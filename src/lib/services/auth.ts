@@ -1,85 +1,41 @@
-import { clientApi, api } from '../fetch';
-import type { Async, Err, RequestEvent, Language } from '../generated';
-import type { UserLoginInput, UserLoginResponse } from '../generated';
+import { headers } from 'next/dist/server/request/headers';
+import axiosInstance from '../fetch';
+import type { UserRegisterResponse, UserRegisterInput, UserLoginInput, UserLoginResponse, Language } from '../generated';
 
-// Client-side login function that handles cookies manually
-export const login = async (
-  email: string,
-  password: string,
-  lang: Language = 'eng',
-  event: RequestEvent
-): Async<UserLoginResponse, Err> => {
+export const login = async (email: string, password: string, lang: Language) => {
   try {
-    const response = await clientApi<UserLoginInput, { message: string; data: string }>(
-      'auth/login',
+    const response = await axiosInstance.post<UserLoginResponse>(`/auth/login`, 
+      { email, password },
       {
-        data: { email, password },
-        method: 'POST',
-        lang: String(lang),
-      },
-      event.cookies
-    );
-
-    return [
-      {
-       statusCode: response.status,
-         body: {
-            message: response.data.message,
-            data: String(response.data.data), // This is the token
-         }
-      },
-      null,
-    ];
-  } catch (error: any) {
-    if (error.response?.data?.body) {
-      const backendError = error.response.data.body;
-      console.log('Backend error:', backendError);
-      return [
-        null,
-        {
-          message: backendError.message || backendError.error || 'Unexpected error',
+        headers: {
+          'X-Language': lang, 
         },
-      ];
-    }
-    return [
-      null,
-      {
-        message: error.message,
-      },
-    ];
+      }
+    );
+    return response.data;
+  } catch (error: any) {
+    const errorMessage = error.response?.data?.body?.message || 
+                        error.response?.data?.message || 
+                        'Login failed';
+    throw new Error(errorMessage);
   }
 };
 
-// Server-side login function that uses the api function with server cookies
-export const serverLogin = async (
-  email: string,
-  password: string
-): Async<UserLoginResponse, Err> => {
+export const registerUser = async (data: UserRegisterInput, lang: Language) => {
   try {
-    const response = await api<UserLoginInput, { message: string; data: string }>(
-      'auth/login',
+    const response = await axiosInstance.post<UserRegisterResponse>(`/auth/register`, 
+      { data },
       {
-        data: { email, password },
-        method: 'POST',
+        headers: {
+          'X-Language': lang, 
+        },
       }
     );
-
-    return [
-      {
-       statusCode: response.status,
-         body: {
-            message: response.data.message,
-            data: String(response.data.data), // This is the token
-         }
-      },
-      null,
-    ];
+    return response.data;
   } catch (error: any) {
-    return [
-      null,
-      {
-        message: error.message,
-      },
-    ];
+    const errorMessage = error.response?.data?.body?.message || 
+                        error.response?.data?.message || 
+                        'Registration failed';
+    throw new Error(errorMessage);
   }
 };

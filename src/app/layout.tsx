@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import { QueryProvider } from "@/components/providers/QueryProvider";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "LevelUp - Gamify Your Learning",
@@ -15,9 +14,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className} suppressHydrationWarning>
-        {children}
+    <html>
+      <body>
+        <QueryProvider>
+          <Toaster position="bottom-right" />
+          {children}
+        </QueryProvider>
       </body>
     </html>
   );

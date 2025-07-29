@@ -259,8 +259,31 @@ export interface UserLoginInput {
   email: string;
   password: string;
 }
-
-
+export interface UserData{
+  id: string;
+  UserName: string;
+  email: string;
+}
+export interface UserRegisterInput {
+  UserName: string;
+  email: string;
+}
+export interface UserRegisterInput {
+  UserName: string;
+  email: string;
+}
+export interface UserRegisterInput {
+  UserName: string;
+  email: string;
+}
+export interface UserRegisterResponse {
+  statusCode: number;
+  headers: Record<string, string>;
+ body:{
+  message: string;
+  data: UserData
+ }
+}
 
 // ----------------------------
 // Translation Types
