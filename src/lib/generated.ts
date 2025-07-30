@@ -295,9 +295,9 @@ export interface UserRegisterResponse {
 // ----------------------------
 export type Language = 'eng' | 'arab' | 'chin' | 'nep' | 'span' | 'jap' | 'hind' | 'fr';
 
-export interface TranslationRequest extends Request {
+export interface TranslationRequest {
   language: Language;
-  body: any;
+  body: Record<string, unknown>;
 }
 
 // ----------------------------
@@ -316,7 +316,7 @@ export interface Err {
 export interface RequestEvent {
   cookies: {
     get(name: string): { value: string } | undefined;
-    set(name: string, value: string, options?: any): void;
+    set(name: string, value: string, options?: Record<string, unknown>): void;
     delete(name: string): void;
   };
 }

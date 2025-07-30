@@ -1,4 +1,3 @@
-import { headers } from 'next/dist/server/request/headers';
 import axiosInstance from '../fetch';
 import type { UserRegisterResponse, UserRegisterInput, UserLoginInput, UserLoginResponse, Language } from '../generated';
 
@@ -13,9 +12,10 @@ export const login = async (data: UserLoginInput, lang: Language) => {
       }
     );
     return response.data;
-  } catch (error: any) {
-    const errorMessage = error.response?.data?.body?.message || 
-                        error.response?.data?.message || 
+  } catch (error: unknown) {
+    const err = error as { response?: { data?: { body?: { message?: string }; message?: string } } };
+    const errorMessage = err.response?.data?.body?.message || 
+                        err.response?.data?.message || 
                         'Login failed';
     throw new Error(errorMessage);
   }
@@ -32,9 +32,10 @@ export const registerUser = async (data: UserRegisterInput, lang: Language) => {
       }
     );
     return response.data;
-  } catch (error: any) {
-    const errorMessage = error.response?.data?.body?.message || 
-                        error.response?.data?.message || 
+  } catch (error: unknown) {
+    const err = error as { response?: { data?: { body?: { message?: string }; message?: string } } };
+    const errorMessage = err.response?.data?.body?.message || 
+                        err.response?.data?.message || 
                         'Registration failed';
     throw new Error(errorMessage);
   }

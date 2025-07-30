@@ -5,16 +5,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { FeaturesSection } from "@/components/landing/FeaturesSection";
 import {
-  Zap,
-  Target,
   Brain,
-  Users,
   TrendingUp,
-  Heart,
   Shield,
   Star,
   Clock,
-  Trophy,
   Globe,
   Sparkles,
 } from "lucide-react";
@@ -23,7 +18,7 @@ interface FeaturesPageProps {
   params: Promise<{ lang: string }>;
 }
 
-const FeaturesPage: React.FC<FeaturesPageProps> = ({ params }) => {
+const FeaturesPage: React.FC<FeaturesPageProps> = ({ params: _params }) => {
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
       <Navbar />

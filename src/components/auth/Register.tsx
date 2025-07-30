@@ -28,7 +28,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Eye, EyeOff, User, Mail, Lock } from "lucide-react";
+import { Eye, EyeOff, User, Mail, Lock, Link } from "lucide-react";
 import { useState } from "react";
 
 type RegisterFormData = z.infer<typeof registerSchema>;
@@ -62,9 +62,10 @@ export function RegisterForm({ lang }: RegisterFormProps) {
       });
       toast.success(data.body.message);
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
+      const err = error as { message?: string };
       console.error("Registration failed:", error);
-      toast.error(error.message || "Registration failed");
+      toast.error(err.message || "Registration failed");
     },
   });
 
@@ -191,12 +192,12 @@ export function RegisterForm({ lang }: RegisterFormProps) {
           <div className="text-center pt-4 border-t border-gray-100">
             <p className="text-sm text-gray-600">
               Already have an account?{" "}
-              <a
+              <Link
                 href={`/${lang}/login`}
                 className="font-medium text-blue-600 hover:text-blue-700 transition-colors"
               >
                 Sign in here
-              </a>
+              </Link>
             </p>
           </div>
         </CardContent>

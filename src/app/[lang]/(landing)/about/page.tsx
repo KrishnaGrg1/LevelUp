@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CTASection } from "@/components/landing/CTASection";
@@ -12,12 +13,8 @@ import {
   Target,
   Trophy,
   Heart,
-  Clock,
-  Sparkles,
   ArrowRight,
   Star,
-  Globe,
-  Brain,
 } from "lucide-react";
 
 interface AboutPageProps {
@@ -467,13 +464,13 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
               We&apos;re always looking for passionate individuals who share our
               vision of making personal growth fun and engaging.
             </p>
-            <a
+            <Link
               href="/en/contact"
               className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25"
             >
               <span>View Open Positions</span>
               <ArrowRight className="w-5 h-5" />
-            </a>
+            </Link>
           </div>
         </div>
       </section>

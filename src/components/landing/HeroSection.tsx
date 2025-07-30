@@ -16,7 +16,9 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ className = "" }) => {
   return (
-    <section className="relative py-32 text-center overflow-hidden min-h-screen flex items-center">
+    <section
+      className={`relative py-32 text-center overflow-hidden min-h-screen flex items-center ${className}`}
+    >
       {/* Enhanced Background Effects */}
       <div className="absolute inset-0 bg-gradient-radial from-indigo-500/15 via-transparent to-transparent"></div>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-indigo-500/30 to-purple-500/30 rounded-full blur-3xl animate-pulse"></div>

@@ -19,7 +19,7 @@ interface PricingPageProps {
   params: Promise<{ lang: string }>;
 }
 
-const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
+const PricingPage: React.FC<PricingPageProps> = ({ params: _params }) => {
   const [isAnnual, setIsAnnual] = useState(false);
 
   const plans = [

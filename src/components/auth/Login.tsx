@@ -28,7 +28,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Eye, EyeOff, User, Mail, Lock } from "lucide-react";
+import { Eye, EyeOff, User, Mail, Lock, Link } from "lucide-react";
 import { useState } from "react";
 
 type LoginFormData = z.infer<typeof loginSchema>;
@@ -65,9 +65,10 @@ export function LoginForm({ lang }: LoginFormProps) {
       setAuthenticated(true);
       toast.success(data?.body.message);
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
+      const err = error as { message?: string };
       console.error("Registration failed:", error);
-      toast.error(error.message || "Registration failed");
+      toast.error(err.message || "Registration failed");
     },
   });
 
@@ -171,12 +172,12 @@ export function LoginForm({ lang }: LoginFormProps) {
           <div className="text-center pt-4 border-t border-gray-100">
             <p className="text-sm text-gray-600">
               Create an Account?{" "}
-              <a
+              <Link
                 href={`/${lang}/signup`}
                 className="font-medium text-blue-600 hover:text-blue-700 transition-colors"
               >
                 Register here
-              </a>
+              </Link>
             </p>
           </div>
         </CardContent>

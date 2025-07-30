@@ -10,7 +10,7 @@ const axiosInstance: AxiosInstance = axios.create({
 axiosInstance.interceptors.request.use(config => {
  
 
-  config.headers['X-Language'] 
+  config.headers['X-Language'] = 'en'; // Default language
   return config;
 });
 

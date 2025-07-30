@@ -18,7 +18,7 @@ interface ContactPageProps {
   params: Promise<{ lang: string }>;
 }
 
-const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
+const ContactPage: React.FC<ContactPageProps> = ({ params: _params }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
