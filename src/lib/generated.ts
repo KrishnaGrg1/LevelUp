@@ -250,9 +250,14 @@ export interface UserLoginResponse {
   statusCode: number;
   body: LoginResponse;
 }
-
-export interface LoginResponse {
+export interface LoginUserData{
+  id: string;
+  UserName: string;
+  email: string;
   data: string;
+}
+export interface LoginResponse {
+  data: LoginUserData
   message: string; // localized message
 }
 export interface UserLoginInput {
