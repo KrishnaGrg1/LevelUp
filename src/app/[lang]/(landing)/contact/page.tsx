@@ -291,14 +291,14 @@ const ContactPage: React.FC<ContactPageProps> = ({ params: _params }) => {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-white mb-2">
-                    San Francisco Office
+                    Pokhara Office
                   </h3>
                   <p className="text-slate-400 leading-relaxed">
-                    123 Innovation Street
+                    Lakeside
                     <br />
-                    San Francisco, CA 94105
+                    Pokhara, Nepal 33700
                     <br />
-                    United States
+                    <span className="text-slate-400">Nepal</span>
                   </p>
                 </div>
               </div>

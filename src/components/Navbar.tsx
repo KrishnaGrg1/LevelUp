@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 const Navbar: React.FC = () => {
   return (
@@ -56,11 +57,14 @@ const Navbar: React.FC = () => {
               Login
             </Link>
             <Link
-              href="/en/register"
+              href="/en/signup"
               className="px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg text-white hover:from-indigo-500 hover:to-purple-500 transition-all"
             >
               Get Started
             </Link>
+            <div className="flex flex-end items-center ml-3 ">
+              <LanguageSwitcher />
+            </div>
           </div>
         </div>
       </div>

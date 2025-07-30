@@ -1,7 +1,7 @@
 "use client";
 
 import { Toaster } from "sonner";
-
+import TopBar from "@/components/auth/TopBar";
 export default function AuthLayout({
   children,
 }: {
@@ -11,6 +11,7 @@ export default function AuthLayout({
   // No authentication check needed here
   return (
     <>
+      <TopBar />
       {children}
       <Toaster />
     </>
