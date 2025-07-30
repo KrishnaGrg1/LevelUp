@@ -215,7 +215,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ params: _params }) => {
                 </ul>
 
                 <Link
-                  href="/en/register"
+                  href="/en/signup"
                   className={`block w-full py-4 px-6 rounded-2xl font-bold text-center transition-all duration-300 hover:scale-105 ${
                     plan.popular
                       ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-500 hover:to-pink-500 shadow-lg hover:shadow-purple-500/25"

@@ -28,8 +28,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Eye, EyeOff, User, Mail, Lock, Link } from "lucide-react";
+import { Eye, EyeOff, User, Mail, Lock } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
