@@ -1,5 +1,18 @@
-import { Language } from "@/lib/generated";
+import { Language } from "@/stores/useLanguage";
 import { RegisterForm } from "../../../../components/auth/Register";
+
+// Helper function to validate and normalize language code
+const validateLanguage = (lang: string): Language => {
+  const validLanguages: Language[] = [
+    "eng",
+    "nep",
+    "fr",
+    "arab",
+    "chin",
+    "span",
+  ];
+  return validLanguages.includes(lang as Language) ? (lang as Language) : "eng";
+};
 
 interface SignupPageProps {
   params: Promise<{
@@ -9,5 +22,6 @@ interface SignupPageProps {
 
 export default async function SignupPage({ params }: SignupPageProps) {
   const { lang } = await params;
-  return <RegisterForm lang={lang} />;
+  const validatedLang = validateLanguage(lang);
+  return <RegisterForm lang={validatedLang} />;
 }

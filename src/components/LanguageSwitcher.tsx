@@ -6,49 +6,107 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Languages } from "lucide-react";
-import React from "react";
-import { useTranslation } from "react-i18next";
+import React, { useState, useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
+import LanguageStore, { Language } from "@/stores/useLanguage";
 
 const languages = [
-  { code: "en", name: "English", flag: "🇺🇸" },
-  { code: "fr", name: "Français", flag: "🇫🇷" },
-  { code: "nep", name: "नेपाली", flag: "🇳🇵" },
-  { code: "arab", name: "العربية", flag: "🇸🇦" },
-  { code: "chin", name: "中文", flag: "🇨🇳" },
-  { code: "span", name: "Español", flag: "🇪🇸" },
+  { code: "eng" as Language, name: "English", flag: "🇺🇸" },
+  { code: "fr" as Language, name: "Français", flag: "🇫🇷" },
+  { code: "nep" as Language, name: "नेपाली", flag: "🇳🇵" },
+  { code: "arab" as Language, name: "العربية", flag: "🇸🇦" },
+  { code: "chin" as Language, name: "中文", flag: "🇨🇳" },
+  { code: "span" as Language, name: "Español", flag: "🇪🇸" },
 ];
 
-export const LanguageSwitcher: React.FC = () => {
-  const { i18n, t } = useTranslation();
+// Helper function to validate and normalize language code
+const validateLanguage = (lang: string): Language => {
+  const validLanguages: Language[] = [
+    "eng",
+    "nep",
+    "fr",
+    "arab",
+    "chin",
+    "span",
+  ];
+  return validLanguages.includes(lang as Language) ? (lang as Language) : "eng";
+};
 
-  const currentLanguage = languages.find((lang) => lang.code === i18n.language);
+interface LanguageSwitcherProps {
+  currentLang?: string;
+}
 
-  const changeLanguage = (languageCode: string) => {
-    i18n.changeLanguage(languageCode);
+export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
+  currentLang,
+}) => {
+  const [isClient, setIsClient] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+  const { language, setLanguage } = LanguageStore();
+
+  useEffect(() => {
+    setIsClient(true);
+
+    // If currentLang is provided from URL, sync it with the store
+    if (currentLang) {
+      const validLang = validateLanguage(currentLang);
+      if (validLang !== language) {
+        setLanguage(validLang);
+      }
+    }
+  }, [currentLang, language, setLanguage]);
+
+  const currentLanguage =
+    languages.find((lang) => lang.code === language) || languages[0];
+
+  const changeLanguage = (languageCode: Language) => {
+    // Update the global store
+    setLanguage(languageCode);
+
+    // Update the URL
+    const segments = pathname.split("/");
+    if (segments.length > 1) {
+      segments[1] = languageCode; // Replace the language segment
+      const newPath = segments.join("/");
+      router.push(newPath);
+    } else {
+      router.push(`/${languageCode}/home`);
+    }
   };
+
+  // Prevent hydration mismatch by not rendering interactive elements until client-side
+  if (!isClient) {
+    return (
+      <div className="h-9 w-32 bg-slate-700/30 rounded-md animate-pulse"></div>
+    );
+  }
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="cursor-pointer">
+        <Button
+          variant="outline"
+          size="sm"
+          className="cursor-pointer bg-slate-800/50 border-slate-700/50 text-white hover:bg-slate-700/50 hover:border-indigo-500/50"
+        >
           <Languages className="mr-2 h-4 w-4" />
           {currentLanguage?.flag} {currentLanguage?.name}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="bg-white text-black shadow-md border border-gray-200"
+        className="bg-slate-800/90 backdrop-blur-lg text-white shadow-2xl border border-slate-700/50 rounded-xl"
       >
-        {languages.map((language) => (
+        {languages.map((lang) => (
           <DropdownMenuItem
-            key={language.code}
-            onClick={() => changeLanguage(language.code)}
-            className={`cursor-pointer hover:bg-gray-100 ${
-              i18n.language === language.code ? "font-semibold" : ""
+            key={lang.code}
+            onClick={() => changeLanguage(lang.code)}
+            className={`cursor-pointer hover:bg-slate-700/50 rounded-lg transition-colors ${
+              language === lang.code ? "font-semibold bg-indigo-500/20" : ""
             }`}
           >
-            <span className="mr-2">{language.flag}</span>
-            {language.name}
+            <span className="mr-2">{lang.flag}</span>
+            {lang.name}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

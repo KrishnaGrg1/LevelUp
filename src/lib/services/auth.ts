@@ -1,5 +1,6 @@
 import axiosInstance from '../fetch';
-import type { UserRegisterResponse, UserRegisterInput, UserLoginInput, UserLoginResponse, Language } from '../generated';
+import type { UserRegisterResponse, UserRegisterInput, UserLoginInput, UserLoginResponse } from '../generated';
+import { Language } from '@/stores/useLanguage';
 
 export const login = async (data: UserLoginInput, lang: Language) => {
   try {

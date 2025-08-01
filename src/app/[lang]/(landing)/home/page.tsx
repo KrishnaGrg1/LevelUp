@@ -8,13 +8,27 @@ import { FeaturesSection } from "@/components/landing/FeaturesSection";
 import { StatsSection } from "@/components/landing/StatsSection";
 import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
 import { CTASection } from "@/components/landing/CTASection";
+import { Language } from "@/stores/useLanguage";
+
+// Helper function to validate and normalize language code
+const validateLanguage = (lang: string): Language => {
+  const validLanguages: Language[] = [
+    "eng",
+    "nep",
+    "fr",
+    "arab",
+    "chin",
+    "span",
+  ];
+  return validLanguages.includes(lang as Language) ? (lang as Language) : "eng";
+};
 
 interface HomePageProps {
   params: Promise<{ lang: string }>;
 }
 
 const HomePage: React.FC<HomePageProps> = ({ params }) => {
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState<Language>("eng");
   const statsRef = useRef<HTMLDivElement>(null);
 
   // Animated counter for stats
@@ -32,9 +46,10 @@ const HomePage: React.FC<HomePageProps> = ({ params }) => {
     // Mark as client-side to avoid hydration issues
     setIsClient(true);
 
-    // Get language from params
+    // Get language from params and validate it
     params.then((resolvedParams) => {
-      setLanguage(resolvedParams.lang);
+      const validatedLang = validateLanguage(resolvedParams.lang);
+      setLanguage(validatedLang);
     });
 
     // Particle setup - only on client side
@@ -124,7 +139,7 @@ const HomePage: React.FC<HomePageProps> = ({ params }) => {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
-      <Navbar />
+      <Navbar language={language} />
 
       {/* Particle background - only render on client side */}
       {isClient && (

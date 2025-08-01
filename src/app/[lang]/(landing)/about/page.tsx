@@ -132,7 +132,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
-      <Navbar />
+      <Navbar language={language} />
 
       {/* Particle background - only render on client side */}
       {isClient && (

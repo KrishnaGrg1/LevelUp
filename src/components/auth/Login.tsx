@@ -20,7 +20,8 @@ import { useMutation } from "@tanstack/react-query";
 import { login } from "@/lib/services/auth";
 import authStore from "@/stores/useAuth";
 import { toast } from "sonner";
-import { Language } from "@/lib/generated";
+import { Language } from "@/stores/useLanguage";
+import { useRouter } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -29,7 +30,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Eye, EyeOff, User, Mail, Lock } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 type LoginFormData = z.infer<typeof loginSchema>;
@@ -40,6 +41,8 @@ interface LoginFormProps {
 
 export function LoginForm({ lang }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+  const router = useRouter();
 
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -50,6 +53,11 @@ export function LoginForm({ lang }: LoginFormProps) {
   });
 
   const { setToken, setUser, setAuthenticated } = authStore();
+
+  // Add hydration safety
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const { mutateAsync, isPending: isLoading } = useMutation({
     mutationKey: ["login"],
@@ -77,21 +85,54 @@ export function LoginForm({ lang }: LoginFormProps) {
     await mutateAsync(data);
   };
 
+  // Prevent hydration mismatch by not rendering form until client-side
+  if (!isClient) {
+    return (
+      <div className="w-full max-w-md">
+        <Card className="relative bg-gradient-to-br from-slate-800/30 to-slate-900/30 backdrop-blur-xl border border-slate-700/30 rounded-3xl shadow-2xl overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 rounded-3xl"></div>
+          <CardHeader className="relative space-y-4 text-center pb-6 pt-8">
+            <div className="mx-auto w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+              <User className="w-8 h-8 text-white" />
+            </div>
+            <CardTitle className="text-3xl font-black">
+              <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Loading...
+              </span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="relative space-y-6 px-8 pb-8">
+            <div className="animate-pulse space-y-4">
+              <div className="h-12 bg-slate-700/30 rounded-xl"></div>
+              <div className="h-12 bg-slate-700/30 rounded-xl"></div>
+              <div className="h-12 bg-slate-700/30 rounded-xl"></div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-      <Card className="w-full max-w-md shadow-xl border-0 bg-white/95 backdrop-blur-sm">
-        <CardHeader className="space-y-2 text-center pb-6">
-          <div className="mx-auto w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mb-4">
-            <User className="w-6 h-6 text-white" />
+    <div className="w-full max-w-md">
+      <Card className="relative bg-gradient-to-br from-slate-800/30 to-slate-900/30 backdrop-blur-xl border border-slate-700/30 rounded-3xl shadow-2xl overflow-hidden">
+        {/* Card glow effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 rounded-3xl"></div>
+
+        <CardHeader className="relative space-y-4 text-center pb-6 pt-8">
+          <div className="mx-auto w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+            <User className="w-8 h-8 text-white" />
           </div>
-          <CardTitle className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Create Account
+          <CardTitle className="text-3xl font-black">
+            <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Welcome Back
+            </span>
           </CardTitle>
-          <CardDescription className="text-gray-600">
-            Join us and start your learning journey
+          <CardDescription className="text-slate-400 text-lg">
+            Sign in to continue your journey
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="relative space-y-6 px-8 pb-8">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
               <FormField
@@ -99,21 +140,21 @@ export function LoginForm({ lang }: LoginFormProps) {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm font-medium text-gray-700">
+                    <FormLabel className="text-sm font-medium text-slate-300">
                       Email
                     </FormLabel>
                     <FormControl>
                       <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
                         <Input
                           type="email"
                           placeholder="you@example.com"
-                          className="pl-10 h-11 border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors"
+                          className="pl-10 h-12 bg-slate-800/50 border-slate-600 text-white placeholder-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-300 rounded-xl"
                           {...field}
                         />
                       </div>
                     </FormControl>
-                    <FormMessage className="text-xs text-red-600 mt-1 font-semibold" />
+                    <FormMessage className="text-xs text-red-400 mt-1" />
                   </FormItem>
                 )}
               />
@@ -123,22 +164,22 @@ export function LoginForm({ lang }: LoginFormProps) {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm font-medium text-gray-700">
+                    <FormLabel className="text-sm font-medium text-slate-300">
                       Password
                     </FormLabel>
                     <FormControl>
                       <div className="relative">
-                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
                         <Input
                           type={showPassword ? "text" : "password"}
                           placeholder="Enter your password"
-                          className="pl-10 pr-10 h-11 border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors"
+                          className="pl-10 pr-10 h-12 bg-slate-800/50 border-slate-600 text-white placeholder-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-300 rounded-xl"
                           {...field}
                         />
                         <button
                           type="button"
                           onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-300 transition-colors"
                         >
                           {showPassword ? (
                             <EyeOff className="w-4 h-4" />
@@ -148,7 +189,7 @@ export function LoginForm({ lang }: LoginFormProps) {
                         </button>
                       </div>
                     </FormControl>
-                    <FormMessage className="text-xs text-red-600 mt-1 font-semibold" />
+                    <FormMessage className="text-xs text-red-400 mt-1" />
                   </FormItem>
                 )}
               />
@@ -156,7 +197,7 @@ export function LoginForm({ lang }: LoginFormProps) {
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-11 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50"
+                className="w-full h-12 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:scale-100 rounded-xl"
               >
                 {isLoading ? (
                   <div className="flex items-center gap-2">
@@ -170,12 +211,12 @@ export function LoginForm({ lang }: LoginFormProps) {
             </form>
           </Form>
 
-          <div className="text-center pt-4 border-t border-gray-100">
-            <p className="text-sm text-gray-600">
+          <div className="text-center pt-6 border-t border-slate-700/50">
+            <p className="text-sm text-slate-400">
               Create an Account?{" "}
               <Link
                 href={`/${lang}/signup`}
-                className="font-medium text-blue-600 hover:text-blue-700 transition-colors"
+                className="font-medium text-indigo-400 hover:text-indigo-300 transition-colors"
               >
                 Register here
               </Link>

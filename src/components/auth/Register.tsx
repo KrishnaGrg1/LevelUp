@@ -20,7 +20,7 @@ import { useMutation } from "@tanstack/react-query";
 import { registerUser } from "@/lib/services/auth";
 import authStore from "@/stores/useAuth";
 import { toast } from "sonner";
-import { Language } from "@/lib/generated";
+import { Language } from "@/stores/useLanguage";
 import {
   Card,
   CardContent,

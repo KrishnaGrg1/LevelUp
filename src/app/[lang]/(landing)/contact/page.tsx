@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import {
@@ -19,6 +19,7 @@ interface ContactPageProps {
 }
 
 const ContactPage: React.FC<ContactPageProps> = ({ params: _params }) => {
+  const [language, setLanguage] = useState("en");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -26,6 +27,12 @@ const ContactPage: React.FC<ContactPageProps> = ({ params: _params }) => {
     message: "",
     type: "general",
   });
+
+  useEffect(() => {
+    _params.then((resolvedParams) => {
+      setLanguage(resolvedParams.lang);
+    });
+  }, [_params]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,7 +53,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ params: _params }) => {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
-      <Navbar />
+      <Navbar language={language} />
 
       {/* Hero Section */}
       <section className="relative py-32 text-center min-h-screen flex items-center">
