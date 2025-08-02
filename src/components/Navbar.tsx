@@ -2,16 +2,22 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import { Menu, X, Sparkles } from "lucide-react";
-import { useState } from "react";
+import { Menu, Sparkles } from "lucide-react";
 import { Language } from "@/stores/useLanguage";
+import { 
+  Sheet, 
+  SheetContent, 
+  SheetHeader, 
+  SheetTitle, 
+  SheetTrigger,
+  SheetClose 
+} from "@/components/ui/sheet";
 
 interface NavbarProps {
   language?: Language;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ language = "eng" }) => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const isActive = (path: string) => pathname?.includes(path);
 
@@ -82,57 +88,73 @@ const Navbar: React.FC<NavbarProps> = ({ language = "eng" }) => {
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center space-x-3">
             <LanguageSwitcher currentLang={language} />
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 text-slate-300 hover:text-white transition-colors rounded-lg hover:bg-slate-800/50"
-            >
-              {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
+            <Sheet>
+              <SheetTrigger asChild>
+                <button className="p-2 text-slate-300 hover:text-white transition-colors rounded-lg hover:bg-slate-800/50">
+                  <Menu className="w-6 h-6" />
+                </button>
+              </SheetTrigger>
+              <SheetContent 
+                side="right" 
+                className="w-[300px] bg-black/95 backdrop-blur-xl border-l border-slate-800/50 text-white"
+              >
+                <SheetHeader className="text-left">
+                  <SheetTitle className="flex items-center space-x-2">
+                    <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center">
+                      <Sparkles className="w-4 h-4 text-white" />
+                    </div>
+                    <span className="text-xl font-black bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+                      Level Up
+                    </span>
+                  </SheetTitle>
+                </SheetHeader>
+                
+                <div className="flex flex-col space-y-4 mt-8">
+                  {/* Navigation Links */}
+                  <div className="space-y-2">
+                    {navLinks.map((link) => (
+                      <SheetClose key={link.href} asChild>
+                        <Link
+                          href={link.href}
+                          className={`block px-4 py-3 rounded-lg transition-all duration-300 ${
+                            isActive(link.href.split("/").pop() || "")
+                              ? "text-white bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/30"
+                              : "text-slate-300 hover:text-white hover:bg-slate-800/50"
+                          }`}
+                        >
+                          {link.label}
+                        </Link>
+                      </SheetClose>
+                    ))}
+                  </div>
+
+                  {/* Divider */}
+                  <div className="border-t border-slate-800/50 my-4"></div>
+
+                  {/* Auth Buttons */}
+                  <div className="space-y-3">
+                    <SheetClose asChild>
+                      <Link
+                        href={`/${language}/login`}
+                        className="block px-4 py-3 text-slate-300 hover:text-white transition-colors rounded-lg hover:bg-slate-800/50 text-center"
+                      >
+                        Login
+                      </Link>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <Link
+                        href={`/${language}/signup`}
+                        className="block px-4 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl text-white font-medium hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 text-center"
+                      >
+                        Get Started
+                      </Link>
+                    </SheetClose>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden mt-4 pb-4 border-t border-slate-800/50">
-            <div className="flex flex-col space-y-2 mt-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`px-4 py-3 rounded-lg transition-all duration-300 ${
-                    isActive(link.href.split("/").pop() || "")
-                      ? "text-white bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/30"
-                      : "text-slate-300 hover:text-white hover:bg-slate-800/50"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
-
-              <div className="flex flex-col space-y-2 pt-4 border-t border-slate-800/50 mt-4">
-                <Link
-                  href={`/${language}/login`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="px-4 py-3 text-slate-300 hover:text-white transition-colors rounded-lg hover:bg-slate-800/50"
-                >
-                  Login
-                </Link>
-                <Link
-                  href={`/${language}/signup`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="px-4 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl text-white font-medium hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 text-center"
-                >
-                  Get Started
-                </Link>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </nav>
   );
