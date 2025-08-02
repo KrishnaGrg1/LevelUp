@@ -5,6 +5,7 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CTASection } from "@/components/landing/CTASection";
+import { Language } from "@/stores/useLanguage";
 import {
   CheckCircle,
   Users,
@@ -17,12 +18,18 @@ import {
   Star,
 } from "lucide-react";
 
+// Helper function to validate and normalize language code
+const validateLanguage = (lang: string): Language => {
+  const validLanguages: Language[] = ['eng', 'nep', 'fr', 'arab', 'chin', 'span'];
+  return validLanguages.includes(lang as Language) ? (lang as Language) : 'eng';
+};
+
 interface AboutPageProps {
   params: Promise<{ lang: string }>;
 }
 
 const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState<Language>("eng");
   const [particles, setParticles] = useState<
     { x: number; y: number; size: number; speed: number; opacity: number }[]
   >([]);
@@ -39,9 +46,10 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
     // Mark as client-side to avoid hydration issues
     setIsClient(true);
 
-    // Get language from params
+    // Get language from params and validate it
     params.then((resolvedParams) => {
-      setLanguage(resolvedParams.lang);
+      const validatedLang = validateLanguage(resolvedParams.lang);
+      setLanguage(validatedLang);
     });
 
     // Particle setup - only on client side

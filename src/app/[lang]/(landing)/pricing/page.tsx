@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import { Language } from "@/stores/useLanguage";
 import {
   Check,
   Zap,
@@ -15,12 +16,26 @@ import {
   Sparkles,
 } from "lucide-react";
 
+// Helper function to validate and normalize language code
+const validateLanguage = (lang: string): Language => {
+  const validLanguages: Language[] = ['eng', 'nep', 'fr', 'arab', 'chin', 'span'];
+  return validLanguages.includes(lang as Language) ? (lang as Language) : 'eng';
+};
+
 interface PricingPageProps {
   params: Promise<{ lang: string }>;
 }
 
-const PricingPage: React.FC<PricingPageProps> = ({ params: _params }) => {
+const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
   const [isAnnual, setIsAnnual] = useState(false);
+  const [language, setLanguage] = useState<Language>("eng");
+
+  useEffect(() => {
+    params.then((resolvedParams) => {
+      const validatedLang = validateLanguage(resolvedParams.lang);
+      setLanguage(validatedLang);
+    });
+  }, [params]);
 
   const plans = [
     {
@@ -85,7 +100,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ params: _params }) => {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
-      <Navbar />
+      <Navbar language={language} />
 
       {/* Hero Section */}
       <section className="relative py-32 text-center min-h-screen flex items-center">

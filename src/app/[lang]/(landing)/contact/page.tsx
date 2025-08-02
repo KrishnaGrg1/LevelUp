@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Language } from "@/stores/useLanguage";
 import {
   Mail,
   Phone,
@@ -14,12 +15,18 @@ import {
   CheckCircle,
 } from "lucide-react";
 
+// Helper function to validate and normalize language code
+const validateLanguage = (lang: string): Language => {
+  const validLanguages: Language[] = ['eng', 'nep', 'fr', 'arab', 'chin', 'span'];
+  return validLanguages.includes(lang as Language) ? (lang as Language) : 'eng';
+};
+
 interface ContactPageProps {
   params: Promise<{ lang: string }>;
 }
 
-const ContactPage: React.FC<ContactPageProps> = ({ params: _params }) => {
-  const [language, setLanguage] = useState("en");
+const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
+  const [language, setLanguage] = useState<Language>("eng");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -29,10 +36,11 @@ const ContactPage: React.FC<ContactPageProps> = ({ params: _params }) => {
   });
 
   useEffect(() => {
-    _params.then((resolvedParams) => {
-      setLanguage(resolvedParams.lang);
+    params.then((resolvedParams) => {
+      const validatedLang = validateLanguage(resolvedParams.lang);
+      setLanguage(validatedLang);
     });
-  }, [_params]);
+  }, [params]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

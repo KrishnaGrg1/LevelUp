@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { FeaturesSection } from "@/components/landing/FeaturesSection";
+import { Language } from "@/stores/useLanguage";
 import {
   Brain,
   TrendingUp,
@@ -14,14 +15,29 @@ import {
   Sparkles,
 } from "lucide-react";
 
+// Helper function to validate and normalize language code
+const validateLanguage = (lang: string): Language => {
+  const validLanguages: Language[] = ['eng', 'nep', 'fr', 'arab', 'chin', 'span'];
+  return validLanguages.includes(lang as Language) ? (lang as Language) : 'eng';
+};
+
 interface FeaturesPageProps {
   params: Promise<{ lang: string }>;
 }
 
-const FeaturesPage: React.FC<FeaturesPageProps> = ({ params: _params }) => {
+const FeaturesPage: React.FC<FeaturesPageProps> = ({ params }) => {
+  const [language, setLanguage] = useState<Language>("eng");
+
+  useEffect(() => {
+    params.then((resolvedParams) => {
+      const validatedLang = validateLanguage(resolvedParams.lang);
+      setLanguage(validatedLang);
+    });
+  }, [params]);
+
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
-      <Navbar />
+      <Navbar language={language} />
 
       {/* Hero Section */}
       <section className="relative py-32 text-center min-h-screen flex items-center">

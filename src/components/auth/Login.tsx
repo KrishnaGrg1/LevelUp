@@ -21,7 +21,6 @@ import { login } from "@/lib/services/auth";
 import authStore from "@/stores/useAuth";
 import { toast } from "sonner";
 import { Language } from "@/stores/useLanguage";
-import { useRouter } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -42,7 +41,6 @@ interface LoginFormProps {
 export function LoginForm({ lang }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  const router = useRouter();
 
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
