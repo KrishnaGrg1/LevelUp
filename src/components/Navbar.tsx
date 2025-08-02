@@ -4,13 +4,13 @@ import { usePathname } from "next/navigation";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Menu, Sparkles } from "lucide-react";
 import { Language } from "@/stores/useLanguage";
-import { 
-  Sheet, 
-  SheetContent, 
-  SheetHeader, 
-  SheetTitle, 
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
   SheetTrigger,
-  SheetClose 
+  SheetClose,
 } from "@/components/ui/sheet";
 
 interface NavbarProps {
@@ -94,8 +94,8 @@ const Navbar: React.FC<NavbarProps> = ({ language = "eng" }) => {
                   <Menu className="w-6 h-6" />
                 </button>
               </SheetTrigger>
-              <SheetContent 
-                side="right" 
+              <SheetContent
+                side="right"
                 className="w-[300px] bg-black/95 backdrop-blur-xl border-l border-slate-800/50 text-white"
               >
                 <SheetHeader className="text-left">
@@ -108,7 +108,7 @@ const Navbar: React.FC<NavbarProps> = ({ language = "eng" }) => {
                     </span>
                   </SheetTitle>
                 </SheetHeader>
-                
+
                 <div className="flex flex-col space-y-4 mt-8">
                   {/* Navigation Links */}
                   <div className="space-y-2">

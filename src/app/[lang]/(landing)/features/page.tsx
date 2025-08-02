@@ -17,8 +17,15 @@ import {
 
 // Helper function to validate and normalize language code
 const validateLanguage = (lang: string): Language => {
-  const validLanguages: Language[] = ['eng', 'nep', 'fr', 'arab', 'chin', 'span'];
-  return validLanguages.includes(lang as Language) ? (lang as Language) : 'eng';
+  const validLanguages: Language[] = [
+    "eng",
+    "nep",
+    "fr",
+    "arab",
+    "chin",
+    "span",
+  ];
+  return validLanguages.includes(lang as Language) ? (lang as Language) : "eng";
 };
 
 interface FeaturesPageProps {
