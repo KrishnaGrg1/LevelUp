@@ -70,7 +70,7 @@ export default function LoginPage({ params }: LoginPageProps) {
           ...particle,
           y: particle.y - particle.speed,
           opacity: particle.y > 0 ? particle.opacity : 0,
-        }))
+        })),
       );
     };
 
