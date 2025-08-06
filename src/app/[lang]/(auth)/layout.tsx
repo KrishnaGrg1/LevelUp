@@ -2,6 +2,7 @@
 
 import { Toaster } from "sonner";
 import TopBar from "@/components/auth/TopBar";
+import useLanguage from "@/stores/useLanguage";
 export default function AuthLayout({
   children,
 }: {
@@ -9,9 +10,10 @@ export default function AuthLayout({
 }) {
   // Auth pages (login, register, etc.) should be accessible to unauthenticated users
   // No authentication check needed here
+  const { language } = useLanguage();
   return (
     <>
-      <TopBar />
+      <TopBar language={language} />
       {children}
       <Toaster />
     </>
