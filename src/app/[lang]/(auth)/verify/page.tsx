@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Language } from "@/stores/useLanguage";
-import { LoginForm } from "@/components/auth/Login";
 import { ArrowLeft, Sparkles } from "lucide-react";
+import { VerifyForm } from "@/components/auth/Verfiy";
 
 // Helper function to validate and normalize language code
 const validateLanguage = (lang: string): Language => {
@@ -130,7 +130,7 @@ export default function VerifyPage({ params }: LoginPageProps) {
 
       {/* Main Content */}
       <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
-        <LoginForm lang={language} />
+        <VerifyForm lang={language} />
       </div>
     </div>
   );

@@ -58,7 +58,7 @@ export const registerUser = async (data: UserRegisterInput, lang: Language) => {
 
 export const VerifyUser = async (data: VerifyOtpInput, lang: Language) => {
   try {
-    const response = await axiosInstance.post<UserRegisterResponse>(
+    const response = await axiosInstance.post<UserLoginResponse>(
       `/auth/verify`,
       { data },
       {
