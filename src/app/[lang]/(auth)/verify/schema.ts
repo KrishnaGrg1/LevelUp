@@ -4,7 +4,7 @@ import z from "zod";
 const VerifySchema = z.object({
   otp_code: z
     .string()
-    .min(6, { message: "OTP must be at least 6 digits long" }),
+    .length(6, { message: "OTP must be exactly 6 digits long" }),
   email: z.string().min(6, { message: "OTP must be at least 6 digits long" }),
 });
 
