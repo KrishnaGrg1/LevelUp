@@ -42,7 +42,7 @@ if (!i18n.isInitialized) {
     .use(LanguageDetector)
     .use(initReactI18next)
     .init({
-      resources: resources as any,
+      resources: resources,
       ns: ["auth", "success", "error"],
       defaultNS: "auth",
       fallbackLng: "eng",
@@ -65,7 +65,7 @@ if (!i18n.isInitialized) {
       react: { useSuspense: false },
       initImmediate: false,
       saveMissing: false,
-      missingKeyHandler: (lngs: readonly string[], ns: string, key: string, fallbackValue: string) => {
+      missingKeyHandler: (lngs: readonly string[], ns: string, key: string) => {
         if (process.env.NODE_ENV !== "production") {
           console.warn(`Missing key: ${key} in ${ns} for ${lngs?.join(", ")}`);
         }

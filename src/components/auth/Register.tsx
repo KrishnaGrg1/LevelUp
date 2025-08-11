@@ -30,7 +30,6 @@ import {
 } from "@/components/ui/card";
 import { Eye, EyeOff, User, Mail, Lock } from "lucide-react";
 import { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 

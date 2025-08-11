@@ -10,7 +10,8 @@ export default async function LanguageLayout({
   children,
   params,
 }: LanguageLayoutProps) {
-  const { lang: _lang } = await params;
+  // Extract lang from params for future use if needed
+  await params;
   return (
     <ReactQueryProvider>
       {children}

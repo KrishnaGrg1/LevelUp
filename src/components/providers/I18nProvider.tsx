@@ -13,5 +13,5 @@ export default function I18nProvider({ children }: { children: ReactNode }) {
         }
     }, [language]);
 
-    return children as any;
+    return children as React.ReactElement;
 }

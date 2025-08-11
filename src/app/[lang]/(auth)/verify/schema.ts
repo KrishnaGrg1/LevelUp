@@ -1,4 +1,3 @@
-import { warn } from "console";
 import z from "zod";
 
 const VerifySchema = z.object({

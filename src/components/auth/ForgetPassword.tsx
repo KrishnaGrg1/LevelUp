@@ -53,7 +53,10 @@ export default function ForgetPassword({ lang, onSent }: ForgetPasswordProps) {
     });
 
     const onSubmit = async (data: ForgetFormData) => {
-        await mutateAsync(data);
+        const result = await mutateAsync(data);
+        if (result && onSent) {
+            onSent(data.email);
+        }
     };
 
     return (

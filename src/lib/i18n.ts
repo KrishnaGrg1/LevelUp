@@ -5,18 +5,18 @@ import { useEffect, useMemo, useState } from "react";
 export async function loadNamespace(lang: Language, ns: "auth" | "success" | "error") {
   switch (ns) {
     case "auth":
-      return (await import(`@/translations/${lang}/auth.json`)).default as Record<string, any>;
+      return (await import(`@/translations/${lang}/auth.json`)).default as Record<string, string>;
     case "success":
-      return (await import(`@/translations/${lang}/success.json`)).default as Record<string, any>;
+      return (await import(`@/translations/${lang}/success.json`)).default as Record<string, string>;
     case "error":
-      return (await import(`@/translations/${lang}/error.json`)).default as Record<string, any>;
+      return (await import(`@/translations/${lang}/error.json`)).default as Record<string, string>;
   }
 }
 
 // Client hook: loads requested namespaces into state; re-renders when ready
 export function useI18n(namespaces: Array<"auth" | "success" | "error"> = ["auth"]) {
   const { language } = LanguageStore();
-  const [dicts, setDicts] = useState<Record<string, any>>({});
+  const [dicts, setDicts] = useState<Record<string, Record<string, string>>>({});
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export function useI18n(namespaces: Array<"auth" | "success" | "error"> = ["auth
     setReady(false);
     Promise.all(namespaces.map((ns) => loadNamespace(language, ns))).then((results) => {
       if (!mounted) return;
-      const map: Record<string, any> = {};
+      const map: Record<string, Record<string, string>> = {};
       namespaces.forEach((ns, i) => (map[ns] = results[i]));
       setDicts(map);
       setReady(true);
@@ -32,7 +32,7 @@ export function useI18n(namespaces: Array<"auth" | "success" | "error"> = ["auth
     return () => {
       mounted = false;
     };
-  }, [language, JSON.stringify(namespaces)]);
+  }, [language, namespaces]);
 
   const t = useMemo(() => {
     return (key: string, defaultValue?: string) => {
@@ -44,11 +44,11 @@ export function useI18n(namespaces: Array<"auth" | "success" | "error"> = ["auth
       for (const ns of searchNamespaces) {
         const obj = dicts[ns];
         if (!obj) continue;
-        let cur: any = obj;
+        let cur: Record<string, string> | string = obj;
         for (const p of path) {
           if (cur && typeof cur === "object" && p in cur) cur = cur[p];
           else {
-            cur = undefined;
+            cur = "";
             break;
           }
         }

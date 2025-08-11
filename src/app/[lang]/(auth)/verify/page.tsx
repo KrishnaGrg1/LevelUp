@@ -32,7 +32,7 @@ export default function VerifyPage({ params }: LoginPageProps) {
       const validatedLang = validateLanguage(resolvedParams.lang);
       setLanguage(validatedLang);
     });
-  }, [params]);
+  }, [params, setLanguage]);
 
   return (
     <div className="relative z-10 flex items-center justify-center min-h-screen pt-20">

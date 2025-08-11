@@ -4,9 +4,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import VerifySchema from "@/app/[lang]/(auth)/verify/schema";
-("@/app/[lang]/(auth)/verify/schema");
 import { z } from "zod";
-import { Input } from "@/components/ui/input";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { Button } from "@/components/ui/button";
 import {
@@ -30,7 +28,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { User, Mail } from "lucide-react";
+import { User } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
