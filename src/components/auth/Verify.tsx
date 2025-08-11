@@ -31,6 +31,7 @@ import {
 import { User } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useI18n } from "@/lib/i18n";
 
 type VerifyFormData = z.infer<typeof VerifySchema>;
 interface VerifyFormProps {
@@ -40,12 +41,13 @@ interface VerifyFormProps {
 export function VerifyForm({ lang }: VerifyFormProps) {
   const [isClient, setIsClient] = useState(false);
   const { setToken, setUser, user, setAuthenticated } = authStore();
+  const { t } = useI18n(["auth"]);
 
   const form = useForm<VerifyFormData>({
     resolver: zodResolver(VerifySchema),
     defaultValues: {
       otp_code: "",
-      email: user?.email || "test@test.com",
+      email: user?.email || "",
     },
   });
 
@@ -118,9 +120,13 @@ export function VerifyForm({ lang }: VerifyFormProps) {
           <div className="mx-auto w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
             <User className="w-8 h-8 text-white" />
           </div>
-          <CardTitle className="text-3xl font-black"></CardTitle>
+          <CardTitle className="text-3xl font-black">
+            <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              {t("verify.title", "Verify Email")}
+            </span>
+          </CardTitle>
           <CardDescription className="text-slate-400 text-lg">
-            Verify your Account
+            {t("verify.subtitle", "Enter the code we sent")}
           </CardDescription>
         </CardHeader>
         <CardContent className="relative space-y-6 px-8 pb-8">
@@ -132,7 +138,7 @@ export function VerifyForm({ lang }: VerifyFormProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-medium text-slate-300">
-                      Enter your OTP
+                      {t("verify.otp", "Verification Code")}
                     </FormLabel>
                     <FormControl>
                       <InputOTP maxLength={6} value={field.value} onChange={field.onChange} className="w-full">
@@ -156,10 +162,10 @@ export function VerifyForm({ lang }: VerifyFormProps) {
                 {isLoading ? (
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    Verfiying in...
+                    Verifying...
                   </div>
                 ) : (
-                  "Verfiy"
+                  t("verify.submit", "Verify")
                 )}
               </Button>
             </form>
@@ -167,12 +173,12 @@ export function VerifyForm({ lang }: VerifyFormProps) {
 
           <div className="text-center pt-6 border-t border-slate-700/50">
             <p className="text-sm text-slate-400">
-              Create an Account?{" "}
+              {t("register.hasAccount", "Already have an account?")}{" "}
               <Link
                 href={`/${lang}/signup`}
                 className="font-medium text-indigo-400 hover:text-indigo-300 transition-colors"
               >
-                Register here
+                {t("register.loginLink", "Sign in here")}
               </Link>
             </p>
           </div>

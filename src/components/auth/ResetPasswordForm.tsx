@@ -30,6 +30,7 @@ import {
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import authStore from "@/stores/useAuth";
 import { Eye, EyeOff } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 type ResetFormData = z.infer<typeof ResetPasswordSchema>;
 interface ResetPasswordFormProps {
@@ -40,11 +41,12 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
     const { user } = authStore();
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const { t } = useI18n(["auth"]);
 
     const form = useForm<ResetFormData>({
         resolver: zodResolver(ResetPasswordSchema),
         defaultValues: {
-            email: user?.email || "test@gmail.com",
+            email: user?.email || "",
             otp_code: "",
             newPassword: "",
             confirmPassword: "",
@@ -72,9 +74,9 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
             <Card className="relative bg-gradient-to-br from-slate-800/30 to-slate-900/30 backdrop-blur-xl border border-slate-700/30 rounded-3xl shadow-2xl overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 rounded-3xl"></div>
                 <CardHeader className="relative space-y-2 text-center pb-4 pt-8">
-                    <CardTitle className="text-2xl font-black">Reset Password</CardTitle>
+                    <CardTitle className="text-2xl font-black">{t("reset.title", "Reset Password")}</CardTitle>
                     <CardDescription className="text-slate-400">
-                        Enter the OTP sent to your email and set a new password
+                        {t("reset.subtitle", "Enter the code and your new password")}
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="relative space-y-6 px-8 pb-8">
@@ -87,7 +89,7 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel className="text-sm font-medium text-slate-300">
-                                            OTP
+                                            {t("reset.otp", "Reset Code")}
                                         </FormLabel>
                                         <FormControl>
                                             <InputOTP
@@ -115,7 +117,7 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel className="text-sm font-medium text-slate-300">
-                                            New Password
+                                            {t("reset.newPassword", "New Password")}
                                         </FormLabel>
                                         <FormControl>
                                             <div className="relative">
@@ -152,7 +154,7 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel className="text-sm font-medium text-slate-300">
-                                            Confirm Password
+                                            {t("reset.confirmPassword", "Confirm Password")}
                                         </FormLabel>
                                         <FormControl>
                                             <div className="relative">
@@ -187,7 +189,7 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
                                 disabled={isLoading}
                                 className="w-full h-12 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:scale-100 rounded-xl"
                             >
-                                {isLoading ? "Resetting..." : "Reset Password"}
+                                {isLoading ? "Resetting..." : t("reset.submit", "Reset Password")}
                             </Button>
                         </form>
                     </Form>

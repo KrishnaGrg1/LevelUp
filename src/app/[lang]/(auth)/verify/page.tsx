@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import LanguageStore, { Language } from "@/stores/useLanguage";
-import { VerifyForm } from "@/components/auth/Verfiy";
+import { VerifyForm } from "@/components/auth/Verify";
 
 // Helper function to validate and normalize language code
 const validateLanguage = (lang: string): Language => {

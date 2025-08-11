@@ -98,7 +98,7 @@ export const CTASection: React.FC<CTASectionProps> = ({
         {/* CTA buttons */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
           <Link
-            href={`/${language}/register`}
+            href={`/${language}/signup`}
             className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25 min-w-[200px]"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl blur opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
