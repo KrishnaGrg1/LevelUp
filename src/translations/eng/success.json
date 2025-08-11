@@ -1,0 +1,7 @@
+{
+  "login": "Logged in successfully",
+  "register": "Account created successfully",
+  "verify": "Account verified successfully",
+  "forgot": "Reset code sent to your email",
+  "reset": "Password reset successfully"
+}

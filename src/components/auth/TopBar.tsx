@@ -2,6 +2,7 @@ import Link from "next/link";
 import { LanguageSwitcher } from "../LanguageSwitcher";
 import { Sparkles, ArrowLeft } from "lucide-react";
 import { Language } from "@/stores/useLanguage";
+import { useTranslation } from "react-i18next";
 
 interface TopBarProps {
   language?: Language;
@@ -14,6 +15,7 @@ const TopBar: React.FC<TopBarProps> = ({
   showBackButton = false,
   backUrl,
 }) => {
+  const { t } = useTranslation(["auth"]);
   const defaultBackUrl = `/${language}/home`;
 
   return (
@@ -28,7 +30,7 @@ const TopBar: React.FC<TopBarProps> = ({
                 className="inline-flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-slate-800/80 to-slate-900/80 backdrop-blur-sm rounded-xl border border-slate-700/50 hover:border-indigo-500/50 transition-all duration-300 hover:scale-105 text-slate-300 hover:text-white"
               >
                 <ArrowLeft className="w-4 h-4" />
-                <span className="text-sm font-medium">Back</span>
+                <span className="text-sm font-medium">{t("back", "Back")}</span>
               </Link>
             )}
 
@@ -41,7 +43,7 @@ const TopBar: React.FC<TopBarProps> = ({
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
               <span className="text-2xl font-black bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-                Level Up
+                {t("brand", "Level Up")}
               </span>
             </Link>
           </div>

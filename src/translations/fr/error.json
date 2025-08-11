@@ -1,0 +1,7 @@
+{
+  "unknown": "Une erreur s'est produite",
+  "network": "Erreur réseau. Veuillez réessayer.",
+  "validation": "Veuillez vérifier les champs du formulaire.",
+  "invalidOtp": "Code invalide, veuillez réessayer.",
+  "passwordMismatch": "Les mots de passe ne correspondent pas"
+}

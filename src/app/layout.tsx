@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { QueryProvider } from "@/components/providers/QueryProvider";
 import { Toaster } from "sonner";
+import I18nProvider from "@/components/providers/I18nProvider";
 
 export const metadata: Metadata = {
   title: "LevelUp - Gamify Your Learning",
@@ -17,8 +18,10 @@ export default function RootLayout({
     <html>
       <body>
         <QueryProvider>
-          <Toaster position="bottom-right" />
-          {children}
+          <I18nProvider>
+            <Toaster position="bottom-right" />
+            {children}
+          </I18nProvider>
         </QueryProvider>
       </body>
     </html>

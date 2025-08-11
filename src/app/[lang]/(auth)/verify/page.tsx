@@ -35,7 +35,7 @@ export default function VerifyPage({ params }: LoginPageProps) {
   }, [params]);
 
   return (
-    <div className="relative z-10 flex items-center justify-center min-h-screen">
+    <div className="relative z-10 flex items-center justify-center min-h-screen pt-20">
       <VerifyForm lang={language} />
     </div>
   );

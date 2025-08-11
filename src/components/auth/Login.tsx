@@ -31,6 +31,7 @@ import {
 import { Eye, EyeOff, User, Mail, Lock } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
@@ -39,6 +40,7 @@ interface LoginFormProps {
 }
 
 export function LoginForm({ lang }: LoginFormProps) {
+  const { t } = useTranslation(["auth", "success", "error"]);
   const [showPassword, setShowPassword] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
@@ -70,12 +72,12 @@ export function LoginForm({ lang }: LoginFormProps) {
         email: data?.body.data.email,
       });
       setAuthenticated(true);
-      toast.success(data?.body.message);
+      toast.success(t("success:login", data?.body.message));
     },
     onError: (error: unknown) => {
       const err = error as { message?: string };
       console.error("Registration failed:", error);
-      toast.error(err.message || "Registration failed");
+      toast.error(err.message || t("error:unknown", "Registration failed"));
     },
   });
 
@@ -123,11 +125,11 @@ export function LoginForm({ lang }: LoginFormProps) {
           </div>
           <CardTitle className="text-3xl font-black">
             <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Welcome Back
+              {t("login.title")}
             </span>
           </CardTitle>
           <CardDescription className="text-slate-400 text-lg">
-            Sign in to continue your journey
+            {t("login.subtitle")}
           </CardDescription>
         </CardHeader>
         <CardContent className="relative space-y-6 px-8 pb-8">
@@ -139,7 +141,7 @@ export function LoginForm({ lang }: LoginFormProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-medium text-slate-300">
-                      Email
+                      {t("login.email", "Email")}
                     </FormLabel>
                     <FormControl>
                       <div className="relative">
@@ -163,14 +165,14 @@ export function LoginForm({ lang }: LoginFormProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-medium text-slate-300">
-                      Password
+                      {t("login.password", "Password")}
                     </FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
                         <Input
                           type={showPassword ? "text" : "password"}
-                          placeholder="Enter your password"
+                          placeholder={t("login.password", "Enter your password")}
                           className="pl-10 pr-10 h-12 bg-slate-800/50 border-slate-600 text-white placeholder-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-300 rounded-xl"
                           {...field}
                         />
@@ -200,10 +202,10 @@ export function LoginForm({ lang }: LoginFormProps) {
                 {isLoading ? (
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    Logging in...
+                    {t("login.submit", "Logging in...")}
                   </div>
                 ) : (
-                  "Log in"
+                  t("login.submit", "Log in")
                 )}
               </Button>
             </form>
@@ -211,12 +213,12 @@ export function LoginForm({ lang }: LoginFormProps) {
 
           <div className="text-center pt-6 border-t border-slate-700/50">
             <p className="text-sm text-slate-400">
-              Create an Account?{" "}
+              {t("login.noAccount", "Create an Account?")} {" "}
               <Link
                 href={`/${lang}/signup`}
                 className="font-medium text-indigo-400 hover:text-indigo-300 transition-colors"
               >
-                Register here
+                {t("login.registerLink", "Register here")}
               </Link>
             </p>
           </div>

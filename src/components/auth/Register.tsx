@@ -31,6 +31,8 @@ import {
 import { Eye, EyeOff, User, Mail, Lock } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 type RegisterFormData = z.infer<typeof registerSchema>;
 
@@ -39,6 +41,8 @@ interface RegisterFormProps {
 }
 
 export function RegisterForm({ lang }: RegisterFormProps) {
+  const { t } = useTranslation(["auth", "success", "error"]);
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 
   const form = useForm<RegisterFormData>({
@@ -93,7 +97,7 @@ export function RegisterForm({ lang }: RegisterFormProps) {
             Register to continue your journey
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="relative z-10 space-y-6">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
               <FormField
@@ -181,7 +185,7 @@ export function RegisterForm({ lang }: RegisterFormProps) {
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-11 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50"
+                className="w-full cursor-pointer h-11 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50"
               >
                 {isLoading ? (
                   <div className="flex items-center gap-2">
@@ -195,15 +199,25 @@ export function RegisterForm({ lang }: RegisterFormProps) {
             </form>
           </Form>
 
-          <div className="text-center pt-4 border-t border-gray-100">
-            <p className="text-sm text-gray-600">
-              Already have an account?{" "}
-              <Link
-                href={`/${lang}/login`}
-                className="font-medium text-blue-600 hover:text-blue-700 transition-colors"
+          <div className="text-center pt-6 border-t border-slate-700/50 relative z-10">
+            <p className="text-sm text-slate-400">
+              {t("register.hasAccount", "Already have an account?")} {" "}
+              <span
+                onClick={() => {
+                  console.log("Navigating to login...");
+                  router.push(`/${lang}/login`);
+                }}
+                className="font-medium text-indigo-400 hover:text-indigo-300 transition-colors cursor-pointer hover:underline inline-block relative z-20"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    router.push(`/${lang}/login`);
+                  }
+                }}
               >
-                Sign in here
-              </Link>
+                {t("register.loginLink", "Sign in here")}
+              </span>
             </p>
           </div>
         </CardContent>

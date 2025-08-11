@@ -1,0 +1,7 @@
+{
+  "login": "Connexion réussie",
+  "register": "Compte créé avec succès",
+  "verify": "Compte vérifié avec succès",
+  "forgot": "Code de réinitialisation envoyé",
+  "reset": "Mot de passe réinitialisé"
+}
