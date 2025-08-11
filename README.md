@@ -9,6 +9,7 @@ LevelUp is a modern, multi-language SaaS starter built with Next.js 15, React 19
 - **Authentication**: Signup, Login, Password Reset, Email Verification — with Zod validation and React Hook Form.
 - **Internationalization Ready**: Language-aware routing and structure, prepared for i18n.
 - **Reusable UI Library**: 40+ custom and Radix UI-based components (buttons, dialogs, forms, tables, etc.).
+ - **Reusable UI Library**: 40+ shadcn/ui components (built on Radix primitives) — buttons, dialogs, forms, tables, and more.
 - **Modern Design System**: Gradients, glassmorphism, animated stats, testimonials, and more.
 - **Performance & Accessibility**: Optimized for speed, SEO, and accessibility (semantic HTML, ARIA, keyboard nav).
 - **State Management**: Zustand for global state, TanStack React Query for async data.
@@ -33,7 +34,7 @@ public/                                 # Static assets
 
 - **Framework**: Next.js 15 (App Router)
 - **Language**: TypeScript
-- **UI**: React 19, Tailwind CSS, Radix UI, Styled Components
+- **UI**: React 19, Tailwind CSS, shadcn/ui (Radix primitives), Styled Components
 - **State**: Zustand, React Query
 - **Forms**: React Hook Form, Zod
 - **API**: Axios
@@ -100,7 +101,8 @@ Deploy easily on [Vercel](https://vercel.com/) or your preferred platform.
 ## 📚 Resources
 
 - [Next.js Documentation](https://nextjs.org/docs)
-- [Radix UI](https://www.radix-ui.com/)
+- [shadcn/ui](https://ui.shadcn.com/)
+- [Radix UI Primitives](https://www.radix-ui.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Zustand](https://docs.pmnd.rs/zustand/getting-started/introduction)
 - [TanStack Query](https://tanstack.com/query/latest)
