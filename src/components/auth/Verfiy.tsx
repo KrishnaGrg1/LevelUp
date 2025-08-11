@@ -7,6 +7,7 @@ import VerifySchema from "@/app/[lang]/(auth)/verify/schema";
 ("@/app/[lang]/(auth)/verify/schema");
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -133,18 +134,16 @@ export function VerifyForm({ lang }: VerifyFormProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-medium text-slate-300">
-                      OTP
+                      Enter your OTP
                     </FormLabel>
                     <FormControl>
-                      <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
-                        <Input
-                          type="text"
-                          placeholder="Enter OTP"
-                          className="pl-10 h-12 bg-slate-800/50 border-slate-600 text-white placeholder-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-300 rounded-xl"
-                          {...field}
-                        />
-                      </div>
+                      <InputOTP maxLength={6} value={field.value} onChange={field.onChange} className="w-full">
+                        <InputOTPGroup className="gap-2">
+                          {Array.from({ length: 6 }).map((_, idx) => (
+                            <InputOTPSlot key={idx} index={idx} />
+                          ))}
+                        </InputOTPGroup>
+                      </InputOTP>
                     </FormControl>
                     <FormMessage className="text-xs text-red-400 mt-1" />
                   </FormItem>

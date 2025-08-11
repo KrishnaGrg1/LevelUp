@@ -1,22 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
+import LanguageStore, { Language } from "@/stores/useLanguage";
+import ResetPasswordForm from "@/components/auth/ResetPasswordForm";
 
 interface ResetPasswordPageProps {
-  params: Promise<{ lang: string }>;
+  params: Promise<{ lang: Language }>;
 }
 
-const ResetPasswordPage: React.FC<ResetPasswordPageProps> = ({
-  params: _params,
-}) => {
+export default function ResetPasswordPage({ params }: ResetPasswordPageProps) {
+  const { language, setLanguage } = LanguageStore();
+  useEffect(() => {
+    params.then((p) => setLanguage((p.lang ?? "eng") as Language));
+  }, [params, setLanguage]);
+
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Reset Password</h1>
-        <p className="text-slate-400">This feature is coming soon...</p>
-      </div>
+    <div className="relative z-10 flex items-center justify-center min-h-screen">
+      <ResetPasswordForm lang={language} />
     </div>
   );
-};
-
-export default ResetPasswordPage;
+}

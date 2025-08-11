@@ -1,22 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
+import ForgetPassword from "@/components/auth/ForgetPassword";
+import LanguageStore, { Language } from "@/stores/useLanguage";
 
 interface ForgetPasswordPageProps {
-  params: Promise<{ lang: string }>;
+  params: Promise<{ lang: Language }>;
 }
 
-const ForgetPasswordPage: React.FC<ForgetPasswordPageProps> = ({
-  params: _params,
-}) => {
+export default function ForgetPasswordPage({ params }: ForgetPasswordPageProps) {
+  const { language, setLanguage } = LanguageStore();
+  useEffect(() => {
+    params.then((p) => setLanguage((p.lang ?? "eng") as Language));
+  }, [params, setLanguage]);
+
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Forgot Password</h1>
-        <p className="text-slate-400">This feature is coming soon...</p>
-      </div>
+    <div className="relative z-10 flex items-center justify-center min-h-screen">
+      <ForgetPassword lang={language} />
     </div>
   );
-};
-
-export default ForgetPasswordPage;
+}
