@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# LevelUp
 
-First, run the development server:
+LevelUp is a modern, multi-language SaaS starter built with Next.js 15, React 19, TypeScript, and Tailwind CSS. It features a modular landing page system, authentication flows, reusable UI components, and a scalable architecture for rapid product launches.
+
+## 🚀 Features
+
+- **Landing Pages**: Home, About, Features, Pricing, Contact — all modular, responsive, and analytics-ready.
+- **Authentication**: Signup, Login, Password Reset, Email Verification — with Zod validation and React Hook Form.
+- **Internationalization Ready**: Language-aware routing and structure, prepared for i18n.
+- **Reusable UI Library**: 40+ custom and Radix UI-based components (buttons, dialogs, forms, tables, etc.).
+- **Modern Design System**: Gradients, glassmorphism, animated stats, testimonials, and more.
+- **Performance & Accessibility**: Optimized for speed, SEO, and accessibility (semantic HTML, ARIA, keyboard nav).
+- **State Management**: Zustand for global state, TanStack React Query for async data.
+- **API Integration Ready**: Axios and service layer for backend communication.
+- **Mobile-First**: Fully responsive, touch-friendly, and fast on all devices.
+
+## 🗂️ Project Structure
+
+```
+src/
+	app/
+		[lang]/(landing)/[page]/page.tsx   # Landing pages (home, about, features, pricing, contact)
+		[lang]/(auth)/[flow]/page.tsx       # Auth flows (login, signup, reset-password, verify)
+		components/                         # All UI, landing, and auth components
+		hooks/                              # Custom React hooks
+		lib/                                # Utilities and API services
+		stores/                             # Zustand stores
+public/                                 # Static assets
+```
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **UI**: React 19, Tailwind CSS, Radix UI, Styled Components
+- **State**: Zustand, React Query
+- **Forms**: React Hook Form, Zod
+- **API**: Axios
+- **Testing**: (Add your preferred tools)
+
+## ⚡ Getting Started
+
+Install dependencies:
 
 ```bash
-npm run dev
+pnpm install
+# or
+yarn install
+# or
+npm install
+```
+
+Run the development server:
+
+```bash
+pnpm dev
 # or
 yarn dev
 # or
-pnpm dev
-# or
-bun dev
+npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🧩 Main Components
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `Navbar`, `Footer`, `LanguageSwitcher` — shared layout
+- `HeroSection`, `FeaturesSection`, `StatsSection`, `TestimonialsSection`, `CTASection` — landing modules
+- `Login`, `Register`, `TopBar`, `Verify` — authentication
+- 40+ UI primitives in `components/ui/`
 
-## Learn More
+## 📄 Landing Pages
 
-To learn more about Next.js, take a look at the following resources:
+- `/[lang]/(landing)/home` — Main landing page
+- `/[lang]/(landing)/about` — Company, mission, team
+- `/[lang]/(landing)/features` — Feature showcase, integrations
+- `/[lang]/(landing)/pricing` — Plan comparison, FAQ
+- `/[lang]/(landing)/contact` — Contact form, support, FAQ
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔒 Authentication
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `/[lang]/(auth)/login` — Login form
+- `/[lang]/(auth)/signup` — Registration
+- `/[lang]/(auth)/forget-password` — Request password reset
+- `/[lang]/(auth)/reset-password` — Set new password
+- `/[lang]/(auth)/verify` — Email verification
 
-## Deploy on Vercel
+## 🧑‍💻 Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Fork the repo
+2. Create a feature branch
+3. Commit your changes
+4. Open a pull request
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📦 Deployment
+
+Deploy easily on [Vercel](https://vercel.com/) or your preferred platform.
+
+## 📚 Resources
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Radix UI](https://www.radix-ui.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Zustand](https://docs.pmnd.rs/zustand/getting-started/introduction)
+- [TanStack Query](https://tanstack.com/query/latest)
+
+---
+
+© 2025 Krishna Bahadur Gurung. All rights reserved.
