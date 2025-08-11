@@ -75,17 +75,22 @@ export function RegisterForm({ lang }: RegisterFormProps) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-      <Card className="w-full max-w-md shadow-xl border-0 bg-white/95 backdrop-blur-sm">
-        <CardHeader className="space-y-2 text-center pb-6">
-          <div className="mx-auto w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mb-4">
-            <User className="w-6 h-6 text-white" />
+    <div className="w-full max-w-md">
+      <Card className="relative bg-gradient-to-br from-slate-800/30 to-slate-900/30 backdrop-blur-xl border border-slate-700/30 rounded-3xl shadow-2xl overflow-hidden">
+        {/* Card glow effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 rounded-3xl"></div>
+
+        <CardHeader className="relative space-y-4 text-center pb-6 pt-8">
+          <div className="mx-auto w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+            <User className="w-8 h-8 text-white" />
           </div>
-          <CardTitle className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Create Account
+          <CardTitle className="text-3xl font-black">
+            <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Welcome to Level Up
+            </span>
           </CardTitle>
-          <CardDescription className="text-gray-600">
-            Join us and start your learning journey
+          <CardDescription className="text-slate-400 text-lg">
+            Register to continue your journey
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -205,4 +210,3 @@ export function RegisterForm({ lang }: RegisterFormProps) {
       </Card>
     </div>
   );
-}

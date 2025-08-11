@@ -1,4 +1,4 @@
-// components/auth/Register.tsx
+// components/auth/Verify.tsx
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -46,7 +46,7 @@ export function VerifyForm({ lang }: VerifyFormProps) {
     resolver: zodResolver(VerifySchema),
     defaultValues: {
       otp_code: "",
-      email: user?.email,
+      email: user?.email || "test@test.com",
     },
   });
 
@@ -59,7 +59,6 @@ export function VerifyForm({ lang }: VerifyFormProps) {
     mutationKey: ["verify"],
     mutationFn: (data: VerifyFormData) => VerifyUser(data, lang),
     onSuccess: (data) => {
-      console.log(data);
       if (setToken) {
         setToken(data?.body.data.data);
       }
@@ -69,7 +68,7 @@ export function VerifyForm({ lang }: VerifyFormProps) {
         email: data?.body.data.email,
       });
       setAuthenticated(true);
-      toast.success(data?.body.message);
+      toast.success(data?.body.message || "Verification Successful");
     },
     onError: (error: unknown) => {
       const err = error as { message?: string };
