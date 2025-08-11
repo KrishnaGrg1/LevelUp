@@ -210,3 +210,4 @@ export function RegisterForm({ lang }: RegisterFormProps) {
       </Card>
     </div>
   );
+}
