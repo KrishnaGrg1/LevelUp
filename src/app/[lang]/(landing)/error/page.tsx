@@ -17,7 +17,7 @@ export default function ErrorPage() {
     const searchParams = useSearchParams();
     const invalidLang = searchParams.get('invalid_lang');
     const { language } = LanguageStore();
-    const fullLanguage = lang[language as LangKey];
+    const fullLanguage = lang[language as LangKey] || "English";
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 flex items-center justify-center px-4">
             <Card className="w-full max-w-md bg-gradient-to-br from-slate-800/30 to-slate-900/30 backdrop-blur-xl border border-slate-700/30 rounded-3xl shadow-2xl">
