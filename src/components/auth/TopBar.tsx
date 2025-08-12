@@ -43,7 +43,7 @@ const TopBar: React.FC<TopBarProps> = ({
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
               <span className="text-2xl font-black bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-                {t("brand", "Level Up")}
+                Level Up
               </span>
             </Link>
           </div>
