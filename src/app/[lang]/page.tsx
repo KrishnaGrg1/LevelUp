@@ -6,7 +6,6 @@ interface HomePageProps {
 
 export default async function LangHomePage({ params }: HomePageProps) {
   const { lang } = await params;
-  // If no language is found, redirect to the default language (English)
-  redirect("/eng/home");
-
+  // Redirect to home page with the specified language
+  redirect(`/${lang}/home`);
 }

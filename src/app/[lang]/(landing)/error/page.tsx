@@ -5,11 +5,19 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { AlertCircle, Home } from "lucide-react";
 import Link from "next/link";
+import LanguageStore from "@/stores/useLanguage";
+import lang from '@/translations/lang';
+
+// If possible, import the Language type from where it's defined
+// import type { Language } from '@/types/language';
+
+type LangKey = keyof typeof lang;
 
 export default function ErrorPage() {
     const searchParams = useSearchParams();
     const invalidLang = searchParams.get('invalid_lang');
-
+    const { language } = LanguageStore();
+    const fullLanguage = lang[language as LangKey];
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 flex items-center justify-center px-4">
             <Card className="w-full max-w-md bg-gradient-to-br from-slate-800/30 to-slate-900/30 backdrop-blur-xl border border-slate-700/30 rounded-3xl shadow-2xl">
@@ -34,7 +42,7 @@ export default function ErrorPage() {
                         {invalidLang && (
                             <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
                                 <p className="text-red-300 text-sm">
-                                    Language code <span className="font-mono font-bold">"{invalidLang}"</span> is not valid
+                                    Language code <span className="font-mono font-bold">&quot;{invalidLang}&quot;</span> is not valid
                                 </p>
                             </div>
                         )}
@@ -52,10 +60,10 @@ export default function ErrorPage() {
                         </div>
                     </div>
 
-                    <Link href="/eng/home" className="block">
+                    <Link href={`/${language}/home`} className="block">
                         <Button className="w-full h-12 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 rounded-xl">
                             <Home className="w-4 h-4 mr-2" />
-                            Go to Home (English)
+                            Go to Home ({fullLanguage})
                         </Button>
                     </Link>
 

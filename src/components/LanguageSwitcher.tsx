@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Languages } from "lucide-react";
 import React, { useState, useEffect } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import LanguageStore, { Language } from "@/stores/useLanguage";
 
 const languages = [
@@ -40,7 +40,6 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   currentLang,
 }) => {
   const [isClient, setIsClient] = useState(false);
-  const router = useRouter();
   const pathname = usePathname();
   const { language, setLanguage } = LanguageStore();
 
