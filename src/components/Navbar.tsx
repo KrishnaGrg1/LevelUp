@@ -46,7 +46,7 @@ const Navbar: React.FC<NavbarProps> = ({ language: initialLanguage = "eng" }) =>
               <Sparkles className="w-4 h-4 text-white" />
             </div>
             <span className="text-2xl font-black bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-              {t("nav.brand")}
+              Level Up
             </span>
           </Link>
 
@@ -57,8 +57,8 @@ const Navbar: React.FC<NavbarProps> = ({ language: initialLanguage = "eng" }) =>
                 key={link.href}
                 href={link.href}
                 className={`relative px-3 py-2 rounded-lg transition-all duration-300 ${isActive(link.href.split("/").pop() || "")
-                    ? "text-white bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/30"
-                    : "text-slate-300 hover:text-white hover:bg-slate-800/50"
+                  ? "text-white bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/30"
+                  : "text-slate-300 hover:text-white hover:bg-slate-800/50"
                   }`}
               >
                 {link.label}
@@ -120,8 +120,8 @@ const Navbar: React.FC<NavbarProps> = ({ language: initialLanguage = "eng" }) =>
                         <Link
                           href={link.href}
                           className={`block px-4 py-3 rounded-lg transition-all duration-300 ${isActive(link.href.split("/").pop() || "")
-                              ? "text-white bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/30"
-                              : "text-slate-300 hover:text-white hover:bg-slate-800/50"
+                            ? "text-white bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/30"
+                            : "text-slate-300 hover:text-white hover:bg-slate-800/50"
                             }`}
                         >
                           {link.label}
