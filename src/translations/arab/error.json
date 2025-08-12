@@ -1,3 +1,15 @@
 {
-  "unknown": "حدث خطأ ما"
+  "unknown": "حدث خطأ ما",
+  "auth":{
+    "emailRequired": "البريد الإلكتروني مطلوب",
+    "emailInvalid": "يرجى إدخال عنوان بريد إلكتروني صحيح",
+    "passwordRequired": "كلمة المرور مطلوبة",
+    "passwordMinLength": "يجب أن تكون كلمة المرور على الأقل 6 أحرف",
+    "usernameRequired": "اسم المستخدم مطلوب",
+    "usernameMinLength": "يجب أن يكون اسم المستخدم على الأقل 3 أحرف",
+    "confirmPasswordRequired": "يرجى تأكيد كلمة المرور",
+    "passwordMismatch": "كلمات المرور غير متطابقة",
+    "otpRequired": "رمز التحقق مطلوب",
+    "otpLength": "يجب أن يكون رمز التحقق 6 أرقام"
+  }
 }

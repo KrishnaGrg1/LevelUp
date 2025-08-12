@@ -1,3 +1,19 @@
 {
-  "unknown": "Algo salió mal"
+  "unknown": "Algo salió mal",
+  "network": "Error de red. Por favor, inténtelo de nuevo.",
+  "validation": "Por favor, verifique los campos del formulario.",
+  "invalidOtp": "Código inválido, inténtelo de nuevo.",
+  "passwordMismatch": "Las contraseñas no coinciden",
+  "auth": {
+    "emailRequired": "El correo electrónico es obligatorio",
+    "emailInvalid": "Por favor, introduzca una dirección de correo válida",
+    "passwordRequired": "La contraseña es obligatoria",
+    "passwordMinLength": "La contraseña debe tener al menos 6 caracteres",
+    "usernameRequired": "El nombre de usuario es obligatorio",
+    "usernameMinLength": "El nombre de usuario debe tener al menos 3 caracteres",
+    "confirmPasswordRequired": "Por favor, confirme su contraseña",
+    "passwordMismatch": "Las contraseñas no coinciden",
+    "otpRequired": "El código de verificación es obligatorio",
+    "otpLength": "El código de verificación debe tener 6 dígitos"
+  }
 }

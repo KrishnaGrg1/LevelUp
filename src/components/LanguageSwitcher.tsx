@@ -60,17 +60,17 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
     languages.find((lang) => lang.code === language) || languages[0];
 
   const changeLanguage = (languageCode: Language) => {
-    // Update the global store
+    // Only update the global store, don't navigate
+    // This prevents form state from being lost
     setLanguage(languageCode);
 
-    // Update the URL
+    // Optional: Update URL in browser history without navigation
+    // This updates the URL bar but doesn't trigger a page load
     const segments = pathname.split("/");
     if (segments.length > 1) {
-      segments[1] = languageCode; // Replace the language segment
+      segments[1] = languageCode;
       const newPath = segments.join("/");
-      router.push(newPath);
-    } else {
-      router.push(`/${languageCode}/home`);
+      window.history.replaceState(null, '', newPath);
     }
   };
 
@@ -101,9 +101,8 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
           <DropdownMenuItem
             key={lang.code}
             onClick={() => changeLanguage(lang.code)}
-            className={`cursor-pointer hover:bg-slate-700/50 rounded-lg transition-colors ${
-              language === lang.code ? "font-semibold bg-indigo-500/20" : ""
-            }`}
+            className={`cursor-pointer hover:bg-slate-700/50 rounded-lg transition-colors ${language === lang.code ? "font-semibold bg-indigo-500/20" : ""
+              }`}
           >
             <span className="mr-2">{lang.flag}</span>
             {lang.name}

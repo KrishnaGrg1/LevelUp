@@ -12,6 +12,7 @@ import {
   type FieldPath,
   type FieldValues,
 } from "react-hook-form"
+import { t } from "@/translations/index"
 
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
@@ -137,7 +138,8 @@ function FormDescription({ className, ...props }: React.ComponentProps<"p">) {
 
 function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
   const { error, formMessageId } = useFormField()
-  const body = error ? String(error?.message ?? "") : props.children
+  // Translate the error message if it's a translation key
+  const body = error ? t(String(error?.message ?? ""), String(error?.message ?? "")) : props.children
 
   if (!body) {
     return null

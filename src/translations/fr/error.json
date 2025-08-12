@@ -3,5 +3,17 @@
   "network": "Erreur réseau. Veuillez réessayer.",
   "validation": "Veuillez vérifier les champs du formulaire.",
   "invalidOtp": "Code invalide, veuillez réessayer.",
-  "passwordMismatch": "Les mots de passe ne correspondent pas"
+  "passwordMismatch": "Les mots de passe ne correspondent pas",
+  "auth":{
+    "emailRequired": "L'e-mail est requis",
+    "emailInvalid": "Veuillez entrer une adresse e-mail valide",
+    "passwordRequired": "Le mot de passe est requis",
+    "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères",
+    "usernameRequired": "Le nom d'utilisateur est requis",
+    "usernameMinLength": "Le nom d'utilisateur doit contenir au moins 3 caractères",
+    "confirmPasswordRequired": "Veuillez confirmer votre mot de passe",
+    "passwordMismatch": "Les mots de passe ne correspondent pas",
+    "otpRequired": "Le code de vérification est requis",
+    "otpLength": "Le code de vérification doit contenir 6 chiffres"
+  }
 }

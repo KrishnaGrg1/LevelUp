@@ -13,8 +13,8 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form";
+import { TranslatedFormMessage } from "@/components/ui/TranslatedFormMessage";
 
 import { useMutation } from "@tanstack/react-query";
 import { login } from "@/lib/services/auth";
@@ -31,7 +31,8 @@ import {
 import { Eye, EyeOff, User, Mail, Lock } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useTranslation } from "react-i18next";
+import { t } from "@/translations/index";
+import LanguageStore from "@/stores/useLanguage";
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
@@ -40,9 +41,9 @@ interface LoginFormProps {
 }
 
 export function LoginForm({ lang }: LoginFormProps) {
-  const { t } = useTranslation(["auth", "success", "error"]);
   const [showPassword, setShowPassword] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const { language } = LanguageStore();
 
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -125,11 +126,11 @@ export function LoginForm({ lang }: LoginFormProps) {
           </div>
           <CardTitle className="text-3xl font-black">
             <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              {t("login.title")}
+              {t("auth.login.title")}
             </span>
           </CardTitle>
           <CardDescription className="text-slate-400 text-lg">
-            {t("login.subtitle")}
+            {t("auth.login.subtitle")}
           </CardDescription>
         </CardHeader>
         <CardContent className="relative space-y-6 px-8 pb-8">
@@ -141,7 +142,7 @@ export function LoginForm({ lang }: LoginFormProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-medium text-slate-300">
-                      {t("login.email", "Email")}
+                      {t("auth.login.email", "Email")}
                     </FormLabel>
                     <FormControl>
                       <div className="relative">
@@ -154,7 +155,7 @@ export function LoginForm({ lang }: LoginFormProps) {
                         />
                       </div>
                     </FormControl>
-                    <FormMessage className="text-xs text-red-400 mt-1" />
+                    <TranslatedFormMessage className="text-xs text-red-400 mt-1" />
                   </FormItem>
                 )}
               />
@@ -165,14 +166,14 @@ export function LoginForm({ lang }: LoginFormProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-medium text-slate-300">
-                      {t("login.password", "Password")}
+                      {t("auth.login.password", "Password")}
                     </FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
                         <Input
                           type={showPassword ? "text" : "password"}
-                          placeholder={t("login.password", "Enter your password")}
+                          placeholder={t("auth.login.password", "Enter your password")}
                           className="pl-10 pr-10 h-12 bg-slate-800/50 border-slate-600 text-white placeholder-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-300 rounded-xl"
                           {...field}
                         />
@@ -189,7 +190,7 @@ export function LoginForm({ lang }: LoginFormProps) {
                         </button>
                       </div>
                     </FormControl>
-                    <FormMessage className="text-xs text-red-400 mt-1" />
+                    <TranslatedFormMessage className="text-xs text-red-400 mt-1" />
                   </FormItem>
                 )}
               />
@@ -202,10 +203,10 @@ export function LoginForm({ lang }: LoginFormProps) {
                 {isLoading ? (
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    {t("login.submit", "Logging in...")}
+                    {t("auth.login.submit", "Logging in...")}
                   </div>
                 ) : (
-                  t("login.submit", "Log in")
+                  t("auth.login.submit", "Log in")
                 )}
               </Button>
             </form>
@@ -213,12 +214,12 @@ export function LoginForm({ lang }: LoginFormProps) {
 
           <div className="text-center pt-6 border-t border-slate-700/50">
             <p className="text-sm text-slate-400">
-              {t("login.noAccount", "Create an Account?")} {" "}
+              {t("auth.login.noAccount", "Create an Account?")} {" "}
               <Link
                 href={`/${lang}/signup`}
                 className="font-medium text-indigo-400 hover:text-indigo-300 transition-colors"
               >
-                {t("login.registerLink", "Register here")}
+                {t("auth.login.registerLink", "Register here")}
               </Link>
             </p>
           </div>

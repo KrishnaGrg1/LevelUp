@@ -3,5 +3,17 @@
   "network": "Network error. Please try again.",
   "validation": "Please check the form fields.",
   "invalidOtp": "Invalid code, please try again.",
-  "passwordMismatch": "Passwords do not match"
+  "passwordMismatch": "Passwords do not match",
+  "auth":{
+    "emailRequired": "Email is required",
+    "emailInvalid": "Please enter a valid email address",
+    "passwordRequired": "Password is required",
+    "passwordMinLength": "Password must be at least 6 characters long",
+    "usernameRequired": "Username is required",
+    "usernameMinLength": "Username must be at least 3 characters long",
+    "confirmPasswordRequired": "Please confirm your password",
+    "passwordMismatch": "Passwords do not match",
+    "otpRequired": "Verification code is required",
+    "otpLength": "Verification code must be 6 digits"
+  }
 }

@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import ResetPasswordSchema from "@/app/[lang]/(auth)/reset-password/schema";
 import { z } from "zod";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -30,7 +30,8 @@ import {
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import authStore from "@/stores/useAuth";
 import { Eye, EyeOff } from "lucide-react";
-import { useI18n } from "@/lib/i18n";
+import { t } from "@/translations/index";
+import LanguageStore from "@/stores/useLanguage";
 
 type ResetFormData = z.infer<typeof ResetPasswordSchema>;
 interface ResetPasswordFormProps {
@@ -39,9 +40,9 @@ interface ResetPasswordFormProps {
 
 export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
     const { user } = authStore();
+    const { language } = LanguageStore();
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    const { t } = useI18n(["auth"]);
 
     const form = useForm<ResetFormData>({
         resolver: zodResolver(ResetPasswordSchema),
@@ -52,6 +53,15 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
             confirmPassword: "",
         },
     });
+
+    // Re-validate form when language changes to update error messages
+    useEffect(() => {
+        if (Object.keys(form.formState.errors).length > 0) {
+            // Re-trigger validation to get translated error messages
+            form.trigger();
+        }
+    }, [language, form]);
+
     const { mutateAsync, isPending: isLoading } = useMutation({
         mutationKey: ["reset-password"],
         mutationFn: (data: ResetFormData) => resetPasswordWithOtp(data, lang),

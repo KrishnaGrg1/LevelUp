@@ -2,18 +2,25 @@ import z from "zod";
 
 const ResetPasswordSchema = z
   .object({
-    email: z.string().email({ message: "Please enter a valid email" }),
+    email: z
+      .string()
+      .min(1, { message: "error.auth.emailRequired" })
+      .email({ message: "error.auth.emailInvalid" }),
     otp_code: z
       .string()
-      .length(6, { message: "OTP must be exactly 6 digits long" }),
+      .min(1, { message: "error.auth.otpRequired" })
+      .length(6, { message: "error.auth.otpLength" }),
     newPassword: z
       .string()
-      .min(8, { message: "Password must be at least 8 characters" }),
-    confirmPassword: z.string(),
+      .min(1, { message: "error.auth.passwordRequired" })
+      .min(6, { message: "error.auth.passwordMinLength" }),
+    confirmPassword: z
+      .string()
+      .min(1, { message: "error.auth.confirmPasswordRequired" }),
   })
   .refine((data) => data.newPassword === data.confirmPassword, {
     path: ["confirmPassword"],
-    message: "Passwords do not match",
+    message: "error.auth.passwordMismatch",
   });
 
 export default ResetPasswordSchema;

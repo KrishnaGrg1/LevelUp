@@ -1,10 +1,14 @@
 import z from "zod";
 
 const loginSchema = z.object({
-  email: z.email().min(3, { message: "Email is required" }),
+  email: z
+    .string()
+    .min(1, "error.auth.emailRequired")
+    .email({ message: "error.auth.emailInvalid" }),
   password: z
     .string()
-    .min(6, { message: "Password must be at least 6 characters long" }),
+    .min(1, "error.auth.passwordRequired")
+    .min(6, "error.auth.passwordMinLength"),
 });
 
 export default loginSchema;

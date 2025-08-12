@@ -31,7 +31,8 @@ import {
 import { User } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useI18n } from "@/lib/i18n";
+import { useTranslation } from "react-i18next";
+import LanguageStore from "@/stores/useLanguage";
 
 type VerifyFormData = z.infer<typeof VerifySchema>;
 interface VerifyFormProps {
@@ -41,7 +42,8 @@ interface VerifyFormProps {
 export function VerifyForm({ lang }: VerifyFormProps) {
   const [isClient, setIsClient] = useState(false);
   const { setToken, setUser, user, setAuthenticated } = authStore();
-  const { t } = useI18n(["auth"]);
+  const { t } = useTranslation();
+  const { language } = LanguageStore();
 
   const form = useForm<VerifyFormData>({
     resolver: zodResolver(VerifySchema),
@@ -55,6 +57,14 @@ export function VerifyForm({ lang }: VerifyFormProps) {
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  // Re-validate form when language changes to update error messages
+  useEffect(() => {
+    if (isClient && Object.keys(form.formState.errors).length > 0) {
+      // Re-trigger validation to get translated error messages
+      form.trigger();
+    }
+  }, [language, isClient, form]);
 
   const { mutateAsync, isPending: isLoading } = useMutation({
     mutationKey: ["verify"],
