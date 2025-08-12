@@ -3,7 +3,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Menu, Sparkles } from "lucide-react";
-import { Language } from "@/stores/useLanguage";
+import LanguageStore, { Language } from "@/stores/useLanguage";
+import { t } from "@/translations/index";
 import {
   Sheet,
   SheetContent,
@@ -17,16 +18,19 @@ interface NavbarProps {
   language?: Language;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ language = "eng" }) => {
+const Navbar: React.FC<NavbarProps> = ({ language: initialLanguage = "eng" }) => {
   const pathname = usePathname();
+  const { language } = LanguageStore(); // Use language from store instead of prop
+  const currentLanguage = language || initialLanguage; // Fallback to prop if store is not ready
+
   const isActive = (path: string) => pathname?.includes(path);
 
   const navLinks = [
-    { href: `/${language}/home`, label: "Home" },
-    { href: `/${language}/features`, label: "Features" },
-    { href: `/${language}/pricing`, label: "Pricing" },
-    { href: `/${language}/about`, label: "About" },
-    { href: `/${language}/contact`, label: "Contact" },
+    { href: `/${currentLanguage}/home`, label: t("nav.home") },
+    { href: `/${currentLanguage}/features`, label: t("nav.features") },
+    { href: `/${currentLanguage}/pricing`, label: t("nav.pricing") },
+    { href: `/${currentLanguage}/about`, label: t("nav.about") },
+    { href: `/${currentLanguage}/contact`, label: t("nav.contact") },
   ];
 
   return (
@@ -35,14 +39,14 @@ const Navbar: React.FC<NavbarProps> = ({ language = "eng" }) => {
         <div className="flex items-center justify-between">
           {/* Brand */}
           <Link
-            href={`/${language}/home`}
+            href={`/${currentLanguage}/home`}
             className="flex items-center space-x-2 group"
           >
             <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
               <Sparkles className="w-4 h-4 text-white" />
             </div>
             <span className="text-2xl font-black bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-              Level Up
+              {t("nav.brand")}
             </span>
           </Link>
 
@@ -52,11 +56,10 @@ const Navbar: React.FC<NavbarProps> = ({ language = "eng" }) => {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative px-3 py-2 rounded-lg transition-all duration-300 ${
-                  isActive(link.href.split("/").pop() || "")
+                className={`relative px-3 py-2 rounded-lg transition-all duration-300 ${isActive(link.href.split("/").pop() || "")
                     ? "text-white bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/30"
                     : "text-slate-300 hover:text-white hover:bg-slate-800/50"
-                }`}
+                  }`}
               >
                 {link.label}
                 {isActive(link.href.split("/").pop() || "") && (
@@ -69,25 +72,25 @@ const Navbar: React.FC<NavbarProps> = ({ language = "eng" }) => {
           {/* Desktop Auth Buttons */}
           <div className="hidden lg:flex items-center space-x-4">
             <Link
-              href={`/${language}/login`}
+              href={`/${currentLanguage}/login`}
               className="px-4 py-2 text-slate-300 hover:text-white transition-colors rounded-lg hover:bg-slate-800/50"
             >
-              Login
+              {t("nav.login")}
             </Link>
             <Link
-              href={`/${language}/signup`}
+              href={`/${currentLanguage}/signup`}
               className="px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl text-white font-medium hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
             >
-              Get Started
+              {t("nav.getStarted")}
             </Link>
             <div className="ml-3">
-              <LanguageSwitcher currentLang={language} />
+              <LanguageSwitcher currentLang={currentLanguage} />
             </div>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center space-x-3">
-            <LanguageSwitcher currentLang={language} />
+            <LanguageSwitcher currentLang={currentLanguage} />
             <Sheet>
               <SheetTrigger asChild>
                 <button className="p-2 text-slate-300 hover:text-white transition-colors rounded-lg hover:bg-slate-800/50">
@@ -104,7 +107,7 @@ const Navbar: React.FC<NavbarProps> = ({ language = "eng" }) => {
                       <Sparkles className="w-4 h-4 text-white" />
                     </div>
                     <span className="text-xl font-black bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-                      Level Up
+                      {t("nav.brand")}
                     </span>
                   </SheetTitle>
                 </SheetHeader>
@@ -116,11 +119,10 @@ const Navbar: React.FC<NavbarProps> = ({ language = "eng" }) => {
                       <SheetClose key={link.href} asChild>
                         <Link
                           href={link.href}
-                          className={`block px-4 py-3 rounded-lg transition-all duration-300 ${
-                            isActive(link.href.split("/").pop() || "")
+                          className={`block px-4 py-3 rounded-lg transition-all duration-300 ${isActive(link.href.split("/").pop() || "")
                               ? "text-white bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/30"
                               : "text-slate-300 hover:text-white hover:bg-slate-800/50"
-                          }`}
+                            }`}
                         >
                           {link.label}
                         </Link>
@@ -135,18 +137,18 @@ const Navbar: React.FC<NavbarProps> = ({ language = "eng" }) => {
                   <div className="space-y-3">
                     <SheetClose asChild>
                       <Link
-                        href={`/${language}/login`}
+                        href={`/${currentLanguage}/login`}
                         className="block px-4 py-3 text-slate-300 hover:text-white transition-colors rounded-lg hover:bg-slate-800/50 text-center"
                       >
-                        Login
+                        {t("nav.login")}
                       </Link>
                     </SheetClose>
                     <SheetClose asChild>
                       <Link
-                        href={`/${language}/signup`}
+                        href={`/${currentLanguage}/signup`}
                         className="block px-4 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl text-white font-medium hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 text-center"
                       >
-                        Get Started
+                        {t("nav.getStarted")}
                       </Link>
                     </SheetClose>
                   </div>

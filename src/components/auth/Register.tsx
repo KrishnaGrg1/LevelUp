@@ -31,7 +31,7 @@ import {
 import { Eye, EyeOff, User, Mail, Lock } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useTranslation } from "react-i18next";
+import { t } from "@/translations/index";
 
 type RegisterFormData = z.infer<typeof registerSchema>;
 
@@ -40,7 +40,6 @@ interface RegisterFormProps {
 }
 
 export function RegisterForm({ lang }: RegisterFormProps) {
-  const { t } = useTranslation(["auth", "success", "error"]);
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -200,7 +199,7 @@ export function RegisterForm({ lang }: RegisterFormProps) {
 
           <div className="text-center pt-6 border-t border-slate-700/50 relative z-10">
             <p className="text-sm text-slate-400">
-              {t("register.hasAccount", "Already have an account?")} {" "}
+              {t("auth.register.hasAccount", "Already have an account?")} {" "}
               <span
                 onClick={() => {
                   console.log("Navigating to login...");
@@ -215,7 +214,7 @@ export function RegisterForm({ lang }: RegisterFormProps) {
                   }
                 }}
               >
-                {t("register.loginLink", "Sign in here")}
+                {t("auth.register.loginLink", "Sign in here")}
               </span>
             </p>
           </div>
