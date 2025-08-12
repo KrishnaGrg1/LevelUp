@@ -7,7 +7,11 @@ import span from './span/index';
 import lang from './lang';
 import LanguageStore, { Language } from '@/stores/useLanguage';
 
-const translations = {
+// Define translation structure types
+type TranslationValue = string | Record<string, unknown>;
+type TranslationContent = Record<string, TranslationValue>;
+
+const translations: Record<Language, TranslationContent> = {
 	eng: {
 		...en,
 		lang
@@ -53,25 +57,26 @@ export function t(key: string, fallback?: string): string {
 	const currentLang = getCurrentLanguage();
 	const keys = key.split('.');
 	
-	let value: any = translations[currentLang];
+	let value: unknown = translations[currentLang];
 	
 	// Handle namespace:key format (e.g., "success:login")
 	if (key.includes(':')) {
 		const [namespace, ...restKeys] = key.split(':');
 		const actualKey = restKeys.join(':');
-		value = (translations[currentLang] as any)?.[namespace];
+		const langTranslations = translations[currentLang] as TranslationContent;
+		value = langTranslations?.[namespace];
 		
 		if (value && actualKey) {
 			const nestedKeys = actualKey.split('.');
 			for (const nestedKey of nestedKeys) {
-				value = value?.[nestedKey];
+				value = (value as Record<string, unknown>)?.[nestedKey];
 				if (value === undefined) break;
 			}
 		}
 	} else {
 		// Handle dot notation (e.g., "auth.login.title")
 		for (const k of keys) {
-			value = value?.[k];
+			value = (value as Record<string, unknown>)?.[k];
 			if (value === undefined) break;
 		}
 	}

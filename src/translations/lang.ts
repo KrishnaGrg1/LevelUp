@@ -1,4 +1,4 @@
-export default {
+const lang= {
 	fr: 'French',
 	en: 'English',
 	arab: 'Arabic',
@@ -6,3 +6,5 @@ export default {
 	nep: 'Nepali',
 	span: 'Spanish'
 };
+
+export default lang;

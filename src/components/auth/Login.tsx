@@ -32,7 +32,6 @@ import { Eye, EyeOff, User, Mail, Lock } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { t } from "@/translations/index";
-import LanguageStore from "@/stores/useLanguage";
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
@@ -43,7 +42,6 @@ interface LoginFormProps {
 export function LoginForm({ lang }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  const { language } = LanguageStore();
 
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),

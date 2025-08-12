@@ -3,9 +3,12 @@ import success from './success.json';
 import auth from './auth.json';
 import nav from './nav.json';
 
-export default {
+const eng = {
 	auth,
 	error,
 	success,
 	nav
 };
+
+export default eng;
+
