@@ -31,7 +31,7 @@ import {
 import { User } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useTranslation } from "react-i18next";
+import { t } from "@/translations/index";
 import LanguageStore from "@/stores/useLanguage";
 
 type VerifyFormData = z.infer<typeof VerifySchema>;
@@ -42,7 +42,6 @@ interface VerifyFormProps {
 export function VerifyForm({ lang }: VerifyFormProps) {
   const [isClient, setIsClient] = useState(false);
   const { setToken, setUser, user, setAuthenticated } = authStore();
-  const { t } = useTranslation();
   const { language } = LanguageStore();
 
   const form = useForm<VerifyFormData>({

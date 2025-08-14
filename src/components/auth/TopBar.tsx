@@ -2,7 +2,7 @@ import Link from "next/link";
 import { LanguageSwitcher } from "../LanguageSwitcher";
 import { Sparkles, ArrowLeft } from "lucide-react";
 import { Language } from "@/stores/useLanguage";
-import { useTranslation } from "react-i18next";
+import { t } from "@/translations/index";
 
 interface TopBarProps {
   language?: Language;
@@ -15,7 +15,7 @@ const TopBar: React.FC<TopBarProps> = ({
   showBackButton = false,
   backUrl,
 }) => {
-  const { t } = useTranslation(["auth"]);
+
   const defaultBackUrl = `/${language}/home`;
 
   return (
