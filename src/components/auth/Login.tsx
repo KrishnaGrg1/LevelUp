@@ -147,7 +147,7 @@ export function LoginForm({ lang }: LoginFormProps) {
                         <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
                         <Input
                           type="email"
-                          placeholder="you@example.com"
+                          placeholder={t("auth.login.emailPlaceholder", "Enter your email")}
                           className="pl-10 h-12 bg-slate-800/50 border-slate-600 text-white placeholder-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-300 rounded-xl"
                           {...field}
                         />
@@ -171,7 +171,7 @@ export function LoginForm({ lang }: LoginFormProps) {
                         <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
                         <Input
                           type={showPassword ? "text" : "password"}
-                          placeholder={t("auth.login.password", "Enter your password")}
+                          placeholder={t("auth.login.passwordPlaceholder", "Enter your password")}
                           className="pl-10 pr-10 h-12 bg-slate-800/50 border-slate-600 text-white placeholder-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-300 rounded-xl"
                           {...field}
                         />
