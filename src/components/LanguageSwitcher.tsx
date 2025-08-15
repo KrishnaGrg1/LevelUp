@@ -29,6 +29,7 @@ const validateLanguage = (lang: string): Language => {
     "arab",
     "chin",
     "span",
+    "jap"
   ];
   return validLanguages.includes(lang as Language) ? (lang as Language) : "eng";
 };
