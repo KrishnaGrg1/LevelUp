@@ -2,10 +2,10 @@
 import { create } from "zustand";
 import { persist } from 'zustand/middleware';
 
-export type Language = 'eng' | 'nep' | 'fr' | 'arab' | 'chin' | 'span'; 
+export type Language = 'eng' | 'nep' | 'fr' | 'arab' | 'chin' | 'span' | 'jap';
 
 interface LanguageState {
-   language: Language;
+    language: Language;
     setLanguage: (lang: Language) => void;
 }
 
