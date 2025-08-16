@@ -7,7 +7,7 @@ import { StatsSection } from "@/components/landing/StatsSection";
 import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
 import { CTASection } from "@/components/landing/CTASection";
 import LanguageStore from "@/stores/useLanguage";
-import { useLanguageParam, PageProps } from "@/hooks/useLanguageParam";
+import { PageProps } from "@/hooks/useLanguageParam";
 
 const HomePage: React.FC<PageProps> = ({ params }) => {
   const { language } = LanguageStore();

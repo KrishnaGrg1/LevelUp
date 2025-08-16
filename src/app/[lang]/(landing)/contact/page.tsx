@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 
-import LanguageStore, { Language } from "@/stores/useLanguage";
+import LanguageStore from "@/stores/useLanguage";
 import { validateLanguage } from "@/lib/language";
 import {
   Mail,
@@ -20,7 +20,7 @@ interface ContactPageProps {
 }
 
 const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
-  const { language, setLanguage } = LanguageStore();
+  const { setLanguage } = LanguageStore();
   const [formData, setFormData] = useState({
     name: "",
     email: "",

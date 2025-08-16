@@ -43,6 +43,7 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
     const { language } = LanguageStore();
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [isClient, setIsClient] = useState(false);
 
     const form = useForm<ResetFormData>({
         resolver: zodResolver(ResetPasswordSchema),
@@ -53,6 +54,10 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
             confirmPassword: "",
         },
     });
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
 
     // Re-validate form when language changes to update error messages
     useEffect(() => {
@@ -76,6 +81,33 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
     const onSubmit = async (data: ResetFormData) => {
         await mutateAsync(data);
     };
+
+    // Prevent hydration mismatch by not rendering form until client-side
+    if (!isClient) {
+        return (
+            <div className="w-full max-w-md">
+                <Card className="relative bg-gradient-to-br from-slate-800/30 to-slate-900/30 backdrop-blur-xl border border-slate-700/30 rounded-3xl shadow-2xl overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 rounded-3xl"></div>
+                    <CardHeader className="relative space-y-2 text-center pb-4 pt-8">
+                        <CardTitle className="text-2xl font-black">
+                            Reset Password
+                        </CardTitle>
+                        <CardDescription className="text-slate-400">
+                            Loading...
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent className="relative space-y-6 px-8 pb-8">
+                        <div className="animate-pulse space-y-4">
+                            <div className="h-12 bg-slate-700/30 rounded-xl"></div>
+                            <div className="h-12 bg-slate-700/30 rounded-xl"></div>
+                            <div className="h-12 bg-slate-700/30 rounded-xl"></div>
+                            <div className="h-12 bg-slate-700/30 rounded-xl"></div>
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
+        );
+    }
 
     return (
         <div className="w-full max-w-md">
@@ -138,7 +170,7 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
                                                     className="h-12 pr-10 bg-slate-800/50 border-slate-600 text-white placeholder-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-300 rounded-xl"
                                                     {...field}
                                                 />
-                                                <button
+                                                <Button
                                                     type="button"
                                                     onClick={() => setShowNewPassword((s) => !s)}
                                                     className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200"
@@ -149,7 +181,7 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
                                                     ) : (
                                                         <Eye className="w-5 h-5" />
                                                     )}
-                                                </button>
+                                                </Button>
                                             </div>
                                         </FormControl>
                                         <FormMessage className="text-xs text-red-400 mt-1" />
@@ -175,7 +207,7 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
                                                     className="h-12 pr-10 bg-slate-800/50 border-slate-600 text-white placeholder-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-300 rounded-xl"
                                                     {...field}
                                                 />
-                                                <button
+                                                <Button
                                                     type="button"
                                                     onClick={() => setShowConfirmPassword((s) => !s)}
                                                     className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200"
@@ -186,7 +218,7 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
                                                     ) : (
                                                         <Eye className="w-5 h-5" />
                                                     )}
-                                                </button>
+                                                </Button>
                                             </div>
                                         </FormControl>
                                         <FormMessage className="text-xs text-red-400 mt-1" />

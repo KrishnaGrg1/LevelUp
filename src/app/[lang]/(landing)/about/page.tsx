@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { CTASection } from "@/components/landing/CTASection";
-import LanguageStore, { Language } from "@/stores/useLanguage";
+import LanguageStore from "@/stores/useLanguage";
 import { validateLanguage } from "@/lib/language";
 import {
   CheckCircle,
@@ -129,7 +129,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
       clearInterval(interval);
       observer.disconnect();
     };
-  }, [params]);
+  }, [params, setLanguage]);
 
   return (
     <>
@@ -152,7 +152,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
       )}
 
       {/* Hero Section */}
-      <section className="relative py-32 text-center min-h-screen flex items-center">"
+      <section className="relative py-32 text-center min-h-screen flex items-center">
         <div className="absolute inset-0 bg-gradient-radial from-indigo-500/15 via-transparent to-transparent"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-indigo-500/30 to-purple-500/30 rounded-full blur-3xl animate-pulse"></div>
         <div

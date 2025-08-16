@@ -175,7 +175,7 @@ export function LoginForm({ lang }: LoginFormProps) {
                           className="pl-10 pr-10 h-12 bg-slate-800/50 border-slate-600 text-white placeholder-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-300 rounded-xl"
                           {...field}
                         />
-                        <button
+                        <Button
                           type="button"
                           onClick={() => setShowPassword(!showPassword)}
                           className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-300 transition-colors"
@@ -185,7 +185,7 @@ export function LoginForm({ lang }: LoginFormProps) {
                           ) : (
                             <Eye className="w-4 h-4" />
                           )}
-                        </button>
+                        </Button>
                       </div>
                     </FormControl>
                     <TranslatedFormMessage className="text-xs text-red-400 mt-1" />
