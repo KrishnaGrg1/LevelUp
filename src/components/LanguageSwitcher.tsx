@@ -17,6 +17,7 @@ const languages = [
   { code: "arab" as Language, name: "العربية", flag: "🇸🇦" },
   { code: "chin" as Language, name: "中文", flag: "🇨🇳" },
   { code: "span" as Language, name: "Español", flag: "🇪🇸" },
+  { code: "jap" as Language, name: "日本語", flag: "🇯🇵" }
 ];
 
 // Helper function to validate and normalize language code
@@ -28,6 +29,7 @@ const validateLanguage = (lang: string): Language => {
     "arab",
     "chin",
     "span",
+    "jap"
   ];
   return validLanguages.includes(lang as Language) ? (lang as Language) : "eng";
 };

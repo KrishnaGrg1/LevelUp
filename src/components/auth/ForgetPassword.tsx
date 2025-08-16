@@ -12,7 +12,6 @@ import {
     FormField,
     FormItem,
     FormLabel,
-    FormMessage,
 } from "@/components/ui/form";
 
 import { useMutation } from "@tanstack/react-query";
@@ -27,8 +26,11 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { Mail } from "lucide-react";
+import { t } from "@/translations/index";
+import { TranslatedFormMessage } from "@/components/ui/TranslatedFormMessage";
 
 type ForgetFormData = z.infer<typeof ForgetPasswordSchema>;
+
 interface ForgetPasswordProps {
     lang: Language;
     onSent?: (email: string) => void;
@@ -44,11 +46,11 @@ export default function ForgetPassword({ lang, onSent }: ForgetPasswordProps) {
         mutationKey: ["auth", "forgot"],
         mutationFn: (data: ForgetFormData) => requestPasswordReset(data.email, lang),
         onSuccess: (res) => {
-            toast.success(res?.message || "Reset link sent. Check your email.");
+            toast.success(t("success:forgotPassword", res?.message || "Reset link sent"));
         },
         onError: (error: unknown) => {
             const err = error as { message?: string };
-            toast.error(err.message || "Failed to send reset email");
+            toast.error(err.message || t("error:forgotPassword", "Failed to send reset email"));
         },
     });
 
@@ -64,9 +66,11 @@ export default function ForgetPassword({ lang, onSent }: ForgetPasswordProps) {
             <Card className="relative bg-gradient-to-br from-slate-800/30 to-slate-900/30 backdrop-blur-xl border border-slate-700/30 rounded-3xl shadow-2xl overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 rounded-3xl" />
                 <CardHeader className="relative space-y-2 text-center pb-4 pt-8">
-                    <CardTitle className="text-2xl font-black">Forgot Password</CardTitle>
+                    <CardTitle className="text-2xl font-black">
+                        {t("auth.forgetPassword.title", "Forgot Password")}
+                    </CardTitle>
                     <CardDescription className="text-slate-400">
-                        Enter your email to receive a reset link
+                        {t("auth.forgetPassword.subtitle", "Enter your email to receive a reset link")}
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="relative space-y-6 px-8 pb-8">
@@ -78,20 +82,20 @@ export default function ForgetPassword({ lang, onSent }: ForgetPasswordProps) {
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel className="text-sm font-medium text-slate-300">
-                                            Email
+                                            {t("auth.forgetPassword.email", "Email")}
                                         </FormLabel>
                                         <FormControl>
                                             <div className="relative">
                                                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
                                                 <Input
                                                     type="email"
-                                                    placeholder="you@example.com"
+                                                    placeholder={t("auth.forgetPassword.emailPlaceholder", "you@example.com")}
                                                     className="pl-10 h-12 bg-slate-800/50 border-slate-600 text-white placeholder-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-300 rounded-xl"
                                                     {...field}
                                                 />
                                             </div>
                                         </FormControl>
-                                        <FormMessage className="text-xs text-red-400 mt-1" />
+                                        <TranslatedFormMessage className="text-xs text-red-400 mt-1" />
                                     </FormItem>
                                 )}
                             />
@@ -101,7 +105,9 @@ export default function ForgetPassword({ lang, onSent }: ForgetPasswordProps) {
                                 disabled={isLoading}
                                 className="w-full h-12 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:scale-100 rounded-xl"
                             >
-                                {isLoading ? "Sending..." : "Send reset link"}
+                                {isLoading
+                                    ? t("auth.forgetPassword.sending", "Sending...")
+                                    : t("auth.forgetPassword.submit", "Send reset link")}
                             </Button>
                         </form>
                     </Form>

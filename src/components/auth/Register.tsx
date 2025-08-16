@@ -63,12 +63,11 @@ export function RegisterForm({ lang }: RegisterFormProps) {
         UserName: data.body.data.UserName,
         email: data.body.data.email,
       });
-      toast.success(data.body.message);
+      toast.success(t("success:register", data.body.message));
     },
     onError: (error: unknown) => {
       const err = error as { message?: string };
-      console.error("Registration failed:", error);
-      toast.error(err.message || "Registration failed");
+      toast.error(t("error:register", err.message || "Registration failed"));
     },
   });
 
@@ -79,7 +78,6 @@ export function RegisterForm({ lang }: RegisterFormProps) {
   return (
     <div className="w-full max-w-md">
       <Card className="relative bg-gradient-to-br from-slate-800/30 to-slate-900/30 backdrop-blur-xl border border-slate-700/30 rounded-3xl shadow-2xl overflow-hidden">
-        {/* Card glow effect */}
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 rounded-3xl"></div>
 
         <CardHeader className="relative space-y-4 text-center pb-6 pt-8">
@@ -88,13 +86,14 @@ export function RegisterForm({ lang }: RegisterFormProps) {
           </div>
           <CardTitle className="text-3xl font-black">
             <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Welcome to Level Up
+              {t("auth.register.title", "Welcome to Level Up")}
             </span>
           </CardTitle>
           <CardDescription className="text-slate-400 text-lg">
-            Register to continue your journey
+            {t("auth.register.subtitle", "Register to continue your journey")}
           </CardDescription>
         </CardHeader>
+
         <CardContent className="relative z-10 space-y-6">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
@@ -104,13 +103,13 @@ export function RegisterForm({ lang }: RegisterFormProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-medium text-gray-700">
-                      Username
+                      {t("auth.register.username", "Username")}
                     </FormLabel>
                     <FormControl>
                       <div className="relative">
                         <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                         <Input
-                          placeholder="Enter your username"
+                          placeholder={t("auth.register.usernamePlaceholder", "Enter your username")}
                           className="pl-10 h-11 border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors"
                           {...field}
                         />
@@ -127,14 +126,14 @@ export function RegisterForm({ lang }: RegisterFormProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-medium text-gray-700">
-                      Email
+                      {t("auth.register.email", "Email")}
                     </FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                         <Input
                           type="email"
-                          placeholder="you@example.com"
+                          placeholder={t("auth.register.emailPlaceholder", "you@example.com")}
                           className="pl-10 h-11 border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors"
                           {...field}
                         />
@@ -151,14 +150,14 @@ export function RegisterForm({ lang }: RegisterFormProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-medium text-gray-700">
-                      Password
+                      {t("auth.register.password", "Password")}
                     </FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                         <Input
                           type={showPassword ? "text" : "password"}
-                          placeholder="Enter your password"
+                          placeholder={t("auth.register.passwordPlaceholder", "Enter your password")}
                           className="pl-10 pr-10 h-11 border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors"
                           {...field}
                         />
@@ -188,10 +187,10 @@ export function RegisterForm({ lang }: RegisterFormProps) {
                 {isLoading ? (
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    Creating Account...
+                    {t("auth.register.loading", "Creating Account...")}
                   </div>
                 ) : (
-                  "Create Account"
+                  t("auth.register.submit", "Create Account")
                 )}
               </Button>
             </form>
@@ -199,17 +198,14 @@ export function RegisterForm({ lang }: RegisterFormProps) {
 
           <div className="text-center pt-6 border-t border-slate-700/50 relative z-10">
             <p className="text-sm text-slate-400">
-              {t("auth.register.hasAccount", "Already have an account?")} {" "}
+              {t("auth.register.hasAccount", "Already have an account?")}{" "}
               <span
-                onClick={() => {
-                  console.log("Navigating to login...");
-                  router.push(`/${lang}/login`);
-                }}
+                onClick={() => router.push(`/${lang}/login`)}
                 className="font-medium text-indigo-400 hover:text-indigo-300 transition-colors cursor-pointer hover:underline inline-block relative z-20"
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
+                  if (e.key === "Enter" || e.key === " ") {
                     router.push(`/${lang}/login`);
                   }
                 }}

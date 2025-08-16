@@ -1,10 +1,11 @@
-const lang= {
+const lang = {
 	fr: 'French',
 	en: 'English',
 	arab: 'Arabic',
 	chin: 'Chinese',
 	nep: 'Nepali',
-	span: 'Spanish'
+	span: 'Spanish',
+	jap: 'Japanese'
 };
 
 export default lang;

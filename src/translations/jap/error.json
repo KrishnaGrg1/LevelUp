@@ -1,0 +1,19 @@
+{
+  "unknown": "エラーが発生しました",
+  "network": "ネットワークエラー。もう一度お試しください。",
+  "validation": "フォームの入力内容を確認してください。",
+  "invalidOtp": "無効なコードです。もう一度お試しください。",
+  "passwordMismatch": "パスワードが一致しません",
+  "auth": {
+    "emailRequired": "メールは必須です",
+    "emailInvalid": "有効なメールアドレスを入力してください",
+    "passwordRequired": "パスワードは必須です",
+    "passwordMinLength": "パスワードは6文字以上である必要があります",
+    "usernameRequired": "ユーザー名は必須です",
+    "usernameMinLength": "ユーザー名は3文字以上である必要があります",
+    "confirmPasswordRequired": "パスワードを確認してください",
+    "passwordMismatch": "パスワードが一致しません",
+    "otpRequired": "確認コードは必須です",
+    "otpLength": "確認コードは6桁である必要があります"
+  }
+}

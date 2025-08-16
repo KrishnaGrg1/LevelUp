@@ -4,6 +4,7 @@ import arab from './arab/index';
 import chin from './chin/index';
 import nep from './nep/index';
 import span from './span/index';
+import jap from './jap/index';
 import lang from './lang';
 import LanguageStore, { Language } from '@/stores/useLanguage';
 
@@ -35,6 +36,10 @@ const translations: Record<Language, TranslationContent> = {
 	span: {
 		...span,
 		lang
+	},
+	jap: {
+		...jap,
+		lang
 	}
 };
 
@@ -56,16 +61,16 @@ function getCurrentLanguage(): Language {
 export function t(key: string, fallback?: string): string {
 	const currentLang = getCurrentLanguage();
 	const keys = key.split('.');
-	
+
 	let value: unknown = translations[currentLang];
-	
+
 	// Handle namespace:key format (e.g., "success:login")
 	if (key.includes(':')) {
 		const [namespace, ...restKeys] = key.split(':');
 		const actualKey = restKeys.join(':');
 		const langTranslations = translations[currentLang] as TranslationContent;
 		value = langTranslations?.[namespace];
-		
+
 		if (value && actualKey) {
 			const nestedKeys = actualKey.split('.');
 			for (const nestedKey of nestedKeys) {
@@ -80,7 +85,7 @@ export function t(key: string, fallback?: string): string {
 			if (value === undefined) break;
 		}
 	}
-	
+
 	return typeof value === 'string' ? value : (fallback || key);
 }
 
