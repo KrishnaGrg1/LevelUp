@@ -9,13 +9,13 @@ import {
   ArrowRight,
   Rocket,
 } from "lucide-react";
+import { t } from "@/translations";
 
 const features = [
   {
     icon: Brain,
-    title: "AI-Powered Daily Quests",
-    description:
-      "Get personalized daily challenges tailored to your goals. Our AI creates fresh, motivating quests that adapt to your progress and learning style.",
+    title: "FeaturesSection.feature1Title",
+    description: "FeaturesSection.feature1Desc",
     color: "indigo",
     gradient: "from-indigo-500 to-purple-600",
     hoverColor: "indigo-500/50",
@@ -23,9 +23,8 @@ const features = [
   },
   {
     icon: TrendingUp,
-    title: "Real-Time Progress Tracking",
-    description:
-      "Watch your life level up with beautiful visualizations. Track streaks, achievements, and see your transformation through interactive charts.",
+    title: "FeaturesSection.feature2Title",
+    description: "FeaturesSection.feature2Desc",
     color: "purple",
     gradient: "from-purple-500 to-pink-600",
     hoverColor: "purple-500/50",
@@ -33,9 +32,8 @@ const features = [
   },
   {
     icon: GamepadIcon,
-    title: "Epic Gamification System",
-    description:
-      "Earn XP, unlock achievements, and compete with friends. Transform boring tasks into exciting adventures with our comprehensive reward system.",
+    title: "FeaturesSection.feature3Title",
+    description: "FeaturesSection.feature3Desc",
     color: "green",
     gradient: "from-green-500 to-emerald-600",
     hoverColor: "green-500/50",
@@ -43,9 +41,8 @@ const features = [
   },
   {
     icon: Globe,
-    title: "Global Community",
-    description:
-      "Join thousands of life-levelers worldwide. Share achievements, get motivated, and find accountability partners on your journey to greatness.",
+    title: "FeaturesSection.feature4Title",
+    description: "FeaturesSection.feature4Desc",
     color: "blue",
     gradient: "from-blue-500 to-cyan-600",
     hoverColor: "blue-500/50",
@@ -53,9 +50,8 @@ const features = [
   },
   {
     icon: Clock,
-    title: "Smart Time Management",
-    description:
-      "Optimize your daily schedule with AI-driven time allocation. Balance work, health, relationships, and personal growth for maximum life satisfaction.",
+    title: "FeaturesSection.feature5Title",
+    description: "FeaturesSection.feature5Desc",
     color: "orange",
     gradient: "from-orange-500 to-red-600",
     hoverColor: "orange-500/50",
@@ -63,9 +59,8 @@ const features = [
   },
   {
     icon: Heart,
-    title: "Holistic Wellness",
-    description:
-      "Focus on mental, physical, and emotional well-being. Get personalized wellness quests that nurture your mind, body, and soul for complete transformation.",
+    title: "FeaturesSection.feature6Title",
+    description: "FeaturesSection.feature6Desc",
     color: "pink",
     gradient: "from-pink-500 to-rose-600",
     hoverColor: "pink-500/50",
@@ -81,14 +76,13 @@ export const FeaturesSection: React.FC = () => {
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 rounded-full text-indigo-300 text-sm font-medium mb-6">
             <Rocket className="h-4 w-4" />
-            Powerful Features
+            {t("landing.FeaturesSection.badgeText")}
           </div>
           <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-            Why Choose Level Up?
+            {t("landing.FeaturesSection.badge")}
           </h2>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Discover the revolutionary features that make Level Up the ultimate
-            life gamification platform
+            {t("landing.FeaturesSection.description")}
           </p>
         </div>
 
@@ -110,15 +104,18 @@ export const FeaturesSection: React.FC = () => {
                     <Icon className="h-8 w-8 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold mb-4 text-white">
-                    {feature.title}
+                    {t(`landing.${feature.title}`)}
                   </h3>
                   <p className="text-slate-400 leading-relaxed mb-6">
-                    {feature.description}
+                    {t(`landing.${feature.description}`)}
                   </p>
                   <div
                     className={`flex items-center text-${feature.color}-400 group-hover:text-${feature.color}-300 transition-colors cursor-pointer`}
                   >
-                    <span className="text-sm font-medium">Learn more</span>
+                    <span className="text-sm font-medium">
+                      {" "}
+                      {t("landing.FeaturesSection.readMore")}
+                    </span>
                     <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>

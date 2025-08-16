@@ -12,5 +12,57 @@
     "rating": "4.9/5 评分",
     "secure": "100% 安全",
     "activeUsers": "20k+ 活跃用户"
-  }
+  },
+  "FeaturesSection": {
+    "badge": "为什么选择LevelUp？",
+    "badgeText": "强大的功能",
+    "description": "发现使Level Up成为终极生活游戏化平台的革命性功能",
+    "titleMain": "史诗功能",
+    "feature1Title": "AI驱动的每日任务",
+    "feature1Desc": "获得根据你的目标量身定制的每日挑战。我们的AI会创建新的、充满动力的任务，适应你的进度和学习风格。",
+    "feature2Title": "实时进度追踪",
+    "feature2Desc": "通过精美的可视化查看你的生活升级。追踪连胜、成就，并通过交互式图表观察你的成长。",
+    "feature3Title": "游戏化奖励系统",
+    "feature3Desc": "获取经验值、解锁成就并与朋友竞争。将枯燥的任务转变为令人兴奋的冒险，享受我们的全面奖励系统。",
+    "feature4Title": "全球社区",
+    "feature4Desc": "加入全球数千名生活升级者。分享成就，获得动力，并找到你的责任伙伴，共同迈向卓越。",
+    "feature5Title": "智能时间管理",
+    "feature5Desc": "使用AI驱动的时间分配优化每日日程。平衡工作、健康、人际关系和个人成长，实现最大生活满意度。",
+    "feature6Title": "整体健康",
+    "feature6Desc": "关注心理、身体和情绪健康。获得个性化的健康任务，滋养你的身心灵，实现全面转变。",
+    "readMore": "了解更多"
+  },
+  "CTASection": {
+    "badgeText": "冒险在等着你",
+    "titleMain": "准备好升级了吗？",
+    "titleSub": "你的人生？",
+    "description": "加入成千上万的冒险者，他们改变了习惯，实现了目标，并通过 Level Up 解锁了自己的全部潜力。",
+    "primaryCTA": "开始你的任务",
+    "secondaryCTA": "继续冒险",
+    "trustIndicators": {
+      "freeStart": "免费开始",
+      "noCreditCard": "无需信用卡",
+      "quickJoin": "30 秒加入"
+    }
+  },
+  "StatsSection": {
+  "titleMain": "加入人生升级革命",
+  "description": "数千名冒险者已经在使用 Level Up 改变他们的生活",
+  "stats": [
+    {
+      "label": "活跃冒险者",
+      "description": "每天提升他们的生活水平"
+    },
+    {
+      "label": "完成的任务",
+      "description": "实现目标并实现梦想"
+    },
+    {
+      "label": "成功率",
+      "description": "坚持他们习惯的用户"
+    }
+  ]
+}
+
+
 }

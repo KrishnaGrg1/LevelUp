@@ -12,6 +12,96 @@
         "rating": "4.9/5 Rating",
         "secure": "100% Secure",
         "activeUsers": "20k+ Active Users"
-
+    },
+    "FeaturesSection": {
+        "badge": "Why Choose LevelUp?",
+        "badgeText": "Powerful Features",
+        "description": "Discover the revolutionary features that make Level Up the ultimate life gamification platform",
+        "titleMain": "Epic Features",
+        "feature1Title": "AI-Powered Daily Quests",
+        "feature1Desc": "Get personalized daily challenges tailored to your goals. Our AI creates fresh, motivating quests that adapt to your progress and learning style.",
+        "feature2Title": "Real-Time Progress Tracking",
+        "feature2Desc": "Watch your life level up with beautiful visualizations. Track streaks, achievements, and see your transformation through interactive charts.",
+        "feature3Title": "Gamified Rewards System",
+        "feature3Desc": "Earn XP, unlock achievements, and compete with friends. Transform boring tasks into exciting adventures with our comprehensive reward system.",
+        "feature4Title": "Global Community",
+        "feature4Desc": "Join thousands of life-levelers worldwide. Share achievements, get motivated, and find accountability partners on your journey to greatness.",
+        "feature5Title": "Smart Time Management",
+        "feature5Desc": "Optimize your daily schedule with AI-driven time allocation. Balance work, health, relationships, and personal growth for maximum life satisfaction.",
+        "feature6Title": "Holistic Wellness",
+        "feature6Desc": "Focus on mental, physical, and emotional well-being. Get personalized wellness quests that nurture your mind, body, and soul for complete transformation.",
+        "readMore": "Learn more"
+    },
+    "CTASection": {
+    "badgeText": "Your Adventure Awaits",
+    "titleMain": "Ready to Level Up",
+    "titleSub": "Your Life?",
+    "description": "Join thousands of adventurers who've transformed their habits, achieved their goals, and unlocked their full potential with Level Up.",
+    "primaryCTA": "Start Your Quest",
+    "secondaryCTA": "Continue Adventure",
+    "trustIndicators": {
+      "freeStart": "Free to start",
+      "noCreditCard": "No credit card required",
+      "quickJoin": "Join in 30 seconds"
     }
+  },
+   "StatsSection": {
+    "titleMain": "Join the Life-Leveling Revolution",
+    "description": "Thousands of adventurers are already transforming their lives with Level Up",
+    "stats": [
+      {
+        "label": "Active Adventurers",
+        "description": "Leveling up their lives daily"
+      },
+      {
+        "label": "Quests Completed",
+        "description": "Goals achieved and dreams realized"
+      },
+      {
+        "label": "Success Rate",
+        "description": "Users who stick to their habits"
+      }
+    ]
+  },
+  
+  "TestimonialsSection": {
+    "titleMain": "Real Stories, Real Transformations",
+    "description": "Discover how adventurers worldwide are leveling up their lives with Level Up",
+    "testimonials": [
+      {
+        "name": "Alex Rivera",
+        "role": "Software Engineer",
+        "content": "Level Up transformed my productivity completely. The gamification made building habits actually fun, and I've completed 45 goals in just 3 months!",
+        "avatar": "AR",
+        "badge": {
+          "text": "45 Quests",
+          "color": "from-yellow-400 to-orange-400"
+        }
+      },
+      {
+        "name": "Sarah Chen",
+        "role": "Marketing Director",
+        "content": "The community aspect is incredible. Sharing achievements and getting support from fellow adventurers keeps me motivated every single day.",
+        "avatar": "SC",
+        "badge": {
+          "text": "Level 12",
+          "color": "from-blue-400 to-indigo-400"
+        }
+      },
+      {
+        "name": "Marcus Johnson",
+        "role": "Fitness Coach",
+        "content": "I've tried countless habit apps, but Level Up's approach to wellness and progress tracking is unmatched. My clients love it too!",
+        "avatar": "MJ",
+        "badge": {
+          "text": "Champion",
+          "color": "from-green-400 to-emerald-400"
+        }
+      }
+    ],
+    "socialProof": "Join 10,000+ happy adventurers"
+  }
+
+
+
 }
