@@ -57,7 +57,6 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
     // Re-validate form when language changes to update error messages
     useEffect(() => {
         if (Object.keys(form.formState.errors).length > 0) {
-            // Re-trigger validation to get translated error messages
             form.trigger();
         }
     }, [language, form]);
@@ -66,16 +65,15 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
         mutationKey: ["reset-password"],
         mutationFn: (data: ResetFormData) => resetPasswordWithOtp(data, lang),
         onSuccess: (res) => {
-            toast.success(res?.message || "Password reset successful");
+            toast.success(res?.message || t("resetPassword.success", "Password reset successful"));
         },
         onError: (error: unknown) => {
             const err = error as { message?: string };
-            toast.error(err.message || "Password reset failed");
+            toast.error(err.message || t("resetPassword.error", "Password reset failed"));
         },
     });
 
     const onSubmit = async (data: ResetFormData) => {
-
         await mutateAsync(data);
     };
 
@@ -84,9 +82,11 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
             <Card className="relative bg-gradient-to-br from-slate-800/30 to-slate-900/30 backdrop-blur-xl border border-slate-700/30 rounded-3xl shadow-2xl overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 rounded-3xl"></div>
                 <CardHeader className="relative space-y-2 text-center pb-4 pt-8">
-                    <CardTitle className="text-2xl font-black">{t("reset.title", "Reset Password")}</CardTitle>
+                    <CardTitle className="text-2xl font-black">
+                        {t("auth.resetPassword.title", "Reset Password")}
+                    </CardTitle>
                     <CardDescription className="text-slate-400">
-                        {t("reset.subtitle", "Enter the code and your new password")}
+                        {t("auth.resetPassword.subtitle", "Enter the code and your new password")}
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="relative space-y-6 px-8 pb-8">
@@ -99,7 +99,7 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel className="text-sm font-medium text-slate-300">
-                                            {t("reset.otp", "Reset Code")}
+                                            {t("auth.resetPassword.otp", "Reset Code")}
                                         </FormLabel>
                                         <FormControl>
                                             <InputOTP
@@ -127,13 +127,13 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel className="text-sm font-medium text-slate-300">
-                                            {t("reset.newPassword", "New Password")}
+                                            {t("auth.resetPassword.newPassword", "New Password")}
                                         </FormLabel>
                                         <FormControl>
                                             <div className="relative">
                                                 <Input
                                                     type={showNewPassword ? "text" : "password"}
-                                                    placeholder="••••••••"
+                                                    placeholder={t("auth.resetPassword.newPasswordPlaceholder", "••••••••")}
                                                     autoComplete="new-password"
                                                     className="h-12 pr-10 bg-slate-800/50 border-slate-600 text-white placeholder-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-300 rounded-xl"
                                                     {...field}
@@ -164,13 +164,13 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel className="text-sm font-medium text-slate-300">
-                                            {t("reset.confirmPassword", "Confirm Password")}
+                                            {t("auth.resetPassword.confirmPassword", "Confirm Password")}
                                         </FormLabel>
                                         <FormControl>
                                             <div className="relative">
                                                 <Input
                                                     type={showConfirmPassword ? "text" : "password"}
-                                                    placeholder="••••••••"
+                                                    placeholder={t("auth.resetPassword.confirmPasswordPlaceholder", "••••••••")}
                                                     autoComplete="new-password"
                                                     className="h-12 pr-10 bg-slate-800/50 border-slate-600 text-white placeholder-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-300 rounded-xl"
                                                     {...field}
@@ -199,7 +199,9 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
                                 disabled={isLoading}
                                 className="w-full h-12 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:scale-100 rounded-xl"
                             >
-                                {isLoading ? "Resetting..." : t("reset.submit", "Reset Password")}
+                                {isLoading
+                                    ? t("resetPassword.loading", "Resetting...")
+                                    : t("resetPassword.submit", "Reset Password")}
                             </Button>
                         </form>
                     </Form>

@@ -131,11 +131,11 @@ export function VerifyForm({ lang }: VerifyFormProps) {
           </div>
           <CardTitle className="text-3xl font-black">
             <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              {t("verify.title", "Verify Email")}
+              {t("auth.verify.title", "Verify Email")}
             </span>
           </CardTitle>
           <CardDescription className="text-slate-400 text-lg">
-            {t("verify.subtitle", "Enter the code we sent")}
+            {t("auth.verify.subtitle", "Enter the code we sent")}
           </CardDescription>
         </CardHeader>
         <CardContent className="relative space-y-6 px-8 pb-8">
@@ -147,7 +147,7 @@ export function VerifyForm({ lang }: VerifyFormProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-medium text-slate-300">
-                      {t("verify.otp", "Verification Code")}
+                      {t("auth.verify.otp", "Verification Code")}
                     </FormLabel>
                     <FormControl>
                       <InputOTP maxLength={6} value={field.value} onChange={field.onChange} className="w-full">
@@ -174,7 +174,7 @@ export function VerifyForm({ lang }: VerifyFormProps) {
                     Verifying...
                   </div>
                 ) : (
-                  t("verify.submit", "Verify")
+                  t("auth.verify.submit", "Verify")
                 )}
               </Button>
             </form>
@@ -182,12 +182,12 @@ export function VerifyForm({ lang }: VerifyFormProps) {
 
           <div className="text-center pt-6 border-t border-slate-700/50">
             <p className="text-sm text-slate-400">
-              {t("register.hasAccount", "Already have an account?")}{" "}
+              {t("auth.register.hasAccount", "Already have an account?")}{" "}
               <Link
                 href={`/${lang}/signup`}
                 className="font-medium text-indigo-400 hover:text-indigo-300 transition-colors"
               >
-                {t("register.loginLink", "Sign in here")}
+                {t("auth.register.loginLink", "Sign in here")}
               </Link>
             </p>
           </div>
