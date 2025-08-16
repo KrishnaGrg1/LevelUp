@@ -7,6 +7,7 @@ import span from './span/index';
 import jap from './jap/index';
 import lang from './lang';
 import LanguageStore, { Language } from '@/stores/useLanguage';
+import { DEFAULT_LANGUAGE } from '@/lib/language';
 
 // Define translation structure types
 type TranslationValue = string | Record<string, unknown>;
@@ -43,7 +44,7 @@ const translations: Record<Language, TranslationContent> = {
 	}
 };
 
-export const defaultLocale: Language = 'eng';
+export const defaultLocale: Language = DEFAULT_LANGUAGE;
 
 // Get current language from store
 function getCurrentLanguage(): Language {
@@ -99,3 +100,14 @@ export function setLocale(newLocale: Language) {
 }
 
 export { translations };
+
+// Re-export language utilities for convenience
+export { 
+	VALID_LANGUAGES, 
+	DEFAULT_LANGUAGE, 
+	validateLanguage, 
+	isValidLanguage,
+	getLanguageName,
+	isRTLLanguage,
+	getLanguageDirection 
+} from '@/lib/language';

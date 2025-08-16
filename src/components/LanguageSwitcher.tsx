@@ -9,6 +9,7 @@ import { Languages } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import LanguageStore, { Language } from "@/stores/useLanguage";
+import { validateLanguage } from "@/lib/language";
 
 const languages = [
   { code: "eng" as Language, name: "English", flag: "🇺🇸" },
@@ -19,20 +20,6 @@ const languages = [
   { code: "span" as Language, name: "Español", flag: "🇪🇸" },
   { code: "jap" as Language, name: "日本語", flag: "🇯🇵" }
 ];
-
-// Helper function to validate and normalize language code
-const validateLanguage = (lang: string): Language => {
-  const validLanguages: Language[] = [
-    "eng",
-    "nep",
-    "fr",
-    "arab",
-    "chin",
-    "span",
-    "jap"
-  ];
-  return validLanguages.includes(lang as Language) ? (lang as Language) : "eng";
-};
 
 interface LanguageSwitcherProps {
   currentLang?: string;

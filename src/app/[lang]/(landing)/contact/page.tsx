@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Language } from "@/stores/useLanguage";
+import { validateLanguage } from "@/lib/language";
 import {
   Mail,
   Phone,
@@ -14,19 +15,6 @@ import {
   Clock,
   CheckCircle,
 } from "lucide-react";
-
-// Helper function to validate and normalize language code
-const validateLanguage = (lang: string): Language => {
-  const validLanguages: Language[] = [
-    "eng",
-    "nep",
-    "fr",
-    "arab",
-    "chin",
-    "span",
-  ];
-  return validLanguages.includes(lang as Language) ? (lang as Language) : "eng";
-};
 
 interface ContactPageProps {
   params: Promise<{ lang: string }>;

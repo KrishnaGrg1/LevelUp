@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CTASection } from "@/components/landing/CTASection";
 import { Language } from "@/stores/useLanguage";
+import { validateLanguage } from "@/lib/language";
 import {
   CheckCircle,
   Users,
@@ -17,19 +18,6 @@ import {
   ArrowRight,
   Star,
 } from "lucide-react";
-
-// Helper function to validate and normalize language code
-const validateLanguage = (lang: string): Language => {
-  const validLanguages: Language[] = [
-    "eng",
-    "nep",
-    "fr",
-    "arab",
-    "chin",
-    "span",
-  ];
-  return validLanguages.includes(lang as Language) ? (lang as Language) : "eng";
-};
 
 interface AboutPageProps {
   params: Promise<{ lang: string }>;

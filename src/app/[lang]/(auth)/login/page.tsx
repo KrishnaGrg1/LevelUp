@@ -3,19 +3,7 @@
 import React, { useEffect } from "react";
 import LanguageStore, { Language } from "@/stores/useLanguage";
 import { LoginForm } from "@/components/auth/Login";
-
-// Helper function to validate and normalize language code
-const validateLanguage = (lang: string): Language => {
-  const validLanguages: Language[] = [
-    "eng",
-    "nep",
-    "fr",
-    "arab",
-    "chin",
-    "span",
-  ];
-  return validLanguages.includes(lang as Language) ? (lang as Language) : "eng";
-};
+import { validateLanguage } from "@/lib/language";
 
 interface LoginPageProps {
   params: Promise<{

@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { FeaturesSection } from "@/components/landing/FeaturesSection";
 import { Language } from "@/stores/useLanguage";
+import { validateLanguage } from "@/lib/language";
 import {
   Brain,
   TrendingUp,
@@ -14,19 +15,6 @@ import {
   Globe,
   Sparkles,
 } from "lucide-react";
-
-// Helper function to validate and normalize language code
-const validateLanguage = (lang: string): Language => {
-  const validLanguages: Language[] = [
-    "eng",
-    "nep",
-    "fr",
-    "arab",
-    "chin",
-    "span",
-  ];
-  return validLanguages.includes(lang as Language) ? (lang as Language) : "eng";
-};
 
 interface FeaturesPageProps {
   params: Promise<{ lang: string }>;

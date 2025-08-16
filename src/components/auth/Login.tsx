@@ -192,7 +192,14 @@ export function LoginForm({ lang }: LoginFormProps) {
                   </FormItem>
                 )}
               />
-
+              <p className="text-sm text-slate-400">
+                <Link
+                  href={`/${lang}/forget-password`}
+                  className="font-medium text-indigo-400 hover:text-indigo-300 transition-colors"
+                >
+                  {t("auth.login.forgotPasswordLink", "Forgot your password?")}
+                </Link>
+              </p>
               <Button
                 type="submit"
                 disabled={isLoading}
@@ -220,6 +227,7 @@ export function LoginForm({ lang }: LoginFormProps) {
                 {t("auth.login.registerLink", "Register here")}
               </Link>
             </p>
+
           </div>
         </CardContent>
       </Card>
