@@ -30,8 +30,8 @@ import {
 } from "@/components/ui/card";
 import { Eye, EyeOff, User, Mail, Lock } from "lucide-react";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { t } from "@/translations/index";
+import Link from "next/link";
 
 type RegisterFormData = z.infer<typeof registerSchema>;
 
@@ -40,7 +40,6 @@ interface RegisterFormProps {
 }
 
 export function RegisterForm({ lang }: RegisterFormProps) {
-  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 
   const form = useForm<RegisterFormData>({
@@ -199,19 +198,10 @@ export function RegisterForm({ lang }: RegisterFormProps) {
           <div className="text-center pt-6 border-t border-slate-700/50 relative z-10">
             <p className="text-sm text-slate-400">
               {t("auth.register.hasAccount", "Already have an account?")}{" "}
-              <span
-                onClick={() => router.push(`/${lang}/login`)}
-                className="font-medium text-indigo-400 hover:text-indigo-300 transition-colors cursor-pointer hover:underline inline-block relative z-20"
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    router.push(`/${lang}/login`);
-                  }
-                }}
-              >
+              <Link href={`/${lang}/login`}>
                 {t("auth.register.loginLink", "Sign in here")}
-              </span>
+              </Link>
+
             </p>
           </div>
         </CardContent>
