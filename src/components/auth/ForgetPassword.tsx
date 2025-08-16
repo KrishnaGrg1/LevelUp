@@ -28,6 +28,7 @@ import {
 import { Mail } from "lucide-react";
 import { t } from "@/translations/index";
 import { TranslatedFormMessage } from "@/components/ui/TranslatedFormMessage";
+import Link from "next/link";
 
 type ForgetFormData = z.infer<typeof ForgetPasswordSchema>;
 
@@ -111,6 +112,17 @@ export default function ForgetPassword({ lang, onSent }: ForgetPasswordProps) {
                             </Button>
                         </form>
                     </Form>
+                    <div className="text-center pt-6 border-t border-slate-700/50 relative z-10">
+                        <p className="text-sm text-slate-400">
+                            {t("auth.register.hasAccount", "Already have an account?")}{" "}
+                            <Link
+                                href={`/${lang}/login`}
+                                className="font-medium text-indigo-400 hover:text-indigo-300 transition-colors"
+                            >
+                                {t("auth.register.loginLink", "Sign in here")}
+                            </Link>
+                        </p>
+                    </div>
                 </CardContent>
             </Card>
         </div>

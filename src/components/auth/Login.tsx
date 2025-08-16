@@ -227,7 +227,6 @@ export function LoginForm({ lang }: LoginFormProps) {
                 {t("auth.login.registerLink", "Register here")}
               </Link>
             </p>
-
           </div>
         </CardContent>
       </Card>
