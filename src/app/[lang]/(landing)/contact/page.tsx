@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { Language } from "@/stores/useLanguage";
+
+import LanguageStore, { Language } from "@/stores/useLanguage";
 import { validateLanguage } from "@/lib/language";
 import {
   Mail,
@@ -21,7 +20,7 @@ interface ContactPageProps {
 }
 
 const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
-  const [language, setLanguage] = useState<Language>("eng");
+  const { language, setLanguage } = LanguageStore();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -35,7 +34,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
       const validatedLang = validateLanguage(resolvedParams.lang);
       setLanguage(validatedLang);
     });
-  }, [params]);
+  }, [params, setLanguage]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,8 +55,6 @@ const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
-      <Navbar language={language} />
-
       {/* Hero Section */}
       <section className="relative py-32 text-center min-h-screen flex items-center">
         <div className="absolute inset-0 bg-gradient-radial from-purple-500/15 via-transparent to-transparent"></div>
@@ -417,8 +414,6 @@ const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };

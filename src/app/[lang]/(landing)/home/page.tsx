@@ -1,17 +1,16 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { FeaturesSection } from "@/components/landing/FeaturesSection";
 import { StatsSection } from "@/components/landing/StatsSection";
 import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
 import { CTASection } from "@/components/landing/CTASection";
+import LanguageStore from "@/stores/useLanguage";
 import { useLanguageParam, PageProps } from "@/hooks/useLanguageParam";
 
 const HomePage: React.FC<PageProps> = ({ params }) => {
-  const language = useLanguageParam(params);
+  const { language } = LanguageStore();
   const statsRef = useRef<HTMLDivElement>(null);
 
   // Animated counter for stats
@@ -115,9 +114,7 @@ const HomePage: React.FC<PageProps> = ({ params }) => {
   }, [params]);
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
-      <Navbar language={language} />
-
+    <>
       {/* Particle background - only render on client side */}
       {isClient && (
         <div className="fixed inset-0 pointer-events-none z-0">
@@ -155,9 +152,7 @@ const HomePage: React.FC<PageProps> = ({ params }) => {
 
       {/* CTA Section */}
       <CTASection language={language} />
-
-      <Footer />
-    </div>
+    </>
   );
 };
 

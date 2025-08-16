@@ -2,10 +2,8 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { CTASection } from "@/components/landing/CTASection";
-import { Language } from "@/stores/useLanguage";
+import LanguageStore, { Language } from "@/stores/useLanguage";
 import { validateLanguage } from "@/lib/language";
 import {
   CheckCircle,
@@ -24,7 +22,7 @@ interface AboutPageProps {
 }
 
 const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
-  const [language, setLanguage] = useState<Language>("eng");
+  const { language, setLanguage } = LanguageStore();
   const [particles, setParticles] = useState<
     { x: number; y: number; size: number; speed: number; opacity: number }[]
   >([]);
@@ -134,9 +132,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
   }, [params]);
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
-      <Navbar language={language} />
-
+    <>
       {/* Particle background - only render on client side */}
       {isClient && (
         <div className="fixed inset-0 pointer-events-none z-0">
@@ -156,7 +152,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
       )}
 
       {/* Hero Section */}
-      <section className="relative py-32 text-center min-h-screen flex items-center">
+      <section className="relative py-32 text-center min-h-screen flex items-center">"
         <div className="absolute inset-0 bg-gradient-radial from-indigo-500/15 via-transparent to-transparent"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-indigo-500/30 to-purple-500/30 rounded-full blur-3xl animate-pulse"></div>
         <div
@@ -468,7 +464,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
               vision of making personal growth fun and engaging.
             </p>
             <Link
-              href="/en/contact"
+              href={`/${language}/contact`}
               className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25"
             >
               <span>View Open Positions</span>
@@ -480,9 +476,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
 
       {/* CTA Section */}
       <CTASection language={language} />
-
-      <Footer />
-    </div>
+    </>
   );
 };
 
