@@ -11,14 +11,15 @@ export const metadata: Metadata = {
     icon: [
       {
         url: "/companylogo.jpeg",
-        type: "image/png",
+        type: "image/jpeg",
+        sizes: "192x192",
       },
       {
-        url: "/companylogo.jpeg",
-        type: "image/x-icon",
+        url: '/companylogo1.jpeg',
+        type: "image/jpeg",
+        sizes: "192x192",
       }
-    ],
-    apple: "/apple-touch-icon.png",
+    ]
   },
 };
 
