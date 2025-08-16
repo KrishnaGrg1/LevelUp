@@ -31,6 +31,19 @@
         "feature6Title": "Holistic Wellness",
         "feature6Desc": "Focus on mental, physical, and emotional well-being. Get personalized wellness quests that nurture your mind, body, and soul for complete transformation.",
         "readMore": "Learn more"
+    },
+     "CTASection": {
+    "badgeText": "Your Adventure Awaits",
+    "titleMain": "Ready to Level Up",
+    "titleSub": "Your Life?",
+    "description": "Join thousands of adventurers who've transformed their habits, achieved their goals, and unlocked their full potential with Level Up.",
+    "primaryCTA": "Start Your Quest",
+    "secondaryCTA": "Continue Adventure",
+    "trustIndicators": {
+      "freeStart": "Free to start",
+      "noCreditCard": "No credit card required",
+      "quickJoin": "Join in 30 seconds"
     }
+  }
 
 }

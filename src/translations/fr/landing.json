@@ -31,5 +31,18 @@
     "feature6Title": "Bien-être holistique",
     "feature6Desc": "Concentrez-vous sur le bien-être mental, physique et émotionnel. Recevez des quêtes de bien-être personnalisées qui nourrissent votre esprit, votre corps et votre âme pour une transformation complète.",
     "readMore": "En savoir plus"
+  },
+   "CTASection": {
+    "badgeText": "Votre aventure vous attend",
+    "titleMain": "Prêt à passer au niveau supérieur ?",
+    "titleSub": "Votre vie ?",
+    "description": "Rejoignez des milliers d'aventuriers qui ont transformé leurs habitudes, atteint leurs objectifs et débloqué leur plein potentiel avec Level Up.",
+    "primaryCTA": "Commencez votre quête",
+    "secondaryCTA": "Continuer l'aventure",
+    "trustIndicators": {
+      "freeStart": "Démarrage gratuit",
+      "noCreditCard": "Pas besoin de carte de crédit",
+      "quickJoin": "Rejoignez en 30 secondes"
+    }
   }
 }

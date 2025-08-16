@@ -31,6 +31,19 @@
     "feature6Title": "整体健康",
     "feature6Desc": "关注心理、身体和情绪健康。获得个性化的健康任务，滋养你的身心灵，实现全面转变。",
     "readMore": "了解更多"
+  },
+  "CTASection": {
+    "badgeText": "冒险在等着你",
+    "titleMain": "准备好升级了吗？",
+    "titleSub": "你的人生？",
+    "description": "加入成千上万的冒险者，他们改变了习惯，实现了目标，并通过 Level Up 解锁了自己的全部潜力。",
+    "primaryCTA": "开始你的任务",
+    "secondaryCTA": "继续冒险",
+    "trustIndicators": {
+      "freeStart": "免费开始",
+      "noCreditCard": "无需信用卡",
+      "quickJoin": "30 秒加入"
+    }
   }
 
 }

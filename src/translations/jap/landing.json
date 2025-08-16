@@ -31,5 +31,18 @@
     "feature6Title": "ホリスティックウェルネス",
     "feature6Desc": "精神的、身体的、感情的な健康に焦点を当てる。心、体、魂を育むパーソナライズされたウェルネスクエストで完全な変容を達成しましょう。",
     "readMore": "もっと読む"
+  },
+   "CTASection": {
+    "badgeText": "冒険があなたを待っている",
+    "titleMain": "レベルアップする準備はできた？",
+    "titleSub": "あなたの人生を？",
+    "description": "習慣を変え、目標を達成し、Level Upで最大限の可能性を解き放った何千人もの冒険者に参加しましょう。",
+    "primaryCTA": "クエストを始める",
+    "secondaryCTA": "冒険を続ける",
+    "trustIndicators": {
+      "freeStart": "無料で開始",
+      "noCreditCard": "クレジットカード不要",
+      "quickJoin": "30秒で参加"
+    }
   }
 }
