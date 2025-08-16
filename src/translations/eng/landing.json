@@ -12,6 +12,25 @@
         "rating": "4.9/5 Rating",
         "secure": "100% Secure",
         "activeUsers": "20k+ Active Users"
-
+    },
+    "FeaturesSection": {
+        "badge": "Why Choose LevelUp?",
+        "badgeText": "Powerful Features",
+        "description": "Discover the revolutionary features that make Level Up the ultimate life gamification platform",
+        "titleMain": "Epic Features",
+        "feature1Title": "AI-Powered Daily Quests",
+        "feature1Desc": "Get personalized daily challenges tailored to your goals. Our AI creates fresh, motivating quests that adapt to your progress and learning style.",
+        "feature2Title": "Real-Time Progress Tracking",
+        "feature2Desc": "Watch your life level up with beautiful visualizations. Track streaks, achievements, and see your transformation through interactive charts.",
+        "feature3Title": "Gamified Rewards System",
+        "feature3Desc": "Earn XP, unlock achievements, and compete with friends. Transform boring tasks into exciting adventures with our comprehensive reward system.",
+        "feature4Title": "Global Community",
+        "feature4Desc": "Join thousands of life-levelers worldwide. Share achievements, get motivated, and find accountability partners on your journey to greatness.",
+        "feature5Title": "Smart Time Management",
+        "feature5Desc": "Optimize your daily schedule with AI-driven time allocation. Balance work, health, relationships, and personal growth for maximum life satisfaction.",
+        "feature6Title": "Holistic Wellness",
+        "feature6Desc": "Focus on mental, physical, and emotional well-being. Get personalized wellness quests that nurture your mind, body, and soul for complete transformation.",
+        "readMore": "Learn more"
     }
+
 }

@@ -12,5 +12,24 @@
     "rating": "Note 4,9/5",
     "secure": "100% Sécurisé",
     "activeUsers": "20k+ Utilisateurs Actifs"
+  },
+  "FeaturesSection": {
+    "badge": "Pourquoi choisir LevelUp ?",
+    "badgeText": "Fonctionnalités puissantes",
+    "description": "Découvrez les fonctionnalités révolutionnaires qui font de Level Up la plateforme ultime de gamification de la vie",
+    "titleMain": "Fonctionnalités Épiques",
+    "feature1Title": "Quêtes quotidiennes propulsées par l'IA",
+    "feature1Desc": "Recevez des défis quotidiens personnalisés adaptés à vos objectifs. Notre IA crée des quêtes nouvelles et motivantes qui s'adaptent à vos progrès et à votre style d'apprentissage.",
+    "feature2Title": "Suivi des progrès en temps réel",
+    "feature2Desc": "Suivez l'évolution de votre vie avec de magnifiques visualisations. Suivez vos séries, vos réalisations et observez votre transformation grâce à des graphiques interactifs.",
+    "feature3Title": "Système de récompenses gamifié",
+    "feature3Desc": "Gagnez des XP, débloquez des réalisations et défiez vos amis. Transformez les tâches ennuyeuses en aventures passionnantes grâce à notre système de récompenses complet.",
+    "feature4Title": "Communauté mondiale",
+    "feature4Desc": "Rejoignez des milliers de participants du monde entier. Partagez vos réalisations, trouvez la motivation et des partenaires de responsabilité dans votre quête de grandeur.",
+    "feature5Title": "Gestion intelligente du temps",
+    "feature5Desc": "Optimisez votre emploi du temps quotidien grâce à l'allocation de temps pilotée par l'IA. Équilibrez travail, santé, relations et développement personnel pour une satisfaction maximale de la vie.",
+    "feature6Title": "Bien-être holistique",
+    "feature6Desc": "Concentrez-vous sur le bien-être mental, physique et émotionnel. Recevez des quêtes de bien-être personnalisées qui nourrissent votre esprit, votre corps et votre âme pour une transformation complète.",
+    "readMore": "En savoir plus"
   }
 }

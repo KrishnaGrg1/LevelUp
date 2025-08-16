@@ -12,5 +12,25 @@
     "rating": "Calificación 4.9/5",
     "secure": "100% Seguro",
     "activeUsers": "20k+ Usuarios Activos"
+  },
+  "FeaturesSection": {
+    "badge": "¿Por qué elegir LevelUp?",
+    "badgeText": "Funciones Poderosas",
+    "description": "Descubre las características revolucionarias que hacen de Level Up la plataforma definitiva de gamificación de la vida",
+    "titleMain": "Características Épicas",
+    "feature1Title": "Misiones Diarias Impulsadas por IA",
+    "feature1Desc": "Obtén desafíos diarios personalizados adaptados a tus objetivos. Nuestra IA crea misiones nuevas y motivadoras que se adaptan a tu progreso y estilo de aprendizaje.",
+    "feature2Title": "Seguimiento de Progreso en Tiempo Real",
+    "feature2Desc": "Observa cómo tu vida sube de nivel con hermosas visualizaciones. Rastrea rachas, logros y ve tu transformación a través de gráficos interactivos.",
+    "feature3Title": "Sistema de Recompensas Gamificado",
+    "feature3Desc": "Gana XP, desbloquea logros y compite con amigos. Transforma tareas aburridas en aventuras emocionantes con nuestro completo sistema de recompensas.",
+    "feature4Title": "Comunidad Global",
+    "feature4Desc": "Únete a miles de personas en todo el mundo. Comparte logros, obtén motivación y encuentra compañeros de responsabilidad en tu camino hacia la grandeza.",
+    "feature5Title": "Gestión Inteligente del Tiempo",
+    "feature5Desc": "Optimiza tu horario diario con asignación de tiempo impulsada por IA. Equilibra trabajo, salud, relaciones y crecimiento personal para la máxima satisfacción de vida.",
+    "feature6Title": "Bienestar Holístico",
+    "feature6Desc": "Concéntrate en el bienestar mental, físico y emocional. Obtén misiones de bienestar personalizadas que nutren tu mente, cuerpo y alma para una transformación completa.",
+    "readMore": "Aprender más"
   }
+
 }
