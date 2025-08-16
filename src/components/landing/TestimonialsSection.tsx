@@ -1,5 +1,6 @@
 import React from "react";
 import { Quote, Zap, Target, Trophy } from "lucide-react";
+import { t } from "@/translations";
 
 interface TestimonialCard {
   name: string;
@@ -23,38 +24,35 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
 }) => {
   const testimonials: TestimonialCard[] = [
     {
-      name: "Alex Rivera",
-      role: "Software Engineer",
-      content:
-        "Level Up transformed my productivity completely. The gamification made building habits actually fun, and I've completed 45 goals in just 3 months!",
+      name: "TestimonialsSection.testimonials.0.name",
+      role: "TestimonialsSection.testimonials.0.role",
+      content: "TestimonialsSection.testimonials.0.content",
       avatar: "AR",
       badge: {
         icon: <Zap className="w-4 h-4" />,
-        text: "45 Quests",
+        text: "TestimonialsSection.testimonials.0.badge.text",
         color: "from-yellow-400 to-orange-400",
       },
     },
     {
-      name: "Sarah Chen",
-      role: "Marketing Director",
-      content:
-        "The community aspect is incredible. Sharing achievements and getting support from fellow adventurers keeps me motivated every single day.",
+      name: "TestimonialsSection.testimonials.1.name",
+      role: "TestimonialsSection.testimonials.1.role",
+      content: "TestimonialsSection.testimonials.1.content",
       avatar: "SC",
       badge: {
         icon: <Target className="w-4 h-4" />,
-        text: "Level 12",
+        text: "TestimonialsSection.testimonials.1.badge.text",
         color: "from-blue-400 to-indigo-400",
       },
     },
     {
-      name: "Marcus Johnson",
-      role: "Fitness Coach",
-      content:
-        "I've tried countless habit apps, but Level Up's approach to wellness and progress tracking is unmatched. My clients love it too!",
+      name: "TestimonialsSection.testimonials.2.name",
+      role: "TestimonialsSection.testimonials.2.role",
+      content: "TestimonialsSection.testimonials.2.content",
       avatar: "MJ",
       badge: {
         icon: <Trophy className="w-4 h-4" />,
-        text: "Champion",
+        text: "TestimonialsSection.testimonials.2.badge.text",
         color: "from-green-400 to-emerald-400",
       },
     },
@@ -68,11 +66,10 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
       <div className="relative mx-auto max-w-6xl px-6 z-10">
         <div className="text-center mb-20">
           <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            Real Stories, Real Transformations
+            {t("landing.TestimonialsSection.titleMain")}
           </h2>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Discover how adventurers worldwide are leveling up their lives with
-            Level Up
+            {t("landing.TestimonialsSection.description")}
           </p>
         </div>
 
@@ -93,7 +90,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
 
                 {/* Testimonial content */}
                 <p className="text-slate-300 text-lg leading-relaxed mb-8">
-                  &ldquo;{testimonial.content}&rdquo;
+                  &ldquo; {t(`landing.${testimonial.content}`)}&rdquo;
                 </p>
 
                 {/* User info */}
@@ -109,10 +106,10 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                     {/* Name and role */}
                     <div>
                       <p className="text-slate-200 font-semibold">
-                        {testimonial.name}
+                        {t(`landing.${testimonial.name}`)}
                       </p>
                       <p className="text-slate-500 text-sm">
-                        {testimonial.role}
+                        {t(`landing.${testimonial.role}`)}
                       </p>
                     </div>
                   </div>
@@ -123,7 +120,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                   >
                     {testimonial.badge.icon}
                     <span className="text-white text-xs font-medium">
-                      {testimonial.badge.text}
+                      {t(`landing.${testimonial.badge.text}`)}
                     </span>
                   </div>
                 </div>
@@ -151,7 +148,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
               </div>
             </div>
             <span className="text-slate-400 text-sm ml-3">
-              Join 10,000+ happy adventurers
+              {t("landing.TestimonialsSection.socialProof")}
             </span>
           </div>
         </div>

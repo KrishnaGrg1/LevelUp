@@ -62,6 +62,46 @@
         "description": "Users who stick to their habits"
       }
     ]
+  },
+  
+  "TestimonialsSection": {
+    "titleMain": "Real Stories, Real Transformations",
+    "description": "Discover how adventurers worldwide are leveling up their lives with Level Up",
+    "testimonials": [
+      {
+        "name": "Alex Rivera",
+        "role": "Software Engineer",
+        "content": "Level Up transformed my productivity completely. The gamification made building habits actually fun, and I've completed 45 goals in just 3 months!",
+        "avatar": "AR",
+        "badge": {
+          "text": "45 Quests",
+          "color": "from-yellow-400 to-orange-400"
+        }
+      },
+      {
+        "name": "Sarah Chen",
+        "role": "Marketing Director",
+        "content": "The community aspect is incredible. Sharing achievements and getting support from fellow adventurers keeps me motivated every single day.",
+        "avatar": "SC",
+        "badge": {
+          "text": "Level 12",
+          "color": "from-blue-400 to-indigo-400"
+        }
+      },
+      {
+        "name": "Marcus Johnson",
+        "role": "Fitness Coach",
+        "content": "I've tried countless habit apps, but Level Up's approach to wellness and progress tracking is unmatched. My clients love it too!",
+        "avatar": "MJ",
+        "badge": {
+          "text": "Champion",
+          "color": "from-green-400 to-emerald-400"
+        }
+      }
+    ],
+    "socialProof": "Join 10,000+ happy adventurers"
   }
+
+
 
 }
