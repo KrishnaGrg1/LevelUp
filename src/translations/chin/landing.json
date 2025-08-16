@@ -44,6 +44,25 @@
       "noCreditCard": "无需信用卡",
       "quickJoin": "30 秒加入"
     }
-  }
+  },
+  "StatsSection": {
+  "titleMain": "加入人生升级革命",
+  "description": "数千名冒险者已经在使用 Level Up 改变他们的生活",
+  "stats": [
+    {
+      "label": "活跃冒险者",
+      "description": "每天提升他们的生活水平"
+    },
+    {
+      "label": "完成的任务",
+      "description": "实现目标并实现梦想"
+    },
+    {
+      "label": "成功率",
+      "description": "坚持他们习惯的用户"
+    }
+  ]
+}
+
 
 }

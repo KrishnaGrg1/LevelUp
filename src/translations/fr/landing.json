@@ -44,5 +44,24 @@
       "noCreditCard": "Pas besoin de carte de crédit",
       "quickJoin": "Rejoignez en 30 secondes"
     }
-  }
+  },
+  "StatsSection": {
+  "titleMain": "Rejoignez la révolution du leveling de la vie",
+  "description": "Des milliers d'aventuriers transforment déjà leur vie avec Level Up",
+  "stats": [
+    {
+      "label": "Aventuriers actifs",
+      "description": "Améliorent leur vie chaque jour"
+    },
+    {
+      "label": "Quêtes terminées",
+      "description": "Objectifs atteints et rêves réalisés"
+    },
+    {
+      "label": "Taux de réussite",
+      "description": "Utilisateurs qui maintiennent leurs habitudes"
+    }
+  ]
+}
+
 }
