@@ -115,24 +115,6 @@ const HomePage: React.FC<PageProps> = ({ params }) => {
 
   return (
     <>
-      {/* Particle background - only render on client side */}
-      {isClient && (
-        <div className="fixed inset-0 pointer-events-none z-0">
-          {particles.map((particle, index) => (
-            <div
-              key={index}
-              className="absolute w-1 h-1 bg-purple-400 rounded-full animate-pulse"
-              style={{
-                left: particle.x,
-                top: particle.y,
-                opacity: particle.opacity,
-                transform: `scale(${particle.size})`,
-              }}
-            />
-          ))}
-        </div>
-      )}
-
       {/* Hero Section */}
       <HeroSection />
 
@@ -151,7 +133,7 @@ const HomePage: React.FC<PageProps> = ({ params }) => {
       <TestimonialsSection />
 
       {/* CTA Section */}
-      <CTASection language={language} />
+      <CTASection />
     </>
   );
 };

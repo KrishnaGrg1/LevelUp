@@ -1,3 +1,4 @@
+import LanguageStore from "@/stores/useLanguage";
 import { t } from "@/translations";
 import React from "react";
 
@@ -23,6 +24,7 @@ export const StatsSection: React.FC<StatsSectionProps> = ({
   successRate,
   statsRef,
 }) => {
+  const { language } = LanguageStore();
   const stats: StatsItem[] = [
     {
       count: userCount,
@@ -82,8 +84,8 @@ export const StatsSection: React.FC<StatsSectionProps> = ({
                   {index === 1
                     ? `${stat.count}M+`
                     : index === 2
-                    ? `${stat.count}%`
-                    : `${stat.count.toLocaleString()}+`}
+                      ? `${stat.count}%`
+                      : `${stat.count.toLocaleString()}+`}
                 </div>
                 <p className="text-slate-300 text-lg font-medium mb-2">
                   {t(`landing.${stat.label}`)}

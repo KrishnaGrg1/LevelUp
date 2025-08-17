@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowRight, Sparkles, Zap } from "lucide-react";
 import { t } from "@/translations";
+import LanguageStore from "@/stores/useLanguage";
 
 interface CTASectionProps {
-  language?: string;
   className?: string;
 }
 
 export const CTASection: React.FC<CTASectionProps> = ({
-  language = "en",
   className = "",
 }) => {
   const [isClient, setIsClient] = useState(false);
+  const { language } = LanguageStore();
   const [particles, setParticles] = useState<
     Array<{
       left: number;

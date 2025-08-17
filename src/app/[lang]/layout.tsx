@@ -2,6 +2,7 @@ import { Toaster } from "sonner";
 import { ReactQueryProvider } from "../../components/providers/ReactQueryProvider";
 import { redirect } from "next/navigation";
 import { isValidLanguage } from "@/lib/language";
+import { useEffect, useState } from "react";
 
 interface LanguageLayoutProps {
   children: React.ReactNode;
@@ -19,6 +20,7 @@ export default async function LanguageLayout({
   if (!isValidLanguage(lang)) {
     redirect(`/eng/error?invalid_lang=${lang}`);
   }
+
 
   return (
     <div className="min-h-screen">

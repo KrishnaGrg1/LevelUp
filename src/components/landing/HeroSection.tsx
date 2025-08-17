@@ -10,12 +10,14 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { t } from "@/translations/index";
+import LanguageStore from "@/stores/useLanguage";
 
 interface HeroSectionProps {
   className?: string;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ className = "" }) => {
+  const { language } = LanguageStore();
   return (
     <section
       className={`relative py-32 text-center overflow-hidden min-h-screen flex items-center ${className}`}

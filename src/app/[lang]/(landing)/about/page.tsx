@@ -475,7 +475,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
       </section>
 
       {/* CTA Section */}
-      <CTASection language={language} />
+      <CTASection />
     </>
   );
 };
