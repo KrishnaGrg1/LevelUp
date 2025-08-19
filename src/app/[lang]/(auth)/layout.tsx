@@ -5,10 +5,19 @@ import { Toaster } from "sonner";
 import TopBar from "@/components/auth/TopBar";
 import useLanguage from "@/stores/useLanguage";
 
+type Particle = {
+  x: number;
+  y: number;
+  size: number;
+  speed: number;
+  opacity: number;
+};
 
-type Particle = { x: number; y: number; size: number; speed: number; opacity: number };
-
-export default function AuthLayout({ children }: { children: React.ReactNode }) {
+export default function AuthLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const { language } = useLanguage();
 
   const [particles, setParticles] = useState<Particle[]>([]);
@@ -33,7 +42,11 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
 
     const interval = setInterval(() => {
       setParticles((prev) =>
-        prev.map((p) => ({ ...p, y: p.y - p.speed, opacity: p.y > 0 ? p.opacity : 0 })),
+        prev.map((p) => ({
+          ...p,
+          y: p.y - p.speed,
+          opacity: p.y > 0 ? p.opacity : 0,
+        })),
       );
     }, 80);
 

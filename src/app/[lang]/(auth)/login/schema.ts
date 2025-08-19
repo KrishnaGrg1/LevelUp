@@ -12,4 +12,3 @@ const loginSchema = z.object({
 });
 
 export default loginSchema;
-

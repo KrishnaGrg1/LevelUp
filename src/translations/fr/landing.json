@@ -32,7 +32,7 @@
     "feature6Desc": "Concentrez-vous sur le bien-être mental, physique et émotionnel. Recevez des quêtes de bien-être personnalisées qui nourrissent votre esprit, votre corps et votre âme pour une transformation complète.",
     "readMore": "En savoir plus"
   },
-   "CTASection": {
+  "CTASection": {
     "badgeText": "Votre aventure vous attend",
     "titleMain": "Prêt à passer au niveau supérieur ?",
     "titleSub": "Votre vie ?",
@@ -46,23 +46,23 @@
     }
   },
   "StatsSection": {
-  "titleMain": "Rejoignez la révolution du leveling de la vie",
-  "description": "Des milliers d'aventuriers transforment déjà leur vie avec Level Up",
-  "stats": [
-    {
-      "label": "Aventuriers actifs",
-      "description": "Améliorent leur vie chaque jour"
-    },
-    {
-      "label": "Quêtes terminées",
-      "description": "Objectifs atteints et rêves réalisés"
-    },
-    {
-      "label": "Taux de réussite",
-      "description": "Utilisateurs qui maintiennent leurs habitudes"
-    }
-  ]
-},
+    "titleMain": "Rejoignez la révolution du leveling de la vie",
+    "description": "Des milliers d'aventuriers transforment déjà leur vie avec Level Up",
+    "stats": [
+      {
+        "label": "Aventuriers actifs",
+        "description": "Améliorent leur vie chaque jour"
+      },
+      {
+        "label": "Quêtes terminées",
+        "description": "Objectifs atteints et rêves réalisés"
+      },
+      {
+        "label": "Taux de réussite",
+        "description": "Utilisateurs qui maintiennent leurs habitudes"
+      }
+    ]
+  },
 
   "about": {
     "hero": {
@@ -159,5 +159,4 @@
       }
     }
   }
-
 }

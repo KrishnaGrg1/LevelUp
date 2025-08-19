@@ -1,13 +1,15 @@
 # Landing Page Component Architecture
 
 ## Overview
+
 The landing page has been refactored into modular, maintainable components for better code organization and reusability.
 
 ## Component Structure
 
 ### 1. **HeroSection** (`/src/components/landing/HeroSection.tsx`)
+
 - **Purpose**: Main hero section with call-to-action
-- **Features**: 
+- **Features**:
   - Enhanced gradient backgrounds and animations
   - Floating particles integration
   - Call-to-action buttons with hover effects
@@ -16,6 +18,7 @@ The landing page has been refactored into modular, maintainable components for b
 - **Props**: `className` (optional)
 
 ### 2. **FeaturesSection** (`/src/components/landing/FeaturesSection.tsx`)
+
 - **Purpose**: Showcase key platform features
 - **Features**:
   - 6 predefined features with unique icons and colors
@@ -25,6 +28,7 @@ The landing page has been refactored into modular, maintainable components for b
 - **Props**: `className` (optional)
 
 ### 3. **StatsSection** (`/src/components/landing/StatsSection.tsx`)
+
 - **Purpose**: Display animated statistics and achievements
 - **Features**:
   - Animated counters with intersection observer
@@ -34,6 +38,7 @@ The landing page has been refactored into modular, maintainable components for b
 - **Props**: `userCount`, `questCount`, `successRate`, `statsRef`
 
 ### 4. **TestimonialsSection** (`/src/components/landing/TestimonialsSection.tsx`)
+
 - **Purpose**: User testimonials and social proof
 - **Features**:
   - 3 testimonial cards with user avatars
@@ -43,6 +48,7 @@ The landing page has been refactored into modular, maintainable components for b
 - **Props**: `className` (optional)
 
 ### 5. **CTASection** (`/src/components/landing/CTASection.tsx`)
+
 - **Purpose**: Final call-to-action with registration links
 - **Features**:
   - Multiple background effects and animations
@@ -58,7 +64,7 @@ The main page now acts as a composer, orchestrating all sections:
 ```tsx
 <div className="min-h-screen bg-black text-white overflow-x-hidden">
   <Navbar />
-  
+
   {/* Particle background */}
   <div className="fixed inset-0 pointer-events-none z-0">
     {/* Particle system */}
@@ -66,7 +72,7 @@ The main page now acts as a composer, orchestrating all sections:
 
   <HeroSection />
   <FeaturesSection />
-  <StatsSection 
+  <StatsSection
     userCount={userCount}
     questCount={questCount}
     successRate={successRate}
@@ -74,7 +80,7 @@ The main page now acts as a composer, orchestrating all sections:
   />
   <TestimonialsSection />
   <CTASection language={language} />
-  
+
   <Footer />
 </div>
 ```
@@ -91,6 +97,7 @@ The main page now acts as a composer, orchestrating all sections:
 ## Custom Animations
 
 The landing page uses custom CSS animations defined in `/src/app/landing.css`:
+
 - `animate-float`: Floating particle effects
 - `animate-spin-slow`: Slow spinning animations
 - `animate-gradient-shift`: Dynamic gradient animations

@@ -122,33 +122,37 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
             </h1>
 
             <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed mb-12">
-              Choose the plan that fits your ambitions. Start free and upgrade as
-              your adventures grow.
+              Choose the plan that fits your ambitions. Start free and upgrade
+              as your adventures grow.
             </p>
 
             {/* Billing Toggle */}
             <div className="flex items-center justify-center space-x-4 mb-12">
               <span
-                className={`text-lg ${!isAnnual ? "text-white font-semibold" : "text-slate-400"
-                  }`}
+                className={`text-lg ${
+                  !isAnnual ? "text-white font-semibold" : "text-slate-400"
+                }`}
               >
                 Monthly
               </span>
               <button
                 onClick={() => setIsAnnual(!isAnnual)}
-                className={`relative w-16 h-8 rounded-full transition-colors duration-300 ${isAnnual
-                  ? "bg-gradient-to-r from-indigo-500 to-purple-500"
-                  : "bg-slate-600"
-                  }`}
+                className={`relative w-16 h-8 rounded-full transition-colors duration-300 ${
+                  isAnnual
+                    ? "bg-gradient-to-r from-indigo-500 to-purple-500"
+                    : "bg-slate-600"
+                }`}
               >
                 <div
-                  className={`absolute top-1 w-6 h-6 bg-white rounded-full transition-transform duration-300 ${isAnnual ? "translate-x-9" : "translate-x-1"
-                    }`}
+                  className={`absolute top-1 w-6 h-6 bg-white rounded-full transition-transform duration-300 ${
+                    isAnnual ? "translate-x-9" : "translate-x-1"
+                  }`}
                 ></div>
               </button>
               <span
-                className={`text-lg ${isAnnual ? "text-white font-semibold" : "text-slate-400"
-                  }`}
+                className={`text-lg ${
+                  isAnnual ? "text-white font-semibold" : "text-slate-400"
+                }`}
               >
                 Annual
                 <span className="ml-2 px-2 py-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full text-xs font-bold text-black">
@@ -166,10 +170,11 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
               {plans.map((plan, index) => (
                 <div
                   key={index}
-                  className={`relative p-8 rounded-3xl border transition-all duration-500 hover:scale-105 ${plan.popular
-                    ? "border-purple-500/50 bg-gradient-to-br from-purple-900/20 to-indigo-900/20"
-                    : "border-slate-700/30 bg-gradient-to-br from-slate-800/30 to-slate-900/30 hover:border-purple-500/50"
-                    }`}
+                  className={`relative p-8 rounded-3xl border transition-all duration-500 hover:scale-105 ${
+                    plan.popular
+                      ? "border-purple-500/50 bg-gradient-to-br from-purple-900/20 to-indigo-900/20"
+                      : "border-slate-700/30 bg-gradient-to-br from-slate-800/30 to-slate-900/30 hover:border-purple-500/50"
+                  }`}
                 >
                   {plan.popular && (
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-sm font-bold text-white">
@@ -222,10 +227,11 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
 
                   <Link
                     href="/en/signup"
-                    className={`block w-full py-4 px-6 rounded-2xl font-bold text-center transition-all duration-300 hover:scale-105 ${plan.popular
-                      ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-500 hover:to-pink-500 shadow-lg hover:shadow-purple-500/25"
-                      : "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-600"
-                      }`}
+                    className={`block w-full py-4 px-6 rounded-2xl font-bold text-center transition-all duration-300 hover:scale-105 ${
+                      plan.popular
+                        ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-500 hover:to-pink-500 shadow-lg hover:shadow-purple-500/25"
+                        : "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-600"
+                    }`}
                   >
                     {plan.buttonText}
                   </Link>

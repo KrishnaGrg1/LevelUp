@@ -4,7 +4,7 @@
   "validation": "Veuillez vérifier les champs du formulaire.",
   "invalidOtp": "Code invalide, veuillez réessayer.",
   "passwordMismatch": "Les mots de passe ne correspondent pas",
-  "auth":{
+  "auth": {
     "emailRequired": "L'e-mail est requis",
     "emailInvalid": "Veuillez entrer une adresse e-mail valide",
     "passwordRequired": "Le mot de passe est requis",

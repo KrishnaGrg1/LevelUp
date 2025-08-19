@@ -21,7 +21,6 @@ export default async function LanguageLayout({
     redirect(`/eng/error?invalid_lang=${lang}`);
   }
 
-
   return (
     <div className="min-h-screen">
       <ReactQueryProvider>

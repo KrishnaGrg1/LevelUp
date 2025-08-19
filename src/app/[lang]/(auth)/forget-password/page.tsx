@@ -8,7 +8,9 @@ interface ForgetPasswordPageProps {
   params: Promise<{ lang: Language }>;
 }
 
-export default function ForgetPasswordPage({ params }: ForgetPasswordPageProps) {
+export default function ForgetPasswordPage({
+  params,
+}: ForgetPasswordPageProps) {
   const { language, setLanguage } = LanguageStore();
   useEffect(() => {
     params.then((p) => setLanguage((p.lang ?? "eng") as Language));

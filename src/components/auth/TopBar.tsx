@@ -15,7 +15,6 @@ const TopBar: React.FC<TopBarProps> = ({
   showBackButton = false,
   backUrl,
 }) => {
-
   const defaultBackUrl = `/${language}/home`;
 
   return (

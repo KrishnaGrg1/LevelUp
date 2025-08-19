@@ -14,7 +14,7 @@ export default function ResetPasswordPage({ params }: ResetPasswordPageProps) {
     params.then((p) => setLanguage((p.lang ?? "eng") as Language));
   }, [params, setLanguage]);
 
-  return (
+    return (
     <div className="relative z-10 flex items-center justify-center min-h-screen pt-20">
       <ResetPasswordForm lang={language} />
     </div>

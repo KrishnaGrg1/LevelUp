@@ -1,6 +1,6 @@
 {
   "unknown": "حدث خطأ ما",
-  "auth":{
+  "auth": {
     "emailRequired": "البريد الإلكتروني مطلوب",
     "emailInvalid": "يرجى إدخال عنوان بريد إلكتروني صحيح",
     "passwordRequired": "كلمة المرور مطلوبة",

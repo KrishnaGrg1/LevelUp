@@ -5,13 +5,13 @@ import { Language } from "@/stores/useLanguage";
  * This is the single source of truth for language validation
  */
 export const VALID_LANGUAGES: readonly Language[] = [
-  "eng", 
-  "fr", 
-  "nep", 
-  "arab", 
-  "chin", 
-  "span", 
-  "jap"
+  "eng",
+  "fr",
+  "nep",
+  "arab",
+  "chin",
+  "span",
+  "jap",
 ] as const;
 
 /**
@@ -55,7 +55,8 @@ export function getNextLanguage(currentLang: Language): Language {
  */
 export function getPreviousLanguage(currentLang: Language): Language {
   const currentIndex = VALID_LANGUAGES.indexOf(currentLang);
-  const prevIndex = currentIndex === 0 ? VALID_LANGUAGES.length - 1 : currentIndex - 1;
+  const prevIndex =
+    currentIndex === 0 ? VALID_LANGUAGES.length - 1 : currentIndex - 1;
   return VALID_LANGUAGES[prevIndex];
 }
 
@@ -65,12 +66,12 @@ export function getPreviousLanguage(currentLang: Language): Language {
  */
 export const LANGUAGE_NAMES: Record<Language, string> = {
   eng: "English",
-  fr: "French", 
+  fr: "French",
   nep: "नेपाली",
   arab: "العربية",
   chin: "中文",
   span: "Español",
-  jap: "日本語"
+  jap: "日本語",
 } as const;
 
 /**

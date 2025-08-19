@@ -4,7 +4,7 @@
   "validation": "Please check the form fields.",
   "invalidOtp": "Invalid code, please try again.",
   "passwordMismatch": "Passwords do not match",
-  "auth":{
+  "auth": {
     "emailRequired": "Email is required",
     "emailInvalid": "Please enter a valid email address",
     "passwordRequired": "Password is required",

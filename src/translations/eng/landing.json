@@ -1,38 +1,38 @@
 {
-    "heroSection": {
-        "watchDemo": "Watch Demo",
-        "batchText": "Life Gamification Platform",
-        "titleMain": "Level Up Your Life",
-        "titleSub": "with Epic Daily Quests",
-        "desc1": "Transform your mundane goals into an",
-        "descHighlight1": "epic adventure",
-        "desc2": "Get AI-powered daily quests, track your heroic progress, and",
-        "descHighlight2": "visualize your legendary future.",
-        "ctaStart": "Start Your Epic Journey",
-        "rating": "4.9/5 Rating",
-        "secure": "100% Secure",
-        "activeUsers": "20k+ Active Users"
-    },
-    "FeaturesSection": {
-        "badge": "Why Choose LevelUp?",
-        "badgeText": "Powerful Features",
-        "description": "Discover the revolutionary features that make Level Up the ultimate life gamification platform",
-        "titleMain": "Epic Features",
-        "feature1Title": "AI-Powered Daily Quests",
-        "feature1Desc": "Get personalized daily challenges tailored to your goals. Our AI creates fresh, motivating quests that adapt to your progress and learning style.",
-        "feature2Title": "Real-Time Progress Tracking",
-        "feature2Desc": "Watch your life level up with beautiful visualizations. Track streaks, achievements, and see your transformation through interactive charts.",
-        "feature3Title": "Gamified Rewards System",
-        "feature3Desc": "Earn XP, unlock achievements, and compete with friends. Transform boring tasks into exciting adventures with our comprehensive reward system.",
-        "feature4Title": "Global Community",
-        "feature4Desc": "Join thousands of life-levelers worldwide. Share achievements, get motivated, and find accountability partners on your journey to greatness.",
-        "feature5Title": "Smart Time Management",
-        "feature5Desc": "Optimize your daily schedule with AI-driven time allocation. Balance work, health, relationships, and personal growth for maximum life satisfaction.",
-        "feature6Title": "Holistic Wellness",
-        "feature6Desc": "Focus on mental, physical, and emotional well-being. Get personalized wellness quests that nurture your mind, body, and soul for complete transformation.",
-        "readMore": "Learn more"
-    },
-    "CTASection": {
+  "heroSection": {
+    "watchDemo": "Watch Demo",
+    "batchText": "Life Gamification Platform",
+    "titleMain": "Level Up Your Life",
+    "titleSub": "with Epic Daily Quests",
+    "desc1": "Transform your mundane goals into an",
+    "descHighlight1": "epic adventure",
+    "desc2": "Get AI-powered daily quests, track your heroic progress, and",
+    "descHighlight2": "visualize your legendary future.",
+    "ctaStart": "Start Your Epic Journey",
+    "rating": "4.9/5 Rating",
+    "secure": "100% Secure",
+    "activeUsers": "20k+ Active Users"
+  },
+  "FeaturesSection": {
+    "badge": "Why Choose LevelUp?",
+    "badgeText": "Powerful Features",
+    "description": "Discover the revolutionary features that make Level Up the ultimate life gamification platform",
+    "titleMain": "Epic Features",
+    "feature1Title": "AI-Powered Daily Quests",
+    "feature1Desc": "Get personalized daily challenges tailored to your goals. Our AI creates fresh, motivating quests that adapt to your progress and learning style.",
+    "feature2Title": "Real-Time Progress Tracking",
+    "feature2Desc": "Watch your life level up with beautiful visualizations. Track streaks, achievements, and see your transformation through interactive charts.",
+    "feature3Title": "Gamified Rewards System",
+    "feature3Desc": "Earn XP, unlock achievements, and compete with friends. Transform boring tasks into exciting adventures with our comprehensive reward system.",
+    "feature4Title": "Global Community",
+    "feature4Desc": "Join thousands of life-levelers worldwide. Share achievements, get motivated, and find accountability partners on your journey to greatness.",
+    "feature5Title": "Smart Time Management",
+    "feature5Desc": "Optimize your daily schedule with AI-driven time allocation. Balance work, health, relationships, and personal growth for maximum life satisfaction.",
+    "feature6Title": "Holistic Wellness",
+    "feature6Desc": "Focus on mental, physical, and emotional well-being. Get personalized wellness quests that nurture your mind, body, and soul for complete transformation.",
+    "readMore": "Learn more"
+  },
+  "CTASection": {
     "badgeText": "Your Adventure Awaits",
     "titleMain": "Ready to Level Up",
     "titleSub": "Your Life?",
@@ -45,7 +45,7 @@
       "quickJoin": "Join in 30 seconds"
     }
   },
-   "StatsSection": {
+  "StatsSection": {
     "titleMain": "Join the Life-Leveling Revolution",
     "description": "Thousands of adventurers are already transforming their lives with Level Up",
     "stats": [
@@ -63,7 +63,7 @@
       }
     ]
   },
-  
+
   "TestimonialsSection": {
     "titleMain": "Real Stories, Real Transformations",
     "description": "Discover how adventurers worldwide are leveling up their lives with Level Up",
@@ -101,100 +101,99 @@
     ],
     "socialProof": "Join 10,000+ happy adventurers"
   },
-  "about":{
-  "hero": {
-    "badge": "Our Story",
-    "titleLine1": "Transforming Lives",
-    "titleLine2": "One Quest at a Time",
-    "description": "We believe that everyone has the potential to level up their life. Level Up was born from the idea that achieving your goals should feel like an epic adventure, not a boring chore."
-  },
-  "stats": {
-    "title": "Our Journey in Numbers",
-    "description": "From a small startup to a global community of life-leveling adventurers",
-    "founded": {
-      "label": "Founded",
-      "description": "Our adventure began"
+  "about": {
+    "hero": {
+      "badge": "Our Story",
+      "titleLine1": "Transforming Lives",
+      "titleLine2": "One Quest at a Time",
+      "description": "We believe that everyone has the potential to level up their life. Level Up was born from the idea that achieving your goals should feel like an epic adventure, not a boring chore."
+    },
+    "stats": {
+      "title": "Our Journey in Numbers",
+      "description": "From a small startup to a global community of life-leveling adventurers",
+      "founded": {
+        "label": "Founded",
+        "description": "Our adventure began"
+      },
+      "team": {
+        "label": "Team Members",
+        "description": "Passionate adventurers"
+      },
+      "countries": {
+        "label": "Countries",
+        "description": "Global community"
+      },
+      "milestones": {
+        "label": "Milestones",
+        "description": "Goals achieved together"
+      }
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "To gamify personal development and make achieving life goals as engaging as playing your favorite game.",
+      "items": [
+        {
+          "title": "Goal Achievement",
+          "description": "Transform your dreams into achievable quests with clear milestones and rewarding progress tracking."
+        },
+        {
+          "title": "Community Power",
+          "description": "Join a supportive community of adventurers who celebrate your wins and help you overcome challenges."
+        },
+        {
+          "title": "Gamified Experience",
+          "description": "Level up your life with XP points, achievements, and rewards that make personal growth addictively fun."
+        }
+      ]
+    },
+    "values": {
+      "title": "Our Values",
+      "description": "The principles that guide everything we do at Level Up.",
+      "items": [
+        {
+          "title": "Progress Over Perfection",
+          "description": "We believe that consistent small steps lead to extraordinary transformations. Every quest completed is a victory worth celebrating."
+        },
+        {
+          "title": "Community First",
+          "description": "Personal growth is better together. We foster a supportive environment where everyone can thrive and help others succeed."
+        },
+        {
+          "title": "Privacy & Security",
+          "description": "Your personal journey is sacred. We protect your data with enterprise-grade security and never compromise your privacy."
+        },
+        {
+          "title": "Innovation & Fun",
+          "description": "We constantly innovate to make personal development more engaging, effective, and enjoyable than ever before."
+        }
+      ]
     },
     "team": {
-      "label": "Team Members",
-      "description": "Passionate adventurers"
-    },
-    "countries": {
-      "label": "Countries",
-      "description": "Global community"
-    },
-    "milestones": {
-      "label": "Milestones",
-      "description": "Goals achieved together"
-    }
-  },
-  "mission": {
-    "title": "Our Mission",
-    "description": "To gamify personal development and make achieving life goals as engaging as playing your favorite game.",
-    "items": [
-      {
-        "title": "Goal Achievement",
-        "description": "Transform your dreams into achievable quests with clear milestones and rewarding progress tracking."
-      },
-      {
-        "title": "Community Power",
-        "description": "Join a supportive community of adventurers who celebrate your wins and help you overcome challenges."
-      },
-      {
-        "title": "Gamified Experience",
-        "description": "Level up your life with XP points, achievements, and rewards that make personal growth addictively fun."
+      "title": "Meet the Team",
+      "description": "The passionate adventurers behind Level Up who are dedicated to helping you level up your life.",
+      "members": [
+        {
+          "name": "Alex Chen",
+          "role": "Co-Founder & CEO",
+          "bio": "Former game designer turned life-leveling enthusiast. Believes everyone deserves to be the hero of their own story."
+        },
+        {
+          "name": "Sarah Rodriguez",
+          "role": "Co-Founder & CTO",
+          "bio": "Tech wizard with a passion for building tools that actually make life better. 15+ years in product development."
+        },
+        {
+          "name": "Marcus Johnson",
+          "role": "Head of Product",
+          "bio": "UX obsessed designer who turned his own productivity struggles into the features you love in Level Up."
+        }
+      ],
+      "cta": {
+        "badge": "We're Growing",
+        "title": "Want to Join Our Adventure?",
+        "description": "We're always looking for passionate individuals who share our vision of making personal growth fun and engaging.",
+        "button": "View Open Positions"
       }
-    ]
-  },
-  "values": {
-    "title": "Our Values",
-    "description": "The principles that guide everything we do at Level Up.",
-    "items": [
-      {
-        "title": "Progress Over Perfection",
-        "description": "We believe that consistent small steps lead to extraordinary transformations. Every quest completed is a victory worth celebrating."
-      },
-      {
-        "title": "Community First",
-        "description": "Personal growth is better together. We foster a supportive environment where everyone can thrive and help others succeed."
-      },
-      {
-        "title": "Privacy & Security",
-        "description": "Your personal journey is sacred. We protect your data with enterprise-grade security and never compromise your privacy."
-      },
-      {
-        "title": "Innovation & Fun",
-        "description": "We constantly innovate to make personal development more engaging, effective, and enjoyable than ever before."
-      }
-    ]
-  },
-  "team": {
-    "title": "Meet the Team",
-    "description": "The passionate adventurers behind Level Up who are dedicated to helping you level up your life.",
-    "members": [
-      {
-        "name": "Alex Chen",
-        "role": "Co-Founder & CEO",
-        "bio": "Former game designer turned life-leveling enthusiast. Believes everyone deserves to be the hero of their own story."
-      },
-      {
-        "name": "Sarah Rodriguez",
-        "role": "Co-Founder & CTO",
-        "bio": "Tech wizard with a passion for building tools that actually make life better. 15+ years in product development."
-      },
-      {
-        "name": "Marcus Johnson",
-        "role": "Head of Product",
-        "bio": "UX obsessed designer who turned his own productivity struggles into the features you love in Level Up."
-      }
-    ],
-    "cta": {
-      "badge": "We're Growing",
-      "title": "Want to Join Our Adventure?",
-      "description": "We're always looking for passionate individuals who share our vision of making personal growth fun and engaging.",
-      "button": "View Open Positions"
     }
   }
-  }
-
 }

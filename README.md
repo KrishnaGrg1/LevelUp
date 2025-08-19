@@ -1,4 +1,3 @@
-
 # LevelUp
 
 LevelUp is a modern, multi-language SaaS starter built with Next.js 15, React 19, TypeScript, and Tailwind CSS. It features a modular landing page system, authentication flows, reusable UI components, and a scalable architecture for rapid product launches.
@@ -9,7 +8,7 @@ LevelUp is a modern, multi-language SaaS starter built with Next.js 15, React 19
 - **Authentication**: Signup, Login, Password Reset, Email Verification — with Zod validation and React Hook Form.
 - **Internationalization Ready**: Language-aware routing and structure, prepared for i18n.
 - **Reusable UI Library**: 40+ custom and Radix UI-based components (buttons, dialogs, forms, tables, etc.).
- - **Reusable UI Library**: 40+ shadcn/ui components (built on Radix primitives) — buttons, dialogs, forms, tables, and more.
+- **Reusable UI Library**: 40+ shadcn/ui components (built on Radix primitives) — buttons, dialogs, forms, tables, and more.
 - **Modern Design System**: Gradients, glassmorphism, animated stats, testimonials, and more.
 - **Performance & Accessibility**: Optimized for speed, SEO, and accessibility (semantic HTML, ARIA, keyboard nav).
 - **State Management**: Zustand for global state, TanStack React Query for async data.

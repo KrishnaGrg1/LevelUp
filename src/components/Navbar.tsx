@@ -18,7 +18,9 @@ interface NavbarProps {
   language?: Language;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ language: initialLanguage = "eng" }) => {
+const Navbar: React.FC<NavbarProps> = ({
+  language: initialLanguage = "eng",
+}) => {
   const pathname = usePathname();
   const { language } = LanguageStore(); // Use language from store instead of prop
   const currentLanguage = language || initialLanguage; // Fallback to prop if store is not ready
@@ -56,10 +58,11 @@ const Navbar: React.FC<NavbarProps> = ({ language: initialLanguage = "eng" }) =>
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative px-3 py-2 rounded-lg transition-all duration-300 ${isActive(link.href.split("/").pop() || "")
-                  ? "text-white bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/30"
-                  : "text-slate-300 hover:text-white hover:bg-slate-800/50"
-                  }`}
+                className={`relative px-3 py-2 rounded-lg transition-all duration-300 ${
+                  isActive(link.href.split("/").pop() || "")
+                    ? "text-white bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/30"
+                    : "text-slate-300 hover:text-white hover:bg-slate-800/50"
+                }`}
               >
                 {link.label}
                 {isActive(link.href.split("/").pop() || "") && (
@@ -119,10 +122,11 @@ const Navbar: React.FC<NavbarProps> = ({ language: initialLanguage = "eng" }) =>
                       <SheetClose key={link.href} asChild>
                         <Link
                           href={link.href}
-                          className={`block px-4 py-3 rounded-lg transition-all duration-300 ${isActive(link.href.split("/").pop() || "")
-                            ? "text-white bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/30"
-                            : "text-slate-300 hover:text-white hover:bg-slate-800/50"
-                            }`}
+                          className={`block px-4 py-3 rounded-lg transition-all duration-300 ${
+                            isActive(link.href.split("/").pop() || "")
+                              ? "text-white bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/30"
+                              : "text-slate-300 hover:text-white hover:bg-slate-800/50"
+                          }`}
                         >
                           {link.label}
                         </Link>

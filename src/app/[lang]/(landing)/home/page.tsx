@@ -56,7 +56,7 @@ const HomePage: React.FC<PageProps> = ({ params }) => {
           ...particle,
           y: particle.y - particle.speed,
           opacity: particle.y > 0 ? particle.opacity : 0,
-        }))
+        })),
       );
     };
 
@@ -83,7 +83,7 @@ const HomePage: React.FC<PageProps> = ({ params }) => {
               currentUser += Math.ceil(targetUser / (duration / increment));
               currentQuest += Math.ceil(targetQuest / (duration / increment));
               currentSuccess += Math.ceil(
-                targetSuccess / (duration / increment)
+                targetSuccess / (duration / increment),
               );
 
               if (currentUser >= targetUser) {
@@ -100,7 +100,7 @@ const HomePage: React.FC<PageProps> = ({ params }) => {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     if (statsRef.current) {

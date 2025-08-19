@@ -4,20 +4,20 @@
 export enum MemberStatus {
   Beginner = "Beginner",
   Intermediate = "Intermediate",
-  Advanced = "Advanced"
+  Advanced = "Advanced",
 }
 
 export enum QuestType {
   Daily = "Daily",
   Weekly = "Weekly",
   Monthly = "Monthly",
-  OneTime = "OneTime"
+  OneTime = "OneTime",
 }
 
 export enum QuestSource {
   AI = "AI",
   TEMPLATE = "TEMPLATE",
-  MANUAL = "MANUAL"
+  MANUAL = "MANUAL",
 }
 
 // ----------------------------
@@ -213,7 +213,7 @@ export interface VerifyOtpDto {
 // Response Types
 // ----------------------------
 export interface AuthResponse {
-  user: Omit<User, 'password'>;
+  user: Omit<User, "password">;
   token: string;
 }
 
@@ -227,7 +227,7 @@ export interface ApiResponse<T> {
 // ----------------------------
 // Utility Types
 // ----------------------------
-export type UserPublic = Omit<User, 'password'>;
+export type UserPublic = Omit<User, "password">;
 export type UserProfile = UserPublic & {
   category?: Category;
   totalQuests?: number;
@@ -250,21 +250,21 @@ export interface UserLoginResponse {
   statusCode: number;
   body: LoginResponse;
 }
-export interface LoginUserData{
+export interface LoginUserData {
   id: string;
   UserName: string;
   email: string;
   data: string;
 }
 export interface LoginResponse {
-  data: LoginUserData
+  data: LoginUserData;
   message: string; // localized message
 }
 export interface UserLoginInput {
   email: string;
   password: string;
 }
-export interface UserData{
+export interface UserData {
   id: string;
   UserName: string;
   email: string;
@@ -284,16 +284,24 @@ export interface UserRegisterInput {
 export interface UserRegisterResponse {
   statusCode: number;
   headers: Record<string, string>;
- body:{
-  message: string;
-  data: UserData
- }
+  body: {
+    message: string;
+    data: UserData;
+  };
 }
 
 // ----------------------------
 // Translation Types
 // ----------------------------
-export type Language = 'eng' | 'arab' | 'chin' | 'nep' | 'span' | 'jap' | 'hind' | 'fr';
+export type Language =
+  | "eng"
+  | "arab"
+  | "chin"
+  | "nep"
+  | "span"
+  | "jap"
+  | "hind"
+  | "fr";
 
 export interface TranslationRequest {
   language: Language;

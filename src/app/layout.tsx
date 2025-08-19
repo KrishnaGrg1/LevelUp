@@ -15,11 +15,11 @@ export const metadata: Metadata = {
         sizes: "192x192",
       },
       {
-        url: '/companylogo1.jpeg',
+        url: "/companylogo1.jpeg",
         type: "image/jpeg",
         sizes: "192x192",
-      }
-    ]
+      },
+    ],
   },
 };
 
@@ -37,6 +37,6 @@ export default function RootLayout({
           {children}
         </QueryProvider>
       </body>
-    </html >
+    </html>
   );
 }

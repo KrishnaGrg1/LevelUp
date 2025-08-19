@@ -73,7 +73,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
           ...particle,
           y: particle.y - particle.speed,
           opacity: particle.y > 0 ? particle.opacity : 0,
-        }))
+        })),
       );
     };
 
@@ -98,10 +98,10 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
             const timer = setInterval(() => {
               currentTeam += Math.ceil(targetTeam / (duration / increment));
               currentCountries += Math.ceil(
-                targetCountries / (duration / increment)
+                targetCountries / (duration / increment),
               );
               currentMilestones += Math.ceil(
-                targetMilestones / (duration / increment)
+                targetMilestones / (duration / increment),
               );
 
               if (currentTeam >= targetTeam) {
@@ -118,7 +118,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     if (statsRef.current) {
@@ -164,25 +164,25 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
           <div className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-full border border-indigo-500/20 mb-8 animate-float">
             <Heart className="w-4 h-4 text-indigo-400" />
             <span className="text-indigo-300 text-sm font-medium">
-              {t('landing.about.hero.badge')}
+              {t("landing.about.hero.badge")}
             </span>
           </div>
 
           <h1 className="text-6xl md:text-7xl font-black mb-8 leading-tight">
             <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-shift">
-              {t('landing.about.hero.titleLine1')}
+              {t("landing.about.hero.titleLine1")}
             </span>
             <br />
             <span
               className="bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-gradient-shift"
               style={{ animationDelay: "0.5s" }}
             >
-              {t('landing.about.hero.titleLine2')}
+              {t("landing.about.hero.titleLine2")}
             </span>
           </h1>
 
           <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed mb-12">
-            {t('landing.about.hero.description')}
+            {t("landing.about.hero.description")}
           </p>
 
           {/* Scroll Indicator */}
@@ -204,10 +204,10 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
           <div className="mb-16">
             <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Our Journey in Numbers
-              {t('landing.about.stats.title')}
+              {t("landing.about.stats.title")}
             </h2>
             <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-              {t('landing.about.stats.description')}
+              {t("landing.about.stats.description")}
             </p>
           </div>
 
@@ -221,20 +221,20 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
               },
               {
                 count: teamSize,
-                label: 'landing.about.stats.team.label',
-                description: 'landing.about.stats.team.description',
+                label: "landing.about.stats.team.label",
+                description: "landing.about.stats.team.description",
                 suffix: "+",
               },
               {
                 count: countriesServed,
-                label: 'landing.about.stats.countries.label',
-                description: 'landing.about.stats.countries.description',
+                label: "landing.about.stats.countries.label",
+                description: "landing.about.stats.countries.description",
                 suffix: "+",
               },
               {
                 count: milestonesAchieved,
-                label: 'landing.about.stats.milestones.label',
-                description: 'landing.about.stats.milestones.description',
+                label: "landing.about.stats.milestones.label",
+                description: "landing.about.stats.milestones.description",
                 suffix: "+",
               },
             ].map((stat, index) => (
@@ -251,7 +251,9 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
                   <p className="text-slate-300 text-lg font-medium mb-2">
                     {t(stat.label)}
                   </p>
-                  <p className="text-slate-500 text-sm">{t(stat.description)}</p>
+                  <p className="text-slate-500 text-sm">
+                    {t(stat.description)}
+                  </p>
                 </div>
               </div>
             ))}
@@ -264,10 +266,10 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
         <div className="relative mx-auto max-w-6xl px-6 z-10">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-              {t('landing.about.mission.title')}
+              {t("landing.about.mission.title")}
             </h2>
             <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-              {t('landing.about.mission.description')}
+              {t("landing.about.mission.description")}
             </p>
           </div>
 
@@ -275,24 +277,21 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
             {[
               {
                 icon: Target,
-                title: 'landing.about.mission.items.0.title',
-                description:
-                  'landing.about.mission.items.0.description',
-                color: 'from-purple-500 to-pink-500',
+                title: "landing.about.mission.items.0.title",
+                description: "landing.about.mission.items.0.description",
+                color: "from-purple-500 to-pink-500",
               },
               {
                 icon: Users,
-                title: 'landing.about.mission.items.1.title',
-                description:
-                  'landing.about.mission.items.1.description',
-                color: 'from-indigo-500 to-purple-500',
+                title: "landing.about.mission.items.1.title",
+                description: "landing.about.mission.items.1.description",
+                color: "from-indigo-500 to-purple-500",
               },
               {
                 icon: Trophy,
-                title: 'landing.about.mission.items.2.title',
-                description:
-                  'landing.about.mission.items.2.description',
-                color: 'from-yellow-500 to-orange-500',
+                title: "landing.about.mission.items.2.title",
+                description: "landing.about.mission.items.2.description",
+                color: "from-yellow-500 to-orange-500",
               },
             ].map((mission, index) => (
               <div
@@ -324,10 +323,10 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
         <div className="relative mx-auto max-w-6xl px-6 z-10">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
-              {t('landing.about.values.title')}
+              {t("landing.about.values.title")}
             </h2>
             <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-              {t('landing.about.values.description')}
+              {t("landing.about.values.description")}
             </p>
           </div>
 
@@ -336,28 +335,24 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
               {
                 icon: CheckCircle,
                 title: "landing.about.values.items.0.title",
-                description:
-                  "landing.about.values.items.0.description",
+                description: "landing.about.values.items.0.description",
               },
               {
                 icon: Users,
                 title: "landing.about.values.items.1.title",
-                description:
-                  "landing.about.values.items.1.description",
+                description: "landing.about.values.items.1.description",
                 color: "from-blue-500 to-indigo-500",
               },
               {
                 icon: Shield,
                 title: "landing.about.values.items.2.title",
-                description:
-                  "landing.about.values.items.2.description",
+                description: "landing.about.values.items.2.description",
                 color: "from-purple-500 to-pink-500",
               },
               {
                 icon: Zap,
                 title: "landing.about.values.items.3.title",
-                description:
-                  "landing.about.values.items.3.description",
+                description: "landing.about.values.items.3.description",
                 color: "from-yellow-500 to-orange-500",
               },
             ].map((value, index) => (
@@ -386,10 +381,10 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
         <div className="relative mx-auto max-w-6xl px-6 z-10">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-transparent">
-              {t('landing.about.team.title')}
+              {t("landing.about.team.title")}
             </h2>
             <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-              {t('landing.about.team.description')}
+              {t("landing.about.team.description")}
             </p>
           </div>
 
@@ -448,20 +443,20 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
             <div className="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-full border border-indigo-500/20 mb-6">
               <Star className="w-5 h-5 text-indigo-400" />
               <span className="text-indigo-300 font-medium">
-                {t('landing.about.team.cta.badge')}
+                {t("landing.about.team.cta.badge")}
               </span>
             </div>
             <h3 className="text-3xl font-bold text-white mb-4">
-              {t('landing.about.team.cta.title')}
+              {t("landing.about.team.cta.title")}
             </h3>
             <p className="text-slate-400 mb-8 max-w-2xl mx-auto">
-              {t('landing.about.team.cta.description')}
+              {t("landing.about.team.cta.description")}
             </p>
             <Link
               href={`/${language}/contact`}
               className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25"
             >
-              <span>{t('landing.about.team.cta.button')}</span>
+              <span>{t("landing.about.team.cta.button")}</span>
               <ArrowRight className="w-5 h-5" />
             </Link>
           </div>

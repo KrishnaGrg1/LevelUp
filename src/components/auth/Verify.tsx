@@ -5,7 +5,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import VerifySchema from "@/app/[lang]/(auth)/verify/schema";
 import { z } from "zod";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -150,7 +154,12 @@ export function VerifyForm({ lang }: VerifyFormProps) {
                       {t("auth.verify.otp", "Verification Code")}
                     </FormLabel>
                     <FormControl>
-                      <InputOTP maxLength={6} value={field.value} onChange={field.onChange} className="w-full">
+                      <InputOTP
+                        maxLength={6}
+                        value={field.value}
+                        onChange={field.onChange}
+                        className="w-full"
+                      >
                         <InputOTPGroup className="gap-2">
                           {Array.from({ length: 6 }).map((_, idx) => (
                             <InputOTPSlot key={idx} index={idx} />

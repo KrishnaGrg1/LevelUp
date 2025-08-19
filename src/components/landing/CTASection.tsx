@@ -8,9 +8,7 @@ interface CTASectionProps {
   className?: string;
 }
 
-export const CTASection: React.FC<CTASectionProps> = ({
-  className = "",
-}) => {
+export const CTASection: React.FC<CTASectionProps> = ({ className = "" }) => {
   const [isClient, setIsClient] = useState(false);
   const { language } = LanguageStore();
   const [particles, setParticles] = useState<

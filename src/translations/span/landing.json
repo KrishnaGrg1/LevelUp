@@ -32,7 +32,7 @@
     "feature6Desc": "Concéntrate en el bienestar mental, físico y emocional. Obtén misiones de bienestar personalizadas que nutren tu mente, cuerpo y alma para una transformación completa.",
     "readMore": "Aprender más"
   },
-   "CTASection": {
+  "CTASection": {
     "badgeText": "Tu aventura te espera",
     "titleMain": "¿Listo para subir de nivel?",
     "titleSub": "¿Tu vida?",
@@ -46,23 +46,23 @@
     }
   },
   "StatsSection": {
-  "titleMain": "Únete a la Revolución del Nivel de Vida",
-  "description": "Miles de aventureros ya están transformando sus vidas con Level Up",
-  "stats": [
-    {
-      "label": "Aventureros Activos",
-      "description": "Mejorando su vida día a día"
-    },
-    {
-      "label": "Misiones Completadas",
-      "description": "Objetivos alcanzados y sueños realizados"
-    },
-    {
-      "label": "Tasa de Éxito",
-      "description": "Usuarios que mantienen sus hábitos"
-    }
-  ]
-},
+    "titleMain": "Únete a la Revolución del Nivel de Vida",
+    "description": "Miles de aventureros ya están transformando sus vidas con Level Up",
+    "stats": [
+      {
+        "label": "Aventureros Activos",
+        "description": "Mejorando su vida día a día"
+      },
+      {
+        "label": "Misiones Completadas",
+        "description": "Objetivos alcanzados y sueños realizados"
+      },
+      {
+        "label": "Tasa de Éxito",
+        "description": "Usuarios que mantienen sus hábitos"
+      }
+    ]
+     },
   "about": {
     "hero": {
       "badge": "Nuestra historia",

@@ -18,7 +18,7 @@ const languages = [
   { code: "arab" as Language, name: "العربية", flag: "🇸🇦" },
   { code: "chin" as Language, name: "中文", flag: "🇨🇳" },
   { code: "span" as Language, name: "Español", flag: "🇪🇸" },
-  { code: "jap" as Language, name: "日本語", flag: "🇯🇵" }
+  { code: "jap" as Language, name: "日本語", flag: "🇯🇵" },
 ];
 
 interface LanguageSwitcherProps {
@@ -58,7 +58,7 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
     if (segments.length > 1) {
       segments[1] = languageCode;
       const newPath = segments.join("/");
-      window.history.replaceState(null, '', newPath);
+      window.history.replaceState(null, "", newPath);
     }
   };
 
@@ -89,8 +89,9 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
           <DropdownMenuItem
             key={lang.code}
             onClick={() => changeLanguage(lang.code)}
-            className={`cursor-pointer hover:bg-slate-700/50 rounded-lg transition-colors ${language === lang.code ? "font-semibold bg-indigo-500/20" : ""
-              }`}
+            className={`cursor-pointer hover:bg-slate-700/50 rounded-lg transition-colors ${
+              language === lang.code ? "font-semibold bg-indigo-500/20" : ""
+            }`}
           >
             <span className="mr-2">{lang.flag}</span>
             {lang.name}

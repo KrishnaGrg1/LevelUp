@@ -45,7 +45,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
   const handleInputChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
     setFormData((prev) => ({
       ...prev,

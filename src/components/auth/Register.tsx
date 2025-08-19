@@ -108,7 +108,10 @@ export function RegisterForm({ lang }: RegisterFormProps) {
                       <div className="relative">
                         <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                         <Input
-                          placeholder={t("auth.register.usernamePlaceholder", "Enter your username")}
+                          placeholder={t(
+                            "auth.register.usernamePlaceholder",
+                            "Enter your username",
+                          )}
                           className="pl-10 h-11 border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors"
                           {...field}
                         />
@@ -132,7 +135,10 @@ export function RegisterForm({ lang }: RegisterFormProps) {
                         <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                         <Input
                           type="email"
-                          placeholder={t("auth.register.emailPlaceholder", "you@example.com")}
+                          placeholder={t(
+                            "auth.register.emailPlaceholder",
+                            "you@example.com",
+                          )}
                           className="pl-10 h-11 border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors"
                           {...field}
                         />
@@ -156,7 +162,10 @@ export function RegisterForm({ lang }: RegisterFormProps) {
                         <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                         <Input
                           type={showPassword ? "text" : "password"}
-                          placeholder={t("auth.register.passwordPlaceholder", "Enter your password")}
+                          placeholder={t(
+                            "auth.register.passwordPlaceholder",
+                            "Enter your password",
+                          )}
                           className="pl-10 pr-10 h-11 border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors"
                           {...field}
                         />
@@ -201,7 +210,6 @@ export function RegisterForm({ lang }: RegisterFormProps) {
               <Link href={`/${lang}/login`}>
                 {t("auth.register.loginLink", "Sign in here")}
               </Link>
-
             </p>
           </div>
         </CardContent>
