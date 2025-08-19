@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 import {
   Brain,
   TrendingUp,
@@ -10,64 +10,64 @@ import {
   Heart,
   ArrowRight,
   Rocket,
-} from "lucide-react";
-import { t } from "@/translations";
-import LanguageStore from "@/stores/useLanguage";
+} from 'lucide-react';
+import { t } from '@/translations';
+import LanguageStore from '@/stores/useLanguage';
 
 const features = [
   {
     icon: Brain,
-    title: "FeaturesSection.feature1Title",
-    description: "FeaturesSection.feature1Desc",
-    color: "indigo",
-    gradient: "from-indigo-500 to-purple-600",
-    hoverColor: "indigo-500/50",
-    bgGradient: "from-indigo-500/5 to-purple-500/5",
+    title: 'FeaturesSection.feature1Title',
+    description: 'FeaturesSection.feature1Desc',
+    color: 'indigo',
+    gradient: 'from-indigo-500 to-purple-600',
+    hoverColor: 'indigo-500/50',
+    bgGradient: 'from-indigo-500/5 to-purple-500/5',
   },
   {
     icon: TrendingUp,
-    title: "FeaturesSection.feature2Title",
-    description: "FeaturesSection.feature2Desc",
-    color: "purple",
-    gradient: "from-purple-500 to-pink-600",
-    hoverColor: "purple-500/50",
-    bgGradient: "from-purple-500/5 to-pink-500/5",
+    title: 'FeaturesSection.feature2Title',
+    description: 'FeaturesSection.feature2Desc',
+    color: 'purple',
+    gradient: 'from-purple-500 to-pink-600',
+    hoverColor: 'purple-500/50',
+    bgGradient: 'from-purple-500/5 to-pink-500/5',
   },
   {
     icon: GamepadIcon,
-    title: "FeaturesSection.feature3Title",
-    description: "FeaturesSection.feature3Desc",
-    color: "green",
-    gradient: "from-green-500 to-emerald-600",
-    hoverColor: "green-500/50",
-    bgGradient: "from-green-500/5 to-emerald-500/5",
+    title: 'FeaturesSection.feature3Title',
+    description: 'FeaturesSection.feature3Desc',
+    color: 'green',
+    gradient: 'from-green-500 to-emerald-600',
+    hoverColor: 'green-500/50',
+    bgGradient: 'from-green-500/5 to-emerald-500/5',
   },
   {
     icon: Globe,
-    title: "FeaturesSection.feature4Title",
-    description: "FeaturesSection.feature4Desc",
-    color: "blue",
-    gradient: "from-blue-500 to-cyan-600",
-    hoverColor: "blue-500/50",
-    bgGradient: "from-blue-500/5 to-cyan-500/5",
+    title: 'FeaturesSection.feature4Title',
+    description: 'FeaturesSection.feature4Desc',
+    color: 'blue',
+    gradient: 'from-blue-500 to-cyan-600',
+    hoverColor: 'blue-500/50',
+    bgGradient: 'from-blue-500/5 to-cyan-500/5',
   },
   {
     icon: Clock,
-    title: "FeaturesSection.feature5Title",
-    description: "FeaturesSection.feature5Desc",
-    color: "orange",
-    gradient: "from-orange-500 to-red-600",
-    hoverColor: "orange-500/50",
-    bgGradient: "from-orange-500/5 to-red-500/5",
+    title: 'FeaturesSection.feature5Title',
+    description: 'FeaturesSection.feature5Desc',
+    color: 'orange',
+    gradient: 'from-orange-500 to-red-600',
+    hoverColor: 'orange-500/50',
+    bgGradient: 'from-orange-500/5 to-red-500/5',
   },
   {
     icon: Heart,
-    title: "FeaturesSection.feature6Title",
-    description: "FeaturesSection.feature6Desc",
-    color: "pink",
-    gradient: "from-pink-500 to-rose-600",
-    hoverColor: "pink-500/50",
-    bgGradient: "from-pink-500/5 to-rose-500/5",
+    title: 'FeaturesSection.feature6Title',
+    description: 'FeaturesSection.feature6Desc',
+    color: 'pink',
+    gradient: 'from-pink-500 to-rose-600',
+    hoverColor: 'pink-500/50',
+    bgGradient: 'from-pink-500/5 to-rose-500/5',
   },
 ];
 
@@ -80,13 +80,13 @@ export const FeaturesSection: React.FC = () => {
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 rounded-full text-indigo-300 text-sm font-medium mb-6">
             <Rocket className="h-4 w-4" />
-            {t("landing.FeaturesSection.badgeText")}
+            {t('landing.FeaturesSection.badgeText')}
           </div>
           <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-            {t("landing.FeaturesSection.badge")}
+            {t('landing.FeaturesSection.badge')}
           </h2>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            {t("landing.FeaturesSection.description")}
+            {t('landing.FeaturesSection.description')}
           </p>
         </div>
 
@@ -117,8 +117,8 @@ export const FeaturesSection: React.FC = () => {
                     className={`flex items-center text-${feature.color}-400 group-hover:text-${feature.color}-300 transition-colors cursor-pointer`}
                   >
                     <span className="text-sm font-medium">
-                      {" "}
-                      {t("landing.FeaturesSection.readMore")}
+                      {' '}
+                      {t('landing.FeaturesSection.readMore')}
                     </span>
                     <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </div>

@@ -1,7 +1,7 @@
-import React from "react";
-import { Quote, Zap, Target, Trophy } from "lucide-react";
-import { t } from "@/translations";
-import LanguageStore from "@/stores/useLanguage";
+import React from 'react';
+import { Quote, Zap, Target, Trophy } from 'lucide-react';
+import { t } from '@/translations';
+import LanguageStore from '@/stores/useLanguage';
 
 interface TestimonialCard {
   name: string;
@@ -20,58 +20,54 @@ interface TestimonialsSectionProps {
   className?: string;
 }
 
-export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
-  className = "",
-}) => {
+export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ className = '' }) => {
   const { language } = LanguageStore();
   const testimonials: TestimonialCard[] = [
     {
-      name: "TestimonialsSection.testimonials.0.name",
-      role: "TestimonialsSection.testimonials.0.role",
-      content: "TestimonialsSection.testimonials.0.content",
-      avatar: "AR",
+      name: 'TestimonialsSection.testimonials.0.name',
+      role: 'TestimonialsSection.testimonials.0.role',
+      content: 'TestimonialsSection.testimonials.0.content',
+      avatar: 'AR',
       badge: {
         icon: <Zap className="w-4 h-4" />,
-        text: "TestimonialsSection.testimonials.0.badge.text",
-        color: "from-yellow-400 to-orange-400",
+        text: 'TestimonialsSection.testimonials.0.badge.text',
+        color: 'from-yellow-400 to-orange-400',
       },
     },
     {
-      name: "TestimonialsSection.testimonials.1.name",
-      role: "TestimonialsSection.testimonials.1.role",
-      content: "TestimonialsSection.testimonials.1.content",
-      avatar: "SC",
+      name: 'TestimonialsSection.testimonials.1.name',
+      role: 'TestimonialsSection.testimonials.1.role',
+      content: 'TestimonialsSection.testimonials.1.content',
+      avatar: 'SC',
       badge: {
         icon: <Target className="w-4 h-4" />,
-        text: "TestimonialsSection.testimonials.1.badge.text",
-        color: "from-blue-400 to-indigo-400",
+        text: 'TestimonialsSection.testimonials.1.badge.text',
+        color: 'from-blue-400 to-indigo-400',
       },
     },
     {
-      name: "TestimonialsSection.testimonials.2.name",
-      role: "TestimonialsSection.testimonials.2.role",
-      content: "TestimonialsSection.testimonials.2.content",
-      avatar: "MJ",
+      name: 'TestimonialsSection.testimonials.2.name',
+      role: 'TestimonialsSection.testimonials.2.role',
+      content: 'TestimonialsSection.testimonials.2.content',
+      avatar: 'MJ',
       badge: {
         icon: <Trophy className="w-4 h-4" />,
-        text: "TestimonialsSection.testimonials.2.badge.text",
-        color: "from-green-400 to-emerald-400",
+        text: 'TestimonialsSection.testimonials.2.badge.text',
+        color: 'from-green-400 to-emerald-400',
       },
     },
   ];
 
   return (
-    <section
-      className={`relative py-32 bg-gradient-to-b from-slate-950 to-slate-900 ${className}`}
-    >
+    <section className={`relative py-32 bg-gradient-to-b from-slate-950 to-slate-900 ${className}`}>
       <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 via-transparent to-transparent"></div>
       <div className="relative mx-auto max-w-6xl px-6 z-10">
         <div className="text-center mb-20">
           <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            {t("landing.TestimonialsSection.titleMain")}
+            {t('landing.TestimonialsSection.titleMain')}
           </h2>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            {t("landing.TestimonialsSection.description")}
+            {t('landing.TestimonialsSection.description')}
           </p>
         </div>
 
@@ -100,9 +96,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                   <div className="flex items-center space-x-4">
                     {/* Avatar */}
                     <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                      <span className="text-white font-bold text-sm">
-                        {testimonial.avatar}
-                      </span>
+                      <span className="text-white font-bold text-sm">{testimonial.avatar}</span>
                     </div>
 
                     {/* Name and role */}
@@ -110,9 +104,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                       <p className="text-slate-200 font-semibold">
                         {t(`landing.${testimonial.name}`)}
                       </p>
-                      <p className="text-slate-500 text-sm">
-                        {t(`landing.${testimonial.role}`)}
-                      </p>
+                      <p className="text-slate-500 text-sm">{t(`landing.${testimonial.role}`)}</p>
                     </div>
                   </div>
 
@@ -150,7 +142,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
               </div>
             </div>
             <span className="text-slate-400 text-sm ml-3">
-              {t("landing.TestimonialsSection.socialProof")}
+              {t('landing.TestimonialsSection.socialProof')}
             </span>
           </div>
         </div>

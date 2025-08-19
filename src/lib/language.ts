@@ -1,23 +1,23 @@
-import { Language } from "@/stores/useLanguage";
+import { Language } from '@/stores/useLanguage';
 
 /**
  * All supported languages in the application
  * This is the single source of truth for language validation
  */
 export const VALID_LANGUAGES: readonly Language[] = [
-  "eng",
-  "fr",
-  "nep",
-  "arab",
-  "chin",
-  "span",
-  "jap",
+  'eng',
+  'fr',
+  'nep',
+  'arab',
+  'chin',
+  'span',
+  'jap',
 ] as const;
 
 /**
  * Default language fallback
  */
-export const DEFAULT_LANGUAGE: Language = "eng";
+export const DEFAULT_LANGUAGE: Language = 'eng';
 
 /**
  * Validates if a string is a supported language
@@ -55,8 +55,7 @@ export function getNextLanguage(currentLang: Language): Language {
  */
 export function getPreviousLanguage(currentLang: Language): Language {
   const currentIndex = VALID_LANGUAGES.indexOf(currentLang);
-  const prevIndex =
-    currentIndex === 0 ? VALID_LANGUAGES.length - 1 : currentIndex - 1;
+  const prevIndex = currentIndex === 0 ? VALID_LANGUAGES.length - 1 : currentIndex - 1;
   return VALID_LANGUAGES[prevIndex];
 }
 
@@ -65,13 +64,13 @@ export function getPreviousLanguage(currentLang: Language): Language {
  * Could be moved to translations later if needed
  */
 export const LANGUAGE_NAMES: Record<Language, string> = {
-  eng: "English",
-  fr: "French",
-  nep: "नेपाली",
-  arab: "العربية",
-  chin: "中文",
-  span: "Español",
-  jap: "日本語",
+  eng: 'English',
+  fr: 'French',
+  nep: 'नेपाली',
+  arab: 'العربية',
+  chin: '中文',
+  span: 'Español',
+  jap: '日本語',
 } as const;
 
 /**
@@ -89,7 +88,7 @@ export function getLanguageName(lang: Language): string {
  * @returns true if RTL, false if LTR
  */
 export function isRTLLanguage(lang: Language): boolean {
-  return lang === "arab";
+  return lang === 'arab';
 }
 
 /**
@@ -97,6 +96,6 @@ export function isRTLLanguage(lang: Language): boolean {
  * @param lang - Language code
  * @returns "rtl" or "ltr"
  */
-export function getLanguageDirection(lang: Language): "rtl" | "ltr" {
-  return isRTLLanguage(lang) ? "rtl" : "ltr";
+export function getLanguageDirection(lang: Language): 'rtl' | 'ltr' {
+  return isRTLLanguage(lang) ? 'rtl' : 'ltr';
 }

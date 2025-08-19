@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation";
-import type { Language } from "@/stores/useLanguage";
-import { VALID_LANGUAGES } from "@/lib/language";
+import { redirect } from 'next/navigation';
+import type { Language } from '@/stores/useLanguage';
+import { VALID_LANGUAGES } from '@/lib/language';
 
 interface HomePageProps {
   params: Promise<{ lang: string }>;

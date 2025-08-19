@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import LanguageStore from "@/stores/useLanguage";
-import { validateLanguage } from "@/lib/language";
+import React, { useEffect, useState } from 'react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import LanguageStore from '@/stores/useLanguage';
+import { validateLanguage } from '@/lib/language';
 
 interface LandingLayoutProps {
   children: React.ReactNode;
@@ -17,10 +17,7 @@ type Particle = {
   speed: number;
   opacity: number;
 };
-export default function LandingLayout({
-  children,
-  params,
-}: LandingLayoutProps) {
+export default function LandingLayout({ children, params }: LandingLayoutProps) {
   const { language, setLanguage } = LanguageStore();
   const [particles, setParticles] = useState<Particle[]>([]);
   const [isClient, setIsClient] = useState(false);
@@ -28,7 +25,7 @@ export default function LandingLayout({
   useEffect(() => {
     setIsClient(true);
 
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       const arr: Particle[] = [];
       for (let i = 0; i < 30; i++) {
         arr.push({
@@ -43,8 +40,8 @@ export default function LandingLayout({
     }
 
     const interval = setInterval(() => {
-      setParticles((prev) =>
-        prev.map((p) => ({
+      setParticles(prev =>
+        prev.map(p => ({
           ...p,
           y: p.y - p.speed,
           opacity: p.y > 0 ? p.opacity : 0,
@@ -56,7 +53,7 @@ export default function LandingLayout({
   }, []);
   useEffect(() => {
     // Get language from params and validate it
-    params.then((resolvedParams) => {
+    params.then(resolvedParams => {
       const validatedLang = validateLanguage(resolvedParams.lang);
       setLanguage(validatedLang);
     });

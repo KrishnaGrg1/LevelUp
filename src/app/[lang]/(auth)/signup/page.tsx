@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React, { useEffect } from "react";
-import LanguageStore, { Language } from "@/stores/useLanguage";
-import { RegisterForm } from "@/components/auth/Register";
-import { validateLanguage } from "@/lib/language";
+import React, { useEffect } from 'react';
+import LanguageStore, { Language } from '@/stores/useLanguage';
+import { RegisterForm } from '@/components/auth/Register';
+import { validateLanguage } from '@/lib/language';
 
 interface RegisterPageProps {
   params: Promise<{
@@ -16,7 +16,7 @@ export default function RegisterPage({ params }: RegisterPageProps) {
 
   useEffect(() => {
     // Get language from params and validate it
-    params.then((resolvedParams) => {
+    params.then(resolvedParams => {
       const validatedLang = validateLanguage(resolvedParams.lang);
       setLanguage(validatedLang);
     });

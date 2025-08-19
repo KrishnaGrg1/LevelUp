@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React, { useEffect } from "react";
-import LanguageStore, { Language } from "@/stores/useLanguage";
-import { LoginForm } from "@/components/auth/Login";
-import { validateLanguage } from "@/lib/language";
+import React, { useEffect } from 'react';
+import LanguageStore, { Language } from '@/stores/useLanguage';
+import { LoginForm } from '@/components/auth/Login';
+import { validateLanguage } from '@/lib/language';
 
 interface LoginPageProps {
   params: Promise<{
@@ -16,7 +16,7 @@ export default function LoginPage({ params }: LoginPageProps) {
 
   useEffect(() => {
     // Get language from params and validate it, then set in store
-    params.then((resolvedParams) => {
+    params.then(resolvedParams => {
       const validatedLang = validateLanguage(resolvedParams.lang);
       setLanguage(validatedLang);
     });

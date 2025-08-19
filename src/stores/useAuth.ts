@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 interface AuthState {
   isAuthenticated: boolean;
   setAuthenticated: (value: boolean) => void;
@@ -11,18 +11,17 @@ interface AuthState {
 
 const authStore = create<AuthState>()(
   persist(
-    (set) => ({
+    set => ({
       isAuthenticated: false,
       setAuthenticated: (value: boolean) => set({ isAuthenticated: value }),
       token: undefined,
       setToken: (token: string) => set({ token }),
       user: undefined,
-      setUser: (user: { id: number; UserName: string; email: string }) =>
-        set({ user }),
+      setUser: (user: { id: number; UserName: string; email: string }) => set({ user }),
     }),
     {
-      name: "auth-storage", // unique name for localStorage
-      partialize: (state) => ({
+      name: 'auth-storage', // unique name for localStorage
+      partialize: state => ({
         isAuthenticated: state.isAuthenticated,
         token: state.token,
         user: state.user,

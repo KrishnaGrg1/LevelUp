@@ -1,33 +1,27 @@
-import axiosInstance from "../fetch";
+import axiosInstance from '../fetch';
 import type {
   UserRegisterResponse,
   UserRegisterInput,
   UserLoginInput,
   UserLoginResponse,
   VerifyOtpInput,
-} from "../generated";
-import { Language } from "@/stores/useLanguage";
+} from '../generated';
+import { Language } from '@/stores/useLanguage';
 
 export const login = async (data: UserLoginInput, lang: Language) => {
   try {
-    const response = await axiosInstance.post<UserLoginResponse>(
-      `/auth/login`,
-      data,
-      {
-        headers: {
-          "X-Language": lang,
-        },
+    const response = await axiosInstance.post<UserLoginResponse>(`/auth/login`, data, {
+      headers: {
+        'X-Language': lang,
       },
-    );
+    });
     return response.data;
   } catch (error: unknown) {
     const err = error as {
       response?: { data?: { body?: { message?: string }; message?: string } };
     };
     const errorMessage =
-      err.response?.data?.body?.message ||
-      err.response?.data?.message ||
-      "Login failed";
+      err.response?.data?.body?.message || err.response?.data?.message || 'Login failed';
     throw new Error(errorMessage);
   }
 };
@@ -39,7 +33,7 @@ export const registerUser = async (data: UserRegisterInput, lang: Language) => {
       { data },
       {
         headers: {
-          "X-Language": lang,
+          'X-Language': lang,
         },
       },
     );
@@ -49,9 +43,7 @@ export const registerUser = async (data: UserRegisterInput, lang: Language) => {
       response?: { data?: { body?: { message?: string }; message?: string } };
     };
     const errorMessage =
-      err.response?.data?.body?.message ||
-      err.response?.data?.message ||
-      "Registration failed";
+      err.response?.data?.body?.message || err.response?.data?.message || 'Registration failed';
     throw new Error(errorMessage);
   }
 };
@@ -63,7 +55,7 @@ export const VerifyUser = async (data: VerifyOtpInput, lang: Language) => {
       { data },
       {
         headers: {
-          "X-Language": lang,
+          'X-Language': lang,
         },
       },
     );
@@ -73,9 +65,7 @@ export const VerifyUser = async (data: VerifyOtpInput, lang: Language) => {
       response?: { data?: { body?: { message?: string }; message?: string } };
     };
     const errorMessage =
-      err.response?.data?.body?.message ||
-      err.response?.data?.message ||
-      "Verification failed";
+      err.response?.data?.body?.message || err.response?.data?.message || 'Verification failed';
     throw new Error(errorMessage);
   }
 };
@@ -88,7 +78,7 @@ export const requestPasswordReset = async (email: string, lang: Language) => {
       { email },
       {
         headers: {
-          "X-Language": lang,
+          'X-Language': lang,
         },
       },
     );
@@ -100,7 +90,7 @@ export const requestPasswordReset = async (email: string, lang: Language) => {
     const errorMessage =
       err.response?.data?.body?.message ||
       err.response?.data?.message ||
-      "Failed to request password reset";
+      'Failed to request password reset';
     throw new Error(errorMessage);
   }
 };
@@ -116,7 +106,7 @@ export const resetPasswordWithOtp = async (
       { data },
       {
         headers: {
-          "X-Language": lang,
+          'X-Language': lang,
         },
       },
     );
@@ -128,7 +118,7 @@ export const resetPasswordWithOtp = async (
     const errorMessage =
       err.response?.data?.body?.message ||
       err.response?.data?.message ||
-      "Failed to reset password";
+      'Failed to reset password';
     throw new Error(errorMessage);
   }
 };

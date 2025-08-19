@@ -1,16 +1,12 @@
 // components/auth/Verify.tsx
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import VerifySchema from "@/app/[lang]/(auth)/verify/schema";
-import { z } from "zod";
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-} from "@/components/ui/input-otp";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import VerifySchema from '@/app/[lang]/(auth)/verify/schema';
+import { z } from 'zod';
+import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -18,25 +14,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 
-import { useMutation } from "@tanstack/react-query";
-import { VerifyUser } from "@/lib/services/auth";
-import authStore from "@/stores/useAuth";
-import { toast } from "sonner";
-import { Language } from "@/stores/useLanguage";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { User } from "lucide-react";
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { t } from "@/translations/index";
-import LanguageStore from "@/stores/useLanguage";
+import { useMutation } from '@tanstack/react-query';
+import { VerifyUser } from '@/lib/services/auth';
+import authStore from '@/stores/useAuth';
+import { toast } from 'sonner';
+import { Language } from '@/stores/useLanguage';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { User } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { t } from '@/translations/index';
+import LanguageStore from '@/stores/useLanguage';
 
 type VerifyFormData = z.infer<typeof VerifySchema>;
 interface VerifyFormProps {
@@ -51,8 +41,8 @@ export function VerifyForm({ lang }: VerifyFormProps) {
   const form = useForm<VerifyFormData>({
     resolver: zodResolver(VerifySchema),
     defaultValues: {
-      otp_code: "",
-      email: user?.email || "",
+      otp_code: '',
+      email: user?.email || '',
     },
   });
 
@@ -70,9 +60,9 @@ export function VerifyForm({ lang }: VerifyFormProps) {
   }, [language, isClient, form]);
 
   const { mutateAsync, isPending: isLoading } = useMutation({
-    mutationKey: ["verify"],
+    mutationKey: ['verify'],
     mutationFn: (data: VerifyFormData) => VerifyUser(data, lang),
-    onSuccess: (data) => {
+    onSuccess: data => {
       if (setToken) {
         setToken(data?.body.data.data);
       }
@@ -82,12 +72,12 @@ export function VerifyForm({ lang }: VerifyFormProps) {
         email: data?.body.data.email,
       });
       setAuthenticated(true);
-      toast.success(data?.body.message || "Verification Successful");
+      toast.success(data?.body.message || 'Verification Successful');
     },
     onError: (error: unknown) => {
       const err = error as { message?: string };
-      console.error("Verification failed:", error);
-      toast.error(err.message || "Verification failed");
+      console.error('Verification failed:', error);
+      toast.error(err.message || 'Verification failed');
     },
   });
 
@@ -135,11 +125,11 @@ export function VerifyForm({ lang }: VerifyFormProps) {
           </div>
           <CardTitle className="text-3xl font-black">
             <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              {t("auth.verify.title", "Verify Email")}
+              {t('auth.verify.title', 'Verify Email')}
             </span>
           </CardTitle>
           <CardDescription className="text-slate-400 text-lg">
-            {t("auth.verify.subtitle", "Enter the code we sent")}
+            {t('auth.verify.subtitle', 'Enter the code we sent')}
           </CardDescription>
         </CardHeader>
         <CardContent className="relative space-y-6 px-8 pb-8">
@@ -151,7 +141,7 @@ export function VerifyForm({ lang }: VerifyFormProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-medium text-slate-300">
-                      {t("auth.verify.otp", "Verification Code")}
+                      {t('auth.verify.otp', 'Verification Code')}
                     </FormLabel>
                     <FormControl>
                       <InputOTP
@@ -183,7 +173,7 @@ export function VerifyForm({ lang }: VerifyFormProps) {
                     Verifying...
                   </div>
                 ) : (
-                  t("auth.verify.submit", "Verify")
+                  t('auth.verify.submit', 'Verify')
                 )}
               </Button>
             </form>
@@ -191,12 +181,12 @@ export function VerifyForm({ lang }: VerifyFormProps) {
 
           <div className="text-center pt-6 border-t border-slate-700/50">
             <p className="text-sm text-slate-400">
-              {t("auth.register.hasAccount", "Already have an account?")}{" "}
+              {t('auth.register.hasAccount', 'Already have an account?')}{' '}
               <Link
                 href={`/${lang}/signup`}
                 className="font-medium text-indigo-400 hover:text-indigo-300 transition-colors"
               >
-                {t("auth.register.loginLink", "Sign in here")}
+                {t('auth.register.loginLink', 'Sign in here')}
               </Link>
             </p>
           </div>

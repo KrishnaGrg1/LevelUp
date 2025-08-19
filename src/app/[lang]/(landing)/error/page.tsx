@@ -1,18 +1,12 @@
-"use client";
+'use client';
 
-import { useSearchParams } from "next/navigation";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { AlertCircle, Home } from "lucide-react";
-import Link from "next/link";
-import LanguageStore from "@/stores/useLanguage";
-import lang from "@/translations/lang";
+import { useSearchParams } from 'next/navigation';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { AlertCircle, Home } from 'lucide-react';
+import Link from 'next/link';
+import LanguageStore from '@/stores/useLanguage';
+import lang from '@/translations/lang';
 
 // If possible, import the Language type from where it's defined
 // import type { Language } from '@/types/language';
@@ -21,9 +15,9 @@ type LangKey = keyof typeof lang;
 
 export default function ErrorPage() {
   const searchParams = useSearchParams();
-  const invalidLang = searchParams.get("invalid_lang");
+  const invalidLang = searchParams.get('invalid_lang');
   const { language } = LanguageStore();
-  const fullLanguage = lang[language as LangKey] || "English";
+  const fullLanguage = lang[language as LangKey] || 'English';
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 flex items-center justify-center px-4">
       <Card className="w-full max-w-md bg-gradient-to-br from-slate-800/30 to-slate-900/30 backdrop-blur-xl border border-slate-700/30 rounded-3xl shadow-2xl">
@@ -48,19 +42,15 @@ export default function ErrorPage() {
             {invalidLang && (
               <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
                 <p className="text-red-300 text-sm">
-                  Language code{" "}
-                  <span className="font-mono font-bold">
-                    &quot;{invalidLang}&quot;
-                  </span>{" "}
-                  is not valid
+                  Language code{' '}
+                  <span className="font-mono font-bold">&quot;{invalidLang}&quot;</span> is not
+                  valid
                 </p>
               </div>
             )}
 
             <div className="p-4 bg-slate-700/30 border border-slate-600/30 rounded-xl">
-              <p className="text-slate-300 text-sm mb-2">
-                Supported languages:
-              </p>
+              <p className="text-slate-300 text-sm mb-2">Supported languages:</p>
               <div className="grid grid-cols-2 gap-2 text-xs text-slate-400">
                 <div>🇺🇸 English (eng)</div>
                 <div>🇫🇷 Français (fr)</div>

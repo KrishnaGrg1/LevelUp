@@ -1,6 +1,6 @@
-import LanguageStore from "@/stores/useLanguage";
-import { t } from "@/translations";
-import React from "react";
+import LanguageStore from '@/stores/useLanguage';
+import { t } from '@/translations';
+import React from 'react';
 
 interface StatsItem {
   count: number;
@@ -28,43 +28,40 @@ export const StatsSection: React.FC<StatsSectionProps> = ({
   const stats: StatsItem[] = [
     {
       count: userCount,
-      label: "StatsSection.stats.0.label",
-      description: "StatsSection.stats.0.description",
-      gradient: "from-indigo-400 to-purple-400",
-      hoverColor: "indigo-500/50",
-      bgGradient: "from-indigo-500/5 to-purple-500/5",
+      label: 'StatsSection.stats.0.label',
+      description: 'StatsSection.stats.0.description',
+      gradient: 'from-indigo-400 to-purple-400',
+      hoverColor: 'indigo-500/50',
+      bgGradient: 'from-indigo-500/5 to-purple-500/5',
     },
     {
       count: Math.round(questCount / 100000) / 10,
-      label: "StatsSection.stats.1.label",
-      description: "StatsSection.stats.1.description",
-      gradient: "from-purple-400 to-pink-400",
-      hoverColor: "purple-500/50",
-      bgGradient: "from-purple-500/5 to-pink-500/5",
+      label: 'StatsSection.stats.1.label',
+      description: 'StatsSection.stats.1.description',
+      gradient: 'from-purple-400 to-pink-400',
+      hoverColor: 'purple-500/50',
+      bgGradient: 'from-purple-500/5 to-pink-500/5',
     },
     {
       count: successRate,
-      label: "StatsSection.stats.2.label",
-      description: "StatsSection.stats.2.description",
-      gradient: "from-green-400 to-emerald-400",
-      hoverColor: "green-500/50",
-      bgGradient: "from-green-500/5 to-emerald-500/5",
+      label: 'StatsSection.stats.2.label',
+      description: 'StatsSection.stats.2.description',
+      gradient: 'from-green-400 to-emerald-400',
+      hoverColor: 'green-500/50',
+      bgGradient: 'from-green-500/5 to-emerald-500/5',
     },
   ];
 
   return (
-    <section
-      ref={statsRef}
-      className="relative py-32 bg-gradient-to-b from-slate-900 to-slate-950"
-    >
+    <section ref={statsRef} className="relative py-32 bg-gradient-to-b from-slate-900 to-slate-950">
       <div className="absolute inset-0 bg-gradient-radial from-indigo-500/5 via-transparent to-transparent"></div>
       <div className="relative mx-auto max-w-6xl px-6 text-center z-10">
         <div className="mb-16">
           <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-            {t("landing.StatsSection.titleMain")}
+            {t('landing.StatsSection.titleMain')}
           </h2>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            {t("landing.StatsSection.description")}
+            {t('landing.StatsSection.description')}
           </p>
         </div>
 
@@ -90,10 +87,7 @@ export const StatsSection: React.FC<StatsSectionProps> = ({
                 <p className="text-slate-300 text-lg font-medium mb-2">
                   {t(`landing.${stat.label}`)}
                 </p>
-                <p className="text-slate-500 text-sm">
-                  {" "}
-                  {t(`landing.${stat.description}`)}
-                </p>
+                <p className="text-slate-500 text-sm"> {t(`landing.${stat.description}`)}</p>
               </div>
             </div>
           ))}

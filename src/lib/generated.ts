@@ -2,22 +2,22 @@
 // Enums
 // ----------------------------
 export enum MemberStatus {
-  Beginner = "Beginner",
-  Intermediate = "Intermediate",
-  Advanced = "Advanced",
+  Beginner = 'Beginner',
+  Intermediate = 'Intermediate',
+  Advanced = 'Advanced',
 }
 
 export enum QuestType {
-  Daily = "Daily",
-  Weekly = "Weekly",
-  Monthly = "Monthly",
-  OneTime = "OneTime",
+  Daily = 'Daily',
+  Weekly = 'Weekly',
+  Monthly = 'Monthly',
+  OneTime = 'OneTime',
 }
 
 export enum QuestSource {
-  AI = "AI",
-  TEMPLATE = "TEMPLATE",
-  MANUAL = "MANUAL",
+  AI = 'AI',
+  TEMPLATE = 'TEMPLATE',
+  MANUAL = 'MANUAL',
 }
 
 // ----------------------------
@@ -213,7 +213,7 @@ export interface VerifyOtpDto {
 // Response Types
 // ----------------------------
 export interface AuthResponse {
-  user: Omit<User, "password">;
+  user: Omit<User, 'password'>;
   token: string;
 }
 
@@ -227,7 +227,7 @@ export interface ApiResponse<T> {
 // ----------------------------
 // Utility Types
 // ----------------------------
-export type UserPublic = Omit<User, "password">;
+export type UserPublic = Omit<User, 'password'>;
 export type UserProfile = UserPublic & {
   category?: Category;
   totalQuests?: number;
@@ -293,15 +293,7 @@ export interface UserRegisterResponse {
 // ----------------------------
 // Translation Types
 // ----------------------------
-export type Language =
-  | "eng"
-  | "arab"
-  | "chin"
-  | "nep"
-  | "span"
-  | "jap"
-  | "hind"
-  | "fr";
+export type Language = 'eng' | 'arab' | 'chin' | 'nep' | 'span' | 'jap' | 'hind' | 'fr';
 
 export interface TranslationRequest {
   language: Language;

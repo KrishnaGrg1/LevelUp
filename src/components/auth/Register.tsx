@@ -1,12 +1,12 @@
 // components/auth/Register.tsx
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { registerSchema } from "../../app/[lang]/(auth)/signup/schema";
-import { z } from "zod";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { registerSchema } from '../../app/[lang]/(auth)/signup/schema';
+import { z } from 'zod';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -14,24 +14,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 
-import { useMutation } from "@tanstack/react-query";
-import { registerUser } from "@/lib/services/auth";
-import authStore from "@/stores/useAuth";
-import { toast } from "sonner";
-import { Language } from "@/stores/useLanguage";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Eye, EyeOff, User, Mail, Lock } from "lucide-react";
-import { useState } from "react";
-import { t } from "@/translations/index";
-import Link from "next/link";
+import { useMutation } from '@tanstack/react-query';
+import { registerUser } from '@/lib/services/auth';
+import authStore from '@/stores/useAuth';
+import { toast } from 'sonner';
+import { Language } from '@/stores/useLanguage';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Eye, EyeOff, User, Mail, Lock } from 'lucide-react';
+import { useState } from 'react';
+import { t } from '@/translations/index';
+import Link from 'next/link';
 
 type RegisterFormData = z.infer<typeof registerSchema>;
 
@@ -45,28 +39,28 @@ export function RegisterForm({ lang }: RegisterFormProps) {
   const form = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      UserName: "",
-      email: "",
-      password: "",
+      UserName: '',
+      email: '',
+      password: '',
     },
   });
 
   const { setUser } = authStore();
 
   const { mutateAsync, isPending: isLoading } = useMutation({
-    mutationKey: ["register"],
+    mutationKey: ['register'],
     mutationFn: (data: RegisterFormData) => registerUser(data, lang),
-    onSuccess: (data) => {
+    onSuccess: data => {
       setUser!({
         id: Number(data.body.data.id),
         UserName: data.body.data.UserName,
         email: data.body.data.email,
       });
-      toast.success(t("success:register", data.body.message));
+      toast.success(t('success:register', data.body.message));
     },
     onError: (error: unknown) => {
       const err = error as { message?: string };
-      toast.error(t("error:register", err.message || "Registration failed"));
+      toast.error(t('error:register', err.message || 'Registration failed'));
     },
   });
 
@@ -85,11 +79,11 @@ export function RegisterForm({ lang }: RegisterFormProps) {
           </div>
           <CardTitle className="text-3xl font-black">
             <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              {t("auth.register.title", "Welcome to Level Up")}
+              {t('auth.register.title', 'Welcome to Level Up')}
             </span>
           </CardTitle>
           <CardDescription className="text-slate-400 text-lg">
-            {t("auth.register.subtitle", "Register to continue your journey")}
+            {t('auth.register.subtitle', 'Register to continue your journey')}
           </CardDescription>
         </CardHeader>
 
@@ -102,15 +96,15 @@ export function RegisterForm({ lang }: RegisterFormProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-medium text-gray-700">
-                      {t("auth.register.username", "Username")}
+                      {t('auth.register.username', 'Username')}
                     </FormLabel>
                     <FormControl>
                       <div className="relative">
                         <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                         <Input
                           placeholder={t(
-                            "auth.register.usernamePlaceholder",
-                            "Enter your username",
+                            'auth.register.usernamePlaceholder',
+                            'Enter your username',
                           )}
                           className="pl-10 h-11 border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors"
                           {...field}
@@ -128,17 +122,14 @@ export function RegisterForm({ lang }: RegisterFormProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-medium text-gray-700">
-                      {t("auth.register.email", "Email")}
+                      {t('auth.register.email', 'Email')}
                     </FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                         <Input
                           type="email"
-                          placeholder={t(
-                            "auth.register.emailPlaceholder",
-                            "you@example.com",
-                          )}
+                          placeholder={t('auth.register.emailPlaceholder', 'you@example.com')}
                           className="pl-10 h-11 border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors"
                           {...field}
                         />
@@ -155,16 +146,16 @@ export function RegisterForm({ lang }: RegisterFormProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-medium text-gray-700">
-                      {t("auth.register.password", "Password")}
+                      {t('auth.register.password', 'Password')}
                     </FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                         <Input
-                          type={showPassword ? "text" : "password"}
+                          type={showPassword ? 'text' : 'password'}
                           placeholder={t(
-                            "auth.register.passwordPlaceholder",
-                            "Enter your password",
+                            'auth.register.passwordPlaceholder',
+                            'Enter your password',
                           )}
                           className="pl-10 pr-10 h-11 border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors"
                           {...field}
@@ -195,10 +186,10 @@ export function RegisterForm({ lang }: RegisterFormProps) {
                 {isLoading ? (
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    {t("auth.register.loading", "Creating Account...")}
+                    {t('auth.register.loading', 'Creating Account...')}
                   </div>
                 ) : (
-                  t("auth.register.submit", "Create Account")
+                  t('auth.register.submit', 'Create Account')
                 )}
               </Button>
             </form>
@@ -206,10 +197,8 @@ export function RegisterForm({ lang }: RegisterFormProps) {
 
           <div className="text-center pt-6 border-t border-slate-700/50 relative z-10">
             <p className="text-sm text-slate-400">
-              {t("auth.register.hasAccount", "Already have an account?")}{" "}
-              <Link href={`/${lang}/login`}>
-                {t("auth.register.loginLink", "Sign in here")}
-              </Link>
+              {t('auth.register.hasAccount', 'Already have an account?')}{' '}
+              <Link href={`/${lang}/login`}>{t('auth.register.loginLink', 'Sign in here')}</Link>
             </p>
           </div>
         </CardContent>

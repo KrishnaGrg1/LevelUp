@@ -1,7 +1,7 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-export type Language = "eng" | "nep" | "fr" | "arab" | "chin" | "span" | "jap";
+export type Language = 'eng' | 'nep' | 'fr' | 'arab' | 'chin' | 'span' | 'jap';
 
 interface LanguageState {
   language: Language;
@@ -10,13 +10,13 @@ interface LanguageState {
 
 const LanguageStore = create<LanguageState>()(
   persist(
-    (set) => ({
-      language: "eng",
+    set => ({
+      language: 'eng',
       setLanguage: (lang: Language) => set({ language: lang }),
     }),
     {
-      name: "language-storage", // unique name for localStorage
-      partialize: (state) => ({
+      name: 'language-storage', // unique name for localStorage
+      partialize: state => ({
         language: state.language,
       }),
     },

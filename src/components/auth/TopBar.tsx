@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { LanguageSwitcher } from "../LanguageSwitcher";
-import { Sparkles, ArrowLeft } from "lucide-react";
-import { Language } from "@/stores/useLanguage";
-import { t } from "@/translations/index";
+import Link from 'next/link';
+import { LanguageSwitcher } from '../LanguageSwitcher';
+import { Sparkles, ArrowLeft } from 'lucide-react';
+import { Language } from '@/stores/useLanguage';
+import { t } from '@/translations/index';
 
 interface TopBarProps {
   language?: Language;
@@ -10,11 +10,7 @@ interface TopBarProps {
   backUrl?: string;
 }
 
-const TopBar: React.FC<TopBarProps> = ({
-  language = "eng",
-  showBackButton = false,
-  backUrl,
-}) => {
+const TopBar: React.FC<TopBarProps> = ({ language = 'eng', showBackButton = false, backUrl }) => {
   const defaultBackUrl = `/${language}/home`;
 
   return (
@@ -29,15 +25,12 @@ const TopBar: React.FC<TopBarProps> = ({
                 className="inline-flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-slate-800/80 to-slate-900/80 backdrop-blur-sm rounded-xl border border-slate-700/50 hover:border-indigo-500/50 transition-all duration-300 hover:scale-105 text-slate-300 hover:text-white"
               >
                 <ArrowLeft className="w-4 h-4" />
-                <span className="text-sm font-medium">{t("back", "Back")}</span>
+                <span className="text-sm font-medium">{t('back', 'Back')}</span>
               </Link>
             )}
 
             {/* Brand */}
-            <Link
-              href={`/${language}/home`}
-              className="flex items-center space-x-2 group"
-            >
+            <Link href={`/${language}/home`} className="flex items-center space-x-2 group">
               <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <Sparkles className="w-4 h-4 text-white" />
               </div>

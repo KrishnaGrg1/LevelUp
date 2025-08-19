@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import ResetPasswordSchema from "@/app/[lang]/(auth)/reset-password/schema";
-import { z } from "zod";
-import { useState, useEffect } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import ResetPasswordSchema from '@/app/[lang]/(auth)/reset-password/schema';
+import { z } from 'zod';
+import { useState, useEffect } from 'react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -14,28 +14,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 
-import { useMutation } from "@tanstack/react-query";
-import { resetPasswordWithOtp } from "@/lib/services/auth";
-import { toast } from "sonner";
-import { Language } from "@/stores/useLanguage";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-} from "@/components/ui/input-otp";
-import authStore from "@/stores/useAuth";
-import { Eye, EyeOff } from "lucide-react";
-import { t } from "@/translations/index";
-import LanguageStore from "@/stores/useLanguage";
+import { useMutation } from '@tanstack/react-query';
+import { resetPasswordWithOtp } from '@/lib/services/auth';
+import { toast } from 'sonner';
+import { Language } from '@/stores/useLanguage';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
+import authStore from '@/stores/useAuth';
+import { Eye, EyeOff } from 'lucide-react';
+import { t } from '@/translations/index';
+import LanguageStore from '@/stores/useLanguage';
 
 type ResetFormData = z.infer<typeof ResetPasswordSchema>;
 interface ResetPasswordFormProps {
@@ -52,10 +42,10 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
   const form = useForm<ResetFormData>({
     resolver: zodResolver(ResetPasswordSchema),
     defaultValues: {
-      email: user?.email || "",
-      otp_code: "",
-      newPassword: "",
-      confirmPassword: "",
+      email: user?.email || '',
+      otp_code: '',
+      newPassword: '',
+      confirmPassword: '',
     },
   });
 
@@ -71,18 +61,14 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
   }, [language, form]);
 
   const { mutateAsync, isPending: isLoading } = useMutation({
-    mutationKey: ["reset-password"],
+    mutationKey: ['reset-password'],
     mutationFn: (data: ResetFormData) => resetPasswordWithOtp(data, lang),
-    onSuccess: (res) => {
-      toast.success(
-        res?.message || t("resetPassword.success", "Password reset successful"),
-      );
+    onSuccess: res => {
+      toast.success(res?.message || t('resetPassword.success', 'Password reset successful'));
     },
     onError: (error: unknown) => {
       const err = error as { message?: string };
-      toast.error(
-        err.message || t("resetPassword.error", "Password reset failed"),
-      );
+      toast.error(err.message || t('resetPassword.error', 'Password reset failed'));
     },
   });
 
@@ -97,12 +83,8 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
         <Card className="relative bg-gradient-to-br from-slate-800/30 to-slate-900/30 backdrop-blur-xl border border-slate-700/30 rounded-3xl shadow-2xl overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 rounded-3xl"></div>
           <CardHeader className="relative space-y-2 text-center pb-4 pt-8">
-            <CardTitle className="text-2xl font-black">
-              Reset Password
-            </CardTitle>
-            <CardDescription className="text-slate-400">
-              Loading...
-            </CardDescription>
+            <CardTitle className="text-2xl font-black">Reset Password</CardTitle>
+            <CardDescription className="text-slate-400">Loading...</CardDescription>
           </CardHeader>
           <CardContent className="relative space-y-6 px-8 pb-8">
             <div className="animate-pulse space-y-4">
@@ -123,13 +105,10 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 rounded-3xl"></div>
         <CardHeader className="relative space-y-2 text-center pb-4 pt-8">
           <CardTitle className="text-2xl font-black">
-            {t("auth.resetPassword.title", "Reset Password")}
+            {t('auth.resetPassword.title', 'Reset Password')}
           </CardTitle>
           <CardDescription className="text-slate-400">
-            {t(
-              "auth.resetPassword.subtitle",
-              "Enter the code and your new password",
-            )}
+            {t('auth.resetPassword.subtitle', 'Enter the code and your new password')}
           </CardDescription>
         </CardHeader>
         <CardContent className="relative space-y-6 px-8 pb-8">
@@ -142,7 +121,7 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-medium text-slate-300">
-                      {t("auth.resetPassword.otp", "Reset Code")}
+                      {t('auth.resetPassword.otp', 'Reset Code')}
                     </FormLabel>
                     <FormControl>
                       <InputOTP
@@ -170,27 +149,22 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-medium text-slate-300">
-                      {t("auth.resetPassword.newPassword", "New Password")}
+                      {t('auth.resetPassword.newPassword', 'New Password')}
                     </FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Input
-                          type={showNewPassword ? "text" : "password"}
-                          placeholder={t(
-                            "auth.resetPassword.newPasswordPlaceholder",
-                            "••••••••",
-                          )}
+                          type={showNewPassword ? 'text' : 'password'}
+                          placeholder={t('auth.resetPassword.newPasswordPlaceholder', '••••••••')}
                           autoComplete="new-password"
                           className="h-12 pr-10 bg-slate-800/50 border-slate-600 text-white placeholder-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-300 rounded-xl"
                           {...field}
                         />
                         <Button
                           type="button"
-                          onClick={() => setShowNewPassword((s) => !s)}
+                          onClick={() => setShowNewPassword(s => !s)}
                           className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200"
-                          aria-label={
-                            showNewPassword ? "Hide password" : "Show password"
-                          }
+                          aria-label={showNewPassword ? 'Hide password' : 'Show password'}
                         >
                           {showNewPassword ? (
                             <EyeOff className="w-5 h-5" />
@@ -212,18 +186,15 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-medium text-slate-300">
-                      {t(
-                        "auth.resetPassword.confirmPassword",
-                        "Confirm Password",
-                      )}
+                      {t('auth.resetPassword.confirmPassword', 'Confirm Password')}
                     </FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Input
-                          type={showConfirmPassword ? "text" : "password"}
+                          type={showConfirmPassword ? 'text' : 'password'}
                           placeholder={t(
-                            "auth.resetPassword.confirmPasswordPlaceholder",
-                            "••••••••",
+                            'auth.resetPassword.confirmPasswordPlaceholder',
+                            '••••••••',
                           )}
                           autoComplete="new-password"
                           className="h-12 pr-10 bg-slate-800/50 border-slate-600 text-white placeholder-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-300 rounded-xl"
@@ -231,13 +202,9 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
                         />
                         <Button
                           type="button"
-                          onClick={() => setShowConfirmPassword((s) => !s)}
+                          onClick={() => setShowConfirmPassword(s => !s)}
                           className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200"
-                          aria-label={
-                            showConfirmPassword
-                              ? "Hide password"
-                              : "Show password"
-                          }
+                          aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
                         >
                           {showConfirmPassword ? (
                             <EyeOff className="w-5 h-5" />
@@ -258,8 +225,8 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
                 className="w-full h-12 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:scale-100 rounded-xl"
               >
                 {isLoading
-                  ? t("resetPassword.loading", "Resetting...")
-                  : t("resetPassword.submit", "Reset Password")}
+                  ? t('resetPassword.loading', 'Resetting...')
+                  : t('resetPassword.submit', 'Reset Password')}
               </Button>
             </form>
           </Form>

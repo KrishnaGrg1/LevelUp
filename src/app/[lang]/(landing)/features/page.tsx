@@ -1,30 +1,22 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { FeaturesSection } from "@/components/landing/FeaturesSection";
-import { Language } from "@/stores/useLanguage";
-import { validateLanguage } from "@/lib/language";
-import {
-  Brain,
-  TrendingUp,
-  Shield,
-  Star,
-  Clock,
-  Globe,
-  Sparkles,
-} from "lucide-react";
+import React, { useEffect, useState } from 'react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import { FeaturesSection } from '@/components/landing/FeaturesSection';
+import { Language } from '@/stores/useLanguage';
+import { validateLanguage } from '@/lib/language';
+import { Brain, TrendingUp, Shield, Star, Clock, Globe, Sparkles } from 'lucide-react';
 
 interface FeaturesPageProps {
   params: Promise<{ lang: string }>;
 }
 
 const FeaturesPage: React.FC<FeaturesPageProps> = ({ params }) => {
-  const [language, setLanguage] = useState<Language>("eng");
+  const [language, setLanguage] = useState<Language>('eng');
 
   useEffect(() => {
-    params.then((resolvedParams) => {
+    params.then(resolvedParams => {
       const validatedLang = validateLanguage(resolvedParams.lang);
       setLanguage(validatedLang);
     });
@@ -42,9 +34,7 @@ const FeaturesPage: React.FC<FeaturesPageProps> = ({ params }) => {
         <div className="relative mx-auto max-w-4xl px-6 z-10">
           <div className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full border border-purple-500/20 mb-8">
             <Sparkles className="w-4 h-4 text-purple-400" />
-            <span className="text-purple-300 text-sm font-medium">
-              Powerful Features
-            </span>
+            <span className="text-purple-300 text-sm font-medium">Powerful Features</span>
           </div>
 
           <h1 className="text-6xl md:text-7xl font-black mb-8 leading-tight">
@@ -58,9 +48,8 @@ const FeaturesPage: React.FC<FeaturesPageProps> = ({ params }) => {
           </h1>
 
           <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Discover the comprehensive suite of features designed to transform
-            your goals into epic adventures and make personal growth
-            irresistibly engaging.
+            Discover the comprehensive suite of features designed to transform your goals into epic
+            adventures and make personal growth irresistibly engaging.
           </p>
         </div>
       </section>
@@ -76,8 +65,7 @@ const FeaturesPage: React.FC<FeaturesPageProps> = ({ params }) => {
               Advanced Capabilities
             </h2>
             <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-              Unlock powerful tools that adapt to your unique journey and
-              accelerate your progress.
+              Unlock powerful tools that adapt to your unique journey and accelerate your progress.
             </p>
           </div>
 
@@ -85,51 +73,51 @@ const FeaturesPage: React.FC<FeaturesPageProps> = ({ params }) => {
             {[
               {
                 icon: Brain,
-                title: "AI-Powered Insights",
+                title: 'AI-Powered Insights',
                 description:
-                  "Smart recommendations based on your progress patterns and behavioral data.",
-                color: "from-indigo-500 to-purple-500",
-                highlight: "NEW",
+                  'Smart recommendations based on your progress patterns and behavioral data.',
+                color: 'from-indigo-500 to-purple-500',
+                highlight: 'NEW',
               },
               {
                 icon: TrendingUp,
-                title: "Advanced Analytics",
+                title: 'Advanced Analytics',
                 description:
-                  "Deep dive into your performance with detailed charts and trend analysis.",
-                color: "from-purple-500 to-pink-500",
-                highlight: "",
+                  'Deep dive into your performance with detailed charts and trend analysis.',
+                color: 'from-purple-500 to-pink-500',
+                highlight: '',
               },
               {
                 icon: Shield,
-                title: "Privacy First",
+                title: 'Privacy First',
                 description:
-                  "End-to-end encryption ensures your personal data stays completely private.",
-                color: "from-green-500 to-emerald-500",
-                highlight: "",
+                  'End-to-end encryption ensures your personal data stays completely private.',
+                color: 'from-green-500 to-emerald-500',
+                highlight: '',
               },
               {
                 icon: Globe,
-                title: "Cross-Platform Sync",
+                title: 'Cross-Platform Sync',
                 description:
-                  "Seamlessly access your quests across all devices with real-time synchronization.",
-                color: "from-blue-500 to-indigo-500",
-                highlight: "",
+                  'Seamlessly access your quests across all devices with real-time synchronization.',
+                color: 'from-blue-500 to-indigo-500',
+                highlight: '',
               },
               {
                 icon: Clock,
-                title: "Smart Scheduling",
+                title: 'Smart Scheduling',
                 description:
-                  "AI-optimized time blocks that adapt to your energy levels and availability.",
-                color: "from-orange-500 to-red-500",
-                highlight: "BETA",
+                  'AI-optimized time blocks that adapt to your energy levels and availability.',
+                color: 'from-orange-500 to-red-500',
+                highlight: 'BETA',
               },
               {
                 icon: Star,
-                title: "Achievement System",
+                title: 'Achievement System',
                 description:
-                  "Earn badges, unlock titles, and showcase your journey with a comprehensive achievement system.",
-                color: "from-yellow-500 to-orange-500",
-                highlight: "",
+                  'Earn badges, unlock titles, and showcase your journey with a comprehensive achievement system.',
+                color: 'from-yellow-500 to-orange-500',
+                highlight: '',
               },
             ].map((feature, index) => (
               <div
@@ -148,12 +136,8 @@ const FeaturesPage: React.FC<FeaturesPageProps> = ({ params }) => {
                   >
                     <feature.icon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-4">
-                    {feature.title}
-                  </h3>
-                  <p className="text-slate-400 leading-relaxed">
-                    {feature.description}
-                  </p>
+                  <h3 className="text-2xl font-bold text-white mb-4">{feature.title}</h3>
+                  <p className="text-slate-400 leading-relaxed">{feature.description}</p>
                 </div>
               </div>
             ))}
@@ -169,25 +153,25 @@ const FeaturesPage: React.FC<FeaturesPageProps> = ({ params }) => {
               Seamless Integrations
             </h2>
             <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-              Connect with your favorite apps and services to create a unified
-              productivity ecosystem.
+              Connect with your favorite apps and services to create a unified productivity
+              ecosystem.
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
             {[
-              "Calendar Apps",
-              "Fitness Trackers",
-              "Note Taking",
-              "Music Apps",
-              "Social Media",
-              "Health Apps",
-              "Task Managers",
-              "Time Trackers",
-              "Meditation",
-              "Reading Apps",
-              "Learning Platforms",
-              "Banking Apps",
+              'Calendar Apps',
+              'Fitness Trackers',
+              'Note Taking',
+              'Music Apps',
+              'Social Media',
+              'Health Apps',
+              'Task Managers',
+              'Time Trackers',
+              'Meditation',
+              'Reading Apps',
+              'Learning Platforms',
+              'Banking Apps',
             ].map((integration, index) => (
               <div
                 key={index}
@@ -196,9 +180,7 @@ const FeaturesPage: React.FC<FeaturesPageProps> = ({ params }) => {
                 <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl mx-auto mb-4 flex items-center justify-center">
                   <div className="w-6 h-6 bg-white rounded opacity-80"></div>
                 </div>
-                <p className="text-slate-300 text-sm font-medium">
-                  {integration}
-                </p>
+                <p className="text-slate-300 text-sm font-medium">{integration}</p>
               </div>
             ))}
           </div>
@@ -213,8 +195,7 @@ const FeaturesPage: React.FC<FeaturesPageProps> = ({ params }) => {
               Why Choose Level Up?
             </h2>
             <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-              See how we compare to traditional goal-setting methods and other
-              apps.
+              See how we compare to traditional goal-setting methods and other apps.
             </p>
           </div>
 
@@ -222,51 +203,34 @@ const FeaturesPage: React.FC<FeaturesPageProps> = ({ params }) => {
             <table className="w-full border-collapse">
               <thead>
                 <tr className="border-b border-slate-700">
-                  <th className="text-left py-4 px-6 text-slate-300">
-                    Feature
-                  </th>
-                  <th className="text-center py-4 px-6 text-purple-400 font-bold">
-                    Level Up
-                  </th>
-                  <th className="text-center py-4 px-6 text-slate-400">
-                    Traditional Methods
-                  </th>
-                  <th className="text-center py-4 px-6 text-slate-400">
-                    Other Apps
-                  </th>
+                  <th className="text-left py-4 px-6 text-slate-300">Feature</th>
+                  <th className="text-center py-4 px-6 text-purple-400 font-bold">Level Up</th>
+                  <th className="text-center py-4 px-6 text-slate-400">Traditional Methods</th>
+                  <th className="text-center py-4 px-6 text-slate-400">Other Apps</th>
                 </tr>
               </thead>
               <tbody>
                 {[
-                  ["Gamified Experience", "✓", "✗", "Limited"],
-                  ["AI-Powered Insights", "✓", "✗", "✗"],
-                  ["Community Support", "✓", "✗", "Basic"],
-                  ["Cross-Platform Sync", "✓", "✗", "✓"],
-                  ["Advanced Analytics", "✓", "✗", "Limited"],
-                  ["Privacy Protection", "✓", "✓", "Varies"],
+                  ['Gamified Experience', '✓', '✗', 'Limited'],
+                  ['AI-Powered Insights', '✓', '✗', '✗'],
+                  ['Community Support', '✓', '✗', 'Basic'],
+                  ['Cross-Platform Sync', '✓', '✗', '✓'],
+                  ['Advanced Analytics', '✓', '✗', 'Limited'],
+                  ['Privacy Protection', '✓', '✓', 'Varies'],
                 ].map(([feature, levelup, traditional, others], index) => (
-                  <tr
-                    key={index}
-                    className="border-b border-slate-800 hover:bg-slate-900/20"
-                  >
+                  <tr key={index} className="border-b border-slate-800 hover:bg-slate-900/20">
                     <td className="py-4 px-6 text-slate-300">{feature}</td>
                     <td className="py-4 px-6 text-center">
-                      {levelup === "✓" ? (
+                      {levelup === '✓' ? (
                         <div className="w-6 h-6 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto flex items-center justify-center">
                           <span className="text-white text-sm">✓</span>
                         </div>
                       ) : (
-                        <span className="text-purple-400 font-medium">
-                          {levelup}
-                        </span>
+                        <span className="text-purple-400 font-medium">{levelup}</span>
                       )}
                     </td>
-                    <td className="py-4 px-6 text-center text-slate-500">
-                      {traditional}
-                    </td>
-                    <td className="py-4 px-6 text-center text-slate-500">
-                      {others}
-                    </td>
+                    <td className="py-4 px-6 text-center text-slate-500">{traditional}</td>
+                    <td className="py-4 px-6 text-center text-slate-500">{others}</td>
                   </tr>
                 ))}
               </tbody>

@@ -1,19 +1,16 @@
-"use client";
+'use client';
 
-import React from "react";
-import { useFormField } from "@/components/ui/form";
-import { cn } from "@/lib/utils";
-import { t } from "@/translations/index";
+import React from 'react';
+import { useFormField } from '@/components/ui/form';
+import { cn } from '@/lib/utils';
+import { t } from '@/translations/index';
 
-function TranslatedFormMessage({
-  className,
-  ...props
-}: React.ComponentProps<"p">) {
+function TranslatedFormMessage({ className, ...props }: React.ComponentProps<'p'>) {
   const { error, formMessageId } = useFormField();
 
   // Translate the error message if it exists
-  const errorMessage = error?.message ? String(error.message) : "";
-  const translatedMessage = errorMessage ? t(errorMessage, errorMessage) : "";
+  const errorMessage = error?.message ? String(error.message) : '';
+  const translatedMessage = errorMessage ? t(errorMessage, errorMessage) : '';
 
   const body = translatedMessage || props.children;
 
@@ -25,7 +22,7 @@ function TranslatedFormMessage({
     <p
       data-slot="form-message"
       id={formMessageId}
-      className={cn("text-destructive text-sm", className)}
+      className={cn('text-destructive text-sm', className)}
       {...props}
     >
       {body}

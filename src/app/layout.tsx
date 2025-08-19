@@ -1,33 +1,29 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import { QueryProvider } from "@/components/providers/QueryProvider";
+import type { Metadata } from 'next';
+import './globals.css';
+import { QueryProvider } from '@/components/providers/QueryProvider';
 // import { Toaster } from "sonner";
-import { ToastWrapper } from "@/components/ToasterWrapper";
+import { ToastWrapper } from '@/components/ToasterWrapper';
 
 export const metadata: Metadata = {
-  title: "LevelUp - Gamify Your Learning",
-  description: "Level up your skills through gamified learning experiences",
+  title: 'LevelUp - Gamify Your Learning',
+  description: 'Level up your skills through gamified learning experiences',
   icons: {
     icon: [
       {
-        url: "/companylogo.jpeg",
-        type: "image/jpeg",
-        sizes: "192x192",
+        url: '/companylogo.jpeg',
+        type: 'image/jpeg',
+        sizes: '192x192',
       },
       {
-        url: "/companylogo1.jpeg",
-        type: "image/jpeg",
-        sizes: "192x192",
+        url: '/companylogo1.jpeg',
+        type: 'image/jpeg',
+        sizes: '192x192',
       },
     ],
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html>
       <body>

@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import { ArrowRight, Sparkles, Zap } from "lucide-react";
-import { t } from "@/translations";
-import LanguageStore from "@/stores/useLanguage";
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { ArrowRight, Sparkles, Zap } from 'lucide-react';
+import { t } from '@/translations';
+import LanguageStore from '@/stores/useLanguage';
 
 interface CTASectionProps {
   className?: string;
 }
 
-export const CTASection: React.FC<CTASectionProps> = ({ className = "" }) => {
+export const CTASection: React.FC<CTASectionProps> = ({ className = '' }) => {
   const [isClient, setIsClient] = useState(false);
   const { language } = LanguageStore();
   const [particles, setParticles] = useState<
@@ -73,22 +73,22 @@ export const CTASection: React.FC<CTASectionProps> = ({ className = "" }) => {
           <div className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-full border border-indigo-500/20 mb-8">
             <Sparkles className="w-4 h-4 text-indigo-400" />
             <span className="text-indigo-300 text-sm font-medium">
-              {t("landing.CTASection.badgeText")}
+              {t('landing.CTASection.badgeText')}
             </span>
           </div>
 
           <h2 className="text-6xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight">
             <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              {t("landing.CTASection.secondaryCTA")}
+              {t('landing.CTASection.secondaryCTA')}
             </span>
             <br />
             <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent">
-              {t("landing.CTASection.titleSub")}
+              {t('landing.CTASection.titleSub')}
             </span>
           </h2>
 
           <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed mb-12">
-            {t("landing.CTASection.description")}
+            {t('landing.CTASection.description')}
           </p>
         </div>
 
@@ -101,7 +101,7 @@ export const CTASection: React.FC<CTASectionProps> = ({ className = "" }) => {
             <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl blur opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
             <span className="relative flex items-center space-x-2">
               <Zap className="w-5 h-5" />
-              <span>{t("landing.CTASection.primaryCTA")}</span>
+              <span>{t('landing.CTASection.primaryCTA')}</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
             </span>
           </Link>
@@ -111,7 +111,7 @@ export const CTASection: React.FC<CTASectionProps> = ({ className = "" }) => {
             className="group inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-slate-300 bg-slate-800/50 border border-slate-600/50 rounded-2xl hover:bg-slate-700/50 hover:border-slate-500/50 transition-all duration-300 hover:scale-105 min-w-[200px]"
           >
             <span className="flex items-center space-x-2">
-              <span> {t("landing.CTASection.secondaryCTA")}</span>
+              <span> {t('landing.CTASection.secondaryCTA')}</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
             </span>
           </Link>
@@ -121,22 +121,15 @@ export const CTASection: React.FC<CTASectionProps> = ({ className = "" }) => {
         <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8 text-slate-500">
           <div className="flex items-center space-x-2">
             <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-            <span className="text-sm">
-              {t("landing.CTASection.trustIndicators.freeStart")}
-            </span>
+            <span className="text-sm">{t('landing.CTASection.trustIndicators.freeStart')}</span>
           </div>
           <div className="flex items-center space-x-2">
             <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-            <span className="text-sm">
-              {" "}
-              {t("landing.CTASection.trustIndicators.noCreditCard")}
-            </span>
+            <span className="text-sm"> {t('landing.CTASection.trustIndicators.noCreditCard')}</span>
           </div>
           <div className="flex items-center space-x-2">
             <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-            <span className="text-sm">
-              {t("landing.CTASection.trustIndicators.quickJoin")}
-            </span>
+            <span className="text-sm">{t('landing.CTASection.trustIndicators.quickJoin')}</span>
           </div>
         </div>
       </div>

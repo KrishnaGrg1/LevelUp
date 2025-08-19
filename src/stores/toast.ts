@@ -1,6 +1,6 @@
 // Central store for managing toast notifications in Next.js (React version)
 
-export type ToastType = "success" | "error" | "info" | "warning";
+export type ToastType = 'success' | 'error' | 'info' | 'warning';
 
 export interface ToastData {
   type: ToastType;
@@ -9,10 +9,10 @@ export interface ToastData {
 }
 
 // Custom event name
-const TOAST_EVENT = "app:toast";
+const TOAST_EVENT = 'app:toast';
 
 export function addToast(type: ToastType, message: string): void {
-  if (typeof window !== "undefined") {
+  if (typeof window !== 'undefined') {
     const id = Date.now();
     window.dispatchEvent(
       new CustomEvent<ToastData>(TOAST_EVENT, {
@@ -23,16 +23,14 @@ export function addToast(type: ToastType, message: string): void {
 }
 
 export const toastActions = {
-  success: (message: string) => addToast("success", message),
-  error: (message: string) => addToast("error", message),
-  info: (message: string) => addToast("info", message),
-  warning: (message: string) => addToast("warning", message),
+  success: (message: string) => addToast('success', message),
+  error: (message: string) => addToast('error', message),
+  info: (message: string) => addToast('info', message),
+  warning: (message: string) => addToast('warning', message),
 };
 
-export function setupToastListener(
-  callback: (data: ToastData) => void,
-): () => void {
-  if (typeof window === "undefined") return () => {};
+export function setupToastListener(callback: (data: ToastData) => void): () => void {
+  if (typeof window === 'undefined') return () => {};
 
   const handleToast = (event: Event) => {
     const customEvent = event as CustomEvent<ToastData>;

@@ -1,19 +1,10 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import LanguageStore from "@/stores/useLanguage";
-import { validateLanguage } from "@/lib/language";
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Send,
-  MessageCircle,
-  Heart,
-  Clock,
-  CheckCircle,
-} from "lucide-react";
+import LanguageStore from '@/stores/useLanguage';
+import { validateLanguage } from '@/lib/language';
+import { Mail, Phone, MapPin, Send, MessageCircle, Heart, Clock, CheckCircle } from 'lucide-react';
 
 interface ContactPageProps {
   params: Promise<{ lang: string }>;
@@ -22,15 +13,15 @@ interface ContactPageProps {
 const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
   const { setLanguage } = LanguageStore();
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-    type: "general",
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+    type: 'general',
   });
 
   useEffect(() => {
-    params.then((resolvedParams) => {
+    params.then(resolvedParams => {
       const validatedLang = validateLanguage(resolvedParams.lang);
       setLanguage(validatedLang);
     });
@@ -39,15 +30,13 @@ const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission
-    console.log("Form submitted:", formData);
+    console.log('Form submitted:', formData);
   };
 
   const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
@@ -63,9 +52,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
         <div className="relative mx-auto max-w-4xl px-6 z-10">
           <div className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full border border-purple-500/20 mb-8">
             <MessageCircle className="w-4 h-4 text-purple-400" />
-            <span className="text-purple-300 text-sm font-medium">
-              Get in Touch
-            </span>
+            <span className="text-purple-300 text-sm font-medium">Get in Touch</span>
           </div>
 
           <h1 className="text-6xl md:text-7xl font-black mb-8 leading-tight">
@@ -79,8 +66,8 @@ const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
           </h1>
 
           <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Have questions about Level Up? Need help getting started? Our team
-            of adventure guides is here to help you level up your life.
+            Have questions about Level Up? Need help getting started? Our team of adventure guides
+            is here to help you level up your life.
           </p>
         </div>
       </section>
@@ -101,27 +88,27 @@ const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
             {[
               {
                 icon: Mail,
-                title: "Email Support",
-                description: "Get detailed answers to your questions",
-                contact: "hello@levelup.app",
-                response: "Response within 24 hours",
-                color: "from-blue-500 to-indigo-500",
+                title: 'Email Support',
+                description: 'Get detailed answers to your questions',
+                contact: 'hello@levelup.app',
+                response: 'Response within 24 hours',
+                color: 'from-blue-500 to-indigo-500',
               },
               {
                 icon: MessageCircle,
-                title: "Live Chat",
-                description: "Instant help when you need it",
-                contact: "Available 9 AM - 6 PM PST",
-                response: "Instant response",
-                color: "from-green-500 to-emerald-500",
+                title: 'Live Chat',
+                description: 'Instant help when you need it',
+                contact: 'Available 9 AM - 6 PM PST',
+                response: 'Instant response',
+                color: 'from-green-500 to-emerald-500',
               },
               {
                 icon: Phone,
-                title: "Phone Support",
-                description: "Talk directly with our team",
-                contact: "+1 (555) 123-4567",
-                response: "Available Mon-Fri",
-                color: "from-purple-500 to-pink-500",
+                title: 'Phone Support',
+                description: 'Talk directly with our team',
+                contact: '+1 (555) 123-4567',
+                response: 'Available Mon-Fri',
+                color: 'from-purple-500 to-pink-500',
               },
             ].map((method, index) => (
               <div
@@ -135,13 +122,9 @@ const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
                   >
                     <method.icon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-4">
-                    {method.title}
-                  </h3>
+                  <h3 className="text-2xl font-bold text-white mb-4">{method.title}</h3>
                   <p className="text-slate-400 mb-4">{method.description}</p>
-                  <p className="text-purple-400 font-semibold mb-2">
-                    {method.contact}
-                  </p>
+                  <p className="text-purple-400 font-semibold mb-2">{method.contact}</p>
                   <p className="text-slate-500 text-sm">{method.response}</p>
                 </div>
               </div>
@@ -158,18 +141,14 @@ const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
               Send Us a Message
             </h2>
             <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-              Fill out the form below and we&apos;ll get back to you as soon as
-              possible.
+              Fill out the form below and we&apos;ll get back to you as soon as possible.
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label
-                  htmlFor="name"
-                  className="block text-slate-300 font-medium mb-2"
-                >
+                <label htmlFor="name" className="block text-slate-300 font-medium mb-2">
                   Full Name *
                 </label>
                 <input
@@ -184,10 +163,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
                 />
               </div>
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-slate-300 font-medium mb-2"
-                >
+                <label htmlFor="email" className="block text-slate-300 font-medium mb-2">
                   Email Address *
                 </label>
                 <input
@@ -205,10 +181,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label
-                  htmlFor="type"
-                  className="block text-slate-300 font-medium mb-2"
-                >
+                <label htmlFor="type" className="block text-slate-300 font-medium mb-2">
                   Inquiry Type
                 </label>
                 <select
@@ -227,10 +200,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
                 </select>
               </div>
               <div>
-                <label
-                  htmlFor="subject"
-                  className="block text-slate-300 font-medium mb-2"
-                >
+                <label htmlFor="subject" className="block text-slate-300 font-medium mb-2">
                   Subject *
                 </label>
                 <input
@@ -247,10 +217,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
             </div>
 
             <div>
-              <label
-                htmlFor="message"
-                className="block text-slate-300 font-medium mb-2"
-              >
+              <label htmlFor="message" className="block text-slate-300 font-medium mb-2">
                 Message *
               </label>
               <textarea
@@ -297,9 +264,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
                   <MapPin className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white mb-2">
-                    Pokhara Office
-                  </h3>
+                  <h3 className="text-xl font-bold text-white mb-2">Pokhara Office</h3>
                   <p className="text-slate-400 leading-relaxed">
                     Lakeside
                     <br />
@@ -315,9 +280,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
                   <Clock className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white mb-2">
-                    Office Hours
-                  </h3>
+                  <h3 className="text-xl font-bold text-white mb-2">Office Hours</h3>
                   <p className="text-slate-400 leading-relaxed">
                     Monday - Friday: 9:00 AM - 6:00 PM PST
                     <br />
@@ -333,12 +296,10 @@ const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
                   <Heart className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white mb-2">
-                    What to Expect
-                  </h3>
+                  <h3 className="text-xl font-bold text-white mb-2">What to Expect</h3>
                   <p className="text-slate-400 leading-relaxed">
-                    Coffee, snacks, and a friendly team ready to help you level
-                    up your life. No appointment necessary for quick questions!
+                    Coffee, snacks, and a friendly team ready to help you level up your life. No
+                    appointment necessary for quick questions!
                   </p>
                 </div>
               </div>
@@ -364,30 +325,29 @@ const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
               Quick Answers
             </h2>
             <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-              Find answers to the most common questions about getting started
-              with Level Up.
+              Find answers to the most common questions about getting started with Level Up.
             </p>
           </div>
 
           <div className="space-y-6">
             {[
               {
-                question: "How quickly can I get started?",
+                question: 'How quickly can I get started?',
                 answer:
-                  "You can create your account and start your first quest in under 2 minutes! Our onboarding process is designed to get you leveling up immediately.",
+                  'You can create your account and start your first quest in under 2 minutes! Our onboarding process is designed to get you leveling up immediately.',
               },
               {
-                question: "Do you offer training sessions?",
+                question: 'Do you offer training sessions?',
                 answer:
-                  "Yes! We offer free onboarding sessions for new users and comprehensive training for teams. Schedule one through our contact form.",
+                  'Yes! We offer free onboarding sessions for new users and comprehensive training for teams. Schedule one through our contact form.',
               },
               {
-                question: "What if I need custom features?",
+                question: 'What if I need custom features?',
                 answer:
                   "We love building custom solutions! Contact our enterprise team to discuss your specific needs and we'll create a tailored plan.",
               },
               {
-                question: "How can I provide feedback?",
+                question: 'How can I provide feedback?',
                 answer:
                   "We're always eager to hear from our community! Use the feedback form in the app, email us, or join our Discord community for real-time discussions.",
               },
@@ -401,12 +361,8 @@ const ContactPage: React.FC<ContactPageProps> = ({ params }) => {
                     <CheckCircle className="w-4 h-4 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-white mb-3">
-                      {faq.question}
-                    </h3>
-                    <p className="text-slate-400 leading-relaxed">
-                      {faq.answer}
-                    </p>
+                    <h3 className="text-xl font-bold text-white mb-3">{faq.question}</h3>
+                    <p className="text-slate-400 leading-relaxed">{faq.answer}</p>
                   </div>
                 </div>
               </div>

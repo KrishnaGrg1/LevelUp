@@ -66,9 +66,7 @@ The main page now acts as a composer, orchestrating all sections:
   <Navbar />
 
   {/* Particle background */}
-  <div className="fixed inset-0 pointer-events-none z-0">
-    {/* Particle system */}
-  </div>
+  <div className="fixed inset-0 pointer-events-none z-0">{/* Particle system */}</div>
 
   <HeroSection />
   <FeaturesSection />

@@ -1,22 +1,14 @@
-import React from "react";
-import Link from "next/link";
-import {
-  Sparkles,
-  Zap,
-  Play,
-  Star,
-  Shield,
-  Users,
-  ChevronDown,
-} from "lucide-react";
-import { t } from "@/translations/index";
-import LanguageStore from "@/stores/useLanguage";
+import React from 'react';
+import Link from 'next/link';
+import { Sparkles, Zap, Play, Star, Shield, Users, ChevronDown } from 'lucide-react';
+import { t } from '@/translations/index';
+import LanguageStore from '@/stores/useLanguage';
 
 interface HeroSectionProps {
   className?: string;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ className = "" }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
   const { language } = LanguageStore();
   return (
     <section
@@ -33,29 +25,29 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = "" }) => {
         <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 rounded-full text-indigo-300 text-sm font-medium mb-8 backdrop-blur-sm animate-float">
           <Sparkles className="h-4 w-4 animate-spin-slow" />
           <span className="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent font-semibold">
-            {t("landing.heroSection.batchText")}
+            {t('landing.heroSection.batchText')}
           </span>
           <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
         </div>
 
         {/* Enhanced Title */}
         <h1 className="mb-8 text-6xl md:text-8xl font-black bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent leading-tight tracking-tight">
-          {t("landing.heroSection.titleMain")}
+          {t('landing.heroSection.titleMain')}
           <br />
           <span className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent">
-            {t("landing.heroSection.titleSub")}
+            {t('landing.heroSection.titleSub')}
           </span>
         </h1>
 
         <p className="mb-12 text-xl md:text-2xl text-slate-300 max-w-4xl mx-auto leading-relaxed font-light">
-          {t("landing.heroSection.desc1")}{" "}
+          {t('landing.heroSection.desc1')}{' '}
           <span className="text-indigo-400 font-semibold">
-            {t("landing.heroSection.descHighlight1")}
+            {t('landing.heroSection.descHighlight1')}
           </span>
-          .{t("landing.heroSection.desc2")}
+          .{t('landing.heroSection.desc2')}
           <span className="text-purple-400 font-semibold">
-            {" "}
-            {t("landing.heroSection.descHighlight1")}
+            {' '}
+            {t('landing.heroSection.descHighlight1')}
           </span>
         </p>
 
@@ -67,16 +59,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = "" }) => {
           >
             <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur animate-pulse"></div>
             <Zap className="h-6 w-6 group-hover:animate-bounce relative z-10" />
-            <span className="relative z-10">
-              {t("landing.heroSection.ctaStart")}
-            </span>
+            <span className="relative z-10">{t('landing.heroSection.ctaStart')}</span>
             <div className="relative z-10 w-2 h-2 bg-white rounded-full animate-ping"></div>
           </Link>
           <button className="group inline-flex items-center gap-3 px-10 py-5 border-2 border-slate-600 rounded-2xl font-semibold text-xl text-slate-300 hover:border-indigo-400 hover:text-white transition-all duration-500 hover:bg-indigo-500/10 backdrop-blur-sm hover:scale-105 hover:shadow-lg">
             <div className="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
               <Play className="h-5 w-5 text-white ml-1" />
             </div>
-            {t("landing.heroSection.watchDemo")}
+            {t('landing.heroSection.watchDemo')}
           </button>
         </div>
 
@@ -92,21 +82,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = "" }) => {
                 />
               ))}
             </div>
-            <span className="text-sm font-medium">
-              {t("landing.heroSection.rating")}
-            </span>
+            <span className="text-sm font-medium">{t('landing.heroSection.rating')}</span>
           </div>
           <div className="flex items-center gap-3 bg-slate-800/30 px-4 py-2 rounded-full backdrop-blur-sm border border-slate-700/50">
             <Shield className="h-4 w-4 text-green-400 animate-pulse" />
-            <span className="text-sm font-medium">
-              {t("landing.heroSection.secure")}
-            </span>
+            <span className="text-sm font-medium">{t('landing.heroSection.secure')}</span>
           </div>
           <div className="flex items-center gap-3 bg-slate-800/30 px-4 py-2 rounded-full backdrop-blur-sm border border-slate-700/50">
             <Users className="h-4 w-4 text-blue-400 animate-pulse" />
-            <span className="text-sm font-medium">
-              {t("landing.heroSection.activeUsers")}
-            </span>
+            <span className="text-sm font-medium">{t('landing.heroSection.activeUsers')}</span>
           </div>
         </div>
 

@@ -1,16 +1,16 @@
-import en from "./eng/index";
-import fr from "./fr/index";
-import arab from "./arab/index";
-import chin from "./chin/index";
-import nep from "./nep/index";
-import span from "./span/index";
-import jap from "./jap/index";
-import lang from "./lang";
-import LanguageStore, { Language } from "@/stores/useLanguage";
-import { DEFAULT_LANGUAGE } from "@/lib/language";
+import en from './eng/index';
+import fr from './fr/index';
+import arab from './arab/index';
+import chin from './chin/index';
+import nep from './nep/index';
+import span from './span/index';
+import jap from './jap/index';
+import lang from './lang';
+import LanguageStore, { Language } from '@/stores/useLanguage';
+import { DEFAULT_LANGUAGE } from '@/lib/language';
 
 // Define translation structure types
-		type TranslationValue = string | Record<string, unknown>;
+type TranslationValue = string | Record<string, unknown>;
 type TranslationContent = Record<string, TranslationValue>;
 
 const translations: Record<Language, TranslationContent> = {
@@ -48,7 +48,7 @@ export const defaultLocale: Language = DEFAULT_LANGUAGE;
 
 // Get current language from store
 function getCurrentLanguage(): Language {
-  if (typeof window !== "undefined") {
+  if (typeof window !== 'undefined') {
     try {
       return LanguageStore.getState().language;
     } catch {
@@ -61,19 +61,19 @@ function getCurrentLanguage(): Language {
 // Translation function
 export function t(key: string, fallback?: string): string {
   const currentLang = getCurrentLanguage();
-  const keys = key.split(".");
+  const keys = key.split('.');
 
   let value: unknown = translations[currentLang];
 
   // Handle namespace:key format (e.g., "success:login")
-  if (key.includes(":")) {
-    const [namespace, ...restKeys] = key.split(":");
-    const actualKey = restKeys.join(":");
+  if (key.includes(':')) {
+    const [namespace, ...restKeys] = key.split(':');
+    const actualKey = restKeys.join(':');
     const langTranslations = translations[currentLang] as TranslationContent;
     value = langTranslations?.[namespace];
 
     if (value && actualKey) {
-      const nestedKeys = actualKey.split(".");
+      const nestedKeys = actualKey.split('.');
       for (const nestedKey of nestedKeys) {
         value = (value as Record<string, unknown>)?.[nestedKey];
         if (value === undefined) break;
@@ -87,7 +87,7 @@ export function t(key: string, fallback?: string): string {
     }
   }
 
-  return typeof value === "string" ? value : fallback || key;
+  return typeof value === 'string' ? value : fallback || key;
 }
 
 // Additional exports for compatibility
@@ -110,4 +110,4 @@ export {
   getLanguageName,
   isRTLLanguage,
   getLanguageDirection,
-} from "@/lib/language";
+} from '@/lib/language';

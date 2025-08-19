@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import React, { useEffect, useRef, useState } from "react";
-import { HeroSection } from "@/components/landing/HeroSection";
-import { FeaturesSection } from "@/components/landing/FeaturesSection";
-import { StatsSection } from "@/components/landing/StatsSection";
-import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
-import { CTASection } from "@/components/landing/CTASection";
-import LanguageStore from "@/stores/useLanguage";
-import { PageProps } from "@/hooks/useLanguageParam";
+import React, { useEffect, useRef, useState } from 'react';
+import { HeroSection } from '@/components/landing/HeroSection';
+import { FeaturesSection } from '@/components/landing/FeaturesSection';
+import { StatsSection } from '@/components/landing/StatsSection';
+import { TestimonialsSection } from '@/components/landing/TestimonialsSection';
+import { CTASection } from '@/components/landing/CTASection';
+import LanguageStore from '@/stores/useLanguage';
+import { PageProps } from '@/hooks/useLanguageParam';
 
 const HomePage: React.FC<PageProps> = ({ params }) => {
   const { language } = LanguageStore();
@@ -29,7 +29,7 @@ const HomePage: React.FC<PageProps> = ({ params }) => {
     setIsClient(true);
 
     // Particle setup - only on client side
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       const arr: {
         x: number;
         y: number;
@@ -51,8 +51,8 @@ const HomePage: React.FC<PageProps> = ({ params }) => {
 
     // Animate particles
     const animateParticles = () => {
-      setParticles((prev) =>
-        prev.map((particle) => ({
+      setParticles(prev =>
+        prev.map(particle => ({
           ...particle,
           y: particle.y - particle.speed,
           opacity: particle.y > 0 ? particle.opacity : 0,
@@ -64,8 +64,8 @@ const HomePage: React.FC<PageProps> = ({ params }) => {
 
     // Animate stats when in view
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      entries => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             // Animate counters
             let currentUser = 0;
@@ -82,9 +82,7 @@ const HomePage: React.FC<PageProps> = ({ params }) => {
             const timer = setInterval(() => {
               currentUser += Math.ceil(targetUser / (duration / increment));
               currentQuest += Math.ceil(targetQuest / (duration / increment));
-              currentSuccess += Math.ceil(
-                targetSuccess / (duration / increment),
-              );
+              currentSuccess += Math.ceil(targetSuccess / (duration / increment));
 
               if (currentUser >= targetUser) {
                 currentUser = targetUser;

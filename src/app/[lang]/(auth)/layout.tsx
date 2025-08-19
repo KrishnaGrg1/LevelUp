@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { Toaster } from "sonner";
-import TopBar from "@/components/auth/TopBar";
-import useLanguage from "@/stores/useLanguage";
+import React, { useEffect, useState } from 'react';
+import { Toaster } from 'sonner';
+import TopBar from '@/components/auth/TopBar';
+import useLanguage from '@/stores/useLanguage';
 
 type Particle = {
   x: number;
@@ -13,11 +13,7 @@ type Particle = {
   opacity: number;
 };
 
-export default function AuthLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AuthLayout({ children }: { children: React.ReactNode }) {
   const { language } = useLanguage();
 
   const [particles, setParticles] = useState<Particle[]>([]);
@@ -26,7 +22,7 @@ export default function AuthLayout({
   useEffect(() => {
     setIsClient(true);
 
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       const arr: Particle[] = [];
       for (let i = 0; i < 30; i++) {
         arr.push({
@@ -41,8 +37,8 @@ export default function AuthLayout({
     }
 
     const interval = setInterval(() => {
-      setParticles((prev) =>
-        prev.map((p) => ({
+      setParticles(prev =>
+        prev.map(p => ({
           ...p,
           y: p.y - p.speed,
           opacity: p.y > 0 ? p.opacity : 0,
@@ -79,7 +75,7 @@ export default function AuthLayout({
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
         <div
           className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-gradient-to-r from-purple-500/15 to-pink-500/15 rounded-full blur-2xl animate-pulse"
-          style={{ animationDelay: "1s" }}
+          style={{ animationDelay: '1s' }}
         ></div>
 
         {/* Navigation and brand handled by TopBar */}

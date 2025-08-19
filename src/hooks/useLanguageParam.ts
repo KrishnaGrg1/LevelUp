@@ -1,6 +1,6 @@
-import { use } from "react";
-import { Language } from "@/stores/useLanguage";
-import { validateLanguage } from "@/lib/language";
+import { use } from 'react';
+import { Language } from '@/stores/useLanguage';
+import { validateLanguage } from '@/lib/language';
 
 /**
  * Custom hook to extract and validate language from Next.js params

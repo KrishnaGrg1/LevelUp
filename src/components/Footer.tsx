@@ -1,5 +1,5 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
 const Footer: React.FC = () => {
   return (
@@ -11,8 +11,7 @@ const Footer: React.FC = () => {
               Level Up
             </h3>
             <p className="text-slate-400 text-sm">
-              Transform your life through gamified goal achievement and habit
-              building.
+              Transform your life through gamified goal achievement and habit building.
             </p>
           </div>
           <div>
@@ -128,26 +127,15 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="border-t border-slate-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-slate-500 text-sm">
-            © 2024 Level Up. All rights reserved.
-          </p>
+          <p className="text-slate-500 text-sm">© 2024 Level Up. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link
-              href="#"
-              className="text-slate-500 hover:text-white transition-colors text-sm"
-            >
+            <Link href="#" className="text-slate-500 hover:text-white transition-colors text-sm">
               Privacy Policy
             </Link>
-            <Link
-              href="#"
-              className="text-slate-500 hover:text-white transition-colors text-sm"
-            >
+            <Link href="#" className="text-slate-500 hover:text-white transition-colors text-sm">
               Terms of Service
             </Link>
-            <Link
-              href="#"
-              className="text-slate-500 hover:text-white transition-colors text-sm"
-            >
+            <Link href="#" className="text-slate-500 hover:text-white transition-colors text-sm">
               Cookie Policy
             </Link>
           </div>
