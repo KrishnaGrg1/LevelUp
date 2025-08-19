@@ -62,6 +62,102 @@
       "description": "Utilisateurs qui maintiennent leurs habitudes"
     }
   ]
-}
+},
+
+  "about": {
+    "hero": {
+      "badge": "Notre Histoire",
+      "titleLine1": "Transformer des vies",
+      "titleLine2": "Une quête à la fois",
+      "description": "Nous croyons que chacun a le potentiel d'améliorer sa vie. Level Up est né de l'idée que réaliser vos objectifs devrait ressembler à une aventure épique, pas à une corvée ennuyante."
+    },
+    "stats": {
+      "title": "Notre Parcours en Chiffres",
+      "description": "D'une petite start‑up à une communauté mondiale d'aventuriers du développement personnel",
+      "founded": {
+        "label": "Fondée",
+        "description": "Notre aventure a commencé"
+      },
+      "team": {
+        "label": "Membres de l'équipe",
+        "description": "Aventuriers passionnés"
+      },
+      "countries": {
+        "label": "Pays desservis",
+        "description": "Communauté mondiale"
+      },
+      "milestones": {
+        "label": "Étapes franchies",
+        "description": "Objectifs atteints ensemble"
+      }
+    },
+    "mission": {
+      "title": "Notre Mission",
+      "description": "Gamifier le développement personnel et rendre la réalisation de ses objectifs de vie aussi captivante que jouer à son jeu préféré.",
+      "items": [
+        {
+          "title": "Atteinte d'objectifs",
+          "description": "Transformez vos rêves en quêtes réalisables avec des étapes claires et un suivi de progrès gratifiant."
+        },
+        {
+          "title": "Pouvoir de la communauté",
+          "description": "Rejoignez une communauté de soutien d'aventuriers qui célèbrent vos victoires et vous aident à surmonter les défis."
+        },
+        {
+          "title": "Expérience ludifiée",
+          "description": "Montez de niveau dans votre vie avec des points d'expérience, des accomplissements et des récompenses qui rendent le développement personnel addictif."
+        }
+      ]
+    },
+    "values": {
+      "title": "Nos Valeurs",
+      "description": "Les principes qui guident tout ce que nous faisons chez Level Up.",
+      "items": [
+        {
+          "title": "Le progrès avant la perfection",
+          "description": "Nous croyons que des petits pas réguliers mènent à des transformations extraordinaires. Chaque quête accomplie est une victoire qu'il faut célébrer."
+        },
+        {
+          "title": "La communauté d'abord",
+          "description": "La croissance personnelle est meilleure ensemble. Nous favorisons un environnement solidaire où chacun peut s'épanouir et aider les autres à réussir."
+        },
+        {
+          "title": "Confidentialité & Sécurité",
+          "description": "Votre parcours personnel est sacré. Nous protégeons vos données avec une sécurité de niveau entreprise et ne compromette jamais votre vie privée."
+        },
+        {
+          "title": "Innovation & Fun",
+          "description": "Nous innovons constamment pour rendre le développement personnel plus engageant, efficace et amusant que jamais."
+        }
+      ]
+    },
+    "team": {
+      "title": "Rencontrez l'équipe",
+      "description": "Les aventuriers passionnés derrière Level Up qui se consacrent à vous aider à améliorer votre vie.",
+      "members": [
+        {
+          "name": "Alex Chen",
+          "role": "Co-fondateur & PDG",
+          "bio": "Ancien game designer devenu passionné de développement de vie. Il croit que chacun mérite d'être le héros de sa propre histoire."
+        },
+        {
+          "name": "Sarah Rodriguez",
+          "role": "Co-fondatrice & CTO",
+          "bio": "Sorcelleuse de la tech passionnée par la création d'outils qui rendent vraiment la vie meilleure. Plus de 15 ans dans le développement produit."
+        },
+        {
+          "name": "Marcus Johnson",
+          "role": "Responsable produit",
+          "bio": "Designer UX obsédé qui a transformé ses propres difficultés de productivité en fonctionnalités que vous adorez dans Level Up."
+        }
+      ],
+      "cta": {
+        "badge": "Nous grandissons",
+        "title": "Envie de rejoindre notre aventure ?",
+        "description": "Nous recherchons toujours des personnes passionnées qui partagent notre vision de rendre le développement personnel amusant et engageant.",
+        "button": "Voir les postes disponibles"
+      }
+    }
+  }
 
 }

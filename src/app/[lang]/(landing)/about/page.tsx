@@ -16,7 +16,7 @@ import {
   ArrowRight,
   Star,
 } from "lucide-react";
-
+import { t } from "@/translations/index";
 interface AboutPageProps {
   params: Promise<{ lang: string }>;
 }
@@ -164,27 +164,25 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
           <div className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-full border border-indigo-500/20 mb-8 animate-float">
             <Heart className="w-4 h-4 text-indigo-400" />
             <span className="text-indigo-300 text-sm font-medium">
-              Our Story
+              {t('landing.about.hero.badge')}
             </span>
           </div>
 
           <h1 className="text-6xl md:text-7xl font-black mb-8 leading-tight">
             <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-shift">
-              Transforming Lives
+              {t('landing.about.hero.titleLine1')}
             </span>
             <br />
             <span
               className="bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-gradient-shift"
               style={{ animationDelay: "0.5s" }}
             >
-              One Quest at a Time
+              {t('landing.about.hero.titleLine2')}
             </span>
           </h1>
 
           <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed mb-12">
-            We believe that everyone has the potential to level up their life.
-            Level Up was born from the idea that achieving your goals should
-            feel like an epic adventure, not a boring chore.
+            {t('landing.about.hero.description')}
           </p>
 
           {/* Scroll Indicator */}
@@ -206,10 +204,10 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
           <div className="mb-16">
             <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Our Journey in Numbers
+              {t('landing.about.stats.title')}
             </h2>
             <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-              From a small startup to a global community of life-leveling
-              adventurers
+              {t('landing.about.stats.description')}
             </p>
           </div>
 
@@ -223,20 +221,20 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
               },
               {
                 count: teamSize,
-                label: "Team Members",
-                description: "Passionate adventurers",
+                label: 'landing.about.stats.team.label',
+                description: 'landing.about.stats.team.description',
                 suffix: "+",
               },
               {
                 count: countriesServed,
-                label: "Countries",
-                description: "Global community",
+                label: 'landing.about.stats.countries.label',
+                description: 'landing.about.stats.countries.description',
                 suffix: "+",
               },
               {
                 count: milestonesAchieved,
-                label: "Milestones",
-                description: "Goals achieved together",
+                label: 'landing.about.stats.milestones.label',
+                description: 'landing.about.stats.milestones.description',
                 suffix: "+",
               },
             ].map((stat, index) => (
@@ -251,9 +249,9 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
                     {stat.suffix}
                   </div>
                   <p className="text-slate-300 text-lg font-medium mb-2">
-                    {stat.label}
+                    {t(stat.label)}
                   </p>
-                  <p className="text-slate-500 text-sm">{stat.description}</p>
+                  <p className="text-slate-500 text-sm">{t(stat.description)}</p>
                 </div>
               </div>
             ))}
@@ -266,11 +264,10 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
         <div className="relative mx-auto max-w-6xl px-6 z-10">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-              Our Mission
+              {t('landing.about.mission.title')}
             </h2>
             <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-              To gamify personal development and make achieving life goals as
-              engaging as playing your favorite game.
+              {t('landing.about.mission.description')}
             </p>
           </div>
 
@@ -278,24 +275,24 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
             {[
               {
                 icon: Target,
-                title: "Goal Achievement",
+                title: 'landing.about.mission.items.0.title',
                 description:
-                  "Transform your dreams into achievable quests with clear milestones and rewarding progress tracking.",
-                color: "from-purple-500 to-pink-500",
+                  'landing.about.mission.items.0.description',
+                color: 'from-purple-500 to-pink-500',
               },
               {
                 icon: Users,
-                title: "Community Power",
+                title: 'landing.about.mission.items.1.title',
                 description:
-                  "Join a supportive community of adventurers who celebrate your wins and help you overcome challenges.",
-                color: "from-indigo-500 to-purple-500",
+                  'landing.about.mission.items.1.description',
+                color: 'from-indigo-500 to-purple-500',
               },
               {
                 icon: Trophy,
-                title: "Gamified Experience",
+                title: 'landing.about.mission.items.2.title',
                 description:
-                  "Level up your life with XP points, achievements, and rewards that make personal growth addictively fun.",
-                color: "from-yellow-500 to-orange-500",
+                  'landing.about.mission.items.2.description',
+                color: 'from-yellow-500 to-orange-500',
               },
             ].map((mission, index) => (
               <div
@@ -310,10 +307,10 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
                     <mission.icon className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-4">
-                    {mission.title}
+                    {t(mission.title)}
                   </h3>
                   <p className="text-slate-400 leading-relaxed">
-                    {mission.description}
+                    {t(mission.description)}
                   </p>
                 </div>
               </div>
@@ -327,10 +324,10 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
         <div className="relative mx-auto max-w-6xl px-6 z-10">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
-              Our Values
+              {t('landing.about.values.title')}
             </h2>
             <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-              The principles that guide everything we do at Level Up.
+              {t('landing.about.values.description')}
             </p>
           </div>
 
@@ -338,30 +335,29 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
             {[
               {
                 icon: CheckCircle,
-                title: "Progress Over Perfection",
+                title: "landing.about.values.items.0.title",
                 description:
-                  "We believe that consistent small steps lead to extraordinary transformations. Every quest completed is a victory worth celebrating.",
-                color: "from-green-500 to-emerald-500",
+                  "landing.about.values.items.0.description",
               },
               {
                 icon: Users,
-                title: "Community First",
+                title: "landing.about.values.items.1.title",
                 description:
-                  "Personal growth is better together. We foster a supportive environment where everyone can thrive and help others succeed.",
+                  "landing.about.values.items.1.description",
                 color: "from-blue-500 to-indigo-500",
               },
               {
                 icon: Shield,
-                title: "Privacy & Security",
+                title: "landing.about.values.items.2.title",
                 description:
-                  "Your personal journey is sacred. We protect your data with enterprise-grade security and never compromise your privacy.",
+                  "landing.about.values.items.2.description",
                 color: "from-purple-500 to-pink-500",
               },
               {
                 icon: Zap,
-                title: "Innovation & Fun",
+                title: "landing.about.values.items.3.title",
                 description:
-                  "We constantly innovate to make personal development more engaging, effective, and enjoyable than ever before.",
+                  "landing.about.values.items.3.description",
                 color: "from-yellow-500 to-orange-500",
               },
             ].map((value, index) => (
@@ -373,10 +369,10 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-white mb-4">
-                    {value.title}
+                    {t(value.title)}
                   </h3>
                   <p className="text-slate-400 leading-relaxed">
-                    {value.description}
+                    {t(value.description)}
                   </p>
                 </div>
               </div>
@@ -390,36 +386,35 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
         <div className="relative mx-auto max-w-6xl px-6 z-10">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-transparent">
-              Meet the Team
+              {t('landing.about.team.title')}
             </h2>
             <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-              The passionate adventurers behind Level Up who are dedicated to
-              helping you level up your life.
+              {t('landing.about.team.description')}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {[
               {
-                name: "Alex Chen",
-                role: "Co-Founder & CEO",
+                name: "landing.about.team.members.0.name",
+                role: "landing.about.team.members.0.role",
                 avatar: "AC",
                 color: "from-indigo-500 to-purple-500",
-                bio: "Former game designer turned life-leveling enthusiast. Believes everyone deserves to be the hero of their own story.",
+                bio: "landing.about.team.members.0.bio",
               },
               {
-                name: "Sarah Rodriguez",
-                role: "Co-Founder & CTO",
+                name: "landing.about.team.members.1.name",
+                role: "landing.about.team.members.1.role",
                 avatar: "SR",
                 color: "from-purple-500 to-pink-500",
-                bio: "Tech wizard with a passion for building tools that actually make life better. 15+ years in product development.",
+                bio: "landing.about.team.members.1.bio",
               },
               {
-                name: "Marcus Johnson",
-                role: "Head of Product",
+                name: "landing.about.team.members.2.name",
+                role: "landing.about.team.members.2.role",
                 avatar: "MJ",
                 color: "from-pink-500 to-indigo-500",
-                bio: "UX obsessed designer who turned his own productivity struggles into the features you love in Level Up.",
+                bio: "landing.about.team.members.2.bio",
               },
             ].map((member, index) => (
               <div
@@ -435,13 +430,13 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
                     </span>
                   </div>
                   <h3 className="text-xl font-bold text-white mb-2">
-                    {member.name}
+                    {t(member.name)}
                   </h3>
                   <p className="text-purple-400 font-medium mb-4">
-                    {member.role}
+                    {t(member.role)}
                   </p>
                   <p className="text-slate-400 text-sm leading-relaxed">
-                    {member.bio}
+                    {t(member.bio)}
                   </p>
                 </div>
               </div>
@@ -453,21 +448,20 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
             <div className="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-full border border-indigo-500/20 mb-6">
               <Star className="w-5 h-5 text-indigo-400" />
               <span className="text-indigo-300 font-medium">
-                We&apos;re Growing
+                {t('landing.about.team.cta.badge')}
               </span>
             </div>
             <h3 className="text-3xl font-bold text-white mb-4">
-              Want to Join Our Adventure?
+              {t('landing.about.team.cta.title')}
             </h3>
             <p className="text-slate-400 mb-8 max-w-2xl mx-auto">
-              We&apos;re always looking for passionate individuals who share our
-              vision of making personal growth fun and engaging.
+              {t('landing.about.team.cta.description')}
             </p>
             <Link
               href={`/${language}/contact`}
               className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25"
             >
-              <span>View Open Positions</span>
+              <span>{t('landing.about.team.cta.button')}</span>
               <ArrowRight className="w-5 h-5" />
             </Link>
           </div>

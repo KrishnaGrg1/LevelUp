@@ -62,5 +62,100 @@
       "description": "Usuarios que mantienen sus hábitos"
     }
   ]
-}
+},
+  "about": {
+    "hero": {
+      "badge": "Nuestra historia",
+      "titleLine1": "Transformando vidas",
+      "titleLine2": "Una misión a la vez",
+      "description": "Creemos que todo el mundo tiene el potencial para mejorar su vida. Level Up nació de la idea de que alcanzar tus objetivos debería sentirse como una aventura épica, no como una tarea aburrida."
+    },
+    "stats": {
+      "title": "Nuestro camino en números",
+      "description": "De una pequeña startup a una comunidad global de aventureros del desarrollo personal",
+      "founded": {
+        "label": "Fundado",
+        "description": "Nuestra aventura comenzó aquí"
+      },
+      "team": {
+        "label": "Miembros del equipo",
+        "description": "Aventureros apasionados"
+      },
+      "countries": {
+        "label": "Países",
+        "description": "Comunidad global"
+      },
+      "milestones": {
+        "label": "Hitos",
+        "description": "Metas alcanzadas juntos"
+      }
+    },
+    "mission": {
+      "title": "Nuestra misión",
+      "description": "Gamificar el desarrollo personal y hacer que alcanzar metas vitales sea tan atractivo como jugar tu juego favorito.",
+      "items": [
+        {
+          "title": "Cumplimiento de objetivos",
+          "description": "Convierte tus sueños en misiones alcanzables con hitos claros y un seguimiento gratificante."
+        },
+        {
+          "title": "Poder comunitario",
+          "description": "Únete a una comunidad de apoyo de aventureros que celebran tus triunfos y te ayudan a superar desafíos."
+        },
+        {
+          "title": "Experiencia gamificada",
+          "description": "Mejora tu vida con puntos de experiencia, logros y recompensas que hacen del crecimiento personal algo adictivo."
+        }
+      ]
+    },
+    "values": {
+      "title": "Nuestros valores",
+      "description": "Los principios que guían todo lo que hacemos en Level Up.",
+      "items": [
+        {
+          "title": "Progreso sobre perfección",
+          "description": "Creemos que los pasos pequeños y constantes conducen a transformaciones extraordinarias. Cada misión completada es una victoria que merece celebración."
+        },
+        {
+          "title": "Primero comunidad",
+          "description": "El crecimiento personal mejora cuando se comparte. Fomentamos un entorno de apoyo donde todos pueden prosperar y ayudar a otros a triunfar."
+        },
+        {
+          "title": "Privacidad y seguridad",
+          "description": "Tu viaje personal es sagrado. Protegemos tus datos con seguridad de nivel empresarial y nunca comprometemos tu privacidad."
+        },
+        {
+          "title": "Innovación y diversión",
+          "description": "Innovamos constantemente para hacer que el crecimiento personal sea más atractivo, efectivo y divertido que nunca."
+        }
+      ]
+    },
+    "team": {
+      "title": "Conoce al equipo",
+      "description": "Los aventureros apasionados detrás de Level Up que se dedican a ayudarte a mejorar tu vida.",
+      "members": [
+        {
+          "name": "Alex Chen",
+          "role": "Co‑fundador y CEO",
+          "bio": "Ex‑diseñador de juegos convertido en entusiasta del crecimiento personal. Cree que todos merecen ser el héroe de su propia historia."
+        },
+        {
+          "name": "Sarah Rodriguez",
+          "role": "Co‑fundadora y CTO",
+          "bio": "Hechicera tecnológica con pasión por construir herramientas que realmente mejoran la vida. Más de 15 años en desarrollo de producto."
+        },
+        {
+          "name": "Marcus Johnson",
+          "role": "Director de producto",
+          "bio": "Diseñador obsesionado por la UX que transformó sus propias luchas de productividad en las funciones que amas de Level Up."
+        }
+      ],
+      "cta": {
+        "badge": "Estamos creciendo",
+        "title": "¿Quieres unirte a nuestra aventura?",
+        "description": "Siempre buscamos personas apasionadas que compartan nuestra visión de hacer el crecimiento personal divertido y atractivo.",
+        "button": "Ver posiciones abiertas"
+      }
+    }
+  }
 }
