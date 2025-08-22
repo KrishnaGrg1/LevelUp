@@ -157,5 +157,92 @@
         "button": "Ver posiciones abiertas"
       }
     }
+  },
+  "contact": {
+    "heroSection": {
+      "badge": "Ponte en contacto",
+      "title1": "Empecemos",
+      "title2": "Tu viaje",
+      "description": "¿Tienes preguntas sobre Level Up? ¿Necesitas ayuda para comenzar? Nuestro equipo de guías de aventura está aquí para ayudarte a impulsar tu vida."
+    },
+    "contactOptions": {
+      "title": "Elige tu método de contacto",
+      "description": "Estamos aquí para ayudarte de la manera que mejor te funcione.",
+      "email": {
+        "title": "Soporte por correo electrónico",
+        "desc": "Obtén respuestas detalladas a tus preguntas",
+        "contact": "hello@levelup.app",
+        "response": "Respuesta en 24 horas"
+      },
+      "chat": {
+        "title": "Chat en vivo",
+        "desc": "Ayuda instantánea cuando la necesites",
+        "contact": "Disponible de 9 AM a 6 PM PST",
+        "response": "Respuesta inmediata"
+      },
+      "phone": {
+        "title": "Soporte telefónico",
+        "desc": "Habla directamente con nuestro equipo",
+        "contact": "+1 (555) 123‑4567",
+        "response": "Disponible de lunes a viernes"
+      }
+    },
+    "form": {
+      "title": "Envíanos un mensaje",
+      "description": "Completa el formulario a continuación y te responderemos lo antes posible.",
+      "name": "Nombre completo *",
+      "email": "Correo electrónico *",
+      "type": "Tipo de consulta",
+      "subject": "Asunto *",
+      "message": "Mensaje *",
+      "send": "Enviar mensaje",
+      "placeholderName": "Ingresa tu nombre completo",
+      "placeholderEmail": "Ingresa tu correo electrónico",
+      "placeholderSubject": "Asunto breve",
+      "placeholderMessage": "Cuéntanos cómo podemos ayudarte…",
+      "select": {
+        "default": "Selecciona una opción",
+        "general": "Consulta general",
+        "support": "Solicitud de soporte",
+        "billing": "Facturación y precios",
+        "enterprise": "Soluciones empresariales",
+        "feedback": "Comentarios/Sugerencias",
+        "partnership": "Oportunidades de asociación",
+        "other": "Otro"
+      }
+    },
+    "office": {
+      "title": "Visita nuestra sede",
+      "description": "Pasa por nuestra sede, toma un café y charlemos sobre tus metas.",
+      "location": "Oficina en Pokhara",
+      "address": "Lakeside\nPokhara, Nepal 33700\nNepal",
+      "hours": "Horario de oficina",
+      "hoursDetail": "Lunes – Viernes: 9:00 AM – 6:00 PM PST\nSábado: 10:00 AM – 4:00 PM PST\nDomingo: Cerrado",
+      "expect": "Qué esperar",
+      "expectDetail": "Café, snacks y un equipo amistoso listo para ayudarte a impulsar tu vida. ¡No necesitas cita para preguntas rápidas!",
+      "map": "Mapa interactivo próximamente"
+    },
+    "faq": {
+      "title": "Respuestas rápidas",
+      "description": "Encuentra respuestas a las preguntas más comunes sobre cómo empezar con Level Up.",
+      "items": [
+        {
+          "q": "¿Qué tan rápido puedo comenzar?",
+          "a": "¡Puedes crear tu cuenta y comenzar tu primera misión en menos de 2 minutos! Nuestro proceso de incorporación está diseñado para que comiences de inmediato."
+        },
+        {
+          "q": "¿Ofrecen sesiones de capacitación?",
+          "a": "¡Sí! Ofrecemos sesiones de incorporación gratis para nuevos usuarios y capacitación integral para equipos. Puedes programar una a través de nuestro formulario de contacto."
+        },
+        {
+          "q": "¿Y si necesito funciones personalizadas?",
+          "a": "¡Nos encanta crear soluciones a medida! Contáctanos para hablar de tus necesidades específicas y elaboraremos un plan personalizado."
+        },
+        {
+          "q": "¿Cómo puedo enviar comentarios?",
+          "a": "¡Siempre estamos ansiosos por escuchar a nuestra comunidad! Usa el formulario de comentarios en la app, escríbenos un correo o únete a nuestra comunidad de Discord para conversaciones en tiempo real."
+        }
+      ]
+    }
   }
 }

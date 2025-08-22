@@ -158,5 +158,92 @@
         "button": "查看招聘职位"
       }
     }
+  },
+  "contact": {
+    "heroSection": {
+      "badge": "联系我们",
+      "title1": "让我们开始",
+      "title2": "你的旅程",
+      "description": "对 Level Up 有疑问？需要帮助入门？我们的冒险指南团队在这里帮助你提升生活。"
+    },
+    "contactOptions": {
+      "title": "选择联系方式",
+      "description": "我们愿意以最适合你的方式提供帮助。",
+      "email": {
+        "title": "电子邮件支持",
+        "desc": "获取对问题的详细解答",
+        "contact": "hello@levelup.app",
+        "response": "24 小时内回复"
+      },
+      "chat": {
+        "title": "实时聊天",
+        "desc": "你需要时立即帮助",
+        "contact": "PST 时间 9:00 AM - 6:00 PM",
+        "response": "即时回复"
+      },
+      "phone": {
+        "title": "电话支持",
+        "desc": "直接与我们团队通话",
+        "contact": "+1 (555) 123‑4567",
+        "response": "周一至周五可用"
+      }
+    },
+    "form": {
+      "title": "给我们留言",
+      "description": "填写下面的表格，我们会尽快回复你。",
+      "name": "全名 *",
+      "email": "电子邮箱 *",
+      "type": "咨询类型",
+      "subject": "主题 *",
+      "message": "留言 *",
+      "send": "发送留言",
+      "placeholderName": "输入你的全名",
+      "placeholderEmail": "输入你的邮箱",
+      "placeholderSubject": "简要主题",
+      "placeholderMessage": "告诉我们如何帮助你...",
+      "select": {
+        "default": "请选择",
+        "general": "一般咨询",
+        "support": "支持请求",
+        "billing": "账单与定价",
+        "enterprise": "企业解决方案",
+        "feedback": "反馈/建议",
+        "partnership": "合作机会",
+        "other": "其他"
+      }
+    },
+    "office": {
+      "title": "访问我们的总部",
+      "description": "亲临我们总部，一起喝咖啡，聊聊你的目标。",
+      "location": "博卡拉办事处",
+      "address": "Lakeside\n波卡拉，尼泊尔 33700\n尼泊尔",
+      "hours": "办公时间",
+      "hoursDetail": "周一 – 周五：PST 时间 9:00 AM - 6:00 PM\n周六：10:00 AM - 4:00 PM PST\n周日：休息",
+      "expect": "你可以期待",
+      "expectDetail": "咖啡、零食，以及随时为你提供帮助的友好团队。快速问题无需预约！",
+      "map": "互动地图敬请期待"
+    },
+    "faq": {
+      "title": "常见问题",
+      "description": "查找关于开始使用 Level Up 的常见问题答案。",
+      "items": [
+        {
+          "q": "我能多快开始？",
+          "a": "你可以在不到两分钟内创建账号并开始你的第一个任务！我们的入门流程旨在让你立即参与。"
+        },
+        {
+          "q": "你们提供培训课程吗？",
+          "a": "是的！我们为新用户提供免费入门培训，并为团队提供全面培训。通过联系我们的表单预约吧。"
+        },
+        {
+          "q": "如果我需要定制功能怎么办？",
+          "a": "我们喜欢构建定制方案！请联系我们的企业团队，讨论你的具体需求，我们将制定专属计划。"
+        },
+        {
+          "q": "我该如何提供反馈？",
+          "a": "我们始终欢迎用户社区的反馈！可以在应用中使用反馈表单、发送电子邮件，或加入我们的 Discord 社区实时讨论。"
+        }
+      ]
+    }
   }
 }

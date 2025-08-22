@@ -158,5 +158,92 @@
         "button": "Voir les postes disponibles"
       }
     }
+  },
+  "contact": {
+    "heroSection": {
+      "badge": "Contactez‑nous",
+      "title1": "Commençons",
+      "title2": "Votre parcours",
+      "description": "Des questions sur Level Up ? Besoin d'aide pour démarrer ? Notre équipe de guides d'aventure est là pour vous aider à faire évoluer votre vie."
+    },
+    "contactOptions": {
+      "title": "Choisissez votre mode de contact",
+      "description": "Nous sommes là pour vous aider de la manière qui vous convient le mieux.",
+      "email": {
+        "title": "Support par e‑mail",
+        "desc": "Obtenez des réponses détaillées à vos questions",
+        "contact": "hello@levelup.app",
+        "response": "Réponse sous 24 h"
+      },
+      "chat": {
+        "title": "Chat en direct",
+        "desc": "Aide instantanée quand vous en avez besoin",
+        "contact": "Disponible de 9 h à 18 h PST",
+        "response": "Réponse instantanée"
+      },
+      "phone": {
+        "title": "Support téléphonique",
+        "desc": "Parlez directement avec notre équipe",
+        "contact": "+1 (555) 123‑4567",
+        "response": "Disponible du lundi au vendredi"
+      }
+    },
+    "form": {
+      "title": "Envoyez‑nous un message",
+      "description": "Remplissez le formulaire ci‑dessous et nous vous répondrons dès que possible.",
+      "name": "Nom complet *",
+      "email": "Adresse e‑mail *",
+      "type": "Type de demande",
+      "subject": "Sujet *",
+      "message": "Message *",
+      "send": "Envoyer le message",
+      "placeholderName": "Entrez votre nom complet",
+      "placeholderEmail": "Entrez votre e‑mail",
+      "placeholderSubject": "Objet succinct",
+      "placeholderMessage": "Dites‑nous comment nous pouvons vous aider...",
+      "select": {
+        "default": "Sélectionnez une option",
+        "general": "Demande générale",
+        "support": "Demande de support",
+        "billing": "Facturation & Tarification",
+        "enterprise": "Solutions entreprises",
+        "feedback": "Retour / Suggestions",
+        "partnership": "Opportunités de partenariat",
+        "other": "Autre"
+      }
+    },
+    "office": {
+      "title": "Visitez notre siège",
+      "description": "Passez à notre siège pour un café et échangeons sur vos objectifs.",
+      "location": "Bureau de Pokhara",
+      "address": "Lakeside\nPokhara, Népal 33700\nNépal",
+      "hours": "Heures d’ouverture",
+      "hoursDetail": "Lundi – Vendredi : 9h00 – 18h00 PST\nSamedi : 10h00 – 16h00 PST\nDimanche : Fermé",
+      "expect": "À quoi s'attendre",
+      "expectDetail": "Café, snacks, et une équipe amicale prête à vous aider à améliorer votre vie. Pas besoin de rendez-vous pour des questions rapides !",
+      "map": "Carte interactive bientôt disponible"
+    },
+    "faq": {
+      "title": "Réponses rapides",
+      "description": "Trouvez des réponses aux questions les plus fréquentes sur le démarrage avec Level Up.",
+      "items": [
+        {
+          "q": "À quelle vitesse puis‑je commencer ?",
+          "a": "Vous pouvez créer votre compte et lancer votre première quête en moins de 2 minutes ! Notre processus d’intégration est conçu pour vous faire démarrer immédiatement."
+        },
+        {
+          "q": "Proposez‑vous des sessions de formation ?",
+          "a": "Oui ! Nous proposons des sessions d’accueil gratuites pour les nouveaux utilisateurs et des formations approfondies pour les équipes. Programmez‑en une via notre formulaire de contact."
+        },
+        {
+          "q": "Et si j’ai besoin de fonctionnalités personnalisées ?",
+          "a": "Nous adorons créer des solutions sur mesure ! Contactez notre équipe entreprise pour discuter du sur‑mesure et nous établirons un plan personnalisé."
+        },
+        {
+          "q": "Comment fournir un retour ?",
+          "a": "Nous sommes toujours ravis d’avoir des retours de notre communauté ! Utilisez le formulaire de feedback dans l’application, écrivez‑nous, ou rejoignez notre communauté Discord pour des discussions en temps réel."
+        }
+      ]
+    }
   }
 }

@@ -195,5 +195,92 @@
         "button": "View Open Positions"
       }
     }
+  },
+  "contact": {
+    "heroSection": {
+      "badge": "Get in Touch",
+      "title1": "Let's Start",
+      "title2": "Your Journey",
+      "description": "Have questions about Level Up? Need help getting started? Our team of adventure guides is here to help you level up your life."
+    },
+    "contactOptions": {
+      "title": "Choose Your Contact Method",
+      "description": "We're here to help in whatever way works best for you.",
+      "email": {
+        "title": "Email Support",
+        "desc": "Get detailed answers to your questions",
+        "contact": "hello@levelup.app",
+        "response": "Response within 24 hours"
+      },
+      "chat": {
+        "title": "Live Chat",
+        "desc": "Instant help when you need it",
+        "contact": "Available 9 AM - 6 PM PST",
+        "response": "Instant response"
+      },
+      "phone": {
+        "title": "Phone Support",
+        "desc": "Talk directly with our team",
+        "contact": "+1 (555) 123-4567",
+        "response": "Available Mon-Fri"
+      }
+    },
+    "form": {
+      "title": "Send Us a Message",
+      "description": "Fill out the form below and we'll get back to you as soon as possible.",
+      "name": "Full Name *",
+      "email": "Email Address *",
+      "type": "Inquiry Type",
+      "subject": "Subject *",
+      "message": "Message *",
+      "send": "Send Message",
+      "placeholderName": "Enter your full name",
+      "placeholderEmail": "Enter your email",
+      "placeholderSubject": "Brief subject line",
+      "placeholderMessage": "Tell us how we can help...",
+      "select": {
+        "default": "Select an option",
+        "general": "General Inquiry",
+        "support": "Support Request",
+        "billing": "Billing & Pricing",
+        "enterprise": "Enterprise Solutions",
+        "feedback": "Feedback/Suggestions",
+        "partnership": "Partnership Opportunities",
+        "other": "Other"
+      }
+    },
+    "office": {
+      "title": "Visit Our HQ",
+      "description": "Stop by our headquarters for a coffee and chat about your goals.",
+      "location": "Pokhara Office",
+      "address": "Lakeside\nPokhara, Nepal 33700\nNepal",
+      "hours": "Office Hours",
+      "hoursDetail": "Monday - Friday: 9:00 AM - 6:00 PM PST\nSaturday: 10:00 AM - 4:00 PM PST\nSunday: Closed",
+      "expect": "What to Expect",
+      "expectDetail": "Coffee, snacks, and a friendly team ready to help you level up your life. No appointment necessary for quick questions!",
+      "map": "Interactive Map Coming Soon"
+    },
+    "faq": {
+      "title": "Quick Answers",
+      "description": "Find answers to the most common questions about getting started with Level Up.",
+      "items": [
+        {
+          "q": "How quickly can I get started?",
+          "a": "You can create your account and start your first quest in under 2 minutes! Our onboarding process is designed to get you leveling up immediately."
+        },
+        {
+          "q": "Do you offer training sessions?",
+          "a": "Yes! We offer free onboarding sessions for new users and comprehensive training for teams. Schedule one through our contact form."
+        },
+        {
+          "q": "What if I need custom features?",
+          "a": "We love building custom solutions! Contact our enterprise team to discuss your specific needs and we'll create a tailored plan."
+        },
+        {
+          "q": "How can I provide feedback?",
+          "a": "We're always eager to hear from our community! Use the feedback form in the app, email us, or join our Discord community for real-time discussions."
+        }
+      ]
+    }
   }
 }
