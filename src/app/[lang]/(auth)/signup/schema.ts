@@ -2,7 +2,7 @@
 import { z } from 'zod';
 
 export const registerSchema = z.object({
-  UserName: z
+  username: z
     .string()
     .min(1, { message: 'error.auth.usernameRequired' })
     .min(3, { message: 'error.auth.usernameMinLength' }),

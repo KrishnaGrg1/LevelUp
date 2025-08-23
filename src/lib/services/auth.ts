@@ -4,7 +4,9 @@ import type {
   UserRegisterInput,
   UserLoginInput,
   UserLoginResponse,
-  VerifyOtpInput,
+  UserVerifyInput,
+  UserVerifyResponse,
+  User,
 } from '../generated';
 import { Language } from '@/stores/useLanguage';
 
@@ -28,37 +30,33 @@ export const login = async (data: UserLoginInput, lang: Language) => {
 
 export const registerUser = async (data: UserRegisterInput, lang: Language) => {
   try {
-    const response = await axiosInstance.post<UserRegisterResponse>(
-      `/auth/register`,
-      { data },
-      {
-        headers: {
-          'X-Language': lang,
-        },
+    const response = await axiosInstance.post<UserRegisterResponse>(`/auth/register`, data, {
+      headers: {
+        'X-Language': lang,
       },
-    );
+    });
     return response.data;
   } catch (error: unknown) {
     const err = error as {
-      response?: { data?: { body?: { message?: string }; message?: string } };
+      response?: {
+        data?: { body?: { message?: string; error?: string }; message?: string; error?: string };
+      };
     };
     const errorMessage =
       err.response?.data?.body?.message || err.response?.data?.message || 'Registration failed';
-    throw new Error(errorMessage);
+    const errorDetail = err.response?.data?.body?.error || err.response?.data?.error;
+
+    throw { message: errorMessage, error: errorDetail };
   }
 };
 
-export const VerifyUser = async (data: VerifyOtpInput, lang: Language) => {
+export const VerifyUser = async (data: UserVerifyInput, lang: Language) => {
   try {
-    const response = await axiosInstance.post<UserLoginResponse>(
-      `/auth/verify`,
-      { data },
-      {
-        headers: {
-          'X-Language': lang,
-        },
+    const response = await axiosInstance.post<UserVerifyResponse>(`/auth/verify`, data, {
+      headers: {
+        'X-Language': lang,
       },
-    );
+    });
     return response.data;
   } catch (error: unknown) {
     const err = error as {
@@ -120,5 +118,22 @@ export const resetPasswordWithOtp = async (
       err.response?.data?.message ||
       'Failed to reset password';
     throw new Error(errorMessage);
+  }
+};
+
+export const getCurrentUser = async (lang: Language) => {
+  try {
+    const response = await axiosInstance.get(`/auth/me`, {
+      headers: {
+        'X-Language': lang,
+      },
+    });
+    return response.data;
+  } catch (error: unknown) {
+    const err = error as { response?: { status?: number } };
+    if (err.response?.status === 401) {
+      return null; // Not authenticated
+    }
+    throw error;
   }
 };

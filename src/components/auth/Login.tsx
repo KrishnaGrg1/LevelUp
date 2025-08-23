@@ -20,7 +20,7 @@ import { Eye, EyeOff, User, Mail, Lock } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { t } from '@/translations/index';
-
+import { useRouter } from 'next/navigation';
 type LoginFormData = z.infer<typeof loginSchema>;
 
 interface LoginFormProps {
@@ -30,7 +30,7 @@ interface LoginFormProps {
 export function LoginForm({ lang }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [isClient, setIsClient] = useState(false);
-
+  const router = useRouter();
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -39,7 +39,7 @@ export function LoginForm({ lang }: LoginFormProps) {
     },
   });
 
-  const { setToken, setUser, setAuthenticated } = authStore();
+  const { setUser, setAuthenticated } = authStore();
 
   // Add hydration safety
   useEffect(() => {
@@ -50,16 +50,10 @@ export function LoginForm({ lang }: LoginFormProps) {
     mutationKey: ['login'],
     mutationFn: (data: LoginFormData) => login(data, lang),
     onSuccess: data => {
-      if (setToken) {
-        setToken(data?.body.data.data);
-      }
-      setUser!({
-        id: Number(data?.body.data.id),
-        UserName: data?.body.data.UserName,
-        email: data?.body.data.email,
-      });
+      setUser!(data.body.data);
       setAuthenticated(true);
       toast.success(t('success:login', data?.body.message));
+      router.push(`/${lang}/home`);
     },
     onError: (error: unknown) => {
       const err = error as { message?: string };

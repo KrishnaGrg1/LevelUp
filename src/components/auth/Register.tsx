@@ -26,7 +26,7 @@ import { Eye, EyeOff, User, Mail, Lock } from 'lucide-react';
 import { useState } from 'react';
 import { t } from '@/translations/index';
 import Link from 'next/link';
-
+import { useRouter } from 'next/navigation';
 type RegisterFormData = z.infer<typeof registerSchema>;
 
 interface RegisterFormProps {
@@ -35,11 +35,11 @@ interface RegisterFormProps {
 
 export function RegisterForm({ lang }: RegisterFormProps) {
   const [showPassword, setShowPassword] = useState(false);
-
+  const router = useRouter();
   const form = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      UserName: '',
+      username: '',
       email: '',
       password: '',
     },
@@ -51,16 +51,15 @@ export function RegisterForm({ lang }: RegisterFormProps) {
     mutationKey: ['register'],
     mutationFn: (data: RegisterFormData) => registerUser(data, lang),
     onSuccess: data => {
-      setUser!({
-        id: Number(data.body.data.id),
-        UserName: data.body.data.UserName,
-        email: data.body.data.email,
-      });
-      toast.success(t('success:register', data.body.message));
+      setUser!(data.body.data);
+      toast.success(t('success:register', data?.body.message));
     },
     onError: (error: unknown) => {
-      const err = error as { message?: string };
-      toast.error(t('error:register', err.message || 'Registration failed'));
+      const err = error as { message?: string; error?: string };
+      toast.error(err.message || t('error:register', 'Registration failed'));
+      if (err.error === 'OTP has been resent') {
+        router.push(`/${lang}/verify`);
+      }
     },
   });
 
@@ -92,7 +91,7 @@ export function RegisterForm({ lang }: RegisterFormProps) {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
               <FormField
                 control={form.control}
-                name="UserName"
+                name="username"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-medium text-gray-700">

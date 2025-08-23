@@ -2,6 +2,7 @@ import axios, { AxiosInstance } from 'axios';
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
+  withCredentials: true,
   headers: {
     'x-language': 'en', // Default language header
   },

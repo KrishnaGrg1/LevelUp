@@ -27,7 +27,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { t } from '@/translations/index';
 import LanguageStore from '@/stores/useLanguage';
-
+import { useRouter } from 'next/navigation';
 type VerifyFormData = z.infer<typeof VerifySchema>;
 interface VerifyFormProps {
   lang: Language;
@@ -35,13 +35,14 @@ interface VerifyFormProps {
 
 export function VerifyForm({ lang }: VerifyFormProps) {
   const [isClient, setIsClient] = useState(false);
-  const { setToken, setUser, user, setAuthenticated } = authStore();
+  const { setUser, user, setAuthenticated } = authStore();
   const { language } = LanguageStore();
+  const router = useRouter();
 
   const form = useForm<VerifyFormData>({
     resolver: zodResolver(VerifySchema),
     defaultValues: {
-      otp_code: '',
+      otp: '',
       email: user?.email || '',
     },
   });
@@ -63,16 +64,9 @@ export function VerifyForm({ lang }: VerifyFormProps) {
     mutationKey: ['verify'],
     mutationFn: (data: VerifyFormData) => VerifyUser(data, lang),
     onSuccess: data => {
-      if (setToken) {
-        setToken(data?.body.data.data);
-      }
-      setUser!({
-        id: Number(data?.body.data.id),
-        UserName: data?.body.data.UserName,
-        email: data?.body.data.email,
-      });
       setAuthenticated(true);
       toast.success(data?.body.message || 'Verification Successful');
+      router.push(`/${lang}/home`);
     },
     onError: (error: unknown) => {
       const err = error as { message?: string };
@@ -137,7 +131,7 @@ export function VerifyForm({ lang }: VerifyFormProps) {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
               <FormField
                 control={form.control}
-                name="otp_code"
+                name="otp"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-medium text-slate-300">
