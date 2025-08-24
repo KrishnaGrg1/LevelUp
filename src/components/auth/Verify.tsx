@@ -66,7 +66,7 @@ export function VerifyForm({ lang }: VerifyFormProps) {
     onSuccess: data => {
       setAuthenticated(true);
       toast.success(data?.body.message || 'Verification Successful');
-      router.push(`/${lang}/home`);
+      router.push(`/${lang}/profile`);
     },
     onError: (error: unknown) => {
       const err = error as { message?: string };
@@ -159,7 +159,7 @@ export function VerifyForm({ lang }: VerifyFormProps) {
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-12 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:scale-100 rounded-xl"
+                className="w-full cursor-pointer h-12 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:scale-100 rounded-xl"
               >
                 {isLoading ? (
                   <div className="flex items-center gap-2">

@@ -7,6 +7,8 @@ import { registerSchema } from '../../app/[lang]/(auth)/signup/schema';
 import { z } from 'zod';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { FcGoogle } from 'react-icons/fc';
+
 import {
   Form,
   FormControl,
@@ -22,7 +24,7 @@ import authStore from '@/stores/useAuth';
 import { toast } from 'sonner';
 import { Language } from '@/stores/useLanguage';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Eye, EyeOff, User, Mail, Lock } from 'lucide-react';
+import { Eye, EyeOff, User, Mail, Lock, Github } from 'lucide-react';
 import { useState } from 'react';
 import { t } from '@/translations/index';
 import Link from 'next/link';
@@ -35,6 +37,7 @@ interface RegisterFormProps {
 
 export function RegisterForm({ lang }: RegisterFormProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const [loadingProvider, setLoadingProvider] = useState<string | null>(null);
   const router = useRouter();
   const form = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
@@ -51,8 +54,10 @@ export function RegisterForm({ lang }: RegisterFormProps) {
     mutationKey: ['register'],
     mutationFn: (data: RegisterFormData) => registerUser(data, lang),
     onSuccess: data => {
+      console.log(data);
       setUser!(data.body.data);
-      toast.success(t('success:register', data?.body.message));
+      toast.success(data?.body.message);
+      router.push(`/${lang}/verify`); // Redirect to verification page
     },
     onError: (error: unknown) => {
       const err = error as { message?: string; error?: string };
@@ -62,6 +67,47 @@ export function RegisterForm({ lang }: RegisterFormProps) {
       }
     },
   });
+  const handleOAuthRegister = async (provider: 'google' | 'github') => {
+    try {
+      setLoadingProvider(provider);
+
+      // Store intent for post-auth redirect
+      sessionStorage.setItem('authIntent', 'register');
+      sessionStorage.setItem('redirectAfterAuth', `/${lang}/dashboard`);
+
+      // Build dynamic redirect URI based on current language
+      const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
+
+      // Google supports multiple redirect URIs, GitHub doesn't
+      const googleRedirectUri = `${baseUrl}/${lang}/auth/callback`;
+      const githubRedirectUri = `${baseUrl}/auth/callback`; // Universal for GitHub
+
+      // Generate OAuth URLs with appropriate redirect URI
+      const oauthUrls = {
+        google:
+          `https://accounts.google.com/o/oauth2/v2/auth?` +
+          `client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}&` +
+          `redirect_uri=${encodeURIComponent(googleRedirectUri)}&` +
+          `response_type=code&` +
+          `scope=${encodeURIComponent('openid email profile')}&` +
+          `state=${encodeURIComponent(JSON.stringify({ provider: 'google', lang, intent: 'register' }))}`,
+
+        github:
+          `https://github.com/login/oauth/authorize?` +
+          `client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}&` +
+          `redirect_uri=${encodeURIComponent(githubRedirectUri)}&` +
+          `scope=${encodeURIComponent('user:email')}&` +
+          `state=${encodeURIComponent(JSON.stringify({ provider: 'github', lang, intent: 'register' }))}`,
+      };
+
+      // Redirect to OAuth provider
+      window.location.href = oauthUrls[provider];
+    } catch (error) {
+      console.error(`${provider} OAuth error:`, error);
+      toast.error(t(`error.auth.${provider}_oauth_failed`, `${provider} registration failed`));
+      setLoadingProvider(null);
+    }
+  };
 
   const onSubmit = async (data: RegisterFormData) => {
     await mutateAsync(data);
@@ -94,12 +140,12 @@ export function RegisterForm({ lang }: RegisterFormProps) {
                 name="username"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm font-medium text-gray-700">
+                    <FormLabel className="text-sm font-medium text-slate-300">
                       {t('auth.register.username', 'Username')}
                     </FormLabel>
                     <FormControl>
                       <div className="relative">
-                        <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                        <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
                         <Input
                           placeholder={t(
                             'auth.register.usernamePlaceholder',
@@ -120,12 +166,12 @@ export function RegisterForm({ lang }: RegisterFormProps) {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm font-medium text-gray-700">
+                    <FormLabel className="text-sm font-medium text-slate-300">
                       {t('auth.register.email', 'Email')}
                     </FormLabel>
                     <FormControl>
                       <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
                         <Input
                           type="email"
                           placeholder={t('auth.register.emailPlaceholder', 'you@example.com')}
@@ -144,12 +190,12 @@ export function RegisterForm({ lang }: RegisterFormProps) {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm font-medium text-gray-700">
+                    <FormLabel className="text-sm font-medium text-slate-300">
                       {t('auth.register.password', 'Password')}
                     </FormLabel>
                     <FormControl>
                       <div className="relative">
-                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
                         <Input
                           type={showPassword ? 'text' : 'password'}
                           placeholder={t(
@@ -191,6 +237,36 @@ export function RegisterForm({ lang }: RegisterFormProps) {
                   t('auth.register.submit', 'Create Account')
                 )}
               </Button>
+              <div className="grid grid-cols-2 gap-3">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => handleOAuthRegister('google')}
+                  disabled={isLoading}
+                  className="h-12 border-slate-600 bg-slate-800/50 hover:bg-slate-700/50 text-slate-300 hover:text-white transition-all duration-200 group"
+                >
+                  {loadingProvider === 'google' ? (
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <FcGoogle className="mr-2 h-5 w-5" />
+                  )}
+                  <span className="ml-2 text-sm font-medium">Google</span>
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => handleOAuthRegister('github')}
+                  disabled={isLoading}
+                  className="h-12 border-slate-600 bg-slate-800/50 hover:bg-slate-700/50 text-slate-300 hover:text-white transition-all duration-200 group"
+                >
+                  {loadingProvider === 'github' ? (
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <Github className="mr-2 h-5 w-5" />
+                  )}
+                  <span className="ml-2 text-sm font-medium">GitHub</span>
+                </Button>
+              </div>
             </form>
           </Form>
 

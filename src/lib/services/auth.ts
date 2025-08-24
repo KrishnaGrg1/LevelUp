@@ -6,7 +6,7 @@ import type {
   UserLoginResponse,
   UserVerifyInput,
   UserVerifyResponse,
-  User,
+  OAuthRequest,
 } from '../generated';
 import { Language } from '@/stores/useLanguage';
 
@@ -52,7 +52,7 @@ export const registerUser = async (data: UserRegisterInput, lang: Language) => {
 
 export const VerifyUser = async (data: UserVerifyInput, lang: Language) => {
   try {
-    const response = await axiosInstance.post<UserVerifyResponse>(`/auth/verify`, data, {
+    const response = await axiosInstance.post<UserVerifyResponse>(`/auth/verify-otp`, data, {
       headers: {
         'X-Language': lang,
       },
@@ -135,5 +135,27 @@ export const getCurrentUser = async (lang: Language) => {
       return null; // Not authenticated
     }
     throw error;
+  }
+};
+
+export const oauthRegisterUser = async (data: OAuthRequest, lang: Language) => {
+  try {
+    const response = await axiosInstance.post<UserRegisterResponse>(`/auth/oauth/register`, data, {
+      headers: {
+        'X-Language': lang,
+      },
+    });
+    return response.data;
+  } catch (error: unknown) {
+    const err = error as {
+      response?: {
+        data?: { body?: { message?: string; error?: string }; message?: string; error?: string };
+      };
+    };
+    const errorMessage =
+      err.response?.data?.body?.message || err.response?.data?.message || 'Registration failed';
+    const errorDetail = err.response?.data?.body?.error || err.response?.data?.error;
+
+    throw { message: errorMessage, error: errorDetail };
   }
 };

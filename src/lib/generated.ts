@@ -185,3 +185,9 @@ export interface UserVerifyInput {
   email: string;
   otp: string;
 }
+
+export interface OAuthRequest {
+  provider: 'google' | 'github';
+  code: string; // Authorization code from OAuth callback
+  redirectUri?: string; // Optional, default handled in env
+}

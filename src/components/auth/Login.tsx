@@ -16,11 +16,12 @@ import authStore from '@/stores/useAuth';
 import { toast } from 'sonner';
 import { Language } from '@/stores/useLanguage';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Eye, EyeOff, User, Mail, Lock } from 'lucide-react';
+import { Eye, EyeOff, User, Mail, Lock, Github } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { t } from '@/translations/index';
 import { useRouter } from 'next/navigation';
+import { FcGoogle } from 'react-icons/fc';
 type LoginFormData = z.infer<typeof loginSchema>;
 
 interface LoginFormProps {
@@ -30,6 +31,7 @@ interface LoginFormProps {
 export function LoginForm({ lang }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [loadingProvider, setLoadingProvider] = useState<'google' | 'github' | null>(null);
   const router = useRouter();
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -53,7 +55,7 @@ export function LoginForm({ lang }: LoginFormProps) {
       setUser!(data.body.data);
       setAuthenticated(true);
       toast.success(t('success:login', data?.body.message));
-      router.push(`/${lang}/home`);
+      router.push(`/${lang}/dashboard`);
     },
     onError: (error: unknown) => {
       const err = error as { message?: string };
@@ -62,6 +64,47 @@ export function LoginForm({ lang }: LoginFormProps) {
     },
   });
 
+  const handleOAuthRegister = async (provider: 'google' | 'github') => {
+    try {
+      setLoadingProvider(provider);
+
+      // Store intent for post-auth redirect
+      sessionStorage.setItem('authIntent', 'register');
+      sessionStorage.setItem('redirectAfterAuth', `/${lang}/dashboard`);
+
+      // Build dynamic redirect URI based on current language
+      const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
+
+      // Google supports multiple redirect URIs, GitHub doesn't
+      const googleRedirectUri = `${baseUrl}/${lang}/auth/callback`;
+      const githubRedirectUri = `${baseUrl}/auth/callback`; // Universal for GitHub
+
+      // Generate OAuth URLs with appropriate redirect URI
+      const oauthUrls = {
+        google:
+          `https://accounts.google.com/o/oauth2/v2/auth?` +
+          `client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}&` +
+          `redirect_uri=${encodeURIComponent(googleRedirectUri)}&` +
+          `response_type=code&` +
+          `scope=${encodeURIComponent('openid email profile')}&` +
+          `state=${encodeURIComponent(JSON.stringify({ provider: 'google', lang, intent: 'register' }))}`,
+
+        github:
+          `https://github.com/login/oauth/authorize?` +
+          `client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}&` +
+          `redirect_uri=${encodeURIComponent(githubRedirectUri)}&` +
+          `scope=${encodeURIComponent('user:email')}&` +
+          `state=${encodeURIComponent(JSON.stringify({ provider: 'github', lang, intent: 'register' }))}`,
+      };
+
+      // Redirect to OAuth provider
+      window.location.href = oauthUrls[provider];
+    } catch (error) {
+      console.error(`${provider} OAuth error:`, error);
+      toast.error(t(`error.auth.${provider}_oauth_failed`, `${provider} registration failed`));
+      setLoadingProvider(null);
+    }
+  };
   const onSubmit = async (data: LoginFormData) => {
     await mutateAsync(data);
   };
@@ -196,6 +239,36 @@ export function LoginForm({ lang }: LoginFormProps) {
                   t('auth.login.submit', 'Log in')
                 )}
               </Button>
+              <div className="grid grid-cols-2 gap-3">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => handleOAuthRegister('google')}
+                  disabled={isLoading}
+                  className="h-12 border-slate-600 bg-slate-800/50 hover:bg-slate-700/50 text-slate-300 hover:text-white transition-all duration-200 group"
+                >
+                  {loadingProvider === 'google' ? (
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <FcGoogle className="mr-2 h-5 w-5" />
+                  )}
+                  <span className="ml-2 text-sm font-medium">Google</span>
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  // onClick={() => handleOAuthRegister('github')}
+                  disabled={isLoading}
+                  className="h-12 border-slate-600 bg-slate-800/50 hover:bg-slate-700/50 text-slate-300 hover:text-white transition-all duration-200 group"
+                >
+                  {loadingProvider === 'github' ? (
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <Github className="mr-2 h-5 w-5" />
+                  )}
+                  <span className="ml-2 text-sm font-medium">GitHub</span>
+                </Button>
+              </div>
             </form>
           </Form>
 
