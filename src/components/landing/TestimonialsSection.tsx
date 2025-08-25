@@ -1,7 +1,6 @@
 import React from 'react';
 import { Quote, Zap, Target, Trophy } from 'lucide-react';
 import { t } from '@/translations';
-import LanguageStore from '@/stores/useLanguage';
 
 interface TestimonialCard {
   name: string;
@@ -21,7 +20,6 @@ interface TestimonialsSectionProps {
 }
 
 export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ className = '' }) => {
-  const { language } = LanguageStore();
   const testimonials: TestimonialCard[] = [
     {
       name: 'TestimonialsSection.testimonials.0.name',

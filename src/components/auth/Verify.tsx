@@ -35,7 +35,7 @@ interface VerifyFormProps {
 
 export function VerifyForm({ lang }: VerifyFormProps) {
   const [isClient, setIsClient] = useState(false);
-  const { setUser, user, setAuthenticated } = authStore();
+  const { user, setAuthenticated } = authStore();
   const { language } = LanguageStore();
   const router = useRouter();
 

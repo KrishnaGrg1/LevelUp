@@ -12,7 +12,6 @@ import {
   Rocket,
 } from 'lucide-react';
 import { t } from '@/translations';
-import LanguageStore from '@/stores/useLanguage';
 
 const features = [
   {
@@ -72,7 +71,6 @@ const features = [
 ];
 
 export const FeaturesSection: React.FC = () => {
-  const { language } = LanguageStore();
   return (
     <section className="relative py-32 bg-gradient-to-b from-slate-950 to-slate-900">
       <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>

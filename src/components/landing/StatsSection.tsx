@@ -1,4 +1,3 @@
-import LanguageStore from '@/stores/useLanguage';
 import { t } from '@/translations';
 import React from 'react';
 
@@ -24,7 +23,6 @@ export const StatsSection: React.FC<StatsSectionProps> = ({
   successRate,
   statsRef,
 }) => {
-  const { language } = LanguageStore();
   const stats: StatsItem[] = [
     {
       count: userCount,

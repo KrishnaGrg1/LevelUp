@@ -4,17 +4,13 @@
 import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { toast } from 'sonner';
-import LanguageStore, { Language } from '@/stores/useLanguage';
+import LanguageStore from '@/stores/useLanguage';
 import authStore from '@/stores/useAuth';
 import { oauthRegisterUser } from '@/lib/services/auth';
 import { t } from '@/translations/index';
 import { useMutation } from '@tanstack/react-query';
 
-interface CallbackPageProps {
-  params: { lang: Language };
-}
-
-export default function CallbackPage({ params }: CallbackPageProps) {
+export default function CallbackPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { setUser, setAuthenticated } = authStore(); // ← Add setAuthenticated
@@ -24,7 +20,6 @@ export default function CallbackPage({ params }: CallbackPageProps) {
     mutate: handleOAuth,
     isPending,
     isError,
-    error,
   } = useMutation({
     mutationKey: ['oauth-callback'],
     mutationFn: async () => {
