@@ -7,7 +7,7 @@ import { FeaturesSection } from '@/components/landing/FeaturesSection';
 import { Language } from '@/stores/useLanguage';
 import { validateLanguage } from '@/lib/language';
 import { Brain, TrendingUp, Shield, Star, Clock, Globe, Sparkles } from 'lucide-react';
-
+import { t } from '@/translations/index';
 interface FeaturesPageProps {
   params: Promise<{ lang: string }>;
 }
@@ -34,22 +34,23 @@ const FeaturesPage: React.FC<FeaturesPageProps> = ({ params }) => {
         <div className="relative mx-auto max-w-4xl px-6 z-10">
           <div className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full border border-purple-500/20 mb-8">
             <Sparkles className="w-4 h-4 text-purple-400" />
-            <span className="text-purple-300 text-sm font-medium">Powerful Features</span>
+            <span className="text-purple-300 text-sm font-medium">
+              {t('landing.features.heroSection.badge')}
+            </span>
           </div>
 
           <h1 className="text-6xl md:text-7xl font-black mb-8 leading-tight">
             <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400 bg-clip-text text-transparent">
-              Everything You Need
+              {t('landing.features.heroSection.title1')}
             </span>
             <br />
             <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              To Level Up
+              {t('landing.features.heroSection.title2')}
             </span>
           </h1>
 
           <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Discover the comprehensive suite of features designed to transform your goals into epic
-            adventures and make personal growth irresistibly engaging.
+            {t('landing.features.heroSection.description')}
           </p>
         </div>
       </section>

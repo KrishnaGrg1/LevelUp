@@ -282,5 +282,87 @@
         }
       ]
     }
+  },
+  "feature": {
+    "heroSection": {
+      "badge": "Powerful Features",
+      "title1": "Everything You Need",
+      "title2": "To Level Up",
+      "description": "Discover the comprehensive suite of features designed to transform your goals into epic adventures and make personal growth irresistibly engaging."
+    },
+    "coreFeatures": [
+      {
+        "icon": "Sparkles",
+        "title": "Gamified Experience",
+        "description": "Turn your goals into quests and earn rewards as you progress."
+      },
+      {
+        "icon": "Brain",
+        "title": "AI-Powered Insights",
+        "description": "Smart recommendations based on your progress patterns and behavioral data.",
+        "highlight": "NEW"
+      },
+      {
+        "icon": "TrendingUp",
+        "title": "Advanced Analytics",
+        "description": "Deep dive into your performance with detailed charts and trend analysis."
+      },
+      {
+        "icon": "Shield",
+        "title": "Privacy First",
+        "description": "End-to-end encryption ensures your personal data stays completely private."
+      },
+      {
+        "icon": "Globe",
+        "title": "Cross-Platform Sync",
+        "description": "Seamlessly access your quests across all devices with real-time synchronization."
+      },
+      {
+        "icon": "Clock",
+        "title": "Smart Scheduling",
+        "description": "AI-optimized time blocks that adapt to your energy levels and availability.",
+        "highlight": "BETA"
+      },
+      {
+        "icon": "Star",
+        "title": "Achievement System",
+        "description": "Earn badges, unlock titles, and showcase your journey with a comprehensive achievement system."
+      }
+    ],
+    "advancedSection": {
+      "title": "Advanced Capabilities",
+      "description": "Unlock powerful tools that adapt to your unique journey and accelerate your progress."
+    },
+    "integrationSection": {
+      "title": "Seamless Integrations",
+      "description": "Connect with your favorite apps and services to create a unified productivity ecosystem.",
+      "integrations": [
+        "Calendar Apps",
+        "Fitness Trackers",
+        "Note Taking",
+        "Music Apps",
+        "Social Media",
+        "Health Apps",
+        "Task Managers",
+        "Time Trackers",
+        "Meditation",
+        "Reading Apps",
+        "Learning Platforms",
+        "Banking Apps"
+      ]
+    },
+    "comparisonSection": {
+      "title": "Why Choose Level Up?",
+      "description": "See how we compare to traditional goal-setting methods and other apps.",
+      "table": [
+        ["Gamified Experience", "✓", "✗", "Limited"],
+        ["AI-Powered Insights", "✓", "✗", "✗"],
+        ["Community Support", "✓", "✗", "Basic"],
+        ["Cross-Platform Sync", "✓", "✗", "✓"],
+        ["Advanced Analytics", "✓", "✗", "Limited"],
+        ["Privacy Protection", "✓", "✓", "Varies"]
+      ],
+      "columns": ["Feature", "Level Up", "Traditional Methods", "Other Apps"]
+    }
   }
 }
