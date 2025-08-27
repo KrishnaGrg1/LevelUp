@@ -3,7 +3,14 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import authStore from '@/stores/useAuth';
 import LanguageStore from '@/stores/useLanguage';
-import { MailIcon, GlobeIcon, StarIcon, TrendingUpIcon, CalendarIcon } from 'lucide-react';
+import {
+  MailIcon,
+  GlobeIcon,
+  StarIcon,
+  TrendingUpIcon,
+  CalendarIcon,
+  UserRoundSearch,
+} from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export default function Profile() {
@@ -45,6 +52,11 @@ export default function Profile() {
             icon={<TrendingUpIcon size={18} />}
             label="XP"
             value={user?.xp?.toString() || '0'}
+          />
+          <ProfileField
+            icon={<UserRoundSearch size={18} />}
+            label="UserName"
+            value={user?.UserName || 'Unknown'}
           />
           <ProfileField
             icon={<CalendarIcon size={18} />}
