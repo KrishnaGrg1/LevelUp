@@ -13,25 +13,154 @@
     "secure": "100％ 安全",
     "activeUsers": "20,000+ アクティブユーザー"
   },
+ 
   "FeaturesSection": {
-    "badge": "なぜLevelUpを選ぶのか？",
-    "badgeText": "強力な機能",
-    "description": "Level Upを究極のライフゲーミフィケーションプラットフォームにする革新的な機能を発見しましょう",
-    "titleMain": "エピックな機能",
-    "feature1Title": "AIによる毎日のクエスト",
-    "feature1Desc": "目標に合わせたパーソナライズされた毎日のチャレンジを獲得。AIが進捗や学習スタイルに適応する新鮮でモチベーションを高めるクエストを作成します。",
-    "feature2Title": "リアルタイム進捗追跡",
-    "feature2Desc": "美しいビジュアルであなたの人生がレベルアップする様子を確認。連続達成や成果を追跡し、インタラクティブなグラフで変化を確認しましょう。",
-    "feature3Title": "ゲーミフィケーション報酬システム",
-    "feature3Desc": "XPを獲得し、成果をアンロックし、友達と競い合おう。退屈なタスクを包括的な報酬システムで刺激的な冒険に変えます。",
-    "feature4Title": "グローバルコミュニティ",
-    "feature4Desc": "世界中の数千人のライフレベラーに参加。成果を共有し、モチベーションを得て、偉大さへの旅で責任を持つ仲間を見つけましょう。",
-    "feature5Title": "スマートタイムマネジメント",
-    "feature5Desc": "AIによる時間配分で毎日のスケジュールを最適化。仕事、健康、人間関係、自己成長のバランスをとり、最大の人生満足度を実現します。",
-    "feature6Title": "ホリスティックウェルネス",
-    "feature6Desc": "精神的、身体的、感情的な健康に焦点を当てる。心、体、魂を育むパーソナライズされたウェルネスクエストで完全な変容を達成しましょう。",
-    "readMore": "もっと読む"
+    "hero": {
+      "badge": "新しく改善！",
+      "title1": "目標をゲーム化",
+      "title2": "あなたの生活をレベルアップ",
+      "description": "私たちのゲーム化システムで、日常の習慣をワクワクする達成に変えましょう。"
+    },
+
+    "features": {
+      "badge": "なぜ LevelUp を選ぶのか？",
+      "badgeText": "強力な機能",
+      "description": "革新的な機能を発見し、Level Up を究極のライフゲーム化プラットフォームにします。",
+      "titleMain": "エピック機能",
+      "feature1": {
+        "title": "AIによる毎日のクエスト",
+        "description": "あなたの目標に合わせたパーソナライズされた毎日のチャレンジを取得。AIが進捗や学習スタイルに応じて新しいモチベーションのあるクエストを作成します。"
+      },
+      "feature2": {
+        "title": "リアルタイム進捗追跡",
+        "description": "美しいビジュアルで生活のレベルアップを確認。連続記録や達成状況を追跡し、インタラクティブなチャートで変化を確認できます。"
+      },
+      "feature3": {
+        "title": "ゲーム化報酬システム",
+        "description": "XPを獲得し、達成を解除し、友達と競争。退屈なタスクをワクワクする冒険に変える包括的な報酬システム。"
+      },
+      "feature4": {
+        "title": "グローバルコミュニティ",
+        "description": "世界中の数千人のレベルアップユーザーに参加。達成を共有し、モチベーションを得て、旅の中でアカウンタビリティパートナーを見つけましょう。"
+      },
+      "feature5": {
+        "title": "スマートタイムマネジメント",
+        "description": "AIによる時間割で日々のスケジュールを最適化。仕事、健康、人間関係、個人の成長のバランスを取り、最大の生活満足度を実現。"
+      },
+      "feature6": {
+        "title": "ホリスティックウェルネス",
+        "description": "心身の健康にフォーカス。パーソナライズされたウェルネスクエストで心、体、魂を養い、完全な変革を実現。"
+      }
+    },
+
+    "readMore": "もっと詳しく",
+
+    "coreFeatures": {
+      "title": "コア機能",
+      "subtitle": "これらの基本ツールで LevelUp の可能性を最大限に引き出す",
+      "features": {
+        "feature1": {
+          "title": "AIによるインサイト",
+          "description": "進捗パターンと行動データに基づいたスマートな推奨。",
+          "highlight": "新機能"
+        },
+        "feature2": {
+          "title": "高度な分析",
+          "description": "詳細なチャートとトレンド分析でパフォーマンスを深く理解。",
+          "highlight": ""
+        },
+        "feature3": {
+          "title": "プライバシー最優先",
+          "description": "エンドツーエンド暗号化で個人データを完全に保護。",
+          "highlight": ""
+        },
+        "feature4": {
+          "title": "クロスプラットフォーム同期",
+          "description": "リアルタイム同期で全てのデバイスでタスクにシームレスにアクセス。",
+          "highlight": ""
+        },
+        "feature5": {
+          "title": "スマートスケジューリング",
+          "description": "エネルギーレベルと利用可能性に応じてAIが最適化した時間ブロック。",
+          "highlight": "ベータ版"
+        },
+        "feature6": {
+          "title": "達成システム",
+          "description": "バッジを獲得し、称号を解除し、包括的な達成システムで旅を見せる。",
+          "highlight": ""
+        }
+      }
+    },
+
+    "integrationFeatures": {
+      "title": "シームレスな統合",
+      "description": "お気に入りのアプリやサービスと接続して統一された生産性エコシステムを作成。",
+      "integrations": {
+        "integration1": "カレンダーアプリ",
+        "integration2": "フィットネストラッカー",
+        "integration3": "ノートアプリ",
+        "integration4": "音楽アプリ",
+        "integration5": "ソーシャルメディア",
+        "integration6": "ヘルスアプリ",
+        "integration7": "タスク管理",
+        "integration8": "時間追跡",
+        "integration9": "瞑想アプリ",
+        "integration10": "読書アプリ",
+        "integration11": "学習プラットフォーム",
+        "integration12": "銀行アプリ"
+      }
+    },
+
+    "comparisonSection": {
+      "title": "なぜ Level Up を選ぶのか？",
+      "description": "従来の目標設定方法や他のアプリとの比較をご覧ください。",
+      "tableHeaders": {
+        "feature": "機能",
+        "levelUp": "Level Up",
+        "traditionalMethods": "従来の方法",
+        "otherApps": "他のアプリ"
+      },
+      "features": {
+        "feature1": {
+          "name": "ゲーム化体験",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "限定"
+        },
+        "feature2": {
+          "name": "AIによるインサイト",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "✗"
+        },
+        "feature3": {
+          "name": "コミュニティサポート",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "基本"
+        },
+        "feature4": {
+          "name": "クロスプラットフォーム同期",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "✓"
+        },
+        "feature5": {
+          "name": "高度な分析",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "限定"
+        },
+        "feature6": {
+          "name": "プライバシー保護",
+          "levelUp": "✓",
+          "traditionalMethods": "✓",
+          "otherApps": "可変"
+        }
+      }
+    }
   },
+    
   "CTASection": {
     "badgeText": "冒険があなたを待っている",
     "titleMain": "レベルアップする準備はできた？",

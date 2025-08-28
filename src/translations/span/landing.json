@@ -13,24 +13,151 @@
     "secure": "100% Seguro",
     "activeUsers": "20k+ Usuarios Activos"
   },
-  "FeaturesSection": {
-    "badge": "¿Por qué elegir LevelUp?",
-    "badgeText": "Funciones Poderosas",
-    "description": "Descubre las características revolucionarias que hacen de Level Up la plataforma definitiva de gamificación de la vida",
-    "titleMain": "Características Épicas",
-    "feature1Title": "Misiones Diarias Impulsadas por IA",
-    "feature1Desc": "Obtén desafíos diarios personalizados adaptados a tus objetivos. Nuestra IA crea misiones nuevas y motivadoras que se adaptan a tu progreso y estilo de aprendizaje.",
-    "feature2Title": "Seguimiento de Progreso en Tiempo Real",
-    "feature2Desc": "Observa cómo tu vida sube de nivel con hermosas visualizaciones. Rastrea rachas, logros y ve tu transformación a través de gráficos interactivos.",
-    "feature3Title": "Sistema de Recompensas Gamificado",
-    "feature3Desc": "Gana XP, desbloquea logros y compite con amigos. Transforma tareas aburridas en aventuras emocionantes con nuestro completo sistema de recompensas.",
-    "feature4Title": "Comunidad Global",
-    "feature4Desc": "Únete a miles de personas en todo el mundo. Comparte logros, obtén motivación y encuentra compañeros de responsabilidad en tu camino hacia la grandeza.",
-    "feature5Title": "Gestión Inteligente del Tiempo",
-    "feature5Desc": "Optimiza tu horario diario con asignación de tiempo impulsada por IA. Equilibra trabajo, salud, relaciones y crecimiento personal para la máxima satisfacción de vida.",
-    "feature6Title": "Bienestar Holístico",
-    "feature6Desc": "Concéntrate en el bienestar mental, físico y emocional. Obtén misiones de bienestar personalizadas que nutren tu mente, cuerpo y alma para una transformación completa.",
-    "readMore": "Aprender más"
+   "FeaturesSection": {
+    "hero": {
+      "badge": "¡Nuevo y Mejorado!",
+      "title1": "Gamifica Tus Metas",
+      "title2": "Eleva Tu Vida",
+      "description": "Transforma tus hábitos diarios en logros emocionantes con nuestro sistema gamificado."
+    },
+
+    "features": {
+      "badge": "¿Por Qué Elegir LevelUp?",
+      "badgeText": "Funciones Poderosas",
+      "description": "Descubre las funciones revolucionarias que hacen de Level Up la plataforma definitiva de gamificación de la vida.",
+      "titleMain": "Funciones Épicas",
+      "feature1": {
+        "title": "Misiones Diarias con IA",
+        "description": "Obtén desafíos diarios personalizados según tus objetivos. Nuestra IA crea misiones frescas y motivadoras que se adaptan a tu progreso y estilo de aprendizaje."
+      },
+      "feature2": {
+        "title": "Seguimiento de Progreso en Tiempo Real",
+        "description": "Observa cómo tu vida sube de nivel con visualizaciones atractivas. Rastrea rachas, logros y ve tu transformación mediante gráficos interactivos."
+      },
+      "feature3": {
+        "title": "Sistema de Recompensas Gamificado",
+        "description": "Gana XP, desbloquea logros y compite con amigos. Transforma tareas aburridas en aventuras emocionantes con nuestro completo sistema de recompensas."
+      },
+      "feature4": {
+        "title": "Comunidad Global",
+        "description": "Únete a miles de usuarios de LevelUp en todo el mundo. Comparte logros, obtén motivación y encuentra compañeros responsables en tu camino hacia la grandeza."
+      },
+      "feature5": {
+        "title": "Gestión Inteligente del Tiempo",
+        "description": "Optimiza tu horario diario con asignación de tiempo impulsada por IA. Equilibra trabajo, salud, relaciones y crecimiento personal para una máxima satisfacción de vida."
+      },
+      "feature6": {
+        "title": "Bienestar Integral",
+        "description": "Enfócate en el bienestar mental, físico y emocional. Obtén misiones de bienestar personalizadas que nutren tu mente, cuerpo y alma para una transformación completa."
+      }
+    },
+
+    "readMore": "Aprender más",
+
+    "coreFeatures": {
+      "title": "Funciones Principales",
+      "subtitle": "Desbloquea todo el potencial de LevelUp con estas herramientas esenciales",
+      "features": {
+        "feature1": {
+          "title": "Perspectivas Impulsadas por IA",
+          "description": "Recomendaciones inteligentes basadas en tus patrones de progreso y datos de comportamiento.",
+          "highlight": "NUEVO"
+        },
+        "feature2": {
+          "title": "Analítica Avanzada",
+          "description": "Profundiza en tu rendimiento con gráficos detallados y análisis de tendencias.",
+          "highlight": ""
+        },
+        "feature3": {
+          "title": "Privacidad Primero",
+          "description": "El cifrado de extremo a extremo asegura que tus datos personales permanezcan completamente privados.",
+          "highlight": ""
+        },
+        "feature4": {
+          "title": "Sincronización Multiplataforma",
+          "description": "Accede a tus misiones en todos los dispositivos con sincronización en tiempo real.",
+          "highlight": ""
+        },
+        "feature5": {
+          "title": "Programación Inteligente",
+          "description": "Bloques de tiempo optimizados por IA que se adaptan a tus niveles de energía y disponibilidad.",
+          "highlight": "BETA"
+        },
+        "feature6": {
+          "title": "Sistema de Logros",
+          "description": "Gana insignias, desbloquea títulos y muestra tu progreso con un completo sistema de logros.",
+          "highlight": ""
+        }
+      }
+    },
+
+    "integrationFeatures": {
+      "title": "Integraciones Sin Problemas",
+      "description": "Conéctate con tus aplicaciones y servicios favoritos para crear un ecosistema de productividad unificado.",
+      "integrations": {
+        "integration1": "Aplicaciones de Calendario",
+        "integration2": "Rastreadores de Fitness",
+        "integration3": "Notas",
+        "integration4": "Aplicaciones de Música",
+        "integration5": "Redes Sociales",
+        "integration6": "Aplicaciones de Salud",
+        "integration7": "Gestores de Tareas",
+        "integration8": "Rastreadores de Tiempo",
+        "integration9": "Meditación",
+        "integration10": "Aplicaciones de Lectura",
+        "integration11": "Plataformas de Aprendizaje",
+        "integration12": "Aplicaciones Bancarias"
+      }
+    },
+
+    "comparisonSection": {
+      "title": "¿Por Qué Elegir Level Up?",
+      "description": "Ve cómo nos comparamos con los métodos tradicionales de establecimiento de metas y otras aplicaciones.",
+      "tableHeaders": {
+        "feature": "Función",
+        "levelUp": "Level Up",
+        "traditionalMethods": "Métodos Tradicionales",
+        "otherApps": "Otras Apps"
+      },
+      "features": {
+        "feature1": {
+          "name": "Experiencia Gamificada",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "Limitado"
+        },
+        "feature2": {
+          "name": "Perspectivas Impulsadas por IA",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "✗"
+        },
+        "feature3": {
+          "name": "Soporte Comunitario",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "Básico"
+        },
+        "feature4": {
+          "name": "Sincronización Multiplataforma",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "✓"
+        },
+        "feature5": {
+          "name": "Analítica Avanzada",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "Limitado"
+        },
+        "feature6": {
+          "name": "Protección de Privacidad",
+          "levelUp": "✓",
+          "traditionalMethods": "✓",
+          "otherApps": "Varía"
+        }
+      }
+    }
   },
   "CTASection": {
     "badgeText": "Tu aventura te espera",

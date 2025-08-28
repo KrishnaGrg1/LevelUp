@@ -16,8 +16,8 @@ import { t } from '@/translations';
 const features = [
   {
     icon: Brain,
-    title: 'FeaturesSection.feature1Title',
-    description: 'FeaturesSection.feature1Desc',
+    title: 'FeaturesSection.features.feature1.title',
+    description: 'FeaturesSection.features.feature1.description',
     color: 'indigo',
     gradient: 'from-indigo-500 to-purple-600',
     hoverColor: 'indigo-500/50',
@@ -25,8 +25,8 @@ const features = [
   },
   {
     icon: TrendingUp,
-    title: 'FeaturesSection.feature2Title',
-    description: 'FeaturesSection.feature2Desc',
+    title: 'FeaturesSection.features.feature2.title',
+    description: 'FeaturesSection.features.feature2.description',
     color: 'purple',
     gradient: 'from-purple-500 to-pink-600',
     hoverColor: 'purple-500/50',
@@ -34,8 +34,8 @@ const features = [
   },
   {
     icon: GamepadIcon,
-    title: 'FeaturesSection.feature3Title',
-    description: 'FeaturesSection.feature3Desc',
+    title: 'FeaturesSection.features.feature3.title',
+    description: 'FeaturesSection.features.feature3.description',
     color: 'green',
     gradient: 'from-green-500 to-emerald-600',
     hoverColor: 'green-500/50',
@@ -43,8 +43,8 @@ const features = [
   },
   {
     icon: Globe,
-    title: 'FeaturesSection.feature4Title',
-    description: 'FeaturesSection.feature4Desc',
+    title: 'FeaturesSection.features.feature4.title',
+    description: 'FeaturesSection.features.feature4.description',
     color: 'blue',
     gradient: 'from-blue-500 to-cyan-600',
     hoverColor: 'blue-500/50',
@@ -52,8 +52,8 @@ const features = [
   },
   {
     icon: Clock,
-    title: 'FeaturesSection.feature5Title',
-    description: 'FeaturesSection.feature5Desc',
+    title: 'FeaturesSection.features.feature5.title',
+    description: 'FeaturesSection.features.feature5.description',
     color: 'orange',
     gradient: 'from-orange-500 to-red-600',
     hoverColor: 'orange-500/50',
@@ -61,7 +61,7 @@ const features = [
   },
   {
     icon: Heart,
-    title: 'FeaturesSection.feature6Title',
+    title: 'FeaturesSection.features.feature6.title',
     description: 'FeaturesSection.feature6Desc',
     color: 'pink',
     gradient: 'from-pink-500 to-rose-600',
@@ -78,13 +78,13 @@ export const FeaturesSection: React.FC = () => {
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 rounded-full text-indigo-300 text-sm font-medium mb-6">
             <Rocket className="h-4 w-4" />
-            {t('landing.FeaturesSection.badgeText')}
+            {t('landing.FeaturesSection.features.badgeText')}
           </div>
           <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-            {t('landing.FeaturesSection.badge')}
+            {t('landing.FeaturesSection.features.badge')}
           </h2>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            {t('landing.FeaturesSection.description')}
+            {t('landing.FeaturesSection.features.description')}
           </p>
         </div>
 
