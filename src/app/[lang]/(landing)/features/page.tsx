@@ -1,10 +1,9 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+
 import { FeaturesSection } from '@/components/landing/FeaturesSection';
-import { Language } from '@/stores/useLanguage';
+import LanguageStore from '@/stores/useLanguage';
 import { validateLanguage } from '@/lib/language';
 import { Brain, TrendingUp, Shield, Star, Clock, Globe, Sparkles } from 'lucide-react';
 import { t } from '@/translations/index';
@@ -136,7 +135,7 @@ const comparisonFeatures = [
 ];
 
 const FeaturesPage: React.FC<FeaturesPageProps> = ({ params }) => {
-  const [language, setLanguage] = useState<Language>('eng');
+  const { setLanguage } = LanguageStore();
 
   useEffect(() => {
     params.then(resolvedParams => {
@@ -147,8 +146,6 @@ const FeaturesPage: React.FC<FeaturesPageProps> = ({ params }) => {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
-      <Navbar language={language} />
-
       {/* Hero Section */}
       <section className="relative py-32 text-center min-h-screen flex items-center">
         <div className="absolute inset-0 bg-gradient-radial from-purple-500/15 via-transparent to-transparent"></div>
