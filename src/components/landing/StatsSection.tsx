@@ -51,7 +51,7 @@ export const StatsSection: React.FC<StatsSectionProps> = ({
   ];
 
   return (
-    <section ref={statsRef} className="relative py-32 bg-gradient-to-b from-slate-900 to-slate-950">
+    <section ref={statsRef} className="relative py-32 bg-gradient-to-b ">
       <div className="absolute inset-0 bg-gradient-radial from-indigo-500/5 via-transparent to-transparent"></div>
       <div className="relative mx-auto max-w-6xl px-6 text-center z-10">
         <div className="mb-16">

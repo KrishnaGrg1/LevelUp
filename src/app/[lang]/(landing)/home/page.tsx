@@ -6,9 +6,7 @@ import { FeaturesSection } from '@/components/landing/FeaturesSection';
 import { StatsSection } from '@/components/landing/StatsSection';
 import { TestimonialsSection } from '@/components/landing/TestimonialsSection';
 import { CTASection } from '@/components/landing/CTASection';
-import MyCommunities from '@/components/landing/myCommunities';
-import StatsSummary from '@/components/landing/statsSummary';
-import TodaysQuests from '@/components/landing/todaysQuests';
+
 import { PageProps } from '@/hooks/useLanguageParam';
 
 const HomePage: React.FC<PageProps> = ({ params }) => {
@@ -70,11 +68,8 @@ const HomePage: React.FC<PageProps> = ({ params }) => {
       {/* Hero and Feature Sections */}
       <HeroSection />
       {/* New Components */}
-      <MyCommunities />
-      <TodaysQuests />
-      <StatsSummary />
-      <FeaturesSection />
 
+      <FeaturesSection />
 
       {/* Stats Section */}
       <StatsSection

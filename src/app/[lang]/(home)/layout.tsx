@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import authStore from '@/stores/useAuth';
 import LanguageStore from '@/stores/useLanguage';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 
 type Particle = {
   x: number;
@@ -120,6 +121,9 @@ export default function HomeLayout({ children }: { children: React.ReactNode }) 
 
       {/* Main content */}
       <div className="relative z-10">
+        <div className="flex justify-end p-4">
+          <LanguageSwitcher currentLang={language} />
+        </div>
         <div className="min-h-screen p-4">{children}</div>
       </div>
     </div>
