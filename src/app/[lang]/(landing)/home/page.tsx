@@ -6,6 +6,7 @@ import { FeaturesSection } from '@/components/landing/FeaturesSection';
 import { StatsSection } from '@/components/landing/StatsSection';
 import { TestimonialsSection } from '@/components/landing/TestimonialsSection';
 import { CTASection } from '@/components/landing/CTASection';
+
 import { PageProps } from '@/hooks/useLanguageParam';
 
 const HomePage: React.FC<PageProps> = ({ params }) => {
@@ -64,14 +65,21 @@ const HomePage: React.FC<PageProps> = ({ params }) => {
 
   return (
     <>
+      {/* Hero and Feature Sections */}
       <HeroSection />
+      {/* New Components */}
+
       <FeaturesSection />
+
+      {/* Stats Section */}
       <StatsSection
         userCount={userCount}
         questCount={questCount}
         successRate={successRate}
         statsRef={statsRef}
       />
+
+      {/* Testimonials and CTA */}
       <TestimonialsSection />
       <CTASection />
     </>

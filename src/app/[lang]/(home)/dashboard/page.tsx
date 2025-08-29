@@ -1,8 +1,13 @@
+import MyCommunities from '@/components/landing/myCommunities';
+import StatsSummary from '@/components/landing/statsSummary';
+import TodaysQuests from '@/components/landing/todaysQuests';
+
 export default function DashboardPage() {
   return (
     <div>
-      <h1>Dashboard</h1>
-      <p>Welcome to your dashboard!</p>
+      <MyCommunities />
+      <TodaysQuests />
+      <StatsSummary />
     </div>
   );
 }
