@@ -14,23 +14,150 @@
     "activeUsers": "20k+ Utilisateurs Actifs"
   },
   "FeaturesSection": {
-    "badge": "Pourquoi choisir LevelUp ?",
-    "badgeText": "Fonctionnalités puissantes",
-    "description": "Découvrez les fonctionnalités révolutionnaires qui font de Level Up la plateforme ultime de gamification de la vie",
-    "titleMain": "Fonctionnalités Épiques",
-    "feature1Title": "Quêtes quotidiennes propulsées par l'IA",
-    "feature1Desc": "Recevez des défis quotidiens personnalisés adaptés à vos objectifs. Notre IA crée des quêtes nouvelles et motivantes qui s'adaptent à vos progrès et à votre style d'apprentissage.",
-    "feature2Title": "Suivi des progrès en temps réel",
-    "feature2Desc": "Suivez l'évolution de votre vie avec de magnifiques visualisations. Suivez vos séries, vos réalisations et observez votre transformation grâce à des graphiques interactifs.",
-    "feature3Title": "Système de récompenses gamifié",
-    "feature3Desc": "Gagnez des XP, débloquez des réalisations et défiez vos amis. Transformez les tâches ennuyeuses en aventures passionnantes grâce à notre système de récompenses complet.",
-    "feature4Title": "Communauté mondiale",
-    "feature4Desc": "Rejoignez des milliers de participants du monde entier. Partagez vos réalisations, trouvez la motivation et des partenaires de responsabilité dans votre quête de grandeur.",
-    "feature5Title": "Gestion intelligente du temps",
-    "feature5Desc": "Optimisez votre emploi du temps quotidien grâce à l'allocation de temps pilotée par l'IA. Équilibrez travail, santé, relations et développement personnel pour une satisfaction maximale de la vie.",
-    "feature6Title": "Bien-être holistique",
-    "feature6Desc": "Concentrez-vous sur le bien-être mental, physique et émotionnel. Recevez des quêtes de bien-être personnalisées qui nourrissent votre esprit, votre corps et votre âme pour une transformation complète.",
-    "readMore": "En savoir plus"
+    "hero": {
+      "badge": "Nouveau & Amélioré !",
+      "title1": "Gamifiez Vos Objectifs",
+      "title2": "Élevez Votre Vie",
+      "description": "Transformez vos habitudes quotidiennes en réalisations passionnantes grâce à notre système gamifié."
+    },
+
+    "features": {
+      "badge": "Pourquoi Choisir LevelUp ?",
+      "badgeText": "Fonctionnalités Puissantes",
+      "description": "Découvrez les fonctionnalités révolutionnaires qui font de Level Up la plateforme ultime de gamification de la vie.",
+      "titleMain": "Fonctionnalités Épiques",
+      "feature1": {
+        "title": "Quêtes Quotidiennes Alimentées par l'IA",
+        "description": "Recevez des défis quotidiens personnalisés selon vos objectifs. Notre IA crée des quêtes nouvelles et motivantes qui s'adaptent à votre progression et style d'apprentissage."
+      },
+      "feature2": {
+        "title": "Suivi des Progrès en Temps Réel",
+        "description": "Observez votre vie progresser avec de belles visualisations. Suivez vos séries, vos accomplissements et voyez votre transformation via des graphiques interactifs."
+      },
+      "feature3": {
+        "title": "Système de Récompenses Gamifié",
+        "description": "Gagnez des XP, débloquez des accomplissements et défiez vos amis. Transformez les tâches ennuyeuses en aventures excitantes grâce à notre système de récompenses complet."
+      },
+      "feature4": {
+        "title": "Communauté Mondiale",
+        "description": "Rejoignez des milliers d'utilisateurs LevelUp à travers le monde. Partagez vos réalisations, trouvez de la motivation et des partenaires responsables dans votre parcours vers l'excellence."
+      },
+      "feature5": {
+        "title": "Gestion du Temps Intelligente",
+        "description": "Optimisez votre emploi du temps quotidien avec l'allocation de temps pilotée par l'IA. Équilibrez travail, santé, relations et développement personnel pour une satisfaction maximale."
+      },
+      "feature6": {
+        "title": "Bien-Être Holistique",
+        "description": "Concentrez-vous sur le bien-être mental, physique et émotionnel. Recevez des quêtes de bien-être personnalisées qui nourrissent votre esprit, corps et âme pour une transformation complète."
+      }
+    },
+
+    "readMore": "En savoir plus",
+
+    "coreFeatures": {
+      "title": "Fonctionnalités Clés",
+      "subtitle": "Débloquez tout le potentiel de LevelUp avec ces outils essentiels",
+      "features": {
+        "feature1": {
+          "title": "Analyses Alimentées par l'IA",
+          "description": "Recommandations intelligentes basées sur vos patterns de progression et vos données comportementales.",
+          "highlight": "NOUVEAU"
+        },
+        "feature2": {
+          "title": "Analyses Avancées",
+          "description": "Plongez dans votre performance avec des graphiques détaillés et des analyses de tendances.",
+          "highlight": ""
+        },
+        "feature3": {
+          "title": "Confidentialité Prioritaire",
+          "description": "Le cryptage de bout en bout garantit que vos données personnelles restent totalement privées.",
+          "highlight": ""
+        },
+        "feature4": {
+          "title": "Synchronisation Multi-Plateformes",
+          "description": "Accédez à vos quêtes sur tous vos appareils avec une synchronisation en temps réel.",
+          "highlight": ""
+        },
+        "feature5": {
+          "title": "Planification Intelligente",
+          "description": "Blocs de temps optimisés par l'IA qui s'adaptent à votre énergie et disponibilité.",
+          "highlight": "BÊTA"
+        },
+        "feature6": {
+          "title": "Système de Réalisations",
+          "description": "Gagnez des badges, débloquez des titres et montrez votre parcours avec un système de réalisations complet.",
+          "highlight": ""
+        }
+      }
+    },
+
+    "integrationFeatures": {
+      "title": "Intégrations Fluides",
+      "description": "Connectez vos applications et services préférés pour créer un écosystème productif unifié.",
+      "integrations": {
+        "integration1": "Applications de Calendrier",
+        "integration2": "Suivi de Fitness",
+        "integration3": "Prise de Notes",
+        "integration4": "Applications Musicales",
+        "integration5": "Réseaux Sociaux",
+        "integration6": "Applications Santé",
+        "integration7": "Gestionnaires de Tâches",
+        "integration8": "Suivi du Temps",
+        "integration9": "Méditation",
+        "integration10": "Applications de Lecture",
+        "integration11": "Plateformes d'Apprentissage",
+        "integration12": "Applications Bancaires"
+      }
+    },
+
+    "comparisonSection": {
+      "title": "Pourquoi Choisir Level Up ?",
+      "description": "Voyez comment nous nous comparons aux méthodes traditionnelles et à d'autres applications.",
+      "tableHeaders": {
+        "feature": "Fonctionnalité",
+        "levelUp": "Level Up",
+        "traditionalMethods": "Méthodes Traditionnelles",
+        "otherApps": "Autres Applications"
+      },
+      "features": {
+        "feature1": {
+          "name": "Expérience Gamifiée",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "Limitée"
+        },
+        "feature2": {
+          "name": "Analyses Alimentées par l'IA",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "✗"
+        },
+        "feature3": {
+          "name": "Support Communautaire",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "Basique"
+        },
+        "feature4": {
+          "name": "Synchronisation Multi-Plateformes",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "✓"
+        },
+        "feature5": {
+          "name": "Analyses Avancées",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "Limitée"
+        },
+        "feature6": {
+          "name": "Protection de la Vie Privée",
+          "levelUp": "✓",
+          "traditionalMethods": "✓",
+          "otherApps": "Variable"
+        }
+      }
+    }
   },
   "CTASection": {
     "badgeText": "Votre aventure vous attend",

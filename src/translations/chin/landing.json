@@ -13,25 +13,155 @@
     "secure": "100% 安全",
     "activeUsers": "20k+ 活跃用户"
   },
+ 
   "FeaturesSection": {
-    "badge": "为什么选择LevelUp？",
-    "badgeText": "强大的功能",
-    "description": "发现使Level Up成为终极生活游戏化平台的革命性功能",
-    "titleMain": "史诗功能",
-    "feature1Title": "AI驱动的每日任务",
-    "feature1Desc": "获得根据你的目标量身定制的每日挑战。我们的AI会创建新的、充满动力的任务，适应你的进度和学习风格。",
-    "feature2Title": "实时进度追踪",
-    "feature2Desc": "通过精美的可视化查看你的生活升级。追踪连胜、成就，并通过交互式图表观察你的成长。",
-    "feature3Title": "游戏化奖励系统",
-    "feature3Desc": "获取经验值、解锁成就并与朋友竞争。将枯燥的任务转变为令人兴奋的冒险，享受我们的全面奖励系统。",
-    "feature4Title": "全球社区",
-    "feature4Desc": "加入全球数千名生活升级者。分享成就，获得动力，并找到你的责任伙伴，共同迈向卓越。",
-    "feature5Title": "智能时间管理",
-    "feature5Desc": "使用AI驱动的时间分配优化每日日程。平衡工作、健康、人际关系和个人成长，实现最大生活满意度。",
-    "feature6Title": "整体健康",
-    "feature6Desc": "关注心理、身体和情绪健康。获得个性化的健康任务，滋养你的身心灵，实现全面转变。",
-    "readMore": "了解更多"
-  },
+    "hero": {
+      "badge": "全新升级！",
+      "title1": "游戏化你的目标",
+      "title2": "提升你的生活",
+      "description": "通过我们的游戏化系统，将你的日常习惯转化为令人兴奋的成就。"
+    },
+
+    "features": {
+      "badge": "为什么选择 LevelUp？",
+      "badgeText": "强大功能",
+      "description": "探索革命性的功能，让 Level Up 成为终极生活游戏化平台。",
+      "titleMain": "精彩功能",
+      "feature1": {
+        "title": "AI 驱动的每日任务",
+        "description": "获取根据你的目标量身定制的每日挑战。我们的 AI 创建新颖、激励性的任务，随你的进展和学习风格调整。"
+      },
+      "feature2": {
+        "title": "实时进度跟踪",
+        "description": "通过美观的可视化观察你的生活提升。跟踪连续完成的任务、成就，并通过交互式图表看到你的变化。"
+      },
+      "feature3": {
+        "title": "游戏化奖励系统",
+        "description": "获取经验值 (XP)、解锁成就，并与朋友竞争。通过我们的完整奖励系统，将枯燥任务变成令人兴奋的冒险。"
+      },
+      "feature4": {
+        "title": "全球社区",
+        "description": "加入全球数千名 LevelUp 用户。分享成就，获得动力，并找到旅途中的责任伙伴。"
+      },
+      "feature5": {
+        "title": "智能时间管理",
+        "description": "使用 AI 驱动的时间分配优化你的每日计划。在工作、健康、关系和个人成长之间取得平衡，实现最大生活满意度。"
+      },
+      "feature6": {
+        "title": "整体健康",
+        "description": "关注心理、身体和情绪健康。获取个性化健康任务，滋养你的身心灵，实现全面转变。"
+      }
+    },
+
+    "readMore": "了解更多",
+
+    "coreFeatures": {
+      "title": "核心功能",
+      "subtitle": "通过这些基本工具释放 LevelUp 的全部潜力",
+      "features": {
+        "feature1": {
+          "title": "AI 驱动的洞察",
+          "description": "基于你的进展模式和行为数据的智能推荐。",
+          "highlight": "全新"
+        },
+        "feature2": {
+          "title": "高级分析",
+          "description": "通过详细图表和趋势分析深入了解你的表现。",
+          "highlight": ""
+        },
+        "feature3": {
+          "title": "隐私优先",
+          "description": "端到端加密确保你的个人数据完全私密。",
+          "highlight": ""
+        },
+        "feature4": {
+          "title": "跨平台同步",
+          "description": "通过实时同步在所有设备上无缝访问你的任务。",
+          "highlight": ""
+        },
+        "feature5": {
+          "title": "智能排程",
+          "description": "AI 优化的时间块，根据你的精力和可用性调整。",
+          "highlight": "测试版"
+        },
+        "feature6": {
+          "title": "成就系统",
+          "description": "获得徽章，解锁称号，并通过全面的成就系统展示你的旅程。",
+          "highlight": ""
+        }
+      }
+    },
+
+    "integrationFeatures": {
+      "title": "无缝集成",
+      "description": "连接你喜爱的应用和服务，创建统一的生产力生态系统。",
+      "integrations": {
+        "integration1": "日历应用",
+        "integration2": "健身追踪器",
+        "integration3": "笔记应用",
+        "integration4": "音乐应用",
+        "integration5": "社交媒体",
+        "integration6": "健康应用",
+        "integration7": "任务管理器",
+        "integration8": "时间追踪器",
+        "integration9": "冥想应用",
+        "integration10": "阅读应用",
+        "integration11": "学习平台",
+        "integration12": "银行应用"
+      }
+    },
+
+    "comparisonSection": {
+      "title": "为什么选择 Level Up？",
+      "description": "看看我们与传统目标设定方法及其他应用的对比。",
+      "tableHeaders": {
+        "feature": "功能",
+        "levelUp": "Level Up",
+        "traditionalMethods": "传统方法",
+        "otherApps": "其他应用"
+      },
+      "features": {
+        "feature1": {
+          "name": "游戏化体验",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "有限"
+        },
+        "feature2": {
+          "name": "AI 驱动洞察",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "✗"
+        },
+        "feature3": {
+          "name": "社区支持",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "基础"
+        },
+        "feature4": {
+          "name": "跨平台同步",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "✓"
+        },
+        "feature5": {
+          "name": "高级分析",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "有限"
+        },
+        "feature6": {
+          "name": "隐私保护",
+          "levelUp": "✓",
+          "traditionalMethods": "✓",
+          "otherApps": "不定"
+        }
+      }
+    }
+  }
+
+,
   "CTASection": {
     "badgeText": "冒险在等着你",
     "titleMain": "准备好升级了吗？",
