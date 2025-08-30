@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
-import { Language } from '@/stores/useLanguage';
+import LanguageStore from '@/stores/useLanguage';
 import { validateLanguage } from '@/lib/language';
 import { Check, Zap, Crown, Rocket, Star, Users, Shield, Sparkles } from 'lucide-react';
 
@@ -14,7 +14,7 @@ interface PricingPageProps {
 
 const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
   const [isAnnual, setIsAnnual] = useState(false);
-  const [language, setLanguage] = useState<Language>('eng');
+  const { setLanguage, language } = LanguageStore();
 
   useEffect(() => {
     params.then(resolvedParams => {
