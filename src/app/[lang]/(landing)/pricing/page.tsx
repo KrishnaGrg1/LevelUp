@@ -153,7 +153,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
               {plans.map((plan, index) => (
                 <div
                   key={index}
-                  className={`relative p-8 rounded-3xl border transition-all duration-500 hover:scale-105 ${
+                  className={`relative p-8 rounded-3xl border transition-all duration-300 hover:scale-105 ${
                     plan.popular
                       ? 'border-purple-500/50 bg-gradient-to-br from-purple-900/20 to-indigo-900/20'
                       : 'border-slate-700/30 bg-gradient-to-br from-slate-800/30 to-slate-900/30 hover:border-purple-500/50'
@@ -203,7 +203,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
                   </ul>
 
                   <Link
-                    href="/en/signup"
+                    href={`/${language}/signup`}
                     className={`block w-full py-4 px-6 rounded-2xl font-bold text-center transition-all duration-300 hover:scale-105 ${
                       plan.popular
                         ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-500 hover:to-pink-500 shadow-lg hover:shadow-purple-500/25'
@@ -312,7 +312,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
             </div>
 
             <Link
-              href="/en/contact"
+              href={`/${language}/contact`}
               className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25"
             >
               <span>Contact Sales</span>
@@ -320,8 +320,6 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
             </Link>
           </div>
         </section>
-
-        <Footer />
       </div>
     </>
   );

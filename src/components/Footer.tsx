@@ -1,7 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
+import LanguageStore from '@/stores/useLanguage';
 
 const Footer: React.FC = () => {
+  const { language } = LanguageStore();
   return (
     <footer className="bg-black border-t border-slate-800 py-12">
       <div className="max-w-6xl mx-auto px-6">
@@ -19,7 +21,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/en/features"
+                  href={`/${language}/features`}
                   className="text-slate-400 hover:text-white transition-colors text-sm"
                 >
                   Features
@@ -27,7 +29,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  href="/en/pricing"
+                  href={`/${language}/pricing`}
                   className="text-slate-400 hover:text-white transition-colors text-sm"
                 >
                   Pricing
@@ -56,7 +58,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/en/about"
+                  href={`/${language}/about`}
                   className="text-slate-400 hover:text-white transition-colors text-sm"
                 >
                   About Us
@@ -64,7 +66,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  href="/en/contact"
+                  href={`/${language}/contact`}
                   className="text-slate-400 hover:text-white transition-colors text-sm"
                 >
                   Contact
@@ -101,7 +103,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  href="/en/contact"
+                  href={`/${language}/contact`}
                   className="text-slate-400 hover:text-white transition-colors text-sm"
                 >
                   Contact Support

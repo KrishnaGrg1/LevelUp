@@ -25,7 +25,7 @@ interface LanguageSwitcherProps {
   currentLang?: string;
 }
 
-export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ currentLang }) => {
+export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = () => {
   const [isClient, setIsClient] = useState(false);
   const pathname = usePathname();
   const { language, setLanguage } = LanguageStore();
@@ -34,13 +34,13 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ currentLang 
     setIsClient(true);
 
     // If currentLang is provided from URL, sync it with the store
-    if (currentLang) {
-      const validLang = validateLanguage(currentLang);
+    if (language) {
+      const validLang = validateLanguage(language);
       if (validLang !== language) {
         setLanguage(validLang);
       }
     }
-  }, [currentLang, language, setLanguage]);
+  }, [language, setLanguage]);
 
   const currentLanguage = languages.find(lang => lang.code === language) || languages[0];
 

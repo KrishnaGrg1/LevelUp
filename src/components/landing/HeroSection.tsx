@@ -2,12 +2,14 @@ import React from 'react';
 import Link from 'next/link';
 import { Sparkles, Zap, Play, Star, Shield, Users, ChevronDown } from 'lucide-react';
 import { t } from '@/translations/index';
+import LanguageStore from '@/stores/useLanguage';
 
 interface HeroSectionProps {
   className?: string;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
+  const { language } = LanguageStore();
   return (
     <section
       className={`relative py-32 text-center overflow-hidden min-h-screen flex items-center ${className}`}
@@ -52,7 +54,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
         {/* Enhanced CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
           <Link
-            href="/en/signup"
+            href={`/${language}/signup`}
             className="group relative inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-2xl font-bold text-xl text-white transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-indigo-500/30 transform hover:-translate-y-1"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur animate-pulse"></div>

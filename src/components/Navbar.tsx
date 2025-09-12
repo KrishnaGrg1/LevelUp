@@ -82,13 +82,13 @@ const Navbar: React.FC<NavbarProps> = ({ language: initialLanguage = 'eng' }) =>
               {t('nav.getStarted')}
             </Link>
             <div className="ml-3">
-              <LanguageSwitcher currentLang={currentLanguage} />
+              <LanguageSwitcher />
             </div>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center space-x-3">
-            <LanguageSwitcher currentLang={currentLanguage} />
+            <LanguageSwitcher />
             <Sheet>
               <SheetTrigger asChild>
                 <button className="p-2 text-slate-300 hover:text-white transition-colors rounded-lg hover:bg-slate-800/50">
