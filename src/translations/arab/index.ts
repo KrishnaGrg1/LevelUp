@@ -3,6 +3,7 @@ import success from './success.json';
 import auth from './auth.json';
 import nav from './nav.json';
 import landing from './landing.json';
+import footer from './footer.json';
 
 const arab = {
   auth,
@@ -10,6 +11,7 @@ const arab = {
   success,
   nav,
   landing,
+  footer,
 };
 
 export default arab;
