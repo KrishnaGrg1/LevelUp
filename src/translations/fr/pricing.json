@@ -1,0 +1,94 @@
+{
+  "hero": {
+    "badge": "Choisissez votre aventure",
+    "titleLine1": "Améliorez votre vie",
+    "titleLine2": "À votre manière",
+    "description": "Choisissez le plan qui correspond à vos ambitions. Commencez gratuitement et améliorez au fur et à mesure que vos aventures progressent."
+  },
+  "billing": {
+    "monthly": "Mensuel",
+    "annual": "Annuel",
+    "annualSave": "Économisez 17%"
+  },
+  "plans": {
+    "adventurer": {
+      "name": "Aventurier",
+      "description": "Parfait pour commencer votre voyage",
+      "button": "Commencer Gratuitement",
+      "features": [
+        "Jusqu'à 5 quêtes actives",
+        "Suivi de progression de base",
+        "Accès à la communauté",
+        "Application mobile",
+        "Réalisations de base",
+        "Rapports hebdomadaires"
+      ]
+    },
+    "hero": {
+      "name": "Héros",
+      "description": "Pour ceux qui veulent plus de puissance",
+      "button": "Passer au Héros",
+      "features": [
+        "Quêtes illimitées",
+        "Analyses avancées",
+        "Insights propulsés par l'IA",
+        "Support prioritaire",
+        "Modèles de quêtes personnalisés",
+        "Réalisations avancées",
+        "Collaboration en équipe",
+        "Exportation des données"
+      ]
+    },
+    "legend": {
+      "name": "Légende",
+      "description": "Puissance ultime pour les équipes et utilisateurs avancés",
+      "button": "Devenir Légende",
+      "features": [
+        "Tout ce qui est dans Héros",
+        "Gestion d'équipe",
+        "Intégrations avancées",
+        "Options en marque blanche",
+        "Branding personnalisé",
+        "Accès API",
+        "Gestionnaire de succès dédié",
+        "Sécurité avancée"
+      ]
+    }
+  },
+  "faq": [
+    {
+      "q": "Puis-je changer de plan à tout moment ?",
+      "a": "Oui ! Vous pouvez passer à un plan supérieur ou inférieur à tout moment. Les changements prennent effet immédiatement, et nous ajusterons la facturation au prorata."
+    },
+    {
+      "q": "Que se passe-t-il avec mes données si j'annule ?",
+      "a": "Vos données restent accessibles pendant 30 jours après l'annulation. Vous pouvez exporter vos progrès et données de quêtes avant suppression définitive."
+    },
+    {
+      "q": "Y a-t-il une remise pour les équipes ?",
+      "a": "Oui ! Les équipes de 10 utilisateurs ou plus bénéficient de 20 % de réduction sur n'importe quel plan. Contactez notre équipe commerciale pour des tarifs personnalisés."
+    },
+    {
+      "q": "Offrez-vous une garantie de remboursement ?",
+      "a": "Absolument ! Nous offrons une garantie de remboursement de 30 jours. Si vous n'êtes pas satisfait, nous vous rembourserons sans poser de questions."
+    }
+  ],
+  "enterprise": {
+    "0": {
+      "title": "Gestion d'équipe",
+      "description": "Gestion avancée des utilisateurs avec permissions basées sur les rôles"
+    },
+    "1": {
+      "title": "Sécurité entreprise",
+      "description": "Conformité SOC 2, SSO et protection avancée des données"
+    },
+    "2": {
+      "title": "Solutions personnalisées",
+      "description": "Fonctionnalités et intégrations adaptées à vos besoins"
+    },
+    "contactButton": "Contacter les ventes",
+    "badge": "Solutions Entreprise",
+    "title": "Prêt pour l'entreprise ?",
+    "description": "Obtenez des solutions personnalisées, un support dédié et une sécurité de niveau entreprise pour votre organisation."
+  }
+}

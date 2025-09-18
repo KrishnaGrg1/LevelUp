@@ -4,6 +4,7 @@ import auth from './auth.json';
 import nav from './nav.json';
 import landing from './landing.json';
 import footer from './footer.json';
+import pricing from './pricing.json';
 
 const eng = {
   auth,
@@ -12,6 +13,7 @@ const eng = {
   footer,
   nav,
   landing,
+  pricing,
 };
 
 export default eng;
