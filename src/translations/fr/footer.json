@@ -1,0 +1,29 @@
+{
+    "brand": "Level Up",
+    "tagline": "Transformez votre vie grâce à l’atteinte d’objectifs et la création d’habitudes gamifiées.",
+    "product": {
+      "title": "Produit",
+      "features": "Fonctionnalités",
+      "pricing": "Tarification",
+      "mobileApp": "Application mobile",
+      "integrations": "Intégrations"
+    },
+    "company": {
+      "title": "Entreprise",
+      "about": "À propos",
+      "contact": "Contact",
+      "careers": "Carrières",
+      "blog": "Blog"
+    },
+    "support": {
+      "title": "Support",
+      "helpCenter": "Centre d’aide",
+      "contactSupport": "Contacter le support",
+      "community": "Communauté",
+      "status": "Statut"
+    },
+    "copyright": "© 2024 Level Up. Tous droits réservés.",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d’utilisation",
+    "cookies": "Politique relative aux cookies"
+  }

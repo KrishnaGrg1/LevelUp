@@ -1,0 +1,29 @@
+{
+    "brand": "Level Up",
+    "tagline": "गेम जस्तै लक्ष्य प्राप्ति र बानी निर्माणमार्फत आफ्नो जीवन परिवर्तन गर्नुहोस्।",
+    "product": {
+      "title": "उत्पादन",
+      "features": "विशेषताहरू",
+      "pricing": "मूल्य",
+      "mobileApp": "मोबाइल एप",
+      "integrations": "एकीकरण"
+    },
+    "company": {
+      "title": "कम्पनी",
+      "about": "हाम्रो बारेमा",
+      "contact": "सम्पर्क",
+      "careers": "रोजगार अवसर",
+      "blog": "ब्लग"
+    },
+    "support": {
+      "title": "समर्थन",
+      "helpCenter": "सहायता केन्द्र",
+      "contactSupport": "समर्थन सम्पर्क",
+      "community": "समुदाय",
+      "status": "स्थिति"
+    },
+    "copyright": "© 2024 Level Up. सबै अधिकार सुरक्षित।",
+    "privacy": "गोपनीयता नीति",
+    "terms": "सेवा सर्तहरू",
+    "cookies": "कुकी नीति"
+  }

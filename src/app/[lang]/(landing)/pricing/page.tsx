@@ -6,7 +6,16 @@ import Footer from '@/components/Footer';
 import Link from 'next/link';
 import LanguageStore from '@/stores/useLanguage';
 import { validateLanguage } from '@/lib/language';
-import { Check, Zap, Crown, Rocket, Star, Users, Shield, Sparkles } from 'lucide-react';
+import {
+  Check,
+  Zap,
+  Crown,
+  Rocket,
+  Star,
+  Users,
+  Shield,
+  Sparkles,
+} from 'lucide-react';
 
 interface PricingPageProps {
   params: Promise<{ lang: string }>;
@@ -17,11 +26,11 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
   const { setLanguage, language } = LanguageStore();
 
   useEffect(() => {
-    params.then(resolvedParams => {
+    params.then((resolvedParams) => {
       const validatedLang = validateLanguage(resolvedParams.lang);
       setLanguage(validatedLang);
     });
-  }, [params]);
+  }, [params, setLanguage]);
 
   const plans = [
     {
@@ -91,13 +100,15 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
 
         {/* Hero Section */}
         <section className="relative py-32 text-center min-h-screen flex items-center">
-          <div className="absolute inset-0 bg-gradient-radial from-indigo-500/15 via-transparent to-transparent"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-indigo-500/30 to-purple-500/30 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute inset-0 bg-gradient-radial from-indigo-500/15 via-transparent to-transparent" />
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-indigo-500/30 to-purple-500/30 rounded-full blur-3xl animate-pulse" />
 
           <div className="relative mx-auto max-w-4xl px-6 z-10">
             <div className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-full border border-indigo-500/20 mb-8">
               <Crown className="w-4 h-4 text-indigo-400" />
-              <span className="text-indigo-300 text-sm font-medium">Choose Your Adventure</span>
+              <span className="text-indigo-300 text-sm font-medium">
+                Choose Your Adventure
+              </span>
             </div>
 
             <h1 className="text-6xl md:text-7xl font-black mb-8 leading-tight">
@@ -111,8 +122,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
             </h1>
 
             <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed mb-12">
-              Choose the plan that fits your ambitions. Start free and upgrade as your adventures
-              grow.
+              Choose the plan that fits your ambitions. Start free and upgrade as your adventures grow.
             </p>
 
             {/* Billing Toggle */}
@@ -125,14 +135,16 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
               <button
                 onClick={() => setIsAnnual(!isAnnual)}
                 className={`relative w-16 h-8 rounded-full transition-colors duration-300 ${
-                  isAnnual ? 'bg-gradient-to-r from-indigo-500 to-purple-500' : 'bg-slate-600'
+                  isAnnual
+                    ? 'bg-gradient-to-r from-indigo-500 to-purple-500'
+                    : 'bg-slate-600'
                 }`}
               >
                 <div
                   className={`absolute top-1 w-6 h-6 bg-white rounded-full transition-transform duration-300 ${
                     isAnnual ? 'translate-x-9' : 'translate-x-1'
                   }`}
-                ></div>
+                />
               </button>
               <span
                 className={`text-lg ${isAnnual ? 'text-white font-semibold' : 'text-slate-400'}`}
@@ -153,7 +165,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
               {plans.map((plan, index) => (
                 <div
                   key={index}
-                  className={`relative p-8 rounded-3xl border transition-all duration-300 hover:scale-105 ${
+                  className={`relative p-8 rounded-3xl border transition-all duration-500 hover:scale-105 ${
                     plan.popular
                       ? 'border-purple-500/50 bg-gradient-to-br from-purple-900/20 to-indigo-900/20'
                       : 'border-slate-700/30 bg-gradient-to-br from-slate-800/30 to-slate-900/30 hover:border-purple-500/50'
@@ -171,7 +183,9 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
                     >
                       <plan.icon className="w-8 h-8 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
+                    <h3 className="text-2xl font-bold text-white mb-2">
+                      {plan.name}
+                    </h3>
                     <p className="text-slate-400 mb-6">{plan.description}</p>
 
                     <div className="mb-6">
@@ -203,7 +217,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
                   </ul>
 
                   <Link
-                    href={`/${language}/signup`}
+                    href="/en/signup"
                     className={`block w-full py-4 px-6 rounded-2xl font-bold text-center transition-all duration-300 hover:scale-105 ${
                       plan.popular
                         ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-500 hover:to-pink-500 shadow-lg hover:shadow-purple-500/25'
@@ -270,16 +284,16 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
           <div className="relative mx-auto max-w-6xl px-6 z-10 text-center">
             <div className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full border border-purple-500/20 mb-8">
               <Shield className="w-4 h-4 text-purple-400" />
-              <span className="text-purple-300 text-sm font-medium">Enterprise Solutions</span>
+              <span className="text-purple-300 text-sm font-medium">
+                Enterprise Solutions
+              </span>
             </div>
 
             <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
               Ready for Enterprise?
             </h2>
-
             <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed mb-12">
-              Get custom solutions, dedicated support, and enterprise-grade security for your
-              organization.
+              Get custom solutions, dedicated support, and enterprise-grade security for your organization.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
@@ -312,7 +326,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
             </div>
 
             <Link
-              href={`/${language}/contact`}
+              href="/en/contact"
               className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25"
             >
               <span>Contact Sales</span>
@@ -320,6 +334,8 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
             </Link>
           </div>
         </section>
+
+        <Footer />
       </div>
     </>
   );

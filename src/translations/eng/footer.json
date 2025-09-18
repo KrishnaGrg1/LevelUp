@@ -1,0 +1,29 @@
+{
+    "brand": "Level Up",
+    "tagline": "Transform your life through gamified goal achievement and habit building.",
+    "product": {
+      "title": "Product",
+      "features": "Features",
+      "pricing": "Pricing",
+      "mobileApp": "Mobile App",
+      "integrations": "Integrations"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About Us",
+      "contact": "Contact",
+      "careers": "Careers",
+      "blog": "Blog"
+    },
+    "support": {
+      "title": "Support",
+      "helpCenter": "Help Center",
+      "contactSupport": "Contact Support",
+      "community": "Community",
+      "status": "Status"
+    },
+    "copyright": "© 2024 Level Up. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "cookies": "Cookie Policy"
+  }

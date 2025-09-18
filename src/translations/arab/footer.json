@@ -1,0 +1,29 @@
+{
+    "brand": "Level Up",
+    "tagline": "حوّل حياتك من خلال تحقيق الأهداف وبناء العادات بأسلوب مُشَوَّق يشبه الألعاب.",
+    "product": {
+      "title": "المنتج",
+      "features": "الميزات",
+      "pricing": "الأسعار",
+      "mobileApp": "تطبيق الهاتف",
+      "integrations": "التكاملات"
+    },
+    "company": {
+      "title": "الشركة",
+      "about": "معلومات عنا",
+      "contact": "اتصل بنا",
+      "careers": "الوظائف",
+      "blog": "المدونة"
+    },
+    "support": {
+      "title": "الدعم",
+      "helpCenter": "مركز المساعدة",
+      "contactSupport": "اتصل بالدعم",
+      "community": "المجتمع",
+      "status": "الحالة"
+    },
+    "copyright": "© 2024 Level Up. جميع الحقوق محفوظة.",
+    "privacy": "سياسة الخصوصية",
+    "terms": "شروط الخدمة",
+    "cookies": "سياسة ملفات تعريف الارتباط"
+  }
