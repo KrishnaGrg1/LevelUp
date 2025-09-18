@@ -4,7 +4,7 @@ import auth from './auth.json';
 import nav from './nav.json';
 import landing from './landing.json';
 import footer from './footer.json';
-import pricing from './pricing.json'
+import pricing from './pricing.json';
 
 const nep = {
   auth,

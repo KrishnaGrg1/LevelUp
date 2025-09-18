@@ -55,6 +55,9 @@
       ]
     }
   },
+  "faqTitle": "Questions Fréquemment Posées",
+  "faqSubtitle": "Tout ce que vous devez savoir sur les tarifs et fonctionnalités de Level Up.",
+
   "faq": [
     {
       "q": "Puis-je changer de plan à tout moment ?",

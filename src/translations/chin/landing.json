@@ -13,7 +13,7 @@
     "secure": "100% 安全",
     "activeUsers": "20k+ 活跃用户"
   },
- 
+
   "FeaturesSection": {
     "hero": {
       "badge": "全新升级！",
@@ -159,9 +159,8 @@
         }
       }
     }
-  }
+  },
 
-,
   "CTASection": {
     "badgeText": "冒险在等着你",
     "titleMain": "准备好升级了吗？",

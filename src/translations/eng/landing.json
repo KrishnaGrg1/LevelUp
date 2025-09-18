@@ -14,43 +14,43 @@
     "activeUsers": "20k+ Active Users"
   },
   "FeaturesSection": {
-      "hero": {
-        "badge": "New & Improved!",
-        "title1": "Gamify Your Goals",
-        "title2": "Level Up Your Life",
-        "description": "Transform your daily habits into exciting achievements with our gamified system."
-      },
+    "hero": {
+      "badge": "New & Improved!",
+      "title1": "Gamify Your Goals",
+      "title2": "Level Up Your Life",
+      "description": "Transform your daily habits into exciting achievements with our gamified system."
+    },
 
     "features": {
-       "badge": "Why Choose LevelUp?",
-        "badgeText": "Powerful Features",
-        "description": "Discover the revolutionary features that make Level Up the ultimate life gamification platform",
-        "titleMain": "Epic Features",
-        "feature1": {
-          "title": "AI-Powered Daily Quests",
-          "description": "Get personalized daily challenges tailored to your goals. Our AI creates fresh, motivating quests that adapt to your progress and learning style."
-        },
-        "feature2": {
-          "title": "Real-Time Progress Tracking",
-          "description": "Watch your life level up with beautiful visualizations. Track streaks, achievements, and see your transformation through interactive charts."
-        },
-        "feature3": {
-          "title": "Gamified Rewards System",
-          "description": "Earn XP, unlock achievements, and compete with friends. Transform boring tasks into exciting adventures with our comprehensive reward system."
-        },
-        "feature4": {
-          "title": "Global Community",
-          "description": "Join thousands of life-levelers worldwide. Share achievements, get motivated, and find accountability partners on your journey to greatness."
-        },
-        "feature5": {
-          "title": "Smart Time Management",
-          "description": "Optimize your daily schedule with AI-driven time allocation. Balance work, health, relationships, and personal growth for maximum life satisfaction."
-        },
-        "feature6": {
-          "title": "Holistic Wellness",
-          "description": "Focus on mental, physical, and emotional well-being. Get personalized wellness quests that nurture your mind, body, and soul for complete transformation."
-        }
+      "badge": "Why Choose LevelUp?",
+      "badgeText": "Powerful Features",
+      "description": "Discover the revolutionary features that make Level Up the ultimate life gamification platform",
+      "titleMain": "Epic Features",
+      "feature1": {
+        "title": "AI-Powered Daily Quests",
+        "description": "Get personalized daily challenges tailored to your goals. Our AI creates fresh, motivating quests that adapt to your progress and learning style."
       },
+      "feature2": {
+        "title": "Real-Time Progress Tracking",
+        "description": "Watch your life level up with beautiful visualizations. Track streaks, achievements, and see your transformation through interactive charts."
+      },
+      "feature3": {
+        "title": "Gamified Rewards System",
+        "description": "Earn XP, unlock achievements, and compete with friends. Transform boring tasks into exciting adventures with our comprehensive reward system."
+      },
+      "feature4": {
+        "title": "Global Community",
+        "description": "Join thousands of life-levelers worldwide. Share achievements, get motivated, and find accountability partners on your journey to greatness."
+      },
+      "feature5": {
+        "title": "Smart Time Management",
+        "description": "Optimize your daily schedule with AI-driven time allocation. Balance work, health, relationships, and personal growth for maximum life satisfaction."
+      },
+      "feature6": {
+        "title": "Holistic Wellness",
+        "description": "Focus on mental, physical, and emotional well-being. Get personalized wellness quests that nurture your mind, body, and soul for complete transformation."
+      }
+    },
     "readMore": "Learn more",
 
     "coreFeatures": {
@@ -61,109 +61,103 @@
           "title": "AI-Powered Insights",
           "description": "Smart recommendations based on your progress patterns and behavioral data.",
           "highlight": "NEW"
-         
         },
-      "feature2": {
-        "title": "Advanced Analytics",
-        "description": "Deep dive into your performance with detailed charts and trend analysis.",
-        "highlight": ""
-       
-      },
-      "feature3": {
-        "title": "Privacy First",
-        "description": "End-to-end encryption ensures your personal data stays completely private.",
-        "highlight": ""
-        
-      },
-      "feature4": {
-        "title": "Cross-Platform Sync",
-        "description": "Seamlessly access your quests across all devices with real-time synchronization.",
-        "highlight": ""
-      },
-      "feature5": {
-        "title": "Smart Scheduling",
-        "description": "AI-optimized time blocks that adapt to your energy levels and availability.",
-        "highlight": "BETA"
-      },
-      "feature6": {
-        "title": "Achievement System",
-        "description": "Earn badges, unlock titles, and showcase your journey with a comprehensive achievement system.",
-        "highlight": ""
+        "feature2": {
+          "title": "Advanced Analytics",
+          "description": "Deep dive into your performance with detailed charts and trend analysis.",
+          "highlight": ""
+        },
+        "feature3": {
+          "title": "Privacy First",
+          "description": "End-to-end encryption ensures your personal data stays completely private.",
+          "highlight": ""
+        },
+        "feature4": {
+          "title": "Cross-Platform Sync",
+          "description": "Seamlessly access your quests across all devices with real-time synchronization.",
+          "highlight": ""
+        },
+        "feature5": {
+          "title": "Smart Scheduling",
+          "description": "AI-optimized time blocks that adapt to your energy levels and availability.",
+          "highlight": "BETA"
+        },
+        "feature6": {
+          "title": "Achievement System",
+          "description": "Earn badges, unlock titles, and showcase your journey with a comprehensive achievement system.",
+          "highlight": ""
+        }
       }
-  }
     },
 
     "integrationFeatures": {
-    "title": "Seamless Integrations",
-    "description": "Connect with your favorite apps and services to create a unified productivity ecosystem.",
-    "integrations": {
-      "integration1": "Calendar Apps",
-      "integration2": "Fitness Trackers",
-      "integration3": "Note Taking",
-      "integration4": "Music Apps",
-      "integration5": "Social Media",
-      "integration6": "Health Apps",
-      "integration7": "Task Managers",
-      "integration8": "Time Trackers",
-      "integration9": "Meditation",
-      "integration10": "Reading Apps",
-      "integration11": "Learning Platforms",
-      "integration12": "Banking Apps"
-    }
-  },
-  
+      "title": "Seamless Integrations",
+      "description": "Connect with your favorite apps and services to create a unified productivity ecosystem.",
+      "integrations": {
+        "integration1": "Calendar Apps",
+        "integration2": "Fitness Trackers",
+        "integration3": "Note Taking",
+        "integration4": "Music Apps",
+        "integration5": "Social Media",
+        "integration6": "Health Apps",
+        "integration7": "Task Managers",
+        "integration8": "Time Trackers",
+        "integration9": "Meditation",
+        "integration10": "Reading Apps",
+        "integration11": "Learning Platforms",
+        "integration12": "Banking Apps"
+      }
+    },
 
-   "comparisonSection": {
-    "title": "Why Choose Level Up?",
-    "description": "See how we compare to traditional goal-setting methods and other apps.",
-    "tableHeaders": {
-      "feature": "Feature",
-      "levelUp": "Level Up",
-      "traditionalMethods": "Traditional Methods",
-      "otherApps": "Other Apps"
-  },
-    "features": {
-      "feature1": {
-        "name": "Gamified Experience",
-        "levelUp": "✓",
-        "traditionalMethods": "✗",
-        "otherApps": "Limited"
+    "comparisonSection": {
+      "title": "Why Choose Level Up?",
+      "description": "See how we compare to traditional goal-setting methods and other apps.",
+      "tableHeaders": {
+        "feature": "Feature",
+        "levelUp": "Level Up",
+        "traditionalMethods": "Traditional Methods",
+        "otherApps": "Other Apps"
       },
-      "feature2": {
-        "name": "AI-Powered Insights",
-        "levelUp": "✓",
-        "traditionalMethods": "✗",
-        "otherApps": "✗"
-      },
-      "feature3": {
-        "name": "Community Support",
-        "levelUp": "✓",
-        "traditionalMethods": "✗",
-        "otherApps": "Basic"
-      },
-      "feature4": {
-        "name": "Cross-Platform Sync",
-        "levelUp": "✓",
-        "traditionalMethods": "✗",
-        "otherApps": "✓"
-      },
-      "feature5": {
-        "name": "Advanced Analytics",
-        "levelUp": "✓",
-        "traditionalMethods": "✗",
-        "otherApps": "Limited"
-      },
-      "feature6": {
-        "name": "Privacy Protection",
-        "levelUp": "✓",
-        "traditionalMethods": "✓",
-        "otherApps": "Varies"
+      "features": {
+        "feature1": {
+          "name": "Gamified Experience",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "Limited"
+        },
+        "feature2": {
+          "name": "AI-Powered Insights",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "✗"
+        },
+        "feature3": {
+          "name": "Community Support",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "Basic"
+        },
+        "feature4": {
+          "name": "Cross-Platform Sync",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "✓"
+        },
+        "feature5": {
+          "name": "Advanced Analytics",
+          "levelUp": "✓",
+          "traditionalMethods": "✗",
+          "otherApps": "Limited"
+        },
+        "feature6": {
+          "name": "Privacy Protection",
+          "levelUp": "✓",
+          "traditionalMethods": "✓",
+          "otherApps": "Varies"
+        }
       }
     }
-  }
-    
-},
-
+  },
 
   "CTASection": {
     "badgeText": "Your Adventure Awaits",

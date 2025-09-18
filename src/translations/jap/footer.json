@@ -1,29 +1,29 @@
 {
-    "brand": "Level Up",
-    "tagline": "ゲーム感覚の目標達成と習慣づくりで人生を変えましょう。",
-    "product": {
-      "title": "製品",
-      "features": "機能",
-      "pricing": "料金",
-      "mobileApp": "モバイルアプリ",
-      "integrations": "連携"
-    },
-    "company": {
-      "title": "会社",
-      "about": "私たちについて",
-      "contact": "お問い合わせ",
-      "careers": "採用情報",
-      "blog": "ブログ"
-    },
-    "support": {
-      "title": "サポート",
-      "helpCenter": "ヘルプセンター",
-      "contactSupport": "サポートに連絡",
-      "community": "コミュニティ",
-      "status": "ステータス"
-    },
-    "copyright": "© 2024 Level Up. 無断転載を禁じます。",
-    "privacy": "プライバシーポリシー",
-    "terms": "利用規約",
-    "cookies": "クッキーポリシー"
-  }
+  "brand": "Level Up",
+  "tagline": "ゲーム感覚の目標達成と習慣づくりで人生を変えましょう。",
+  "product": {
+    "title": "製品",
+    "features": "機能",
+    "pricing": "料金",
+    "mobileApp": "モバイルアプリ",
+    "integrations": "連携"
+  },
+  "company": {
+    "title": "会社",
+    "about": "私たちについて",
+    "contact": "お問い合わせ",
+    "careers": "採用情報",
+    "blog": "ブログ"
+  },
+  "support": {
+    "title": "サポート",
+    "helpCenter": "ヘルプセンター",
+    "contactSupport": "サポートに連絡",
+    "community": "コミュニティ",
+    "status": "ステータス"
+  },
+  "copyright": "© 2024 Level Up. 無断転載を禁じます。",
+  "privacy": "プライバシーポリシー",
+  "terms": "利用規約",
+  "cookies": "クッキーポリシー"
+}

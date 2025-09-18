@@ -1,30 +1,29 @@
 {
-    "brand": "Level Up",
-    "tagline": "通过游戏化的目标实现和习惯养成来改变你的生活。",
-    "product": {
-      "title": "产品",
-      "features": "功能",
-      "pricing": "定价",
-      "mobileApp": "移动应用",
-      "integrations": "整合"
-    },
-    "company": {
-      "title": "公司",
-      "about": "关于我们",
-      "contact": "联系我们",
-      "careers": "招聘",
-      "blog": "博客"
-    },
-    "support": {
-      "title": "支持",
-      "helpCenter": "帮助中心",
-      "contactSupport": "联系支持",
-      "community": "社区",
-      "status": "状态"
-    },
-    "copyright": "© 2024 Level Up. 保留所有权利。",
-    "privacy": "隐私政策",
-    "terms": "服务条款",
-    "cookies": "Cookie 政策"
-  }
-
+  "brand": "Level Up",
+  "tagline": "通过游戏化的目标实现和习惯养成来改变你的生活。",
+  "product": {
+    "title": "产品",
+    "features": "功能",
+    "pricing": "定价",
+    "mobileApp": "移动应用",
+    "integrations": "整合"
+  },
+  "company": {
+    "title": "公司",
+    "about": "关于我们",
+    "contact": "联系我们",
+    "careers": "招聘",
+    "blog": "博客"
+  },
+  "support": {
+    "title": "支持",
+    "helpCenter": "帮助中心",
+    "contactSupport": "联系支持",
+    "community": "社区",
+    "status": "状态"
+  },
+  "copyright": "© 2024 Level Up. 保留所有权利。",
+  "privacy": "隐私政策",
+  "terms": "服务条款",
+  "cookies": "Cookie 政策"
+}

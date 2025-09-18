@@ -1,29 +1,29 @@
 {
-    "brand": "Level Up",
-    "tagline": "Transforma tu vida mediante la consecución de objetivos y la creación de hábitos gamificados.",
-    "product": {
-      "title": "Producto",
-      "features": "Funciones",
-      "pricing": "Precios",
-      "mobileApp": "Aplicación móvil",
-      "integrations": "Integraciones"
-    },
-    "company": {
-      "title": "Compañía",
-      "about": "Sobre nosotros",
-      "contact": "Contacto",
-      "careers": "Carreras",
-      "blog": "Blog"
-    },
-    "support": {
-      "title": "Soporte",
-      "helpCenter": "Centro de ayuda",
-      "contactSupport": "Contactar soporte",
-      "community": "Comunidad",
-      "status": "Estado"
-    },
-    "copyright": "© 2024 Level Up. Todos los derechos reservados.",
-    "privacy": "Política de privacidad",
-    "terms": "Términos de servicio",
-    "cookies": "Política de cookies"
-  }
+  "brand": "Level Up",
+  "tagline": "Transforma tu vida mediante la consecución de objetivos y la creación de hábitos gamificados.",
+  "product": {
+    "title": "Producto",
+    "features": "Funciones",
+    "pricing": "Precios",
+    "mobileApp": "Aplicación móvil",
+    "integrations": "Integraciones"
+  },
+  "company": {
+    "title": "Compañía",
+    "about": "Sobre nosotros",
+    "contact": "Contacto",
+    "careers": "Carreras",
+    "blog": "Blog"
+  },
+  "support": {
+    "title": "Soporte",
+    "helpCenter": "Centro de ayuda",
+    "contactSupport": "Contactar soporte",
+    "community": "Comunidad",
+    "status": "Estado"
+  },
+  "copyright": "© 2024 Level Up. Todos los derechos reservados.",
+  "privacy": "Política de privacidad",
+  "terms": "Términos de servicio",
+  "cookies": "Política de cookies"
+}

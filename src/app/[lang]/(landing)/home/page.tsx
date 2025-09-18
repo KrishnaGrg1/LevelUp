@@ -14,7 +14,6 @@ import { CategoryFilter } from '@/components/landing/categoryFilter';
 import { CommunityCard } from '@/components/landing/communityCard';
 import { CommunityList } from '@/components/landing/communityLists';
 
-
 const HomePage: React.FC<PageProps> = ({ params }) => {
   const statsRef = useRef<HTMLDivElement>(null);
   const { setLanguage } = LanguageStore();
@@ -141,7 +140,6 @@ const HomePage: React.FC<PageProps> = ({ params }) => {
         ]}
       />
 
-
       {/* <CommunityCard
         name="Sample Community"
         description="This is a sample community description."
@@ -151,8 +149,6 @@ const HomePage: React.FC<PageProps> = ({ params }) => {
         category="General"
         isJoined={false}
       /> */}
-
-
 
       <FeaturesSection />
       {/* Stats Section */}

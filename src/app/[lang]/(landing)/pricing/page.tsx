@@ -1,37 +1,28 @@
-'use client'
+'use client';
 
-import React, { useState, useEffect } from 'react'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import Link from 'next/link'
-import LanguageStore from '@/stores/useLanguage'
-import { validateLanguage } from '@/lib/language'
-import { t } from '@/translations'
-import {
-  Check,
-  Zap,
-  Crown,
-  Rocket,
-  Star,
-  Users,
-  Shield,
-  Sparkles,
-} from 'lucide-react'
+import React, { useState, useEffect } from 'react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import Link from 'next/link';
+import LanguageStore from '@/stores/useLanguage';
+import { validateLanguage } from '@/lib/language';
+import { t } from '@/translations';
+import { Check, Zap, Crown, Rocket, Star, Users, Shield, Sparkles } from 'lucide-react';
 
 interface PricingPageProps {
-  params: Promise<{ lang: string }>
+  params: Promise<{ lang: string }>;
 }
 
 const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
-  const [isAnnual, setIsAnnual] = useState(false)
-  const { setLanguage, language } = LanguageStore()
+  const [isAnnual, setIsAnnual] = useState(false);
+  const { setLanguage, language } = LanguageStore();
 
   useEffect(() => {
-    params.then((resolvedParams) => {
-      const validatedLang = validateLanguage(resolvedParams.lang)
-      setLanguage(validatedLang)
-    })
-  }, [params, setLanguage])
+    params.then(resolvedParams => {
+      const validatedLang = validateLanguage(resolvedParams.lang);
+      setLanguage(validatedLang);
+    });
+  }, [params, setLanguage]);
 
   const plans = [
     {
@@ -92,7 +83,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
       buttonText: t('pricing.plans.legend.button'),
       popular: false,
     },
-  ]
+  ];
 
   const faqs = [
     {
@@ -111,7 +102,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
       q: t('pricing.faq.3.q'),
       a: t('pricing.faq.3.a'),
     },
-  ]
+  ];
 
   const enterprise = [
     {
@@ -129,7 +120,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
       title: t('pricing.enterprise.2.title'),
       description: t('pricing.enterprise.2.description'),
     },
-  ]
+  ];
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
@@ -143,9 +134,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
         <div className="relative mx-auto max-w-4xl px-6 z-10">
           <div className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-full border border-indigo-500/20 mb-8">
             <Crown className="w-4 h-4 text-indigo-400" />
-            <span className="text-indigo-300 text-sm font-medium">
-              {t('pricing.hero.badge')}
-            </span>
+            <span className="text-indigo-300 text-sm font-medium">{t('pricing.hero.badge')}</span>
           </div>
 
           <h1 className="text-6xl md:text-7xl font-black mb-8 leading-tight">
@@ -164,15 +153,15 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
 
           {/* Billing toggle */}
           <div className="flex items-center justify-center space-x-4 mb-12">
-            <span className={`text-lg ${!isAnnual ? 'text-white font-semibold' : 'text-slate-400'}`}>
+            <span
+              className={`text-lg ${!isAnnual ? 'text-white font-semibold' : 'text-slate-400'}`}
+            >
               {t('pricing.billing.monthly')}
             </span>
             <button
               onClick={() => setIsAnnual(!isAnnual)}
               className={`relative w-16 h-8 rounded-full transition-colors duration-300 ${
-                isAnnual
-                  ? 'bg-gradient-to-r from-indigo-500 to-purple-500'
-                  : 'bg-slate-600'
+                isAnnual ? 'bg-gradient-to-r from-indigo-500 to-purple-500' : 'bg-slate-600'
               }`}
             >
               <div
@@ -210,7 +199,9 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
               )}
 
               <div className="text-center mb-8">
-                <div className={`w-16 h-16 bg-gradient-to-r ${plan.color} rounded-2xl mx-auto mb-4 flex items-center justify-center`}>
+                <div
+                  className={`w-16 h-16 bg-gradient-to-r ${plan.color} rounded-2xl mx-auto mb-4 flex items-center justify-center`}
+                >
                   <plan.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
@@ -227,7 +218,8 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
                   </div>
                   {isAnnual && plan.monthlyPrice > 0 && (
                     <div className="text-slate-400 text-sm">
-                      ${(plan.annualPrice / 12).toFixed(2)}/{t('pricing.billing.month')} {t('pricing.billing.billedAnnually')}
+                      ${(plan.annualPrice / 12).toFixed(2)}/{t('pricing.billing.month')}{' '}
+                      {t('pricing.billing.billedAnnually')}
                     </div>
                   )}
                 </div>
@@ -324,9 +316,8 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
           </Link>
         </div>
       </section>
-
     </div>
-  )
-}
+  );
+};
 
-export default PricingPage
+export default PricingPage;
