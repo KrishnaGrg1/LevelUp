@@ -5,11 +5,13 @@ import nav from './nav.json';
 import landing from './landing.json';
 import footer from './footer.json';
 import pricing from './pricing.json';
+import dashboard from './dashboard.json';
 
 const fr = {
   auth,
   error,
   success,
+  dashboard,
   pricing,
   footer,
   nav,

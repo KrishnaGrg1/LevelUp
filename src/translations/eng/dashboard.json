@@ -1,0 +1,24 @@
+{
+  "myCommunities": {
+    "reactMembers": "15,420 members",
+    "uiuxMembers": "8,932 members",
+    "title": "My Communities",
+    "new": "new",
+    "level": "Level"
+  },
+  "stats": {
+    "totalLevel": "Total Level",
+    "communities": "Communities",
+    "questsDone": "Quests Done",
+    "streak": "Streak"
+  },
+  "quests": {
+    "hookTitle": "Share a React Hook",
+    "hookTime": "18h left",
+    "reviewTitle": "Review 3 Designs",
+    "completed": "Completed",
+    "nnTitle": "Explain Neural Networks",
+    "nnTime": "15h left",
+    "title": "Today's Quests"
+  }
+}

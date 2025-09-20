@@ -1,0 +1,24 @@
+{
+  "myCommunities": {
+    "reactMembers": "१५,४२० सदस्य",
+    "uiuxMembers": "८,९३२ सदस्य",
+    "title": "मेरो समुदायहरू",
+    "new": "नयाँ",
+    "level": "स्तर"
+  },
+  "stats": {
+    "totalLevel": "कुल स्तर",
+    "communities": "समुदायहरू",
+    "questsDone": "पूरा भएका क्वेस्ट",
+    "streak": "लगातार दिन"
+  },
+  "quests": {
+    "hookTitle": "एक React Hook साझेदारी गर्नुहोस्",
+    "hookTime": "१८ घण्टा बाँकी",
+    "reviewTitle": "३ डिजाइन समीक्षा गर्नुहोस्",
+    "completed": "पूरा भयो",
+    "nnTitle": "न्युरल नेटवर्कहरू व्याख्या गर्नुहोस्",
+    "nnTime": "१५ घण्टा बाँकी",
+    "title": "आजका क्वेस्ट"
+  }
+}

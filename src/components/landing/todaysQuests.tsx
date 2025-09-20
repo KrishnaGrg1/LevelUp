@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { t } from '@/translations';
 
 interface Quest {
   title: string;
@@ -14,33 +15,33 @@ interface Quest {
 const TodaysQuests = () => {
   const quests: Quest[] = [
     {
-      title: 'Share a React Hook',
+      title: t('dashboard.quests.hookTitle', 'Share a React Hook'),
       xp: 150,
       difficulty: 'Easy',
       community: 'React Developers',
-      timeLeft: '18h left',
+      timeLeft: t('dashboard.quests.hookTime', '18h left'),
     },
     {
-      title: 'Review 3 Designs',
+      title: t('dashboard.quests.reviewTitle', 'Review 3 Designs'),
       xp: 200,
       difficulty: 'Medium',
       community: 'UI/UX Design Masters',
-      timeLeft: 'Completed',
+      timeLeft: t('dashboard.quests.completed', 'Completed'),
       completed: true,
     },
     {
-      title: 'Explain Neural Networks',
+      title: t('dashboard.quests.nnTitle', 'Explain Neural Networks'),
       xp: 300,
       difficulty: 'Hard',
       community: 'Python AI Community',
-      timeLeft: '15h left',
+      timeLeft: t('dashboard.quests.nnTime', '15h left'),
     },
   ];
 
   return (
-    <section className="py-16 px-6 bg-gradient-to-b  rounded-3xl">
+    <section className="py-16 px-6 bg-gradient-to-b rounded-3xl">
       <h2 className="text-4xl font-black mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
-        Today&#39;s Quests
+        {t('dashboard.quests.title', "Today's Quests")}
       </h2>
 
       <div className="grid md:grid-cols-2 gap-6">
