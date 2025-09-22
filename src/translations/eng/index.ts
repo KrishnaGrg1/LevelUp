@@ -6,11 +6,13 @@ import landing from './landing.json';
 import footer from './footer.json';
 import pricing from './pricing.json';
 import dashboard from './dashboard.json';
+import profile from './profile.json';
 
 const eng = {
   auth,
   error,
   success,
+  profile,
   dashboard,
   footer,
   nav,

@@ -1,0 +1,14 @@
+{
+  "userFallback": "Usuario",
+  "unnamedUser": "Usuario sin nombre",
+  "welcomeBack": "¡Bienvenido de nuevo! Aquí está la información de tu perfil.",
+  "email": "Correo electrónico",
+  "notAvailable": "No disponible",
+  "language": "Idioma",
+  "level": "Nivel",
+  "xp": "XP",
+  "username": "Nombre de usuario",
+  "unknown": "Desconocido",
+  "memberSince": "Miembro desde",
+  "na": "N/D"
+}
