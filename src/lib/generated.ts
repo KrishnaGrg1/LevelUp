@@ -191,3 +191,14 @@ export interface OAuthRequest {
   code: string; // Authorization code from OAuth callback
   redirectUri?: string; // Optional, default handled in env
 }
+export interface LogoutRequest {
+  auth_session: string;
+}
+export interface LogoutResponse {
+  statusCode: number;
+  headers: Record<string, string>;
+  body: {
+    message: string;
+    data: User;
+  };
+}

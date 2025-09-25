@@ -1,3 +1,4 @@
+import lang from '@/translations/lang';
 import axiosInstance from '../fetch';
 import type {
   UserRegisterResponse,
@@ -7,6 +8,8 @@ import type {
   UserVerifyInput,
   UserVerifyResponse,
   OAuthRequest,
+  LogoutRequest,
+  LogoutResponse,
 } from '../generated';
 import { Language } from '@/stores/useLanguage';
 
@@ -154,6 +157,33 @@ export const oauthRegisterUser = async (data: OAuthRequest, lang: Language) => {
     };
     const errorMessage =
       err.response?.data?.body?.message || err.response?.data?.message || 'Registration failed';
+    const errorDetail = err.response?.data?.body?.error || err.response?.data?.error;
+
+    throw { message: errorMessage, error: errorDetail };
+  }
+};
+
+export const logout = async (lang: Language) => {
+  try {
+    const response = await axiosInstance.post<LogoutResponse>(
+      `/auth/logout`,
+      {},
+      {
+        withCredentials: true,
+        headers: {
+          'X-Language': lang,
+        },
+      },
+    );
+    return response.data;
+  } catch (error: unknown) {
+    const err = error as {
+      response?: {
+        data?: { body?: { message?: string; error?: string }; message?: string; error?: string };
+      };
+    };
+    const errorMessage =
+      err.response?.data?.body?.message || err.response?.data?.message || 'Logout failed';
     const errorDetail = err.response?.data?.body?.error || err.response?.data?.error;
 
     throw { message: errorMessage, error: errorDetail };
