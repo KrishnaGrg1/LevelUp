@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import authStore from '@/stores/useAuth';
 import LanguageStore from '@/stores/useLanguage';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { ProfileDropdownMenu } from '@/components/ProfileDropdown';
 
 type Particle = {
   x: number;
@@ -123,6 +124,7 @@ export default function HomeLayout({ children }: { children: React.ReactNode }) 
       <div className="relative z-10">
         <div className="flex justify-end p-4">
           <LanguageSwitcher currentLang={language} />
+          <ProfileDropdownMenu />
         </div>
         <div className="min-h-screen p-4">{children}</div>
       </div>
