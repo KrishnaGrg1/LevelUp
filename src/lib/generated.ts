@@ -145,7 +145,10 @@ export interface Quest {
 export interface UserLoginResponse {
   statusCode: number;
   body: {
-    data: User;
+    data: {
+      isadmin: boolean;
+      expiredAt: string;
+    };
     message: string;
   };
 }
@@ -165,7 +168,10 @@ export interface UserRegisterResponse {
   headers: Record<string, string>;
   body: {
     message: string;
-    data: User;
+    data: {
+      isadmin: boolean;
+      expiredAt: string;
+    };
   };
 }
 
@@ -175,8 +181,8 @@ export interface UserVerifyResponse {
   body: {
     message: string;
     data: {
-      token: string;
-      user: User;
+      isadmin: boolean;
+      expiredAt: string;
     };
   };
 }
