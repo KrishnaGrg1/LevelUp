@@ -1,4 +1,3 @@
-import lang from '@/translations/lang';
 import axiosInstance from '../fetch';
 import type {
   UserRegisterResponse,
@@ -8,7 +7,7 @@ import type {
   UserVerifyInput,
   UserVerifyResponse,
   OAuthRequest,
-  LogoutRequest,
+  // LogoutRequest,
   LogoutResponse,
 } from '../generated';
 import { Language } from '@/stores/useLanguage';
@@ -55,7 +54,7 @@ export const registerUser = async (data: UserRegisterInput, lang: Language) => {
 
 export const VerifyUser = async (data: UserVerifyInput, lang: Language) => {
   try {
-    const response = await axiosInstance.post<UserVerifyResponse>(`/auth/verify-otp`, data, {
+    const response = await axiosInstance.post<UserVerifyResponse>(`/auth/verify-email`, data, {
       headers: {
         'X-Language': lang,
       },
@@ -71,11 +70,10 @@ export const VerifyUser = async (data: UserVerifyInput, lang: Language) => {
   }
 };
 
-// Forgot password: request reset link
 export const requestPasswordReset = async (email: string, lang: Language) => {
   try {
     const response = await axiosInstance.post<{ message: string }>(
-      `/auth/forgot-password`,
+      `/auth/forget-password`,
       { email },
       {
         headers: {
@@ -98,19 +96,15 @@ export const requestPasswordReset = async (email: string, lang: Language) => {
 
 // Verify OTP for password reset and set new password
 export const resetPasswordWithOtp = async (
-  data: { email: string; otp_code: string; newPassword: string },
+  data: { userId: string; otp: string; newPassword: string },
   lang: Language,
 ) => {
   try {
-    const response = await axiosInstance.post<{ message: string }>(
-      `/auth/reset-password`,
-      { data },
-      {
-        headers: {
-          'X-Language': lang,
-        },
+    const response = await axiosInstance.post<{ message: string }>(`/auth/reset-password`, data, {
+      headers: {
+        'X-Language': lang,
       },
-    );
+    });
     return response.data;
   } catch (error: unknown) {
     const err = error as {

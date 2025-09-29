@@ -11,7 +11,6 @@ import { validateLanguage } from '@/lib/language';
 import { PageProps } from '@/hooks/useLanguageParam';
 import { SearchBar } from '@/components/landing/search';
 import { CategoryFilter } from '@/components/landing/categoryFilter';
-import { CommunityCard } from '@/components/landing/communityCard';
 import { CommunityList } from '@/components/landing/communityLists';
 
 const HomePage: React.FC<PageProps> = ({ params }) => {
@@ -71,7 +70,7 @@ const HomePage: React.FC<PageProps> = ({ params }) => {
       const validatedLang = validateLanguage(resolvedParams.lang);
       setLanguage(validatedLang);
     });
-  }, [params]);
+  }, [params, setLanguage]);
   return (
     <>
       {/* Hero and Feature Sections */}

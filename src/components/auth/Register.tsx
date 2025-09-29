@@ -20,7 +20,6 @@ import {
 
 import { useMutation } from '@tanstack/react-query';
 import { registerUser } from '@/lib/services/auth';
-import authStore from '@/stores/useAuth';
 import { toast } from 'sonner';
 import { Language } from '@/stores/useLanguage';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -28,7 +27,6 @@ import { Eye, EyeOff, User, Mail, Lock, Github } from 'lucide-react';
 import { useState } from 'react';
 import { t } from '@/translations/index';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 type RegisterFormData = z.infer<typeof registerSchema>;
 
 interface RegisterFormProps {
@@ -38,7 +36,6 @@ interface RegisterFormProps {
 export function RegisterForm({ lang }: RegisterFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [loadingProvider, setLoadingProvider] = useState<string | null>(null);
-  const router = useRouter();
   const form = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -47,24 +44,16 @@ export function RegisterForm({ lang }: RegisterFormProps) {
       password: '',
     },
   });
-
-  const { setUser } = authStore();
-
   const { mutateAsync, isPending: isLoading } = useMutation({
     mutationKey: ['register'],
     mutationFn: (data: RegisterFormData) => registerUser(data, lang),
     onSuccess: data => {
       console.log(data);
-      setUser!(data.body.data);
       toast.success(data?.body.message);
-      router.push(`/${lang}/verify`); // Redirect to verification page
     },
     onError: (error: unknown) => {
       const err = error as { message?: string; error?: string };
       toast.error(err.message || t('error:register', 'Registration failed'));
-      if (err.error === 'OTP has been resent') {
-        router.push(`/${lang}/verify`);
-      }
     },
   });
   const handleOAuthRegister = async (provider: 'google' | 'github') => {

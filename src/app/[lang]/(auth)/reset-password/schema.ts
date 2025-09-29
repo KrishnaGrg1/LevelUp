@@ -1,19 +1,16 @@
-import z from 'zod';
+import { z } from 'zod';
 
 const ResetPasswordSchema = z
   .object({
-    email: z
-      .string()
-      .min(1, { message: 'error.auth.emailRequired' })
-      .email({ message: 'error.auth.emailInvalid' }),
-    otp_code: z
+    userId: z.string().min(1, { message: 'error.auth.userIdRequired' }),
+    otp: z
       .string()
       .min(1, { message: 'error.auth.otpRequired' })
       .length(6, { message: 'error.auth.otpLength' }),
     newPassword: z
       .string()
-      .min(1, { message: 'error.auth.passwordRequired' })
-      .min(6, { message: 'error.auth.passwordMinLength' }),
+      .min(8, { message: 'error.auth.passwordMinLength' })
+      .max(50, { message: 'error.auth.passwordMaxLength' }),
     confirmPassword: z.string().min(1, { message: 'error.auth.confirmPasswordRequired' }),
   })
   .refine(data => data.newPassword === data.confirmPassword, {

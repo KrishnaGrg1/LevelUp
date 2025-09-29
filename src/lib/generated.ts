@@ -188,7 +188,7 @@ export interface UserVerifyResponse {
 }
 
 export interface UserVerifyInput {
-  email: string;
+  userId: string;
   otp: string;
 }
 

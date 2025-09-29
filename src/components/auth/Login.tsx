@@ -41,7 +41,7 @@ export function LoginForm({ lang }: LoginFormProps) {
     },
   });
 
-  const { setUser, setAuthenticated } = authStore();
+  const { setAuthenticated } = authStore();
 
   // Add hydration safety
   useEffect(() => {
@@ -52,7 +52,6 @@ export function LoginForm({ lang }: LoginFormProps) {
     mutationKey: ['login'],
     mutationFn: (data: LoginFormData) => login(data, lang),
     onSuccess: data => {
-      setUser!(data.body.data);
       setAuthenticated(true);
       toast.success(t('success:login', data?.body.message));
       router.push(`/${lang}/dashboard`);

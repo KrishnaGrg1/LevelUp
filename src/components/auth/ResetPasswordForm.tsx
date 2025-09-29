@@ -21,38 +21,63 @@ import { resetPasswordWithOtp } from '@/lib/services/auth';
 import { toast } from 'sonner';
 import { Language } from '@/stores/useLanguage';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
-import authStore from '@/stores/useAuth';
-import { Eye, EyeOff } from 'lucide-react';
+
+import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { t } from '@/translations/index';
 import LanguageStore from '@/stores/useLanguage';
-
+import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 type ResetFormData = z.infer<typeof ResetPasswordSchema>;
 interface ResetPasswordFormProps {
   lang: Language;
+  otp?: string | null;
+  userId?: string | null;
 }
 
-export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
-  const { user } = authStore();
+export default function ResetPasswordForm({ lang, otp, userId }: ResetPasswordFormProps) {
   const { language } = LanguageStore();
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [countdown, setCountdown] = useState(10);
 
+  const router = useRouter();
   const form = useForm<ResetFormData>({
     resolver: zodResolver(ResetPasswordSchema),
     defaultValues: {
-      email: user?.email || '',
-      otp_code: '',
+      userId: userId || '',
+      otp: otp ? otp : undefined,
       newPassword: '',
       confirmPassword: '',
     },
   });
-
   useEffect(() => {
     setIsClient(true);
   }, []);
+  useEffect(() => {
+    if (userId && otp) {
+      form.reset({
+        userId,
+        otp: otp ? otp : undefined,
+        newPassword: '',
+        confirmPassword: '',
+      });
+    }
+  }, [userId, otp, form]);
+  useEffect(() => {
+    if (form.formState.isSubmitSuccessful) {
+      const interval = setInterval(() => {
+        setCountdown(prev => prev - 1);
+      }, 1000);
 
+      return () => clearInterval(interval);
+    }
+  }, [form.formState.isSubmitSuccessful]);
+  useEffect(() => {
+    if (countdown === 0 && form.formState.isSubmitSuccessful) {
+      router.push(`/${lang}/login`);
+    }
+  }, [countdown, form.formState.isSubmitSuccessful, lang, router]);
   // Re-validate form when language changes to update error messages
   useEffect(() => {
     if (Object.keys(form.formState.errors).length > 0) {
@@ -62,9 +87,11 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
 
   const { mutateAsync, isPending: isLoading } = useMutation({
     mutationKey: ['reset-password'],
-    mutationFn: (data: ResetFormData) => resetPasswordWithOtp(data, lang),
+    mutationFn: (data: { userId: string; otp: string; newPassword: string }) =>
+      resetPasswordWithOtp(data, lang),
     onSuccess: res => {
       toast.success(res?.message || t('resetPassword.success', 'Password reset successful'));
+      setCountdown(10); // reset countdown
     },
     onError: (error: unknown) => {
       const err = error as { message?: string };
@@ -73,7 +100,12 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
   });
 
   const onSubmit = async (data: ResetFormData) => {
-    await mutateAsync(data);
+    // Remove confirmPassword before sending to backend
+    const { confirmPassword: _confirmPassword, ...apiData } = data;
+
+    console.log('Data being sent to API (without confirmPassword):', apiData);
+
+    await mutateAsync(apiData);
   };
 
   // Prevent hydration mismatch by not rendering form until client-side
@@ -114,35 +146,20 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
         <CardContent className="relative space-y-6 px-8 pb-8">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-              {/* OTP */}
+              {/* New Password */}
               <FormField
                 control={form.control}
-                name="otp_code"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm font-medium text-slate-300">
-                      {t('auth.resetPassword.otp', 'Reset Code')}
-                    </FormLabel>
-                    <FormControl>
-                      <InputOTP
-                        maxLength={6}
-                        value={field.value}
-                        onChange={field.onChange}
-                        className="w-full"
-                      >
-                        <InputOTPGroup className="gap-2">
-                          {Array.from({ length: 6 }).map((_, idx) => (
-                            <InputOTPSlot key={idx} index={idx} />
-                          ))}
-                        </InputOTPGroup>
-                      </InputOTP>
-                    </FormControl>
-                    <FormMessage className="text-xs text-red-400 mt-1" />
-                  </FormItem>
-                )}
+                name="userId"
+                defaultValue={form.formState.defaultValues?.userId}
+                render={({ field }) => <Input type="hidden" {...field} />}
               />
 
-              {/* New Password */}
+              <FormField
+                control={form.control}
+                name="otp"
+                defaultValue={form.formState.defaultValues?.otp}
+                render={({ field }) => <Input type="hidden" {...field} value={field.value || ''} />}
+              />
               <FormField
                 control={form.control}
                 name="newPassword"
@@ -224,11 +241,66 @@ export default function ResetPasswordForm({ lang }: ResetPasswordFormProps) {
                 disabled={isLoading}
                 className="w-full h-12 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:scale-100 rounded-xl"
               >
-                {isLoading
-                  ? t('resetPassword.loading', 'Resetting...')
-                  : t('resetPassword.submit', 'Reset Password')}
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    {t('resetPassword.loading', 'Resetting...')}
+                  </>
+                ) : (
+                  t('resetPassword.submit', 'Reset Password')
+                )}
               </Button>
             </form>
+
+            {form.formState.isSubmitSuccessful && !isLoading && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, ease: 'easeOut' }}
+                className="flex flex-col items-center justify-center py-8 space-y-4"
+              >
+                {/* Success Icon */}
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.2, type: 'spring', stiffness: 200, damping: 12 }}
+                  className="w-16 h-16 flex items-center justify-center rounded-full bg-green-500/20 border border-green-400"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-10 w-10 text-green-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </motion.div>
+
+                {/* Message */}
+                <motion.h3
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="text-lg font-semibold text-green-400"
+                >
+                  {t('auth.resetPassword.successTitle', 'Password Reset Successful')}
+                </motion.h3>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="text-sm text-slate-400 text-center max-w-xs"
+                >
+                  {t(
+                    'auth.resetPassword.redirectMessage',
+                    `You can now log in with your new password. Redirecting in ${countdown} seconds...`,
+                  )}
+                </motion.p>
+              </motion.div>
+            )}
           </Form>
         </CardContent>
       </Card>

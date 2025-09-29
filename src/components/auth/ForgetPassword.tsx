@@ -7,13 +7,13 @@ import { z } from 'zod';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
-
+import { motion } from 'framer-motion';
 import { useMutation } from '@tanstack/react-query';
 import { requestPasswordReset } from '@/lib/services/auth';
 import { toast } from 'sonner';
 import { Language } from '@/stores/useLanguage';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Mail } from 'lucide-react';
+import { Check, Loader2, Mail } from 'lucide-react';
 import { t } from '@/translations/index';
 import { TranslatedFormMessage } from '@/components/ui/TranslatedFormMessage';
 import Link from 'next/link';
@@ -88,16 +88,42 @@ export default function ForgetPassword({ lang, onSent }: ForgetPasswordProps) {
                   </FormItem>
                 )}
               />
-
               <Button
                 type="submit"
                 disabled={isLoading}
                 className="w-full h-12 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:scale-100 rounded-xl"
               >
-                {isLoading
-                  ? t('auth.forgetPassword.sending', 'Sending...')
-                  : t('auth.forgetPassword.submit', 'Send reset link')}
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    {t('auth.forgetPassword.sending', 'Sending...')}
+                  </>
+                ) : (
+                  t('auth.forgetPassword.submit', 'Send reset link')
+                )}
               </Button>
+
+              {form.formState.isSubmitSuccessful && !isLoading && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mt-6 rounded-xl bg-green-600/20 border border-green-500/30 p-4 shadow-lg"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500/30">
+                      <Check className="h-5 w-5 text-green-300" />
+                    </div>
+                    <div>
+                      <p className="text-green-300 font-semibold">
+                        {t('auth.forgetPassword.success')}
+                      </p>
+                      <p className="text-green-200 text-sm">
+                        {t('auth.forgetPassword.success-description')}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
             </form>
           </Form>
           <div className="text-center pt-6 border-t border-slate-700/50 relative z-10">

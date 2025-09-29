@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import Link from 'next/link';
 import LanguageStore from '@/stores/useLanguage';
 import { validateLanguage } from '@/lib/language';
