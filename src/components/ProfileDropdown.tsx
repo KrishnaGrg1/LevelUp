@@ -44,17 +44,26 @@ export function ProfileDropdownMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">Profile</Button>
+        <Button variant="outline">
+          {user?.UserName
+            ? user.UserName.charAt(0).toUpperCase() + user.UserName.slice(1)
+            : 'Profile'}
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 bg-white" align="start">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuGroup>
-          <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>Settings</DropdownMenuItem>
+          <DropdownMenuItem
+            className=" cursor-pointer"
+            onClick={() => router.push(`/${language}/profile`)}
+          >
+            Profile
+          </DropdownMenuItem>
+          <DropdownMenuItem className=" cursor-pointer">Settings</DropdownMenuItem>
         </DropdownMenuGroup>
 
         <DropdownMenuItem
-          className="flex flex-row gap-1"
+          className="flex flex-row gap-1 cursor-pointer"
           onClick={() => handleLogout()}
           disabled={isPending}
         >
