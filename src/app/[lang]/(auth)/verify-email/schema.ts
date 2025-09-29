@@ -5,10 +5,7 @@ const VerifySchema = z.object({
     .string()
     .min(1, { message: 'error.auth.otpRequired' })
     .length(6, { message: 'error.auth.otpLength' }),
-  email: z
-    .string()
-    .min(1, { message: 'error.auth.emailRequired' })
-    .email({ message: 'error.auth.emailInvalid' }),
+  userId: z.string().min(1, { message: 'error.auth.userIdRequired' }),
 });
 
 export default VerifySchema;

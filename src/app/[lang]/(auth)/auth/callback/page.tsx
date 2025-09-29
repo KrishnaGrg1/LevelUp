@@ -13,7 +13,7 @@ import { useMutation } from '@tanstack/react-query';
 export default function CallbackPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { setUser, setAuthenticated } = authStore(); // ← Add setAuthenticated
+  const { setAuthenticated } = authStore(); // ← Add setAuthenticated
   const { language } = LanguageStore();
 
   const {
@@ -76,26 +76,18 @@ export default function CallbackPage() {
 
       return { response, provider, intent, lang };
     },
-    onSuccess: ({ response, provider, intent, lang }) => {
+    onSuccess: ({ provider, intent, lang }) => {
       // Set user in store and mark as authenticated
-      if (typeof setUser === 'function') {
-        setUser(response.body.data); // This now sets isAuthenticated: true
-      }
 
       // Also explicitly set authenticated for clarity
       setAuthenticated(true);
 
       // Determine if this is a new user
-      const isNewUser =
-        response.body.data.createdAt &&
-        new Date(response.body.data.createdAt).getTime() > Date.now() - 60000;
 
       // Show appropriate success message based on intent
       if (intent === 'register') {
         toast.success(
-          isNewUser
-            ? t('success.auth.oauth_register', `Successfully registered with ${provider}!`)
-            : t('success.auth.oauth_login_existing', `Welcome back! Logged in with ${provider}.`),
+          t('success.auth.oauth_login_existing', `Welcome back! Logged in with ${provider}.`),
         );
       } else {
         toast.success(t('success.auth.oauth_login', 'Successfully logged in!'));
@@ -114,7 +106,7 @@ export default function CallbackPage() {
 
       if (redirectAfterAuth) {
         redirectTo = redirectAfterAuth;
-      } else if (authIntent === 'register' && isNewUser) {
+      } else if (authIntent === 'register') {
         redirectTo = `/${lang}/onboarding`;
       } else if (authIntent === 'register') {
         redirectTo = `/${lang}/dashboard`;

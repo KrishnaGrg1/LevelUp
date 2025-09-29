@@ -3,7 +3,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import VerifySchema from '@/app/[lang]/(auth)/verify/schema';
+import VerifySchema from '@/app/[lang]/(auth)/verify-email/schema';
 import { z } from 'zod';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 import { Button } from '@/components/ui/button';
@@ -28,22 +28,26 @@ import Link from 'next/link';
 import { t } from '@/translations/index';
 import LanguageStore from '@/stores/useLanguage';
 import { useRouter } from 'next/navigation';
+import { Input } from '../ui/input';
+import { Debug } from '../Debug';
 type VerifyFormData = z.infer<typeof VerifySchema>;
 interface VerifyFormProps {
   lang: Language;
+  otp?: string | null;
+  userId?: string | null;
 }
 
-export function VerifyForm({ lang }: VerifyFormProps) {
+export function VerifyForm({ lang, otp, userId }: VerifyFormProps) {
   const [isClient, setIsClient] = useState(false);
-  const { user, setAuthenticated } = authStore();
+  const { setAuthenticated } = authStore();
   const { language } = LanguageStore();
   const router = useRouter();
 
   const form = useForm<VerifyFormData>({
     resolver: zodResolver(VerifySchema),
     defaultValues: {
-      otp: '',
-      email: user?.email || '',
+      otp: otp || '',
+      userId: userId || '',
     },
   });
 
@@ -51,7 +55,14 @@ export function VerifyForm({ lang }: VerifyFormProps) {
   useEffect(() => {
     setIsClient(true);
   }, []);
-
+  useEffect(() => {
+    if (userId && otp) {
+      form.reset({
+        userId,
+        otp: otp ? otp : undefined,
+      });
+    }
+  }, [userId, otp, form]);
   // Re-validate form when language changes to update error messages
   useEffect(() => {
     if (isClient && Object.keys(form.formState.errors).length > 0) {
@@ -131,6 +142,11 @@ export function VerifyForm({ lang }: VerifyFormProps) {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
               <FormField
                 control={form.control}
+                name="userId"
+                render={({ field }) => <Input type="hidden" {...field} />}
+              />
+              <FormField
+                control={form.control}
                 name="otp"
                 render={({ field }) => (
                   <FormItem>
@@ -155,7 +171,7 @@ export function VerifyForm({ lang }: VerifyFormProps) {
                   </FormItem>
                 )}
               />
-
+              <Debug data={form.getValues()} />
               <Button
                 type="submit"
                 disabled={isLoading}

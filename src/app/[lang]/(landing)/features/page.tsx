@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { FeaturesSection } from '@/components/landing/FeaturesSection';
 import LanguageStore from '@/stores/useLanguage';
@@ -142,7 +142,7 @@ const FeaturesPage: React.FC<FeaturesPageProps> = ({ params }) => {
       const validatedLang = validateLanguage(resolvedParams.lang);
       setLanguage(validatedLang);
     });
-  }, [params]);
+  }, [params, setLanguage]);
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">

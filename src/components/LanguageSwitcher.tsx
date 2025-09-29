@@ -73,7 +73,8 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = () => {
           className="cursor-pointer bg-slate-800/50 border-slate-700/50 text-white hover:bg-slate-700/50 hover:border-indigo-500/50"
         >
           <Languages className="mr-2 h-4 w-4" />
-          {currentLanguage?.flag} {currentLanguage?.name}
+          <span>{currentLanguage?.flag}</span>
+          <span className="hidden text-sm md:text-base md:block">{currentLanguage?.name}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
