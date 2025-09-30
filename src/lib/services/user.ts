@@ -1,4 +1,3 @@
-import lang from '@/translations/lang';
 import axiosInstance from '../fetch';
 import type {
     GetAllUsersResponse,

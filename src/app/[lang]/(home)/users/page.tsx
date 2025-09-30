@@ -17,7 +17,6 @@ import { usePaginationStore } from '@/stores/usePagination';
 import { useQuery } from '@tanstack/react-query';
 import type { User, PaginationMetadata } from '@/lib/generated';
 import { Button } from '@/components/ui/button';
-import DeleteModal from '@/components/DeleteModal';
 import DeleteDialog from '@/components/DeleteModal';
 
 export const UserManagement = () => {

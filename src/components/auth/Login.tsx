@@ -16,7 +16,7 @@ import authStore from '@/stores/useAuth';
 import { toast } from 'sonner';
 import { Language } from '@/stores/useLanguage';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Eye, EyeOff, User, Mail, Lock, Github, Check } from 'lucide-react';
+import { Eye, EyeOff, User, Mail, Lock, Github } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { t } from '@/translations/index';

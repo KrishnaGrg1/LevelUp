@@ -11,7 +11,6 @@ import { useMutation } from '@tanstack/react-query';
 import { getMe } from '@/lib/services/user';
 import { toast } from 'sonner';
 import { t } from '@/translations';
-
 type Particle = {
   x: number;
   y: number;
@@ -96,7 +95,7 @@ export default function HomeLayout({ children }: { children: React.ReactNode }) 
   }, [handleGetMe]);
 
   // Show loading state while hydrating or not authenticated
-  if (!isHydrated || (isHydrated && !isAuthenticated)) {
+  if (!isHydrated || (isHydrated && !isAuthenticated) || isPending) {
     return (
       <div className="min-h-screen bg-black text-white overflow-x-hidden relative flex items-center justify-center">
         {/* Background Effects */}
