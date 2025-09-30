@@ -22,6 +22,7 @@ import Link from 'next/link';
 import { t } from '@/translations/index';
 import { useRouter } from 'next/navigation';
 import { FcGoogle } from 'react-icons/fc';
+import ErrorMessages from '../ErrorDispaly';
 type LoginFormData = z.infer<typeof loginSchema>;
 
 interface LoginFormProps {
@@ -59,7 +60,12 @@ export function LoginForm({ lang }: LoginFormProps) {
     onError: (error: unknown) => {
       const err = error as { message?: string };
       console.error('Registration failed:', error);
-      toast.error(err.message || t('error:unknown', 'Registration failed'));
+      const errorMessage = err.message || t('error:unknown', 'Registration failed');
+      toast.error(errorMessage);
+      form.setError('root', {
+        type: 'server',
+        message: errorMessage,
+      });
     },
   });
 
@@ -269,6 +275,11 @@ export function LoginForm({ lang }: LoginFormProps) {
                 </Button>
               </div>
             </form>
+            <ErrorMessages
+              errors={
+                form.formState.errors.root?.message ? [form.formState.errors.root.message] : []
+              }
+            />
           </Form>
 
           <div className="text-center pt-6 border-t border-slate-700/50">
