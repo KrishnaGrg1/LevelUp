@@ -12,11 +12,12 @@ import {
   UserRoundSearch,
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { t } from '@/translations';
 
 export default function Profile() {
   const { language } = LanguageStore();
   const { user } = authStore();
-  console.log('user', user?.createdAt);
+
   return (
     <div className="container mx-auto py-10 px-4">
       <Card className="max-w-3xl mx-auto shadow-lg">
@@ -24,14 +25,16 @@ export default function Profile() {
           <Avatar className="h-20 w-20">
             <AvatarImage
               src="https://api.dicebear.com/8.x/thumbs/svg"
-              alt={user?.UserName || 'User'}
+              alt={user?.UserName || t('profile.userFallback')}
             />
             <AvatarFallback>{user?.UserName?.[0] || 'U'}</AvatarFallback>
           </Avatar>
           <div>
-            <CardTitle className="text-3xl font-bold">{user?.UserName || 'Unnamed User'}</CardTitle>
+            <CardTitle className="text-3xl font-bold">
+              {user?.UserName || t('profile.unnamedUser')}
+            </CardTitle>
             <CardDescription className="text-muted-foreground">
-              Welcome back! Here’s your profile info.
+              {t('profile.welcomeBack')}
             </CardDescription>
           </div>
         </CardHeader>
@@ -39,29 +42,35 @@ export default function Profile() {
         <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
           <ProfileField
             icon={<MailIcon size={18} />}
-            label="Email"
-            value={user?.email || 'Not available'}
+            label={t('profile.email')}
+            value={user?.email || t('profile.notAvailable')}
           />
-          <ProfileField icon={<GlobeIcon size={18} />} label="Language" value={language} />
+          <ProfileField
+            icon={<GlobeIcon size={18} />}
+            label={t('profile.language')}
+            value={language}
+          />
           <ProfileField
             icon={<StarIcon size={18} />}
-            label="Level"
+            label={t('profile.level')}
             value={user?.level?.toString() || '1'}
           />
           <ProfileField
             icon={<TrendingUpIcon size={18} />}
-            label="XP"
+            label={t('profile.xp')}
             value={user?.xp?.toString() || '0'}
           />
           <ProfileField
             icon={<UserRoundSearch size={18} />}
-            label="UserName"
-            value={user?.UserName || 'Unknown'}
+            label={t('profile.username')}
+            value={user?.UserName || t('profile.unknown')}
           />
           <ProfileField
             icon={<CalendarIcon size={18} />}
-            label="Member Since"
-            value={user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}
+            label={t('profile.memberSince')}
+            value={
+              user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : t('profile.na')
+            }
           />
         </CardContent>
       </Card>

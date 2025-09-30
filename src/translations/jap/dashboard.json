@@ -1,0 +1,24 @@
+{
+  "myCommunities": {
+    "reactMembers": "15,420 人のメンバー",
+    "uiuxMembers": "8,932 人のメンバー",
+    "title": "マイコミュニティ",
+    "new": "新着",
+    "level": "レベル"
+  },
+  "stats": {
+    "totalLevel": "合計レベル",
+    "communities": "コミュニティ",
+    "questsDone": "完了したクエスト",
+    "streak": "連続日数"
+  },
+  "quests": {
+    "hookTitle": "React Hook を共有する",
+    "hookTime": "残り18時間",
+    "reviewTitle": "デザインを3件レビューする",
+    "completed": "完了",
+    "nnTitle": "ニューラルネットワークを説明する",
+    "nnTime": "残り15時間",
+    "title": "今日のクエスト"
+  }
+}

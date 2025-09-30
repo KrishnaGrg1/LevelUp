@@ -1,0 +1,24 @@
+{
+  "myCommunities": {
+    "reactMembers": "١٥٬٤٢٠ عضوًا",
+    "uiuxMembers": "٨٬٩٣٢ عضوًا",
+    "title": "مجتمعاتي",
+    "new": "جديد",
+    "level": "المستوى"
+  },
+  "stats": {
+    "totalLevel": "إجمالي المستوى",
+    "communities": "المجتمعات",
+    "questsDone": "المهام المنجزة",
+    "streak": "سلسلة الإنجاز"
+  },
+  "quests": {
+    "hookTitle": "شارك React Hook",
+    "hookTime": "متبقي ١٨ ساعة",
+    "reviewTitle": "راجع 3 تصاميم",
+    "completed": "مكتمل",
+    "nnTitle": "اشرح الشبكات العصبية",
+    "nnTime": "متبقي ١٥ ساعة",
+    "title": "مهام اليوم"
+  }
+}

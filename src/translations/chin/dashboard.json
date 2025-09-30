@@ -1,0 +1,24 @@
+{
+  "myCommunities": {
+    "reactMembers": "15,420 名成员",
+    "uiuxMembers": "8,932 名成员",
+    "title": "我的社区",
+    "new": "新",
+    "level": "等级"
+  },
+  "stats": {
+    "totalLevel": "总等级",
+    "communities": "社区",
+    "questsDone": "完成的任务",
+    "streak": "连续天数"
+  },
+  "quests": {
+    "hookTitle": "分享一个 React Hook",
+    "hookTime": "剩余 18 小时",
+    "reviewTitle": "审查 3 个设计",
+    "completed": "已完成",
+    "nnTitle": "解释神经网络",
+    "nnTime": "剩余 15 小时",
+    "title": "今日任务"
+  }
+}

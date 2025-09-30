@@ -1,17 +1,18 @@
 'use client';
 
 import React from 'react';
+import { t } from '@/translations';
 
 const StatsSummary = () => {
   const stats = [
-    { label: 'Total Level', value: 42 },
-    { label: 'Communities', value: 3 },
-    { label: 'Quests Done', value: 127 },
-    { label: 'Streak', value: 12 },
+    { label: t('dashboard.stats.totalLevel', 'Total Level'), value: 42 },
+    { label: t('dashboard.stats.communities', 'Communities'), value: 3 },
+    { label: t('dashboard.stats.questsDone', 'Quests Done'), value: 127 },
+    { label: t('dashboard.stats.streak', 'Streak'), value: 12 },
   ];
 
   return (
-    <section className="py-16 px-6 bg-gradient-to-b  rounded-3xl">
+    <section className="py-16 px-6 bg-gradient-to-b rounded-3xl">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
         {stats.map(stat => (
           <div

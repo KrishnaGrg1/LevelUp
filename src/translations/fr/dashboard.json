@@ -1,0 +1,24 @@
+{
+  "myCommunities": {
+    "reactMembers": "15 420 membres",
+    "uiuxMembers": "8 932 membres",
+    "title": "Mes communautés",
+    "new": "nouveau",
+    "level": "Niveau"
+  },
+  "stats": {
+    "totalLevel": "Niveau total",
+    "communities": "Communautés",
+    "questsDone": "Quêtes terminées",
+    "streak": "Série"
+  },
+  "quests": {
+    "hookTitle": "Partagez un React Hook",
+    "hookTime": "18 h restantes",
+    "reviewTitle": "Examiner 3 designs",
+    "completed": "Terminé",
+    "nnTitle": "Expliquer les réseaux neuronaux",
+    "nnTime": "15 h restantes",
+    "title": "Quêtes du jour"
+  }
+}
