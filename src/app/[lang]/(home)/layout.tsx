@@ -7,6 +7,10 @@ import authStore from '@/stores/useAuth';
 import LanguageStore from '@/stores/useLanguage';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { ProfileDropdownMenu } from '@/components/ProfileDropdown';
+import { useMutation } from '@tanstack/react-query';
+import { getMe } from '@/lib/services/user';
+import { toast } from 'sonner';
+import { t } from '@/translations';
 
 type Particle = {
   x: number;
@@ -18,7 +22,7 @@ type Particle = {
 
 export default function HomeLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const { isAuthenticated } = authStore();
+  const { isAuthenticated, setUser } = authStore();
   const { language } = LanguageStore();
   const [particles, setParticles] = useState<Particle[]>([]);
   const [isClient, setIsClient] = useState(false);
@@ -39,7 +43,6 @@ export default function HomeLayout({ children }: { children: React.ReactNode }) 
       router.push(`/${language}/login`);
     }
   }, [isAuthenticated, router, language, isHydrated]); // ← Add isHydrated dependency
-
   // Particle effects
   useEffect(() => {
     setIsClient(true);
@@ -70,6 +73,27 @@ export default function HomeLayout({ children }: { children: React.ReactNode }) 
 
     return () => clearInterval(interval);
   }, []);
+
+  const { mutateAsync: handleGetMe, isPending } = useMutation({
+    mutationKey: ['getMe'],
+    mutationFn: async () => {
+      return await getMe(language); // <- correct signature
+    },
+    onSuccess: data => {
+      setUser(data.body.data);
+    },
+    onError: (error: unknown) => {
+      router.push(`/${language}/login`);
+      const err = error as { message?: string };
+      toast.error(err.message || t('error:unknown', 'Get details failed'));
+    },
+  });
+  useEffect(() => {
+    const fetchUser = async () => {
+      await handleGetMe();
+    };
+    fetchUser();
+  }, [handleGetMe]);
 
   // Show loading state while hydrating or not authenticated
   if (!isHydrated || (isHydrated && !isAuthenticated)) {

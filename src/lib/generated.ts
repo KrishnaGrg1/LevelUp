@@ -208,3 +208,34 @@ export interface LogoutResponse {
     data: User;
   };
 }
+
+export interface GetMeResponse{
+  statusCode: number;
+  headers: Record<string, string>;
+  body: {
+    data: User;
+    message: string;
+  };
+}export interface PaginationMetadata {
+  total: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+  // optionally, if you add more fields later
+  first_page?: number;
+  last_page?: number;
+  previous_page?: number;
+  next_page?: number;
+}
+export interface GetAllUsersData {
+  users: User[];
+  pagination: PaginationMetadata;
+}
+
+export interface GetAllUsersResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: GetAllUsersData;
+  };
+}

@@ -8,7 +8,7 @@ import { z } from 'zod';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { FcGoogle } from 'react-icons/fc';
-
+import { motion } from 'framer-motion';
 import {
   Form,
   FormControl,
@@ -23,10 +23,11 @@ import { registerUser } from '@/lib/services/auth';
 import { toast } from 'sonner';
 import { Language } from '@/stores/useLanguage';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Eye, EyeOff, User, Mail, Lock, Github } from 'lucide-react';
+import { Eye, EyeOff, User, Mail, Lock, Github, Check } from 'lucide-react';
 import { useState } from 'react';
 import { t } from '@/translations/index';
 import Link from 'next/link';
+import ErrorMessages from '../ErrorDispaly';
 type RegisterFormData = z.infer<typeof registerSchema>;
 
 interface RegisterFormProps {
@@ -53,7 +54,12 @@ export function RegisterForm({ lang }: RegisterFormProps) {
     },
     onError: (error: unknown) => {
       const err = error as { message?: string; error?: string };
-      toast.error(err.message || t('error:register', 'Registration failed'));
+      const errorMessage = err.message || t('error:register', 'Registration failed');
+      toast.error(errorMessage);
+      form.setError('root', {
+        type: 'server',
+        message: errorMessage,
+      });
     },
   });
   const handleOAuthRegister = async (provider: 'google' | 'github') => {
@@ -256,6 +262,30 @@ export function RegisterForm({ lang }: RegisterFormProps) {
                   <span className="ml-2 text-sm font-medium">GitHub</span>
                 </Button>
               </div>
+              <ErrorMessages
+                errors={
+                  form.formState.errors.root?.message ? [form.formState.errors.root.message] : []
+                }
+              />
+              {form.formState.isSubmitSuccessful && !isLoading && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mt-6 rounded-xl bg-green-600/20 border border-green-500/30 p-4 shadow-lg"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500/30">
+                      <Check className="h-5 w-5 text-green-300" />
+                    </div>
+                    <div>
+                      <p className="text-green-300 font-semibold">{t('auth.login.success')}</p>
+                      <p className="text-green-200 text-sm">
+                        {t('auth.login.success-description')}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
             </form>
           </Form>
 

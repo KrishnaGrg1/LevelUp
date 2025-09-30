@@ -16,12 +16,13 @@ import authStore from '@/stores/useAuth';
 import { toast } from 'sonner';
 import { Language } from '@/stores/useLanguage';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Eye, EyeOff, User, Mail, Lock, Github } from 'lucide-react';
+import { Eye, EyeOff, User, Mail, Lock, Github, Check } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { t } from '@/translations/index';
 import { useRouter } from 'next/navigation';
 import { FcGoogle } from 'react-icons/fc';
+import ErrorMessages from '../ErrorDispaly';
 type LoginFormData = z.infer<typeof loginSchema>;
 
 interface LoginFormProps {
@@ -59,7 +60,12 @@ export function LoginForm({ lang }: LoginFormProps) {
     onError: (error: unknown) => {
       const err = error as { message?: string };
       console.error('Registration failed:', error);
-      toast.error(err.message || t('error:unknown', 'Registration failed'));
+      const errorMessage = err.message || t('error:unknown', 'Registration failed');
+      toast.error(errorMessage);
+      form.setError('root', {
+        type: 'server',
+        message: errorMessage,
+      });
     },
   });
 
@@ -269,6 +275,11 @@ export function LoginForm({ lang }: LoginFormProps) {
                 </Button>
               </div>
             </form>
+            <ErrorMessages
+              errors={
+                form.formState.errors.root?.message ? [form.formState.errors.root.message] : []
+              }
+            />
           </Form>
 
           <div className="text-center pt-6 border-t border-slate-700/50">
