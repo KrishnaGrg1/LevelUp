@@ -9,7 +9,7 @@ import { Language } from '@/stores/useLanguage';
 export const getMe = async ( lang: Language) => {
   try {
     const response = await axiosInstance.get<GetMeResponse>(`/auth/me`, {
-        withCredentials: true,
+     withCredentials: true,
       headers: {
         'X-Language': lang,
       },

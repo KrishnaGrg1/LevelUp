@@ -214,7 +214,7 @@ export const UserManagement = () => {
                               )}
                             </span>
                           </TableCell>
-                          <TableCell className="px-4 py-3 text-start text-sm flex gap-2">
+                          <TableCell className=" text-sm flex gap-2 text-right">
                             <a href={`user/${user.id}`}>
                               <Button
                                 variant="outline"
