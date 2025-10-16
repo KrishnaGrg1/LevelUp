@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { LanguageSwitcher } from '../LanguageSwitcher';
+import LanguageSwitcherWrapper from '../LanguageSwitcherWrapper';
 import { Sparkles, ArrowLeft } from 'lucide-react';
 import { Language } from '@/stores/useLanguage';
 import { t } from '@/translations/index';
@@ -42,7 +42,7 @@ const TopBar: React.FC<TopBarProps> = ({ language = 'eng', showBackButton = fals
 
           {/* Right Side - Language Switcher */}
           <div className="flex items-center space-x-4">
-            <LanguageSwitcher currentLang={language} />
+            <LanguageSwitcherWrapper currentLang={language} />
           </div>
         </div>
       </div>

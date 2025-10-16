@@ -6,7 +6,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Languages } from 'lucide-react';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import LanguageStore, { Language } from '@/stores/useLanguage';
 import { validateLanguage } from '@/lib/language';
@@ -26,13 +26,10 @@ interface LanguageSwitcherProps {
 }
 
 export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = () => {
-  const [isClient, setIsClient] = useState(false);
   const pathname = usePathname();
   const { language, setLanguage } = LanguageStore();
 
   useEffect(() => {
-    setIsClient(true);
-
     // If currentLang is provided from URL, sync it with the store
     if (language) {
       const validLang = validateLanguage(language);
@@ -58,11 +55,6 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = () => {
       window.history.replaceState(null, '', newPath);
     }
   };
-
-  // Prevent hydration mismatch by not rendering interactive elements until client-side
-  if (!isClient) {
-    return <div className="h-9 w-32 bg-slate-700/30 rounded-md animate-pulse"></div>;
-  }
 
   return (
     <DropdownMenu>

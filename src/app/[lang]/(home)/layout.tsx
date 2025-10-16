@@ -5,25 +5,19 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import authStore from '@/stores/useAuth';
 import LanguageStore from '@/stores/useLanguage';
-import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import LanguageSwitcherWrapper from '@/components/LanguageSwitcherWrapper';
 import { ProfileDropdownMenu } from '@/components/ProfileDropdown';
 import { useMutation } from '@tanstack/react-query';
 import { getMe } from '@/lib/services/user';
 import { toast } from 'sonner';
 import { t } from '@/translations';
-type Particle = {
-  x: number;
-  y: number;
-  size: number;
-  speed: number;
-  opacity: number;
-};
+import ClientOnly from '@/components/ClientOnly';
+import ParticleBackground from '@/components/ParticleBackground';
 
 export default function HomeLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const { isAuthenticated, setUser } = authStore();
   const { language } = LanguageStore();
-  const [particles, setParticles] = useState<Particle[]>([]);
   const [isClient, setIsClient] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false); // ← Add hydration state
 
@@ -42,35 +36,9 @@ export default function HomeLayout({ children }: { children: React.ReactNode }) 
       router.push(`/${language}/login`);
     }
   }, [isAuthenticated, router, language, isHydrated]); // ← Add isHydrated dependency
-  // Particle effects
+  // Set client state
   useEffect(() => {
     setIsClient(true);
-
-    if (typeof window !== 'undefined') {
-      const arr: Particle[] = [];
-      for (let i = 0; i < 30; i++) {
-        arr.push({
-          x: Math.random() * window.innerWidth,
-          y: Math.random() * window.innerHeight,
-          size: Math.random() * 2 + 1,
-          speed: Math.random() * 1.5 + 0.3,
-          opacity: Math.random() * 0.3 + 0.1,
-        });
-      }
-      setParticles(arr);
-    }
-
-    const interval = setInterval(() => {
-      setParticles(prev =>
-        prev.map(p => ({
-          ...p,
-          y: p.y - p.speed,
-          opacity: p.y > 0 ? p.opacity : 0,
-        })),
-      );
-    }, 80);
-
-    return () => clearInterval(interval);
   }, []);
 
   const { mutateAsync: handleGetMe, isPending } = useMutation({
@@ -118,22 +86,9 @@ export default function HomeLayout({ children }: { children: React.ReactNode }) 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden relative">
       {/* Particle background - only render on client side */}
-      {isClient && (
-        <div className="fixed inset-0 pointer-events-none z-0">
-          {particles.map((particle, index) => (
-            <div
-              key={index}
-              className="absolute w-1 h-1 bg-indigo-400 rounded-full animate-pulse"
-              style={{
-                left: particle.x,
-                top: particle.y,
-                opacity: particle.opacity,
-                transform: `scale(${particle.size})`,
-              }}
-            />
-          ))}
-        </div>
-      )}
+      <ClientOnly>
+        <ParticleBackground />
+      </ClientOnly>
 
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-radial from-indigo-500/15 via-transparent to-transparent"></div>
@@ -146,7 +101,7 @@ export default function HomeLayout({ children }: { children: React.ReactNode }) 
       {/* Main content */}
       <div className="relative z-10">
         <div className="flex justify-end p-4">
-          <LanguageSwitcher currentLang={language} />
+          <LanguageSwitcherWrapper currentLang={language} />
           <ProfileDropdownMenu />
         </div>
         <div className="min-h-screen p-4">{children}</div>

@@ -38,7 +38,6 @@ interface VerifyFormProps {
 }
 
 export function VerifyForm({ lang, otp, userId }: VerifyFormProps) {
-  const [isClient, setIsClient] = useState(false);
   const { setAuthenticated } = authStore();
   const { language } = LanguageStore();
   const router = useRouter();
@@ -51,10 +50,7 @@ export function VerifyForm({ lang, otp, userId }: VerifyFormProps) {
     },
   });
 
-  // Add hydration safety
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+
   useEffect(() => {
     if (userId && otp) {
       form.reset({
@@ -65,11 +61,11 @@ export function VerifyForm({ lang, otp, userId }: VerifyFormProps) {
   }, [userId, otp, form]);
   // Re-validate form when language changes to update error messages
   useEffect(() => {
-    if (isClient && Object.keys(form.formState.errors).length > 0) {
+    if (Object.keys(form.formState.errors).length > 0) {
       // Re-trigger validation to get translated error messages
       form.trigger();
     }
-  }, [language, isClient, form]);
+  }, [language, form]);
 
   const { mutateAsync, isPending: isLoading } = useMutation({
     mutationKey: ['verify'],
@@ -89,34 +85,6 @@ export function VerifyForm({ lang, otp, userId }: VerifyFormProps) {
   const onSubmit = async (data: VerifyFormData) => {
     await mutateAsync(data);
   };
-
-  // Prevent hydration mismatch by not rendering form until client-side
-  if (!isClient) {
-    return (
-      <div className="w-full max-w-md">
-        <Card className="relative bg-gradient-to-br from-slate-800/30 to-slate-900/30 backdrop-blur-xl border border-slate-700/30 rounded-3xl shadow-2xl overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 rounded-3xl"></div>
-          <CardHeader className="relative space-y-4 text-center pb-6 pt-8">
-            <div className="mx-auto w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
-              <User className="w-8 h-8 text-white" />
-            </div>
-            <CardTitle className="text-3xl font-black">
-              <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Loading...
-              </span>
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="relative space-y-6 px-8 pb-8">
-            <div className="animate-pulse space-y-4">
-              <div className="h-12 bg-slate-700/30 rounded-xl"></div>
-              <div className="h-12 bg-slate-700/30 rounded-xl"></div>
-              <div className="h-12 bg-slate-700/30 rounded-xl"></div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
 
   return (
     <div className="w-full max-w-md">

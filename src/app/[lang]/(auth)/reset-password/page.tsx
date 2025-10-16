@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import LanguageStore, { Language } from '@/stores/useLanguage';
 import ResetPasswordForm from '@/components/auth/ResetPasswordForm';
+import FormLoading from '@/components/auth/FormLoading';
 
 interface ResetPasswordPageProps {
   params: Promise<{ lang: Language }>;
@@ -28,7 +29,9 @@ export default function ResetPasswordPage({ params }: ResetPasswordPageProps) {
 
   return (
     <div className="relative z-10 flex items-center justify-center min-h-screen pt-20">
-      <ResetPasswordForm lang={language} otp={otp} userId={userId} />
+      <Suspense fallback={<FormLoading message="Reset Password" />}>
+        <ResetPasswordForm lang={language} otp={otp} userId={userId} />
+      </Suspense>
     </div>
   );
 }

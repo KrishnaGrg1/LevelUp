@@ -38,8 +38,6 @@ export default function ResetPasswordForm({ lang, otp, userId }: ResetPasswordFo
   const { language } = LanguageStore();
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [isClient, setIsClient] = useState(false);
-  const [countdown, setCountdown] = useState(10);
 
   const router = useRouter();
   const form = useForm<ResetFormData>({
@@ -52,9 +50,6 @@ export default function ResetPasswordForm({ lang, otp, userId }: ResetPasswordFo
     },
   });
   useEffect(() => {
-    setIsClient(true);
-  }, []);
-  useEffect(() => {
     if (userId && otp) {
       form.reset({
         userId,
@@ -64,20 +59,6 @@ export default function ResetPasswordForm({ lang, otp, userId }: ResetPasswordFo
       });
     }
   }, [userId, otp, form]);
-  useEffect(() => {
-    if (form.formState.isSubmitSuccessful) {
-      const interval = setInterval(() => {
-        setCountdown(prev => prev - 1);
-      }, 1000);
-
-      return () => clearInterval(interval);
-    }
-  }, [form.formState.isSubmitSuccessful]);
-  useEffect(() => {
-    if (countdown === 0 && form.formState.isSubmitSuccessful) {
-      router.push(`/${lang}/login`);
-    }
-  }, [countdown, form.formState.isSubmitSuccessful, lang, router]);
   // Re-validate form when language changes to update error messages
   useEffect(() => {
     if (Object.keys(form.formState.errors).length > 0) {
@@ -91,7 +72,10 @@ export default function ResetPasswordForm({ lang, otp, userId }: ResetPasswordFo
       resetPasswordWithOtp(data, lang),
     onSuccess: res => {
       toast.success(res?.message || t('resetPassword.success', 'Password reset successful'));
-      setCountdown(10); // reset countdown
+      // Redirect after a short delay to let user see the success message
+      setTimeout(() => {
+        router.push(`/${lang}/login`);
+      }, 2000);
     },
     onError: (error: unknown) => {
       const err = error as { message?: string };
@@ -107,29 +91,6 @@ export default function ResetPasswordForm({ lang, otp, userId }: ResetPasswordFo
 
     await mutateAsync(apiData);
   };
-
-  // Prevent hydration mismatch by not rendering form until client-side
-  if (!isClient) {
-    return (
-      <div className="w-full max-w-md">
-        <Card className="relative bg-gradient-to-br from-slate-800/30 to-slate-900/30 backdrop-blur-xl border border-slate-700/30 rounded-3xl shadow-2xl overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 rounded-3xl"></div>
-          <CardHeader className="relative space-y-2 text-center pb-4 pt-8">
-            <CardTitle className="text-2xl font-black">Reset Password</CardTitle>
-            <CardDescription className="text-slate-400">Loading...</CardDescription>
-          </CardHeader>
-          <CardContent className="relative space-y-6 px-8 pb-8">
-            <div className="animate-pulse space-y-4">
-              <div className="h-12 bg-slate-700/30 rounded-xl"></div>
-              <div className="h-12 bg-slate-700/30 rounded-xl"></div>
-              <div className="h-12 bg-slate-700/30 rounded-xl"></div>
-              <div className="h-12 bg-slate-700/30 rounded-xl"></div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
 
   return (
     <div className="w-full max-w-md">
@@ -296,7 +257,7 @@ export default function ResetPasswordForm({ lang, otp, userId }: ResetPasswordFo
                 >
                   {t(
                     'auth.resetPassword.redirectMessage',
-                    `You can now log in with your new password. Redirecting in ${countdown} seconds...`,
+                    'You can now log in with your new password. Redirecting to login page...',
                   )}
                 </motion.p>
               </motion.div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LanguageSwitcher } from './LanguageSwitcher';
+import LanguageSwitcherWrapper from './LanguageSwitcherWrapper';
 import { Menu, Sparkles } from 'lucide-react';
 import LanguageStore, { Language } from '@/stores/useLanguage';
 import { t } from '@/translations/index';
@@ -82,13 +82,13 @@ const Navbar: React.FC<NavbarProps> = ({ language: initialLanguage = 'eng' }) =>
               {t('nav.getStarted')}
             </Link>
             <div className="ml-3">
-              <LanguageSwitcher />
+              <LanguageSwitcherWrapper currentLang={currentLanguage} />
             </div>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center space-x-3">
-            <LanguageSwitcher />
+            <LanguageSwitcherWrapper currentLang={currentLanguage} />
             <Sheet>
               <SheetTrigger asChild>
                 <button className="p-2 text-slate-300 hover:text-white transition-colors rounded-lg hover:bg-slate-800/50">

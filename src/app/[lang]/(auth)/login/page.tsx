@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import LanguageStore, { Language } from '@/stores/useLanguage';
 import { LoginForm } from '@/components/auth/Login';
 import { validateLanguage } from '@/lib/language';
+import FormLoading from '@/components/auth/FormLoading';
 
 interface LoginPageProps {
   params: Promise<{
@@ -24,7 +25,9 @@ export default function LoginPage({ params }: LoginPageProps) {
 
   return (
     <div className="relative z-10 flex items-center justify-center min-h-screen pt-20">
-      <LoginForm lang={language} />
+      <Suspense fallback={<FormLoading message="Logg In" />}>
+        <LoginForm lang={language} />
+      </Suspense>
     </div>
   );
 }

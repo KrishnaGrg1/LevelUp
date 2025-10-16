@@ -1,40 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { ArrowRight, Sparkles, Zap } from 'lucide-react';
 import { t } from '@/translations';
 import LanguageStore from '@/stores/useLanguage';
+import ClientOnly from '@/components/ClientOnly';
+import ParticleBackground from '@/components/ParticleBackground';
 
 interface CTASectionProps {
   className?: string;
 }
 
 export const CTASection: React.FC<CTASectionProps> = ({ className = '' }) => {
-  const [isClient, setIsClient] = useState(false);
   const { language } = LanguageStore();
-  const [particles, setParticles] = useState<
-    Array<{
-      left: number;
-      top: number;
-      delay: number;
-      duration: number;
-    }>
-  >([]);
-
-  useEffect(() => {
-    setIsClient(true);
-
-    // Generate particles only on client side
-    const particleArray = [];
-    for (let i = 0; i < 20; i++) {
-      particleArray.push({
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-        delay: Math.random() * 10,
-        duration: 8 + Math.random() * 4,
-      });
-    }
-    setParticles(particleArray);
-  }, []);
 
   return (
     <section
@@ -48,24 +25,16 @@ export const CTASection: React.FC<CTASectionProps> = ({ className = '' }) => {
       </div>
 
       {/* Floating particles - only render on client side */}
-      {isClient && (
-        <div className="absolute inset-0 overflow-hidden">
-          {particles.map((particle, i) => (
-            <div
-              key={i}
-              className="absolute animate-float"
-              style={{
-                left: `${particle.left}%`,
-                top: `${particle.top}%`,
-                animationDelay: `${particle.delay}s`,
-                animationDuration: `${particle.duration}s`,
-              }}
-            >
-              <div className="w-2 h-2 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full opacity-30"></div>
-            </div>
-          ))}
-        </div>
-      )}
+      <div className="absolute inset-0 overflow-hidden">
+        <ClientOnly>
+          <ParticleBackground
+            count={20}
+            animation="float"
+            showBackground={false}
+            particleClass="w-2 h-2 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full opacity-30 animate-float"
+          />
+        </ClientOnly>
+      </div>
 
       <div className="relative mx-auto max-w-4xl px-6 text-center z-10">
         {/* Main heading */}
