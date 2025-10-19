@@ -209,14 +209,15 @@ export interface LogoutResponse {
   };
 }
 
-export interface GetMeResponse{
+export interface GetMeResponse {
   statusCode: number;
   headers: Record<string, string>;
   body: {
     data: User;
     message: string;
   };
-}export interface PaginationMetadata {
+}
+export interface PaginationMetadata {
   total: number;
   page: number;
   pageSize: number;
@@ -237,5 +238,13 @@ export interface GetAllUsersResponse {
   body: {
     message: string;
     data: GetAllUsersData;
+  };
+}
+
+export interface changePasswordResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: null;
   };
 }
