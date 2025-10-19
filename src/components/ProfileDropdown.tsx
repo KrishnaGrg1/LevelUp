@@ -59,6 +59,12 @@ export function ProfileDropdownMenu() {
           >
             Profile
           </DropdownMenuItem>
+          <DropdownMenuItem
+            className=" cursor-pointer"
+            onClick={() => router.push(`/${language}/change-password`)}
+          >
+            Change Password
+          </DropdownMenuItem>
           <DropdownMenuItem className=" cursor-pointer">Settings</DropdownMenuItem>
         </DropdownMenuGroup>
 
