@@ -14,12 +14,14 @@ import { BetterPagination } from '@/components/BetterPagination';
 import { getAllUsers } from '@/lib/services/user';
 import LanguageStore from '@/stores/useLanguage';
 import { usePaginationStore } from '@/stores/usePagination';
-import { useQuery } from '@tanstack/react-query';
+import { QueryClient, useQuery } from '@tanstack/react-query';
 import type { User, PaginationMetadata } from '@/lib/generated';
 import { Button } from '@/components/ui/button';
 import DeleteDialog from '@/components/DeleteModal';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const UserManagement = () => {
+  const queryClient = new QueryClient();
   const { language } = LanguageStore();
   const { page, pageSize, setPage, setPageSize } = usePaginationStore();
 
@@ -224,10 +226,14 @@ export const UserManagement = () => {
                               </Button>
                             </a>
                             <DeleteDialog
-                              formAction="/api/users/delete"
+                              formAction="/api/v1/admin/delete"
                               title="Confirm Deletion"
                               description="Are you sure you want to delete this user? This action cannot be undone."
-                              id="user_id_here"
+                              id={user.id}
+                              onSuccess={() =>
+                                queryClient.invalidateQueries({ queryKey: ['users'] })
+                              }
+                              // Refetch the user list after successful deletion
                             />
                           </TableCell>
                         </TableRow>

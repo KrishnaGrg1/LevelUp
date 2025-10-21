@@ -1,62 +1,65 @@
 'use client';
 
 import * as Dialog from '@radix-ui/react-dialog';
-import { TrashIcon } from 'lucide-react';
+import { TrashIcon, Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import clsx from 'clsx';
 import { Button } from './ui/button';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { deleteUserByAdmin } from '@/lib/services/user';
+import LanguageStore from '@/stores/useLanguage';
+import { toast } from 'sonner';
 
 interface DeleteDialogProps {
-  formAction: string;
+  id: string;
   title: string;
   description: string;
-  id: string | number;
-  onSuccess?: () => void; // optional callback when delete succeeds
+  formAction?: string;
+  onSuccess?: () => void;
 }
 
 const DeleteDialog: React.FC<DeleteDialogProps> = ({
-  formAction,
+  id,
   title,
   description,
-  id,
+  formAction = '/api/users/delete',
   onSuccess,
 }) => {
   const [open, setOpen] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
+  const queryClient = useQueryClient();
+  const { language } = LanguageStore();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitting(true);
-
-    const formData = new FormData(e.currentTarget);
-
-    try {
-      const res = await fetch(formAction, {
-        method: 'POST',
-        body: formData,
+  // ✅ define mutation
+  const deleteUser = useMutation({
+    mutationFn: async (userId: string) => {
+      const res = await deleteUserByAdmin(userId, language);
+      return res;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['users'] });
+      toast.success('User deleted successfully!', {
+        duration: 3000, // Show for 3 seconds
       });
+      onSuccess?.();
 
-      if (res.ok) {
+      // Delay closing modal by 1 second to show success state
+      setTimeout(() => {
         setOpen(false);
-        onSuccess?.();
-      } else {
-        console.error('Delete failed');
-      }
-    } catch (err) {
-      console.error('Error deleting:', err);
-    } finally {
-      setSubmitting(false);
-    }
+      }, 1000);
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || 'Failed to delete user');
+    },
+  });
+
+  const handleDelete = () => {
+    deleteUser.mutate(id);
   };
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
-        <Button
-          className="bg-destructive p-2 rounded-sm cursor-pointer
-         "
-          aria-label="Delete"
-        >
+        <Button className="bg-destructive p-2 rounded-sm cursor-pointer">
           <TrashIcon className="size-4 text-red-600" />
         </Button>
       </Dialog.Trigger>
@@ -73,35 +76,24 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
             <Button
               type="button"
               onClick={() => setOpen(false)}
-              disabled={submitting}
-              className="px-4 py-2 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-50 cursor-pointer"
+              disabled={deleteUser.isPending}
+              className="px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-50"
             >
               Cancel
             </Button>
 
-            <form method="POST" action={formAction} onSubmit={handleSubmit}>
-              <input type="hidden" name="id" value={id} />
-              <Button
-                type="submit"
-                disabled={submitting}
-                className={clsx(
-                  'px-4 py-2 rounded-md text-white bg-red-600 hover:bg-red-700 cursor-pointer',
-                  submitting && 'opacity-50 cursor-not-allowed',
-                )}
-              >
-                {submitting ? 'Deleting...' : 'Confirm'}
-              </Button>
-            </form>
-          </div>
-
-          <Dialog.Close asChild>
             <Button
-              className="absolute top-2 right-2 text-gray-400 hover:text-gray-700 cursor-pointer"
-              aria-label="Close"
+              onClick={handleDelete}
+              disabled={deleteUser.isPending}
+              className={clsx(
+                'px-4 py-2 text-white bg-red-600 hover:bg-red-700 flex items-center gap-2',
+                deleteUser.isPending && 'opacity-50 cursor-not-allowed',
+              )}
             >
-              ✕
+              {deleteUser.isPending && <Loader2 className="h-4 w-4 animate-spin" />}
+              {deleteUser.isPending ? 'Deleting...' : 'Confirm'}
             </Button>
-          </Dialog.Close>
+          </div>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

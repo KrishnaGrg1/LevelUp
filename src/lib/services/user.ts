@@ -70,3 +70,27 @@ export const changePassword = async (
     throw { message: errorMessage, error: errorDetail };
   }
 };
+
+export const deleteUserByAdmin = async (id: string, lang: Language) => {
+  try {
+    const response = await axiosInstance.delete(`/admin/users/delete`, {
+      withCredentials: true,
+      headers: {
+        'X-Language': lang,
+      },
+      data: { id },
+    });
+    return response.data;
+  } catch (error: unknown) {
+    const err = error as {
+      response?: {
+        data?: { body?: { message?: string; error?: string }; message?: string; error?: string };
+      };
+    };
+    const errorMessage =
+      err.response?.data?.body?.message || err.response?.data?.message || 'Delete user failed';
+    const errorDetail = err.response?.data?.body?.error || err.response?.data?.error;
+
+    throw { message: errorMessage, error: errorDetail };
+  }
+};
