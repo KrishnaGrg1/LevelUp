@@ -20,7 +20,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Search, X } from 'lucide-react';
 import DeleteDialog from '@/components/DeleteModal';
-import { useQueryClient } from '@tanstack/react-query';
 
 export const UserManagement = () => {
   const queryClient = new QueryClient();
@@ -309,7 +308,6 @@ export const UserManagement = () => {
                               </Button>
                             </a>
                             <DeleteDialog
-                              formAction="/api/v1/admin/delete"
                               title="Confirm Deletion"
                               description="Are you sure you want to delete this user? This action cannot be undone."
                               id={user.id}

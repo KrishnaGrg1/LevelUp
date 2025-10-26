@@ -14,7 +14,6 @@ interface DeleteDialogProps {
   id: string;
   title: string;
   description: string;
-  formAction?: string;
   onSuccess?: () => void;
 }
 
@@ -22,7 +21,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
   id,
   title,
   description,
-  formAction = '/api/users/delete',
+
   onSuccess,
 }) => {
   const [open, setOpen] = useState(false);

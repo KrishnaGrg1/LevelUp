@@ -16,9 +16,9 @@ import ParticleBackground from '@/components/ParticleBackground';
 
 export default function HomeLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const { isAuthenticated, setUser, isAdmin, setAdminStatus } = authStore();
+  const { isAuthenticated, setUser, isAdmin } = authStore();
   const { language } = LanguageStore();
-  const [isClient, setIsClient] = useState(false);
+
   const [isHydrated, setIsHydrated] = useState(false); // ← Add hydration state
 
   // Wait for Zustand hydration to complete
@@ -47,10 +47,6 @@ export default function HomeLayout({ children }: { children: React.ReactNode }) 
       }
     }
   }, [isAuthenticated, isAdmin, router, language, isHydrated]);
-  // Set client state
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   const { mutateAsync: handleGetMe, isPending } = useMutation({
     mutationKey: ['getMe'],
