@@ -248,3 +248,15 @@ export interface changePasswordResponse {
     data: null;
   };
 }
+
+export interface adminOverviewResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: {
+      totalUsers: number;
+      verifiedUsers: number;
+      adminUsers: number;
+    };
+  };
+}

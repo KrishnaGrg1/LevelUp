@@ -8,7 +8,9 @@ interface AuthState {
   isAuthenticated: boolean;
   setAuthenticated: (value: boolean) => void;
   user?: User;
+  isAdmin: boolean;
   setUser: (user: User) => void;
+  setAdminStatus: (isAdmin: boolean) => void;
   logout: () => void;
 }
 
@@ -18,8 +20,10 @@ const authStore = create<AuthState>()(
       isAuthenticated: false,
       setAuthenticated: (value: boolean) => set({ isAuthenticated: value }),
       user: undefined,
+      isAdmin: false,
       setUser: (user: User) => set({ user }), // ← Set both user and authenticated
-      logout: () => set({ user: undefined, isAuthenticated: false }),
+      setAdminStatus: (isAdmin: boolean) => set({ isAdmin }),
+      logout: () => set({ user: undefined, isAuthenticated: false, isAdmin: false }),
     }),
     {
       name: 'auth-storage', // unique name for localStorage

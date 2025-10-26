@@ -17,6 +17,8 @@ import { usePaginationStore } from '@/stores/usePagination';
 import { QueryClient, useQuery } from '@tanstack/react-query';
 import type { User, PaginationMetadata } from '@/lib/generated';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Search, X } from 'lucide-react';
 import DeleteDialog from '@/components/DeleteModal';
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -24,15 +26,19 @@ export const UserManagement = () => {
   const queryClient = new QueryClient();
   const { language } = LanguageStore();
   const { page, pageSize, setPage, setPageSize } = usePaginationStore();
+  const [searchTerm, setSearchTerm] = React.useState('');
 
   // Fetch users with pagination
   const { data, isPending, isError, error, isFetching } = useQuery({
-    queryKey: ['users', language, page, pageSize],
+    queryKey: ['users', language, page, pageSize, searchTerm],
     queryFn: async () => {
       const params = new URLSearchParams({
         page: page.toString(),
         pageSize: pageSize.toString(),
       });
+      if (searchTerm.trim()) {
+        params.append('search', searchTerm.trim());
+      }
       return await getAllUsers(language, params);
     },
     staleTime: 30000, // 30 seconds
@@ -59,6 +65,34 @@ export const UserManagement = () => {
     [setPageSize],
   );
 
+  // Handle search
+  const handleSearchChange = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchTerm(e.target.value);
+      setPage(1); // Reset to first page when searching
+    },
+    [setPage],
+  );
+
+  // Clear search
+  const clearSearch = React.useCallback(() => {
+    setSearchTerm('');
+    setPage(1);
+  }, [setPage]);
+
+  const users = data?.body?.data?.users ?? [];
+
+  // Filter users based on search term (client-side filtering as backup)
+  const filteredUsers = React.useMemo(() => {
+    if (!searchTerm.trim()) return users;
+
+    const search = searchTerm.toLowerCase().trim();
+    return users.filter(
+      (user: User) =>
+        user.UserName?.toLowerCase().includes(search) || user.email?.toLowerCase().includes(search),
+    );
+  }, [users, searchTerm]);
+
   // Transform pagination metadata to match BetterPagination component
   const paginationMetadata: PaginationMetadata | undefined = React.useMemo(() => {
     if (!data?.body?.data?.pagination) return undefined;
@@ -75,22 +109,53 @@ export const UserManagement = () => {
     };
   }, [data]);
 
-  const users = data?.body?.data?.users ?? [];
-
   return (
     <div className="p-4 md:p-6 lg:p-8">
       <div className="mb-6 lg:mb-8">
-        <h1 className="text-2xl md:text-3xl lg:text-4xl mb-2 font-bold">User Management</h1>
+        <h1 className="text-2xl md:text-3xl lg:text-4xl mb-2 font-bold text-blue-300">
+          User Management
+        </h1>
         <p className="text-sm md:text-base lg:text-lg text-muted-foreground">
-          Manage all users with advanced pagination
+          Manage all users in one place. Control access, assign roles, and monitor activity across
+          your platform.
         </p>
+      </div>
+
+      {/* Search Filter */}
+      <div className="mb-6">
+        <div className="relative max-w-md">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+          <Input
+            type="text"
+            placeholder="Search users by username or email..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className="pl-10 pr-10 bg-background border-white/30 focus:border-white focus:ring-white/20"
+          />
+          {searchTerm && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={clearSearch}
+              className="absolute right-1 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0 hover:bg-muted"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          )}
+        </div>
+        {searchTerm && (
+          <p className="text-sm text-muted-foreground mt-2">
+            Showing results for "{searchTerm}" • {filteredUsers.length} user
+            {filteredUsers.length !== 1 ? 's' : ''} found
+          </p>
+        )}
       </div>
 
       <div className="space-y-4">
         {/* Loading State */}
         {isPending && (
           <div className="flex flex-col items-center justify-center py-12 space-y-4">
-            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary"></div>
+            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-500"></div>
             <p className="text-sm text-muted-foreground">Loading users...</p>
           </div>
         )}
@@ -113,7 +178,7 @@ export const UserManagement = () => {
               {isFetching && (
                 <div className="absolute top-2 right-2 z-10">
                   <div className="flex items-center gap-2 bg-background/80 backdrop-blur-sm border rounded-md px-3 py-1.5">
-                    <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-primary"></div>
+                    <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-blue-500"></div>
                     <span className="text-xs text-muted-foreground">Updating...</span>
                   </div>
                 </div>
@@ -133,34 +198,52 @@ export const UserManagement = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {users.length === 0 ? (
+                    {filteredUsers.length === 0 ? (
                       <TableRow>
                         <TableCell colSpan={7} className="text-center py-12">
                           <div className="flex flex-col items-center gap-3">
-                            <svg
-                              className="w-16 h-16 text-muted-foreground/50"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              strokeWidth={1.5}
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
-                              />
-                            </svg>
+                            {searchTerm ? (
+                              <Search className="w-16 h-16 text-muted-foreground/50" />
+                            ) : (
+                              <svg
+                                className="w-16 h-16 text-muted-foreground/50"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={1.5}
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
+                                />
+                              </svg>
+                            )}
                             <div>
-                              <p className="font-medium text-foreground">No users found</p>
-                              <p className="text-sm text-muted-foreground mt-1">
-                                Try adjusting your search criteria
+                              <p className="font-medium text-foreground">
+                                {searchTerm ? 'No matching users found' : 'No users found'}
                               </p>
+                              <p className="text-sm text-muted-foreground mt-1">
+                                {searchTerm
+                                  ? 'Try adjusting your search terms or clear the filter'
+                                  : 'Try adjusting your search criteria'}
+                              </p>
+                              {searchTerm && (
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={clearSearch}
+                                  className="mt-3"
+                                >
+                                  Clear Search
+                                </Button>
+                              )}
                             </div>
                           </div>
                         </TableCell>
                       </TableRow>
                     ) : (
-                      users.map((user: User) => (
+                      filteredUsers.map((user: User) => (
                         <TableRow key={user.id} className="hover:bg-muted/50">
                           <TableCell className="font-medium">{user.UserName}</TableCell>
                           <TableCell className="text-muted-foreground">{user.email}</TableCell>

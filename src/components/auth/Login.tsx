@@ -41,15 +41,26 @@ export function LoginForm({ lang }: LoginFormProps) {
     },
   });
 
-  const { setAuthenticated } = authStore();
+  const { setAuthenticated, setAdminStatus } = authStore();
 
   const { mutateAsync, isPending: isLoading } = useMutation({
     mutationKey: ['login'],
     mutationFn: (data: LoginFormData) => login(data, lang),
     onSuccess: data => {
       setAuthenticated(true);
+
+      // Set admin status from login response
+      const isAdmin = data?.body?.data?.isadmin || false;
+      setAdminStatus(isAdmin);
+
       toast.success(t('success:login', data?.body.message));
-      router.push(`/${lang}/dashboard`);
+
+      // Redirect based on admin status
+      if (isAdmin) {
+        router.push(`/${lang}/admin/dashboard`);
+      } else {
+        router.push(`/${lang}/dashboard`);
+      }
     },
     onError: (error: unknown) => {
       const err = error as { message?: string };

@@ -16,7 +16,7 @@ import ParticleBackground from '@/components/ParticleBackground';
 
 export default function HomeLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const { isAuthenticated, setUser } = authStore();
+  const { isAuthenticated, setUser, isAdmin, setAdminStatus } = authStore();
   const { language } = LanguageStore();
   const [isClient, setIsClient] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false); // ← Add hydration state
@@ -36,6 +36,17 @@ export default function HomeLayout({ children }: { children: React.ReactNode }) 
       router.push(`/${language}/login`);
     }
   }, [isAuthenticated, router, language, isHydrated]); // ← Add isHydrated dependency
+
+  // Admin redirect check - redirect admin users to admin section
+  useEffect(() => {
+    if (isHydrated && isAuthenticated && isAdmin) {
+      const currentPath = window.location.pathname;
+      if (!currentPath.includes('/admin')) {
+        console.log('Admin user detected, redirecting to admin dashboard');
+        router.push(`/${language}/admin/dashboard`);
+      }
+    }
+  }, [isAuthenticated, isAdmin, router, language, isHydrated]);
   // Set client state
   useEffect(() => {
     setIsClient(true);
@@ -48,6 +59,8 @@ export default function HomeLayout({ children }: { children: React.ReactNode }) 
     },
     onSuccess: data => {
       setUser(data.body.data);
+      // Note: You'll need to get admin status from login response or separate API call
+      // For now, we can check if user data has admin info or make additional API call
     },
     onError: (error: unknown) => {
       router.push(`/${language}/login`);
@@ -100,10 +113,13 @@ export default function HomeLayout({ children }: { children: React.ReactNode }) 
 
       {/* Main content */}
       <div className="relative z-10">
-        <div className="flex justify-end p-4">
-          <LanguageSwitcherWrapper currentLang={language} />
-          <ProfileDropdownMenu />
-        </div>
+        {/* Only show header for non-admin users */}
+        {!isAdmin && (
+          <div className="flex justify-end p-4">
+            <LanguageSwitcherWrapper currentLang={language} />
+            <ProfileDropdownMenu />
+          </div>
+        )}
         <div className="min-h-screen p-4">{children}</div>
       </div>
     </div>

@@ -29,7 +29,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
   const queryClient = useQueryClient();
   const { language } = LanguageStore();
 
-  // ✅ define mutation
+  //  define mutation
   const deleteUser = useMutation({
     mutationFn: async (userId: string) => {
       const res = await deleteUserByAdmin(userId, language);

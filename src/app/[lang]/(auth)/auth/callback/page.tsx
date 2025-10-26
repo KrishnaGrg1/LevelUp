@@ -13,7 +13,7 @@ import { useMutation } from '@tanstack/react-query';
 export default function CallbackPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { setAuthenticated } = authStore(); // ← Add setAuthenticated
+  const { setAuthenticated, setAdminStatus } = authStore();
   const { language } = LanguageStore();
 
   const {
@@ -76,13 +76,13 @@ export default function CallbackPage() {
 
       return { response, provider, intent, lang };
     },
-    onSuccess: ({ provider, intent, lang }) => {
+    onSuccess: ({ response, provider, intent, lang }) => {
       // Set user in store and mark as authenticated
-
-      // Also explicitly set authenticated for clarity
       setAuthenticated(true);
 
-      // Determine if this is a new user
+      // Set admin status from OAuth response
+      const isAdmin = response?.body?.data?.isadmin || false;
+      setAdminStatus(isAdmin);
 
       // Show appropriate success message based on intent
       if (intent === 'register') {
@@ -101,15 +101,15 @@ export default function CallbackPage() {
       sessionStorage.removeItem('redirectAfterAuth');
       sessionStorage.removeItem('authIntent');
 
-      // Determine redirect destination
+      // Determine redirect destination based on admin status
       let redirectTo = `/${lang}/dashboard`;
 
       if (redirectAfterAuth) {
         redirectTo = redirectAfterAuth;
       } else if (authIntent === 'register') {
         redirectTo = `/${lang}/onboarding`;
-      } else if (authIntent === 'register') {
-        redirectTo = `/${lang}/dashboard`;
+      } else if (isAdmin) {
+        redirectTo = `/${lang}/admin/dashboard`;
       }
 
       // Redirect immediately
