@@ -9,7 +9,7 @@ import type {
   OAuthRequest,
   // LogoutRequest,
   LogoutResponse,
-} from '../d';
+} from '../generated';
 import { Language } from '@/stores/useLanguage';
 
 export const login = async (data: UserLoginInput, lang: Language) => {

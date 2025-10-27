@@ -102,7 +102,7 @@ export default function CallbackPage() {
       sessionStorage.removeItem('authIntent');
 
       // Determine redirect destination based on admin status
-      let redirectTo = `/${lang}/dashboard`;
+      let redirectTo = `/${lang}/user/dashboard`;
 
       if (redirectAfterAuth) {
         redirectTo = redirectAfterAuth;

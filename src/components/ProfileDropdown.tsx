@@ -18,7 +18,7 @@ import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
-export function ProfileDropdownMenu() {
+export function ProfileDropdownMenu({ isadmin }: { isadmin?: boolean }) {
   const { language } = LanguageStore();
   const { user, logout: clearAuth } = authStore();
 
@@ -55,13 +55,25 @@ export function ProfileDropdownMenu() {
         <DropdownMenuGroup>
           <DropdownMenuItem
             className=" cursor-pointer"
-            onClick={() => router.push(`/${language}/profile`)}
+            onClick={() => {
+              if (isadmin) {
+                router.push(`/${language}/admin/profile`);
+                return;
+              }
+              router.push(`/${language}/user/profile`);
+            }}
           >
             Profile
           </DropdownMenuItem>
           <DropdownMenuItem
             className=" cursor-pointer"
-            onClick={() => router.push(`/${language}/change-password`)}
+            onClick={() => {
+              if (isadmin) {
+                router.push(`/${language}/admin/change-password`);
+                return;
+              }
+              router.push(`/${language}/user/change-password`);
+            }}
           >
             Change Password
           </DropdownMenuItem>

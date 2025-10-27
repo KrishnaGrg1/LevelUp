@@ -30,7 +30,7 @@ export interface User {
   updatedAt: Date;
   categoryId?: string;
   isVerified: boolean;
-
+  isAdmin: boolean;
   Clan?: Clan[];
   Community?: Community[];
   CommunityMember?: CommunityMember[];
