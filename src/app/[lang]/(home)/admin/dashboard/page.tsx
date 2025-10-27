@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Users, UserCheck, Shield, Activity, TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { Users, UserCheck, Shield, Activity } from 'lucide-react';
 import LanguageStore from '@/stores/useLanguage';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
