@@ -40,8 +40,8 @@ const MyCommunities = () => {
 
       <div className="grid md:grid-cols-2 gap-6">
         {communities.map(community => {
-          const [current, total] = community.xp.split('/');
-          const xpPercent = (parseInt(current) / parseInt(total)) * 100;
+          const [current = '0', total = '100'] = community.xp.split('/');
+          const xpPercent = (parseInt(current, 10) / parseInt(total, 10)) * 100;
 
           return (
             <div

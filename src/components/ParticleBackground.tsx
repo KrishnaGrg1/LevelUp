@@ -64,9 +64,12 @@ export default function ParticleBackground({
 
       return () => clearInterval(interval);
     }
+
+    // Return empty cleanup for other animation types
+    return undefined;
   }, [count, animation]);
 
-  const getParticleStyle = (particle: Particle) => {
+  const getParticleStyle = (particle: Particle): React.CSSProperties => {
     const baseStyle: React.CSSProperties = {
       opacity: particle.opacity,
     };
@@ -82,16 +85,16 @@ export default function ParticleBackground({
         animationDelay: `${particle.delay}s`,
         animationDuration: `${particle.duration}s`,
       };
-    } else {
-      // Use pixel-based positioning for rise and static animations
-      return {
-        ...baseStyle,
-        left: `${particle.x}px`,
-        top: `${particle.y}px`,
-        width: `${particle.size}px`,
-        height: `${particle.size}px`,
-      };
     }
+
+    // Use pixel-based positioning for rise and static animations
+    return {
+      ...baseStyle,
+      left: `${particle.x}px`,
+      top: `${particle.y}px`,
+      width: `${particle.size}px`,
+      height: `${particle.size}px`,
+    };
   };
 
   const getParticleClassName = () => {

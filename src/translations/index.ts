@@ -70,7 +70,7 @@ export function t(key: string, fallback?: string): string {
     const [namespace, ...restKeys] = key.split(':');
     const actualKey = restKeys.join(':');
     const langTranslations = translations[currentLang] as TranslationContent;
-    value = langTranslations?.[namespace];
+    value = namespace ? langTranslations?.[namespace] : undefined;
 
     if (value && actualKey) {
       const nestedKeys = actualKey.split('.');

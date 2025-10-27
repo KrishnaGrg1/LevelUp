@@ -45,7 +45,8 @@ export function validateLanguage(lang: string): Language {
 export function getNextLanguage(currentLang: Language): Language {
   const currentIndex = VALID_LANGUAGES.indexOf(currentLang);
   const nextIndex = (currentIndex + 1) % VALID_LANGUAGES.length;
-  return VALID_LANGUAGES[nextIndex];
+  const nextLang = VALID_LANGUAGES[nextIndex];
+  return nextLang ?? DEFAULT_LANGUAGE;
 }
 
 /**
@@ -56,7 +57,8 @@ export function getNextLanguage(currentLang: Language): Language {
 export function getPreviousLanguage(currentLang: Language): Language {
   const currentIndex = VALID_LANGUAGES.indexOf(currentLang);
   const prevIndex = currentIndex === 0 ? VALID_LANGUAGES.length - 1 : currentIndex - 1;
-  return VALID_LANGUAGES[prevIndex];
+  const prevLang = VALID_LANGUAGES[prevIndex];
+  return prevLang ?? DEFAULT_LANGUAGE;
 }
 
 /**

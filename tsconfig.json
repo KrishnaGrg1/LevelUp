@@ -1,29 +1,77 @@
 {
   "compilerOptions": {
+    // Strict Type Checking
+    "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    "exactOptionalPropertyTypes": false, // Can be enabled for stricter optional properties
+    "noPropertyAccessFromIndexSignature": false,
+
+    // Module Resolution
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    // Emit
+    "noEmit": true,
     "jsx": "preserve",
     "incremental": true,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    // Interop Constraints
+    "allowJs": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // Next.js
     "plugins": [
       {
         "name": "next"
       }
     ],
+
+    // Path Aliases - Feature-based architecture
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      // Root alias
+      "@/*": ["./src/*"],
+
+      // Feature-based aliases
+      "@/features/*": ["./src/features/*"],
+      "@/shared/*": ["./src/shared/*"],
+      "@/core/*": ["./src/core/*"],
+
+      // Specific shared modules
+      "@/ui": ["./src/shared/components/ui"],
+      "@/components": ["./src/shared/components"],
+      "@/hooks": ["./src/shared/hooks"],
+      "@/utils": ["./src/shared/utils"],
+      "@/types": ["./src/shared/types"],
+
+      // Core modules
+      "@/api": ["./src/core/api"],
+      "@/config": ["./src/core/config"],
+      "@/providers": ["./src/core/providers"],
+
+      // Legacy support (gradually migrate away from these)
+      "@/lib/*": ["./src/lib/*"],
+      "@/stores/*": ["./src/stores/*"],
+      "@/translations/*": ["./src/translations/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", ".next", "out", "dist"]
 }
