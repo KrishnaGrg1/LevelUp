@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { QueryProvider } from '@/components/providers/QueryProvider';
-// import { Toaster } from "sonner";
 import { ToastWrapper } from '@/components/ToasterWrapper';
+import Providers from '@/components/providers/Providers';
 
 export const metadata: Metadata = {
   title: 'LevelUp - Gamify Your Learning',
@@ -27,11 +26,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html>
       <body>
-        <QueryProvider>
+        <Providers>
           {/* <Toaster position="bottom-right" /> */}
           <ToastWrapper />
           {children}
-        </QueryProvider>
+        </Providers>
       </body>
     </html>
   );

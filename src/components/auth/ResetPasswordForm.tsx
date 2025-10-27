@@ -85,7 +85,7 @@ export default function ResetPasswordForm({ lang, otp, userId }: ResetPasswordFo
 
   const onSubmit = async (data: ResetFormData) => {
     // Remove confirmPassword before sending to backend
-    const { confirmPassword: _confirmPassword, ...apiData } = data;
+    const { ...apiData } = data;
 
     console.log('Data being sent to API (without confirmPassword):', apiData);
 

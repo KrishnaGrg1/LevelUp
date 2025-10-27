@@ -1,5 +1,5 @@
 import { Toaster } from 'sonner';
-import { ReactQueryProvider } from '../../components/providers/ReactQueryProvider';
+import Providers from '@/components/providers/Providers';
 import { redirect } from 'next/navigation';
 import { isValidLanguage } from '@/lib/language';
 
@@ -19,10 +19,10 @@ export default async function LanguageLayout({ children, params }: LanguageLayou
 
   return (
     <div className="min-h-screen">
-      <ReactQueryProvider>
+      <Providers>
         {children}
         <Toaster />
-      </ReactQueryProvider>
+      </Providers>
     </div>
   );
 }

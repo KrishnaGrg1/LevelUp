@@ -17,7 +17,7 @@ import { toast } from 'sonner';
 import { Language } from '@/stores/useLanguage';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Eye, EyeOff, User, Mail, Lock, Github } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { t } from '@/translations/index';
 import { useRouter } from 'next/navigation';
@@ -41,15 +41,26 @@ export function LoginForm({ lang }: LoginFormProps) {
     },
   });
 
-  const { setAuthenticated } = authStore();
+  const { setAuthenticated, setAdminStatus } = authStore();
 
   const { mutateAsync, isPending: isLoading } = useMutation({
     mutationKey: ['login'],
     mutationFn: (data: LoginFormData) => login(data, lang),
     onSuccess: data => {
       setAuthenticated(true);
+
+      // Set admin status from login response
+      const isAdmin = data?.body?.data?.isadmin || false;
+      setAdminStatus(isAdmin);
+
       toast.success(t('success:login', data?.body.message));
-      router.push(`/${lang}/dashboard`);
+
+      // Redirect based on admin status
+      if (isAdmin) {
+        router.push(`/${lang}/admin/dashboard`);
+      } else {
+        router.push(`/${lang}/user/dashboard`);
+      }
     },
     onError: (error: unknown) => {
       const err = error as { message?: string };
@@ -69,7 +80,7 @@ export function LoginForm({ lang }: LoginFormProps) {
 
       // Store intent for post-auth redirect
       sessionStorage.setItem('authIntent', 'register');
-      sessionStorage.setItem('redirectAfterAuth', `/${lang}/dashboard`);
+      sessionStorage.setItem('redirectAfterAuth', `/${lang}/user/dashboard`);
 
       // Build dynamic redirect URI based on current language
       const baseUrl = process.env.NEXT_PUBLIC_APP_URL;

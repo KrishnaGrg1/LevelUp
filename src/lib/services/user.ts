@@ -1,5 +1,10 @@
 import axiosInstance from '../fetch';
-import type { GetAllUsersResponse, GetMeResponse, changePasswordResponse } from '../generated';
+import type {
+  GetAllUsersResponse,
+  GetMeResponse,
+  adminOverviewResponse,
+  changePasswordResponse,
+} from '../generated';
 import { Language } from '@/stores/useLanguage';
 
 export const getMe = async (lang: Language) => {
@@ -92,5 +97,24 @@ export const deleteUserByAdmin = async (id: string, lang: Language) => {
     const errorDetail = err.response?.data?.body?.error || err.response?.data?.error;
 
     throw { message: errorMessage, error: errorDetail };
+  }
+};
+
+export const adminOverview = async (lang: Language) => {
+  try {
+    const response = await axiosInstance.get<adminOverviewResponse>(`/admin/overview`, {
+      withCredentials: true,
+      headers: {
+        'X-Language': lang,
+      },
+    });
+    return response.data;
+  } catch (error: unknown) {
+    const err = error as {
+      response?: { data?: { body?: { message?: string }; message?: string } };
+    };
+    const errorMessage =
+      err.response?.data?.body?.message || err.response?.data?.message || 'Admin Overview failed';
+    throw new Error(errorMessage);
   }
 };

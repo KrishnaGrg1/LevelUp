@@ -1,7 +1,6 @@
 'use client';
 
-import React, { Suspense } from 'react';
-import { Toaster } from 'sonner';
+import React from 'react';
 import TopBar from '@/components/auth/TopBar';
 import useLanguage from '@/stores/useLanguage';
 import ClientOnly from '@/components/ClientOnly';

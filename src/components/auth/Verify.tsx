@@ -23,7 +23,7 @@ import { toast } from 'sonner';
 import { Language } from '@/stores/useLanguage';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { User } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { t } from '@/translations/index';
 import LanguageStore from '@/stores/useLanguage';
@@ -49,7 +49,6 @@ export function VerifyForm({ lang, otp, userId }: VerifyFormProps) {
       userId: userId || '',
     },
   });
-
 
   useEffect(() => {
     if (userId && otp) {

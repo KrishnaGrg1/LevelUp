@@ -118,8 +118,9 @@ export const BetterPagination: React.FC<BetterPaginationProps> = ({
   );
 
   const buttonClass =
-    'inline-flex items-center justify-center rounded-md w-10 h-10 text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring';
-  const activeButtonClass = 'bg-primary text-primary-foreground border-primary hover:bg-primary/90';
+    'inline-flex items-center justify-center rounded-md w-10 h-10 text-sm font-medium transition-all duration-200 border border-slate-700 bg-slate-800/50 text-slate-300 hover:bg-slate-700 hover:text-white hover:border-slate-600 disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500';
+  const activeButtonClass =
+    'bg-gradient-to-br from-indigo-600 to-purple-600 text-white border-indigo-500 hover:from-indigo-700 hover:to-purple-700 shadow-lg shadow-indigo-500/50 scale-110 font-bold';
 
   // Early return if no data
   if (!paginationMetadata || totalPages === 0) {
@@ -158,7 +159,7 @@ export const BetterPagination: React.FC<BetterPaginationProps> = ({
             return (
               <span
                 key={`ellipsis-${idx}`}
-                className="inline-flex items-center justify-center w-10 h-10 text-sm text-muted-foreground"
+                className="inline-flex items-center justify-center w-10 h-10 text-sm text-slate-500"
                 aria-hidden="true"
               >
                 ...
@@ -175,7 +176,7 @@ export const BetterPagination: React.FC<BetterPaginationProps> = ({
               className={`${buttonClass} ${isActive ? activeButtonClass : ''}`}
               aria-label={`Go to page ${pageNumber}`}
               aria-current={isActive ? 'page' : undefined}
-              title={`Page ${pageNumber}`}
+              title={isActive ? `Current page ${pageNumber}` : `Go to page ${pageNumber}`}
             >
               {pageNumber}
             </button>
@@ -206,30 +207,37 @@ export const BetterPagination: React.FC<BetterPaginationProps> = ({
       </nav>
 
       {/* Pagination Info & Page Size Selector */}
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-muted-foreground">
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-slate-400">
         <div className="text-center sm:text-left">
           Showing{' '}
-          <span className="font-medium text-foreground">
+          <span className="font-semibold text-indigo-400">
             {Math.min((currentPage - 1) * pageSize + 1, total)}
           </span>{' '}
           to{' '}
-          <span className="font-medium text-foreground">
+          <span className="font-semibold text-indigo-400">
             {Math.min(currentPage * pageSize, total)}
           </span>{' '}
-          of <span className="font-medium text-foreground">{total}</span> results
+          of <span className="font-semibold text-white">{total.toLocaleString()}</span> results
         </div>
 
         <div className="flex items-center gap-2">
-          <label htmlFor="page-size-select" className="text-sm">
+          <label htmlFor="page-size-select" className="text-sm font-medium">
             Items per page:
           </label>
           <Select value={pageSize.toString()} onValueChange={handlePageSizeChange}>
-            <SelectTrigger className="w-[70px] h-8" id="page-size-select">
+            <SelectTrigger
+              className="w-[70px] h-8 border-slate-700 bg-slate-800/50 text-white hover:bg-slate-700"
+              id="page-size-select"
+            >
               <SelectValue>{pageSize}</SelectValue>
             </SelectTrigger>
-            <SelectContent className="bg-white">
+            <SelectContent className="bg-slate-800 border-slate-700 text-white">
               {pageSizeOptions.map(option => (
-                <SelectItem key={option} value={option.toString()}>
+                <SelectItem
+                  key={option}
+                  value={option.toString()}
+                  className="hover:bg-slate-700 focus:bg-slate-700 cursor-pointer"
+                >
                   {option}
                 </SelectItem>
               ))}

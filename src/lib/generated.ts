@@ -30,7 +30,7 @@ export interface User {
   updatedAt: Date;
   categoryId?: string;
   isVerified: boolean;
-
+  isAdmin: boolean;
   Clan?: Clan[];
   Community?: Community[];
   CommunityMember?: CommunityMember[];
@@ -246,5 +246,17 @@ export interface changePasswordResponse {
   body: {
     message: string;
     data: null;
+  };
+}
+
+export interface adminOverviewResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: {
+      totalUsers: number;
+      verifiedUsers: number;
+      adminUsers: number;
+    };
   };
 }

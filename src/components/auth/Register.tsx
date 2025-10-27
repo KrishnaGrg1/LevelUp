@@ -68,7 +68,7 @@ export function RegisterForm({ lang }: RegisterFormProps) {
 
       // Store intent for post-auth redirect
       sessionStorage.setItem('authIntent', 'register');
-      sessionStorage.setItem('redirectAfterAuth', `/${lang}/dashboard`);
+      sessionStorage.setItem('redirectAfterAuth', `/${lang}/user/dashboard`);
 
       // Build dynamic redirect URI based on current language
       const baseUrl = process.env.NEXT_PUBLIC_APP_URL;

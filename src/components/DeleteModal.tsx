@@ -14,22 +14,15 @@ interface DeleteDialogProps {
   id: string;
   title: string;
   description: string;
-  formAction?: string;
   onSuccess?: () => void;
 }
 
-const DeleteDialog: React.FC<DeleteDialogProps> = ({
-  id,
-  title,
-  description,
-  formAction = '/api/users/delete',
-  onSuccess,
-}) => {
+const DeleteDialog: React.FC<DeleteDialogProps> = ({ id, title, description, onSuccess }) => {
   const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
   const { language } = LanguageStore();
 
-  // ✅ define mutation
+  //  define mutation
   const deleteUser = useMutation({
     mutationFn: async (userId: string) => {
       const res = await deleteUserByAdmin(userId, language);
