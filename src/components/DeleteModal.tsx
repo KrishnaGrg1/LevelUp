@@ -17,13 +17,7 @@ interface DeleteDialogProps {
   onSuccess?: () => void;
 }
 
-const DeleteDialog: React.FC<DeleteDialogProps> = ({
-  id,
-  title,
-  description,
-
-  onSuccess,
-}) => {
+const DeleteDialog: React.FC<DeleteDialogProps> = ({ id, title, description, onSuccess }) => {
   const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
   const { language } = LanguageStore();

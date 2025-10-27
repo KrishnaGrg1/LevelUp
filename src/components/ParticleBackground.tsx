@@ -94,7 +94,7 @@ export default function ParticleBackground({
     }
   };
 
-  const getParticleClassName = (particle: Particle) => {
+  const getParticleClassName = () => {
     let className = 'absolute rounded-full';
 
     if (particleClass) {
@@ -127,11 +127,7 @@ export default function ParticleBackground({
 
       {/* Particles */}
       {particles.map((particle, index) => (
-        <div
-          key={index}
-          className={getParticleClassName(particle)}
-          style={getParticleStyle(particle)}
-        />
+        <div key={index} className={getParticleClassName()} style={getParticleStyle(particle)} />
       ))}
     </>
   );

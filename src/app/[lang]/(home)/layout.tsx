@@ -21,12 +21,9 @@ export default function HomeLayout({ children }: { children: React.ReactNode }) 
 
   const [isHydrated, setIsHydrated] = useState(false); // ← Add hydration state
 
-  // Wait for Zustand hydration to complete
+  // Wait for Zustand to hydrate before checking authentication
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsHydrated(true);
-    }, 100); // Short delay to ensure hydration
-    return () => clearTimeout(timer);
+    setIsHydrated(true);
   }, []);
 
   // Authentication check - only after hydration
@@ -64,12 +61,12 @@ export default function HomeLayout({ children }: { children: React.ReactNode }) 
       toast.error(err.message || t('error:unknown', 'Get details failed'));
     },
   });
+
   useEffect(() => {
-    const fetchUser = async () => {
-      await handleGetMe();
-    };
-    fetchUser();
-  }, [handleGetMe]);
+    if (isHydrated && isAuthenticated) {
+      handleGetMe();
+    }
+  }, [isHydrated, isAuthenticated, handleGetMe]);
 
   // Show loading state while hydrating or not authenticated
   if (!isHydrated || (isHydrated && !isAuthenticated) || isPending) {
@@ -86,7 +83,9 @@ export default function HomeLayout({ children }: { children: React.ReactNode }) 
         {/* Loading spinner */}
         <div className="text-center space-y-4 relative z-10">
           <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
-          <p className="text-slate-400">{!isHydrated ? 'Loading...' : 'Redirecting to login...'}</p>
+          <p className="text-slate-400">
+            {!isAuthenticated ? 'Loading...' : 'Redirecting to login...'}
+          </p>
         </div>
       </div>
     );

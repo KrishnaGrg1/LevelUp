@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import LanguageSwitcherLoading from './LanguageSwitcherLoading';
 import ClientOnly from './ClientOnly';
