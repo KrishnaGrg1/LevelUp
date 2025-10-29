@@ -25,7 +25,7 @@ export default function LoginPage({ params }: LoginPageProps) {
 
   return (
     <div className="relative z-10 flex items-center justify-center min-h-screen pt-20">
-      <Suspense fallback={<FormLoading message="Logg In" />}>
+      <Suspense fallback={<FormLoading message="Log In" />}>
         <LoginForm lang={language} />
       </Suspense>
     </div>
