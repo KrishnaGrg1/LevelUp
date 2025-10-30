@@ -118,3 +118,26 @@ export const adminOverview = async (lang: Language) => {
     throw new Error(errorMessage);
   }
 };
+
+export const adminUserGrowth = async (lang: Language, range: 'day' | 'week' | 'month') => {
+  try {
+    const response = await axiosInstance.get(`/admin/user-growth?range=${range}`, {
+      withCredentials: true,
+      headers: {
+        'X-Language': lang,
+      },
+    });
+    return response.data;
+  } catch (error: unknown) {
+    const err = error as {
+      response?: {
+        data?: { body?: { message?: string; error?: string }; message?: string; error?: string };
+      };
+    };
+    const errorMessage =
+      err.response?.data?.body?.message || err.response?.data?.message || 'Delete user failed';
+    const errorDetail = err.response?.data?.body?.error || err.response?.data?.error;
+
+    throw { message: errorMessage, error: errorDetail };
+  }
+};
