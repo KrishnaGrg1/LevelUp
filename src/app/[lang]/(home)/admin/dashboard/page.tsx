@@ -7,6 +7,7 @@ import LanguageStore from '@/stores/useLanguage';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { adminOverview } from '@/lib/services/user';
+import { UserGrowthChart } from '@/components/users/chart';
 
 export default function AdminDashboard() {
   const { language } = LanguageStore();
@@ -158,6 +159,19 @@ export default function AdminDashboard() {
           </Card>
         </div>
       )}
+
+      {/* User Growth Analytics */}
+      <div className="mb-8">
+        <Card className="rounded-xl border-2 border-purple-400/60 border-dashed bg-purple-500/5">
+          <CardHeader>
+            <CardTitle className="text-purple-300 text-2xl font-bold">User Growth</CardTitle>
+            <CardDescription>New users over time</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <UserGrowthChart />
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Quick Actions */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -260,3 +260,20 @@ export interface adminOverviewResponse {
     };
   };
 }
+
+export interface GrowthData {
+  period: string;
+  count: number;
+}
+
+export interface UserGrowthResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: {
+      range: string;
+      totalNewUsers: number;
+      growth: GrowthData[];
+    };
+  };
+}
