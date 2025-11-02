@@ -18,7 +18,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createCommunity } from '@/lib/services/communities';
 import LanguageStore from '@/stores/useLanguage';
 import { toast } from 'sonner';
-import { Loader2, Upload, X, Image } from 'lucide-react';
+import { Loader2, Upload, X } from 'lucide-react';
 
 interface CreateCommunityModalProps {
   open: boolean;
@@ -108,7 +108,7 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
 
     // Create FormData for file upload
     const formData = new FormData();
-    formData.append('name', name.trim());
+    formData.append('communityName', name.trim());
     formData.append('description', description.trim());
     formData.append('memberLimit', (memberLimit || 100).toString());
     formData.append('isPrivate', isPrivate.toString());
@@ -119,7 +119,7 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
     }
 
     console.log('Submitting FormData with:', {
-      name: name.trim(),
+      communityName: name.trim(),
       description: description.trim(),
       memberLimit: memberLimit || 100,
       isPrivate,
@@ -131,9 +131,9 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogOverlay className="fixed inset-0 bg-black/40 backdrop-blur-[3px] transition-all duration-300" />
+      <DialogOverlay className="fixed inset-0 bg-black/50 backdrop-blur-[8px] transition-all duration-300" />
 
-      <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto bg-gradient-to-br from-gray-900 via-gray-850 to-gray-900 text-gray-100 shadow-[0_0_25px_rgba(59,130,246,0.45)] border border-blue-500/20 rounded-2xl backdrop-blur-md transition-all duration-300">
+      <DialogContent className="sm:max-w-2xl bg-gradient-to-br from-gray-900 via-gray-850 to-gray-900 text-gray-100 shadow-[0_0_25px_rgba(59,130,246,0.45)] border border-blue-500/20 rounded-2xl backdrop-blur-md transition-all duration-300">
         <DialogHeader className="text-center space-y-2">
           <DialogTitle className="text-2xl font-bold tracking-tight bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-600 bg-clip-text text-transparent">
             Create New Community
@@ -143,109 +143,103 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
           </p>
         </DialogHeader>
 
-        <div className="space-y-4 mt-4">
-          {/* Community Picture */}
-          <div>
-            <Label className="text-sm font-medium text-gray-200 mb-2 block">
-              Community Picture
-            </Label>
+        <div className="space-y-5 mt-5">
+          {/* Community Picture and Basic Info - Side by Side */}
+          <div className="flex gap-6">
+            {/* Community Picture - Left Side */}
+            <div className="flex flex-col items-center flex-shrink-0">
+              <Label className="text-sm font-medium text-gray-200 mb-3 block">Picture</Label>
 
-            {!imagePreview ? (
-              <div className="relative">
-                <input
-                  type="file"
-                  id="communityImage"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  className="hidden"
-                />
-                <label
-                  htmlFor="communityImage"
-                  className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-600 rounded-lg cursor-pointer bg-gray-800/50 hover:bg-gray-800/70 transition-all duration-200 group"
-                >
-                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                    <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center mb-3 group-hover:bg-blue-500/20 transition-colors">
-                      <Upload className="h-6 w-6 text-blue-400" />
+              {!imagePreview ? (
+                <div className="relative">
+                  <input
+                    type="file"
+                    id="communityImage"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="hidden"
+                  />
+                  <label
+                    htmlFor="communityImage"
+                    className="flex flex-col items-center justify-center w-32 h-32 border-2 border-dashed border-gray-600 rounded-full cursor-pointer bg-gray-800/50 hover:bg-gray-800/70 transition-all duration-200 group"
+                  >
+                    <div className="flex flex-col items-center justify-center">
+                      <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center mb-2 group-hover:bg-blue-500/20 transition-colors">
+                        <Upload className="h-5 w-5 text-blue-400" />
+                      </div>
+                      <p className="text-xs text-gray-300 text-center px-2">
+                        <span className="font-semibold">Upload</span>
+                      </p>
                     </div>
-                    <p className="mb-2 text-sm text-gray-300">
-                      <span className="font-semibold">Click to upload</span> or drag and drop
-                    </p>
-                    <p className="text-xs text-gray-400">PNG, JPG, GIF up to 5MB</p>
-                  </div>
-                </label>
-              </div>
-            ) : (
-              <div className="relative w-full h-40 rounded-lg overflow-hidden border-2 border-gray-600 bg-gray-800/50">
-                <img
-                  src={imagePreview}
-                  alt="Community preview"
-                  className="w-full h-full object-cover"
-                />
-                <button
-                  type="button"
-                  onClick={removeImage}
-                  className="absolute top-2 right-2 p-1.5 rounded-full bg-red-500/90 hover:bg-red-600 text-white transition-colors"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2">
-                  <p className="text-xs text-white flex items-center gap-1">
-                    <Image className="h-3 w-3" />
-                    {imageFile?.name}
-                  </p>
+                  </label>
                 </div>
+              ) : (
+                <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-gray-600 bg-gray-800/50">
+                  <img
+                    src={imagePreview}
+                    alt="Community preview"
+                    className="w-full h-full object-cover object-center"
+                  />
+                  <button
+                    type="button"
+                    onClick={removeImage}
+                    className="absolute top-1 right-1 p-1.5 rounded-full bg-red-500/90 hover:bg-red-600 text-white transition-colors"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+              )}
+              <p className="text-xs text-gray-400 mt-2 text-center">Up to 5MB</p>
+            </div>
+
+            {/* Form Fields - Right Side */}
+            <div className="flex-1 space-y-5">
+              {/* Community Name */}
+              <div>
+                <Label htmlFor="communityName" className="text-sm font-medium text-gray-200">
+                  Community Name <span className="text-red-400">*</span>
+                </Label>
+                <Input
+                  id="communityName"
+                  placeholder="e.g., Tech Innovators"
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                  required
+                  className="mt-2 bg-gray-800/70 border border-gray-600 text-gray-100 placeholder:text-gray-400 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:border-blue-500"
+                />
               </div>
-            )}
-            <p className="text-xs text-gray-400 mt-2">
-              Upload a picture to represent your community
-            </p>
-          </div>
 
-          {/* Community Name */}
-          <div>
-            <Label htmlFor="communityName" className="text-sm font-medium text-gray-200">
-              Community Name <span className="text-red-400">*</span>
-            </Label>
-            <Input
-              id="communityName"
-              placeholder="e.g., Tech Innovators"
-              value={name}
-              onChange={e => setName(e.target.value)}
-              required
-              className="mt-2 bg-gray-800/70 border border-gray-600 text-gray-100 placeholder:text-gray-400 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:border-blue-500"
-            />
-          </div>
+              {/* Description */}
+              <div>
+                <Label htmlFor="description" className="text-sm font-medium text-gray-200">
+                  Description <span className="text-red-400">*</span>
+                </Label>
+                <Textarea
+                  id="description"
+                  placeholder="Write a short description..."
+                  value={description}
+                  onChange={e => setDescription(e.target.value)}
+                  required
+                  rows={4}
+                  className="mt-2 bg-gray-800/70 border border-gray-600 text-gray-100 placeholder:text-gray-400 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:border-blue-500"
+                />
+              </div>
 
-          {/* Description */}
-          <div>
-            <Label htmlFor="description" className="text-sm font-medium text-gray-200">
-              Description <span className="text-red-400">*</span>
-            </Label>
-            <Textarea
-              id="description"
-              placeholder="Write a short description about your community..."
-              value={description}
-              onChange={e => setDescription(e.target.value)}
-              required
-              rows={3}
-              className="mt-2 bg-gray-800/70 border border-gray-600 text-gray-100 placeholder:text-gray-400 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:border-blue-500"
-            />
-          </div>
-
-          {/* Member Limit */}
-          <div>
-            <Label htmlFor="memberLimit" className="text-sm font-medium text-gray-200">
-              Member Limit <span className="text-gray-400 text-xs">(Default: 100)</span>
-            </Label>
-            <Input
-              id="memberLimit"
-              type="number"
-              min={1}
-              value={memberLimit}
-              onChange={e => setMemberLimit(Number(e.target.value))}
-              className="mt-2 bg-gray-800/70 border border-gray-600 text-gray-100 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:border-blue-500"
-            />
-            <p className="text-xs text-gray-400 mt-1">Maximum number of members allowed</p>
+              {/* Member Limit */}
+              <div>
+                <Label htmlFor="memberLimit" className="text-sm font-medium text-gray-200">
+                  Member Limit <span className="text-gray-400 text-xs">(Default: 100)</span>
+                </Label>
+                <Input
+                  id="memberLimit"
+                  type="number"
+                  min={1}
+                  value={memberLimit}
+                  onChange={e => setMemberLimit(Number(e.target.value))}
+                  className="mt-2 bg-gray-800/70 border border-gray-600 text-gray-100 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:border-blue-500"
+                />
+              </div>
+            </div>
           </div>
 
           {/* Privacy Toggle */}
@@ -255,7 +249,7 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
             </Label>
             <div className="flex items-center justify-between border border-gray-700/50 rounded-lg px-4 py-3 bg-gray-800/50 hover:bg-gray-800/70 transition-colors">
               <div className="flex-1">
-                <div className="flex items-center gap-2 mb-1">
+                <div className="flex items-center gap-2">
                   <span className="text-sm font-medium text-gray-200">
                     {isPrivate ? '🔒 Private' : '🌐 Public'}
                   </span>
@@ -269,11 +263,6 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
                     {isPrivate ? 'Invite Only' : 'Anyone Can Join'}
                   </span>
                 </div>
-                <p className="text-xs text-gray-400">
-                  {isPrivate
-                    ? 'Only invited members can join this community'
-                    : 'Anyone can discover and join this community'}
-                </p>
               </div>
               <div className="ml-3 flex items-center">
                 <Switch
