@@ -7,10 +7,12 @@ import LanguageStore from '@/stores/useLanguage';
 import { useQuery } from '@tanstack/react-query';
 import { getMyCommunities } from '@/lib/services/communities';
 import CreateCommunityModal from './CreateCommunityModal';
+import CustomizePinModal from './CustomizePin';
 
 export default function CommunitiesSection() {
   const { language } = LanguageStore();
   const [openCreateModal, setOpenCreateModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Fetch user communities data
   const { data, isPending, isError, error } = useQuery({
@@ -92,6 +94,24 @@ export default function CommunitiesSection() {
         </div>
       )}
 
+      <div>
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="px-3 py-2 rounded-md bg-yellow-500 text-black font-semibold hover:bg-yellow-600"
+        >
+          Customize Pins
+        </button>
+
+        <CustomizePinModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          communities={communities.map(c => ({
+            id: c.id,
+            name: c.name,
+            isPinned: c.isPinned ?? false,
+          }))}
+        />
+      </div>
       {/* Communities Grid */}
       {!isPending && !isError && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

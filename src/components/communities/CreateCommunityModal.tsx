@@ -115,7 +115,7 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
 
     // Add image if provided
     if (imageFile) {
-      formData.append('image', imageFile);
+      formData.append('photo', imageFile);
     }
 
     console.log('Submitting FormData with:', {

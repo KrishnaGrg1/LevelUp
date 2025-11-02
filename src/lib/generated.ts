@@ -285,6 +285,7 @@ export interface CommunityDTO {
   maxMembers: number; // member limit
   visibility: 'private' | 'public';
   userRole: 'ADMIN' | 'MEMBER';
+  isPinned?: boolean;
 }
 
 export interface GetMyCommunities {
