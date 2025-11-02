@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Users, Lock, Globe, Crown, Plus } from 'lucide-react';
+import { Users, Lock, Globe, Crown, Plus, Pin } from 'lucide-react';
 import LanguageStore from '@/stores/useLanguage';
 import { useQuery } from '@tanstack/react-query';
 import { getMyCommunities } from '@/lib/services/communities';
@@ -120,6 +120,7 @@ export default function CommunitiesSection() {
           {communities.map((community: any, index: number) => {
             const isPrivate = community.visibility === 'private';
             const isAdmin = community.userRole === 'ADMIN';
+            const isPinned = community.isPinned;
 
             return (
               <Card
@@ -139,6 +140,15 @@ export default function CommunitiesSection() {
                   }`}
                 ></div>
 
+                {/* Pinned Icon - Top Right Corner */}
+                {isPinned && (
+                  <div className="absolute top-4 right-4 z-10">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-500/90 to-amber-600/90 flex items-center justify-center shadow-lg shadow-yellow-500/30 animate-pulse">
+                      <Pin className="h-4 w-4 text-white" fill="currentColor" />
+                    </div>
+                  </div>
+                )}
+
                 <CardHeader className="pb-2 px-4 pt-4">
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex items-center gap-3">
@@ -153,9 +163,18 @@ export default function CommunitiesSection() {
                         {isPrivate ? <Lock className="h-5 w-5" /> : <Globe className="h-5 w-5" />}
                       </div>
                       <div>
-                        <CardTitle className="text-lg md:text-xl font-semibold text-gray-100 group-hover:text-white transition-colors">
-                          {community.name}
-                        </CardTitle>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <CardTitle className="text-lg md:text-xl font-semibold text-gray-100 group-hover:text-white transition-colors">
+                            {community.name}
+                          </CardTitle>
+                          {/* Pinned Badge next to title */}
+                          {isPinned && (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-500/20 text-yellow-300 border border-yellow-500/40">
+                              <Pin className="h-3 w-3" fill="currentColor" />
+                              Pinned
+                            </span>
+                          )}
+                        </div>
                         <p
                           className={`text-xs mt-0.5 font-medium ${
                             isPrivate ? 'text-purple-400/80' : 'text-emerald-400/80'
