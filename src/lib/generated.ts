@@ -313,3 +313,14 @@ export interface CreateCommunityResponse {
     data: CommunityDTO; // changed from 'any' to CommunityDTO
   };
 }
+export interface TogglePinDTO {
+  communityId: string;
+  isPinned: boolean;
+}
+export interface TogglePinResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: TogglePinDTO[];
+  };
+}

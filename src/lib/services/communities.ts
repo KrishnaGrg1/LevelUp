@@ -1,6 +1,6 @@
 import axiosInstance from '../fetch';
 import { Language } from '@/stores/useLanguage';
-import { GetMyCommunities } from '../generated';
+import { CreateCommunityResponse, GetMyCommunities, TogglePinResponse } from '../generated';
 
 // Get user's communities
 export const getMyCommunities = async (lang: Language) => {
@@ -27,7 +27,7 @@ export const getMyCommunities = async (lang: Language) => {
 // Create new community
 export const togglePin = async (lang: Language, communityIds: string[]) => {
   try {
-    const response = await axiosInstance.post(
+    const response = await axiosInstance.post<TogglePinResponse>(
       `/community/toggle-pin`,
       { communityIds },
       {
@@ -52,19 +52,17 @@ export const togglePin = async (lang: Language, communityIds: string[]) => {
 // Create new community
 export const createCommunity = async (lang: Language, formData: FormData) => {
   try {
-    const response = await axiosInstance.post<{
-      statusCode: number;
-      body: {
-        message: string;
-        data: any;
-      };
-    }>(`/community/create`, formData, {
-      withCredentials: true,
-      headers: {
-        'X-Language': lang,
-        'Content-Type': 'multipart/form-data',
+    const response = await axiosInstance.post<CreateCommunityResponse>(
+      `/community/create`,
+      formData,
+      {
+        withCredentials: true,
+        headers: {
+          'X-Language': lang,
+          'Content-Type': 'multipart/form-data',
+        },
       },
-    });
+    );
     return response.data;
   } catch (error: unknown) {
     const err = error as {

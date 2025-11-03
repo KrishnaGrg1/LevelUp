@@ -24,9 +24,9 @@ const authStore = create<AuthState>()(
       user: undefined,
       isAdmin: false,
       setUser: (user: User) => {
-        set({ 
-          user, 
-          isAuthenticated: true, 
+        set({
+          user,
+          isAuthenticated: true,
           isAdmin: user.isAdmin === true,
         });
       },
@@ -38,7 +38,7 @@ const authStore = create<AuthState>()(
     {
       name: 'auth-storage',
       storage: createJSONStorage(() => localStorage),
-      onRehydrateStorage: () => (state) => {
+      onRehydrateStorage: () => state => {
         state?.setHasHydrated(true);
       },
     },
