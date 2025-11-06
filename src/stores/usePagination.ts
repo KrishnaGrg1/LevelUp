@@ -11,11 +11,11 @@ interface PaginationState {
 
 export const usePaginationStore = create<PaginationState>()(
   persist(
-    (set) => ({
+    set => ({
       page: 1,
       pageSize: 10,
-      setPage: (page) => set({ page }),
-      setPageSize: (pageSize) => {
+      setPage: page => set({ page }),
+      setPageSize: pageSize => {
         console.log('Setting page size to:', pageSize); // Debug log
         set({ pageSize, page: 1 }); // Reset to page 1 when changing size
       },
@@ -24,6 +24,6 @@ export const usePaginationStore = create<PaginationState>()(
     {
       name: 'user-pagination-storage',
       storage: createJSONStorage(() => localStorage),
-    }
-  )
+    },
+  ),
 );

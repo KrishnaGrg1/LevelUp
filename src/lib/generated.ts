@@ -277,3 +277,50 @@ export interface UserGrowthResponse {
     };
   };
 }
+export interface CommunityDTO {
+  id: string;
+  name: string;
+  description?: string;
+  currentMembers: number; // number of members
+  maxMembers: number; // member limit
+  visibility: 'private' | 'public';
+  userRole: 'ADMIN' | 'MEMBER';
+  isPinned?: boolean;
+}
+
+export interface GetMyCommunities {
+  statusCode: number;
+  body: {
+    message: string;
+    data: CommunityDTO[];
+  };
+}
+
+export interface CreateCommunityInput {
+  name: string;
+  description?: string;
+  memberLimit?: number;
+  isPrivate?: boolean;
+  photo?: string;
+  image?: File; // Add this
+}
+
+// ✅ Updated CreateCommunityResponse
+export interface CreateCommunityResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: CommunityDTO; // changed from 'any' to CommunityDTO
+  };
+}
+export interface TogglePinDTO {
+  communityId: string;
+  isPinned: boolean;
+}
+export interface TogglePinResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: TogglePinDTO[];
+  };
+}

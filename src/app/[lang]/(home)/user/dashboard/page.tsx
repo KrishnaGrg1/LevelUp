@@ -1,11 +1,13 @@
-import MyCommunities from '@/components/landing/myCommunities';
+import CommunitiesSection from '@/components/communities/communityCard';
+
 import StatsSummary from '@/components/landing/statsSummary';
 import TodaysQuests from '@/components/landing/todaysQuests';
 
 export default function DashboardPage() {
   return (
     <div>
-      <MyCommunities />
+      {/* <MyCommunities /> */}
+      <CommunitiesSection />
       <TodaysQuests />
       <StatsSummary />
     </div>

@@ -39,14 +39,10 @@ export function RoleGuard({ children, allowedRole, fallbackPath }: RoleGuardProp
 
     if (!hasPermission) {
       const defaultFallback =
-        allowedRole === 'admin'
-          ? `/${language}/user/dashboard`
-          : `/${language}/admin/dashboard`;
+        allowedRole === 'admin' ? `/${language}/user/dashboard` : `/${language}/admin/dashboard`;
       const redirectPath = fallbackPath || defaultFallback;
 
-      console.log(
-        `User doesn't have ${allowedRole} permission, redirecting to ${redirectPath}`,
-      );
+      console.log(`User doesn't have ${allowedRole} permission, redirecting to ${redirectPath}`);
       router.push(redirectPath);
       return;
     }
