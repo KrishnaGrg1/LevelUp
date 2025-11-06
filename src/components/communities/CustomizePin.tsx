@@ -19,14 +19,13 @@ interface CustomizePinModalProps {
   isOpen: boolean;
   onClose: () => void;
   communities: Community[];
-  onUpdate?: (updated: any[]) => void;
+  onUpdate?: (updated: Community[]) => void;
 }
 
 export default function CustomizePinModal({
   isOpen,
   onClose,
   communities,
-  onUpdate,
 }: CustomizePinModalProps) {
   const { language } = LanguageStore();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -48,12 +47,11 @@ export default function CustomizePinModal({
 
   const { mutate: handleToggle, isPending } = useMutation({
     mutationFn: (ids: string[]) => togglePin(language, ids),
-    onSuccess: data => {
-      onUpdate?.(data?.body?.updatedMembers || []);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['my-communities', language] });
       onClose();
     },
-    onError: (err: any) => {
+    onError: (err: Error) => {
       console.error(err);
       alert('Failed to save pinned communities');
     },

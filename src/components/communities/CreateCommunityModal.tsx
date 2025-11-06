@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import {
   Dialog,
   DialogContent,
@@ -175,10 +176,12 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
                 </div>
               ) : (
                 <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-gray-600 bg-gray-800/50">
-                  <img
+                  <Image
                     src={imagePreview}
                     alt="Community preview"
-                    className="w-full h-full object-cover object-center"
+                    fill
+                    className="object-cover object-center"
+                    unoptimized
                   />
                   <button
                     type="button"

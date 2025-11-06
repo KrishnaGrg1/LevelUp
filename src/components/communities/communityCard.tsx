@@ -8,6 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getMyCommunities } from '@/lib/services/communities';
 import CreateCommunityModal from './CreateCommunityModal';
 import CustomizePinModal from './CustomizePin';
+import type { CommunityDTO } from '@/lib/generated';
 
 export default function CommunitiesSection() {
   const { language } = LanguageStore();
@@ -137,7 +138,7 @@ export default function CommunitiesSection() {
           </Card>
 
           {/* Existing Communities */}
-          {communities.map((community: any, index: number) => {
+          {communities.map((community: CommunityDTO, index: number) => {
             const isPrivate = community.visibility === 'private';
             const isAdmin = community.userRole === 'ADMIN';
             const isPinned = community.isPinned;
