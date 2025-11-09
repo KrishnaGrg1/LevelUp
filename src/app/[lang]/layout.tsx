@@ -18,11 +18,11 @@ export default async function LanguageLayout({ children, params }: LanguageLayou
   }
 
   return (
-    <div className="min-h-screen">
-      {/* <Providers> */}
-      {children}
-      {/* <Toaster /> */}
-      {/* </Providers> */}
-    </div>
+    // <div className="min-h-screen">
+    //   <Providers>
+    <>{children}</>
+    //   <Toaster />
+    // </Providers>
+    // </div>
   );
 }

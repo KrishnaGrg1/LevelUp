@@ -3,7 +3,7 @@ import LanguageSwitcherWrapper from '../LanguageSwitcherWrapper';
 import { Sparkles, ArrowLeft } from 'lucide-react';
 import { Language } from '@/stores/useLanguage';
 import { t } from '@/translations/index';
-import { ModeToggle } from '../ModeToggle';
+import { ModeToggle } from '../toggle';
 
 interface TopBarProps {
   language?: Language;
@@ -15,7 +15,7 @@ const TopBar: React.FC<TopBarProps> = ({ language = 'eng', showBackButton = fals
   const defaultBackUrl = `/${language}/home`;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-lg border-b border-slate-800/50">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-black/90 backdrop-blur-lg border-b dark:border-slate-800/50">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Left Side - Back Button or Brand */}

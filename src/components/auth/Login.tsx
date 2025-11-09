@@ -23,6 +23,7 @@ import { t } from '@/translations/index';
 import { useRouter } from 'next/navigation';
 import { FcGoogle } from 'react-icons/fc';
 import ErrorMessages from '../ErrorDispaly';
+import { ModeToggle } from '../toggle';
 type LoginFormData = z.infer<typeof loginSchema>;
 
 interface LoginFormProps {
@@ -120,7 +121,7 @@ export function LoginForm({ lang }: LoginFormProps) {
   };
 
   return (
-    <Card className="w-full max-w-2xl mx-auto relative z-10 border-0">
+    <Card className="w-full max-w-2xl mx-auto relative z-10 border-0 dark:bg-black">
       <CardHeader className="space-y-3 pb-4 pt-8">
         {/* Logo/Icon */}
         <div className="flex justify-center">
