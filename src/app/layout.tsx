@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html>
+    <html lang="en" suppressHydrationWarning>
       <body>
         <Providers>
           {/* <Toaster position="bottom-right" /> */}

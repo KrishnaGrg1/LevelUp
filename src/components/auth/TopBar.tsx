@@ -3,6 +3,7 @@ import LanguageSwitcherWrapper from '../LanguageSwitcherWrapper';
 import { Sparkles, ArrowLeft } from 'lucide-react';
 import { Language } from '@/stores/useLanguage';
 import { t } from '@/translations/index';
+import { ModeToggle } from '../ModeToggle';
 
 interface TopBarProps {
   language?: Language;
@@ -42,6 +43,7 @@ const TopBar: React.FC<TopBarProps> = ({ language = 'eng', showBackButton = fals
 
           {/* Right Side - Language Switcher */}
           <div className="flex items-center space-x-4">
+            <ModeToggle />
             <LanguageSwitcherWrapper currentLang={language} />
           </div>
         </div>
