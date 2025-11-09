@@ -38,10 +38,9 @@ interface VerifyFormProps {
 }
 
 export function VerifyForm({ lang, otp, userId }: VerifyFormProps) {
-  const { setAuthenticated } = authStore();
+  const { setAuthenticated, setAdminStatus } = authStore();
   const { language } = LanguageStore();
   const router = useRouter();
-
   const form = useForm<VerifyFormData>({
     resolver: zodResolver(VerifySchema),
     defaultValues: {
@@ -72,7 +71,13 @@ export function VerifyForm({ lang, otp, userId }: VerifyFormProps) {
     onSuccess: data => {
       setAuthenticated(true);
       toast.success(data?.body.message || 'Verification Successful');
-      router.push(`/${lang}/profile`);
+      setAdminStatus(data?.body.data?.isadmin || false);
+      // Redirect based on admin status
+      if (data?.body.data?.isadmin) {
+        router.push(`/${lang}/admin/dashboard`);
+      } else {
+        router.push(`/${lang}/user/dashboard`);
+      }
     },
     onError: (error: unknown) => {
       const err = error as { message?: string };
