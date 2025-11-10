@@ -23,7 +23,7 @@ import { t } from '@/translations/index';
 import { useRouter } from 'next/navigation';
 import { FcGoogle } from 'react-icons/fc';
 import ErrorMessages from '../ErrorDispaly';
-import { ModeToggle } from '../toggle';
+
 type LoginFormData = z.infer<typeof loginSchema>;
 
 interface LoginFormProps {
@@ -116,31 +116,33 @@ export function LoginForm({ lang }: LoginFormProps) {
       setLoadingProvider(null);
     }
   };
+
   const onSubmit = async (data: LoginFormData) => {
     await mutateAsync(data);
   };
 
   return (
-    <Card className="w-full max-w-2xl mx-auto relative z-10 border-0 dark:bg-black">
+    <Card className="w-full max-w-2xl mx-auto relative z-10 border-0  shadow-none">
       <CardHeader className="space-y-3 pb-4 pt-8">
         {/* Logo/Icon */}
         <div className="flex justify-center">
-          <div className="w-12 h-12 border border-white  rounded-lg flex items-center justify-center ">
-            <span className="text-white font-bold text-xl ">
-              <Sparkles className="w-4 h-" />
-            </span>
+          <div className="w-12 h-12 border-2 border-gray-900 dark:border-white rounded-lg flex items-center justify-center">
+            <Sparkles className="w-6 h-6 text-gray-900 dark:text-white" />
           </div>
         </div>
 
         {/* Title */}
-        <CardTitle className="text-2xl font-semibold text-white text-center transition-colors duration-300">
+        <CardTitle className="text-2xl font-semibold text-gray-900 dark:text-white text-center">
           {t('auth.login.title', 'Log in to LevelUp')}
         </CardTitle>
 
         {/* Subtitle */}
-        <CardDescription className="text-center text-gray-400 ">
+        <CardDescription className="text-center text-gray-500 dark:text-gray-400">
           {t('auth.login.noAccount', "Don't have an account?")}{' '}
-          <Link href={`/${lang}/signup`} className="text-white hover:underline font-medium ">
+          <Link
+            href={`/${lang}/signup`}
+            className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-200 font-medium underline underline-offset-2"
+          >
             {t('auth.login.registerLink', 'Sign up')}
           </Link>
         </CardDescription>
@@ -148,21 +150,21 @@ export function LoginForm({ lang }: LoginFormProps) {
 
       <CardContent className="px-6 pb-8">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             {/* Social Login Buttons */}
             <div className="grid grid-cols-2 gap-3">
               <Button
                 type="button"
                 onClick={() => handleOAuthRegister('google')}
                 disabled={isLoading || loadingProvider !== null}
-                className="h-11 bg-gray-900 hover:bg-gray-800 border border-gray-700 text-white rounded-lg  disabled:opacity-50 disabled:cursor-not-allowed"
+                className="h-11 bg-white hover:bg-gray-50 active:bg-gray-100 dark:bg-gray-900 dark:hover:bg-gray-850 dark:active:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white dark:disabled:hover:bg-gray-900"
               >
                 {loadingProvider === 'google' ? (
-                  <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                  <div className="w-5 h-5 border-2 border-gray-300 dark:border-gray-700 border-t-gray-900 dark:border-t-white rounded-full animate-spin" />
                 ) : (
                   <>
                     <FcGoogle className="w-5 h-5" />
-                    <span className="ml-2 text-sm font-medium">Login with Google</span>
+                    <span className="ml-2 text-sm font-medium">{t('auth.loginWithGoogle')}</span>
                   </>
                 )}
               </Button>
@@ -170,26 +172,28 @@ export function LoginForm({ lang }: LoginFormProps) {
                 type="button"
                 // onClick={() => handleOAuthRegister('github')}
                 disabled={isLoading || loadingProvider !== null}
-                className="h-11 bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-800 border border-gray-700 text-white rounded-lg  disabled:opacity-50 disabled:cursor-not-allowed"
+                className="h-11 bg-white hover:bg-gray-50 active:bg-gray-100 dark:bg-gray-900 dark:hover:bg-gray-850 dark:active:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white dark:disabled:hover:bg-gray-900"
               >
                 {loadingProvider === 'github' ? (
-                  <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                  <div className="w-5 h-5 border-2 border-gray-300 dark:border-gray-700 border-t-gray-900 dark:border-t-white rounded-full animate-spin" />
                 ) : (
                   <>
                     <Github className="w-5 h-5" />
-                    <span className="ml-2 text-sm font-medium">Login with GitHub</span>
+                    <span className="ml-2 text-sm font-medium">{t('auth.loginWithGithub')}</span>
                   </>
                 )}
               </Button>
             </div>
 
             {/* Divider */}
-            <div className="relative my-4">
+            <div className="relative my-6">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-700"></div>
+                <div className="w-full border-t border-gray-200 dark:border-gray-800"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-black text-gray-400">or</span>
+                <span className="px-4 bg-white dark:bg-gray-950 text-gray-500 dark:text-gray-400">
+                  {t('auth.or', 'or')}
+                </span>
               </div>
             </div>
 
@@ -199,18 +203,18 @@ export function LoginForm({ lang }: LoginFormProps) {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-normal text-gray-300 ">
+                  <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
                     {t('auth.login.email', 'Email')}
                   </FormLabel>
                   <FormControl>
                     <Input
                       type="email"
                       placeholder={t('auth.login.emailPlaceholder', 'alan.turing@example.com')}
-                      className="h-11 bg-gray-900 border border-gray-700 text-white placeholder-gray-500  rounded-lg "
+                      className="h-11 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent transition-all duration-200"
                       {...field}
                     />
                   </FormControl>
-                  <TranslatedFormMessage className="text-xs text-red-400 mt-1" />
+                  <TranslatedFormMessage className="text-xs text-red-600 dark:text-red-400 mt-1" />
                 </FormItem>
               )}
             />
@@ -222,12 +226,12 @@ export function LoginForm({ lang }: LoginFormProps) {
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between mb-2">
-                    <FormLabel className="text-sm font-normal text-gray-300 ">
+                    <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       {t('auth.login.password', 'Password')}
                     </FormLabel>
                     <Link
                       href={`/${lang}/forget-password`}
-                      className="text-sm text-white hover:underline transition-colors duration-300"
+                      className="text-sm text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-200 underline underline-offset-2 transition-colors duration-200"
                     >
                       {t('auth.login.forgotPasswordLink', 'Forgot your password?')}
                     </Link>
@@ -237,13 +241,13 @@ export function LoginForm({ lang }: LoginFormProps) {
                       <Input
                         type={showPassword ? 'text' : 'password'}
                         placeholder="••••••••••••"
-                        className="h-11 bg-gray-900 border border-gray-700 text-white placeholder-gray-500 rounded-lg pr-10 transition-colors duration-300"
+                        className="h-11 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 rounded-lg pr-10 focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent transition-all duration-200"
                         {...field}
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors duration-300"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200"
                       >
                         {showPassword ? (
                           <EyeOff className="w-5 h-5" />
@@ -253,7 +257,7 @@ export function LoginForm({ lang }: LoginFormProps) {
                       </button>
                     </div>
                   </FormControl>
-                  <TranslatedFormMessage className="text-xs text-red-400 mt-1" />
+                  <TranslatedFormMessage className="text-xs text-red-600 dark:text-red-400 mt-1" />
                 </FormItem>
               )}
             />
@@ -262,11 +266,11 @@ export function LoginForm({ lang }: LoginFormProps) {
             <Button
               type="submit"
               disabled={isLoading || form.formState.isSubmitting || !form.formState.isValid}
-              className="w-full h-11 bg-gray-800 text-white disabled:bg-gray-700 disabled:text-gray-400 font-medium rounded-lg  disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full h-11 bg-gray-900 hover:bg-gray-800 active:bg-gray-950 dark:bg-white dark:hover:bg-gray-100 dark:active:bg-gray-200 text-white dark:text-gray-900 disabled:bg-gray-300 disabled:text-gray-500 dark:disabled:bg-gray-800 dark:disabled:text-gray-500 font-medium rounded-lg transition-colors duration-200 cursor-pointer disabled:cursor-not-allowed "
             >
               {isLoading ? (
                 <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                  <div className="w-4 h-4 border-2 border-white/20 dark:border-gray-900/20 border-t-white dark:border-t-gray-900 rounded-full animate-spin" />
                   {t('auth.login.loggingIn', 'Logging in...')}
                 </div>
               ) : (
@@ -282,14 +286,20 @@ export function LoginForm({ lang }: LoginFormProps) {
             />
 
             {/* Terms */}
-            <p className="text-center text-xs text-gray-500 mt-6 ">
-              By signing in, you agree to our{' '}
-              <a href="#" className="underline hover:text-gray-400 ">
-                Terms
+            <p className="text-center text-xs text-gray-500 dark:text-gray-400 mt-6">
+              {t('auth.agreeTo')}{' '}
+              <a
+                href="#"
+                className="text-gray-900 dark:text-white underline hover:text-gray-700 dark:hover:text-gray-200 transition-colors duration-200"
+              >
+                {t('auth.terms')}
               </a>{' '}
-              and{' '}
-              <a href="#" className="underline hover:text-gray-400 ">
-                Privacy Policy
+              {t('auth.and')}{' '}
+              <a
+                href="#"
+                className="text-gray-900 dark:text-white underline hover:text-gray-700 dark:hover:text-gray-200 transition-colors duration-200"
+              >
+                {t('auth.privacyPolicy')}
               </a>
               .
             </p>

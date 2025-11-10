@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import ForgetPassword from '@/components/auth/ForgetPassword';
 import LanguageStore, { Language } from '@/stores/useLanguage';
+import FormLoading from '@/components/auth/FormLoading';
 
 interface ForgetPasswordPageProps {
   params: Promise<{ lang: Language }>;
@@ -16,7 +17,9 @@ export default function ForgetPasswordPage({ params }: ForgetPasswordPageProps) 
 
   return (
     <div className="relative z-10 flex items-center justify-center min-h-screen pt-20">
-      <ForgetPassword lang={language} />
+      <Suspense fallback={<FormLoading message="Forget Password" />}>
+        <ForgetPassword lang={language} />
+      </Suspense>
     </div>
   );
 }

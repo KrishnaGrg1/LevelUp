@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import LanguageSwitcherWrapper from '../LanguageSwitcherWrapper';
+import LanguageSwitcherWrapper from './LanguageSwitcherWrapper';
 import { Sparkles, ArrowLeft } from 'lucide-react';
 import { Language } from '@/stores/useLanguage';
 import { t } from '@/translations/index';
-import { ModeToggle } from '../toggle';
+import { ModeToggle } from './toggle';
 
 interface TopBarProps {
   language?: Language;
