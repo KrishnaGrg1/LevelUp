@@ -148,7 +148,9 @@ export function RegisterForm({ lang }: RegisterFormProps) {
                 ) : (
                   <>
                     <FcGoogle className="w-5 h-5" />
-                    <span className="ml-2 text-sm font-medium">Sign up with Google</span>
+                    <span className="ml-2 text-sm font-medium">
+                      {t('auth.login.loginWithGoogle')}
+                    </span>
                   </>
                 )}
               </Button>
@@ -163,7 +165,9 @@ export function RegisterForm({ lang }: RegisterFormProps) {
                 ) : (
                   <>
                     <Github className="w-5 h-5" />
-                    <span className="ml-2 text-sm font-medium">Sign up with GitHub</span>
+                    <span className="ml-2 text-sm font-medium">
+                      {t('auth.login.loginWithGitHub')}
+                    </span>
                   </>
                 )}
               </Button>
@@ -284,19 +288,19 @@ export function RegisterForm({ lang }: RegisterFormProps) {
 
             {/* Terms */}
             <p className="text-center text-xs text-gray-500 dark:text-gray-400 mt-6">
-              By signing up, you agree to our{' '}
+              {t('auth.agreeToSignup')}{' '}
               <a
                 href="#"
                 className="text-gray-900 dark:text-white underline hover:text-gray-700 dark:hover:text-gray-200 transition-colors duration-200"
               >
-                Terms
+                {t('auth.terms')}
               </a>{' '}
-              and{' '}
+              {t('auth.and')}{' '}
               <a
                 href="#"
                 className="text-gray-900 dark:text-white underline hover:text-gray-700 dark:hover:text-gray-200 transition-colors duration-200"
               >
-                Privacy Policy
+                {t('auth.privacyPolicy')}
               </a>
               .
             </p>

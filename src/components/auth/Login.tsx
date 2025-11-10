@@ -164,7 +164,9 @@ export function LoginForm({ lang }: LoginFormProps) {
                 ) : (
                   <>
                     <FcGoogle className="w-5 h-5" />
-                    <span className="ml-2 text-sm font-medium">{t('auth.loginWithGoogle')}</span>
+                    <span className="ml-2 text-sm font-medium">
+                      {t('auth.login.loginWithGoogle')}
+                    </span>
                   </>
                 )}
               </Button>
@@ -179,7 +181,9 @@ export function LoginForm({ lang }: LoginFormProps) {
                 ) : (
                   <>
                     <Github className="w-5 h-5" />
-                    <span className="ml-2 text-sm font-medium">{t('auth.loginWithGithub')}</span>
+                    <span className="ml-2 text-sm font-medium">
+                      {t('auth.login.loginWithGitHub')}
+                    </span>
                   </>
                 )}
               </Button>
