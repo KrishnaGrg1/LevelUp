@@ -62,7 +62,8 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = () => {
         <Button
           variant="outline"
           size="sm"
-          className="cursor-pointer bg-slate-800/50 border-slate-700/50 text-white hover:bg-slate-700/50 hover:border-indigo-500/50"
+          className="cursor-pointer"
+          // className="cursor-pointer bg-slate-800/50 border-slate-700/50 text-white hover:bg-slate-700/50 hover:border-indigo-500/50"
         >
           <Languages className="mr-2 h-4 w-4" />
           <span>{currentLanguage?.flag}</span>
@@ -71,14 +72,14 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="bg-slate-800/90 backdrop-blur-lg text-white shadow-2xl border border-slate-700/50 rounded-xl"
+        // className="bg-slate-800/90 backdrop-blur-lg text-white shadow-2xl border border-slate-700/50 rounded-xl"
       >
         {languages.map(lang => (
           <DropdownMenuItem
             key={lang.code}
             onClick={() => changeLanguage(lang.code)}
-            className={`cursor-pointer hover:bg-slate-700/50 rounded-lg transition-colors ${
-              language === lang.code ? 'font-semibold bg-indigo-500/20' : ''
+            className={`cursor-pointer  rounded-lg transition-colors ${
+              language === lang.code ? 'font-semibold ' : ''
             }`}
           >
             <span className="mr-2">{lang.flag}</span>
