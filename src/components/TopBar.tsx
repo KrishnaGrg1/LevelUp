@@ -32,12 +32,10 @@ const TopBar: React.FC<TopBarProps> = ({ language = 'eng', showBackButton = fals
 
             {/* Brand */}
             <Link href={`/${language}/home`} className="flex items-center space-x-2 group">
-              <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <Sparkles className="w-4 h-4 text-white" />
+              <div className="w-8 h-8  rounded-lg border-2 flex items-center justify-center  ">
+                <Sparkles className="w-4 h-4" />
               </div>
-              <span className="text-2xl font-black bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-                Level Up
-              </span>
+              <span className="text-2xl font-extrabold ">Level Up</span>
             </Link>
           </div>
 
