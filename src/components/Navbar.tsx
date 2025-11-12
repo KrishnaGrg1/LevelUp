@@ -13,6 +13,7 @@ import {
   SheetTrigger,
   SheetClose,
 } from '@/components/ui/sheet';
+import { ModeToggle } from './toggle';
 
 interface NavbarProps {
   language?: Language;
@@ -81,13 +82,15 @@ const Navbar: React.FC<NavbarProps> = ({ language: initialLanguage = 'eng' }) =>
             >
               {t('nav.getStarted')}
             </Link>
-            <div className="ml-3">
+            <ModeToggle />
+            <div className="ml-3 ">
               <LanguageSwitcherWrapper currentLang={currentLanguage} />
             </div>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center space-x-3">
+            <ModeToggle />
             <LanguageSwitcherWrapper currentLang={currentLanguage} />
             <Sheet>
               <SheetTrigger asChild>

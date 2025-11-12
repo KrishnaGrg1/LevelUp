@@ -1,21 +1,21 @@
 'use client';
 
 import React from 'react';
-import TopBar from '@/components/auth/TopBar';
+import TopBar from '@/components/TopBar';
 import useLanguage from '@/stores/useLanguage';
-import ClientOnly from '@/components/ClientOnly';
-import ParticleBackground from '@/components/ParticleBackground';
+// import ClientOnly from '@/components/ClientOnly';
+// import ParticleBackground from '@/components/ParticleBackground';
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   const { language } = useLanguage();
 
   return (
     <>
-      <div className="min-h-screen bg-black text-white overflow-x-hidden relative">
+      <div className="min-h-screen   overflow-x-hidden relative">
         {/* Particle background - only render on client side */}
-        <ClientOnly>
+        {/* <ClientOnly>
           <ParticleBackground />
-        </ClientOnly>
+        </ClientOnly> */}
 
         {/* Top bar and page content */}
         <div className="relative z-10">
