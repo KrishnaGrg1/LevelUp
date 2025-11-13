@@ -5,37 +5,36 @@ import { RoleGuard } from '@/components/providers/RoleGuard';
 import LanguageStore from '@/stores/useLanguage';
 import LanguageSwitcherWrapper from '@/components/LanguageSwitcherWrapper';
 import { ProfileDropdownMenu } from '@/components/ProfileDropdown';
-import ClientOnly from '@/components/ClientOnly';
-import ParticleBackground from '@/components/ParticleBackground';
+// import ClientOnly from '@/components/ClientOnly';
+// import ParticleBackground from '@/components/ParticleBackground';
+import { ModeToggle } from '@/components/toggle';
 
 export default function UserLayout({ children }: { children: React.ReactNode }) {
   const { language } = LanguageStore();
 
   return (
     <RoleGuard allowedRole="user">
-      <div className="min-h-screen bg-black text-white overflow-x-hidden relative">
+      <div className="min-h-screen  overflow-x-hidden relative">
         {/* Particle background - only render on client side */}
-        <ClientOnly>
+        {/* <ClientOnly>
           <ParticleBackground />
-        </ClientOnly>
+        </ClientOnly> */}
 
-        {/* Background Effects - Purple theme for users */}
-        <div className="absolute inset-0 bg-gradient-radial from-indigo-500/15 via-transparent to-transparent"></div>
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
-        <div
+        {/* <div
           className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-gradient-to-r from-purple-500/15 to-pink-500/15 rounded-full blur-2xl animate-pulse"
           style={{ animationDelay: '1s' }}
-        ></div>
+        ></div> */}
 
         {/* Main content */}
         <div className="relative z-10">
           {/* User Header */}
-          <div className="flex justify-between items-center p-4 border-b border-indigo-500/20">
+          <div className="flex justify-between items-center p-4 border-b ">
             <div className="flex items-center gap-3">
-              <div className="w-3 h-3 bg-indigo-500 rounded-full animate-pulse"></div>
-              <h1 className="text-xl font-bold text-indigo-400">User Dashboard</h1>
+              <div className="w-3 h-3  rounded-full animate-pulse"></div>
+              <h1 className="text-xl font-bold ">User Dashboard</h1>
             </div>
             <div className="flex items-center gap-4">
+              <ModeToggle />
               <LanguageSwitcherWrapper currentLang={language} />
               <ProfileDropdownMenu isadmin={false} />
             </div>

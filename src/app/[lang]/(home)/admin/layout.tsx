@@ -7,25 +7,26 @@ import LanguageSwitcherWrapper from '@/components/LanguageSwitcherWrapper';
 import { ProfileDropdownMenu } from '@/components/ProfileDropdown';
 import ClientOnly from '@/components/ClientOnly';
 import ParticleBackground from '@/components/ParticleBackground';
+import { ModeToggle } from '@/components/toggle';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { language } = LanguageStore();
 
   return (
     <RoleGuard allowedRole="admin">
-      <div className="min-h-screen bg-black text-white overflow-x-hidden relative">
+      <div className="min-h-screen overflow-x-hidden relative">
         {/* Particle background - only render on client side */}
-        <ClientOnly>
+        {/* <ClientOnly>
           <ParticleBackground />
-        </ClientOnly>
+        </ClientOnly> */}
 
         {/* Background Effects - Blue theme for admin */}
-        <div className="absolute inset-0 bg-gradient-radial from-blue-500/15 via-transparent to-transparent"></div>
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-500/20 to-sky-500/20 rounded-full blur-3xl animate-pulse"></div>
-        <div
+        {/* <div className="absolute inset-0 bg-gradient-radial from-blue-500/15 via-transparent to-transparent"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-500/20 to-sky-500/20 rounded-full blur-3xl animate-pulse"></div> */}
+        {/* <div
           className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-gradient-to-r from-sky-500/15 to-cyan-500/15 rounded-full blur-2xl animate-pulse"
           style={{ animationDelay: '1s' }}
-        ></div>
+        ></div> */}
 
         {/* Main content */}
         <div className="relative z-10">
@@ -36,6 +37,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <h1 className="text-xl font-bold text-blue-400">Admin Panel</h1>
             </div>
             <div className="flex items-center gap-4">
+              <ModeToggle />
               <LanguageSwitcherWrapper currentLang={language} />
               <ProfileDropdownMenu isadmin={true} />
             </div>

@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { BetterPagination } from '@/components/BetterPagination';
 import { getAllUsers } from '@/lib/services/user';
 import LanguageStore from '@/stores/useLanguage';
@@ -16,12 +17,25 @@ import { usePaginationStore } from '@/stores/usePagination';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import type { User, PaginationMetadata } from '@/lib/generated';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import DeleteDialog from '@/components/DeleteModal';
+import {
+  Users,
+  TrendingUp,
+  Calendar,
+  Mail,
+  Star,
+  ShieldCheck,
+  AlertCircle,
+  Loader2,
+  Edit,
+} from 'lucide-react';
 
 export default function UserManagement() {
   const { language } = LanguageStore();
   const { page, pageSize, setPage, setPageSize } = usePaginationStore();
   const queryClient = useQueryClient();
+
   // Fetch users with pagination
   const { data, isPending, isError, error, isFetching } = useQuery({
     queryKey: ['users', language, page, pageSize],
@@ -59,10 +73,14 @@ export default function UserManagement() {
   // Loading state
   if (isPending) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500 mx-auto"></div>
-          <p className="mt-4 text-slate-400">Loading users...</p>
+      <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 py-8 px-4">
+        <div className="container mx-auto max-w-7xl">
+          <div className="flex min-h-[400px] items-center justify-center">
+            <div className="text-center">
+              <Loader2 className="mx-auto h-12 w-12 animate-spin text-zinc-900 dark:text-zinc-50" />
+              <p className="mt-4 text-zinc-600 dark:text-zinc-400">Loading users...</p>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -71,19 +89,24 @@ export default function UserManagement() {
   // Error state
   if (isError) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="text-center max-w-md">
-          <div className="text-red-500 text-5xl mb-4">⚠️</div>
-          <h3 className="text-xl font-semibold text-white mb-2">Error Loading Users</h3>
-          <p className="text-slate-400">
-            {error instanceof Error ? error.message : 'An unexpected error occurred'}
-          </p>
-          <Button
-            onClick={() => window.location.reload()}
-            className="mt-4 bg-indigo-600 hover:bg-indigo-700"
-          >
-            Try Again
-          </Button>
+      <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 py-8 px-4">
+        <div className="container mx-auto max-w-7xl">
+          <div className="flex min-h-[400px] items-center justify-center">
+            <Card className="border-red-200 bg-red-50 dark:border-red-900/50 dark:bg-red-900/10">
+              <CardContent className="p-8 text-center">
+                <AlertCircle className="mx-auto h-12 w-12 text-red-600 dark:text-red-400" />
+                <h3 className="mt-4 text-xl font-semibold text-zinc-900 dark:text-zinc-50">
+                  Error Loading Users
+                </h3>
+                <p className="mt-2 text-zinc-600 dark:text-zinc-400">
+                  {error instanceof Error ? error.message : 'An unexpected error occurred'}
+                </p>
+                <Button onClick={() => window.location.reload()} className="mt-4 cursor-pointer">
+                  Try Again
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     );
@@ -93,157 +116,245 @@ export default function UserManagement() {
   const metadata: PaginationMetadata | undefined = data?.body?.data?.pagination;
 
   return (
-    <div className="container mx-auto p-6 max-w-7xl">
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
-          User Management
-        </h1>
-        <p className="text-slate-400">Manage and monitor all registered users</p>
-      </div>
+    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 py-8 px-4">
+      <div className="container mx-auto max-w-7xl space-y-6">
+        {/* Header */}
+        <div className="space-y-2">
+          <h1 className="font-heading text-4xl font-bold text-zinc-900 dark:text-zinc-50">
+            User Management
+          </h1>
+          <p className="text-zinc-600 dark:text-zinc-400">
+            Manage and monitor all registered users
+          </p>
+        </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl border border-slate-700/50 rounded-xl p-6">
-          <div className="text-sm text-slate-400 mb-1">Total Users</div>
-          <div className="text-3xl font-bold text-white">{metadata?.total || 0}</div>
+        {/* Stats Cards */}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <StatCard
+            icon={<Users className="h-5 w-5 text-blue-600 dark:text-blue-400" />}
+            label="Total Users"
+            value={metadata?.total?.toLocaleString() || '0'}
+            bgColor="bg-blue-50 dark:bg-blue-900/10"
+          />
+          <StatCard
+            icon={<TrendingUp className="h-5 w-5 text-purple-600 dark:text-purple-400" />}
+            label="Current Page"
+            value={(metadata?.page || 1).toString()}
+            bgColor="bg-purple-50 dark:bg-purple-900/10"
+          />
+          <StatCard
+            icon={<Calendar className="h-5 w-5 text-green-600 dark:text-green-400" />}
+            label="Total Pages"
+            value={(metadata?.totalPages || 1).toString()}
+            bgColor="bg-green-50 dark:bg-green-900/10"
+          />
         </div>
-        <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl border border-slate-700/50 rounded-xl p-6">
-          <div className="text-sm text-slate-400 mb-1">Current Page</div>
-          <div className="text-3xl font-bold text-white">{metadata?.page || 1}</div>
-        </div>
-        <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl border border-slate-700/50 rounded-xl p-6">
-          <div className="text-sm text-slate-400 mb-1">Total Pages</div>
-          <div className="text-3xl font-bold text-white">{metadata?.totalPages || 1}</div>
-        </div>
-      </div>
 
-      {/* Users Table */}
-      <div className="bg-gradient-to-br from-slate-800/30 to-slate-900/30 backdrop-blur-xl border border-slate-700/30 rounded-2xl overflow-hidden shadow-2xl">
-        <div className="overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow className="border-slate-700/50 hover:bg-slate-800/50">
-                <TableHead className="text-slate-300 font-semibold">ID</TableHead>
-                <TableHead className="text-slate-300 font-semibold">Username</TableHead>
-                <TableHead className="text-slate-300 font-semibold">Email</TableHead>
-                <TableHead className="text-slate-300 font-semibold">XP</TableHead>
-                <TableHead className="text-slate-300 font-semibold">Level</TableHead>
-                <TableHead className="text-slate-300 font-semibold">Created At</TableHead>
-                <TableHead className="text-slate-300 font-semibold">Status</TableHead>
-                <TableHead className="text-slate-300 font-semibold ">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {users.length === 0 ? (
-                <TableRow>
-                  <TableCell colSpan={7} className="text-center py-12 text-slate-400">
-                    No users found
-                  </TableCell>
-                </TableRow>
-              ) : (
-                users.map((user: User) => (
-                  <TableRow key={user.id} className="hover:bg-muted/50">
-                    <TableCell className="font-mono text-sm text-slate-400">{user.id}</TableCell>
-                    <TableCell className="font-medium">{user.UserName}</TableCell>
-                    <TableCell className="text-muted-foreground">{user.email}</TableCell>
-                    <TableCell>
-                      <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400">
-                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                        {user.xp.toLocaleString()}
-                      </span>
-                    </TableCell>
-                    <TableCell>
-                      <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400">
-                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                          <path
-                            fillRule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                        Level {user.level}
-                      </span>
-                    </TableCell>
-                    <TableCell className="text-muted-foreground">
-                      {new Date(user.createdAt).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric',
-                      })}
-                    </TableCell>
-                    <TableCell>
-                      <span
-                        className={`inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium ${
-                          user.isVerified
-                            ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
-                            : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
-                        }`}
-                      >
-                        {user.isVerified ? (
-                          <>
-                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                              <path
-                                fillRule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            Verified
-                          </>
-                        ) : (
-                          <>UnVerified</>
-                        )}
-                      </span>
-                    </TableCell>
-                    <TableCell className=" text-sm flex gap-2 ">
-                      <a href={`user/${user.id}`}>
-                        <Button variant="outline" size="sm" className="rounded-md cursor-pointer">
-                          Edit
-                        </Button>
-                      </a>
-                      <DeleteDialog
-                        title="Confirm Deletion"
-                        description="Are you sure you want to delete this user? This action cannot be undone."
-                        id={user.id}
-                        onSuccess={() => {
-                          queryClient.invalidateQueries({ queryKey: ['users'] });
-                          queryClient.invalidateQueries({ queryKey: ['admin-overview'] });
-                        }}
-                        // Refetch the user list after successful deletion
-                      />
-                    </TableCell>
+        {/* Users Table */}
+        <Card className="border-0 shadow-none">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-xl">
+              <Users className="h-5 w-5" />
+              All Users
+            </CardTitle>
+            <CardDescription>
+              Showing {users.length} of {metadata?.total || 0} users
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-800">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-zinc-50 hover:bg-zinc-50 dark:bg-zinc-900/50 dark:hover:bg-zinc-900/50">
+                    <TableHead className="font-semibold text-zinc-900 dark:text-zinc-50">
+                      ID
+                    </TableHead>
+                    <TableHead className="font-semibold text-zinc-900 dark:text-zinc-50">
+                      Username
+                    </TableHead>
+                    <TableHead className="font-semibold text-zinc-900 dark:text-zinc-50">
+                      Email
+                    </TableHead>
+                    <TableHead className="font-semibold text-zinc-900 dark:text-zinc-50">
+                      XP
+                    </TableHead>
+                    <TableHead className="font-semibold text-zinc-900 dark:text-zinc-50">
+                      Level
+                    </TableHead>
+                    <TableHead className="font-semibold text-zinc-900 dark:text-zinc-50">
+                      Joined
+                    </TableHead>
+                    <TableHead className="font-semibold text-zinc-900 dark:text-zinc-50">
+                      Status
+                    </TableHead>
+                    <TableHead className="font-semibold text-zinc-900 dark:text-zinc-50">
+                      Actions
+                    </TableHead>
                   </TableRow>
-                ))
-              )}
-            </TableBody>
-          </Table>
-        </div>
+                </TableHeader>
+                <TableBody>
+                  {users.length === 0 ? (
+                    <TableRow>
+                      <TableCell
+                        colSpan={8}
+                        className="h-32 text-center text-zinc-600 dark:text-zinc-400"
+                      >
+                        <div className="flex flex-col items-center justify-center gap-2">
+                          <Users className="h-8 w-8 text-zinc-400" />
+                          <p>No users found</p>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ) : (
+                    users.map((user: User) => (
+                      <TableRow
+                        key={user.id}
+                        className="hover:bg-zinc-50 dark:hover:bg-zinc-900/30"
+                      >
+                        <TableCell className="font-mono text-xs text-zinc-600 dark:text-zinc-400">
+                          {/* {user.id.slice(0, 8)}... */}
+                          {user.id}
+                        </TableCell>
+                        <TableCell className="font-medium text-zinc-900 dark:text-zinc-50">
+                          {user.UserName}
+                        </TableCell>
+                        <TableCell className="text-zinc-600 dark:text-zinc-400">
+                          <div className="flex items-center gap-2">
+                            <Mail className="h-4 w-4" />
+                            {user.email}
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <Badge
+                            variant="secondary"
+                            className="gap-1 bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
+                          >
+                            <Star className="h-3 w-3" />
+                            {user.xp.toLocaleString()}
+                          </Badge>
+                        </TableCell>
+                        <TableCell>
+                          <Badge
+                            variant="secondary"
+                            className="gap-1 bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400"
+                          >
+                            <TrendingUp className="h-3 w-3" />
+                            Level {user.level}
+                          </Badge>
+                        </TableCell>
+                        <TableCell className="text-zinc-600 dark:text-zinc-400">
+                          {new Date(user.createdAt).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                          })}
+                        </TableCell>
+                        <TableCell>
+                          <Badge
+                            variant="secondary"
+                            className={`gap-1 ${
+                              user.isVerified
+                                ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
+                                : 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400'
+                            }`}
+                          >
+                            {user.isVerified ? (
+                              <>
+                                <ShieldCheck className="h-3 w-3" />
+                                Verified
+                              </>
+                            ) : (
+                              <>
+                                <AlertCircle className="h-3 w-3" />
+                                Pending
+                              </>
+                            )}
+                          </Badge>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex gap-2">
+                            <a href={`user/${user.id}`}>
+                              <Button variant="outline" size="sm" className="cursor-pointer gap-1">
+                                <Edit className="h-3 w-3" />
+                                Edit
+                              </Button>
+                            </a>
+                            <DeleteDialog
+                              title="Confirm Deletion"
+                              description="Are you sure you want to delete this user? This action cannot be undone."
+                              id={user.id}
+                              onSuccess={() => {
+                                queryClient.invalidateQueries({ queryKey: ['users'] });
+                                queryClient.invalidateQueries({ queryKey: ['admin-overview'] });
+                              }}
+                            />
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  )}
+                </TableBody>
+              </Table>
+            </div>
 
-        {/* Pagination */}
-        {metadata && (
-          <div className="border-t border-slate-700/50 p-4 bg-slate-800/20">
-            <BetterPagination
-              paginationMetadata={metadata}
-              onPageChange={handlePageChange}
-              onPageSizeChange={handlePageSizeChange}
-              pageSizeOptions={[10, 25, 50, 100]}
-            />
+            {/* Pagination */}
+            {metadata && (
+              <div className="mt-4">
+                <BetterPagination
+                  paginationMetadata={metadata}
+                  onPageChange={handlePageChange}
+                  onPageSizeChange={handlePageSizeChange}
+                  pageSizeOptions={[10, 25, 50, 100]}
+                />
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Loading overlay for refetching */}
+        {isFetching && !isPending && (
+          <div className="fixed bottom-4 right-4 z-50">
+            <Card className="border-0 shadow-lg">
+              <CardContent className="flex items-center gap-3 p-4">
+                <Loader2 className="h-4 w-4 animate-spin text-zinc-900 dark:text-zinc-50" />
+                <span className="text-sm font-medium text-zinc-900 dark:text-zinc-50">
+                  Updating...
+                </span>
+              </CardContent>
+            </Card>
           </div>
         )}
       </div>
+    </div>
+  );
+}
 
-      {/* Loading overlay for refetching */}
-      {isFetching && !isPending && (
-        <div className="fixed bottom-4 right-4 bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 shadow-lg">
-          <div className="flex items-center gap-2">
-            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-indigo-500"></div>
-            <span className="text-sm text-slate-300">Updating...</span>
+function StatCard({
+  icon,
+  label,
+  value,
+  bgColor,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  bgColor: string;
+}) {
+  return (
+    <Card className=" shadow-none">
+      <CardContent className="p-6">
+        <div className="flex items-center gap-4">
+          <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${bgColor}`}>
+            {icon}
+          </div>
+          <div>
+            <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">{label}</p>
+            <p className="mt-1 font-heading text-2xl font-bold text-zinc-900 dark:text-zinc-50">
+              {value}
+            </p>
           </div>
         </div>
-      )}
-    </div>
+      </CardContent>
+    </Card>
   );
 }
