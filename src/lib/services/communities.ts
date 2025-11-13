@@ -1,6 +1,11 @@
 import axiosInstance from '../fetch';
 import { Language } from '@/stores/useLanguage';
-import { CreateCommunityResponse, GetMyCommunities, TogglePinResponse } from '../generated';
+import {
+  CreateCommunityResponse,
+  GetMyCommunities,
+  searchCommunitiesResponse,
+  TogglePinResponse,
+} from '../generated';
 
 // Get user's communities
 export const getMyCommunities = async (lang: Language) => {
@@ -70,6 +75,55 @@ export const createCommunity = async (lang: Language, formData: FormData) => {
     };
     const errorMessage =
       err.response?.data?.body?.message || err.response?.data?.message || 'Create Community failed';
+    throw new Error(errorMessage);
+  }
+};
+
+// Search  communities
+export const searchCommunities = async (lang: Language, query: string) => {
+  try {
+    const response = await axiosInstance.get<searchCommunitiesResponse>(`/community/search`, {
+      params: { q: query },
+      withCredentials: true,
+      headers: {
+        'X-Language': lang,
+      },
+    });
+    return response.data;
+  } catch (error: unknown) {
+    const err = error as {
+      response?: { data?: { body?: { message?: string }; message?: string } };
+    };
+    const errorMessage =
+      err.response?.data?.body?.message ||
+      err.response?.data?.message ||
+      'Failed to search community';
+    throw new Error(errorMessage);
+  }
+};
+
+// Join a community
+export const joinCommunity = async (lang: Language, communityId: string) => {
+  try {
+    const response = await axiosInstance.post<{ success: boolean; message: string }>(
+      `/community/${communityId}/join`,
+      {},
+      {
+        withCredentials: true,
+        headers: {
+          'X-Language': lang,
+        },
+      },
+    );
+    return response.data;
+  } catch (error: unknown) {
+    const err = error as {
+      response?: { data?: { body?: { message?: string }; message?: string } };
+    };
+    const errorMessage =
+      err.response?.data?.body?.message ||
+      err.response?.data?.message ||
+      'Failed to join community';
     throw new Error(errorMessage);
   }
 };

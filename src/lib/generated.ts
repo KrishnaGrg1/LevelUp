@@ -324,3 +324,11 @@ export interface TogglePinResponse {
     data: TogglePinDTO[];
   };
 }
+
+export interface searchCommunitiesResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: Community[];
+  };
+}

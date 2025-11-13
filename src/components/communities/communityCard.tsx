@@ -8,11 +8,13 @@ import { useQuery } from '@tanstack/react-query';
 import { getMyCommunities } from '@/lib/services/communities';
 import CreateCommunityModal from './CreateCommunityModal';
 import CustomizePinModal from './CustomizePin';
+import SearchCommunityModal from './SearchCommunities';
 import type { CommunityDTO } from '@/lib/generated';
 
 export default function CommunitiesSection() {
   const { language } = LanguageStore();
   const [openCreateModal, setOpenCreateModal] = useState(false);
+  const [openJoinModal, setOpenJoinModal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Fetch user communities data
@@ -39,7 +41,10 @@ export default function CommunitiesSection() {
             </p>
           </div>
           <div className="flex gap-3">
-            <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
+            <button
+              onClick={() => setOpenJoinModal(true)}
+              className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-emerald-600 bg-emerald-600/10 text-emerald-400 hover:bg-emerald-600/20 hover:border-emerald-500 h-10 px-4 py-2"
+            >
               <Users className="h-4 w-4 mr-2" />
               Join Community
             </button>
@@ -54,6 +59,7 @@ export default function CommunitiesSection() {
         </div>
 
         <CreateCommunityModal open={openCreateModal} onClose={() => setOpenCreateModal(false)} />
+        <SearchCommunityModal isOpen={openJoinModal} onClose={() => setOpenJoinModal(false)} />
       </div>
 
       {/* Loading State */}
