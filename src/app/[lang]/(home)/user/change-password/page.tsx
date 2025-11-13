@@ -109,7 +109,7 @@ export default function ChangePassword() {
                 <ul className="space-y-1 text-xs text-blue-800 dark:text-blue-200">
                   <li>• Use at least 8 characters with a mix of letters, numbers, and symbols</li>
                   <li>• Avoid using common words or personal information</li>
-                  <li>• Don't reuse passwords from other accounts</li>
+                  <li>• Don&apos;t reuse passwords from other accounts</li>
                 </ul>
               </div>
             </div>

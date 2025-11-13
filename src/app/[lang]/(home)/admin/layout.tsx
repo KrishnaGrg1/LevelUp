@@ -5,8 +5,8 @@ import { RoleGuard } from '@/components/providers/RoleGuard';
 import LanguageStore from '@/stores/useLanguage';
 import LanguageSwitcherWrapper from '@/components/LanguageSwitcherWrapper';
 import { ProfileDropdownMenu } from '@/components/ProfileDropdown';
-import ClientOnly from '@/components/ClientOnly';
-import ParticleBackground from '@/components/ParticleBackground';
+// import ClientOnly from '@/components/ClientOnly';
+// import ParticleBackground from '@/components/ParticleBackground';
 import { ModeToggle } from '@/components/toggle';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

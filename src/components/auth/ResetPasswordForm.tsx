@@ -88,6 +88,7 @@ export default function ResetPasswordForm({ lang, otp, userId }: ResetPasswordFo
 
   const onSubmit = async (data: ResetFormData) => {
     // Remove confirmPassword before sending to backend
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { confirmPassword: _confirmPassword, ...apiData } = data;
     await mutateAsync(apiData);
   };
