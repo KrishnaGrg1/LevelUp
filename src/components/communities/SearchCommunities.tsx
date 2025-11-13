@@ -10,6 +10,7 @@ import { searchCommunities, joinCommunity } from '@/lib/services/communities';
 import LanguageStore from '@/stores/useLanguage';
 import { toast } from 'sonner';
 import { useDebounce } from 'use-debounce';
+import { Community } from '@/lib/generated';
 
 type SortOption = 'all' | 'most-joined' | 'public' | 'private';
 
@@ -39,14 +40,14 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
 
     // Apply visibility filter
     if (sortFilter === 'public') {
-      filtered = filtered.filter((c: any) => c.isPrivate === false);
+      filtered = filtered.filter((c: Community) => c.isPrivate === false);
     } else if (sortFilter === 'private') {
-      filtered = filtered.filter((c: any) => c.isPrivate === true);
+      filtered = filtered.filter((c: Community) => c.isPrivate === true);
     }
 
     // Sort by most joined members
     if (sortFilter === 'most-joined') {
-      filtered.sort((a: any, b: any) => (b.currentMembers || 0) - (a.currentMembers || 0));
+      filtered = filtered.sort((a, b) => (b._count?.members ?? 0) - (a._count?.members ?? 0));
     }
 
     return filtered;
