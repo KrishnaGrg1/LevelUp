@@ -187,8 +187,8 @@ export default function BagPage() {
                     Tax configurations can be updated later
                   </p>
                   <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-                    Don&apos;t worry if you&apos;re not sure right now. You can always change these settings
-                    in your dashboard after setup is complete.
+                    Don&apos;t worry if you&apos;re not sure right now. You can always change these
+                    settings in your dashboard after setup is complete.
                   </p>
                 </div>
               </div>
