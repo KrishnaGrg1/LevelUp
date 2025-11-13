@@ -32,7 +32,8 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
     enabled: debouncedSearch.length > 0,
   });
 
-  const communities = data?.body?.data ?? [];
+  // Memoize communities to prevent unnecessary re-renders
+  const communities = useMemo(() => data?.body?.data ?? [], [data?.body?.data]);
 
   // Filter and sort communities based on the selected filter
   const filteredAndSortedCommunities = useMemo(() => {
@@ -187,7 +188,7 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
             )}
 
             {!isLoading &&
-              filteredAndSortedCommunities.map((community: any) => {
+              filteredAndSortedCommunities.map((community: Community) => {
                 const isPublic = !community.isPrivate;
                 const currentMembers = community._count?.members || 0;
                 const maxMembers = community.memberLimit;
