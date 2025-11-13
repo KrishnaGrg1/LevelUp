@@ -71,7 +71,7 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[85vh] bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800">
+      <DialogContent className="max-w-2xl max-h-[95vh] bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800">
         <DialogHeader className="border-b border-gray-200 dark:border-gray-800 pb-4">
           <div className="flex items-center justify-between">
             <div>
@@ -85,7 +85,7 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
           </div>
         </DialogHeader>
 
-        <div className="space-y-4 py-4">
+        <div className="space-y-3 py-3  h-[60vh] pr-2 ">
           {/* Search Bar */}
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
