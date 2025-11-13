@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { Search, Users, Globe, Lock, X, TrendingUp } from 'lucide-react';
+import { Search, Users, Globe, Lock, TrendingUp } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -10,7 +10,7 @@ import { searchCommunities, joinCommunity } from '@/lib/services/communities';
 import LanguageStore from '@/stores/useLanguage';
 import { toast } from 'sonner';
 import { useDebounce } from 'use-debounce';
-import MyCommunities from '../landing/myCommunities';
+
 type SortOption = 'all' | 'most-joined' | 'public' | 'private';
 
 interface SearchCommunityModalProps {
