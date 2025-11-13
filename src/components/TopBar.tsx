@@ -4,14 +4,21 @@ import { Sparkles, ArrowLeft } from 'lucide-react';
 import { Language } from '@/stores/useLanguage';
 import { t } from '@/translations/index';
 import { ModeToggle } from './toggle';
+import { ProfileDropdownMenu } from './ProfileDropdown';
 
 interface TopBarProps {
   language?: Language;
   showBackButton?: boolean;
   backUrl?: string;
+  isAuthenticated?: boolean;
 }
 
-const TopBar: React.FC<TopBarProps> = ({ language = 'eng', showBackButton = false, backUrl }) => {
+const TopBar: React.FC<TopBarProps> = ({
+  language = 'eng',
+  showBackButton = false,
+  backUrl,
+  isAuthenticated = false,
+}) => {
   const defaultBackUrl = `/${language}/home`;
 
   return (
@@ -43,6 +50,7 @@ const TopBar: React.FC<TopBarProps> = ({ language = 'eng', showBackButton = fals
           <div className="flex items-center space-x-4">
             <ModeToggle />
             <LanguageSwitcherWrapper currentLang={language} />
+            {isAuthenticated && <ProfileDropdownMenu isadmin={false} />}
           </div>
         </div>
       </div>
