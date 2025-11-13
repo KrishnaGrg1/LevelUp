@@ -121,6 +121,7 @@ export const resetPasswordWithOtp = async (
 export const getCurrentUser = async (lang: Language) => {
   try {
     const response = await axiosInstance.get(`/auth/me`, {
+      withCredentials: true,
       headers: {
         'X-Language': lang,
       },

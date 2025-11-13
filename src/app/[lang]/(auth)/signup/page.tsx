@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import LanguageStore, { Language } from '@/stores/useLanguage';
 import { RegisterForm } from '@/components/auth/Register';
 import { validateLanguage } from '@/lib/language';
+import FormLoading from '@/components/auth/FormLoading';
 
 interface RegisterPageProps {
   params: Promise<{
@@ -24,7 +25,9 @@ export default function RegisterPage({ params }: RegisterPageProps) {
 
   return (
     <div className="relative z-10 flex items-center justify-center min-h-screen ">
-      <RegisterForm lang={language} />
+      <Suspense fallback={<FormLoading message="Register" />}>
+        <RegisterForm lang={language} />
+      </Suspense>
     </div>
   );
 }

@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import LanguageStore, { Language } from '@/stores/useLanguage';
 import { VerifyForm } from '@/components/auth/Verify';
+import FormLoading from '@/components/auth/FormLoading';
 
 interface LoginPageProps {
   params: Promise<{
@@ -28,7 +29,9 @@ export default function VerifyPage({ params }: LoginPageProps) {
   }, []);
   return (
     <div className="relative z-10 flex items-center justify-center min-h-screen pt-20">
-      <VerifyForm lang={language} otp={otp} userId={userId} />
+      <Suspense fallback={<FormLoading message="Verify Email" />}>
+        <VerifyForm lang={language} otp={otp} userId={userId} />
+      </Suspense>
     </div>
   );
 }

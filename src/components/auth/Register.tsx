@@ -8,26 +8,20 @@ import { z } from 'zod';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { FcGoogle } from 'react-icons/fc';
-import { motion } from 'framer-motion';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
+import { TranslatedFormMessage } from '@/components/ui/TranslatedFormMessage';
 
 import { useMutation } from '@tanstack/react-query';
 import { registerUser } from '@/lib/services/auth';
 import { toast } from 'sonner';
 import { Language } from '@/stores/useLanguage';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Eye, EyeOff, User, Mail, Lock, Github, Check } from 'lucide-react';
+import { Eye, EyeOff, Github, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import { t } from '@/translations/index';
 import Link from 'next/link';
 import ErrorMessages from '../ErrorDispaly';
+
 type RegisterFormData = z.infer<typeof registerSchema>;
 
 interface RegisterFormProps {
@@ -36,7 +30,8 @@ interface RegisterFormProps {
 
 export function RegisterForm({ lang }: RegisterFormProps) {
   const [showPassword, setShowPassword] = useState(false);
-  const [loadingProvider, setLoadingProvider] = useState<string | null>(null);
+  const [loadingProvider, setLoadingProvider] = useState<'google' | 'github' | null>(null);
+
   const form = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -45,6 +40,7 @@ export function RegisterForm({ lang }: RegisterFormProps) {
       password: '',
     },
   });
+
   const { mutateAsync, isPending: isLoading } = useMutation({
     mutationKey: ['register'],
     mutationFn: (data: RegisterFormData) => registerUser(data, lang),
@@ -62,6 +58,7 @@ export function RegisterForm({ lang }: RegisterFormProps) {
       });
     },
   });
+
   const handleOAuthRegister = async (provider: 'google' | 'github') => {
     try {
       setLoadingProvider(provider);
@@ -109,194 +106,207 @@ export function RegisterForm({ lang }: RegisterFormProps) {
   };
 
   return (
-    <div className="w-full max-w-md">
-      <Card className="relative bg-gradient-to-br from-slate-800/30 to-slate-900/30 backdrop-blur-xl border border-slate-700/30 rounded-3xl shadow-2xl overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 rounded-3xl"></div>
-
-        <CardHeader className="relative space-y-4 text-center pb-6 pt-8">
-          <div className="mx-auto w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
-            <User className="w-8 h-8 text-white" />
+    <Card className="w-full max-w-2xl mx-auto relative z-10 border-0 shadow-none">
+      <CardHeader className="space-y-3 pb-4 pt-8">
+        {/* Logo/Icon */}
+        <div className="flex justify-center">
+          <div className="w-12 h-12 border-2 border-gray-900 dark:border-white rounded-lg flex items-center justify-center">
+            <Sparkles className="w-6 h-6 text-gray-900 dark:text-white" />
           </div>
-          <CardTitle className="text-3xl font-black">
-            <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              {t('auth.register.title', 'Welcome to Level Up')}
-            </span>
-          </CardTitle>
-          <CardDescription className="text-slate-400 text-lg">
-            {t('auth.register.subtitle', 'Register to continue your journey')}
-          </CardDescription>
-        </CardHeader>
+        </div>
 
-        <CardContent className="relative z-10 space-y-6">
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-              <FormField
-                control={form.control}
-                name="username"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm font-medium text-slate-300">
-                      {t('auth.register.username', 'Username')}
-                    </FormLabel>
-                    <FormControl>
-                      <div className="relative">
-                        <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
-                        <Input
-                          placeholder={t(
-                            'auth.register.usernamePlaceholder',
-                            'Enter your username',
-                          )}
-                          className="pl-10 h-11 border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors"
-                          {...field}
-                        />
-                      </div>
-                    </FormControl>
-                    <FormMessage className="text-xs text-red-600 mt-1 font-semibold" />
-                  </FormItem>
-                )}
-              />
+        {/* Title */}
+        <CardTitle className="text-2xl font-semibold text-gray-900 dark:text-white text-center">
+          {t('auth.register.title', 'Create your account')}
+        </CardTitle>
 
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm font-medium text-slate-300">
-                      {t('auth.register.email', 'Email')}
-                    </FormLabel>
-                    <FormControl>
-                      <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
-                        <Input
-                          type="email"
-                          placeholder={t('auth.register.emailPlaceholder', 'you@example.com')}
-                          className="pl-10 h-11 border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors"
-                          {...field}
-                        />
-                      </div>
-                    </FormControl>
-                    <FormMessage className="text-xs text-red-600 mt-1 font-semibold" />
-                  </FormItem>
-                )}
-              />
+        {/* Subtitle */}
+        <CardDescription className="text-center text-gray-500 dark:text-gray-400">
+          {t('auth.register.hasAccount', 'Already have an account?')}{' '}
+          <Link
+            href={`/${lang}/login`}
+            className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-200 font-medium underline underline-offset-2"
+          >
+            {t('auth.register.loginLink', 'Sign in')}
+          </Link>
+        </CardDescription>
+      </CardHeader>
 
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm font-medium text-slate-300">
-                      {t('auth.register.password', 'Password')}
-                    </FormLabel>
-                    <FormControl>
-                      <div className="relative">
-                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
-                        <Input
-                          type={showPassword ? 'text' : 'password'}
-                          placeholder={t(
-                            'auth.register.passwordPlaceholder',
-                            'Enter your password',
-                          )}
-                          className="pl-10 pr-10 h-11 border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors"
-                          {...field}
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
-                        >
-                          {showPassword ? (
-                            <EyeOff className="w-4 h-4" />
-                          ) : (
-                            <Eye className="w-4 h-4" />
-                          )}
-                        </button>
-                      </div>
-                    </FormControl>
-                    <FormMessage className="text-xs text-red-600 mt-1 font-semibold" />
-                  </FormItem>
-                )}
-              />
-
+      <CardContent className="px-6 pb-8">
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            {/* Social Register Buttons */}
+            <div className="grid grid-cols-2 gap-3">
               <Button
-                type="submit"
-                disabled={isLoading}
-                className="w-full cursor-pointer h-11 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50"
+                type="button"
+                onClick={() => handleOAuthRegister('google')}
+                disabled={isLoading || loadingProvider !== null}
+                className="h-11 bg-white hover:bg-gray-50 active:bg-gray-100 dark:bg-gray-900 dark:hover:bg-gray-850 dark:active:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white dark:disabled:hover:bg-gray-900"
               >
-                {isLoading ? (
-                  <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    {t('auth.register.loading', 'Creating Account...')}
-                  </div>
+                {loadingProvider === 'google' ? (
+                  <div className="w-5 h-5 border-2 border-gray-300 dark:border-gray-700 border-t-gray-900 dark:border-t-white rounded-full animate-spin" />
                 ) : (
-                  t('auth.register.submit', 'Create Account')
+                  <>
+                    <FcGoogle className="w-5 h-5" />
+                    <span className="ml-2 text-sm font-medium">
+                      {t('auth.login.loginWithGoogle')}
+                    </span>
+                  </>
                 )}
               </Button>
-              <div className="grid grid-cols-2 gap-3">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => handleOAuthRegister('google')}
-                  disabled={isLoading}
-                  className="h-12 border-slate-600 bg-slate-800/50 hover:bg-slate-700/50 text-slate-300 hover:text-white transition-all duration-200 group"
-                >
-                  {loadingProvider === 'google' ? (
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  ) : (
-                    <FcGoogle className="mr-2 h-5 w-5" />
-                  )}
-                  <span className="ml-2 text-sm font-medium">Google</span>
-                </Button>
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => handleOAuthRegister('github')}
-                  disabled={isLoading}
-                  className="h-12 border-slate-600 bg-slate-800/50 hover:bg-slate-700/50 text-slate-300 hover:text-white transition-all duration-200 group"
-                >
-                  {loadingProvider === 'github' ? (
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  ) : (
-                    <Github className="mr-2 h-5 w-5" />
-                  )}
-                  <span className="ml-2 text-sm font-medium">GitHub</span>
-                </Button>
-              </div>
-              <ErrorMessages
-                errors={
-                  form.formState.errors.root?.message ? [form.formState.errors.root.message] : []
-                }
-              />
-              {form.formState.isSubmitSuccessful && !isLoading && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mt-6 rounded-xl bg-green-600/20 border border-green-500/30 p-4 shadow-lg"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500/30">
-                      <Check className="h-5 w-5 text-green-300" />
-                    </div>
-                    <div>
-                      <p className="text-green-300 font-semibold">{t('auth.login.success')}</p>
-                      <p className="text-green-200 text-sm">
-                        {t('auth.login.success-description')}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </form>
-          </Form>
+              <Button
+                type="button"
+                onClick={() => handleOAuthRegister('github')}
+                disabled={isLoading || loadingProvider !== null}
+                className="h-11 bg-white hover:bg-gray-50 active:bg-gray-100 dark:bg-gray-900 dark:hover:bg-gray-850 dark:active:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white dark:disabled:hover:bg-gray-900"
+              >
+                {loadingProvider === 'github' ? (
+                  <div className="w-5 h-5 border-2 border-gray-300 dark:border-gray-700 border-t-gray-900 dark:border-t-white rounded-full animate-spin" />
+                ) : (
+                  <>
+                    <Github className="w-5 h-5" />
+                    <span className="ml-2 text-sm font-medium">
+                      {t('auth.login.loginWithGitHub')}
+                    </span>
+                  </>
+                )}
+              </Button>
+            </div>
 
-          <div className="text-center pt-6 border-t border-slate-700/50 relative z-10">
-            <p className="text-sm text-slate-400">
-              {t('auth.register.hasAccount', 'Already have an account?')}{' '}
-              <Link href={`/${lang}/login`}>{t('auth.register.loginLink', 'Sign in here')}</Link>
+            {/* Divider */}
+            <div className="relative my-6">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-200 dark:border-gray-800"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-4 bg-white dark:bg-gray-950 text-gray-500 dark:text-gray-400">
+                  or
+                </span>
+              </div>
+            </div>
+
+            {/* Username Field */}
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    {t('auth.register.username', 'Username')}
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder={t('auth.register.usernamePlaceholder', 'johndoe')}
+                      className="h-11 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent transition-all duration-200"
+                      {...field}
+                    />
+                  </FormControl>
+                  <TranslatedFormMessage className="text-xs text-red-600 dark:text-red-400 mt-1" />
+                </FormItem>
+              )}
+            />
+
+            {/* Email Field */}
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    {t('auth.register.email', 'Email')}
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      placeholder={t('auth.register.emailPlaceholder', 'john.doe@example.com')}
+                      className="h-11 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent transition-all duration-200"
+                      {...field}
+                    />
+                  </FormControl>
+                  <TranslatedFormMessage className="text-xs text-red-600 dark:text-red-400 mt-1" />
+                </FormItem>
+              )}
+            />
+
+            {/* Password Field */}
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    {t('auth.register.password', 'Password')}
+                  </FormLabel>
+                  <FormControl>
+                    <div className="relative">
+                      <Input
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder="••••••••••••"
+                        className="h-11 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 rounded-lg pr-10 focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent transition-all duration-200"
+                        {...field}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200"
+                      >
+                        {showPassword ? (
+                          <EyeOff className="w-5 h-5" />
+                        ) : (
+                          <Eye className="w-5 h-5" />
+                        )}
+                      </button>
+                    </div>
+                  </FormControl>
+                  <TranslatedFormMessage className="text-xs text-red-600 dark:text-red-400 mt-1" />
+                </FormItem>
+              )}
+            />
+
+            {/* Submit Button */}
+            <Button
+              type="submit"
+              disabled={isLoading || form.formState.isSubmitting || !form.formState.isValid}
+              className="w-full h-11 bg-gray-900 hover:bg-gray-800 active:bg-gray-950 dark:bg-white dark:hover:bg-gray-100 dark:active:bg-gray-200 text-white dark:text-gray-900 disabled:bg-gray-300 disabled:text-gray-500 dark:disabled:bg-gray-800 dark:disabled:text-gray-500 font-medium rounded-lg transition-colors duration-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {isLoading ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white/20 dark:border-gray-900/20 border-t-white dark:border-t-gray-900 rounded-full animate-spin" />
+                  {t('auth.register.loading', 'Creating Account...')}
+                </div>
+              ) : (
+                t('auth.register.submit', 'Create Account')
+              )}
+            </Button>
+
+            {/* Error Messages */}
+            <ErrorMessages
+              errors={
+                form.formState.errors.root?.message ? [form.formState.errors.root.message] : []
+              }
+            />
+
+            {/* Terms */}
+            <p className="text-center text-xs text-gray-500 dark:text-gray-400 mt-6">
+              {t('auth.agreeToSignup')}{' '}
+              <a
+                href="#"
+                className="text-gray-900 dark:text-white underline hover:text-gray-700 dark:hover:text-gray-200 transition-colors duration-200"
+              >
+                {t('auth.terms')}
+              </a>{' '}
+              {t('auth.and')}{' '}
+              <a
+                href="#"
+                className="text-gray-900 dark:text-white underline hover:text-gray-700 dark:hover:text-gray-200 transition-colors duration-200"
+              >
+                {t('auth.privacyPolicy')}
+              </a>
+              .
             </p>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+          </form>
+        </Form>
+      </CardContent>
+    </Card>
   );
 }

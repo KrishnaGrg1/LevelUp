@@ -7,13 +7,12 @@ import { z } from 'zod';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
-import { motion } from 'framer-motion';
 import { useMutation } from '@tanstack/react-query';
 import { requestPasswordReset } from '@/lib/services/auth';
 import { toast } from 'sonner';
 import { Language } from '@/stores/useLanguage';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Check, Loader2, Mail } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import { t } from '@/translations/index';
 import { TranslatedFormMessage } from '@/components/ui/TranslatedFormMessage';
 import Link from 'next/link';
@@ -51,94 +50,82 @@ export default function ForgetPassword({ lang, onSent }: ForgetPasswordProps) {
   };
 
   return (
-    <div className="w-full max-w-md">
-      <Card className="relative bg-gradient-to-br from-slate-800/30 to-slate-900/30 backdrop-blur-xl border border-slate-700/30 rounded-3xl shadow-2xl overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 rounded-3xl" />
-        <CardHeader className="relative space-y-2 text-center pb-4 pt-8">
-          <CardTitle className="text-2xl font-black">
-            {t('auth.forgetPassword.title', 'Forgot Password')}
-          </CardTitle>
-          <CardDescription className="text-slate-400">
-            {t('auth.forgetPassword.subtitle', 'Enter your email to receive a reset link')}
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="relative space-y-6 px-8 pb-8">
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm font-medium text-slate-300">
-                      {t('auth.forgetPassword.email', 'Email')}
-                    </FormLabel>
-                    <FormControl>
-                      <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
-                        <Input
-                          type="email"
-                          placeholder={t('auth.forgetPassword.emailPlaceholder', 'you@example.com')}
-                          className="pl-10 h-12 bg-slate-800/50 border-slate-600 text-white placeholder-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-300 rounded-xl"
-                          {...field}
-                        />
-                      </div>
-                    </FormControl>
-                    <TranslatedFormMessage className="text-xs text-red-400 mt-1" />
-                  </FormItem>
-                )}
-              />
-              <Button
-                type="submit"
-                disabled={isLoading}
-                className="w-full h-12 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:scale-100 rounded-xl"
-              >
-                {isLoading ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    {t('auth.forgetPassword.sending', 'Sending...')}
-                  </>
-                ) : (
-                  t('auth.forgetPassword.submit', 'Send reset link')
-                )}
-              </Button>
-
-              {form.formState.isSubmitSuccessful && !isLoading && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mt-6 rounded-xl bg-green-600/20 border border-green-500/30 p-4 shadow-lg"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500/30">
-                      <Check className="h-5 w-5 text-green-300" />
-                    </div>
-                    <div>
-                      <p className="text-green-300 font-semibold">
-                        {t('auth.forgetPassword.success')}
-                      </p>
-                      <p className="text-green-200 text-sm">
-                        {t('auth.forgetPassword.success-description')}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </form>
-          </Form>
-          <div className="text-center pt-6 border-t border-slate-700/50 relative z-10">
-            <p className="text-sm text-slate-400">
-              {t('auth.register.hasAccount', 'Already have an account?')}{' '}
-              <Link
-                href={`/${lang}/login`}
-                className="font-medium text-indigo-400 hover:text-indigo-300 transition-colors"
-              >
-                {t('auth.register.loginLink', 'Sign in here')}
-              </Link>
-            </p>
+    <Card className="w-full max-w-2xl mx-auto relative z-10 border-0  shadow-none">
+      <CardHeader className="space-y-3 pb-4 pt-8">
+        {/* Logo/Icon */}
+        <div className="flex justify-center">
+          <div className="w-12 h-12 border-2 border-gray-900 dark:border-white rounded-lg flex items-center justify-center">
+            <Sparkles className="w-6 h-6 text-gray-900 dark:text-white" />
           </div>
-        </CardContent>
-      </Card>
-    </div>
+        </div>
+
+        {/* Title */}
+        <CardTitle className="text-2xl font-semibold text-gray-900 dark:text-white text-center">
+          {t('auth.forgetPassword.title', 'Forgot Password?')}
+        </CardTitle>
+
+        {/* Subtitle */}
+        <CardDescription className="text-center text-gray-500 dark:text-gray-400">
+          {t('auth.forgetPassword.subtitle', 'Enter your email to receive a reset link')}
+        </CardDescription>
+      </CardHeader>
+
+      <CardContent className="px-6 pb-8">
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            {/* Email Field */}
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    {t('auth.forgetPassword.email', 'Email')}
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      placeholder={t('auth.forgetPassword.emailPlaceholder', 'you@example.com')}
+                      className="h-11 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent transition-all duration-200"
+                      {...field}
+                    />
+                  </FormControl>
+                  <TranslatedFormMessage className="text-xs text-red-600 dark:text-red-400 mt-1" />
+                </FormItem>
+              )}
+            />
+
+            {/* Submit Button */}
+            <Button
+              type="submit"
+              disabled={isLoading || form.formState.isSubmitting || !form.formState.isValid}
+              className="w-full h-11 bg-gray-900 hover:bg-gray-800 active:bg-gray-950 dark:bg-white dark:hover:bg-gray-100 dark:active:bg-gray-200 text-white dark:text-gray-900 disabled:bg-gray-300 disabled:text-gray-500 dark:disabled:bg-gray-800 dark:disabled:text-gray-500 font-medium rounded-lg transition-colors duration-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {isLoading ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white/20 dark:border-gray-900/20 border-t-white dark:border-t-gray-900 rounded-full animate-spin" />
+                  {t('auth.forgetPassword.sending', 'Sending...')}
+                </div>
+              ) : (
+                t('auth.forgetPassword.submit', 'Send reset link')
+              )}
+            </Button>
+
+            {/* Back to login link */}
+            <div className="text-center pt-4">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {t('auth.forgetPassword.rememberPassword', 'Remember your password?')}{' '}
+                <Link
+                  href={`/${lang}/login`}
+                  className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-200 font-medium underline underline-offset-2"
+                >
+                  {t('auth.forgetPassword.backToLogin', 'Back to login')}
+                </Link>
+              </p>
+            </div>
+          </form>
+        </Form>
+      </CardContent>
+    </Card>
   );
 }

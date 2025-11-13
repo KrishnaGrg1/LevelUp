@@ -1,8 +1,9 @@
 import Link from 'next/link';
-import LanguageSwitcherWrapper from '../LanguageSwitcherWrapper';
+import LanguageSwitcherWrapper from './LanguageSwitcherWrapper';
 import { Sparkles, ArrowLeft } from 'lucide-react';
 import { Language } from '@/stores/useLanguage';
 import { t } from '@/translations/index';
+import { ModeToggle } from './toggle';
 
 interface TopBarProps {
   language?: Language;
@@ -14,7 +15,7 @@ const TopBar: React.FC<TopBarProps> = ({ language = 'eng', showBackButton = fals
   const defaultBackUrl = `/${language}/home`;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-lg border-b border-slate-800/50">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-black/90 backdrop-blur-lg border-b dark:border-slate-800/50">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Left Side - Back Button or Brand */}
@@ -31,17 +32,16 @@ const TopBar: React.FC<TopBarProps> = ({ language = 'eng', showBackButton = fals
 
             {/* Brand */}
             <Link href={`/${language}/home`} className="flex items-center space-x-2 group">
-              <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <Sparkles className="w-4 h-4 text-white" />
+              <div className="w-8 h-8  rounded-lg border-2 flex items-center justify-center  ">
+                <Sparkles className="w-4 h-4" />
               </div>
-              <span className="text-2xl font-black bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-                Level Up
-              </span>
+              <span className="text-2xl font-extrabold ">Level Up</span>
             </Link>
           </div>
 
           {/* Right Side - Language Switcher */}
           <div className="flex items-center space-x-4">
+            <ModeToggle />
             <LanguageSwitcherWrapper currentLang={language} />
           </div>
         </div>
