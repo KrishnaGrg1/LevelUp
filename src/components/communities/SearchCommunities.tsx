@@ -61,8 +61,10 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
       queryClient.invalidateQueries({ queryKey: ['my-communities'] });
       queryClient.invalidateQueries({ queryKey: ['search-communities'] });
     },
-    onError: (error: any) => {
-      toast.error(error?.response?.data?.message || 'Failed to join community');
+    onError: (error: unknown) => {
+      const err = error as { message?: string; error?: string };
+      const errorMessage = err.message || 'Community Join  failed';
+      toast.error(errorMessage);
     },
   });
 
