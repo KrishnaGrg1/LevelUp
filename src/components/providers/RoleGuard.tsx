@@ -51,10 +51,10 @@ export function RoleGuard({ children, allowedRole, fallbackPath }: RoleGuardProp
   // Show loading state while checking
   if (!isHydrated || !isAuthenticated) {
     return (
-      <div className="min-h-screen bg-black text-white overflow-x-hidden relative flex items-center justify-center">
+      <div className="min-h-screen overflow-x-hidden relative flex items-center justify-center">
         {/* Background Effects */}
-        <div className="absolute inset-0 bg-gradient-radial from-indigo-500/15 via-transparent to-transparent"></div>
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+        {/* <div className="absolute inset-0 bg-gradient-radial from-indigo-500/15 via-transparent to-transparent"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse"></div> */}
 
         {/* Loading spinner */}
         <div className="text-center space-y-4 relative z-10">

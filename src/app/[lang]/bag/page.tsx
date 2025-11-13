@@ -112,7 +112,7 @@ export default function BagPage() {
               Tax options
             </h1>
             <p className="mt-3 text-base text-zinc-600 dark:text-zinc-400">
-              Select how you'd like to configure your tax settings. Guided mode provides
+              Select how you&apos;d like to configure your tax settings. Guided mode provides
               step-by-step assistance, while manual entry gives you full control.
             </p>
           </div>
@@ -147,7 +147,7 @@ export default function BagPage() {
                         </span>
                       </Label>
                       <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-                        Answer a few simple questions and we'll configure everything for you.
+                        Answer a few simple questions and we&apos;ll configure everything for you.
                         Perfect for getting started quickly.
                       </p>
                     </div>
@@ -187,8 +187,8 @@ export default function BagPage() {
                     Tax configurations can be updated later
                   </p>
                   <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-                    Don't worry if you're not sure right now. You can always change these settings
-                    in your dashboard after setup is complete.
+                    Don&apos;t worry if you&apos;re not sure right now. You can always change these
+                    settings in your dashboard after setup is complete.
                   </p>
                 </div>
               </div>
