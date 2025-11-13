@@ -44,17 +44,25 @@ export function ProfileDropdownMenu({ isadmin }: { isadmin?: boolean }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">
+        <Button
+          variant="outline"
+          className="bg-white text-zinc-900 hover:bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-50 dark:hover:bg-zinc-800"
+        >
           {user?.UserName
             ? user.UserName.charAt(0).toUpperCase() + user.UserName.slice(1)
             : 'Profile'}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56 bg-white" align="start">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuContent
+        className="w-56 bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800"
+        align="start"
+      >
+        <DropdownMenuLabel className="text-zinc-900 dark:text-zinc-50">
+          My Account
+        </DropdownMenuLabel>
         <DropdownMenuGroup>
           <DropdownMenuItem
-            className=" cursor-pointer"
+            className="cursor-pointer text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
             onClick={() => {
               if (isadmin) {
                 router.push(`/${language}/admin/profile`);
@@ -66,7 +74,7 @@ export function ProfileDropdownMenu({ isadmin }: { isadmin?: boolean }) {
             Profile
           </DropdownMenuItem>
           <DropdownMenuItem
-            className=" cursor-pointer"
+            className="cursor-pointer text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
             onClick={() => {
               if (isadmin) {
                 router.push(`/${language}/admin/change-password`);
@@ -77,11 +85,13 @@ export function ProfileDropdownMenu({ isadmin }: { isadmin?: boolean }) {
           >
             Change Password
           </DropdownMenuItem>
-          <DropdownMenuItem className=" cursor-pointer">Settings</DropdownMenuItem>
+          <DropdownMenuItem className="cursor-pointer text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800">
+            Settings
+          </DropdownMenuItem>
         </DropdownMenuGroup>
 
         <DropdownMenuItem
-          className="flex flex-row gap-1 cursor-pointer"
+          className="flex flex-row gap-1 cursor-pointer text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/20"
           onClick={() => handleLogout()}
           disabled={isPending}
         >

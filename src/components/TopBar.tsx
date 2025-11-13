@@ -5,6 +5,7 @@ import { Language } from '@/stores/useLanguage';
 import { t } from '@/translations/index';
 import { ModeToggle } from './toggle';
 import { ProfileDropdownMenu } from './ProfileDropdown';
+import authStore from '@/stores/useAuth';
 
 interface TopBarProps {
   language?: Language;
@@ -20,7 +21,7 @@ const TopBar: React.FC<TopBarProps> = ({
   isAuthenticated = false,
 }) => {
   const defaultBackUrl = `/${language}/home`;
-
+  const { user } = authStore();
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-black/90 backdrop-blur-lg border-b dark:border-slate-800/50">
       <div className="max-w-7xl mx-auto px-6 py-4">
@@ -50,7 +51,7 @@ const TopBar: React.FC<TopBarProps> = ({
           <div className="flex items-center space-x-4">
             <ModeToggle />
             <LanguageSwitcherWrapper currentLang={language} />
-            {isAuthenticated && <ProfileDropdownMenu isadmin={false} />}
+            {isAuthenticated && <ProfileDropdownMenu isadmin={user?.isAdmin} />}
           </div>
         </div>
       </div>
