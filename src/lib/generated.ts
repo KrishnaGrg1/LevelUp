@@ -85,11 +85,16 @@ export interface Community {
   ownerId: string;
   categoryId?: string;
   updatedAt: Date;
-
+  isPrivate: boolean;
+  memberLimit: number;
   clans?: Clan[];
+
   category?: Category;
   owner?: User;
   members?: CommunityMember[];
+  _count?: {
+    members: number;
+  };
 }
 
 export interface Clan {
@@ -322,5 +327,13 @@ export interface TogglePinResponse {
   body: {
     message: string;
     data: TogglePinDTO[];
+  };
+}
+
+export interface searchCommunitiesResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: Community[];
   };
 }
