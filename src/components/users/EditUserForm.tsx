@@ -73,7 +73,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
       queryClient.invalidateQueries({ queryKey: ['user', userId] });
       queryClient.invalidateQueries({ queryKey: ['users'] });
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error(error?.message || 'Failed to update user');
     },
   });
@@ -127,7 +127,9 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
         <div className="text-center max-w-md">
           <div className="text-slate-500 text-5xl mb-4">👤</div>
           <h3 className="text-xl font-semibold text-white mb-2">User Not Found</h3>
-          <p className="text-slate-400 mb-4">The user you're looking for doesn't exist.</p>
+          <p className="text-slate-400 mb-4">
+            The user you&apos;re looking for doesn&apos;t exist.
+          </p>
           <Button onClick={() => router.back()} variant="outline">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Go Back
