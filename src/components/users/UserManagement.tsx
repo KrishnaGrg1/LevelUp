@@ -273,7 +273,7 @@ export default function UserManagement() {
                         </TableCell>
                         <TableCell>
                           <div className="flex gap-2">
-                            <a href={`user/${user.id}`}>
+                            <a href={`users/${user.id}/edit`}>
                               <Button variant="outline" size="sm" className="cursor-pointer gap-1">
                                 <Edit className="h-3 w-3" />
                                 Edit

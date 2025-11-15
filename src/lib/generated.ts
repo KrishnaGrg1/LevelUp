@@ -337,3 +337,5 @@ export interface searchCommunitiesResponse {
     data: Community[];
   };
 }
+
+export type UpdateUserPayload = Partial<Pick<User, 'UserName' | 'email' | 'level' | 'isVerified'>>;
