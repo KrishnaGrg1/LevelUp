@@ -5,6 +5,7 @@ import type {
   UpdateUserPayload,
   adminOverviewResponse,
   changePasswordResponse,
+  fullUserObjectResponse,
 } from '../generated';
 import { Language } from '@/stores/useLanguage';
 
@@ -146,7 +147,7 @@ export const adminUserGrowth = async (lang: Language, range: 'day' | 'week' | 'm
 // Get user by ID
 export const getUserById = async (lang: Language, userId: string) => {
   try {
-    const response = await axiosInstance.get(`/admin/users/${userId}`, {
+    const response = await axiosInstance.get<fullUserObjectResponse>(`/admin/users/${userId}`, {
       withCredentials: true,
       headers: {
         'X-Language': lang,
@@ -166,13 +167,17 @@ export const getUserById = async (lang: Language, userId: string) => {
 // Update user
 export const updateUser = async (lang: Language, userId: string, data: UpdateUserPayload) => {
   try {
-    const response = await axiosInstance.patch(`/admin/users/${userId}`, data, {
-      withCredentials: true,
-      headers: {
-        'X-Language': lang,
-        'Content-Type': 'application/json',
+    const response = await axiosInstance.patch<fullUserObjectResponse>(
+      `/admin/users/${userId}`,
+      data,
+      {
+        withCredentials: true,
+        headers: {
+          'X-Language': lang,
+          'Content-Type': 'application/json',
+        },
       },
-    });
+    );
     return response.data;
   } catch (error: unknown) {
     const err = error as {

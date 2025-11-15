@@ -165,7 +165,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
             {/* Avatar */}
             <div className="flex flex-col items-center">
               <Avatar className="h-24 w-24 mb-4 ring-4 ring-indigo-500/20">
-                <AvatarImage src={user.profilePhoto || undefined} alt={user.UserName} />
+                <AvatarImage src={user.profilePicture || undefined} alt={user.UserName} />
                 <AvatarFallback className="bg-gradient-to-br from-indigo-500 to-purple-500 text-white text-2xl">
                   {user.UserName.charAt(0).toUpperCase()}
                 </AvatarFallback>
