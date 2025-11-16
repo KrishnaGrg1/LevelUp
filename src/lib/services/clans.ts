@@ -33,6 +33,7 @@ export interface Clan {
   createdAt: string;
   updatedAt: string;
   owner: ClanOwner;
+  isMember?: boolean;
 }
 
 export interface ClanMember {

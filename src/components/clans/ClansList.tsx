@@ -3,8 +3,9 @@
 import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { getClansByCommunity, joinClan, type Clan } from '@/lib/services/clans';
+import { getClansByCommunity, joinClan, getClanMembers, type Clan } from '@/lib/services/clans';
 import LanguageStore from '@/stores/useLanguage';
+import { useAuth } from '@/hooks/use-auth';
 import { t } from '@/translations/index';
 import { toast } from 'sonner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -19,6 +20,7 @@ export default function ClansList({ communityId }: ClansListProps) {
   const { language } = LanguageStore();
   const queryClient = useQueryClient();
   const router = useRouter();
+  const { user } = useAuth(language);
 
   const { data, isPending, isError, error } = useQuery({
     queryKey: ['clans', communityId, language],
@@ -32,11 +34,39 @@ export default function ClansList({ communityId }: ClansListProps) {
 
   const clans = data?.body?.data || [];
 
+  // Fetch members for all clans to check if user is a member
+  const clanMembersQueries = useQuery({
+    queryKey: ['all-clan-members', communityId, language],
+    queryFn: async () => {
+      if (!clans.length) return {};
+      const membersMap: Record<string, string[]> = {};
+      
+      await Promise.all(
+        clans.map(async (clan) => {
+          try {
+            const response = await getClanMembers(clan.id, language);
+            const members = response?.body?.data || [];
+            membersMap[clan.id] = members.map(m => m.userId);
+          } catch {
+            membersMap[clan.id] = [];
+          }
+        })
+      );
+      
+      return membersMap;
+    },
+    enabled: clans.length > 0 && !!user,
+    staleTime: 60000,
+  });
+
+  const clanMembersMap = clanMembersQueries.data || {};
+
   const joinMutation = useMutation({
     mutationFn: (clanId: string) => joinClan(clanId, language),
     onSuccess: () => {
       toast.success(t('clans.toast.joinedSuccess', language));
       queryClient.invalidateQueries({ queryKey: ['clans', communityId] });
+      queryClient.invalidateQueries({ queryKey: ['all-clan-members', communityId] });
     },
     onError: (error: Error) => {
       toast.error(error.message || t('clans.toast.joinFailed', language));
@@ -108,6 +138,9 @@ export default function ClansList({ communityId }: ClansListProps) {
         const memberCount = clan.stats?.memberCount ?? 0;
         const battlesWon = clan.stats?.battlesWon ?? 0;
         const occupancy = clan.limit > 0 ? Math.round((memberCount / clan.limit) * 100) : 0;
+        
+        // Check if current user is a member of this clan
+        const isMember = user ? clanMembersMap[clan.id]?.includes(user.id) : false;
 
         return (
           <Card
@@ -219,22 +252,31 @@ export default function ClansList({ communityId }: ClansListProps) {
                 </div>
               )}
 
-              {/* Join/Leave Button */}
+              {/* Join/Enter Button */}
               <button
                 onClick={(e) => {
                   e.stopPropagation(); // Prevent navigation when clicking button
-                  handleJoinClan(clan.id);
+                  if (isMember) {
+                    // Navigate to clan detail page
+                    router.push(`/${language}/clan/${clan.id}`);
+                  } else {
+                    handleJoinClan(clan.id);
+                  }
                 }}
-                disabled={memberCount >= clan.limit || joinMutation.isPending}
+                disabled={!isMember && (memberCount >= clan.limit || joinMutation.isPending)}
                 className={`w-full mt-3 ${
-                  memberCount >= clan.limit
+                  isMember
+                    ? 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500'
+                    : memberCount >= clan.limit
                     ? 'bg-gray-500 cursor-not-allowed'
                     : clan.isPrivate
                     ? 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500'
                     : 'bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500'
                 } text-white font-semibold py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100`}
               >
-                {joinMutation.isPending
+                {isMember
+                  ? t('clans.enterClan', language)
+                  : joinMutation.isPending
                   ? t('clans.joining', language)
                   : memberCount >= clan.limit
                   ? t('clans.full', language)
