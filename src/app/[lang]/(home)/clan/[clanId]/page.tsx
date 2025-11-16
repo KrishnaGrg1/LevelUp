@@ -11,6 +11,7 @@ import {
 } from '@/lib/services/clans';
 import LanguageStore from '@/stores/useLanguage';
 import { useAuth } from '@/hooks/use-auth';
+import { t } from '@/translations/index';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
@@ -51,22 +52,22 @@ export default function ClanDetailPage() {
   const leaveMutation = useMutation({
     mutationFn: () => leaveClan(clanId, language),
     onSuccess: () => {
-      toast.success('Successfully left clan');
+      toast.success(t('clans.toast.leftSuccess', language));
       router.back();
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Failed to leave clan');
+      toast.error(error.message || t('clans.toast.leaveFailed', language));
     },
   });
 
   const deleteMutation = useMutation({
     mutationFn: () => deleteClan(clanId, language),
     onSuccess: () => {
-      toast.success('Clan deleted successfully');
+      toast.success(t('clans.toast.deletedSuccess', language));
       router.back();
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Failed to delete clan');
+      toast.error(error.message || t('clans.toast.deleteFailed', language));
     },
   });
 
@@ -92,10 +93,10 @@ export default function ClanDetailPage() {
             <CardContent className="pt-6 text-center">
               <Shield className="h-12 w-12 mx-auto mb-4 text-red-500" />
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                Clan Not Found
+                {t('clans.clanNotFound', language)}
               </h3>
               <Button onClick={() => router.back()} variant="outline" className="mt-4">
-                Go Back
+                {t('clans.goBack', language)}
               </Button>
             </CardContent>
           </Card>
@@ -117,7 +118,7 @@ export default function ClanDetailPage() {
           className="mb-6 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
         >
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Back
+          {t('clans.back', language)}
         </Button>
 
         {/* Clan Header */}
@@ -173,7 +174,7 @@ export default function ClanDetailPage() {
               <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
                 <div className="flex items-center gap-2 mb-1">
                   <Users className="h-4 w-4 text-gray-600 dark:text-gray-400" />
-                  <span className="text-xs text-gray-600 dark:text-gray-400">Members</span>
+                  <span className="text-xs text-gray-600 dark:text-gray-400">{t('clans.members', language)}</span>
                 </div>
                 <p className="text-lg font-semibold text-gray-900 dark:text-white">
                   {memberCount}/{clan.limit}
@@ -183,7 +184,7 @@ export default function ClanDetailPage() {
               <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
                 <div className="flex items-center gap-2 mb-1">
                   <Trophy className="h-4 w-4 text-gray-600 dark:text-gray-400" />
-                  <span className="text-xs text-gray-600 dark:text-gray-400">Victories</span>
+                  <span className="text-xs text-gray-600 dark:text-gray-400">{t('clans.victories', language)}</span>
                 </div>
                 <p className="text-lg font-semibold text-gray-900 dark:text-white">{battlesWon}</p>
               </div>
@@ -191,7 +192,7 @@ export default function ClanDetailPage() {
               <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
                 <div className="flex items-center gap-2 mb-1">
                   <Crown className="h-4 w-4 text-gray-600 dark:text-gray-400" />
-                  <span className="text-xs text-gray-600 dark:text-gray-400">Owner</span>
+                  <span className="text-xs text-gray-600 dark:text-gray-400">{t('clans.owner', language)}</span>
                 </div>
                 <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">
                   {clan.owner.UserName}
@@ -201,10 +202,10 @@ export default function ClanDetailPage() {
               <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
                 <div className="flex items-center gap-2 mb-1">
                   <Shield className="h-4 w-4 text-gray-600 dark:text-gray-400" />
-                  <span className="text-xs text-gray-600 dark:text-gray-400">Privacy</span>
+                  <span className="text-xs text-gray-600 dark:text-gray-400">{t('clans.privacy', language)}</span>
                 </div>
                 <p className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {clan.isPrivate ? 'Private' : 'Public'}
+                  {clan.isPrivate ? t('clans.private', language) : t('clans.public', language)}
                 </p>
               </div>
             </div>
@@ -222,7 +223,7 @@ export default function ClanDetailPage() {
                   ) : (
                     <LogOut className="h-4 w-4 mr-2" />
                   )}
-                  Leave Clan
+                  {t('clans.leaveClan', language)}
                 </Button>
               )}
               {isOwner && (
@@ -237,7 +238,7 @@ export default function ClanDetailPage() {
                   ) : (
                     <Trash2 className="h-4 w-4 mr-2" />
                   )}
-                  Delete Clan
+                  {t('clans.deleteClan', language)}
                 </Button>
               )}
             </div>
@@ -249,7 +250,7 @@ export default function ClanDetailPage() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
               <Users className="h-5 w-5" />
-              Members ({members.length})
+              {t('clans.members', language)} ({members.length})
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -258,7 +259,7 @@ export default function ClanDetailPage() {
                 <Loader2 className="h-8 w-8 animate-spin text-cyan-600 dark:text-cyan-400" />
               </div>
             ) : members.length === 0 ? (
-              <p className="text-center text-gray-600 dark:text-gray-400 py-8">No members yet</p>
+              <p className="text-center text-gray-600 dark:text-gray-400 py-8">{t('clans.noMembers', language)}</p>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {members.map((member) => (

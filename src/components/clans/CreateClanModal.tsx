@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createClan, type CreateClanPayload } from '@/lib/services/clans';
 import LanguageStore from '@/stores/useLanguage';
+import { t } from '@/translations/index';
 import {
   Dialog,
   DialogContent,
@@ -40,7 +41,7 @@ export default function CreateClanModal({ communityId }: CreateClanModalProps) {
   const createMutation = useMutation({
     mutationFn: (payload: CreateClanPayload) => createClan(payload, language),
     onSuccess: () => {
-      toast.success('Clan created successfully!');
+      toast.success(t('clans.toast.createdSuccess', language));
       queryClient.invalidateQueries({ queryKey: ['clans', communityId] });
       setOpen(false);
       setFormData({
@@ -52,14 +53,14 @@ export default function CreateClanModal({ communityId }: CreateClanModalProps) {
       });
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Failed to create clan');
+      toast.error(error.message || t('clans.toast.createFailed', language));
     },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.name.trim().length < 3) {
-      toast.error('Clan name must be at least 3 characters');
+      toast.error(t('clans.createModal.nameMinLength', language));
       return;
     }
     createMutation.mutate(formData);
@@ -70,26 +71,26 @@ export default function CreateClanModal({ communityId }: CreateClanModalProps) {
       <DialogTrigger asChild>
         <Button className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white">
           <Plus className="h-4 w-4 mr-2" />
-          Create Clan
+          {t('clans.createClan', language)}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px] bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800">
         <DialogHeader>
-          <DialogTitle className="text-gray-900 dark:text-white">Create New Clan</DialogTitle>
+          <DialogTitle className="text-gray-900 dark:text-white">{t('clans.createModal.title', language)}</DialogTitle>
           <DialogDescription className="text-gray-600 dark:text-gray-400">
-            Create a new clan within this community. Fill in the details below.
+            {t('clans.createModal.description', language)}
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="name" className="text-gray-900 dark:text-white">
-              Clan Name *
+              {t('clans.createModal.clanName', language)} *
             </Label>
             <Input
               id="name"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              placeholder="Enter clan name"
+              placeholder={t('clans.createModal.namePlaceholder', language)}
               required
               minLength={3}
               maxLength={100}
@@ -99,13 +100,13 @@ export default function CreateClanModal({ communityId }: CreateClanModalProps) {
 
           <div className="space-y-2">
             <Label htmlFor="description" className="text-gray-900 dark:text-white">
-              Description
+              {t('clans.createModal.descriptionLabel', language)}
             </Label>
             <Textarea
               id="description"
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              placeholder="Describe your clan..."
+              placeholder={t('clans.createModal.descriptionPlaceholder', language)}
               maxLength={500}
               rows={3}
               className="bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white resize-none"
@@ -114,7 +115,7 @@ export default function CreateClanModal({ communityId }: CreateClanModalProps) {
 
           <div className="space-y-2">
             <Label htmlFor="limit" className="text-gray-900 dark:text-white">
-              Member Limit
+              {t('clans.createModal.memberLimit', language)}
             </Label>
             <Input
               id="limit"
@@ -130,10 +131,10 @@ export default function CreateClanModal({ communityId }: CreateClanModalProps) {
           <div className="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700">
             <div className="space-y-0.5">
               <Label htmlFor="isPrivate" className="text-gray-900 dark:text-white cursor-pointer">
-                Private Clan
+                {t('clans.createModal.privateClan', language)}
               </Label>
               <p className="text-xs text-gray-600 dark:text-gray-400">
-                Only invited members can join
+                {t('clans.createModal.privateDescription', language)}
               </p>
             </div>
             <Switch
@@ -151,7 +152,7 @@ export default function CreateClanModal({ communityId }: CreateClanModalProps) {
               className="flex-1 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
               disabled={createMutation.isPending}
             >
-              Cancel
+              {t('clans.createModal.cancel', language)}
             </Button>
             <Button
               type="submit"
@@ -161,10 +162,10 @@ export default function CreateClanModal({ communityId }: CreateClanModalProps) {
               {createMutation.isPending ? (
                 <>
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  Creating...
+                  {t('clans.creating', language)}
                 </>
               ) : (
-                'Create Clan'
+                t('clans.createClan', language)
               )}
             </Button>
           </div>

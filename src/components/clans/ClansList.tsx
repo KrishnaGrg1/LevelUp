@@ -5,6 +5,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { getClansByCommunity, joinClan, type Clan } from '@/lib/services/clans';
 import LanguageStore from '@/stores/useLanguage';
+import { t } from '@/translations/index';
 import { toast } from 'sonner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Users, Lock, Globe, Crown, Trophy, Shield } from 'lucide-react';
@@ -34,11 +35,11 @@ export default function ClansList({ communityId }: ClansListProps) {
   const joinMutation = useMutation({
     mutationFn: (clanId: string) => joinClan(clanId, language),
     onSuccess: () => {
-      toast.success('Successfully joined clan!');
+      toast.success(t('clans.toast.joinedSuccess', language));
       queryClient.invalidateQueries({ queryKey: ['clans', communityId] });
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Failed to join clan');
+      toast.error(error.message || t('clans.toast.joinFailed', language));
     },
   });
 
@@ -74,9 +75,9 @@ export default function ClansList({ communityId }: ClansListProps) {
           <div className="flex items-center gap-3 text-red-600 dark:text-red-400">
             <Shield className="h-5 w-5" />
             <div>
-              <h3 className="font-semibold">Failed to load clans</h3>
+              <h3 className="font-semibold">{t('clans.errorLoadingClans', language)}</h3>
               <p className="text-sm text-red-500 dark:text-red-300">
-                {error instanceof Error ? error.message : 'An unknown error occurred'}
+                {error instanceof Error ? error.message : t('clans.unknownError', language)}
               </p>
             </div>
           </div>
@@ -91,9 +92,9 @@ export default function ClansList({ communityId }: ClansListProps) {
         <CardContent className="pt-6">
           <div className="flex flex-col items-center justify-center py-12 text-center">
             <Shield className="h-16 w-16 text-blue-400/50 dark:text-blue-300/50 mb-4" />
-            <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">No Clans Yet</h3>
+            <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">{t('clans.noClan', language)}</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 max-w-md">
-              This community doesn&apos;t have any clans yet. Be the first to create one!
+              {t('clans.noClansDescription', language)}
             </p>
           </div>
         </CardContent>
@@ -185,7 +186,7 @@ export default function ClansList({ communityId }: ClansListProps) {
                 <div className="bg-gray-100 dark:bg-gray-800/40 rounded-lg p-2 border border-gray-300 dark:border-gray-700/50">
                   <div className="flex items-center gap-1 mb-1">
                     <Users className="h-3 w-3 text-gray-600 dark:text-gray-400" />
-                    <span className="text-xs text-gray-600 dark:text-gray-400">Members</span>
+                    <span className="text-xs text-gray-600 dark:text-gray-400">{t('clans.members', language)}</span>
                   </div>
                   <p className="text-sm font-semibold text-gray-900 dark:text-white">
                     {memberCount}/{clan.limit}
@@ -203,7 +204,7 @@ export default function ClansList({ communityId }: ClansListProps) {
                 <div className="bg-gray-100 dark:bg-gray-800/40 rounded-lg p-2 border border-gray-300 dark:border-gray-700/50">
                   <div className="flex items-center gap-1 mb-1">
                     <Trophy className="h-3 w-3 text-gray-600 dark:text-gray-400" />
-                    <span className="text-xs text-gray-600 dark:text-gray-400">Victories</span>
+                    <span className="text-xs text-gray-600 dark:text-gray-400">{t('clans.victories', language)}</span>
                   </div>
                   <p className="text-sm font-semibold text-gray-900 dark:text-white">{battlesWon}</p>
                 </div>
@@ -234,10 +235,10 @@ export default function ClansList({ communityId }: ClansListProps) {
                 } text-white font-semibold py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100`}
               >
                 {joinMutation.isPending
-                  ? 'Joining...'
+                  ? t('clans.joining', language)
                   : memberCount >= clan.limit
-                  ? 'Full'
-                  : 'Join Clan'}
+                  ? t('clans.full', language)
+                  : t('clans.joinClan', language)}
               </button>
             </CardContent>
           </Card>

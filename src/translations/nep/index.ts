@@ -7,6 +7,7 @@ import footer from './footer.json';
 import pricing from './pricing.json';
 import dashboard from './dashboard.json';
 import profile from './profile.json';
+import clans from './clans.json';
 
 const nep = {
   auth,
@@ -18,6 +19,7 @@ const nep = {
   footer,
   nav,
   landing,
+  clans,
 };
 
 export default nep;
