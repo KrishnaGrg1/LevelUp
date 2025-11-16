@@ -98,8 +98,8 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500 mx-auto"></div>
-          <p className="mt-4 text-slate-400">Loading user details...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 dark:border-blue-400 mx-auto"></div>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">Loading user details...</p>
         </div>
       </div>
     );
@@ -110,9 +110,11 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center max-w-md">
-          <div className="text-red-500 text-5xl mb-4">⚠️</div>
-          <h3 className="text-xl font-semibold text-white mb-2">Error Loading User</h3>
-          <p className="text-slate-400 mb-4">
+          <div className="text-red-600 dark:text-red-400 text-5xl mb-4">⚠️</div>
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+            Error Loading User
+          </h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">
             {error instanceof Error ? error.message : 'An unexpected error occurred'}
           </p>
           <Button onClick={() => router.back()} variant="outline">
@@ -128,9 +130,11 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center max-w-md">
-          <div className="text-slate-500 text-5xl mb-4">👤</div>
-          <h3 className="text-xl font-semibold text-white mb-2">User Not Found</h3>
-          <p className="text-slate-400 mb-4">
+          <div className="text-gray-400 dark:text-gray-600 text-5xl mb-4">👤</div>
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+            User Not Found
+          </h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">
             The user you&apos;re looking for doesn&apos;t exist.
           </p>
           <Button onClick={() => router.back()} variant="outline">
@@ -149,44 +153,44 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
         <Button
           variant="ghost"
           onClick={() => router.back()}
-          className="mb-4 text-slate-400 hover:text-white"
+          className="mb-4 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
         >
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back to Users
         </Button>
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
-          Edit User
-        </h1>
-        <p className="text-slate-400">Update user information and permissions</p>
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">Edit User</h1>
+        <p className="text-gray-600 dark:text-gray-400">Update user information and permissions</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* User Profile Card */}
-        <Card className="lg:col-span-1 bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl border-slate-700/50">
+        <Card className="lg:col-span-1 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader>
-            <CardTitle className="text-white">User Profile</CardTitle>
+            <CardTitle className="text-gray-900 dark:text-gray-100">User Profile</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Avatar */}
             <div className="flex flex-col items-center">
-              <Avatar className="h-24 w-24 mb-4 ring-4 ring-indigo-500/20">
+              <Avatar className="h-24 w-24 mb-4 ring-2 ring-gray-200 dark:ring-gray-700">
                 <AvatarImage src={user.profilePicture || undefined} alt={user.UserName} />
-                <AvatarFallback className="bg-gradient-to-br from-indigo-500 to-purple-500 text-white text-2xl">
+                <AvatarFallback className="bg-blue-600 dark:bg-blue-500 text-white text-2xl">
                   {user.UserName.charAt(0).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
-              <h3 className="text-xl font-semibold text-white">{user.UserName}</h3>
-              <p className="text-sm text-slate-400">{user.email}</p>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+                {user.UserName}
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{user.email}</p>
             </div>
 
             {/* Quick Stats */}
-            <div className="space-y-3 pt-4 border-t border-slate-700">
+            <div className="space-y-3 pt-4 border-t border-gray-200 dark:border-gray-700">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-slate-400">
+                <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                   <Calendar className="h-4 w-4" />
                   <span className="text-sm">Joined</span>
                 </div>
-                <span className="text-sm text-white">
+                <span className="text-sm text-gray-900 dark:text-gray-100">
                   {new Date(user.createdAt).toLocaleDateString('en-US', {
                     month: 'short',
                     day: 'numeric',
@@ -196,56 +200,64 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
               </div>
 
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-slate-400">
+                <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                   {user.isVerified ? (
-                    <CheckCircle2 className="h-4 w-4 text-green-400" />
+                    <CheckCircle2 className="h-4 w-4 text-green-600 dark:text-green-500" />
                   ) : (
-                    <XCircle className="h-4 w-4 text-yellow-400" />
+                    <XCircle className="h-4 w-4 text-amber-600 dark:text-amber-500" />
                   )}
                   <span className="text-sm">Status</span>
                 </div>
                 <span
-                  className={`text-sm font-medium ${user.isVerified ? 'text-green-400' : 'text-yellow-400'}`}
+                  className={`text-sm font-medium ${user.isVerified ? 'text-green-600 dark:text-green-500' : 'text-amber-600 dark:text-amber-500'}`}
                 >
                   {user.isVerified ? 'Verified' : 'Unverified'}
                 </span>
               </div>
 
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-slate-400">
+                <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                   <UserIcon className="h-4 w-4" />
                   <span className="text-sm">User ID</span>
                 </div>
-                <span className="text-xs text-slate-400 font-mono">{user.id.slice(0, 8)}...</span>
+                <span className="text-xs text-gray-600 dark:text-gray-400 font-mono">
+                  {user.id.slice(0, 8)}...
+                </span>
               </div>
             </div>
           </CardContent>
         </Card>
 
         {/* Edit Form */}
-        <Card className="lg:col-span-2 bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl border-slate-700/50">
+        <Card className="lg:col-span-2 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader>
-            <CardTitle className="text-white">User Information</CardTitle>
+            <CardTitle className="text-gray-900 dark:text-gray-100">User Information</CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={form.handleSubmit(handleSubmitForm)} className="space-y-6">
               {/* Username */}
               <div className="space-y-2">
-                <Label htmlFor="username" className="text-slate-300 flex items-center gap-2">
+                <Label
+                  htmlFor="username"
+                  className="text-gray-700 dark:text-gray-300 flex items-center gap-2"
+                >
                   <UserIcon className="h-4 w-4" />
                   Username
                 </Label>
                 <Input
                   id="username"
                   {...form.register('UserName')}
-                  className="bg-slate-900/50 border-slate-700 text-white focus:border-indigo-500"
+                  className="bg-gray-50 dark:bg-gray-900 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100"
                   placeholder="Enter username"
                 />
               </div>
 
               {/* Email */}
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-slate-300 flex items-center gap-2">
+                <Label
+                  htmlFor="email"
+                  className="text-gray-700 dark:text-gray-300 flex items-center gap-2"
+                >
                   <Mail className="h-4 w-4" />
                   Email
                 </Label>
@@ -253,7 +265,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
                   id="email"
                   type="email"
                   {...form.register('email')}
-                  className="bg-slate-900/50 border-slate-700 text-white focus:border-indigo-500"
+                  className="bg-gray-50 dark:bg-gray-900 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100"
                   placeholder="Enter email"
                 />
               </div>
@@ -261,7 +273,10 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
               {/* XP and Level */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="xp" className="text-slate-300 flex items-center gap-2">
+                  <Label
+                    htmlFor="xp"
+                    className="text-gray-700 dark:text-gray-300 flex items-center gap-2"
+                  >
                     <Star className="h-4 w-4" />
                     Experience Points
                   </Label>
@@ -269,13 +284,16 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
                     id="xp"
                     type="number"
                     {...form.register('xp', { valueAsNumber: true })}
-                    className="bg-slate-900/50 border-slate-700 text-white focus:border-indigo-500"
+                    className="bg-gray-50 dark:bg-gray-900 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100"
                     min="0"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="level" className="text-slate-300 flex items-center gap-2">
+                  <Label
+                    htmlFor="level"
+                    className="text-gray-700 dark:text-gray-300 flex items-center gap-2"
+                  >
                     <TrendingUp className="h-4 w-4" />
                     Level
                   </Label>
@@ -283,21 +301,24 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
                     id="level"
                     type="number"
                     {...form.register('level', { valueAsNumber: true })}
-                    className="bg-slate-900/50 border-slate-700 text-white focus:border-indigo-500"
+                    className="bg-gray-50 dark:bg-gray-900 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100"
                     min="1"
                   />
                 </div>
               </div>
 
               {/* Verification Status */}
-              <div className="flex items-center justify-between p-4 bg-slate-900/30 rounded-lg border border-slate-700">
+              <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-900/50 rounded-lg border border-gray-200 dark:border-gray-700">
                 <div className="flex items-center gap-3">
-                  <Shield className="h-5 w-5 text-indigo-400" />
+                  <Shield className="h-5 w-5 text-blue-600 dark:text-blue-500" />
                   <div>
-                    <Label htmlFor="verified" className="text-slate-300 cursor-pointer">
+                    <Label
+                      htmlFor="verified"
+                      className="text-gray-700 dark:text-gray-300 cursor-pointer"
+                    >
                       Verification Status
                     </Label>
-                    <p className="text-xs text-slate-400">
+                    <p className="text-xs text-gray-600 dark:text-gray-400">
                       {form.getValues('isVerified')
                         ? 'User is verified and can access all features'
                         : 'User needs verification to access full features'}
@@ -308,16 +329,16 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
                   id="verified"
                   checked={form.getValues('isVerified')}
                   onCheckedChange={checked => form.setValue('isVerified', checked)}
-                  className="data-[state=checked]:bg-green-500"
+                  className="data-[state=checked]:bg-green-600 dark:data-[state=checked]:bg-green-500"
                 />
               </div>
 
               {/* Action Buttons */}
-              <div className="flex items-center gap-3 pt-4 border-t border-slate-700">
+              <div className="flex items-center gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
                 <Button
                   type="submit"
                   disabled={updateMutation.isPending}
-                  className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white"
+                  className="flex-1 bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 text-white"
                 >
                   {updateMutation.isPending ? (
                     <>
@@ -335,7 +356,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
                   type="button"
                   variant="outline"
                   onClick={() => router.back()}
-                  className="border-slate-700 text-slate-300 hover:bg-slate-800"
+                  className="border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                 >
                   Cancel
                 </Button>
@@ -347,45 +368,49 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-        <Card className="bg-gradient-to-br from-blue-500/10 to-blue-600/10 border-blue-500/20">
+        <Card className="bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-900/50">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-slate-400 mb-1">Current XP</p>
-                <p className="text-2xl font-bold text-white">{user.xp}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Current XP</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                  {formData.xp ?? user.xp}
+                </p>
               </div>
-              <Star className="h-8 w-8 text-blue-400" />
+              <Star className="h-8 w-8 text-blue-600 dark:text-blue-500" />
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-purple-500/10 to-purple-600/10 border-purple-500/20">
+        <Card className="bg-purple-50 dark:bg-purple-950/30 border-purple-200 dark:border-purple-900/50">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-slate-400 mb-1">Current Level</p>
-                <p className="text-2xl font-bold text-white">Level {user.level}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Current Level</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                  Level {user.level ?? user.level}
+                </p>
               </div>
-              <TrendingUp className="h-8 w-8 text-purple-400" />
+              <TrendingUp className="h-8 w-8 text-purple-600 dark:text-purple-500" />
             </div>
           </CardContent>
         </Card>
 
         <Card
-          className={`bg-gradient-to-br ${formData.isVerified ? 'from-green-500/10 to-green-600/10 border-green-500/20' : 'from-yellow-500/10 to-yellow-600/10 border-yellow-500/20'}`}
+          className={`${user.isVerified ? 'bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-900/50' : 'bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-900/50'}`}
         >
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-slate-400 mb-1">Account Status</p>
-                <p className="text-2xl font-bold text-white">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Account Status</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                   {user.isVerified ? 'Verified' : 'Unverified'}
                 </p>
               </div>
               {user.isVerified ? (
-                <CheckCircle2 className="h-8 w-8 text-green-400" />
+                <CheckCircle2 className="h-8 w-8 text-green-600 dark:text-green-500" />
               ) : (
-                <XCircle className="h-8 w-8 text-yellow-400" />
+                <XCircle className="h-8 w-8 text-amber-600 dark:text-amber-500" />
               )}
             </div>
           </CardContent>
