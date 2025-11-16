@@ -22,7 +22,6 @@ import {
   Calendar,
   CheckCircle2,
   XCircle,
-  User,
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Switch } from '@/components/ui/switch';
