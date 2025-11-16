@@ -47,7 +47,7 @@ export default function CommunitiesSection() {
           <div className="flex gap-3">
             <button
               onClick={() => setOpenJoinModal(true)}
-              className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-emerald-600 bg-emerald-600/10 text-emerald-400 hover:bg-emerald-600/20 hover:border-emerald-500 h-10 px-4 py-2"
+              className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border-2 border-green-600 dark:border-green-500 bg-white dark:bg-gray-800 text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 h-10 px-4 py-2"
             >
               <Users className="h-4 w-4 mr-2" />
               Join Community
@@ -70,16 +70,19 @@ export default function CommunitiesSection() {
       {isPending && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[...Array(3)].map((_, i) => (
-            <Card key={i} className="border-blue-500/20 bg-blue-500/5">
+            <Card
+              key={i}
+              className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
+            >
               <CardHeader>
                 <div className="animate-pulse">
-                  <div className="h-6 bg-blue-300/30 rounded w-32 mb-3"></div>
-                  <div className="h-4 bg-blue-300/30 rounded w-20 mb-2"></div>
-                  <div className="h-4 bg-blue-300/30 rounded w-28"></div>
+                  <div className="h-6 bg-gray-300 dark:bg-gray-600 rounded w-32 mb-3"></div>
+                  <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-20 mb-2"></div>
+                  <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-28"></div>
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="h-2 bg-blue-300/30 rounded w-full"></div>
+                <div className="h-2 bg-gray-300 dark:bg-gray-600 rounded w-full"></div>
               </CardContent>
             </Card>
           ))}
@@ -89,13 +92,13 @@ export default function CommunitiesSection() {
       {/* Error State */}
       {isError && (
         <div className="mb-8">
-          <Card className="border-red-500/20 bg-red-500/5">
+          <Card className="bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-900/50">
             <CardContent className="pt-6">
-              <div className="flex items-center gap-3 text-red-400">
+              <div className="flex items-center gap-3 text-red-600 dark:text-red-400">
                 <Users className="h-5 w-5" />
                 <div>
                   <h3 className="font-semibold">Failed to load communities</h3>
-                  <p className="text-sm text-red-300">
+                  <p className="text-sm text-red-600 dark:text-red-400">
                     {error instanceof Error ? error.message : 'An unknown error occurred'}
                   </p>
                 </div>
@@ -107,11 +110,11 @@ export default function CommunitiesSection() {
 
       <div>
         <button
-          onClick={(e) => {
+          onClick={e => {
             e.stopPropagation();
             setIsModalOpen(true);
           }}
-          className="px-3 py-2 rounded-md bg-yellow-500 text-black font-semibold hover:bg-yellow-600"
+          className="px-3 py-2 rounded-md bg-amber-500 text-white font-semibold hover:bg-amber-600 dark:bg-amber-600 dark:hover:bg-amber-700"
         >
           Customize Pins
         </button>
@@ -132,19 +135,16 @@ export default function CommunitiesSection() {
           {/* Create Community Card - Always First */}
           <Card
             onClick={() => setOpenCreateModal(true)}
-            className="relative border-2 border-dashed border-blue-400/60 rounded-xl bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 hover:from-blue-500/30 hover:via-purple-500/30 hover:to-pink-500/30 shadow-lg hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 overflow-hidden cursor-pointer group"
+            className="relative border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-750 hover:border-gray-400 dark:hover:border-gray-500 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden cursor-pointer group"
           >
-            {/* Animated gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-purple-600/10 to-pink-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
             <CardContent className="relative pt-6 pb-6 flex flex-col items-center justify-center h-full min-h-[200px]">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-90 transition-all duration-500 shadow-lg">
+              <div className="w-20 h-20 rounded-full bg-blue-600 dark:bg-blue-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-300 shadow-md">
                 <Plus className="h-10 w-10 text-white font-bold" strokeWidth={3} />
               </div>
-              <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">
                 Create Community
               </h3>
-              <p className="text-sm text-gray-300 text-center px-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400 text-center px-4">
                 Start a new community and invite members
               </p>
             </CardContent>
@@ -160,25 +160,25 @@ export default function CommunitiesSection() {
               <Card
                 key={community.id || index}
                 onClick={() => router.push(`/${language}/community/${community.id}`)}
-                className={`relative rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer ${
+                className={`relative rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden group cursor-pointer ${
                   isPrivate
-                    ? 'border border-purple-500/30 bg-gradient-to-br from-purple-950/30 via-gray-900/50 to-gray-900/30 hover:border-purple-400/50'
-                    : 'border border-emerald-500/30 bg-gradient-to-br from-emerald-950/30 via-gray-900/50 to-gray-900/30 hover:border-emerald-400/50'
+                    ? 'border-2 border-purple-200 dark:border-purple-800 bg-white dark:bg-gray-800 hover:border-purple-300 dark:hover:border-purple-700'
+                    : 'border-2 border-green-200 dark:border-green-800 bg-white dark:bg-gray-800 hover:border-green-300 dark:hover:border-green-700'
                 }`}
               >
                 {/* Subtle top accent bar */}
                 <div
                   className={`h-1 w-full ${
                     isPrivate
-                      ? 'bg-gradient-to-r from-purple-500/50 via-purple-400/50 to-pink-500/50'
-                      : 'bg-gradient-to-r from-emerald-500/50 via-teal-400/50 to-cyan-500/50'
+                      ? 'bg-purple-500 dark:bg-purple-600'
+                      : 'bg-green-500 dark:bg-green-600'
                   }`}
                 ></div>
 
                 {/* Pinned Icon - Top Right Corner */}
                 {isPinned && (
                   <div className="absolute top-4 right-4 z-10">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-500/90 to-amber-600/90 flex items-center justify-center shadow-lg shadow-yellow-500/30 animate-pulse">
+                    <div className="w-8 h-8 rounded-full bg-amber-500 dark:bg-amber-600 flex items-center justify-center shadow-md">
                       <Pin className="h-4 w-4 text-white" fill="currentColor" />
                     </div>
                   </div>
@@ -187,24 +187,24 @@ export default function CommunitiesSection() {
                 <CardHeader className="pb-2 px-4 pt-4">
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex items-center gap-3">
-                      {/* Privacy Icon with glow effect */}
+                      {/* Privacy Icon */}
                       <div
-                        className={`w-10 h-10 rounded-lg flex items-center justify-center shadow-lg transition-all duration-300 ${
+                        className={`w-10 h-10 rounded-lg flex items-center justify-center shadow-sm transition-all duration-300 ${
                           isPrivate
-                            ? 'bg-gradient-to-br from-purple-600/20 to-pink-600/20 text-purple-300 group-hover:shadow-purple-500/30'
-                            : 'bg-gradient-to-br from-emerald-600/20 to-teal-600/20 text-emerald-300 group-hover:shadow-emerald-500/30'
+                            ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400'
+                            : 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
                         }`}
                       >
                         {isPrivate ? <Lock className="h-5 w-5" /> : <Globe className="h-5 w-5" />}
                       </div>
                       <div>
                         <div className="flex items-center gap-2 flex-wrap">
-                          <CardTitle className="text-lg md:text-xl font-semibold text-gray-100 group-hover:text-white transition-colors">
+                          <CardTitle className="text-lg md:text-xl font-semibold text-gray-900 dark:text-gray-100 group-hover:text-gray-700 dark:group-hover:text-gray-50 transition-colors">
                             {community.name}
                           </CardTitle>
                           {/* Pinned Badge next to title */}
                           {isPinned && (
-                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-500/20 text-yellow-300 border border-yellow-500/40">
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 border border-amber-300 dark:border-amber-700">
                               <Pin className="h-3 w-3" fill="currentColor" />
                               Pinned
                             </span>
@@ -212,7 +212,9 @@ export default function CommunitiesSection() {
                         </div>
                         <p
                           className={`text-xs mt-0.5 font-medium ${
-                            isPrivate ? 'text-purple-400/80' : 'text-emerald-400/80'
+                            isPrivate
+                              ? 'text-purple-600 dark:text-purple-400'
+                              : 'text-green-600 dark:text-green-400'
                           }`}
                         >
                           {isPrivate ? 'Private Community' : 'Public Community'}
@@ -223,12 +225,12 @@ export default function CommunitiesSection() {
                   <div className="flex items-center gap-2 mt-3 flex-wrap">
                     {/* Admin Badge */}
                     {isAdmin ? (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-500/15 text-amber-300 border border-amber-500/30 shadow-sm">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 border border-amber-300 dark:border-amber-700 shadow-sm">
                         <Crown className="h-3 w-3" />
                         Admin
                       </span>
                     ) : (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-500/15 text-blue-300 border border-blue-500/30 shadow-sm">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border border-blue-300 dark:border-blue-700 shadow-sm">
                         <Users className="h-3 w-3" />
                         Member
                       </span>
@@ -238,7 +240,7 @@ export default function CommunitiesSection() {
 
                 <CardContent className="px-4 pb-4">
                   {/* Members info */}
-                  <div className="flex items-center justify-between text-sm text-gray-300 mb-3">
+                  <div className="flex items-center justify-between text-sm text-gray-700 dark:text-gray-300 mb-3">
                     <div className="flex items-center gap-1">
                       <Users className="h-4 w-4" />
                       {community.currentMembers} / {community.maxMembers} members
@@ -247,7 +249,7 @@ export default function CommunitiesSection() {
 
                   {/* Description */}
                   {community.description && (
-                    <p className="mt-3 text-sm text-gray-300 line-clamp-2">
+                    <p className="mt-3 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
                       {community.description}
                     </p>
                   )}
