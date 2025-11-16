@@ -29,6 +29,28 @@ export const getMyCommunities = async (lang: Language) => {
   }
 };
 
+// Get all communities
+export const getAllCommunities = async (lang: Language) => {
+  try {
+    const response = await axiosInstance.get<GetMyCommunities>(`/community`, {
+      withCredentials: true,
+      headers: {
+        'X-Language': lang,
+      },
+    });
+    return response.data;
+  } catch (error: unknown) {
+    const err = error as {
+      response?: { data?: { body?: { message?: string }; message?: string } };
+    };
+    const errorMessage =
+      err.response?.data?.body?.message ||
+      err.response?.data?.message ||
+      'Get All Communities failed';
+    throw new Error(errorMessage);
+  }
+};
+
 // Create new community
 export const togglePin = async (lang: Language, communityIds: string[]) => {
   try {

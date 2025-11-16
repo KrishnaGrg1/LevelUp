@@ -5,11 +5,12 @@ import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Users, Lock, Globe, Crown, Plus, Pin } from 'lucide-react';
 import LanguageStore from '@/stores/useLanguage';
-import { useQuery } from '@tanstack/react-query';
-import { getMyCommunities } from '@/lib/services/communities';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { getMyCommunities, getAllCommunities, joinCommunity } from '@/lib/services/communities';
 import CreateCommunityModal from './CreateCommunityModal';
 import CustomizePinModal from './CustomizePin';
 import SearchCommunityModal from './SearchCommunities';
+import { toast } from 'sonner';
 import type { CommunityDTO } from '@/lib/generated';
 
 export default function CommunitiesSection() {
@@ -31,7 +32,40 @@ export default function CommunitiesSection() {
     retryDelay: (attemptIndex: number) => Math.min(1000 * 2 ** attemptIndex, 30000),
   });
 
+  // Fetch all communities data
+  const { data: allCommunitiesData, isPending: isLoadingAll, isError: isErrorAll, error: errorAll } = useQuery({
+    queryKey: ['all-communities', language],
+    queryFn: () => getAllCommunities(language),
+    staleTime: 60000, // 1 minute
+    gcTime: 300000, // 5 minutes
+    retry: 1,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    retryDelay: (attemptIndex: number) => Math.min(1000 * 2 ** attemptIndex, 30000),
+  });
+
   const communities = data?.body?.data || [];
+  const allCommunities = allCommunitiesData?.body?.data || [];
+
+  const queryClient = useQueryClient();
+
+  // Join community mutation
+  const joinMutation = useMutation({
+    mutationFn: (communityId: string) => joinCommunity(language, communityId),
+    onSuccess: () => {
+      toast.success('Successfully joined community!');
+      queryClient.invalidateQueries({ queryKey: ['my-communities'] });
+      queryClient.invalidateQueries({ queryKey: ['all-communities'] });
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || 'Failed to join community');
+    },
+  });
+
+  const handleJoinCommunity = (e: React.MouseEvent, communityId: string) => {
+    e.stopPropagation(); // Prevent navigation when clicking Join button
+    joinMutation.mutate(communityId);
+  };
 
   return (
     <div className="p-4 md:p-6 lg:p-8">
@@ -272,6 +306,189 @@ export default function CommunitiesSection() {
           )}
         </div>
       )}
+
+      {/* All Communities Section */}
+      <div className="mt-12">
+        <div className="mb-6">
+          <h2 className="text-2xl md:text-3xl font-bold">All Communities</h2>
+          <p className="text-sm md:text-base text-muted-foreground">
+            Discover and join communities
+          </p>
+        </div>
+
+        {/* Loading State for All Communities */}
+        {isLoadingAll && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[...Array(3)].map((_, i) => (
+              <Card key={i} className="border-blue-500/20 bg-blue-500/5">
+                <CardHeader>
+                  <div className="animate-pulse">
+                    <div className="h-6 bg-blue-300/30 rounded w-32 mb-3"></div>
+                    <div className="h-4 bg-blue-300/30 rounded w-20 mb-2"></div>
+                    <div className="h-4 bg-blue-300/30 rounded w-28"></div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="h-2 bg-blue-300/30 rounded w-full"></div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
+
+        {/* Error State for All Communities */}
+        {isErrorAll && (
+          <Card className="border-red-500/20 bg-red-500/5">
+            <CardContent className="pt-6">
+              <div className="flex items-center gap-3 text-red-400">
+                <Users className="h-5 w-5" />
+                <div>
+                  <h3 className="font-semibold">Failed to load communities</h3>
+                  <p className="text-sm text-red-300">
+                    {errorAll instanceof Error ? errorAll.message : 'An unknown error occurred'}
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* All Communities Grid */}
+        {!isLoadingAll && !isErrorAll && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {allCommunities.map((community: CommunityDTO, index: number) => {
+              const isPrivate = community.visibility === 'private';
+              const isAdmin = community.userRole === 'ADMIN';
+              const isPinned = community.isPinned;
+
+              return (
+                <Card
+                  key={community.id || index}
+                  onClick={() => router.push(`/${language}/community/${community.id}`)}
+                  className={`relative rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer ${
+                    isPrivate
+                      ? 'border border-purple-500/30 bg-gradient-to-br from-purple-950/30 via-gray-900/50 to-gray-900/30 hover:border-purple-400/50'
+                      : 'border border-emerald-500/30 bg-gradient-to-br from-emerald-950/30 via-gray-900/50 to-gray-900/30 hover:border-emerald-400/50'
+                  }`}
+                >
+                  {/* Subtle top accent bar */}
+                  <div
+                    className={`h-1 w-full ${
+                      isPrivate
+                        ? 'bg-gradient-to-r from-purple-500/50 via-purple-400/50 to-pink-500/50'
+                        : 'bg-gradient-to-r from-emerald-500/50 via-teal-400/50 to-cyan-500/50'
+                    }`}
+                  ></div>
+
+                  {/* Pinned Icon - Top Right Corner */}
+                  {isPinned && (
+                    <div className="absolute top-4 right-4 z-10">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-500/90 to-amber-600/90 flex items-center justify-center shadow-lg shadow-yellow-500/30 animate-pulse">
+                        <Pin className="h-4 w-4 text-white" fill="currentColor" />
+                      </div>
+                    </div>
+                  )}
+
+                  <CardHeader className="pb-2 px-4 pt-4">
+                    <div className="flex items-start justify-between mb-2">
+                      <div className="flex items-center gap-3">
+                        {/* Privacy Icon with glow effect */}
+                        <div
+                          className={`w-10 h-10 rounded-lg flex items-center justify-center shadow-lg transition-all duration-300 ${
+                            isPrivate
+                              ? 'bg-gradient-to-br from-purple-600/20 to-pink-600/20 text-purple-300 group-hover:shadow-purple-500/30'
+                              : 'bg-gradient-to-br from-emerald-600/20 to-teal-600/20 text-emerald-300 group-hover:shadow-emerald-500/30'
+                          }`}
+                        >
+                          {isPrivate ? <Lock className="h-5 w-5" /> : <Globe className="h-5 w-5" />}
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <CardTitle className="text-lg md:text-xl font-semibold text-gray-100 group-hover:text-white transition-colors">
+                              {community.name}
+                            </CardTitle>
+                            {/* Pinned Badge next to title */}
+                            {isPinned && (
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-500/20 text-yellow-300 border border-yellow-500/40">
+                                <Pin className="h-3 w-3" fill="currentColor" />
+                                Pinned
+                              </span>
+                            )}
+                          </div>
+                          <p
+                            className={`text-xs mt-0.5 font-medium ${
+                              isPrivate ? 'text-purple-400/80' : 'text-emerald-400/80'
+                            }`}
+                          >
+                            {isPrivate ? 'Private Community' : 'Public Community'}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 mt-3 flex-wrap">
+                      {/* Admin Badge */}
+                      {isAdmin ? (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-500/15 text-amber-300 border border-amber-500/30 shadow-sm">
+                          <Crown className="h-3 w-3" />
+                          Admin
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-500/15 text-blue-300 border border-blue-500/30 shadow-sm">
+                          <Users className="h-3 w-3" />
+                          Member
+                        </span>
+                      )}
+                    </div>
+                  </CardHeader>
+
+                  <CardContent className="px-4 pb-4">
+                    {/* Members info */}
+                    <div className="flex items-center justify-between text-sm text-gray-300 mb-3">
+                      <div className="flex items-center gap-1">
+                        <Users className="h-4 w-4" />
+                        {community.currentMembers} / {community.maxMembers} members
+                      </div>
+                    </div>
+
+                    {/* Description */}
+                    {community.description && (
+                      <p className="mt-3 text-sm text-gray-300 line-clamp-2">
+                        {community.description}
+                      </p>
+                    )}
+
+                    {/* Join Button for non-members */}
+                    {!community.userRole && (
+                      <button
+                        onClick={(e) => handleJoinCommunity(e, community.id)}
+                        disabled={joinMutation.isPending}
+                        className="w-full mt-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                      >
+                        {joinMutation.isPending ? 'Joining...' : 'Join'}
+                      </button>
+                    )}
+                  </CardContent>
+                </Card>
+              );
+            })}
+
+            {/* Empty State */}
+            {allCommunities.length === 0 && (
+              <div className="col-span-full">
+                <Card className="border-dashed border-2">
+                  <CardContent className="pt-6 pb-6 text-center">
+                    <Users className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
+                    <h3 className="text-lg font-semibold mb-2">No communities available</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Be the first to create a community
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
