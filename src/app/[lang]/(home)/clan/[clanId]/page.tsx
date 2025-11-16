@@ -2,14 +2,12 @@
 
 import React from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import {
   getClanInfo,
   getClanMembers,
   leaveClan,
   deleteClan,
-  updateClan,
-  type UpdateClanPayload,
 } from '@/lib/services/clans';
 import LanguageStore from '@/stores/useLanguage';
 import { useAuth } from '@/hooks/use-auth';
@@ -24,7 +22,6 @@ import {
   Crown,
   LogOut,
   Trash2,
-  Edit,
   Lock,
   Globe,
   Loader2,
@@ -38,7 +35,6 @@ export default function ClanDetailPage() {
   const clanId = params.clanId as string;
   const { language } = LanguageStore();
   const { user } = useAuth(language);
-  const queryClient = useQueryClient();
 
   const { data: clanData, isPending: isLoadingInfo } = useQuery({
     queryKey: ['clan-info', clanId, language],
@@ -166,7 +162,7 @@ export default function ClanDetailPage() {
             {clan.welcomeMessage && (
               <div className="mt-4 p-3 rounded-lg bg-blue-100/50 dark:bg-blue-900/20 border border-blue-300 dark:border-blue-500/20">
                 <p className="text-sm text-gray-700 dark:text-gray-300 italic">
-                  "{clan.welcomeMessage}"
+                  &quot;{clan.welcomeMessage}&quot;
                 </p>
               </div>
             )}

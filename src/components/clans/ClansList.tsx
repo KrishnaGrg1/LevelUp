@@ -3,7 +3,7 @@
 import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { getClansByCommunity, joinClan, leaveClan, type Clan } from '@/lib/services/clans';
+import { getClansByCommunity, joinClan, type Clan } from '@/lib/services/clans';
 import LanguageStore from '@/stores/useLanguage';
 import { toast } from 'sonner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -39,17 +39,6 @@ export default function ClansList({ communityId }: ClansListProps) {
     },
     onError: (error: Error) => {
       toast.error(error.message || 'Failed to join clan');
-    },
-  });
-
-  const leaveMutation = useMutation({
-    mutationFn: (clanId: string) => leaveClan(clanId, language),
-    onSuccess: () => {
-      toast.success('Successfully left clan');
-      queryClient.invalidateQueries({ queryKey: ['clans', communityId] });
-    },
-    onError: (error: Error) => {
-      toast.error(error.message || 'Failed to leave clan');
     },
   });
 
@@ -104,7 +93,7 @@ export default function ClansList({ communityId }: ClansListProps) {
             <Shield className="h-16 w-16 text-blue-400/50 dark:text-blue-300/50 mb-4" />
             <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">No Clans Yet</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 max-w-md">
-              This community doesn't have any clans yet. Be the first to create one!
+              This community doesn&apos;t have any clans yet. Be the first to create one!
             </p>
           </div>
         </CardContent>
@@ -224,7 +213,7 @@ export default function ClansList({ communityId }: ClansListProps) {
               {clan.welcomeMessage && (
                 <div className="bg-gradient-to-r from-blue-100/50 to-purple-100/50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-lg p-2 border border-blue-300/50 dark:border-blue-500/20">
                   <p className="text-xs text-gray-700 dark:text-gray-300 italic line-clamp-1">
-                    "{clan.welcomeMessage}"
+                    &quot;{clan.welcomeMessage}&quot;
                   </p>
                 </div>
               )}
