@@ -31,6 +31,7 @@ export interface User {
   categoryId?: string;
   isVerified: boolean;
   isAdmin: boolean;
+  profilePicture?: string;
   Clan?: Clan[];
   Community?: Community[];
   CommunityMember?: CommunityMember[];
@@ -335,5 +336,15 @@ export interface searchCommunitiesResponse {
   body: {
     message: string;
     data: Community[];
+  };
+}
+
+export type UpdateUserPayload = Partial<Pick<User, 'UserName' | 'email' | 'level' | 'isVerified'>>;
+
+export interface fullUserObjectResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: User;
   };
 }

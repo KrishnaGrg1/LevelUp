@@ -2,8 +2,10 @@ import axiosInstance from '../fetch';
 import type {
   GetAllUsersResponse,
   GetMeResponse,
+  UpdateUserPayload,
   adminOverviewResponse,
   changePasswordResponse,
+  fullUserObjectResponse,
 } from '../generated';
 import { Language } from '@/stores/useLanguage';
 
@@ -139,5 +141,50 @@ export const adminUserGrowth = async (lang: Language, range: 'day' | 'week' | 'm
     const errorDetail = err.response?.data?.body?.error || err.response?.data?.error;
 
     throw { message: errorMessage, error: errorDetail };
+  }
+};
+
+// Get user by ID
+export const getUserById = async (lang: Language, userId: string) => {
+  try {
+    const response = await axiosInstance.get<fullUserObjectResponse>(`/admin/users/${userId}`, {
+      withCredentials: true,
+      headers: {
+        'X-Language': lang,
+      },
+    });
+    return response.data;
+  } catch (error: unknown) {
+    const err = error as {
+      response?: { data?: { body?: { message?: string }; message?: string } };
+    };
+    const errorMessage =
+      err.response?.data?.body?.message || err.response?.data?.message || 'Failed to fetch user';
+    throw new Error(errorMessage);
+  }
+};
+
+// Update user
+export const updateUser = async (lang: Language, userId: string, data: UpdateUserPayload) => {
+  try {
+    const response = await axiosInstance.patch<fullUserObjectResponse>(
+      `/admin/users/${userId}`,
+      data,
+      {
+        withCredentials: true,
+        headers: {
+          'X-Language': lang,
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+    return response.data;
+  } catch (error: unknown) {
+    const err = error as {
+      response?: { data?: { body?: { message?: string }; message?: string } };
+    };
+    const errorMessage =
+      err.response?.data?.body?.message || err.response?.data?.message || 'Failed to update user';
+    throw new Error(errorMessage);
   }
 };
