@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { getUserById, updateUser } from '@/lib/services/user';
@@ -24,6 +25,11 @@ import {
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Switch } from '@/components/ui/switch';
+import {
+  editUserFormData,
+  editUserSchema,
+} from '@/app/[lang]/(home)/admin/users/[userId]/edit/schema';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 interface EditUserFormProps {
   userId: string;
@@ -43,31 +49,36 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
 
   const user = data?.body?.data;
 
-  // Form state
-  const [formData, setFormData] = useState({
-    UserName: user?.UserName || '',
-    email: user?.email || '',
-    xp: user?.xp || 0,
-    level: user?.level || 1,
-    isVerified: user?.isVerified || false,
+  //React Hook Form
+  const form = useForm<editUserFormData>({
+    resolver: zodResolver(editUserSchema),
+    defaultValues: {
+      UserName: '',
+      email: '',
+      xp: 0,
+      level: 1,
+      isVerified: false,
+    },
   });
 
-  // Update form data when user data loads
   React.useEffect(() => {
     if (user) {
-      setFormData({
-        UserName: user.UserName || '',
-        email: user.email || '',
-        xp: user.xp || 0,
-        level: user.level || 1,
-        isVerified: user.isVerified || false,
+      form.reset({
+        UserName: user.UserName,
+        email: user.email,
+        xp: user.xp,
+        level: user.level,
+        isVerified: user.isVerified,
       });
     }
   }, [user]);
 
+  // Watch all form fields in real-time, so UI (footer cards) updates instantly when user edits the form
+  const formData = form.watch();
+
   // Update mutation
   const updateMutation = useMutation({
-    mutationFn: (data: typeof formData) => updateUser(language, userId, data),
+    mutationFn: (data: editUserFormData) => updateUser(language, userId, data),
     onSuccess: () => {
       toast.success('User updated successfully!');
       queryClient.invalidateQueries({ queryKey: ['user', userId] });
@@ -78,16 +89,8 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
     },
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    updateMutation.mutate(formData);
-  };
-
-  const handleInputChange = (field: keyof typeof formData, value: string | number | boolean) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: value,
-    }));
+  const handleSubmitForm = (data: editUserFormData) => {
+    updateMutation.mutate(data);
   };
 
   // Loading state
@@ -225,7 +228,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
             <CardTitle className="text-white">User Information</CardTitle>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={form.handleSubmit(handleSubmitForm)} className="space-y-6">
               {/* Username */}
               <div className="space-y-2">
                 <Label htmlFor="username" className="text-slate-300 flex items-center gap-2">
@@ -234,8 +237,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
                 </Label>
                 <Input
                   id="username"
-                  value={formData.UserName}
-                  onChange={e => handleInputChange('UserName', e.target.value)}
+                  {...form.register('UserName')}
                   className="bg-slate-900/50 border-slate-700 text-white focus:border-indigo-500"
                   placeholder="Enter username"
                 />
@@ -250,8 +252,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
                 <Input
                   id="email"
                   type="email"
-                  value={formData.email}
-                  onChange={e => handleInputChange('email', e.target.value)}
+                  {...form.register('email')}
                   className="bg-slate-900/50 border-slate-700 text-white focus:border-indigo-500"
                   placeholder="Enter email"
                 />
@@ -267,8 +268,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
                   <Input
                     id="xp"
                     type="number"
-                    value={formData.xp}
-                    onChange={e => handleInputChange('xp', parseInt(e.target.value) || 0)}
+                    {...form.register('xp', { valueAsNumber: true })}
                     className="bg-slate-900/50 border-slate-700 text-white focus:border-indigo-500"
                     min="0"
                   />
@@ -282,8 +282,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
                   <Input
                     id="level"
                     type="number"
-                    value={formData.level}
-                    onChange={e => handleInputChange('level', parseInt(e.target.value) || 1)}
+                    {...form.register('level', { valueAsNumber: true })}
                     className="bg-slate-900/50 border-slate-700 text-white focus:border-indigo-500"
                     min="1"
                   />
@@ -299,7 +298,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
                       Verification Status
                     </Label>
                     <p className="text-xs text-slate-400">
-                      {formData.isVerified
+                      {form.getValues('isVerified')
                         ? 'User is verified and can access all features'
                         : 'User needs verification to access full features'}
                     </p>
@@ -307,8 +306,8 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
                 </div>
                 <Switch
                   id="verified"
-                  checked={formData.isVerified}
-                  onCheckedChange={checked => handleInputChange('isVerified', checked)}
+                  checked={form.getValues('isVerified')}
+                  onCheckedChange={checked => form.setValue('isVerified', checked)}
                   className="data-[state=checked]:bg-green-500"
                 />
               </div>
@@ -353,7 +352,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-slate-400 mb-1">Current XP</p>
-                <p className="text-2xl font-bold text-white">{formData.xp.toLocaleString()}</p>
+                <p className="text-2xl font-bold text-white">{user.xp}</p>
               </div>
               <Star className="h-8 w-8 text-blue-400" />
             </div>
@@ -365,7 +364,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-slate-400 mb-1">Current Level</p>
-                <p className="text-2xl font-bold text-white">Level {formData.level}</p>
+                <p className="text-2xl font-bold text-white">Level {user.level}</p>
               </div>
               <TrendingUp className="h-8 w-8 text-purple-400" />
             </div>
@@ -380,10 +379,10 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
               <div>
                 <p className="text-sm text-slate-400 mb-1">Account Status</p>
                 <p className="text-2xl font-bold text-white">
-                  {formData.isVerified ? 'Verified' : 'Unverified'}
+                  {user.isVerified ? 'Verified' : 'Unverified'}
                 </p>
               </div>
-              {formData.isVerified ? (
+              {user.isVerified ? (
                 <CheckCircle2 className="h-8 w-8 text-green-400" />
               ) : (
                 <XCircle className="h-8 w-8 text-yellow-400" />

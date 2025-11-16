@@ -61,6 +61,7 @@ export function AuthContext({ children }: AuthContextProps) {
         setIsAuthorized(false);
         toast.error('UH! OH, You do not have permissions to see this page.');
         router.push(`/${language}/user/dashboard`);
+
         return;
       }
 
