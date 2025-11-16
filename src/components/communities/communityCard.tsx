@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Users, Lock, Globe, Crown, Plus, Pin } from 'lucide-react';
 import LanguageStore from '@/stores/useLanguage';
@@ -13,6 +14,7 @@ import type { CommunityDTO } from '@/lib/generated';
 
 export default function CommunitiesSection() {
   const { language } = LanguageStore();
+  const router = useRouter();
   const [openCreateModal, setOpenCreateModal] = useState(false);
   const [openJoinModal, setOpenJoinModal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,7 +25,9 @@ export default function CommunitiesSection() {
     queryFn: () => getMyCommunities(language),
     staleTime: 60000, // 1 minute
     gcTime: 300000, // 5 minutes
-    retry: 2,
+    retry: 1,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
     retryDelay: (attemptIndex: number) => Math.min(1000 * 2 ** attemptIndex, 30000),
   });
 
@@ -103,7 +107,10 @@ export default function CommunitiesSection() {
 
       <div>
         <button
-          onClick={() => setIsModalOpen(true)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsModalOpen(true);
+          }}
           className="px-3 py-2 rounded-md bg-yellow-500 text-black font-semibold hover:bg-yellow-600"
         >
           Customize Pins
@@ -152,6 +159,7 @@ export default function CommunitiesSection() {
             return (
               <Card
                 key={community.id || index}
+                onClick={() => router.push(`/${language}/community/${community.id}`)}
                 className={`relative rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer ${
                   isPrivate
                     ? 'border border-purple-500/30 bg-gradient-to-br from-purple-950/30 via-gray-900/50 to-gray-900/30 hover:border-purple-400/50'
