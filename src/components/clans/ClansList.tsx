@@ -50,7 +50,10 @@ export default function ClansList({ communityId }: ClansListProps) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {[...Array(3)].map((_, i) => (
-          <Card key={i} className="border-blue-500/20 bg-blue-500/5 dark:border-blue-400/20 dark:bg-blue-400/5">
+          <Card
+            key={i}
+            className="border-blue-500/20 bg-blue-500/5 dark:border-blue-400/20 dark:bg-blue-400/5"
+          >
             <CardHeader>
               <div className="animate-pulse">
                 <div className="h-6 bg-blue-300/30 dark:bg-blue-600/30 rounded w-32 mb-3"></div>
@@ -91,7 +94,9 @@ export default function ClansList({ communityId }: ClansListProps) {
         <CardContent className="pt-6">
           <div className="flex flex-col items-center justify-center py-12 text-center">
             <Shield className="h-16 w-16 text-blue-400/50 dark:text-blue-300/50 mb-4" />
-            <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">No Clans Yet</h3>
+            <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              No Clans Yet
+            </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 max-w-md">
               This community doesn&apos;t have any clans yet. Be the first to create one!
             </p>
@@ -111,7 +116,7 @@ export default function ClansList({ communityId }: ClansListProps) {
         return (
           <Card
             key={clan.id}
-            onClick={() => router.push(`/${language}/clan/${clan.id}`)}
+            onClick={() => router.push(`/${language}/user/community/clan/${clan.id}`)}
             className={`relative rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer ${
               clan.isPrivate
                 ? 'border border-purple-500/30 bg-gradient-to-br from-purple-100/50 via-white to-purple-50/50 hover:border-purple-400/70 dark:from-purple-950/30 dark:via-gray-900/50 dark:to-gray-900/30 dark:hover:border-purple-400/50'
@@ -146,7 +151,9 @@ export default function ClansList({ communityId }: ClansListProps) {
                       {clan.name}
                     </CardTitle>
                     {clan.slug && (
-                      <p className="text-xs text-gray-600 dark:text-gray-400 truncate">@{clan.slug}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 truncate">
+                        @{clan.slug}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -160,7 +167,9 @@ export default function ClansList({ communityId }: ClansListProps) {
 
               {/* Description */}
               {clan.description && (
-                <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mb-3">{clan.description}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mb-3">
+                  {clan.description}
+                </p>
               )}
 
               {/* Owner Info */}
@@ -172,9 +181,14 @@ export default function ClansList({ communityId }: ClansListProps) {
                     {clan.owner.UserName.charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
-                <span className="text-xs text-gray-700 dark:text-gray-300 truncate">{clan.owner.UserName}</span>
+                <span className="text-xs text-gray-700 dark:text-gray-300 truncate">
+                  {clan.owner.UserName}
+                </span>
                 {clan.owner.isVerified && (
-                  <Shield className="h-3 w-3 text-blue-500 dark:text-blue-400" fill="currentColor" />
+                  <Shield
+                    className="h-3 w-3 text-blue-500 dark:text-blue-400"
+                    fill="currentColor"
+                  />
                 )}
               </div>
             </CardHeader>
@@ -205,7 +219,9 @@ export default function ClansList({ communityId }: ClansListProps) {
                     <Trophy className="h-3 w-3 text-gray-600 dark:text-gray-400" />
                     <span className="text-xs text-gray-600 dark:text-gray-400">Victories</span>
                   </div>
-                  <p className="text-sm font-semibold text-gray-900 dark:text-white">{battlesWon}</p>
+                  <p className="text-sm font-semibold text-gray-900 dark:text-white">
+                    {battlesWon}
+                  </p>
                 </div>
               </div>
 
@@ -220,7 +236,7 @@ export default function ClansList({ communityId }: ClansListProps) {
 
               {/* Join/Leave Button */}
               <button
-                onClick={(e) => {
+                onClick={e => {
                   e.stopPropagation(); // Prevent navigation when clicking button
                   handleJoinClan(clan.id);
                 }}
@@ -229,15 +245,15 @@ export default function ClansList({ communityId }: ClansListProps) {
                   memberCount >= clan.limit
                     ? 'bg-gray-500 cursor-not-allowed'
                     : clan.isPrivate
-                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500'
-                    : 'bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500'
+                      ? 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500'
+                      : 'bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500'
                 } text-white font-semibold py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100`}
               >
                 {joinMutation.isPending
                   ? 'Joining...'
                   : memberCount >= clan.limit
-                  ? 'Full'
-                  : 'Join Clan'}
+                    ? 'Full'
+                    : 'Join Clan'}
               </button>
             </CardContent>
           </Card>

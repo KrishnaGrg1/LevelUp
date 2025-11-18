@@ -159,7 +159,7 @@ export default function CommunitiesSection() {
             return (
               <Card
                 key={community.id || index}
-                onClick={() => router.push(`/${language}/community/${community.id}`)}
+                onClick={() => router.push(`/${language}/user/community/${community.id}`)}
                 className={`relative rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden group cursor-pointer ${
                   isPrivate
                     ? 'border-2 border-purple-200 dark:border-purple-800 bg-white dark:bg-gray-800 hover:border-purple-300 dark:hover:border-purple-700'

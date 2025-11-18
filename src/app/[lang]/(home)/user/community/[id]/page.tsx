@@ -20,7 +20,8 @@ export default function CommunityDetailPage() {
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Community Clans</h1>
           </div>
           <p className="text-gray-600 dark:text-gray-400">
-            Explore and join clans within this community to compete and collaborate with other members.
+            Explore and join clans within this community to compete and collaborate with other
+            members.
           </p>
         </div>
 
@@ -29,7 +30,9 @@ export default function CommunityDetailPage() {
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-2">
               <Users className="h-6 w-6 text-cyan-600 dark:text-cyan-400" />
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Available Clans</h2>
+              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                Available Clans
+              </h2>
             </div>
             <CreateClanModal communityId={communityId} />
           </div>
