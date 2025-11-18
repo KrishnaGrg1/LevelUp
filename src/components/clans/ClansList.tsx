@@ -40,9 +40,9 @@ export default function ClansList({ communityId }: ClansListProps) {
     queryFn: async () => {
       if (!clans.length) return {};
       const membersMap: Record<string, string[]> = {};
-      
+
       await Promise.all(
-        clans.map(async (clan) => {
+        clans.map(async clan => {
           try {
             const response = await getClanMembers(clan.id, language);
             const members = response?.body?.data || [];
@@ -50,9 +50,9 @@ export default function ClansList({ communityId }: ClansListProps) {
           } catch {
             membersMap[clan.id] = [];
           }
-        })
+        }),
       );
-      
+
       return membersMap;
     },
     enabled: clans.length > 0 && !!user,
@@ -81,7 +81,10 @@ export default function ClansList({ communityId }: ClansListProps) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {[...Array(3)].map((_, i) => (
-          <Card key={i} className="border-blue-500/20 bg-blue-500/5 dark:border-blue-400/20 dark:bg-blue-400/5">
+          <Card
+            key={i}
+            className="border-blue-500/20 bg-blue-500/5 dark:border-blue-400/20 dark:bg-blue-400/5"
+          >
             <CardHeader>
               <div className="animate-pulse">
                 <div className="h-6 bg-blue-300/30 dark:bg-blue-600/30 rounded w-32 mb-3"></div>
@@ -122,7 +125,9 @@ export default function ClansList({ communityId }: ClansListProps) {
         <CardContent className="pt-6">
           <div className="flex flex-col items-center justify-center py-12 text-center">
             <Shield className="h-16 w-16 text-blue-400/50 dark:text-blue-300/50 mb-4" />
-            <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">{t('clans.noClan', language)}</h3>
+            <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              {t('clans.noClan', language)}
+            </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 max-w-md">
               {t('clans.noClansDescription', language)}
             </p>
@@ -138,14 +143,14 @@ export default function ClansList({ communityId }: ClansListProps) {
         const memberCount = clan.stats?.memberCount ?? 0;
         const battlesWon = clan.stats?.battlesWon ?? 0;
         const occupancy = clan.limit > 0 ? Math.round((memberCount / clan.limit) * 100) : 0;
-        
+
         // Check if current user is a member of this clan
         const isMember = user ? clanMembersMap[clan.id]?.includes(user.id) : false;
 
         return (
           <Card
             key={clan.id}
-            onClick={() => router.push(`/${language}/clan/${clan.id}`)}
+            onClick={() => router.push(`/${language}/user/community/clan/${clan.id}`)}
             className={`relative rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer ${
               clan.isPrivate
                 ? 'border border-purple-500/30 bg-gradient-to-br from-purple-100/50 via-white to-purple-50/50 hover:border-purple-400/70 dark:from-purple-950/30 dark:via-gray-900/50 dark:to-gray-900/30 dark:hover:border-purple-400/50'
@@ -180,7 +185,9 @@ export default function ClansList({ communityId }: ClansListProps) {
                       {clan.name}
                     </CardTitle>
                     {clan.slug && (
-                      <p className="text-xs text-gray-600 dark:text-gray-400 truncate">@{clan.slug}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 truncate">
+                        @{clan.slug}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -194,7 +201,9 @@ export default function ClansList({ communityId }: ClansListProps) {
 
               {/* Description */}
               {clan.description && (
-                <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mb-3">{clan.description}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mb-3">
+                  {clan.description}
+                </p>
               )}
 
               {/* Owner Info */}
@@ -206,9 +215,14 @@ export default function ClansList({ communityId }: ClansListProps) {
                     {clan.owner.UserName.charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
-                <span className="text-xs text-gray-700 dark:text-gray-300 truncate">{clan.owner.UserName}</span>
+                <span className="text-xs text-gray-700 dark:text-gray-300 truncate">
+                  {clan.owner.UserName}
+                </span>
                 {clan.owner.isVerified && (
-                  <Shield className="h-3 w-3 text-blue-500 dark:text-blue-400" fill="currentColor" />
+                  <Shield
+                    className="h-3 w-3 text-blue-500 dark:text-blue-400"
+                    fill="currentColor"
+                  />
                 )}
               </div>
             </CardHeader>
@@ -219,7 +233,9 @@ export default function ClansList({ communityId }: ClansListProps) {
                 <div className="bg-gray-100 dark:bg-gray-800/40 rounded-lg p-2 border border-gray-300 dark:border-gray-700/50">
                   <div className="flex items-center gap-1 mb-1">
                     <Users className="h-3 w-3 text-gray-600 dark:text-gray-400" />
-                    <span className="text-xs text-gray-600 dark:text-gray-400">{t('clans.members', language)}</span>
+                    <span className="text-xs text-gray-600 dark:text-gray-400">
+                      {t('clans.members', language)}
+                    </span>
                   </div>
                   <p className="text-sm font-semibold text-gray-900 dark:text-white">
                     {memberCount}/{clan.limit}
@@ -237,9 +253,13 @@ export default function ClansList({ communityId }: ClansListProps) {
                 <div className="bg-gray-100 dark:bg-gray-800/40 rounded-lg p-2 border border-gray-300 dark:border-gray-700/50">
                   <div className="flex items-center gap-1 mb-1">
                     <Trophy className="h-3 w-3 text-gray-600 dark:text-gray-400" />
-                    <span className="text-xs text-gray-600 dark:text-gray-400">{t('clans.victories', language)}</span>
+                    <span className="text-xs text-gray-600 dark:text-gray-400">
+                      {t('clans.victories', language)}
+                    </span>
                   </div>
-                  <p className="text-sm font-semibold text-gray-900 dark:text-white">{battlesWon}</p>
+                  <p className="text-sm font-semibold text-gray-900 dark:text-white">
+                    {battlesWon}
+                  </p>
                 </div>
               </div>
 
@@ -254,7 +274,7 @@ export default function ClansList({ communityId }: ClansListProps) {
 
               {/* Join/Enter Button */}
               <button
-                onClick={(e) => {
+                onClick={e => {
                   e.stopPropagation(); // Prevent navigation when clicking button
                   if (isMember) {
                     // Navigate to clan detail page
@@ -268,19 +288,19 @@ export default function ClansList({ communityId }: ClansListProps) {
                   isMember
                     ? 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500'
                     : memberCount >= clan.limit
-                    ? 'bg-gray-500 cursor-not-allowed'
-                    : clan.isPrivate
-                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500'
-                    : 'bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500'
+                      ? 'bg-gray-500 cursor-not-allowed'
+                      : clan.isPrivate
+                        ? 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500'
+                        : 'bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500'
                 } text-white font-semibold py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100`}
               >
                 {isMember
                   ? t('clans.enterClan', language)
                   : joinMutation.isPending
-                  ? t('clans.joining', language)
-                  : memberCount >= clan.limit
-                  ? t('clans.full', language)
-                  : t('clans.joinClan', language)}
+                    ? t('clans.joining', language)
+                    : memberCount >= clan.limit
+                      ? t('clans.full', language)
+                      : t('clans.joinClan', language)}
               </button>
             </CardContent>
           </Card>
