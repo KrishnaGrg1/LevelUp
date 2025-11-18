@@ -33,7 +33,12 @@ export default function CommunitiesSection() {
   });
 
   // Fetch all communities data
-  const { data: allCommunitiesData, isPending: isLoadingAll, isError: isErrorAll, error: errorAll } = useQuery({
+  const {
+    data: allCommunitiesData,
+    isPending: isLoadingAll,
+    isError: isErrorAll,
+    error: errorAll,
+  } = useQuery({
     queryKey: ['all-communities', language],
     queryFn: () => getAllCommunities(language),
     staleTime: 60000, // 1 minute
@@ -193,7 +198,7 @@ export default function CommunitiesSection() {
             return (
               <Card
                 key={community.id || index}
-                onClick={() => router.push(`/${language}/community/${community.id}`)}
+                onClick={() => router.push(`/${language}/user/community/${community.id}`)}
                 className={`relative rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden group cursor-pointer ${
                   isPrivate
                     ? 'border-2 border-purple-200 dark:border-purple-800 bg-white dark:bg-gray-800 hover:border-purple-300 dark:hover:border-purple-700'
@@ -462,7 +467,7 @@ export default function CommunitiesSection() {
                     {/* Join Button for non-members */}
                     {!community.userRole && (
                       <button
-                        onClick={(e) => handleJoinCommunity(e, community.id)}
+                        onClick={e => handleJoinCommunity(e, community.id)}
                         disabled={joinMutation.isPending}
                         className="w-full mt-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                       >
