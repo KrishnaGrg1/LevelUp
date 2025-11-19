@@ -262,41 +262,63 @@ export default function ClanDetailPage() {
               <p className="text-center text-gray-600 dark:text-gray-400 py-8">{t('clans.noMembers', language)}</p>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {members.map((member) => (
-                  <Card
-                    key={member.id}
-                    className="border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow"
-                  >
-                    <CardContent className="p-4">
-                      <div className="flex items-center gap-3">
-                        <Avatar className="h-12 w-12">
-                          <AvatarImage src={member.user.profilePicture || undefined} />
-                          <AvatarFallback>
-                            {member.user.UserName.charAt(0).toUpperCase()}
-                          </AvatarFallback>
-                        </Avatar>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2">
-                            <p className="font-semibold text-gray-900 dark:text-white truncate">
-                              {member.user.UserName}
-                            </p>
-                            {member.user.isVerified && (
-                              <Shield className="h-4 w-4 text-blue-500 dark:text-blue-400" fill="currentColor" />
-                            )}
+                {[...members]
+                  .sort((a, b) => b.user.xp - a.user.xp)
+                  .map((member, index) => (
+                    <Card
+                      key={member.id}
+                      className="border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow"
+                    >
+                      <CardContent className="p-4">
+                        <div className="flex items-center gap-3">
+                          {/* Rank Badge */}
+                          <div className="flex flex-col items-center justify-center">
+                            <div
+                              className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
+                                index === 0
+                                  ? 'bg-gradient-to-br from-yellow-400 to-amber-500 text-white shadow-lg'
+                                  : index === 1
+                                    ? 'bg-gradient-to-br from-gray-300 to-gray-400 text-gray-800 shadow-md'
+                                    : index === 2
+                                      ? 'bg-gradient-to-br from-orange-400 to-orange-600 text-white shadow-md'
+                                      : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+                              }`}
+                            >
+                              #{index + 1}
+                            </div>
                           </div>
-                          <div className="flex items-center gap-2 mt-1">
-                            <Badge variant="secondary" className="text-xs">
-                              {member.role}
-                            </Badge>
-                            <span className="text-xs text-gray-600 dark:text-gray-400">
-                              Lvl {member.user.level}
-                            </span>
+                          <Avatar className="h-12 w-12">
+                            <AvatarImage src={member.user.profilePicture || undefined} />
+                            <AvatarFallback>
+                              {member.user.UserName.charAt(0).toUpperCase()}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2">
+                              <p className="font-semibold text-gray-900 dark:text-white truncate">
+                                {member.user.UserName}
+                              </p>
+                              {member.user.isVerified && (
+                                <Shield className="h-4 w-4 text-blue-500 dark:text-blue-400" fill="currentColor" />
+                              )}
+                            </div>
+                            <div className="flex items-center gap-2 mt-1 flex-wrap">
+                              <Badge variant="secondary" className="text-xs">
+                                {member.role}
+                              </Badge>
+                              <span className="text-xs text-gray-600 dark:text-gray-400">
+                                Lvl {member.user.level}
+                              </span>
+                              <div className="flex items-center gap-1 text-xs text-amber-600 dark:text-amber-400 font-semibold">
+                                <Trophy className="h-3 w-3" />
+                                {member.user.xp.toLocaleString()} XP
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
+                      </CardContent>
+                    </Card>
+                  ))}
               </div>
             )}
           </CardContent>

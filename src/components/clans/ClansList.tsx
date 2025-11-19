@@ -280,7 +280,7 @@ export default function ClansList({ communityId }: ClansListProps) {
                   e.stopPropagation(); // Prevent navigation when clicking button
                   if (canEnter) {
                     // Navigate to clan detail page
-                    router.push(`/${language}/clan/${clan.id}`);
+                    router.push(`/${language}/user/community/clan/${clan.id}`);
                   } else {
                     handleJoinClan(clan.id);
                   }
