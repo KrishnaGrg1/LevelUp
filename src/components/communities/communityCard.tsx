@@ -372,25 +372,25 @@ export default function CommunitiesSection() {
                 <Card
                   key={community.id || index}
                   onClick={() => router.push(`/${language}/community/${community.id}`)}
-                  className={`relative rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer ${
+                  className={`relative rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden group cursor-pointer ${
                     isPrivate
-                      ? 'border border-purple-500/30 bg-gradient-to-br from-purple-950/30 via-gray-900/50 to-gray-900/30 hover:border-purple-400/50'
-                      : 'border border-emerald-500/30 bg-gradient-to-br from-emerald-950/30 via-gray-900/50 to-gray-900/30 hover:border-emerald-400/50'
+                      ? 'border-2 border-purple-200 dark:border-purple-800 bg-white dark:bg-gray-800 hover:border-purple-300 dark:hover:border-purple-700'
+                      : 'border-2 border-green-200 dark:border-green-800 bg-white dark:bg-gray-800 hover:border-green-300 dark:hover:border-green-700'
                   }`}
                 >
                   {/* Subtle top accent bar */}
                   <div
                     className={`h-1 w-full ${
                       isPrivate
-                        ? 'bg-gradient-to-r from-purple-500/50 via-purple-400/50 to-pink-500/50'
-                        : 'bg-gradient-to-r from-emerald-500/50 via-teal-400/50 to-cyan-500/50'
+                        ? 'bg-purple-500 dark:bg-purple-600'
+                        : 'bg-green-500 dark:bg-green-600'
                     }`}
                   ></div>
 
                   {/* Pinned Icon - Top Right Corner */}
                   {isPinned && (
                     <div className="absolute top-4 right-4 z-10">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-500/90 to-amber-600/90 flex items-center justify-center shadow-lg shadow-yellow-500/30 animate-pulse">
+                      <div className="w-8 h-8 rounded-full bg-amber-500 dark:bg-amber-600 flex items-center justify-center shadow-md">
                         <Pin className="h-4 w-4 text-white" fill="currentColor" />
                       </div>
                     </div>
@@ -399,24 +399,24 @@ export default function CommunitiesSection() {
                   <CardHeader className="pb-2 px-4 pt-4">
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex items-center gap-3">
-                        {/* Privacy Icon with glow effect */}
+                        {/* Privacy Icon */}
                         <div
-                          className={`w-10 h-10 rounded-lg flex items-center justify-center shadow-lg transition-all duration-300 ${
+                          className={`w-10 h-10 rounded-lg flex items-center justify-center shadow-sm transition-all duration-300 ${
                             isPrivate
-                              ? 'bg-gradient-to-br from-purple-600/20 to-pink-600/20 text-purple-300 group-hover:shadow-purple-500/30'
-                              : 'bg-gradient-to-br from-emerald-600/20 to-teal-600/20 text-emerald-300 group-hover:shadow-emerald-500/30'
+                              ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400'
+                              : 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
                           }`}
                         >
                           {isPrivate ? <Lock className="h-5 w-5" /> : <Globe className="h-5 w-5" />}
                         </div>
                         <div>
                           <div className="flex items-center gap-2 flex-wrap">
-                            <CardTitle className="text-lg md:text-xl font-semibold text-gray-100 group-hover:text-white transition-colors">
+                            <CardTitle className="text-lg md:text-xl font-semibold text-gray-900 dark:text-gray-100 group-hover:text-gray-700 dark:group-hover:text-gray-50 transition-colors">
                               {community.name}
                             </CardTitle>
                             {/* Pinned Badge next to title */}
                             {isPinned && (
-                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-500/20 text-yellow-300 border border-yellow-500/40">
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 border border-amber-300 dark:border-amber-700">
                                 <Pin className="h-3 w-3" fill="currentColor" />
                                 Pinned
                               </span>
@@ -424,7 +424,9 @@ export default function CommunitiesSection() {
                           </div>
                           <p
                             className={`text-xs mt-0.5 font-medium ${
-                              isPrivate ? 'text-purple-400/80' : 'text-emerald-400/80'
+                              isPrivate
+                                ? 'text-purple-600 dark:text-purple-400'
+                                : 'text-green-600 dark:text-green-400'
                             }`}
                           >
                             {isPrivate ? 'Private Community' : 'Public Community'}
@@ -435,12 +437,12 @@ export default function CommunitiesSection() {
                     <div className="flex items-center gap-2 mt-3 flex-wrap">
                       {/* Admin Badge */}
                       {isAdmin ? (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-500/15 text-amber-300 border border-amber-500/30 shadow-sm">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 border border-amber-300 dark:border-amber-700 shadow-sm">
                           <Crown className="h-3 w-3" />
                           Admin
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-500/15 text-blue-300 border border-blue-500/30 shadow-sm">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border border-blue-300 dark:border-blue-700 shadow-sm">
                           <Users className="h-3 w-3" />
                           Member
                         </span>
@@ -450,7 +452,7 @@ export default function CommunitiesSection() {
 
                   <CardContent className="px-4 pb-4">
                     {/* Members info */}
-                    <div className="flex items-center justify-between text-sm text-gray-300 mb-3">
+                    <div className="flex items-center justify-between text-sm text-gray-700 dark:text-gray-300 mb-3">
                       <div className="flex items-center gap-1">
                         <Users className="h-4 w-4" />
                         {community.currentMembers} / {community.maxMembers} members
@@ -459,7 +461,7 @@ export default function CommunitiesSection() {
 
                     {/* Description */}
                     {community.description && (
-                      <p className="mt-3 text-sm text-gray-300 line-clamp-2">
+                      <p className="mt-3 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
                         {community.description}
                       </p>
                     )}
@@ -469,7 +471,7 @@ export default function CommunitiesSection() {
                       <button
                         onClick={e => handleJoinCommunity(e, community.id)}
                         disabled={joinMutation.isPending}
-                        className="w-full mt-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                        className="w-full mt-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white font-semibold py-2 rounded-lg transition-all duration-300 hover:shadow-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {joinMutation.isPending ? 'Joining...' : 'Join'}
                       </button>

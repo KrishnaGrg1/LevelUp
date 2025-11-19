@@ -65,8 +65,8 @@ export default function ClansList({ communityId }: ClansListProps) {
     mutationFn: (clanId: string) => joinClan(clanId, language),
     onSuccess: () => {
       toast.success(t('clans.toast.joinedSuccess', language));
-      queryClient.invalidateQueries({ queryKey: ['clans', communityId] });
-      queryClient.invalidateQueries({ queryKey: ['all-clan-members', communityId] });
+      queryClient.invalidateQueries({ queryKey: ['clans', communityId, language] });
+      queryClient.invalidateQueries({ queryKey: ['all-clan-members', communityId, language] });
     },
     onError: (error: Error) => {
       toast.error(error.message || t('clans.toast.joinFailed', language));
@@ -144,8 +144,10 @@ export default function ClansList({ communityId }: ClansListProps) {
         const battlesWon = clan.stats?.battlesWon ?? 0;
         const occupancy = clan.limit > 0 ? Math.round((memberCount / clan.limit) * 100) : 0;
 
-        // Check if current user is a member of this clan
+        // Check if current user is a member or admin of this clan
         const isMember = user ? clanMembersMap[clan.id]?.includes(user.id) : false;
+        const isAdmin = user ? clan.owner.id === user.id : false;
+        const canEnter = isMember || isAdmin;
 
         return (
           <Card
@@ -276,16 +278,16 @@ export default function ClansList({ communityId }: ClansListProps) {
               <button
                 onClick={e => {
                   e.stopPropagation(); // Prevent navigation when clicking button
-                  if (isMember) {
+                  if (canEnter) {
                     // Navigate to clan detail page
                     router.push(`/${language}/clan/${clan.id}`);
                   } else {
                     handleJoinClan(clan.id);
                   }
                 }}
-                disabled={!isMember && (memberCount >= clan.limit || joinMutation.isPending)}
+                disabled={!canEnter && (memberCount >= clan.limit || joinMutation.isPending)}
                 className={`w-full mt-3 ${
-                  isMember
+                  canEnter
                     ? 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500'
                     : memberCount >= clan.limit
                       ? 'bg-gray-500 cursor-not-allowed'
@@ -294,7 +296,7 @@ export default function ClansList({ communityId }: ClansListProps) {
                         : 'bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500'
                 } text-white font-semibold py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100`}
               >
-                {isMember
+                {canEnter
                   ? t('clans.enterClan', language)
                   : joinMutation.isPending
                     ? t('clans.joining', language)
