@@ -66,6 +66,14 @@ export interface GetClansResponse {
   body: {
     message: string;
     data: Clan[];
+    pagination?: {
+      total: number;
+      page: number;
+      pageSize: number;
+      totalPages: number;
+      previous_page?: number;
+      next_page?: number;
+    };
   };
 }
 
@@ -101,9 +109,14 @@ export interface UpdateClanPayload {
 }
 
 // Get all clans for a community
-export const getClansByCommunity = async (communityId: string, lang: Language) => {
+export const getClansByCommunity = async (
+  communityId: string, 
+  lang: Language,
+  params?: URLSearchParams
+) => {
   try {
-    const response = await axiosInstance.get<GetClansResponse>(`/clan/${communityId}`, {
+    const queryString = params ? `?${params.toString()}` : '';
+    const response = await axiosInstance.get<GetClansResponse>(`/clan/${communityId}${queryString}`, {
       withCredentials: true,
       headers: {
         'X-Language': lang,
@@ -164,11 +177,22 @@ export const joinClan = async (clanId: string, lang: Language) => {
     return response.data;
   } catch (error: unknown) {
     const err = error as {
-      response?: { data?: { body?: { message?: string }; message?: string } };
+      response?: { 
+        data?: { 
+          body?: { message?: string }; 
+          message?: string;
+          error?: string;
+        };
+        status?: number;
+      };
+      message?: string;
     };
+    console.error('Join clan error:', err);
     const errorMessage =
       err.response?.data?.body?.message ||
       err.response?.data?.message ||
+      err.response?.data?.error ||
+      err.message ||
       'Failed to join clan';
     throw new Error(errorMessage);
   }
@@ -190,11 +214,22 @@ export const leaveClan = async (clanId: string, lang: Language) => {
     return response.data;
   } catch (error: unknown) {
     const err = error as {
-      response?: { data?: { body?: { message?: string }; message?: string } };
+      response?: { 
+        data?: { 
+          body?: { message?: string }; 
+          message?: string;
+          error?: string;
+        };
+        status?: number;
+      };
+      message?: string;
     };
+    console.error('Leave clan error:', err);
     const errorMessage =
       err.response?.data?.body?.message ||
       err.response?.data?.message ||
+      err.response?.data?.error ||
+      err.message ||
       'Failed to leave clan';
     throw new Error(errorMessage);
   }

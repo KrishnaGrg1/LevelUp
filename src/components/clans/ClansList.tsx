@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { getClansByCommunity, joinClan, getClanMembers, type Clan } from '@/lib/services/clans';
@@ -9,8 +9,18 @@ import { useAuth } from '@/hooks/use-auth';
 import { t } from '@/translations/index';
 import { toast } from 'sonner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Users, Lock, Globe, Crown, Trophy, Shield } from 'lucide-react';
+import { Users, Lock, Globe, Crown, Trophy, Shield, Search, ArrowUpDown } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { usePaginationStore } from '@/stores/usePagination';
+import { BetterPagination } from '@/components/BetterPagination';
 
 interface ClansListProps {
   communityId: string;
@@ -21,10 +31,19 @@ export default function ClansList({ communityId }: ClansListProps) {
   const queryClient = useQueryClient();
   const router = useRouter();
   const { user } = useAuth(language);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState<'xp' | 'members' | 'name'>('xp');
+  const { page, pageSize, setPage, setPageSize } = usePaginationStore();
 
   const { data, isPending, isError, error } = useQuery({
-    queryKey: ['clans', communityId, language],
-    queryFn: () => getClansByCommunity(communityId, language),
+    queryKey: ['clans', communityId, language, page, pageSize],
+    queryFn: () => {
+      const params = new URLSearchParams({
+        page: page.toString(),
+        pageSize: pageSize.toString(),
+      });
+      return getClansByCommunity(communityId, language, params);
+    },
     staleTime: 60000,
     gcTime: 300000,
     retry: 1,
@@ -33,6 +52,7 @@ export default function ClansList({ communityId }: ClansListProps) {
   });
 
   const clans = data?.body?.data || [];
+  const paginationMetadata = data?.body?.pagination;
 
   // Fetch members for all clans to check if user is a member
   const clanMembersQueries = useQuery({
@@ -47,7 +67,8 @@ export default function ClansList({ communityId }: ClansListProps) {
             const response = await getClanMembers(clan.id, language);
             const members = response?.body?.data || [];
             membersMap[clan.id] = members.map(m => m.userId);
-          } catch {
+          } catch (error) {
+            console.warn(`Failed to fetch members for clan ${clan.id}:`, error);
             membersMap[clan.id] = [];
           }
         }),
@@ -57,15 +78,49 @@ export default function ClansList({ communityId }: ClansListProps) {
     },
     enabled: clans.length > 0 && !!user,
     staleTime: 60000,
+    retry: false,
+    refetchOnWindowFocus: false,
   });
 
   const clanMembersMap = clanMembersQueries.data || {};
+
+  // Filter and sort clans - must be before any early returns to follow Rules of Hooks
+  const filteredAndSortedClans = useMemo(() => {
+    let filtered = [...clans];
+
+    // Filter by search query
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(
+        clan =>
+          clan.name.toLowerCase().includes(query) ||
+          clan.slug?.toLowerCase().includes(query) ||
+          clan.description?.toLowerCase().includes(query)
+      );
+    }
+
+    // Sort clans
+    filtered.sort((a, b) => {
+      switch (sortBy) {
+        case 'xp':
+          return (b.xp || 0) - (a.xp || 0);
+        case 'members':
+          return (b.stats?.memberCount || 0) - (a.stats?.memberCount || 0);
+        case 'name':
+          return a.name.localeCompare(b.name);
+        default:
+          return 0;
+      }
+    });
+
+    return filtered;
+  }, [clans, searchQuery, sortBy]);
 
   const joinMutation = useMutation({
     mutationFn: (clanId: string) => joinClan(clanId, language),
     onSuccess: () => {
       toast.success(t('clans.toast.joinedSuccess', language));
-      queryClient.invalidateQueries({ queryKey: ['clans', communityId, language] });
+      queryClient.invalidateQueries({ queryKey: ['clans', communityId, language, page, pageSize] });
       queryClient.invalidateQueries({ queryKey: ['all-clan-members', communityId, language] });
     },
     onError: (error: Error) => {
@@ -75,6 +130,15 @@ export default function ClansList({ communityId }: ClansListProps) {
 
   const handleJoinClan = (clanId: string) => {
     joinMutation.mutate(clanId);
+  };
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handlePageSizeChange = (newPageSize: number) => {
+    setPageSize(newPageSize);
+    setPage(1); // Reset to first page when changing page size
   };
 
   if (isPending) {
@@ -138,8 +202,92 @@ export default function ClansList({ communityId }: ClansListProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {clans.map((clan: Clan) => {
+    <div className="space-y-6">
+      {/* Filter and Sort Controls */}
+      <Card className="border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+        <CardContent className="pt-6">
+          <div className="flex flex-col md:flex-row gap-4">
+            {/* Search Input */}
+            <div className="flex-1 relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Input
+                type="text"
+                placeholder={t('clans.searchPlaceholder', language) || 'Search clans by name...'}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10"
+              />
+            </div>
+
+            {/* Sort Selector */}
+            <div className="w-full md:w-48">
+              <Select value={sortBy} onValueChange={(value: 'xp' | 'members' | 'name') => setSortBy(value)}>
+                <SelectTrigger className="w-full">
+                  <ArrowUpDown className="h-4 w-4 mr-2" />
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="xp">
+                    <div className="flex items-center gap-2">
+                      <Trophy className="h-4 w-4" />
+                      {t('clans.sortByXP', language) || 'Sort by XP'}
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="members">
+                    <div className="flex items-center gap-2">
+                      <Users className="h-4 w-4" />
+                      {t('clans.sortByMembers', language) || 'Sort by Members'}
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="name">
+                    <div className="flex items-center gap-2">
+                      <Shield className="h-4 w-4" />
+                      {t('clans.sortByName', language) || 'Sort by Name'}
+                    </div>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          {/* Results Count */}
+          <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">
+            {paginationMetadata ? (
+              <>
+                {t('clans.showingResults', language) || 'Showing'} {filteredAndSortedClans.length} {t('clans.of', language) || 'of'} {paginationMetadata.total} {t('clans.clans', language) || 'clans'}
+                {searchQuery && (
+                  <span className="ml-2 text-xs text-amber-600 dark:text-amber-400">
+                    (Search and sort apply only to current page)
+                  </span>
+                )}
+              </>
+            ) : (
+              <>
+                {t('clans.showingResults', language) || 'Showing'} {filteredAndSortedClans.length} {t('clans.of', language) || 'of'} {clans.length} {t('clans.clans', language) || 'clans'}
+              </>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Clans Grid */}
+      {filteredAndSortedClans.length === 0 ? (
+        <Card className="border-gray-200 dark:border-gray-800">
+          <CardContent className="pt-6">
+            <div className="flex flex-col items-center justify-center py-12 text-center">
+              <Search className="h-16 w-16 text-gray-400 mb-4" />
+              <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                {t('clans.noResults', language) || 'No clans found'}
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 max-w-md">
+                {t('clans.noResultsDescription', language) || 'Try adjusting your search or filters'}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredAndSortedClans.map((clan: Clan) => {
         const memberCount = clan.stats?.memberCount ?? 0;
         const battlesWon = clan.stats?.battlesWon ?? 0;
         const occupancy = clan.limit > 0 ? Math.round((memberCount / clan.limit) * 100) : 0;
@@ -308,6 +456,19 @@ export default function ClansList({ communityId }: ClansListProps) {
           </Card>
         );
       })}
+        </div>
+      )}
+
+      {/* Pagination */}
+      {paginationMetadata && filteredAndSortedClans.length > 0 && (
+        <div className="mt-6">
+          <BetterPagination
+            paginationMetadata={paginationMetadata}
+            onPageChange={handlePageChange}
+            onPageSizeChange={handlePageSizeChange}
+          />
+        </div>
+      )}
     </div>
   );
 }
