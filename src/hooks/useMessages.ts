@@ -18,7 +18,7 @@ import {
 import LanguageStore from '@/stores/useLanguage';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 
 interface UseMessagesProps {
@@ -33,6 +33,7 @@ export const useMessages = ({ communityId, clanId, page = 1, type }: UseMessages
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [currentPage, setCurrentPage] = useState(page);
+  const messageBoxRef = useRef<HTMLDivElement | null>(null);
 
   const targetId = type === 'community' ? communityId : clanId;
 
@@ -54,15 +55,23 @@ export const useMessages = ({ communityId, clanId, page = 1, type }: UseMessages
       }
     },
     enabled: !!targetId,
-    staleTime: 0,
-    refetchOnMount: 'always',
   });
+
+  // Update local state when initial messages are loaded
+  useEffect(() => {
+    if (!initialMessages) return;
+    setMessages(initialMessages.messages);
+  }, [initialMessages]);
 
   // Load previous page of messages
   const loadMore = async () => {
     if (!targetId) return;
     if (!initialMessages?.pagination?.hasMore) return;
 
+    const div = messageBoxRef.current;
+    if (!div) return;
+
+    const oldScrollHeight = div.scrollHeight;
     const nextPage = currentPage + 1;
 
     const more =
@@ -72,13 +81,12 @@ export const useMessages = ({ communityId, clanId, page = 1, type }: UseMessages
 
     setMessages(prev => [...more.messages, ...prev]);
     setCurrentPage(nextPage);
-  };
 
-  // Update local state when initial messages are loaded
-  useEffect(() => {
-    if (!initialMessages) return;
-    setMessages(initialMessages.messages);
-  }, [initialMessages]);
+    setTimeout(() => {
+      const newScrollHeight = div.scrollHeight;
+      div.scrollTop = newScrollHeight - oldScrollHeight; // MAGIC LINE ✨
+    }, 0);
+  };
 
   // Initialize Socket.IO connection and room subscriptions
   useEffect(() => {
@@ -166,5 +174,6 @@ export const useMessages = ({ communityId, clanId, page = 1, type }: UseMessages
     isSending: sendMessageMutation.isPending,
     loadMore,
     hasMore: initialMessages?.pagination?.hasMore || false,
+    messageBoxRef,
   };
 };

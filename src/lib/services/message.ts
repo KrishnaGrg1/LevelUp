@@ -6,7 +6,7 @@ export const getCommunityMessages = async (
   lang: Language,
   communityId: string,
   page = 1,
-  limit = 20,
+  limit = 10,
 ) => {
   try {
     const res = await axiosInstance.get<GetCommunityMessagesResponse>(

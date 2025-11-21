@@ -29,13 +29,13 @@ export default function MessageArea({
   const { user } = authStore();
   const [messageInput, setMessageInput] = useState('');
 
-  const { messages, sendMessage, isLoading, isSending, loadMore, hasMore } = useMessages({
-    communityId,
-    clanId,
-    type: viewType,
-  });
+  const { messages, sendMessage, isLoading, isSending, loadMore, hasMore, messageBoxRef } =
+    useMessages({
+      communityId,
+      clanId,
+      type: viewType,
+    });
 
-  const messageBoxRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -137,14 +137,14 @@ export default function MessageArea({
               <div key={message.id} className="flex gap-3">
                 <Avatar className="h-10 w-10">
                   <AvatarFallback className="bg-gray-500 text-white font-semibold">
-                    {message.UserName?.[0]?.toUpperCase() ?? 'U'}
+                    {message.sender?.UserName?.[0]?.toUpperCase() ?? 'U'}
                   </AvatarFallback>
                 </Avatar>
 
                 <div className="flex-1">
                   <div className="flex gap-2">
                     <span className="font-semibold text-gray-900 dark:text-gray-100">
-                      {message.UserName}
+                      {message.sender?.UserName ?? 'Unknown User'}
                     </span>
                     <span className="text-xs text-gray-500">
                       {new Date(message.createdAt).toLocaleTimeString('en-US', {

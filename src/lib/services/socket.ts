@@ -70,7 +70,7 @@ export const joinCommunity = (communityId: string) => {
   const socket = getSocket();
 
   socket.emit('join-community', { communityId });
-  console.log(`📥 Joined community room: ${communityId}`);
+  console.log(`📥 Joined community room from socket.ts: ${communityId}`);
 };
 
 export const leaveCommunity = (communityId: string) => {
