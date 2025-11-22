@@ -29,7 +29,7 @@ export default function CreateClanModal({ communityId }: CreateClanModalProps) {
   const { language } = LanguageStore();
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
-  
+
   const [formData, setFormData] = useState<CreateClanPayload>({
     name: '',
     communityId,
@@ -43,6 +43,7 @@ export default function CreateClanModal({ communityId }: CreateClanModalProps) {
     onSuccess: () => {
       toast.success(t('clans.toast.createdSuccess', language));
       queryClient.invalidateQueries({ queryKey: ['clans', communityId] });
+      queryClient.invalidateQueries({ queryKey: ['community-details'] });
       setOpen(false);
       setFormData({
         name: '',
@@ -76,7 +77,9 @@ export default function CreateClanModal({ communityId }: CreateClanModalProps) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px] bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800">
         <DialogHeader>
-          <DialogTitle className="text-gray-900 dark:text-white">{t('clans.createModal.title', language)}</DialogTitle>
+          <DialogTitle className="text-gray-900 dark:text-white">
+            {t('clans.createModal.title', language)}
+          </DialogTitle>
           <DialogDescription className="text-gray-600 dark:text-gray-400">
             {t('clans.createModal.description', language)}
           </DialogDescription>
@@ -89,7 +92,7 @@ export default function CreateClanModal({ communityId }: CreateClanModalProps) {
             <Input
               id="name"
               value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              onChange={e => setFormData({ ...formData, name: e.target.value })}
               placeholder={t('clans.createModal.namePlaceholder', language)}
               required
               minLength={3}
@@ -105,7 +108,7 @@ export default function CreateClanModal({ communityId }: CreateClanModalProps) {
             <Textarea
               id="description"
               value={formData.description}
-              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+              onChange={e => setFormData({ ...formData, description: e.target.value })}
               placeholder={t('clans.createModal.descriptionPlaceholder', language)}
               maxLength={500}
               rows={3}
@@ -121,7 +124,7 @@ export default function CreateClanModal({ communityId }: CreateClanModalProps) {
               id="limit"
               type="number"
               value={formData.limit}
-              onChange={(e) => setFormData({ ...formData, limit: parseInt(e.target.value) || 50 })}
+              onChange={e => setFormData({ ...formData, limit: parseInt(e.target.value) || 50 })}
               min={1}
               max={1000}
               className="bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white"
@@ -140,7 +143,7 @@ export default function CreateClanModal({ communityId }: CreateClanModalProps) {
             <Switch
               id="isPrivate"
               checked={formData.isPrivate}
-              onCheckedChange={(checked) => setFormData({ ...formData, isPrivate: checked })}
+              onCheckedChange={checked => setFormData({ ...formData, isPrivate: checked })}
             />
           </div>
 

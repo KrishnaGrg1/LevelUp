@@ -1,6 +1,7 @@
 import axiosInstance from '../fetch';
 import { Language } from '@/stores/useLanguage';
 import {
+  communityDetailByIdResponse,
   CreateCommunityResponse,
   GetMyCommunities,
   searchCommunitiesResponse,
@@ -146,6 +147,31 @@ export const joinCommunity = async (lang: Language, communityId: string) => {
       err.response?.data?.body?.message ||
       err.response?.data?.message ||
       'Failed to join community';
+    throw new Error(errorMessage);
+  }
+};
+
+// Specific   Community Detail
+export const communityDetailById = async (lang: Language, communityId: string) => {
+  try {
+    const response = await axiosInstance.get<communityDetailByIdResponse>(
+      `/community/${communityId}`,
+      {
+        withCredentials: true,
+        headers: {
+          'X-Language': lang,
+        },
+      },
+    );
+    return response.data;
+  } catch (error: unknown) {
+    const err = error as {
+      response?: { data?: { body?: { message?: string }; message?: string } };
+    };
+    const errorMessage =
+      err.response?.data?.body?.message ||
+      err.response?.data?.message ||
+      'Failed to search community';
     throw new Error(errorMessage);
   }
 };

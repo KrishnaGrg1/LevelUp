@@ -62,10 +62,10 @@ export default function ClansList({ communityId }: ClansListProps) {
   const clanMembersMap = clanMembersQueries.data || {};
 
   const joinMutation = useMutation({
-    mutationFn: (clanId: string) => joinClan(clanId, language),
+    mutationFn: (clanId: string) => joinClan(language, clanId),
     onSuccess: () => {
       toast.success(t('clans.toast.joinedSuccess', language));
-      queryClient.invalidateQueries({ queryKey: ['clans', communityId] });
+      queryClient.invalidateQueries({ queryKey: ['clans', communityId, language] });
       queryClient.invalidateQueries({ queryKey: ['all-clan-members', communityId] });
     },
     onError: (error: Error) => {
