@@ -121,9 +121,14 @@ export const useMessages = ({ communityId, clanId, page = 1, type }: UseMessages
       });
     };
 
-    socket.on('recent-messages', handleRecentMessages);
+    //It loads previous messages
+    //It runs only once when you join
+    socket.on('recent-messages', handleRecentMessages); //This happens right after you join a community:
 
-    if (type === 'community') onCommunityMessage(handleMessage);
+    //It runs every time ANY user sends a new message
+    // It adds one new message to the UI
+    if (type === 'community')
+      onCommunityMessage(handleMessage); //Backend broadcasts a new message:
     else onClanMessage(handleMessage);
 
     return () => {
