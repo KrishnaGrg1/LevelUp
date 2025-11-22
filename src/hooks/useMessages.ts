@@ -111,7 +111,7 @@ export const useMessages = ({ communityId, clanId, page = 1, type }: UseMessages
       const belongs =
         type === 'community'
           ? message.communityId === targetId
-          : (message as any).clanId === targetId;
+          : (message as Message).clanId === targetId;
 
       if (!belongs) return;
 
