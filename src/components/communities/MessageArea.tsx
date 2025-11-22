@@ -50,15 +50,15 @@ export default function MessageArea({
 
     div.addEventListener('scroll', handleScroll);
     return () => div.removeEventListener('scroll', handleScroll);
-  }, [hasMore, loadMore]);
+  }, [hasMore, loadMore, messageBoxRef]);
 
   // Scroll to bottom on new messages
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'auto' });
   }, [messages]);
 
-  const handleSendMessage = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSendMessage = (e?: React.FormEvent) => {
+    e?.preventDefault();
 
     if (!messageInput.trim()) {
       toast.error('Please enter a message');
@@ -77,7 +77,7 @@ export default function MessageArea({
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      handleSendMessage(e as any);
+      handleSendMessage();
     }
   };
 
