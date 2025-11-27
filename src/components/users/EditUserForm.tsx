@@ -71,7 +71,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
         isVerified: user.isVerified,
       });
     }
-  }, [user]);
+  }, [form, user]);
 
   // Watch all form fields in real-time, so UI (footer cards) updates instantly when user edits the form
   const formData = form.watch();

@@ -348,3 +348,70 @@ export interface fullUserObjectResponse {
     data: User;
   };
 }
+
+interface communityDetailById {
+  id: string;
+  name: string;
+  description: string;
+  memberLimit: number;
+  photo?: string;
+  _count: {
+    members: number;
+    clans: number;
+  };
+}
+export interface communityDetailByIdResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: communityDetailById;
+  };
+}
+
+export interface Sender {
+  id: string;
+  UserName: string;
+  profilePicture: string | null;
+  level: number;
+}
+
+export interface Message {
+  id: string;
+  content: string;
+  createdAt: string;
+  senderId: string;
+  UserName: string;
+  sender: Sender;
+  communityId?: string;
+  clanId?: string;
+}
+
+export interface Pagination {
+  page: number;
+  limit: number;
+  total: number;
+  hasMore: boolean;
+}
+
+export interface SendMessagePayload {
+  content: string;
+  type?: 'text' | 'image' | 'file';
+  attachments?: File[];
+}
+
+export interface MessageResponse {
+  success: boolean;
+  data: Message;
+  error?: string;
+}
+
+export interface GetCommunityMessagesResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: {
+      messages: Message[];
+      pagination: Pagination;
+    };
+  };
+}

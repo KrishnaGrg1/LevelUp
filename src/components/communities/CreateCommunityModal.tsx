@@ -45,6 +45,7 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
       toast.success(data.body.message || 'Community created successfully!', {
         duration: 3000,
       });
+
       queryClient.invalidateQueries({ queryKey: ['my-communities'] });
       resetForm();
 
