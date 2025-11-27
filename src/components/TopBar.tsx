@@ -12,6 +12,7 @@ interface TopBarProps {
   showBackButton?: boolean;
   backUrl?: string;
   isAuthenticated?: boolean;
+  isAdmin?: boolean;
 }
 
 const TopBar: React.FC<TopBarProps> = ({
@@ -19,6 +20,7 @@ const TopBar: React.FC<TopBarProps> = ({
   showBackButton = false,
   backUrl,
   isAuthenticated = false,
+  isAdmin = false,
 }) => {
   const defaultBackUrl = `/${language}/home`;
   const { user } = authStore();
@@ -39,12 +41,34 @@ const TopBar: React.FC<TopBarProps> = ({
             )}
 
             {/* Brand */}
-            <Link href={`/${language}/home`} className="flex items-center space-x-2 group">
-              <div className="w-8 h-8  rounded-lg border-2 flex items-center justify-center  ">
-                <Sparkles className="w-4 h-4" />
-              </div>
-              <span className="text-2xl font-extrabold ">Level Up</span>
-            </Link>
+            {!isAuthenticated ? (
+              <Link href={`/${language}/home`} className="flex items-center space-x-2 group">
+                <div className="w-8 h-8  rounded-lg border-2 flex items-center justify-center  ">
+                  <Sparkles className="w-4 h-4" />
+                </div>
+                <span className="text-2xl font-extrabold ">Level Up</span>
+              </Link>
+            ) : isAdmin ? (
+              <Link
+                href={`/${language}/admin/dashboard`}
+                className="flex items-center space-x-2 group"
+              >
+                <div className="w-8 h-8  rounded-lg border-2 flex items-center justify-center  ">
+                  <Sparkles className="w-4 h-4" />
+                </div>
+                <span className="text-2xl font-extrabold ">Level Up</span>
+              </Link>
+            ) : (
+              <Link
+                href={`/${language}/user/dashboard`}
+                className="flex items-center space-x-2 group"
+              >
+                <div className="w-8 h-8  rounded-lg border-2 flex items-center justify-center  ">
+                  <Sparkles className="w-4 h-4" />
+                </div>
+                <span className="text-2xl font-extrabold ">Level Up</span>
+              </Link>
+            )}
           </div>
 
           {/* Right Side - Language Switcher */}

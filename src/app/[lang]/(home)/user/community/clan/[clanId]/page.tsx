@@ -3,12 +3,7 @@
 import React from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import {
-  getClanInfo,
-  getClanMembers,
-  leaveClan,
-  deleteClan,
-} from '@/lib/services/clans';
+import { getClanInfo, getClanMembers, leaveClan, deleteClan } from '@/lib/services/clans';
 import LanguageStore from '@/stores/useLanguage';
 import { useAuth } from '@/hooks/use-auth';
 import { t } from '@/translations/index';
@@ -174,7 +169,9 @@ export default function ClanDetailPage() {
               <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
                 <div className="flex items-center gap-2 mb-1">
                   <Users className="h-4 w-4 text-gray-600 dark:text-gray-400" />
-                  <span className="text-xs text-gray-600 dark:text-gray-400">{t('clans.members', language)}</span>
+                  <span className="text-xs text-gray-600 dark:text-gray-400">
+                    {t('clans.members', language)}
+                  </span>
                 </div>
                 <p className="text-lg font-semibold text-gray-900 dark:text-white">
                   {memberCount}/{clan.limit}
@@ -184,7 +181,9 @@ export default function ClanDetailPage() {
               <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
                 <div className="flex items-center gap-2 mb-1">
                   <Trophy className="h-4 w-4 text-gray-600 dark:text-gray-400" />
-                  <span className="text-xs text-gray-600 dark:text-gray-400">{t('clans.victories', language)}</span>
+                  <span className="text-xs text-gray-600 dark:text-gray-400">
+                    {t('clans.victories', language)}
+                  </span>
                 </div>
                 <p className="text-lg font-semibold text-gray-900 dark:text-white">{battlesWon}</p>
               </div>
@@ -192,7 +191,9 @@ export default function ClanDetailPage() {
               <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
                 <div className="flex items-center gap-2 mb-1">
                   <Crown className="h-4 w-4 text-gray-600 dark:text-gray-400" />
-                  <span className="text-xs text-gray-600 dark:text-gray-400">{t('clans.owner', language)}</span>
+                  <span className="text-xs text-gray-600 dark:text-gray-400">
+                    {t('clans.owner', language)}
+                  </span>
                 </div>
                 <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">
                   {clan.owner.UserName}
@@ -202,7 +203,9 @@ export default function ClanDetailPage() {
               <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
                 <div className="flex items-center gap-2 mb-1">
                   <Shield className="h-4 w-4 text-gray-600 dark:text-gray-400" />
-                  <span className="text-xs text-gray-600 dark:text-gray-400">{t('clans.privacy', language)}</span>
+                  <span className="text-xs text-gray-600 dark:text-gray-400">
+                    {t('clans.privacy', language)}
+                  </span>
                 </div>
                 <p className="text-sm font-semibold text-gray-900 dark:text-white">
                   {clan.isPrivate ? t('clans.private', language) : t('clans.public', language)}
@@ -259,10 +262,12 @@ export default function ClanDetailPage() {
                 <Loader2 className="h-8 w-8 animate-spin text-cyan-600 dark:text-cyan-400" />
               </div>
             ) : members.length === 0 ? (
-              <p className="text-center text-gray-600 dark:text-gray-400 py-8">{t('clans.noMembers', language)}</p>
+              <p className="text-center text-gray-600 dark:text-gray-400 py-8">
+                {t('clans.noMembers', language)}
+              </p>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {members.map((member) => (
+                {members.map(member => (
                   <Card
                     key={member.id}
                     className="border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow"
@@ -281,7 +286,10 @@ export default function ClanDetailPage() {
                               {member.user.UserName}
                             </p>
                             {member.user.isVerified && (
-                              <Shield className="h-4 w-4 text-blue-500 dark:text-blue-400" fill="currentColor" />
+                              <Shield
+                                className="h-4 w-4 text-blue-500 dark:text-blue-400"
+                                fill="currentColor"
+                              />
                             )}
                           </div>
                           <div className="flex items-center gap-2 mt-1">

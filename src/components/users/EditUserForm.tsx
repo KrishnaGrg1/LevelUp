@@ -335,11 +335,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
 
               {/* Action Buttons */}
               <div className="flex items-center gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
-                <Button
-                  type="submit"
-                  disabled={updateMutation.isPending}
-                  className="flex-1 bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 text-white"
-                >
+                <Button type="submit" disabled={updateMutation.isPending} className="flex-1">
                   {updateMutation.isPending ? (
                     <>
                       <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2" />
