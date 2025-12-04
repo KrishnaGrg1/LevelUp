@@ -21,20 +21,22 @@ const QuestPanel: React.FC<QuestPanelProps> = ({ communityId }) => {
   const [openSettings, setOpenSettings] = useState(false);
 
   return (
-    <Card className="relative overflow-hidden border border-white/10 bg-gradient-to-br from-card/80 via-card/50 to-card/80 backdrop-blur-sm">
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-indigo-500/5" />
-
-      <div className="relative p-6">
+    <Card className="border-0 shadow-none">
+      <div className="p-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
           <div>
-            <h3 className="text-lg font-bold text-foreground mb-1">Quest Management</h3>
-            <p className="text-sm text-muted-foreground">View and track your quest progress</p>
+            <h3 className="font-heading text-xl font-bold text-zinc-900 dark:text-zinc-50 mb-1">
+              Quest Management
+            </h3>
+            <p className="text-sm text-zinc-600 dark:text-zinc-400">
+              View and track your quest progress
+            </p>
           </div>
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
           <Button
-            className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white shadow-md hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-200 font-semibold"
+            className="bg-green-600 hover:bg-purple-700 dark:bg-purple-600 dark:hover:bg-purple-700 text-white font-semibold"
             onClick={() => setOpenDetails(true)}
           >
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -47,11 +49,7 @@ const QuestPanel: React.FC<QuestPanelProps> = ({ communityId }) => {
             </svg>
             View Details
           </Button>
-          <Button
-            variant="outline"
-            className="border-white/20 hover:bg-white/5 hover:border-white/30 transition-all duration-200"
-            onClick={() => setOpenSettings(true)}
-          >
+          <Button variant="outline" onClick={() => setOpenSettings(true)}>
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"

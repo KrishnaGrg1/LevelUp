@@ -5,7 +5,6 @@ import { useQuery } from '@tanstack/react-query';
 import LanguageStore from '@/stores/useLanguage';
 import { fetchDailyQuests, fetchWeeklyQuests, type Quest } from '@/lib/services/ai';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
-import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { t } from '@/translations';
 
@@ -14,34 +13,27 @@ interface QuestDetailsProps {
 }
 
 const QuestRow: React.FC<{ quest: Quest; color: 'purple' | 'indigo' }> = ({ quest, color }) => {
-  const gradientFrom = color === 'purple' ? 'from-purple-900/40' : 'from-indigo-900/40';
-  const gradientVia = color === 'purple' ? 'via-purple-800/30' : 'via-indigo-800/30';
-  const gradientTo = color === 'purple' ? 'to-purple-900/40' : 'to-blue-900/40';
-  const hoverBorder =
-    color === 'purple' ? 'hover:border-purple-400/30' : 'hover:border-indigo-400/30';
-  const hoverShadow =
-    color === 'purple' ? 'hover:shadow-purple-500/20' : 'hover:shadow-indigo-500/20';
-  const btnGradient =
+  const xpBgColor =
     color === 'purple'
-      ? 'from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 hover:shadow-purple-500/30'
-      : 'from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 hover:shadow-indigo-500/30';
+      ? 'bg-purple-50 dark:bg-purple-900/10 border-purple-200 dark:border-purple-800 text-purple-600 dark:text-purple-400'
+      : 'bg-blue-50 dark:bg-blue-900/10 border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400';
 
   return (
-    <Card
-      className={`group relative overflow-hidden border border-white/10 bg-gradient-to-br ${gradientFrom} ${gradientVia} ${gradientTo} backdrop-blur-sm ${hoverBorder} transition-all duration-300 hover:shadow-lg ${hoverShadow}`}
-    >
-      <div className="relative p-4 space-y-3">
+    <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900">
+      <div className="space-y-3">
         <div className="flex items-start justify-between gap-3">
-          <p className="flex-1 text-sm font-semibold text-foreground leading-snug">
+          <p className="flex-1 text-sm font-semibold text-zinc-900 dark:text-zinc-50 leading-snug">
             {quest.description}
           </p>
-          <div className="flex items-center gap-1 shrink-0 px-2 py-0.5 rounded-md bg-gradient-to-br from-yellow-500/20 to-amber-600/20 border border-yellow-500/30">
-            <span className="text-xs font-bold font-numeric text-yellow-400">{quest.xpValue}</span>
-            <span className="text-[10px] font-medium text-yellow-400/80">XP</span>
+          <div
+            className={`flex items-center gap-1 shrink-0 px-2 py-0.5 rounded-md border ${xpBgColor}`}
+          >
+            <span className="text-xs font-bold font-numeric">{quest.xpValue}</span>
+            <span className="text-[10px] font-medium">XP</span>
           </div>
         </div>
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <div className="flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400">
             <span className="font-medium">{quest.communityId}</span>
             <span>•</span>
             <span className="font-numeric">#{quest.periodSeq}</span>
@@ -49,17 +41,17 @@ const QuestRow: React.FC<{ quest: Quest; color: 'purple' | 'indigo' }> = ({ ques
           <Button
             size="sm"
             disabled={quest.isCompleted}
-            className={`text-xs font-semibold transition-all duration-200 ${
+            className={`font-semibold py-2 rounded-lg transition-all duration-300 text-xs ${
               quest.isCompleted
-                ? 'bg-green-600/20 text-green-400 border border-green-500/30 hover:bg-green-600/20 cursor-default'
-                : `bg-gradient-to-r ${btnGradient} text-white shadow-sm hover:shadow-md`
+                ? 'bg-green-50 text-green-700 hover:bg-green-50 dark:bg-green-900/20 dark:text-green-400 dark:hover:bg-green-900/20 cursor-default disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100'
+                : 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white hover:scale-105 hover:shadow-lg'
             }`}
           >
             {quest.isCompleted ? t('ai.completed', '✓ Done') : t('ai.completeStatus', 'Complete')}
           </Button>
         </div>
       </div>
-    </Card>
+    </div>
   );
 };
 
@@ -103,16 +95,18 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
       <TabsContent value="daily" className="mt-6 space-y-6">
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <div className="h-1.5 w-1.5 rounded-full bg-purple-500" />
-            <h3 className="text-base font-bold text-foreground">{t('ai.today', 'Today')}</h3>
+            <div className="h-2 w-2 rounded-full bg-purple-500" />
+            <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
+              {t('ai.today', 'Today')}
+            </h3>
           </div>
           <div className="grid md:grid-cols-2 gap-3">
             {today.map(q => (
               <QuestRow key={q.id} quest={q} color="purple" />
             ))}
             {today.length === 0 && (
-              <div className="col-span-full flex items-center justify-center py-8 px-4 rounded-lg border border-dashed border-white/10 bg-white/5">
-                <p className="text-sm text-muted-foreground">
+              <div className="col-span-full flex items-center justify-center py-8 px-4 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800">
+                <p className="text-sm text-zinc-600 dark:text-zinc-400">
                   {t('ai.noQuests', 'No quests available')}
                 </p>
               </div>
@@ -126,23 +120,29 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
         {/* This Week */}
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <div className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
-            <h3 className="text-base font-bold text-foreground">{t('ai.thisWeek', 'This Week')}</h3>
+            <div className="h-2 w-2 rounded-full bg-blue-500" />
+            <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
+              {t('ai.thisWeek', 'This Week')}
+            </h3>
           </div>
           <div className="grid md:grid-cols-2 gap-3">
             {thisWeek.map(q => (
               <QuestRow key={q.id} quest={q} color="indigo" />
             ))}
             {thisWeek.length === 0 && (
-              <p className="text-sm text-gray-400">{t('ai.noQuests', 'No quests')}</p>
+              <div className="col-span-full flex items-center justify-center py-8 px-4 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800">
+                <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                  {t('ai.noQuests', 'No quests available')}
+                </p>
+              </div>
             )}
           </div>
         </div>
         {/* Last Week */}
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <div className="h-1.5 w-1.5 rounded-full bg-indigo-400/60" />
-            <h3 className="text-base font-bold text-foreground/80">
+            <div className="h-2 w-2 rounded-full bg-blue-400" />
+            <h3 className="text-base font-semibold text-zinc-800 dark:text-zinc-200">
               {t('ai.lastWeek', 'Last Week')}
             </h3>
           </div>
@@ -151,15 +151,19 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
               <QuestRow key={q.id} quest={q} color="indigo" />
             ))}
             {lastWeek.length === 0 && (
-              <p className="text-sm text-gray-400">{t('ai.noQuests', 'No quests')}</p>
+              <div className="col-span-full flex items-center justify-center py-8 px-4 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800">
+                <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                  {t('ai.noQuests', 'No quests available')}
+                </p>
+              </div>
             )}
           </div>
         </div>
         {/* Two Weeks Ago */}
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <div className="h-1.5 w-1.5 rounded-full bg-indigo-400/40" />
-            <h3 className="text-base font-bold text-foreground/60">
+            <div className="h-2 w-2 rounded-full bg-blue-300 dark:bg-blue-600" />
+            <h3 className="text-base font-semibold text-zinc-700 dark:text-zinc-300">
               {t('ai.twoWeeksAgo', 'Two Weeks Ago')}
             </h3>
           </div>
@@ -168,7 +172,11 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
               <QuestRow key={q.id} quest={q} color="indigo" />
             ))}
             {twoWeeksAgo.length === 0 && (
-              <p className="text-sm text-gray-400">{t('ai.noQuests', 'No quests')}</p>
+              <div className="col-span-full flex items-center justify-center py-8 px-4 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800">
+                <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                  {t('ai.noQuests', 'No quests available')}
+                </p>
+              </div>
             )}
           </div>
         </div>
