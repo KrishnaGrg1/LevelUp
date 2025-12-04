@@ -4,7 +4,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { t } from '@/translations';
 import LanguageStore from '@/stores/useLanguage';
-import { fetchDailyQuests, type Quest } from '@/lib/services/ai';
+import { fetchWeeklyQuests, type Quest } from '@/lib/services/ai';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
@@ -14,7 +14,7 @@ interface Props {
 
 const QuestCard: React.FC<{ quest: Quest }> = ({ quest }) => {
   return (
-    <Card className="p-4 bg-purple-800 border border-purple-700">
+    <Card className="p-4 bg-indigo-800 border border-indigo-700">
       <div className="flex justify-between mb-2">
         <p className="font-semibold text-white">{quest.description}</p>
         <p className="text-yellow-400 font-bold">{quest.xpValue} XP</p>
@@ -25,7 +25,7 @@ const QuestCard: React.FC<{ quest: Quest }> = ({ quest }) => {
         <Button
           variant="secondary"
           size="sm"
-          className={`text-white ${quest.isCompleted ? 'bg-green-700 hover:bg-green-600' : 'bg-purple-700 hover:bg-purple-600'}`}
+          className={`text-white ${quest.isCompleted ? 'bg-green-700 hover:bg-green-600' : 'bg-indigo-700 hover:bg-indigo-600'}`}
           disabled={quest.isCompleted}
         >
           {quest.isCompleted
@@ -37,24 +37,24 @@ const QuestCard: React.FC<{ quest: Quest }> = ({ quest }) => {
   );
 };
 
-const TodaysQuests: React.FC<Props> = () => {
+const WeeklyQuests: React.FC<Props> = () => {
   const { language } = LanguageStore();
   const { data, isPending } = useQuery({
-    queryKey: ['ai-daily-quests', language],
-    queryFn: () => fetchDailyQuests(language),
+    queryKey: ['ai-weekly-quests', language],
+    queryFn: () => fetchWeeklyQuests(language),
     staleTime: 60000,
     refetchOnWindowFocus: false,
   });
 
-  const today = data?.body?.data?.today ?? [];
-  const yesterday = data?.body?.data?.yesterday ?? [];
-  const dayBeforeYesterday = data?.body?.data?.dayBeforeYesterday ?? [];
+  const thisWeek = data?.body?.data?.thisWeek ?? [];
+  const lastWeek = data?.body?.data?.lastWeek ?? [];
+  const twoWeeksAgo = data?.body?.data?.twoWeeksAgo ?? [];
 
   return (
     <section className="py-8 px-6 rounded-3xl">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
-          {t('dashboard.quests.title', "Today's Quests")}
+          {t('ai.weeklyTitle', "This Week's Quests")}
         </h2>
       </div>
 
@@ -63,24 +63,24 @@ const TodaysQuests: React.FC<Props> = () => {
       ) : (
         <div className="space-y-6">
           <div>
-            <h3 className="text-white/80 font-semibold mb-2">{t('ai.today', 'Today')}</h3>
+            <h3 className="text-white/80 font-semibold mb-2">{t('ai.thisWeek', 'This Week')}</h3>
             <div className="grid md:grid-cols-2 gap-4">
-              {today.map(q => (
+              {thisWeek.map(q => (
                 <QuestCard key={q.id} quest={q} />
               ))}
-              {today.length === 0 && (
+              {thisWeek.length === 0 && (
                 <p className="text-sm text-gray-400">{t('ai.noQuests', 'No quests')}</p>
               )}
             </div>
           </div>
 
           <div>
-            <h3 className="text-white/80 font-semibold mb-2">{t('ai.yesterday', 'Yesterday')}</h3>
+            <h3 className="text-white/80 font-semibold mb-2">{t('ai.lastWeek', 'Last Week')}</h3>
             <div className="grid md:grid-cols-2 gap-4">
-              {yesterday.map(q => (
+              {lastWeek.map(q => (
                 <QuestCard key={q.id} quest={q} />
               ))}
-              {yesterday.length === 0 && (
+              {lastWeek.length === 0 && (
                 <p className="text-sm text-gray-400">{t('ai.noQuests', 'No quests')}</p>
               )}
             </div>
@@ -88,13 +88,13 @@ const TodaysQuests: React.FC<Props> = () => {
 
           <div>
             <h3 className="text-white/80 font-semibold mb-2">
-              {t('ai.dayBeforeYesterday', 'Day Before Yesterday')}
+              {t('ai.twoWeeksAgo', 'Two Weeks Ago')}
             </h3>
             <div className="grid md:grid-cols-2 gap-4">
-              {dayBeforeYesterday.map(q => (
+              {twoWeeksAgo.map(q => (
                 <QuestCard key={q.id} quest={q} />
               ))}
-              {dayBeforeYesterday.length === 0 && (
+              {twoWeeksAgo.length === 0 && (
                 <p className="text-sm text-gray-400">{t('ai.noQuests', 'No quests')}</p>
               )}
             </div>
@@ -105,4 +105,4 @@ const TodaysQuests: React.FC<Props> = () => {
   );
 };
 
-export default TodaysQuests;
+export default WeeklyQuests;
