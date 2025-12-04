@@ -22,12 +22,12 @@ export default function CommunityDetailPage() {
         <h2 className="text-xl font-bold mb-3">Quests</h2>
         {/* Inline lists so quests fetch/render on page load */}
         <div className="space-y-10">
-          <TodaysQuests />
-          <WeeklyQuests />
+          <TodaysQuests communityId={communityId} />
+          <WeeklyQuests communityId={communityId} />
         </div>
         {/* Keep the dialog panel for detailed view */}
         <div className="mt-6">
-          <QuestPanel />
+          <QuestPanel communityId={communityId} />
         </div>
       </section>
     </div>
