@@ -1,55 +1,38 @@
-//socket connection
+/**
+ * useSocket Hook
+ *
+ * Purpose: Track socket connection state for components
+ * Note: Actual connection is managed by SocketProvider at app level
+ * This hook only monitors the connection status
+ */
 
-import { connectSocket, disconnectSocket, getSocket } from '@/lib/services/socket';
-import authStore from '@/stores/useAuth';
+import { getSocket } from '@/lib/services/socket';
 import { useEffect, useState } from 'react';
 
 export const useSocket = () => {
-  const { isAuthenticated, user } = authStore();
   const [isConnected, setIsConnected] = useState(false);
-  const [isConnecting, setIsConnecting] = useState(false);
 
   useEffect(() => {
-    if (isAuthenticated && user) {
-      setIsConnecting(true);
+    const socket = getSocket();
 
-      //get auth token from local storage
-      const token = localStorage.getItem('authToken');
+    // Listen to connection state changes
+    const handleConnect = () => setIsConnected(true);
+    const handleDisconnect = () => setIsConnected(false);
 
-      const socket = connectSocket(token || '');
+    socket.on('connect', handleConnect);
+    socket.on('disconnect', handleDisconnect);
 
-      socket.on('connect', () => {
-        setIsConnected(true);
-        setIsConnecting(false);
-      });
+    // Set initial state
+    setIsConnected(socket.connected);
 
-      socket.on('disconnect', () => {
-        setIsConnected(false);
-      });
-
-      return () => {
-        disconnectSocket();
-        setIsConnected(false);
-        setIsConnecting(false);
-      };
-    }
-  }, [isAuthenticated, user]);
+    return () => {
+      socket.off('connect', handleConnect);
+      socket.off('disconnect', handleDisconnect);
+    };
+  }, []);
 
   return {
     isConnected,
-    isConnecting,
     socket: getSocket(),
   };
 };
-
-/*
-This hook handles Socket.IO connection inside React.
-Its job is to:
-
-Connect socket only when the user is logged in
-
-Update UI state when socket connects/disconnects
-
-Clean up properly when user logs out or component unmounts
-
-*/

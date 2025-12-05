@@ -1,13 +1,15 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Send, Paperclip, MoreVertical, Users, Shield as ShieldIcon, Loader2 } from 'lucide-react';
-import { useMessages } from '@/hooks/useMessages';
+
+import { MessengerChatContainer } from './MessengerChatContainer';
+import { ClanAccessDenied } from './ClanAccessDenied';
 import { toast } from 'sonner';
 import authStore from '@/stores/useAuth';
+import { useMessages } from '@/hooks/useMessages';
 
 interface MessageAreaProps {
   communityId?: string;
@@ -16,6 +18,8 @@ interface MessageAreaProps {
   viewName: string;
   memberCount: number;
   isPrivate?: boolean;
+  onJoinClick?: () => void;
+  onRequestJoinClick?: () => void;
 }
 
 export default function MessageArea({
@@ -29,33 +33,21 @@ export default function MessageArea({
   const { user } = authStore();
   const [messageInput, setMessageInput] = useState('');
 
-  const { messages, sendMessage, isLoading, isSending, loadMore, hasMore, messageBoxRef } =
-    useMessages({
-      communityId,
-      clanId,
-      type: viewType,
-    });
-
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const div = messageBoxRef.current;
-    if (!div) return;
-
-    const handleScroll = () => {
-      if (div.scrollTop <= 0 && hasMore) {
-        loadMore();
-      }
-    };
-
-    div.addEventListener('scroll', handleScroll);
-    return () => div.removeEventListener('scroll', handleScroll);
-  }, [hasMore, loadMore, messageBoxRef]);
-
-  // Scroll to bottom on new messages
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'auto' });
-  }, [messages]);
+  const {
+    messages,
+    sendMessage,
+    isLoading,
+    isSending,
+    loadMore,
+    hasMore,
+    accessDenied,
+    accessDeniedCode,
+    isMember,
+  } = useMessages({
+    communityId,
+    clanId,
+    type: viewType,
+  });
 
   const handleSendMessage = (e?: React.FormEvent) => {
     e?.preventDefault();
@@ -80,6 +72,11 @@ export default function MessageArea({
       handleSendMessage();
     }
   };
+
+  // If clan access is denied, show access denied screen
+  if (viewType === 'clan' && accessDenied) {
+    return <ClanAccessDenied clanName={viewName} accessDeniedCode={accessDeniedCode} />;
+  }
 
   return (
     <>
@@ -115,53 +112,13 @@ export default function MessageArea({
         </Button>
       </div>
 
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto bg-white dark:bg-gray-900 p-6" ref={messageBoxRef}>
-        {isLoading ? (
-          <div className="flex items-center justify-center h-full">
-            <Loader2 className="h-12 w-12 animate-spin text-blue-500" />
-          </div>
-        ) : messages.length === 0 ? (
-          <div className="flex items-center justify-center h-full text-center">
-            <ShieldIcon className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
-              No messages yet
-            </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              Be the first to start the conversation!
-            </p>
-          </div>
-        ) : (
-          <div className="max-w-4xl mx-auto space-y-6">
-            {messages.map(message => (
-              <div key={message.id} className="flex gap-3">
-                <Avatar className="h-10 w-10">
-                  <AvatarFallback className="bg-gray-500 text-white font-semibold">
-                    {message.sender?.UserName?.[0]?.toUpperCase() ?? 'U'}
-                  </AvatarFallback>
-                </Avatar>
-
-                <div className="flex-1">
-                  <div className="flex gap-2">
-                    <span className="font-semibold text-gray-900 dark:text-gray-100">
-                      {message.sender?.UserName ?? 'Unknown User'}
-                    </span>
-                    <span className="text-xs text-gray-500">
-                      {new Date(message.createdAt).toLocaleTimeString('en-US', {
-                        hour: 'numeric',
-                        minute: '2-digit',
-                      })}
-                    </span>
-                  </div>
-
-                  <p className="text-sm text-gray-800 dark:text-gray-200">{message.content}</p>
-                </div>
-              </div>
-            ))}
-            <div ref={messagesEndRef} />
-          </div>
-        )}
-      </div>
+      {/* Messages - Messenger-style chat container */}
+      <MessengerChatContainer
+        messages={messages}
+        hasMore={hasMore}
+        loadMore={loadMore}
+        isLoading={isLoading}
+      />
 
       {/* Input */}
       <div className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 px-6 py-4">
@@ -177,7 +134,7 @@ export default function MessageArea({
               value={messageInput}
               onChange={e => setMessageInput(e.target.value)}
               onKeyDown={handleKeyPress}
-              disabled={isSending}
+              disabled={isSending || !isMember}
               className="h-11 text-sm"
             />
           </div>
@@ -186,7 +143,7 @@ export default function MessageArea({
             type="submit"
             size="sm"
             className="h-11 w-11 rounded-full bg-blue-600 hover:bg-blue-700"
-            disabled={!messageInput.trim() || isSending}
+            disabled={!messageInput.trim() || isSending || !isMember}
           >
             {isSending ? (
               <Loader2 className="h-5 w-5 animate-spin" />
