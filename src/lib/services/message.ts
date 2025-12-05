@@ -5,7 +5,7 @@ import { GetCommunityMessagesResponse, Message, SendMessagePayload } from '../ge
 export const getCommunityMessages = async (
   lang: Language,
   communityId: string,
-  page = 1,
+  page: number,
   limit = 10,
 ) => {
   try {
@@ -62,10 +62,10 @@ export const sendCommunityMessageAPI = async (
 };
 
 // Clan Messages
-export const getClanMessages = async (lang: Language, clanId: string, page = 1, limit = 50) => {
+export const getClanMessages = async (lang: Language, clanId: string, page = 1, limit = 10) => {
   try {
     const response = await axiosInstance.get<GetCommunityMessagesResponse>(
-      `/community/conversation/clan/${clanId}?page=${page}&limit=${limit}`,
+      `/community/clan/${clanId}/messages?page=${page}&limit=${limit}`,
       {
         withCredentials: true,
         headers: {

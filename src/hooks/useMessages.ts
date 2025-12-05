@@ -1,41 +1,48 @@
-/**
- * Real-time messaging hook for communities and clans using Socket.IO
- */
-
+// hooks/useMessages.ts
 import { Message } from '@/lib/generated';
 import { getClanMessages, getCommunityMessages } from '@/lib/services/message';
 import {
   getSocket,
-  joinClan,
-  leaveClan,
-  joinCommunity,
-  leaveCommunity,
   onClanMessage,
   onCommunityMessage,
   sendClanMessage,
   sendCommunityMessage,
 } from '@/lib/services/socket';
 import LanguageStore from '@/stores/useLanguage';
-import { useMutation, useQuery } from '@tanstack/react-query';
-
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
+import { useRoom } from './useRoom';
 
 interface UseMessagesProps {
   communityId?: string;
   clanId?: string;
   type: 'community' | 'clan';
-  page?: number;
 }
 
-export const useMessages = ({ communityId, clanId, page = 1, type }: UseMessagesProps) => {
+/**
+ * Messaging hook
+ * Responsibility: Handle message sending, receiving, and pagination only
+ */
+export const useMessages = ({ communityId, clanId, type }: UseMessagesProps) => {
   const { language } = LanguageStore();
+  const targetId = type === 'community' ? communityId : clanId;
+
+  // Use room hook for room management
+  const { isJoined, isMember, accessDenied, accessDeniedCode } = useRoom({
+    roomId: targetId,
+    type,
+  });
 
   const [messages, setMessages] = useState<Message[]>([]);
-  const [currentPage, setCurrentPage] = useState(page);
-  const messageBoxRef = useRef<HTMLDivElement | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const targetId = type === 'community' ? communityId : clanId;
+  const hasInitializedRef = useRef(false);
+  const queryClient = useQueryClient();
+
+  // ✅ Create unique room key for tracking
+  const roomKey = `${type}-${targetId}`;
+  const previousRoomKeyRef = useRef<string | null>(null);
 
   const queryKey =
     type === 'community'
@@ -48,102 +55,110 @@ export const useMessages = ({ communityId, clanId, page = 1, type }: UseMessages
     queryFn: async () => {
       if (!targetId) return { messages: [], pagination: { hasMore: false } };
 
+      let result;
       if (type === 'community') {
-        return await getCommunityMessages(language, targetId, currentPage);
+        result = await getCommunityMessages(language, targetId, currentPage);
       } else {
-        return await getClanMessages(language, targetId, currentPage);
+        result = await getClanMessages(language, targetId, currentPage);
       }
+
+      return result;
     },
     enabled: !!targetId,
+    staleTime: 0, // ✅ Always refetch on room change
+    gcTime: 0, // ✅ Don't cache between room switches
   });
 
-  // Update local state when initial messages are loaded
+  // ✅ Reset state when switching rooms (using unique room key)
   useEffect(() => {
-    if (!initialMessages) return;
-    setMessages(initialMessages.messages);
-  }, [initialMessages]);
+    if (previousRoomKeyRef.current !== roomKey) {
+      console.log(`🔄 Room changed: ${previousRoomKeyRef.current} → ${roomKey}`);
+      hasInitializedRef.current = false;
 
-  // Load previous page of messages
-  const loadMore = async () => {
-    if (!targetId) return;
-    if (!initialMessages?.pagination?.hasMore) return;
+      // Reset local state
+      setMessages([]);
+      setCurrentPage(1);
 
-    const div = messageBoxRef.current;
-    if (!div) return;
+      //  Invalidate query cache for this room to force fresh fetch
+      queryClient.invalidateQueries({ queryKey });
+      previousRoomKeyRef.current = roomKey;
+    }
+  }, [roomKey, queryClient, queryKey]);
 
-    const oldScrollHeight = div.scrollHeight;
+  // ✅ Initialize messages from API (with room key tracking)
+  useEffect(() => {
+    if (!initialMessages?.messages) return;
+    if (hasInitializedRef.current) return;
+
+    if (initialMessages.messages.length > 0) {
+      setMessages(initialMessages.messages);
+      hasInitializedRef.current = true;
+    } else {
+      // Even if no messages, mark as initialized to prevent re-fetching
+      hasInitializedRef.current = true;
+    }
+  }, [initialMessages, roomKey]);
+
+  // Load more messages (pagination)
+  const loadMore = useCallback(async () => {
+    if (!targetId || !initialMessages?.pagination?.hasMore) return;
+
     const nextPage = currentPage + 1;
 
-    const more =
-      type === 'community'
-        ? await getCommunityMessages(language, targetId, nextPage)
-        : await getClanMessages(language, targetId, nextPage);
+    try {
+      const more =
+        type === 'community'
+          ? await getCommunityMessages(language, targetId, nextPage)
+          : await getClanMessages(language, targetId, nextPage);
 
-    setMessages(prev => [...more.messages, ...prev]);
-    setCurrentPage(nextPage);
+      setMessages(prev => {
+        const existingIds = new Set(prev.map(m => m.id));
+        const newMessages = more.messages.filter(m => !existingIds.has(m.id));
+        return [...newMessages, ...prev];
+      });
+      setCurrentPage(nextPage);
+    } catch (error) {
+      console.error(`Failed to load more messages for ${roomKey}:`, error);
+      toast.error('Failed to load more messages');
+    }
+  }, [targetId, initialMessages?.pagination?.hasMore, currentPage, type, language, roomKey]);
 
-    setTimeout(() => {
-      const newScrollHeight = div.scrollHeight;
-      div.scrollTop = newScrollHeight - oldScrollHeight; // MAGIC LINE ✨
-    }, 0);
-  };
-
-  // Initialize Socket.IO connection and room subscriptions
+  // Listen for new messages via socket
   useEffect(() => {
-    if (!targetId) return;
+    if (!targetId || !isJoined) return;
 
     const socket = getSocket();
 
-    if (!socket.connected) socket.connect();
-
-    if (type === 'community') joinCommunity(targetId);
-    else joinClan(targetId);
-
-    // Handle recent messages received when joining a room
-    const handleRecentMessages = (data: { messages: Message[] }) => {
-      console.log('📥 Recent messages from socket:', data.messages?.length);
-      if (data.messages && Array.isArray(data.messages)) {
-        setMessages(data.messages);
-      }
-    };
-
     const handleMessage = (message: Message) => {
       const belongs =
-        type === 'community'
-          ? message.communityId === targetId
-          : (message as Message).clanId === targetId;
+        type === 'community' ? message.communityId === targetId : message.clanId === targetId;
 
       if (!belongs) return;
 
       setMessages(prev => {
         if (prev.some(m => m.id === message.id)) return prev;
+        console.log(`🔌 New message received via socket`);
         return [...prev, message];
       });
     };
 
-    //It loads previous messages
-    //It runs only once when you join
-    socket.on('recent-messages', handleRecentMessages); //This happens right after you join a community:
-
-    //It runs every time ANY user sends a new message
-    // It adds one new message to the UI
-    if (type === 'community')
-      onCommunityMessage(handleMessage); //Backend broadcasts a new message:
-    else onClanMessage(handleMessage);
+    if (type === 'community') {
+      onCommunityMessage(handleMessage);
+    } else {
+      onClanMessage(handleMessage);
+    }
 
     return () => {
-      socket.off('recent-messages', handleRecentMessages);
-      if (type === 'community') leaveCommunity(targetId);
-      else leaveClan(targetId);
+      socket.off(type === 'community' ? 'community:new-message' : 'clan:new-message');
     };
-  }, [targetId, type]);
+  }, [targetId, type, isJoined, roomKey]);
 
-  // Send message via Socket.IO (backend persists to database)
+  // Send message mutation
   const sendMessageMutation = useMutation({
     mutationFn: async (content: string) => {
       if (!targetId) throw new Error('No target ID');
 
-      console.log('📤 Sending message via socket:', content);
+      console.log(`📤 Sending message`);
 
       if (type === 'community') {
         sendCommunityMessage(targetId, content);
@@ -155,11 +170,11 @@ export const useMessages = ({ communityId, clanId, page = 1, type }: UseMessages
     },
 
     onSuccess: () => {
-      console.log('✅ Message sent successfully');
+      queryClient.invalidateQueries({ queryKey });
     },
 
     onError: error => {
-      console.error('❌ Failed to send message:', error);
+      console.error(`❌ Failed to send message:`, error);
       toast.error('Failed to send message');
     },
   });
@@ -167,9 +182,12 @@ export const useMessages = ({ communityId, clanId, page = 1, type }: UseMessages
   const sendMessage = useCallback(
     (content: string) => {
       if (!content.trim()) return toast.error('Message cannot be empty');
+      if (!isJoined) return toast.error('Not connected to room');
+      if (!isMember) return toast.error('You are not a member');
+
       sendMessageMutation.mutate(content);
     },
-    [sendMessageMutation],
+    [sendMessageMutation, isJoined, isMember],
   );
 
   return {
@@ -179,6 +197,9 @@ export const useMessages = ({ communityId, clanId, page = 1, type }: UseMessages
     isSending: sendMessageMutation.isPending,
     loadMore,
     hasMore: initialMessages?.pagination?.hasMore || false,
-    messageBoxRef,
+    isJoined,
+    isMember,
+    accessDenied,
+    accessDeniedCode,
   };
 };

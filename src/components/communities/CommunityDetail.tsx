@@ -3,13 +3,15 @@
 import React, { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Users, Shield as ShieldIcon, Search, Settings, Info } from 'lucide-react';
+import { Users, Shield as ShieldIcon, Search, Settings, Info, Loader2 } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
-import { getClansByCommunity, type Clan } from '@/lib/services/clans';
+import { getClansByCommunity, checkClanMembership, type Clan } from '@/lib/services/clans';
 import LanguageStore from '@/stores/useLanguage';
 import CreateClanModal from '@/components/clans/CreateClanModal';
 import { communityDetailById } from '@/lib/services/communities';
 import MessageArea from './MessageArea';
+import { ClanAccessDenied } from './ClanAccessDenied';
+import authStore from '@/stores/useAuth';
 
 interface CommunityDetailProps {
   communityId: string;
@@ -17,6 +19,7 @@ interface CommunityDetailProps {
 
 export default function CommunityDetail({ communityId }: CommunityDetailProps) {
   const { language } = LanguageStore();
+  const { user } = authStore();
   const [selectedView, setSelectedView] = useState<'community' | string>('community');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -40,6 +43,17 @@ export default function CommunityDetail({ communityId }: CommunityDetailProps) {
 
   const selectedClan =
     selectedView !== 'community' ? clans.find((c: Clan) => c.id === selectedView) : null;
+
+  // Check clan membership BEFORE rendering MessageArea
+  const { data: membershipData, isLoading: isCheckingMembership } = useQuery({
+    queryKey: ['clan-membership', selectedView, user?.id],
+    queryFn: async () => {
+      if (selectedView === 'community' || !user?.id) return { isMember: true };
+      return await checkClanMembership(user.id, selectedView);
+    },
+    enabled: !!selectedView && selectedView !== 'community',
+    staleTime: 30000, // Cache for 30 seconds
+  });
 
   return (
     <div className="flex h-[calc(100vh-5rem)] bg-gray-100 dark:bg-gray-900">
@@ -190,18 +204,38 @@ export default function CommunityDetail({ communityId }: CommunityDetailProps) {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
-        <MessageArea
-          communityId={selectedView === 'community' ? communityId : undefined}
-          clanId={selectedView !== 'community' ? selectedView : undefined}
-          viewType={selectedView === 'community' ? 'community' : 'clan'}
-          viewName={selectedView === 'community' ? community?.name || '' : selectedClan?.name || ''}
-          memberCount={
-            selectedView === 'community'
-              ? community?._count?.members || 0
-              : selectedClan?.stats?.memberCount || 0
-          }
-          isPrivate={selectedView !== 'community' ? selectedClan?.isPrivate : false}
-        />
+        {/* Show loading state while checking clan membership */}
+        {selectedView !== 'community' && isCheckingMembership ? (
+          <div className="flex-1 flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+            <div className="text-center">
+              <Loader2 className="h-12 w-12 animate-spin text-blue-500 mx-auto mb-4" />
+              <p className="text-sm text-gray-500 dark:text-gray-400">Checking access...</p>
+            </div>
+          </div>
+        ) : selectedView !== 'community' && membershipData?.isMember === false ? (
+          /* Show access denied if not a member */
+          <ClanAccessDenied
+            clanName={selectedClan?.name || 'this clan'}
+            accessDeniedCode="NOT_MEMBER"
+            onGoBack={() => setSelectedView('community')}
+          />
+        ) : (
+          /* Show MessageArea only if member or community channel */
+          <MessageArea
+            communityId={selectedView === 'community' ? communityId : undefined}
+            clanId={selectedView !== 'community' ? selectedView : undefined}
+            viewType={selectedView === 'community' ? 'community' : 'clan'}
+            viewName={
+              selectedView === 'community' ? community?.name || '' : selectedClan?.name || ''
+            }
+            memberCount={
+              selectedView === 'community'
+                ? community?._count?.members || 0
+                : selectedClan?.stats?.memberCount || 0
+            }
+            isPrivate={selectedView !== 'community' ? selectedClan?.isPrivate : false}
+          />
+        )}
       </div>
     </div>
   );
