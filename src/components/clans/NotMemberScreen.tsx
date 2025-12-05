@@ -24,7 +24,6 @@ export const NotMemberScreen = ({
 
   // ✅ Handle different access denied scenarios
   const isBanned = accessDeniedCode === 'CLAN_BANNED' || accessDeniedCode === 'COMMUNITY_BANNED';
-  const isNotMember = accessDeniedCode === 'NOT_A_MEMBER';
   const isPrivate = accessDeniedCode === 'PRIVATE_CLAN' || accessDeniedCode === 'PRIVATE_COMMUNITY';
 
   // ✅ Customize content based on denial reason

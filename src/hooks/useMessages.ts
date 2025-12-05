@@ -10,7 +10,7 @@ import {
 } from '@/lib/services/socket';
 import LanguageStore from '@/stores/useLanguage';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { useRoom } from './useRoom';
 
@@ -44,10 +44,13 @@ export const useMessages = ({ communityId, clanId, type }: UseMessagesProps) => 
   const roomKey = `${type}-${targetId}`;
   const previousRoomKeyRef = useRef<string | null>(null);
 
-  const queryKey =
-    type === 'community'
-      ? ['community-messages', language, communityId, currentPage]
-      : ['clan-messages', language, clanId, currentPage];
+  const queryKey = useMemo(
+    () =>
+      type === 'community'
+        ? ['community-messages', language, communityId, currentPage]
+        : ['clan-messages', language, clanId, currentPage],
+    [type, language, communityId, clanId, currentPage],
+  );
 
   // Fetch paginated messages from API
   const { data: initialMessages, isLoading } = useQuery({

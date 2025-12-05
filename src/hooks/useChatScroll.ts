@@ -1,7 +1,7 @@
 import { useEffect, useRef, useCallback } from 'react';
 
 interface UseChatScrollProps {
-  messages: any[];
+  messages: unknown[];
   hasMore: boolean;
   loadMore: () => Promise<void>;
   isLoading?: boolean;
