@@ -1,18 +1,24 @@
 'use client';
 
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import LanguageStore from '@/stores/useLanguage';
-import { fetchDailyQuests, fetchWeeklyQuests, type Quest } from '@/lib/services/ai';
+import { fetchDailyQuests, fetchWeeklyQuests, completeQuest, type Quest } from '@/lib/services/ai';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { t } from '@/translations';
+import { toast } from 'sonner';
 
 interface QuestDetailsProps {
   communityId: string; // Filter quests for specific community
 }
 
-const QuestRow: React.FC<{ quest: Quest; color: 'purple' | 'indigo' }> = ({ quest, color }) => {
+const QuestRow: React.FC<{
+  quest: Quest;
+  color: 'purple' | 'indigo';
+  onComplete: (questId: string) => void;
+  isCompleting: boolean;
+}> = ({ quest, color, onComplete, isCompleting }) => {
   const xpBgColor =
     color === 'purple'
       ? 'bg-purple-50 dark:bg-purple-900/10 border-purple-200 dark:border-purple-800 text-purple-600 dark:text-purple-400'
@@ -40,7 +46,8 @@ const QuestRow: React.FC<{ quest: Quest; color: 'purple' | 'indigo' }> = ({ ques
           </div>
           <Button
             size="sm"
-            disabled={quest.isCompleted}
+            disabled={quest.isCompleted || isCompleting}
+            onClick={() => onComplete(quest.id)}
             className={`font-semibold py-2 rounded-lg transition-all duration-300 text-xs ${
               quest.isCompleted
                 ? 'bg-green-50 text-green-700 hover:bg-green-50 dark:bg-green-900/20 dark:text-green-400 dark:hover:bg-green-900/20 cursor-default disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100'
@@ -57,6 +64,7 @@ const QuestRow: React.FC<{ quest: Quest; color: 'purple' | 'indigo' }> = ({ ques
 
 const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
   const { language } = LanguageStore();
+  const queryClient = useQueryClient();
 
   const daily = useQuery({
     queryKey: ['ai-daily-quests', language],
@@ -71,6 +79,28 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
     staleTime: 60000,
     refetchOnWindowFocus: false,
   });
+
+  const completeMutation = useMutation({
+    mutationFn: (questId: string) => completeQuest(questId, language),
+    onSuccess: response => {
+      const xpAwarded = response.body.data.xpAwarded;
+      const currentLevel = response.body.data.currentLevel;
+      toast.success(t('ai.quest_completed', 'Quest completed!'), {
+        description: `+${xpAwarded} XP • Level ${currentLevel}`,
+      });
+      queryClient.invalidateQueries({ queryKey: ['ai-daily-quests', language] });
+      queryClient.invalidateQueries({ queryKey: ['ai-weekly-quests', language] });
+    },
+    onError: (error: any) => {
+      toast.error(t('ai.quest_complete_error', 'Failed to complete quest'), {
+        description: error?.response?.data?.body?.message || 'Please try again',
+      });
+    },
+  });
+
+  const handleComplete = (questId: string) => {
+    completeMutation.mutate(questId);
+  };
 
   // Filter quests for the specific community
   const allToday = daily.data?.body?.data?.today ?? [];
@@ -102,7 +132,13 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
           </div>
           <div className="grid md:grid-cols-2 gap-3">
             {today.map(q => (
-              <QuestRow key={q.id} quest={q} color="purple" />
+              <QuestRow
+                key={q.id}
+                quest={q}
+                color="purple"
+                onComplete={handleComplete}
+                isCompleting={completeMutation.isPending}
+              />
             ))}
             {today.length === 0 && (
               <div className="col-span-full flex items-center justify-center py-8 px-4 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800">
@@ -127,7 +163,13 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
           </div>
           <div className="grid md:grid-cols-2 gap-3">
             {thisWeek.map(q => (
-              <QuestRow key={q.id} quest={q} color="indigo" />
+              <QuestRow
+                key={q.id}
+                quest={q}
+                color="indigo"
+                onComplete={handleComplete}
+                isCompleting={completeMutation.isPending}
+              />
             ))}
             {thisWeek.length === 0 && (
               <div className="col-span-full flex items-center justify-center py-8 px-4 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800">
@@ -148,7 +190,13 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
           </div>
           <div className="grid md:grid-cols-2 gap-3">
             {lastWeek.map(q => (
-              <QuestRow key={q.id} quest={q} color="indigo" />
+              <QuestRow
+                key={q.id}
+                quest={q}
+                color="indigo"
+                onComplete={handleComplete}
+                isCompleting={completeMutation.isPending}
+              />
             ))}
             {lastWeek.length === 0 && (
               <div className="col-span-full flex items-center justify-center py-8 px-4 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800">
@@ -169,7 +217,13 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
           </div>
           <div className="grid md:grid-cols-2 gap-3">
             {twoWeeksAgo.map(q => (
-              <QuestRow key={q.id} quest={q} color="indigo" />
+              <QuestRow
+                key={q.id}
+                quest={q}
+                color="indigo"
+                onComplete={handleComplete}
+                isCompleting={completeMutation.isPending}
+              />
             ))}
             {twoWeeksAgo.length === 0 && (
               <div className="col-span-full flex items-center justify-center py-8 px-4 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800">

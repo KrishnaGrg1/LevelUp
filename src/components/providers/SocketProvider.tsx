@@ -18,13 +18,13 @@ export function SocketProvider({ children }: SocketProviderProps) {
       //connect socket with auth token
       connectSocket(token || undefined);
       console.log('✅ Socket connected for user:', user.UserName);
-    } else {
-      //diconnect when user logs out
-      disconnectSocket();
     }
 
+    // Only disconnect on unmount when user is not authenticated
     return () => {
-      disconnectSocket();
+      if (!isAuthenticated) {
+        disconnectSocket();
+      }
     };
   }, [isAuthenticated, user]);
 

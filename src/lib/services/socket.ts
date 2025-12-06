@@ -3,12 +3,13 @@ import { Message } from '../generated';
 
 let socket: Socket | null = null;
 
-const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL;
+const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:8080';
 
 export const getSocket = (): Socket => {
   if (!socket) {
     socket = io(SOCKET_URL, {
       autoConnect: false,
+      withCredentials: true,
       reconnection: true,
       reconnectionAttempts: 5,
       reconnectionDelay: 1000,
@@ -59,9 +60,9 @@ export const connectSocket = (authToken?: string) => {
 };
 
 export const disconnectSocket = () => {
-  if (socket) {
+  if (socket && socket.connected) {
     socket.disconnect();
-    socket = null;
+    // Don't set socket to null to maintain reference for reconnection
   }
 };
 

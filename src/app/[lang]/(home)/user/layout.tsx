@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { RoleGuard } from '@/components/providers/RoleGuard';
 import LanguageStore from '@/stores/useLanguage';
-import { LayoutDashboard, User, KeyRound } from 'lucide-react';
+import { LayoutDashboard, User, KeyRound, MessageSquare } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navItems = [
@@ -23,6 +23,11 @@ const navItems = [
     href: '/user/change-password',
     label: 'Change Password',
     icon: KeyRound,
+  },
+  {
+    href: '/user/ai-chat',
+    label: 'AI Chat',
+    icon: MessageSquare,
   },
 ];
 

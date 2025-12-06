@@ -85,3 +85,212 @@ export const generateWeeklyQuests = async (lang: Language) => {
   );
   return res.data;
 };
+
+export interface CompleteQuestResponse {
+  quest: Quest;
+  xpAwarded: number;
+  currentXp: number;
+  currentLevel: number;
+}
+
+export const completeQuest = async (questId: string, lang: Language) => {
+  const res = await axiosInstance.patch<ApiResponse<CompleteQuestResponse>>(
+    `/ai/quests/complete`,
+    { questId },
+    {
+      headers: { 'X-Language': lang },
+      withCredentials: true,
+    },
+  );
+  return res.data;
+};
+
+// User Features
+export interface CompletedQuestsResponse {
+  quests: Quest[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+    hasMore: boolean;
+  };
+}
+
+export const fetchCompletedQuests = async (
+  lang: Language,
+  page: number = 1,
+  limit: number = 20,
+  type?: 'Daily' | 'Weekly',
+) => {
+  const params = new URLSearchParams({
+    page: page.toString(),
+    limit: limit.toString(),
+  });
+  if (type) params.append('type', type);
+
+  const res = await axiosInstance.get<ApiResponse<CompletedQuestsResponse>>(
+    `/ai/quests/completed?${params.toString()}`,
+    {
+      headers: { 'X-Language': lang },
+      withCredentials: true,
+    },
+  );
+  return res.data;
+};
+
+export interface QuestWithCommunity extends Quest {
+  community: {
+    id: string;
+    name: string;
+    description: string;
+  };
+}
+
+export const fetchSingleQuest = async (questId: string, lang: Language) => {
+  const res = await axiosInstance.get<ApiResponse<{ quest: QuestWithCommunity }>>(
+    `/ai/quests/${questId}`,
+    {
+      headers: { 'X-Language': lang },
+      withCredentials: true,
+    },
+  );
+  return res.data;
+};
+
+export interface AIChatResponse {
+  reply: string;
+}
+
+export const sendAIChat = async (prompt: string, lang: Language) => {
+  const res = await axiosInstance.post<ApiResponse<AIChatResponse>>(
+    `/ai/chat`,
+    { prompt },
+    {
+      headers: { 'X-Language': lang },
+      withCredentials: true,
+    },
+  );
+  return res.data;
+};
+
+export interface AIConfigResponse {
+  version: string;
+  environment: string;
+  ai: {
+    configured: boolean;
+    model: string | null;
+    maxPromptChars: number;
+    tokenCostPerChat: number;
+  };
+  quests: {
+    dailyCount: number;
+    weeklyCount: number;
+    generationSchedule: {
+      daily: string;
+      weekly: string;
+    };
+    questsPerCommunity: number;
+    periodStatuses: {
+      daily: string[];
+      weekly: string[];
+    };
+  };
+  features: {
+    aiChat: boolean;
+    questGeneration: boolean;
+    questCompletion: boolean;
+    xpRewards: boolean;
+    timezoneSupport: boolean;
+  };
+  limits: {
+    maxPromptLength: number;
+    maxDescriptionLength: number;
+    minDescriptionLength: number;
+  };
+  user?: {
+    tokens: number;
+    timezone: string;
+    totalQuests: number;
+    completedQuests: number;
+    communities: number;
+  };
+}
+
+export const fetchAIConfig = async (lang: Language) => {
+  const res = await axiosInstance.get<ApiResponse<AIConfigResponse>>(`/ai/config`, {
+    headers: { 'X-Language': lang },
+    withCredentials: true,
+  });
+  return res.data;
+};
+
+export interface AIHealthResponse {
+  status: 'healthy' | 'degraded';
+  timestamp: string;
+  uptime: number;
+  responseTime: number;
+  services: {
+    ai: {
+      configured: boolean;
+      model: string | null;
+    };
+    database: {
+      healthy: boolean;
+      responseTime: number;
+    };
+  };
+  quests: {
+    total: number;
+    completed: number;
+    todayActive: number;
+    thisWeekActive: number;
+    completionRate: number;
+  } | null;
+  memory: {
+    used: number;
+    total: number;
+    rss: number;
+  };
+}
+
+export const fetchAIHealth = async (lang: Language) => {
+  const res = await axiosInstance.get<ApiResponse<AIHealthResponse>>(`/ai/health`, {
+    headers: { 'X-Language': lang },
+    withCredentials: true,
+  });
+  return res.data;
+};
+
+// User can force generate their own quests
+export const forceGenerateDailyQuests = async (lang: Language) => {
+  const res = await axiosInstance.post<
+    ApiResponse<{ today: QuestWithCommunity[]; count: number; forced: boolean }>
+  >(`/ai/generate/daily/force`, undefined, {
+    headers: { 'X-Language': lang },
+    withCredentials: true,
+  });
+  return res.data;
+};
+
+export const forceGenerateWeeklyQuests = async (lang: Language) => {
+  const res = await axiosInstance.post<
+    ApiResponse<{ thisWeek: QuestWithCommunity[]; count: number; forced: boolean }>
+  >(`/ai/generate/weekly/force`, undefined, {
+    headers: { 'X-Language': lang },
+    withCredentials: true,
+  });
+  return res.data;
+};
+
+// Admin only - delete quest
+export const deleteQuest = async (questId: string, lang: Language) => {
+  const res = await axiosInstance.delete<ApiResponse<{ deletedQuestId: string; userId: string }>>(
+    `/ai/quests/${questId}`,
+    {
+      headers: { 'X-Language': lang },
+      withCredentials: true,
+    },
+  );
+  return res.data;
+};
