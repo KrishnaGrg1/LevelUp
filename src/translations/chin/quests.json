@@ -1,0 +1,100 @@
+{
+  "panel": {
+    "title": "任务管理",
+    "subtitle": "查看和跟踪您的任务进度",
+    "viewDetails": "查看详情",
+    "settings": "设置",
+    "overview": {
+      "title": "任务概览",
+      "description": "跟踪您的每日和每周任务进度"
+    },
+    "settingsModal": {
+      "title": "任务设置",
+      "description": "配置您的任务偏好",
+      "comingSoon": "任务设置即将推出"
+    }
+  },
+  "details": {
+    "tabs": {
+      "daily": "每日",
+      "weekly": "每周"
+    },
+    "periods": {
+      "today": "今天",
+      "thisWeek": "本周",
+      "lastWeek": "上周",
+      "twoWeeksAgo": "两周前"
+    },
+    "xp": "经验值",
+    "buttons": {
+      "complete": "完成",
+      "completed": "✓ 已完成"
+    },
+    "empty": {
+      "noQuests": "暂无可用任务"
+    },
+    "success": {
+      "questCompleted": "任务已完成！",
+      "xpAwarded": "+{xp} 经验值 • 等级 {level}"
+    },
+    "errors": {
+      "completeFailed": "完成任务失败",
+      "tryAgain": "请重试"
+    }
+  },
+  "landing": {
+    "daily": {
+      "title": "今日任务",
+      "button": "每日任务"
+    },
+    "weekly": {
+      "title": "本周任务",
+      "button": "每周任务"
+    },
+    "loading": "加载中...",
+    "noQuests": "没有可用的任务",
+    "completed": "已完成",
+    "markComplete": "标记为完成",
+    "questCompleted": "任务已完成！",
+    "questCompleteFailed": "完成任务失败",
+    "xpLevel": "+{xp} XP • 等级 {level}",
+    "questNumber": "任务 #{number}"
+  },
+  "admin": {
+    "title": "任务生成",
+    "forceDaily": {
+      "title": "强制生成每日任务",
+      "description": "手动触发您账户的每日任务生成",
+      "button": "生成",
+      "generating": "生成中...",
+      "success": "每日任务已生成",
+      "successDesc": "已生成 {count} 个每日任务",
+      "error": "生成每日任务失败"
+    },
+    "forceWeekly": {
+      "title": "强制生成每周任务",
+      "description": "手动触发您账户的每周任务生成",
+      "button": "生成",
+      "generating": "生成中...",
+      "success": "每周任务已生成",
+      "successDesc": "已生成 {count} 个每周任务",
+      "error": "生成每周任务失败"
+    }
+  },
+  "generate": {
+    "buttons": {
+      "generateDaily": "生成今日任务",
+      "generateWeekly": "生成本周任务",
+      "generatingDaily": "生成每日任务中…",
+      "generatingWeekly": "生成每周任务中…"
+    },
+    "success": {
+      "dailyGenerated": "已生成今日任务",
+      "weeklyGenerated": "已生成本周任务"
+    },
+    "errors": {
+      "dailyFailed": "生成每日任务失败",
+      "weeklyFailed": "生成每周任务失败"
+    }
+  }
+}

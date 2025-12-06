@@ -5,8 +5,7 @@ import { useParams } from 'next/navigation';
 import CommunityDetail from '@/components/communities/CommunityDetail';
 import TodaysQuests from '@/components/landing/todaysQuests';
 import WeeklyQuests from '@/components/landing/weeklyQuests';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { t } from '@/translations';
 
 export default function CommunityDetailPage() {
   const params = useParams();
@@ -36,7 +35,7 @@ export default function CommunityDetailPage() {
               <div
                 className={`h-1.5 w-1.5 rounded-full transition-colors ${questView === 'daily' ? 'bg-emerald-400' : 'bg-zinc-400'}`}
               />
-              Daily Quests
+              {t('quests.landing.daily.button')}
             </button>
             <button
               onClick={() => setQuestView('weekly')}
@@ -49,7 +48,7 @@ export default function CommunityDetailPage() {
               <div
                 className={`h-1.5 w-1.5 rounded-full transition-colors ${questView === 'weekly' ? 'bg-blue-400' : 'bg-zinc-400'}`}
               />
-              Weekly Quests
+              {t('quests.landing.weekly.button')}
             </button>
           </div>
         </div>

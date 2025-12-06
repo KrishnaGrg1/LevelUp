@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { generateDailyQuests, generateWeeklyQuests } from '@/lib/services/ai';
 import LanguageStore from '@/stores/useLanguage';
 import { toast } from 'sonner';
+import { t } from '@/translations';
 
 interface Props {
   className?: string;
@@ -18,22 +19,24 @@ const GenerateButtons: React.FC<Props> = ({ className }) => {
   const dailyMutation = useMutation({
     mutationFn: () => generateDailyQuests(language),
     onSuccess: () => {
-      toast.success('Generated today\'s quests');
+      toast.success(t('quests.generate.success.dailyGenerated'));
       queryClient.invalidateQueries({ queryKey: ['ai-daily-quests'] });
     },
-    onError: (err: any) => {
-      toast.error(err?.message || 'Failed to generate daily quests');
+    onError: (err: unknown) => {
+      const error = err as { message?: string };
+      toast.error(error?.message || t('quests.generate.errors.dailyFailed'));
     },
   });
 
   const weeklyMutation = useMutation({
     mutationFn: () => generateWeeklyQuests(language),
     onSuccess: () => {
-      toast.success("Generated this week's quests");
+      toast.success(t('quests.generate.success.weeklyGenerated'));
       queryClient.invalidateQueries({ queryKey: ['ai-weekly-quests'] });
     },
-    onError: (err: any) => {
-      toast.error(err?.message || 'Failed to generate weekly quests');
+    onError: (err: unknown) => {
+      const error = err as { message?: string };
+      toast.error(error?.message || t('quests.generate.errors.weeklyFailed'));
     },
   });
 
@@ -44,7 +47,9 @@ const GenerateButtons: React.FC<Props> = ({ className }) => {
         disabled={dailyMutation.isPending}
         className="bg-purple-600 hover:bg-purple-700 text-white"
       >
-        {dailyMutation.isPending ? 'Generating Daily…' : "Generate Today's Quests"}
+        {dailyMutation.isPending
+          ? t('quests.generate.buttons.generatingDaily')
+          : t('quests.generate.buttons.generateDaily')}
       </Button>
       <Button
         onClick={() => weeklyMutation.mutate()}
@@ -52,7 +57,9 @@ const GenerateButtons: React.FC<Props> = ({ className }) => {
         variant="secondary"
         className="bg-indigo-600 hover:bg-indigo-700 text-white"
       >
-        {weeklyMutation.isPending ? 'Generating Weekly…' : "Generate This Week's Quests"}
+        {weeklyMutation.isPending
+          ? t('quests.generate.buttons.generatingWeekly')
+          : t('quests.generate.buttons.generateWeekly')}
       </Button>
     </div>
   );

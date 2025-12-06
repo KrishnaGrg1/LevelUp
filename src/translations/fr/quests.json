@@ -1,0 +1,100 @@
+{
+  "panel": {
+    "title": "Gestion des Quêtes",
+    "subtitle": "Voir et suivre la progression de vos quêtes",
+    "viewDetails": "Voir les Détails",
+    "settings": "Paramètres",
+    "overview": {
+      "title": "Aperçu des Quêtes",
+      "description": "Suivre la progression de vos quêtes quotidiennes et hebdomadaires"
+    },
+    "settingsModal": {
+      "title": "Paramètres des Quêtes",
+      "description": "Configurer vos préférences de quêtes",
+      "comingSoon": "Les paramètres des quêtes seront bientôt disponibles"
+    }
+  },
+  "details": {
+    "tabs": {
+      "daily": "Quotidien",
+      "weekly": "Hebdomadaire"
+    },
+    "periods": {
+      "today": "Aujourd'hui",
+      "thisWeek": "Cette Semaine",
+      "lastWeek": "Semaine Dernière",
+      "twoWeeksAgo": "Il y a Deux Semaines"
+    },
+    "xp": "XP",
+    "buttons": {
+      "complete": "Terminer",
+      "completed": "✓ Fait"
+    },
+    "empty": {
+      "noQuests": "Aucune quête disponible"
+    },
+    "success": {
+      "questCompleted": "Quête terminée !",
+      "xpAwarded": "+{xp} XP • Niveau {level}"
+    },
+    "errors": {
+      "completeFailed": "Échec de la quête",
+      "tryAgain": "Veuillez réessayer"
+    }
+  },
+  "landing": {
+    "daily": {
+      "title": "Quêtes d'Aujourd'hui",
+      "button": "Quêtes Quotidiennes"
+    },
+    "weekly": {
+      "title": "Quêtes Hebdomadaires",
+      "button": "Quêtes Hebdomadaires"
+    },
+    "loading": "Chargement...",
+    "noQuests": "Aucune quête disponible",
+    "completed": "Terminé",
+    "markComplete": "Marquer comme Terminé",
+    "questCompleted": "Quête terminée!",
+    "questCompleteFailed": "Échec de la completion de la quête",
+    "xpLevel": "+{xp} XP • Niveau {level}",
+    "questNumber": "Quête #{number}"
+  },
+  "admin": {
+    "title": "Génération de Quêtes",
+    "forceDaily": {
+      "title": "Forcer la Génération de Quêtes Quotidiennes",
+      "description": "Déclencher manuellement la génération de quêtes quotidiennes pour votre compte",
+      "button": "Générer",
+      "generating": "Génération...",
+      "success": "Quêtes Quotidiennes Générées",
+      "successDesc": "{count} quêtes quotidiennes générées",
+      "error": "Échec de la génération des quêtes quotidiennes"
+    },
+    "forceWeekly": {
+      "title": "Forcer la Génération de Quêtes Hebdomadaires",
+      "description": "Déclencher manuellement la génération de quêtes hebdomadaires pour votre compte",
+      "button": "Générer",
+      "generating": "Génération...",
+      "success": "Quêtes Hebdomadaires Générées",
+      "successDesc": "{count} quêtes hebdomadaires générées",
+      "error": "Échec de la génération des quêtes hebdomadaires"
+    }
+  },
+  "generate": {
+    "buttons": {
+      "generateDaily": "Générer les Quêtes d'Aujourd'hui",
+      "generateWeekly": "Générer les Quêtes de Cette Semaine",
+      "generatingDaily": "Génération Quotidienne…",
+      "generatingWeekly": "Génération Hebdomadaire…"
+    },
+    "success": {
+      "dailyGenerated": "Quêtes d'aujourd'hui générées",
+      "weeklyGenerated": "Quêtes de cette semaine générées"
+    },
+    "errors": {
+      "dailyFailed": "Échec de la génération des quêtes quotidiennes",
+      "weeklyFailed": "Échec de la génération des quêtes hebdomadaires"
+    }
+  }
+}

@@ -10,7 +10,7 @@ import { t } from '@/translations';
 import { toast } from 'sonner';
 
 interface QuestDetailsProps {
-  communityId: string; // Filter quests for specific community
+  communityId: string;
 }
 
 const QuestRow: React.FC<{
@@ -41,7 +41,7 @@ const QuestRow: React.FC<{
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400">
             <span className="font-medium">{quest.communityId}</span>
-            <span>•</span>
+            <span>&#8226;</span>
             <span className="font-numeric">#{quest.periodSeq}</span>
           </div>
           <Button
@@ -54,7 +54,9 @@ const QuestRow: React.FC<{
                 : 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white hover:scale-105 hover:shadow-lg'
             }`}
           >
-            {quest.isCompleted ? t('ai.completed', '✓ Done') : t('ai.completeStatus', 'Complete')}
+            {quest.isCompleted
+              ? t('quests.details.buttons.completed')
+              : t('quests.details.buttons.complete')}
           </Button>
         </div>
       </div>
@@ -85,15 +87,16 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
     onSuccess: response => {
       const xpAwarded = response.body.data.xpAwarded;
       const currentLevel = response.body.data.currentLevel;
-      toast.success(t('ai.quest_completed', 'Quest completed!'), {
-        description: `+${xpAwarded} XP • Level ${currentLevel}`,
+      toast.success(t('quests.details.success.questCompleted'), {
+        description: `+${xpAwarded} XP - Level ${currentLevel}`,
       });
       queryClient.invalidateQueries({ queryKey: ['ai-daily-quests', language] });
       queryClient.invalidateQueries({ queryKey: ['ai-weekly-quests', language] });
     },
-    onError: (error: any) => {
-      toast.error(t('ai.quest_complete_error', 'Failed to complete quest'), {
-        description: error?.response?.data?.body?.message || 'Please try again',
+    onError: (error: unknown) => {
+      const err = error as { response?: { data?: { body?: { message?: string } } } };
+      toast.error(t('quests.details.errors.completeFailed'), {
+        description: err?.response?.data?.body?.message || t('quests.details.errors.tryAgain'),
       });
     },
   });
@@ -102,7 +105,6 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
     completeMutation.mutate(questId);
   };
 
-  // Filter quests for the specific community
   const allToday = daily.data?.body?.data?.today ?? [];
   const today = allToday.filter(q => q.communityId === communityId);
 
@@ -117,17 +119,16 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
   return (
     <Tabs defaultValue="daily" className="w-full">
       <TabsList>
-        <TabsTrigger value="daily">Daily</TabsTrigger>
-        <TabsTrigger value="weekly">Weekly</TabsTrigger>
+        <TabsTrigger value="daily">{t('quests.details.tabs.daily')}</TabsTrigger>
+        <TabsTrigger value="weekly">{t('quests.details.tabs.weekly')}</TabsTrigger>
       </TabsList>
 
-      {/* Daily: Today only */}
       <TabsContent value="daily" className="mt-6 space-y-6">
         <div>
           <div className="flex items-center gap-2 mb-3">
             <div className="h-2 w-2 rounded-full bg-purple-500" />
             <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
-              {t('ai.today', 'Today')}
+              {t('quests.details.periods.today')}
             </h3>
           </div>
           <div className="grid md:grid-cols-2 gap-3">
@@ -143,7 +144,7 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
             {today.length === 0 && (
               <div className="col-span-full flex items-center justify-center py-8 px-4 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800">
                 <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                  {t('ai.noQuests', 'No quests available')}
+                  {t('quests.details.empty.noQuests')}
                 </p>
               </div>
             )}
@@ -151,14 +152,12 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
         </div>
       </TabsContent>
 
-      {/* Weekly */}
       <TabsContent value="weekly" className="mt-6 space-y-6">
-        {/* This Week */}
         <div>
           <div className="flex items-center gap-2 mb-3">
             <div className="h-2 w-2 rounded-full bg-blue-500" />
             <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
-              {t('ai.thisWeek', 'This Week')}
+              {t('quests.details.periods.thisWeek')}
             </h3>
           </div>
           <div className="grid md:grid-cols-2 gap-3">
@@ -174,18 +173,18 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
             {thisWeek.length === 0 && (
               <div className="col-span-full flex items-center justify-center py-8 px-4 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800">
                 <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                  {t('ai.noQuests', 'No quests available')}
+                  {t('quests.details.empty.noQuests')}
                 </p>
               </div>
             )}
           </div>
         </div>
-        {/* Last Week */}
+
         <div>
           <div className="flex items-center gap-2 mb-3">
             <div className="h-2 w-2 rounded-full bg-blue-400" />
             <h3 className="text-base font-semibold text-zinc-800 dark:text-zinc-200">
-              {t('ai.lastWeek', 'Last Week')}
+              {t('quests.details.periods.lastWeek')}
             </h3>
           </div>
           <div className="grid md:grid-cols-2 gap-3">
@@ -201,18 +200,18 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
             {lastWeek.length === 0 && (
               <div className="col-span-full flex items-center justify-center py-8 px-4 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800">
                 <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                  {t('ai.noQuests', 'No quests available')}
+                  {t('quests.details.empty.noQuests')}
                 </p>
               </div>
             )}
           </div>
         </div>
-        {/* Two Weeks Ago */}
+
         <div>
           <div className="flex items-center gap-2 mb-3">
             <div className="h-2 w-2 rounded-full bg-blue-300 dark:bg-blue-600" />
             <h3 className="text-base font-semibold text-zinc-700 dark:text-zinc-300">
-              {t('ai.twoWeeksAgo', 'Two Weeks Ago')}
+              {t('quests.details.periods.twoWeeksAgo')}
             </h3>
           </div>
           <div className="grid md:grid-cols-2 gap-3">
@@ -228,7 +227,7 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
             {twoWeeksAgo.length === 0 && (
               <div className="col-span-full flex items-center justify-center py-8 px-4 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800">
                 <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                  {t('ai.noQuests', 'No quests available')}
+                  {t('quests.details.empty.noQuests')}
                 </p>
               </div>
             )}

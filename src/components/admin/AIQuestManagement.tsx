@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { t } from '@/translations';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -57,9 +58,10 @@ export default function AIQuestManagement() {
       });
       refetchHealth();
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
+      const err = error as { response?: { data?: { body?: { message?: string } } } };
       toast.error('Failed to generate daily quests', {
-        description: error?.response?.data?.body?.message || 'Please try again',
+        description: err?.response?.data?.body?.message || 'Please try again',
       });
     },
   });
@@ -73,9 +75,10 @@ export default function AIQuestManagement() {
       });
       refetchHealth();
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
+      const err = error as { response?: { data?: { body?: { message?: string } } } };
       toast.error('Failed to generate weekly quests', {
-        description: error?.response?.data?.body?.message || 'Please try again',
+        description: err?.response?.data?.body?.message || 'Please try again',
       });
     },
   });
@@ -91,9 +94,10 @@ export default function AIQuestManagement() {
       setSelectedQuestId(null);
       refetchHealth();
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
+      const err = error as { response?: { data?: { body?: { message?: string } } } };
       toast.error('Failed to delete quest', {
-        description: error?.response?.data?.body?.message || 'Please try again',
+        description: err?.response?.data?.body?.message || 'Please try again',
       });
     },
   });
@@ -270,16 +274,16 @@ export default function AIQuestManagement() {
           <Card className="border-0 shadow-none">
             <div className="p-6">
               <h2 className="text-xl font-bold font-heading text-zinc-900 dark:text-zinc-50 mb-6">
-                Quest Generation
+                {t('quests.admin.title')}
               </h2>
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
                   <div>
                     <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">
-                      Force Generate Daily Quests
+                      {t('quests.admin.forceDaily.title')}
                     </h3>
                     <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
-                      Manually trigger daily quest generation for your account
+                      {t('quests.admin.forceDaily.description')}
                     </p>
                   </div>
                   <Button
@@ -290,10 +294,10 @@ export default function AIQuestManagement() {
                     {forceDailyMutation.isPending ? (
                       <span className="flex items-center gap-2">
                         <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Generating...
+                        {t('quests.admin.forceDaily.generating')}
                       </span>
                     ) : (
-                      'Generate'
+                      t('quests.admin.forceDaily.button')
                     )}
                   </Button>
                 </div>
@@ -301,10 +305,10 @@ export default function AIQuestManagement() {
                 <div className="flex items-center justify-between p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
                   <div>
                     <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">
-                      Force Generate Weekly Quests
+                      {t('quests.admin.forceWeekly.title')}
                     </h3>
                     <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
-                      Manually trigger weekly quest generation for your account
+                      {t('quests.admin.forceWeekly.description')}
                     </p>
                   </div>
                   <Button
@@ -315,10 +319,10 @@ export default function AIQuestManagement() {
                     {forceWeeklyMutation.isPending ? (
                       <span className="flex items-center gap-2">
                         <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Generating...
+                        {t('quests.admin.forceWeekly.generating')}
                       </span>
                     ) : (
-                      'Generate'
+                      t('quests.admin.forceWeekly.button')
                     )}
                   </Button>
                 </div>

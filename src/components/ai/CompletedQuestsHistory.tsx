@@ -86,7 +86,7 @@ export default function CompletedQuestsHistory() {
       <Tabs
         value={filter}
         onValueChange={value => {
-          setFilter(value as any);
+          setFilter(value as 'all' | 'Daily' | 'Weekly');
           setPage(1);
         }}
       >

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { t } from '@/translations';
 import { Card } from '@/components/ui/card';
 import {
   Dialog,
@@ -26,11 +27,9 @@ const QuestPanel: React.FC<QuestPanelProps> = ({ communityId }) => {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
           <div>
             <h3 className="font-heading text-xl font-bold text-zinc-900 dark:text-zinc-50 mb-1">
-              Quest Management
+              {t('quests.panel.title')}
             </h3>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">
-              View and track your quest progress
-            </p>
+            <p className="text-sm text-zinc-600 dark:text-zinc-400">{t('quests.panel.subtitle')}</p>
           </div>
         </div>
 
@@ -47,7 +46,7 @@ const QuestPanel: React.FC<QuestPanelProps> = ({ communityId }) => {
                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
               />
             </svg>
-            View Details
+            {t('quests.panel.viewDetails')}
           </Button>
           <Button variant="outline" onClick={() => setOpenSettings(true)}>
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -64,7 +63,7 @@ const QuestPanel: React.FC<QuestPanelProps> = ({ communityId }) => {
                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
               />
             </svg>
-            Settings
+            {t('quests.panel.settings')}
           </Button>
         </div>
       </div>
@@ -73,8 +72,10 @@ const QuestPanel: React.FC<QuestPanelProps> = ({ communityId }) => {
       <Dialog open={openDetails} onOpenChange={setOpenDetails}>
         <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold">Quest Overview</DialogTitle>
-            <DialogDescription>Track your daily and weekly quest progress</DialogDescription>
+            <DialogTitle className="text-2xl font-bold">
+              {t('quests.panel.overview.title')}
+            </DialogTitle>
+            <DialogDescription>{t('quests.panel.overview.description')}</DialogDescription>
           </DialogHeader>
           <QuestDetails communityId={communityId} />
         </DialogContent>
@@ -84,8 +85,10 @@ const QuestPanel: React.FC<QuestPanelProps> = ({ communityId }) => {
       <Dialog open={openSettings} onOpenChange={setOpenSettings}>
         <DialogContent className="max-w-lg">
           <DialogHeader>
-            <DialogTitle className="text-xl font-bold">Quest Settings</DialogTitle>
-            <DialogDescription>Configure your quest preferences</DialogDescription>
+            <DialogTitle className="text-xl font-bold">
+              {t('quests.panel.settingsModal.title')}
+            </DialogTitle>
+            <DialogDescription>{t('quests.panel.settingsModal.description')}</DialogDescription>
           </DialogHeader>
           <div className="flex flex-col items-center justify-center py-8 px-4 rounded-lg border border-dashed border-white/10 bg-white/5">
             <svg
@@ -102,7 +105,7 @@ const QuestPanel: React.FC<QuestPanelProps> = ({ communityId }) => {
               />
             </svg>
             <p className="text-sm text-muted-foreground text-center">
-              Quest settings will be available soon
+              {t('quests.panel.settingsModal.comingSoon')}
             </p>
           </div>
         </DialogContent>

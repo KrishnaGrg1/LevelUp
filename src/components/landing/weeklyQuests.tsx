@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 
 interface Props {
-  communityId: string; // Filter quests for specific community
+  communityId?: string; // Filter quests for specific community (optional, shows all if not provided)
 }
 
 const QuestCard: React.FC<{
@@ -70,10 +70,10 @@ const QuestCard: React.FC<{
                     clipRule="evenodd"
                   />
                 </svg>
-                {t('ai.completed', 'Completed')}
+                {t('quests.landing.completed')}
               </span>
             ) : (
-              t('ai.completeStatus', 'Mark Complete')
+              t('quests.landing.markComplete')
             )}
           </Button>
         </div>
@@ -98,14 +98,15 @@ const WeeklyQuests: React.FC<Props> = ({ communityId }) => {
     onSuccess: response => {
       const xpAwarded = response.body.data.xpAwarded;
       const currentLevel = response.body.data.currentLevel;
-      toast.success(t('ai.quest_completed', 'Quest completed!'), {
+      toast.success(t('quests.landing.questCompleted'), {
         description: `+${xpAwarded} XP • Level ${currentLevel}`,
       });
-      queryClient.invalidateQueries({ queryKey: ['ai-weekly-quests', language] });
+      queryClient.invalidateQueries({ queryKey: ['ai-daily-quests', language] });
     },
-    onError: (error: any) => {
-      toast.error(t('ai.quest_complete_error', 'Failed to complete quest'), {
-        description: error?.response?.data?.body?.message || 'Please try again',
+    onError: (error: unknown) => {
+      const err = error as { response?: { data?: { body?: { message?: string } } } };
+      toast.error(t('quests.landing.questCompleteFailed'), {
+        description: err?.response?.data?.body?.message || t('quests.details.errors.tryAgain'),
       });
     },
   });
@@ -114,9 +115,11 @@ const WeeklyQuests: React.FC<Props> = ({ communityId }) => {
     completeMutation.mutate(questId);
   };
 
-  // Filter quests for the specific community
+  // Filter quests for the specific community (or show all if no communityId)
   const allThisWeek = data?.body?.data?.thisWeek ?? [];
-  const thisWeek = allThisWeek.filter(q => q.communityId === communityId);
+  const thisWeek = communityId
+    ? allThisWeek.filter(q => q.communityId === communityId)
+    : allThisWeek;
 
   return (
     <Card className="border shadow-sm">
@@ -124,7 +127,7 @@ const WeeklyQuests: React.FC<Props> = ({ communityId }) => {
         <div className="flex items-center gap-2 mb-4">
           <div className="h-2 w-2 rounded-full bg-blue-500" />
           <h2 className="font-heading text-lg font-bold text-zinc-900 dark:text-zinc-50">
-            {t('ai.weeklyTitle', 'Weekly Quests')}
+            {t('quests.landing.weekly.title')}
           </h2>
         </div>
 
@@ -133,7 +136,7 @@ const WeeklyQuests: React.FC<Props> = ({ communityId }) => {
             <div className="flex flex-col items-center gap-2">
               <div className="w-6 h-6 border-2 border-blue-500/30 border-t-blue-500 rounded-full animate-spin" />
               <p className="text-xs text-zinc-600 dark:text-zinc-400">
-                {t('common.loading', 'Loading...')}
+                {t('quests.landing.loading')}
               </p>
             </div>
           </div>
@@ -151,7 +154,7 @@ const WeeklyQuests: React.FC<Props> = ({ communityId }) => {
               {thisWeek.length === 0 && (
                 <div className="flex flex-col items-center justify-center py-6 px-4 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800">
                   <p className="text-xs text-zinc-600 dark:text-zinc-400">
-                    {t('ai.noQuests', 'No quests available')}
+                    {t('quests.landing.noQuests')}
                   </p>
                 </div>
               )}

@@ -11,6 +11,7 @@ import { toast } from 'sonner';
 import { useAuth } from '@/hooks/use-auth';
 import LanguageStore from '@/stores/useLanguage';
 import { getSocket } from '@/lib/services/socket';
+import { t } from '@/translations';
 
 interface ChatMessage {
   role: 'user' | 'assistant';
@@ -127,8 +128,8 @@ export default function AIChat() {
         setChatHistory(prev => [...prev, { role: 'assistant', content: data.response }]);
         setTokens(data.remainingTokens);
         setStreamingResponse('');
-        toast.success('Response received', {
-          description: `${data.tokensUsed} token used • ${data.responseTime}ms`,
+        toast.success(t('aiChat.success.responseReceived'), {
+          description: `${data.tokensUsed} ${t('aiChat.tokens.used')} • ${data.responseTime}ms`,
         });
       },
     );
@@ -137,7 +138,7 @@ export default function AIChat() {
     existingSocket.on('ai-chat:cancelled', () => {
       setIsLoading(false);
       setStreamingResponse('');
-      toast.info('Chat cancelled');
+      toast.info(t('aiChat.success.chatCancelled'));
     });
 
     // Token balance update
@@ -154,26 +155,26 @@ export default function AIChat() {
 
         switch (error.code) {
           case 'INSUFFICIENT_TOKENS':
-            toast.error('Insufficient Tokens', {
-              description: 'Complete quests to earn more tokens!',
+            toast.error(t('aiChat.tokens.insufficient'), {
+              description: t('aiChat.tokens.insufficientDescription'),
             });
             if (error.currentTokens !== undefined) {
               setTokens(error.currentTokens);
             }
             break;
           case 'PROMPT_TOO_LONG':
-            toast.error('Prompt Too Long', {
-              description: 'Maximum 4000 characters allowed',
+            toast.error(t('aiChat.errors.promptTooLong'), {
+              description: t('aiChat.errors.promptTooLongDescription'),
             });
             break;
           case 'AUTH_ERROR':
-            toast.error('Authentication Error', {
-              description: 'Please log in again',
+            toast.error(t('aiChat.errors.authError'), {
+              description: t('aiChat.errors.authErrorDescription'),
             });
             break;
           default:
-            toast.error('Chat Error', {
-              description: error.message || 'Please try again',
+            toast.error(t('aiChat.errors.chatError'), {
+              description: error.message || t('aiChat.errors.chatErrorDescription'),
             });
         }
       },
@@ -205,27 +206,27 @@ export default function AIChat() {
     });
 
     if (!prompt.trim()) {
-      toast.error('Please enter a message');
+      toast.error(t('aiChat.errors.chatError'));
       return;
     }
 
     if (tokens <= 0) {
-      toast.error('No tokens available', {
-        description: 'Complete quests to earn more tokens!',
+      toast.error(t('aiChat.tokens.insufficient'), {
+        description: t('aiChat.tokens.insufficientDescription'),
       });
       return;
     }
 
     if (!socket || !isConnected) {
-      toast.error('Not connected', {
-        description: 'Waiting for connection to AI service...',
+      toast.error(t('aiChat.errors.connectionError'), {
+        description: t('aiChat.errors.notConnected'),
       });
       return;
     }
 
     if (prompt.length > 4000) {
-      toast.error('Prompt too long', {
-        description: 'Maximum 4000 characters allowed',
+      toast.error(t('aiChat.errors.promptTooLong'), {
+        description: t('aiChat.errors.promptTooLongDescription'),
       });
       return;
     }
@@ -256,7 +257,7 @@ export default function AIChat() {
     setChatHistory([]);
     setStreamingResponse('');
     sessionIdRef.current = `session_${Date.now()}`;
-    toast.info('Chat cleared');
+    toast.info(t('aiChat.success.chatCleared'));
   };
 
   return (
@@ -265,11 +266,9 @@ export default function AIChat() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold font-heading text-zinc-900 dark:text-zinc-50">
-            AI Chat
+            {t('aiChat.title')}
           </h1>
-          <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
-            Real-time AI-powered assistance with streaming responses
-          </p>
+          <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">{t('aiChat.subtitle')}</p>
         </div>
         <div className="flex items-center gap-3">
           {/* Connection Status */}
@@ -280,16 +279,18 @@ export default function AIChat() {
               } animate-pulse`}
             />
             <span className="text-xs text-zinc-500 dark:text-zinc-400">
-              {isConnected ? 'Connected' : 'Disconnected'}
+              {isConnected
+                ? t('aiChat.connectionStatus.connected')
+                : t('aiChat.connectionStatus.disconnected')}
             </span>
           </div>
           {chatHistory.length > 0 && (
             <Button size="sm" variant="outline" onClick={clearChat} className="text-xs">
-              Clear Chat
+              {t('aiChat.buttons.clear')}
             </Button>
           )}
           <Badge className="bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900">
-            {tokens} Token{tokens !== 1 ? 's' : ''}
+            {tokens} {t('aiChat.tokens.available')}
           </Badge>
         </div>
       </div>
@@ -298,20 +299,19 @@ export default function AIChat() {
       {!isConnected ? (
         <Alert className="border-orange-200 dark:border-orange-800 bg-orange-50 dark:bg-orange-900/10">
           <AlertDescription className="text-sm text-orange-900 dark:text-orange-100">
-            ⚠️ Connecting to AI service... Please wait.
+            ⚠️ {t('aiChat.connectionStatus.connecting')}
           </AlertDescription>
         </Alert>
       ) : tokens <= 0 ? (
         <Alert className="border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/10">
           <AlertDescription className="text-sm text-red-900 dark:text-red-100">
-            ❌ You have 0 tokens. Complete quests to earn more tokens!
+            ❌ {t('aiChat.tokens.insufficientDescription')}
           </AlertDescription>
         </Alert>
       ) : (
         <Alert className="border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/10">
           <AlertDescription className="text-sm text-blue-900 dark:text-blue-100">
-            💡 Each message costs 1 token. Responses stream in real-time. Complete quests to earn
-            more tokens!
+            💡 {t('aiChat.tokens.insufficientDescription')}
           </AlertDescription>
         </Alert>
       )}
@@ -336,10 +336,10 @@ export default function AIChat() {
                   />
                 </svg>
                 <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 mb-2">
-                  Start a conversation
+                  {t('aiChat.empty.title')}
                 </h3>
                 <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                  Ask anything about your communities, quests, or get general assistance
+                  {t('aiChat.empty.description')}
                 </p>
               </div>
             ) : (
@@ -398,10 +398,10 @@ export default function AIChat() {
                 onChange={e => setPrompt(e.target.value)}
                 placeholder={
                   !isConnected
-                    ? 'Connecting to chat...'
+                    ? t('aiChat.input.placeholderDisconnected')
                     : tokens <= 0
-                      ? 'No tokens available'
-                      : 'Type your message...'
+                      ? t('aiChat.tokens.insufficient')
+                      : t('aiChat.input.placeholder')
                 }
                 disabled={isLoading}
                 className="flex-1"
@@ -429,7 +429,7 @@ export default function AIChat() {
                         d="M6 18L18 6M6 6l12 12"
                       />
                     </svg>
-                    Cancel
+                    {t('aiChat.buttons.cancel')}
                   </span>
                 </Button>
               ) : (
@@ -447,7 +447,7 @@ export default function AIChat() {
                         d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
                       />
                     </svg>
-                    Send
+                    {t('aiChat.buttons.send')}
                   </span>
                 </Button>
               )}
@@ -455,8 +455,10 @@ export default function AIChat() {
 
             {/* Character count and info */}
             <div className="flex items-center justify-between text-xs text-zinc-500 dark:text-zinc-400">
-              <span>Press Enter to send, Shift+Enter for new line</span>
-              <span>{prompt.length} / 4000</span>
+              <span>{t('aiChat.input.maxLength')}</span>
+              <span>
+                {prompt.length} / 4000 {t('aiChat.input.characterCount')}
+              </span>
             </div>
           </form>
         </div>

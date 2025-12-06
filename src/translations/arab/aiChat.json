@@ -1,0 +1,55 @@
+{
+  "title": "مساعد الدردشة بالذكاء الاصطناعي",
+  "subtitle": "احصل على إجابات ذكية مدعومة بالذكاء الاصطناعي",
+  "connectionStatus": {
+    "connected": "متصل",
+    "disconnected": "غير متصل",
+    "connecting": "جاري الاتصال..."
+  },
+  "tokens": {
+    "available": "الرموز المتاحة",
+    "insufficient": "رموز غير كافية",
+    "insufficientDescription": "تحتاج إلى المزيد من الرموز لمواصلة الدردشة",
+    "used": "الرموز المستخدمة"
+  },
+  "input": {
+    "placeholder": "اكتب رسالتك هنا...",
+    "placeholderDisconnected": "الاتصال بالخادم...",
+    "placeholderLoading": "الذكاء الاصطناعي يفكر...",
+    "maxLength": "الحد الأقصى 4000 حرف",
+    "characterCount": "أحرف"
+  },
+  "buttons": {
+    "send": "إرسال",
+    "cancel": "إلغاء",
+    "clear": "مسح الدردشة",
+    "clearConfirm": "هل أنت متأكد أنك تريد مسح سجل الدردشة؟"
+  },
+  "messages": {
+    "you": "أنت",
+    "assistant": "مساعد الذكاء الاصطناعي",
+    "streaming": "الذكاء الاصطناعي يستجيب..."
+  },
+  "errors": {
+    "connectionError": "خطأ في الاتصال",
+    "connectionErrorDescription": "فشل الاتصال بخدمة الذكاء الاصطناعي",
+    "connectionTimeout": "انتهت مهلة الاتصال",
+    "connectionTimeoutDescription": "تعذر الاتصال بالخادم. يرجى المحاولة مرة أخرى.",
+    "promptTooLong": "الرسالة طويلة جدًا",
+    "promptTooLongDescription": "يرجى إبقاء رسالتك أقل من 4000 حرف",
+    "authError": "خطأ في المصادقة",
+    "authErrorDescription": "يرجى تسجيل الدخول لاستخدام دردشة الذكاء الاصطناعي",
+    "chatError": "خطأ في الدردشة",
+    "chatErrorDescription": "حدث خطأ. يرجى المحاولة مرة أخرى.",
+    "notConnected": "غير متصل بالخادم"
+  },
+  "success": {
+    "responseReceived": "تم استلام الرد",
+    "chatCancelled": "تم إلغاء الدردشة",
+    "chatCleared": "تم مسح سجل الدردشة"
+  },
+  "empty": {
+    "title": "ابدأ محادثة",
+    "description": "اسألني أي شيء! أنا هنا لمساعدتك."
+  }
+}

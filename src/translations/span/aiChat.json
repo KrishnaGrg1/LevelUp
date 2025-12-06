@@ -1,0 +1,55 @@
+{
+  "title": "Asistente de Chat IA",
+  "subtitle": "Obtén respuestas inteligentes impulsadas por IA",
+  "connectionStatus": {
+    "connected": "Conectado",
+    "disconnected": "Desconectado",
+    "connecting": "Conectando..."
+  },
+  "tokens": {
+    "available": "tokens disponibles",
+    "insufficient": "Tokens insuficientes",
+    "insufficientDescription": "Necesitas más tokens para continuar chateando",
+    "used": "tokens usados"
+  },
+  "input": {
+    "placeholder": "Escribe tu mensaje aquí...",
+    "placeholderDisconnected": "Conectando al servidor...",
+    "placeholderLoading": "La IA está pensando...",
+    "maxLength": "Máx. 4000 caracteres",
+    "characterCount": "caracteres"
+  },
+  "buttons": {
+    "send": "Enviar",
+    "cancel": "Cancelar",
+    "clear": "Limpiar Chat",
+    "clearConfirm": "¿Estás seguro de que quieres borrar el historial de chat?"
+  },
+  "messages": {
+    "you": "Tú",
+    "assistant": "Asistente IA",
+    "streaming": "La IA está respondiendo..."
+  },
+  "errors": {
+    "connectionError": "Error de Conexión",
+    "connectionErrorDescription": "No se pudo conectar al servicio de IA",
+    "connectionTimeout": "Tiempo de Conexión Agotado",
+    "connectionTimeoutDescription": "No se pudo conectar al servidor. Por favor, inténtalo de nuevo.",
+    "promptTooLong": "Mensaje Demasiado Largo",
+    "promptTooLongDescription": "Por favor, mantén tu mensaje bajo 4000 caracteres",
+    "authError": "Error de Autenticación",
+    "authErrorDescription": "Por favor, inicia sesión para usar el Chat IA",
+    "chatError": "Error de Chat",
+    "chatErrorDescription": "Ocurrió un error. Por favor, inténtalo de nuevo.",
+    "notConnected": "No conectado al servidor"
+  },
+  "success": {
+    "responseReceived": "Respuesta recibida",
+    "chatCancelled": "Chat cancelado",
+    "chatCleared": "Historial de chat borrado"
+  },
+  "empty": {
+    "title": "Iniciar una Conversación",
+    "description": "¡Pregúntame lo que quieras! Estoy aquí para ayudarte."
+  }
+}

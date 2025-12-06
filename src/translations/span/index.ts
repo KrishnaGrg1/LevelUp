@@ -8,6 +8,8 @@ import pricing from './pricing.json';
 import dashboard from './dashboard.json';
 import profile from './profile.json';
 import clans from './clans.json';
+import aiChat from './aiChat.json';
+import quests from './quests.json';
 
 const span = {
   auth,
@@ -20,5 +22,7 @@ const span = {
   nav,
   landing,
   clans,
+  aiChat,
+  quests,
 };
 export default span;

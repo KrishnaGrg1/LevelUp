@@ -8,6 +8,8 @@ import pricing from './pricing.json';
 import dashboard from './dashboard.json';
 import profile from './profile.json';
 import clans from './clans.json';
+import aiChat from './aiChat.json';
+import quests from './quests.json';
 
 const eng = {
   auth,
@@ -20,6 +22,8 @@ const eng = {
   landing,
   pricing,
   clans,
+  aiChat,
+  quests,
 };
 
 export default eng;
