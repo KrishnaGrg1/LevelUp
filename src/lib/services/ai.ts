@@ -1,5 +1,6 @@
 import axiosInstance from '../fetch';
 import { Language } from '@/stores/useLanguage';
+import { t } from '@/translations';
 
 export interface Quest {
   id: string;
@@ -19,10 +20,60 @@ export interface Quest {
   periodSeq: number; // 1–5
   // additional fields returned by API
   isCompleted?: boolean;
+  startedAt?: string | null;
+  completedAt?: string | null;
+  estimatedMinutes?: number; // AI-generated completion time (15-120 minutes)
   date?: string;
   createdAt?: string;
   communityMemberId?: string | null;
   source?: string;
+}
+
+export type QuestStatus = 'not-started' | 'in-progress' | 'ready' | 'completed';
+
+export interface TimeRemaining {
+  isReady: boolean;
+  remainingMinutes: number;
+  remainingText: string;
+  progressPercent: number;
+}
+
+export function getQuestStatus(quest: Quest): QuestStatus {
+  if (quest.isCompleted || quest.completedAt) return 'completed';
+  if (quest.startedAt) {
+    const timeRemaining = getTimeRemaining(quest);
+    return timeRemaining.isReady ? 'ready' : 'in-progress';
+  }
+  return 'not-started';
+}
+
+export function getTimeRemaining(quest: Quest): TimeRemaining {
+  if (!quest.startedAt) {
+    const required = quest.estimatedMinutes || 30;
+    return {
+      isReady: false,
+      remainingMinutes: required,
+      remainingText: t('quests.landing.minRequired', { minutes: required }),
+      progressPercent: 0,
+    };
+  }
+
+  const requiredMinutes = quest.estimatedMinutes || 30;
+  const startTime = new Date(quest.startedAt).getTime();
+  const now = Date.now();
+  const elapsedMinutes = Math.floor((now - startTime) / (1000 * 60));
+  const remainingMinutes = Math.max(0, requiredMinutes - elapsedMinutes);
+  const progressPercent = Math.min(100, (elapsedMinutes / requiredMinutes) * 100);
+
+  return {
+    isReady: remainingMinutes === 0,
+    remainingMinutes,
+    remainingText:
+      remainingMinutes > 0
+        ? t('quests.landing.minRemaining', { minutes: remainingMinutes })
+        : t('quests.landing.readyToComplete'),
+    progressPercent,
+  };
 }
 
 export interface DailyQuestsData {
@@ -97,6 +148,22 @@ export interface CompleteQuestResponse {
   communityLevel?: number;
   communityId?: string;
 }
+
+export interface StartQuestResponse {
+  quest: Quest;
+}
+
+export const startQuest = async (questId: string, lang: Language) => {
+  const res = await axiosInstance.post<ApiResponse<StartQuestResponse>>(
+    `/ai/quests/start`,
+    { questId },
+    {
+      headers: { 'X-Language': lang },
+      withCredentials: true,
+    },
+  );
+  return res.data;
+};
 
 export const completeQuest = async (questId: string, lang: Language) => {
   const res = await axiosInstance.patch<ApiResponse<CompleteQuestResponse>>(

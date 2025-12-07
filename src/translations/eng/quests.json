@@ -58,7 +58,18 @@
     "questCompleted": "Quest completed!",
     "questCompleteFailed": "Failed to complete quest",
     "xpLevel": "+{xp} XP • Level {level}",
-    "questNumber": "Quest #{number}"
+    "questNumber": "Quest #{number}",
+    "startQuest": "Start Quest",
+    "starting": "Starting...",
+    "completeQuest": "Complete Quest",
+    "completing": "Completing...",
+    "completeLocked": "Complete Quest (locked)",
+    "questStarted": "Quest started!",
+    "questStartedDesc": "Complete it within {minutes} minutes to earn rewards.",
+    "questStartFailed": "Failed to start quest",
+    "minRemaining": "{minutes} min remaining",
+    "readyToComplete": "Ready to complete!",
+    "minRequired": "{minutes} min required"
   },
   "dashboard": {
     "quest": "quest",

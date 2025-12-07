@@ -4,7 +4,13 @@ import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { t } from '@/translations';
 import LanguageStore from '@/stores/useLanguage';
-import { fetchDailyQuests, completeQuest, type Quest } from '@/lib/services/ai';
+import {
+  fetchDailyQuests,
+  completeQuest,
+  type Quest,
+  type ApiResponse,
+  type DailyQuestsData,
+} from '@/lib/services/ai';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
@@ -102,24 +108,30 @@ const TodaysQuests: React.FC<Props> = ({ communityId }) => {
       await queryClient.cancelQueries({ queryKey: ['ai-daily-quests', language] });
 
       // Snapshot previous value
-      const previousData = queryClient.getQueryData(['ai-daily-quests', language]);
+      const previousData = queryClient.getQueryData<ApiResponse<DailyQuestsData>>([
+        'ai-daily-quests',
+        language,
+      ]);
 
       // Optimistically update to mark quest as completed
-      queryClient.setQueryData(['ai-daily-quests', language], (old: any) => {
-        if (!old) return old;
-        return {
-          ...old,
-          body: {
-            ...old.body,
-            data: {
-              ...old.body.data,
-              today: old.body.data.today.map((q: any) =>
-                q.id === questId ? { ...q, isCompleted: true } : q,
-              ),
+      queryClient.setQueryData(
+        ['ai-daily-quests', language],
+        (old: ApiResponse<DailyQuestsData> | undefined) => {
+          if (!old) return old;
+          return {
+            ...old,
+            body: {
+              ...old.body,
+              data: {
+                ...old.body.data,
+                today: old.body.data.today.map((q: Quest) =>
+                  q.id === questId ? { ...q, isCompleted: true } : q,
+                ),
+              },
             },
-          },
-        };
-      });
+          };
+        },
+      );
 
       return { previousData };
     },
@@ -134,7 +146,11 @@ const TodaysQuests: React.FC<Props> = ({ communityId }) => {
       queryClient.invalidateQueries({ queryKey: ['ai-daily-quests', language] });
       queryClient.invalidateQueries({ queryKey: ['community-memberships', language] });
     },
-    onError: (error: unknown, _questId: string, context: any) => {
+    onError: (
+      error: unknown,
+      _questId: string,
+      context: { previousData: ApiResponse<DailyQuestsData> | undefined } | undefined,
+    ) => {
       // Rollback on error
       if (context?.previousData) {
         queryClient.setQueryData(['ai-daily-quests', language], context.previousData);

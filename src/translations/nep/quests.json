@@ -58,7 +58,18 @@
     "questCompleted": "खोज पूरा भयो!",
     "questCompleteFailed": "खोज पूरा गर्न असफल",
     "xpLevel": "+{xp} XP • स्तर {level}",
-    "questNumber": "खोज #{number}"
+    "questNumber": "खोज #{number}",
+    "startQuest": "खोज सुरु गर्नुहोस्",
+    "starting": "सुरु गर्दै...",
+    "completeQuest": "खोज पूरा गर्नुहोस्",
+    "completing": "पूरा गर्दै...",
+    "completeLocked": "खोज पूरा गर्नुहोस् (लक गरिएको)",
+    "questStarted": "खोज सुरु भयो!",
+    "questStartedDesc": "पुरस्कार प्राप्त गर्न {minutes} मिनेट भित्र पूरा गर्नुहोस्।",
+    "questStartFailed": "खोज सुरु गर्न असफल",
+    "minRemaining": "{minutes} मिनेट बाँकी",
+    "readyToComplete": "पूरा गर्न तयार!",
+    "minRequired": "{minutes} मिनेट आवश्यक"
   },
   "dashboard": {
     "quest": "खोज",

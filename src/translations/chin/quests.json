@@ -52,13 +52,24 @@
       "button": "每周任务"
     },
     "loading": "加载中...",
-    "noQuests": "没有可用任务",
+    "noQuests": "没有可用的任务",
     "completed": "已完成",
     "markComplete": "标记完成",
     "questCompleted": "任务完成！",
-    "questCompleteFailed": "任务完成失败",
+    "questCompleteFailed": "完成任务失败",
     "xpLevel": "+{xp} XP • 等级 {level}",
-    "questNumber": "任务 #{number}"
+    "questNumber": "任务 #{number}",
+    "startQuest": "开始任务",
+    "starting": "开始中...",
+    "completeQuest": "完成任务",
+    "completing": "完成中...",
+    "completeLocked": "完成任务（已锁定）",
+    "questStarted": "任务已开始！",
+    "questStartedDesc": "在{minutes}分钟内完成以获得奖励。",
+    "questStartFailed": "开始任务失败",
+    "minRemaining": "剩余{minutes}分钟",
+    "readyToComplete": "准备完成！",
+    "minRequired": "需要{minutes}分钟"
   },
   "dashboard": {
     "quest": "任务",

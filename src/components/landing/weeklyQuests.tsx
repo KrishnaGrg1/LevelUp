@@ -4,7 +4,13 @@ import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { t } from '@/translations';
 import LanguageStore from '@/stores/useLanguage';
-import { fetchWeeklyQuests, completeQuest, type Quest } from '@/lib/services/ai';
+import {
+  fetchWeeklyQuests,
+  completeQuest,
+  type Quest,
+  type ApiResponse,
+  type WeeklyQuestsData,
+} from '@/lib/services/ai';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
@@ -102,24 +108,30 @@ const WeeklyQuests: React.FC<Props> = ({ communityId }) => {
       await queryClient.cancelQueries({ queryKey: ['ai-weekly-quests', language] });
 
       // Snapshot previous value
-      const previousData = queryClient.getQueryData(['ai-weekly-quests', language]);
+      const previousData = queryClient.getQueryData<ApiResponse<WeeklyQuestsData>>([
+        'ai-weekly-quests',
+        language,
+      ]);
 
       // Optimistically update to mark quest as completed
-      queryClient.setQueryData(['ai-weekly-quests', language], (old: any) => {
-        if (!old) return old;
-        return {
-          ...old,
-          body: {
-            ...old.body,
-            data: {
-              ...old.body.data,
-              thisWeek: old.body.data.thisWeek.map((q: any) =>
-                q.id === questId ? { ...q, isCompleted: true } : q,
-              ),
+      queryClient.setQueryData(
+        ['ai-weekly-quests', language],
+        (old: ApiResponse<WeeklyQuestsData> | undefined) => {
+          if (!old) return old;
+          return {
+            ...old,
+            body: {
+              ...old.body,
+              data: {
+                ...old.body.data,
+                thisWeek: old.body.data.thisWeek.map((q: Quest) =>
+                  q.id === questId ? { ...q, isCompleted: true } : q,
+                ),
+              },
             },
-          },
-        };
-      });
+          };
+        },
+      );
 
       return { previousData };
     },
@@ -134,7 +146,11 @@ const WeeklyQuests: React.FC<Props> = ({ communityId }) => {
       queryClient.invalidateQueries({ queryKey: ['ai-daily-quests', language] });
       queryClient.invalidateQueries({ queryKey: ['community-memberships', language] });
     },
-    onError: (error: unknown, _questId: string, context: any) => {
+    onError: (
+      error: unknown,
+      _questId: string,
+      context: { previousData: ApiResponse<WeeklyQuestsData> | undefined } | undefined,
+    ) => {
       // Rollback on error
       if (context?.previousData) {
         queryClient.setQueryData(['ai-weekly-quests', language], context.previousData);

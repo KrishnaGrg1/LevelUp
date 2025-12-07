@@ -4,7 +4,15 @@ import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { t } from '@/translations';
 import LanguageStore from '@/stores/useLanguage';
-import { fetchDailyQuests, fetchWeeklyQuests, completeQuest, type Quest } from '@/lib/services/ai';
+import {
+  fetchDailyQuests,
+  fetchWeeklyQuests,
+  completeQuest,
+  type Quest,
+  type ApiResponse,
+  type DailyQuestsData,
+  type WeeklyQuestsData,
+} from '@/lib/services/ai';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
@@ -162,42 +170,54 @@ export default function DashboardQuests() {
       await queryClient.cancelQueries({ queryKey: ['ai-weekly-quests', language] });
 
       // Snapshot previous values
-      const previousDaily = queryClient.getQueryData(['ai-daily-quests', language]);
-      const previousWeekly = queryClient.getQueryData(['ai-weekly-quests', language]);
+      const previousDaily = queryClient.getQueryData<ApiResponse<DailyQuestsData>>([
+        'ai-daily-quests',
+        language,
+      ]);
+      const previousWeekly = queryClient.getQueryData<ApiResponse<WeeklyQuestsData>>([
+        'ai-weekly-quests',
+        language,
+      ]);
 
       // Optimistically update daily quests
-      queryClient.setQueryData(['ai-daily-quests', language], (old: any) => {
-        if (!old) return old;
-        return {
-          ...old,
-          body: {
-            ...old.body,
-            data: {
-              ...old.body.data,
-              today: old.body.data.today.map((q: any) =>
-                q.id === questId ? { ...q, isCompleted: true } : q,
-              ),
+      queryClient.setQueryData(
+        ['ai-daily-quests', language],
+        (old: ApiResponse<DailyQuestsData> | undefined) => {
+          if (!old) return old;
+          return {
+            ...old,
+            body: {
+              ...old.body,
+              data: {
+                ...old.body.data,
+                today: old.body.data.today.map((q: Quest) =>
+                  q.id === questId ? { ...q, isCompleted: true } : q,
+                ),
+              },
             },
-          },
-        };
-      });
+          };
+        },
+      );
 
       // Optimistically update weekly quests
-      queryClient.setQueryData(['ai-weekly-quests', language], (old: any) => {
-        if (!old) return old;
-        return {
-          ...old,
-          body: {
-            ...old.body,
-            data: {
-              ...old.body.data,
-              thisWeek: old.body.data.thisWeek.map((q: any) =>
-                q.id === questId ? { ...q, isCompleted: true } : q,
-              ),
+      queryClient.setQueryData(
+        ['ai-weekly-quests', language],
+        (old: ApiResponse<WeeklyQuestsData> | undefined) => {
+          if (!old) return old;
+          return {
+            ...old,
+            body: {
+              ...old.body,
+              data: {
+                ...old.body.data,
+                thisWeek: old.body.data.thisWeek.map((q: Quest) =>
+                  q.id === questId ? { ...q, isCompleted: true } : q,
+                ),
+              },
             },
-          },
-        };
-      });
+          };
+        },
+      );
 
       return { previousDaily, previousWeekly };
     },
@@ -229,7 +249,16 @@ export default function DashboardQuests() {
       queryClient.invalidateQueries({ queryKey: ['my-communities', language] });
       queryClient.invalidateQueries({ queryKey: ['community-memberships', language] });
     },
-    onError: (error: unknown, _questId: string, context: any) => {
+    onError: (
+      error: unknown,
+      _questId: string,
+      context:
+        | {
+            previousDaily: ApiResponse<DailyQuestsData> | undefined;
+            previousWeekly: ApiResponse<WeeklyQuestsData> | undefined;
+          }
+        | undefined,
+    ) => {
       // Rollback on error
       if (context?.previousDaily) {
         queryClient.setQueryData(['ai-daily-quests', language], context.previousDaily);

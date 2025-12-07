@@ -199,7 +199,7 @@ export default function AIChat() {
       existingSocket.off('ai-chat:tokens');
       existingSocket.off('ai-chat:error');
     };
-  }, [user, isAuthenticated]);
+  }, [user, isAuthenticated, setUserTokens]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

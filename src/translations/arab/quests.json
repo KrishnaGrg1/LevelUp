@@ -51,14 +51,25 @@
       "title": "المهام الأسبوعية",
       "button": "المهام الأسبوعية"
     },
-    "loading": "جار التحميل...",
+    "loading": "جارٍ التحميل...",
     "noQuests": "لا توجد مهام متاحة",
     "completed": "مكتمل",
-    "markComplete": "وضع علامة مكتمل",
+    "markComplete": "وضع علامة كمكتمل",
     "questCompleted": "اكتملت المهمة!",
     "questCompleteFailed": "فشل إكمال المهمة",
     "xpLevel": "+{xp} XP • المستوى {level}",
-    "questNumber": "المهمة #{number}"
+    "questNumber": "المهمة #{number}",
+    "startQuest": "بدء المهمة",
+    "starting": "جارٍ البدء...",
+    "completeQuest": "إكمال المهمة",
+    "completing": "جارٍ الإكمال...",
+    "completeLocked": "إكمال المهمة (مقفل)",
+    "questStarted": "بدأت المهمة!",
+    "questStartedDesc": "أكملها خلال {minutes} دقيقة للحصول على المكافآت.",
+    "questStartFailed": "فشل بدء المهمة",
+    "minRemaining": "{minutes} دقيقة متبقية",
+    "readyToComplete": "جاهز للإكمال!",
+    "minRequired": "{minutes} دقيقة مطلوبة"
   },
   "dashboard": {
     "quest": "مهمة",
