@@ -299,3 +299,23 @@ export const getUserClans = async (userId: string, lang: Language) => {
     throw new Error(errorMessage);
   }
 };
+
+export const checkClanMembership = async (userId: string, clanId: string) => {
+  try {
+    const response = await axiosInstance.get(`/clan/checkMembership/${clanId}`, {
+      withCredentials: true,
+      params: { userId },
+    });
+    console.log('Check Clan Membership Response:', response.data);
+    return response.data.body.data;
+  } catch (error: unknown) {
+    const err = error as {
+      response?: { data?: { body?: { message?: string }; message?: string } };
+    };
+    const errorMessage =
+      err.response?.data?.body?.message ||
+      err.response?.data?.message ||
+      'Failed to check clan membership';
+    throw new Error(errorMessage);
+  }
+};
