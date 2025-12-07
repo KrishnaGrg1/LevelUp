@@ -25,7 +25,7 @@ const fr = {
   clans,
   aiChat,
   quests,
+  community,
 };
 
 export default fr;
-

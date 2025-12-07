@@ -25,7 +25,7 @@ const jap = {
   clans,
   aiChat,
   quests,
+  community,
 };
 
 export default jap;
-

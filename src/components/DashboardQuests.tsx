@@ -156,6 +156,51 @@ export default function DashboardQuests() {
 
   const completeMutation = useMutation({
     mutationFn: (questId: string) => completeQuest(questId, language),
+    onMutate: async (questId: string) => {
+      // Cancel outgoing refetches
+      await queryClient.cancelQueries({ queryKey: ['ai-daily-quests', language] });
+      await queryClient.cancelQueries({ queryKey: ['ai-weekly-quests', language] });
+
+      // Snapshot previous values
+      const previousDaily = queryClient.getQueryData(['ai-daily-quests', language]);
+      const previousWeekly = queryClient.getQueryData(['ai-weekly-quests', language]);
+
+      // Optimistically update daily quests
+      queryClient.setQueryData(['ai-daily-quests', language], (old: any) => {
+        if (!old) return old;
+        return {
+          ...old,
+          body: {
+            ...old.body,
+            data: {
+              ...old.body.data,
+              today: old.body.data.today.map((q: any) =>
+                q.id === questId ? { ...q, isCompleted: true } : q,
+              ),
+            },
+          },
+        };
+      });
+
+      // Optimistically update weekly quests
+      queryClient.setQueryData(['ai-weekly-quests', language], (old: any) => {
+        if (!old) return old;
+        return {
+          ...old,
+          body: {
+            ...old.body,
+            data: {
+              ...old.body.data,
+              thisWeek: old.body.data.thisWeek.map((q: any) =>
+                q.id === questId ? { ...q, isCompleted: true } : q,
+              ),
+            },
+          },
+        };
+      });
+
+      return { previousDaily, previousWeekly };
+    },
     onSuccess: response => {
       const { xpAwarded, currentLevel, tokensAwarded, currentTokens, communityXp, communityId } =
         response.body.data;
@@ -182,8 +227,16 @@ export default function DashboardQuests() {
       queryClient.invalidateQueries({ queryKey: ['ai-daily-quests', language] });
       queryClient.invalidateQueries({ queryKey: ['ai-weekly-quests', language] });
       queryClient.invalidateQueries({ queryKey: ['my-communities', language] });
+      queryClient.invalidateQueries({ queryKey: ['community-memberships', language] });
     },
-    onError: (error: unknown) => {
+    onError: (error: unknown, _questId: string, context: any) => {
+      // Rollback on error
+      if (context?.previousDaily) {
+        queryClient.setQueryData(['ai-daily-quests', language], context.previousDaily);
+      }
+      if (context?.previousWeekly) {
+        queryClient.setQueryData(['ai-weekly-quests', language], context.previousWeekly);
+      }
       const err = error as { response?: { data?: { body?: { message?: string } } } };
       toast.error(t('quests.landing.questCompleteFailed'), {
         description: err?.response?.data?.body?.message || t('quests.details.errors.tryAgain'),

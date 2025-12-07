@@ -372,6 +372,22 @@ export interface communityDetailByIdResponse {
   };
 }
 
+export interface CommunityMemberProfile {
+  totalXP: number;
+  level: number;
+  userRole: 'ADMIN' | 'MEMBER';
+  communityId: string;
+  communityName: string;
+}
+
+export interface CommunityMemberProfileResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: CommunityMemberProfile;
+  };
+}
+
 export interface Sender {
   id: string;
   UserName: string;

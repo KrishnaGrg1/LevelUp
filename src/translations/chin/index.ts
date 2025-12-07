@@ -25,7 +25,7 @@ const chin = {
   clans,
   aiChat,
   quests,
+  community,
 };
 
 export default chin;
-

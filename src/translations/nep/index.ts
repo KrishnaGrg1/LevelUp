@@ -25,7 +25,7 @@ const nep = {
   clans,
   aiChat,
   quests,
+  community,
 };
 
 export default nep;
-

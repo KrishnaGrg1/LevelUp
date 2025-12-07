@@ -97,11 +97,34 @@ const WeeklyQuests: React.FC<Props> = ({ communityId }) => {
 
   const completeMutation = useMutation({
     mutationFn: (questId: string) => completeQuest(questId, language),
+    onMutate: async (questId: string) => {
+      // Cancel outgoing refetches
+      await queryClient.cancelQueries({ queryKey: ['ai-weekly-quests', language] });
+
+      // Snapshot previous value
+      const previousData = queryClient.getQueryData(['ai-weekly-quests', language]);
+
+      // Optimistically update to mark quest as completed
+      queryClient.setQueryData(['ai-weekly-quests', language], (old: any) => {
+        if (!old) return old;
+        return {
+          ...old,
+          body: {
+            ...old.body,
+            data: {
+              ...old.body.data,
+              thisWeek: old.body.data.thisWeek.map((q: any) =>
+                q.id === questId ? { ...q, isCompleted: true } : q,
+              ),
+            },
+          },
+        };
+      });
+
+      return { previousData };
+    },
     onSuccess: response => {
-      const xpAwarded = response.body.data.xpAwarded;
-      const currentLevel = response.body.data.currentLevel;
-      const tokensAwarded = response.body.data.tokensAwarded;
-      const currentTokens = response.body.data.currentTokens;
+      const { xpAwarded, currentLevel, tokensAwarded, currentTokens } = response.body.data;
       toast.success(t('quests.landing.questCompleted'), {
         description: `+${xpAwarded} XP • +${tokensAwarded} Tokens • Level ${currentLevel}`,
       });
@@ -109,8 +132,13 @@ const WeeklyQuests: React.FC<Props> = ({ communityId }) => {
         setTokens(currentTokens);
       }
       queryClient.invalidateQueries({ queryKey: ['ai-daily-quests', language] });
+      queryClient.invalidateQueries({ queryKey: ['community-memberships', language] });
     },
-    onError: (error: unknown) => {
+    onError: (error: unknown, _questId: string, context: any) => {
+      // Rollback on error
+      if (context?.previousData) {
+        queryClient.setQueryData(['ai-weekly-quests', language], context.previousData);
+      }
       const err = error as { response?: { data?: { body?: { message?: string } } } };
       toast.error(t('quests.landing.questCompleteFailed'), {
         description: err?.response?.data?.body?.message || t('quests.details.errors.tryAgain'),

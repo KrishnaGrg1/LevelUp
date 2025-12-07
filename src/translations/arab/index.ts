@@ -25,7 +25,7 @@ const arab = {
   clans,
   aiChat,
   quests,
+  community,
 };
 
 export default arab;
-

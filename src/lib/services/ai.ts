@@ -299,3 +299,33 @@ export const deleteQuest = async (questId: string, lang: Language) => {
   );
   return res.data;
 };
+
+// Community Memberships
+export interface CommunityMembership {
+  communityId: string;
+  totalXP: number;
+  level: number;
+  status: string;
+  isPinned: boolean;
+  community: {
+    id: string;
+    name: string;
+    description: string;
+    photo: string | null;
+  };
+}
+
+export interface CommunityMembershipsResponse {
+  memberships: CommunityMembership[];
+}
+
+export const getCommunityMemberships = async (lang: Language) => {
+  const res = await axiosInstance.get<ApiResponse<CommunityMembershipsResponse>>(
+    `/ai/community/memberships`,
+    {
+      headers: { 'X-Language': lang },
+      withCredentials: true,
+    },
+  );
+  return res.data;
+};

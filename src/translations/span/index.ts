@@ -25,6 +25,6 @@ const span = {
   clans,
   aiChat,
   quests,
+  community,
 };
 export default span;
-
