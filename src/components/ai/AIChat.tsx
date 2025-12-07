@@ -12,6 +12,7 @@ import { useAuth } from '@/hooks/use-auth';
 import LanguageStore from '@/stores/useLanguage';
 import { getSocket } from '@/lib/services/socket';
 import { t } from '@/translations';
+import authStore from '@/stores/useAuth';
 
 interface ChatMessage {
   role: 'user' | 'assistant';
@@ -21,6 +22,7 @@ interface ChatMessage {
 export default function AIChat() {
   const { language } = LanguageStore();
   const { user, isAuthenticated } = useAuth(language);
+  const { setTokens: setUserTokens } = authStore();
   const [socket, setSocket] = useState<Socket | null>(null);
   const [prompt, setPrompt] = useState('');
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
@@ -100,6 +102,7 @@ export default function AIChat() {
       'ai-chat:token-status',
       (data: { hasTokens: boolean; currentTokens: number }) => {
         setTokens(data.currentTokens);
+        setUserTokens(data.currentTokens);
       },
     );
 
@@ -127,6 +130,7 @@ export default function AIChat() {
         setIsLoading(false);
         setChatHistory(prev => [...prev, { role: 'assistant', content: data.response }]);
         setTokens(data.remainingTokens);
+        setUserTokens(data.remainingTokens);
         setStreamingResponse('');
         toast.success(t('aiChat.success.responseReceived'), {
           description: `${data.tokensUsed} ${t('aiChat.tokens.used')} • ${data.responseTime}ms`,
@@ -144,6 +148,7 @@ export default function AIChat() {
     // Token balance update
     existingSocket.on('ai-chat:tokens', (data: { tokens: number }) => {
       setTokens(data.tokens);
+      setUserTokens(data.tokens);
     });
 
     // Error handling
@@ -160,6 +165,7 @@ export default function AIChat() {
             });
             if (error.currentTokens !== undefined) {
               setTokens(error.currentTokens);
+              setUserTokens(error.currentTokens);
             }
             break;
           case 'PROMPT_TOO_LONG':

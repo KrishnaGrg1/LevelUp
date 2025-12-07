@@ -51,14 +51,18 @@
       "title": "المهام الأسبوعية",
       "button": "المهام الأسبوعية"
     },
-    "loading": "جاري التحميل...",
+    "loading": "جار التحميل...",
     "noQuests": "لا توجد مهام متاحة",
     "completed": "مكتمل",
-    "markComplete": "وضع علامة اكتمال",
+    "markComplete": "وضع علامة مكتمل",
     "questCompleted": "اكتملت المهمة!",
     "questCompleteFailed": "فشل إكمال المهمة",
     "xpLevel": "+{xp} XP • المستوى {level}",
     "questNumber": "المهمة #{number}"
+  },
+  "dashboard": {
+    "quest": "مهمة",
+    "quests": "مهام"
   },
   "admin": {
     "title": "إنشاء المهام",

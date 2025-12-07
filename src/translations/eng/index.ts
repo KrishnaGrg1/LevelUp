@@ -10,6 +10,7 @@ import profile from './profile.json';
 import clans from './clans.json';
 import aiChat from './aiChat.json';
 import quests from './quests.json';
+import community from './community.json';
 
 const eng = {
   auth,
@@ -24,6 +25,7 @@ const eng = {
   clans,
   aiChat,
   quests,
+  community,
 };
 
 export default eng;

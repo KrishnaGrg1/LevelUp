@@ -60,6 +60,10 @@
     "xpLevel": "+{xp} XP • Nivel {level}",
     "questNumber": "Misión #{number}"
   },
+  "dashboard": {
+    "quest": "misión",
+    "quests": "misiones"
+  },
   "admin": {
     "title": "Generación de Misiones",
     "forceDaily": {

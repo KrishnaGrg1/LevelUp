@@ -8,6 +8,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { t } from '@/translations';
 import { toast } from 'sonner';
+import authStore from '@/stores/useAuth';
 
 interface QuestDetailsProps {
   communityId: string;
@@ -67,6 +68,7 @@ const QuestRow: React.FC<{
 const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
   const { language } = LanguageStore();
   const queryClient = useQueryClient();
+  const { setTokens } = authStore();
 
   const daily = useQuery({
     queryKey: ['ai-daily-quests', language],
@@ -87,9 +89,14 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
     onSuccess: response => {
       const xpAwarded = response.body.data.xpAwarded;
       const currentLevel = response.body.data.currentLevel;
+      const tokensAwarded = response.body.data.tokensAwarded;
+      const currentTokens = response.body.data.currentTokens;
       toast.success(t('quests.details.success.questCompleted'), {
-        description: `+${xpAwarded} XP - Level ${currentLevel}`,
+        description: `+${xpAwarded} XP • +${tokensAwarded} Tokens • Level ${currentLevel}`,
       });
+      if (typeof currentTokens === 'number') {
+        setTokens(currentTokens);
+      }
       queryClient.invalidateQueries({ queryKey: ['ai-daily-quests', language] });
       queryClient.invalidateQueries({ queryKey: ['ai-weekly-quests', language] });
     },

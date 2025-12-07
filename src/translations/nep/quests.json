@@ -51,14 +51,18 @@
       "title": "साप्ताहिक खोजहरू",
       "button": "साप्ताहिक खोजहरू"
     },
-    "loading": "लोड गर्दै...",
-    "noQuests": "कुनै खोज उपलब्ध छैन",
+    "loading": "लोड हुँदैछ...",
+    "noQuests": "कुनै खोजहरू उपलब्ध छैनन्",
     "completed": "पूरा भयो",
     "markComplete": "पूरा चिन्ह लगाउनुहोस्",
     "questCompleted": "खोज पूरा भयो!",
     "questCompleteFailed": "खोज पूरा गर्न असफल",
     "xpLevel": "+{xp} XP • स्तर {level}",
     "questNumber": "खोज #{number}"
+  },
+  "dashboard": {
+    "quest": "खोज",
+    "quests": "खोजहरू"
   },
   "admin": {
     "title": "खोज उत्पादन",

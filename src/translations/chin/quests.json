@@ -48,17 +48,21 @@
       "button": "每日任务"
     },
     "weekly": {
-      "title": "本周任务",
+      "title": "每周任务",
       "button": "每周任务"
     },
     "loading": "加载中...",
-    "noQuests": "没有可用的任务",
+    "noQuests": "没有可用任务",
     "completed": "已完成",
-    "markComplete": "标记为完成",
-    "questCompleted": "任务已完成！",
-    "questCompleteFailed": "完成任务失败",
+    "markComplete": "标记完成",
+    "questCompleted": "任务完成！",
+    "questCompleteFailed": "任务完成失败",
     "xpLevel": "+{xp} XP • 等级 {level}",
     "questNumber": "任务 #{number}"
+  },
+  "dashboard": {
+    "quest": "任务",
+    "quests": "任务"
   },
   "admin": {
     "title": "任务生成",

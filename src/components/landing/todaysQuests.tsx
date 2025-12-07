@@ -8,6 +8,7 @@ import { fetchDailyQuests, completeQuest, type Quest } from '@/lib/services/ai';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import authStore from '@/stores/useAuth';
 
 interface Props {
   communityId?: string; // Filter quests for specific community (optional, shows all if not provided)
@@ -85,6 +86,7 @@ const QuestCard: React.FC<{
 const TodaysQuests: React.FC<Props> = ({ communityId }) => {
   const { language } = LanguageStore();
   const queryClient = useQueryClient();
+  const { setTokens } = authStore();
 
   const { data, isPending } = useQuery({
     queryKey: ['ai-daily-quests', language],
@@ -98,9 +100,14 @@ const TodaysQuests: React.FC<Props> = ({ communityId }) => {
     onSuccess: response => {
       const xpAwarded = response.body.data.xpAwarded;
       const currentLevel = response.body.data.currentLevel;
+      const tokensAwarded = response.body.data.tokensAwarded;
+      const currentTokens = response.body.data.currentTokens;
       toast.success(t('quests.landing.questCompleted'), {
-        description: `+${xpAwarded} XP • Level ${currentLevel}`,
+        description: `+${xpAwarded} XP • +${tokensAwarded} Tokens • Level ${currentLevel}`,
       });
+      if (typeof currentTokens === 'number') {
+        setTokens(currentTokens);
+      }
       queryClient.invalidateQueries({ queryKey: ['ai-daily-quests', language] });
     },
     onError: (error: unknown) => {

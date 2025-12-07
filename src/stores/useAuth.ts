@@ -10,6 +10,7 @@ interface AuthState {
   user?: User;
   isAdmin: boolean;
   setUser: (user: User) => void;
+  setTokens: (tokens: number) => void;
   setAdminStatus: (isAdmin: boolean) => void;
   logout: () => void;
   _hasHydrated: boolean;
@@ -30,6 +31,10 @@ const authStore = create<AuthState>()(
           isAdmin: user.isAdmin === true,
         });
       },
+      setTokens: (tokens: number) =>
+        set(state => ({
+          user: state.user ? { ...state.user, tokens } : state.user,
+        })),
       setAdminStatus: (isAdmin: boolean) => set({ isAdmin }),
       logout: () => set({ user: undefined, isAuthenticated: false, isAdmin: false }),
       _hasHydrated: false,

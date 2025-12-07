@@ -55,10 +55,14 @@
     "noQuests": "Aucune quête disponible",
     "completed": "Terminé",
     "markComplete": "Marquer comme Terminé",
-    "questCompleted": "Quête terminée!",
-    "questCompleteFailed": "Échec de la completion de la quête",
+    "questCompleted": "Quête terminée !",
+    "questCompleteFailed": "Échec de la quête",
     "xpLevel": "+{xp} XP • Niveau {level}",
     "questNumber": "Quête #{number}"
+  },
+  "dashboard": {
+    "quest": "quête",
+    "quests": "quêtes"
   },
   "admin": {
     "title": "Génération de Quêtes",

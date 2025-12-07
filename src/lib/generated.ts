@@ -26,6 +26,8 @@ export interface User {
   password: string;
   xp: number;
   level: number;
+  // Current token balance for AI interactions (optional until /auth/me fetched)
+  tokens?: number;
   createdAt: Date;
   updatedAt: Date;
   categoryId?: string;
@@ -292,6 +294,8 @@ export interface CommunityDTO {
   visibility: 'private' | 'public';
   userRole: 'ADMIN' | 'MEMBER';
   isPinned?: boolean;
+  totalXP?: number;
+  level?: number;
 }
 
 export interface GetMyCommunities {

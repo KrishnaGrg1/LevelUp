@@ -91,6 +91,11 @@ export interface CompleteQuestResponse {
   xpAwarded: number;
   currentXp: number;
   currentLevel: number;
+  tokensAwarded?: number;
+  currentTokens?: number;
+  communityXp?: number;
+  communityLevel?: number;
+  communityId?: string;
 }
 
 export const completeQuest = async (questId: string, lang: Language) => {

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'next/navigation';
 import CommunityDetail from '@/components/communities/CommunityDetail';
+import CommunityProfile from '@/components/communities/CommunityProfile';
 import TodaysQuests from '@/components/landing/todaysQuests';
 import WeeklyQuests from '@/components/landing/weeklyQuests';
 import { t } from '@/translations';
@@ -13,14 +14,16 @@ export default function CommunityDetailPage() {
   const [questView, setQuestView] = useState<'daily' | 'weekly'>('daily');
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 h-[calc(100vh-5rem)]">
+    <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 h-[calc(100vh-5rem)]">
       {/* Main Community Area - Takes priority space */}
       <div className="flex-1 min-w-0">
         <CommunityDetail communityId={communityId} />
       </div>
 
       {/* Quests Sidebar - Fixed width on large screens, full width on mobile */}
-      <aside className="lg:w-[450px] xl:w-[500px] flex-shrink-0 space-y-4">
+      <aside className="lg:w-[450px] xl:w-[500px] flex-shrink-0 space-y-3 sm:space-y-4">
+        {/* Community Profile - Shows user's XP and level in this community */}
+        <CommunityProfile communityId={communityId} />
         {/* Quest Toggle Header */}
         <div className="bg-white dark:bg-zinc-900 rounded-xl p-1.5 shadow-sm border border-zinc-200 dark:border-zinc-800 sticky top-0 z-10 backdrop-blur-sm">
           <div className="flex gap-1.5">

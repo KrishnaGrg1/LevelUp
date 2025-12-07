@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { adminOverview } from '@/lib/services/user';
 import { UserGrowthChart } from '@/components/users/chart';
+import AIQuestManagement from '@/components/admin/AIQuestManagement';
 
 export default function AdminDashboard() {
   const { language } = LanguageStore();
@@ -185,6 +186,11 @@ export default function AdminDashboard() {
             <UserGrowthChart />
           </CardContent>
         </Card>
+      </div>
+
+      {/* AI Quest Management */}
+      <div className="mb-8">
+        <AIQuestManagement />
       </div>
 
       {/* Quick Actions */}
