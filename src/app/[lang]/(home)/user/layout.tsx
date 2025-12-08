@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+// import Link from 'next/link';
+// import { usePathname } from 'next/navigation';
 import { RoleGuard } from '@/components/providers/RoleGuard';
 import LanguageStore from '@/stores/useLanguage';
 import { LayoutDashboard, User, KeyRound, MessageSquare } from 'lucide-react';
@@ -32,13 +32,13 @@ const navItems = [
 ];
 
 export default function UserLayout({ children }: { children: React.ReactNode }) {
-  const { language } = LanguageStore();
-  const pathname = usePathname();
+  // const { language } = LanguageStore();
+  // const pathname = usePathname();
 
   return (
     <RoleGuard allowedRole="user">
       <div className="min-h-screen">
-        {/* Secondary Navigation */}
+        {/* Secondary Navigation
         <div className=" ">
           <div className="container mx-auto px-4">
             <nav className="flex items-center justify-center gap-1 overflow-x-auto py-3">
@@ -64,7 +64,7 @@ export default function UserLayout({ children }: { children: React.ReactNode }) 
               })}
             </nav>
           </div>
-        </div>
+        </div> */}
 
         {/* Content Area */}
         <div>{children}</div>

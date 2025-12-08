@@ -1,11 +1,21 @@
 import { io, Socket } from 'socket.io-client';
 import { Message } from '../generated';
 
-let socket: Socket | null = null;
+interface AuthSocket extends Socket {
+  auth: {
+    token?: string;
+    userId?: string;
+  };
+  data: {
+    userId?: string;
+  };
+}
+
+let socket: AuthSocket | null = null;
 
 const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:8080';
 
-export const getSocket = (): Socket => {
+export const getSocket = (): AuthSocket => {
   if (!socket) {
     socket = io(SOCKET_URL, {
       autoConnect: false,
@@ -15,7 +25,7 @@ export const getSocket = (): Socket => {
       reconnectionDelay: 1000,
       timeout: 20000,
       transports: ['websocket', 'polling'],
-    });
+    }) as AuthSocket;
 
     // Socket connection event handlers
     socket.on('connect', () => {
@@ -23,12 +33,13 @@ export const getSocket = (): Socket => {
     });
 
     socket.on('disconnect', reason => {
-      console.log('Socket Disconnected:', reason);
+      console.log('❌ Socket Disconnected:', reason);
     });
 
     socket.on('connect_error', error => {
-      console.log('Socket Connection error', error);
+      console.error('❌ Socket Connection error:', error.message);
     });
+
     socket.on('reconnect', attemptNumber => {
       console.log('🔄 Socket reconnected after', attemptNumber, 'attempts');
     });
@@ -45,11 +56,15 @@ export const getSocket = (): Socket => {
   return socket;
 };
 
-export const connectSocket = (authToken?: string) => {
+export const connectSocket = (authToken?: string, userId?: string) => {
   const socket = getSocket();
 
   if (authToken) {
     socket.auth = { token: authToken };
+  }
+
+  if (userId) {
+    socket.data = { userId: userId };
   }
 
   if (!socket.connected) {
@@ -69,41 +84,34 @@ export const disconnectSocket = () => {
 // Community room management
 export const joinCommunity = (communityId: string) => {
   const socket = getSocket();
-
   socket.emit('join-community', { communityId });
-  console.log(`📥 Joined community room from socket.ts: ${communityId}`);
+  console.log('📥 Joined community');
 };
 
 export const leaveCommunity = (communityId: string) => {
   const socket = getSocket();
-
   socket.emit('leave-community', { communityId });
-  console.log(`Left community room: ${communityId}`);
 };
 
 export const sendCommunityMessage = (communityId: string, content: string) => {
   const socket = getSocket();
   socket.emit('community:send-message', { communityId, content });
-  console.log('Send Community Message:', { communityId, content });
 };
 
-// Clan room management
 export const joinClan = (clanId: string) => {
   const socket = getSocket();
   socket.emit('join-clan', { clanId });
-  console.log('📥 Joined clan:', clanId);
+  console.log('📥 Joined clan');
 };
 
 export const leaveClan = (clanId: string) => {
   const socket = getSocket();
   socket.emit('leave-clan', { clanId });
-  console.log('📤 Left clan:', clanId);
 };
 
 export const sendClanMessage = (clanId: string, content: string) => {
   const socket = getSocket();
   socket.emit('clan:send-message', { clanId, content });
-  console.log('📨 Sent clan message:', { clanId, content });
 };
 
 // Message event listeners
