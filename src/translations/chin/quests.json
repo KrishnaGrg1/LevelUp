@@ -61,6 +61,7 @@
     "questNumber": "任务 #{number}",
     "startQuest": "开始任务",
     "starting": "开始中...",
+    "inProgress": "进行中",
     "completeQuest": "完成任务",
     "completing": "完成中...",
     "completeLocked": "完成任务（已锁定）",

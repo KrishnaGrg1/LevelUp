@@ -61,6 +61,7 @@
     "questNumber": "Quest #{number}",
     "startQuest": "Start Quest",
     "starting": "Starting...",
+    "inProgress": "In Progress",
     "completeQuest": "Complete Quest",
     "completing": "Completing...",
     "completeLocked": "Complete Quest (locked)",

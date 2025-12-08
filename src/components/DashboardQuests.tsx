@@ -1,13 +1,16 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { t } from '@/translations';
 import LanguageStore from '@/stores/useLanguage';
 import {
   fetchDailyQuests,
   fetchWeeklyQuests,
+  startQuest,
   completeQuest,
+  getQuestStatus,
+  getTimeRemaining,
   type Quest,
   type ApiResponse,
   type DailyQuestsData,
@@ -27,16 +30,100 @@ interface GroupedQuests {
   };
 }
 
+const QuestTimer: React.FC<{ quest: Quest }> = ({ quest }) => {
+  const [timeRemaining, setTimeRemaining] = useState(() => getTimeRemaining(quest));
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimeRemaining(getTimeRemaining(quest));
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [quest]);
+
+  const status = getQuestStatus(quest);
+  if (status === 'not-started' || status === 'completed') return null;
+
+  return (
+    <div className="flex items-center gap-2 text-xs mt-2">
+      <div className="flex-1 h-1.5 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+        <div
+          className="h-full bg-gradient-to-r from-yellow-500 to-yellow-600 transition-all duration-300"
+          style={{ width: `${timeRemaining.progressPercent}%` }}
+        />
+      </div>
+      <span className="text-zinc-600 dark:text-zinc-400 font-medium min-w-fit">
+        {timeRemaining.remainingText}
+      </span>
+    </div>
+  );
+};
+
 const QuestCard: React.FC<{
   quest: Quest;
+  onStart: (questId: string) => void;
   onComplete: (questId: string) => void;
+  isStarting: boolean;
   isCompleting: boolean;
   type: 'daily' | 'weekly';
-}> = ({ quest, onComplete, isCompleting, type }) => {
+}> = ({ quest, onStart, onComplete, isStarting, isCompleting, type }) => {
+  const status = getQuestStatus(quest);
+
   const colorClass =
     type === 'daily'
       ? 'bg-purple-50 dark:bg-purple-900/10 border-purple-200 dark:border-purple-800 text-purple-600 dark:text-purple-400'
       : 'bg-blue-50 dark:bg-blue-900/10 border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400';
+
+  const getButtonContent = () => {
+    if (status === 'completed') {
+      return (
+        <span className="flex items-center gap-2">
+          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fillRule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+              clipRule="evenodd"
+            />
+          </svg>
+          {t('quests.landing.completed')}
+        </span>
+      );
+    }
+
+    if (status === 'not-started') {
+      return t('quests.landing.startQuest');
+    }
+
+    if (status === 'in-progress') {
+      return t('quests.landing.inProgress');
+    }
+
+    if (status === 'ready') {
+      return t('quests.landing.completeQuest');
+    }
+  };
+
+  const getButtonVariant = () => {
+    if (status === 'completed') {
+      return 'success';
+    }
+    if (status === 'in-progress') {
+      return 'secondary';
+    }
+    if (status === 'ready') {
+      return 'default';
+    }
+    return 'default';
+  };
+
+  const buttonVariants: Record<string, string> = {
+    default:
+      'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 shadow-sm',
+    secondary:
+      'bg-blue-50 text-blue-700 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:hover:bg-blue-900/30 cursor-default',
+    success:
+      'bg-green-50 text-green-700 hover:bg-green-50 dark:bg-green-900/20 dark:text-green-400 dark:hover:bg-green-900/20 cursor-default border-green-200 dark:border-green-800',
+  };
 
   return (
     <Card className="border shadow-sm transition-all hover:shadow-md">
@@ -53,34 +140,30 @@ const QuestCard: React.FC<{
           </div>
         </div>
 
+        {/* Timer */}
+        {status !== 'not-started' && status !== 'completed' && <QuestTimer quest={quest} />}
+
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
           <span className="text-xs text-zinc-600 dark:text-zinc-400 font-numeric">
             Quest #{quest.periodSeq}
           </span>
           <Button
             size="sm"
-            disabled={quest.isCompleted || isCompleting}
-            onClick={() => onComplete(quest.id)}
+            disabled={
+              status === 'completed' || isStarting || (status === 'in-progress' && isCompleting)
+            }
+            onClick={() => {
+              if (status === 'not-started') {
+                onStart(quest.id);
+              } else if (status === 'ready') {
+                onComplete(quest.id);
+              }
+            }}
             className={`w-full sm:w-auto font-medium py-2 px-4 rounded-lg transition-all duration-200 text-xs ${
-              quest.isCompleted
-                ? 'bg-green-50 text-green-700 hover:bg-green-50 dark:bg-green-900/20 dark:text-green-400 dark:hover:bg-green-900/20 cursor-default border-green-200 dark:border-green-800 disabled:opacity-50 disabled:cursor-not-allowed'
-                : 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 shadow-sm'
+              buttonVariants[getButtonVariant()]
             }`}
           >
-            {quest.isCompleted ? (
-              <span className="flex items-center gap-2">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                {t('quests.landing.completed')}
-              </span>
-            ) : (
-              t('quests.landing.markComplete')
-            )}
+            {getButtonContent()}
           </Button>
         </div>
       </div>
@@ -92,10 +175,12 @@ const CommunityQuestSection: React.FC<{
   communityId: string;
   communityName: string;
   quests: Quest[];
+  onStart: (questId: string) => void;
   onComplete: (questId: string) => void;
+  isStarting: boolean;
   isCompleting: boolean;
   type: 'daily' | 'weekly';
-}> = ({ communityName, quests, onComplete, isCompleting, type }) => {
+}> = ({ communityName, quests, onStart, onComplete, isStarting, isCompleting, type }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -126,7 +211,9 @@ const CommunityQuestSection: React.FC<{
             <QuestCard
               key={quest.id}
               quest={quest}
+              onStart={onStart}
               onComplete={onComplete}
+              isStarting={isStarting}
               isCompleting={isCompleting}
               type={type}
             />
@@ -160,6 +247,75 @@ export default function DashboardQuests() {
     queryFn: () => fetchWeeklyQuests(language),
     staleTime: 60000,
     refetchOnWindowFocus: false,
+  });
+
+  const startMutation = useMutation({
+    mutationFn: (questId: string) => startQuest(questId, language),
+    onMutate: async (questId: string) => {
+      await queryClient.cancelQueries({ queryKey: ['ai-daily-quests', language] });
+      await queryClient.cancelQueries({ queryKey: ['ai-weekly-quests', language] });
+
+      const previousDaily = queryClient.getQueryData<ApiResponse<DailyQuestsData>>([
+        'ai-daily-quests',
+        language,
+      ]);
+      const previousWeekly = queryClient.getQueryData<ApiResponse<WeeklyQuestsData>>([
+        'ai-weekly-quests',
+        language,
+      ]);
+
+      queryClient.setQueryData(
+        ['ai-daily-quests', language],
+        (old: ApiResponse<DailyQuestsData> | undefined) => {
+          if (!old) return old;
+          return {
+            ...old,
+            body: {
+              ...old.body,
+              data: {
+                ...old.body.data,
+                today: old.body.data.today.map((q: Quest) =>
+                  q.id === questId ? { ...q, startedAt: new Date().toISOString() } : q,
+                ),
+              },
+            },
+          };
+        },
+      );
+
+      queryClient.setQueryData(
+        ['ai-weekly-quests', language],
+        (old: ApiResponse<WeeklyQuestsData> | undefined) => {
+          if (!old) return old;
+          return {
+            ...old,
+            body: {
+              ...old.body,
+              data: {
+                ...old.body.data,
+                thisWeek: old.body.data.thisWeek.map((q: Quest) =>
+                  q.id === questId ? { ...q, startedAt: new Date().toISOString() } : q,
+                ),
+              },
+            },
+          };
+        },
+      );
+
+      return { previousDaily, previousWeekly };
+    },
+    onSuccess: () => {
+      toast.success(t('quests.landing.questStarted'));
+    },
+    onError: (_err, _questId, context) => {
+      if (context?.previousDaily) {
+        queryClient.setQueryData(['ai-daily-quests', language], context.previousDaily);
+      }
+      if (context?.previousWeekly) {
+        queryClient.setQueryData(['ai-weekly-quests', language], context.previousWeekly);
+      }
+      toast.error(t('quests.landing.questStartFailed'));
+    },
   });
 
   const completeMutation = useMutation({
@@ -273,6 +429,10 @@ export default function DashboardQuests() {
     },
   });
 
+  const handleStart = (questId: string) => {
+    startMutation.mutate(questId);
+  };
+
   const handleComplete = (questId: string) => {
     completeMutation.mutate(questId);
   };
@@ -347,7 +507,9 @@ export default function DashboardQuests() {
                   communityId={communityId}
                   communityName={data.communityName}
                   quests={data.quests}
+                  onStart={handleStart}
                   onComplete={handleComplete}
+                  isStarting={startMutation.isPending}
                   isCompleting={completeMutation.isPending}
                   type="daily"
                 />
@@ -390,7 +552,9 @@ export default function DashboardQuests() {
                   communityId={communityId}
                   communityName={data.communityName}
                   quests={data.quests}
+                  onStart={handleStart}
                   onComplete={handleComplete}
+                  isStarting={startMutation.isPending}
                   isCompleting={completeMutation.isPending}
                   type="weekly"
                 />

@@ -61,6 +61,7 @@
     "questNumber": "Quête #{number}",
     "startQuest": "Commencer la Quête",
     "starting": "Démarrage...",
+    "inProgress": "En cours",
     "completeQuest": "Terminer la Quête",
     "completing": "Achèvement...",
     "completeLocked": "Terminer la Quête (verrouillé)",

@@ -61,6 +61,7 @@
     "questNumber": "खोज #{number}",
     "startQuest": "खोज सुरु गर्नुहोस्",
     "starting": "सुरु गर्दै...",
+    "inProgress": "प्रगतिमा",
     "completeQuest": "खोज पूरा गर्नुहोस्",
     "completing": "पूरा गर्दै...",
     "completeLocked": "खोज पूरा गर्नुहोस् (लक गरिएको)",

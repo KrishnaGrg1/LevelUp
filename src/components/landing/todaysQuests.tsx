@@ -1,12 +1,15 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { t } from '@/translations';
 import LanguageStore from '@/stores/useLanguage';
 import {
   fetchDailyQuests,
+  startQuest,
   completeQuest,
+  getQuestStatus,
+  getTimeRemaining,
   type Quest,
   type ApiResponse,
   type DailyQuestsData,
@@ -20,11 +23,94 @@ interface Props {
   communityId?: string; // Filter quests for specific community (optional, shows all if not provided)
 }
 
+const QuestTimer: React.FC<{ quest: Quest }> = ({ quest }) => {
+  const [timeRemaining, setTimeRemaining] = useState(() => getTimeRemaining(quest));
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimeRemaining(getTimeRemaining(quest));
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [quest]);
+
+  const status = getQuestStatus(quest);
+  if (status === 'not-started' || status === 'completed') return null;
+
+  return (
+    <div className="flex items-center gap-2 text-xs">
+      <div className="flex-1 h-1.5 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+        <div
+          className="h-full bg-gradient-to-r from-purple-500 to-purple-600 transition-all duration-300"
+          style={{ width: `${timeRemaining.progressPercent}%` }}
+        />
+      </div>
+      <span className="text-zinc-600 dark:text-zinc-400 font-medium min-w-fit">
+        {timeRemaining.remainingText}
+      </span>
+    </div>
+  );
+};
+
 const QuestCard: React.FC<{
   quest: Quest;
+  onStart: (questId: string) => void;
   onComplete: (questId: string) => void;
+  isStarting: boolean;
   isCompleting: boolean;
-}> = ({ quest, onComplete, isCompleting }) => {
+}> = ({ quest, onStart, onComplete, isStarting, isCompleting }) => {
+  const status = getQuestStatus(quest);
+
+  const getButtonContent = () => {
+    if (status === 'completed') {
+      return (
+        <span className="flex items-center gap-2">
+          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fillRule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+              clipRule="evenodd"
+            />
+          </svg>
+          {t('quests.landing.completed')}
+        </span>
+      );
+    }
+
+    if (status === 'not-started') {
+      return t('quests.landing.startQuest');
+    }
+
+    if (status === 'in-progress') {
+      return t('quests.landing.inProgress');
+    }
+
+    if (status === 'ready') {
+      return t('quests.landing.completeQuest');
+    }
+  };
+
+  const getButtonVariant = () => {
+    if (status === 'completed') {
+      return 'success';
+    }
+    if (status === 'in-progress') {
+      return 'secondary';
+    }
+    if (status === 'ready') {
+      return 'default';
+    }
+    return 'default';
+  };
+
+  const buttonVariants: Record<string, string> = {
+    default:
+      'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 shadow-sm',
+    secondary:
+      'bg-blue-50 text-blue-700 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:hover:bg-blue-900/30 cursor-default',
+    success:
+      'bg-green-50 text-green-700 hover:bg-green-50 dark:bg-green-900/20 dark:text-green-400 dark:hover:bg-green-900/20 cursor-default border-green-200 dark:border-green-800',
+  };
   return (
     <Card className="border shadow-sm transition-all hover:shadow-md hover:border-purple-200 dark:hover:border-purple-800">
       <div className="p-4 space-y-3">
@@ -56,32 +142,28 @@ const QuestCard: React.FC<{
           </span>
         </div>
 
+        {/* Timer */}
+        {status !== 'not-started' && status !== 'completed' && <QuestTimer quest={quest} />}
+
         {/* Action button */}
         <div className="pt-2">
           <Button
             size="sm"
-            disabled={quest.isCompleted || isCompleting}
-            onClick={() => onComplete(quest.id)}
+            disabled={
+              status === 'completed' || isStarting || (status === 'in-progress' && isCompleting)
+            }
+            onClick={() => {
+              if (status === 'not-started') {
+                onStart(quest.id);
+              } else if (status === 'ready') {
+                onComplete(quest.id);
+              }
+            }}
             className={`w-full font-medium py-2 rounded-lg transition-all duration-200 text-sm ${
-              quest.isCompleted
-                ? 'bg-green-50 text-green-700 hover:bg-green-50 dark:bg-green-900/20 dark:text-green-400 dark:hover:bg-green-900/20 cursor-default border-green-200 dark:border-green-800 disabled:opacity-50 disabled:cursor-not-allowed'
-                : 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 shadow-sm'
+              buttonVariants[getButtonVariant()]
             }`}
           >
-            {quest.isCompleted ? (
-              <span className="flex items-center gap-2">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                {t('quests.landing.completed')}
-              </span>
-            ) : (
-              t('quests.landing.markComplete')
-            )}
+            {getButtonContent()}
           </Button>
         </div>
       </div>
@@ -99,6 +181,55 @@ const TodaysQuests: React.FC<Props> = ({ communityId }) => {
     queryFn: () => fetchDailyQuests(language),
     staleTime: 60000,
     refetchOnWindowFocus: false,
+  });
+
+  const startMutation = useMutation({
+    mutationFn: (questId: string) => startQuest(questId, language),
+    onMutate: async (questId: string) => {
+      await queryClient.cancelQueries({ queryKey: ['ai-daily-quests', language] });
+
+      const previousData = queryClient.getQueryData<ApiResponse<DailyQuestsData>>([
+        'ai-daily-quests',
+        language,
+      ]);
+
+      queryClient.setQueryData(
+        ['ai-daily-quests', language],
+        (old: ApiResponse<DailyQuestsData> | undefined) => {
+          if (!old) return old;
+          return {
+            ...old,
+            body: {
+              ...old.body,
+              data: {
+                ...old.body.data,
+                today: old.body.data.today.map((q: Quest) =>
+                  q.id === questId ? { ...q, startedAt: new Date().toISOString() } : q,
+                ),
+              },
+            },
+          };
+        },
+      );
+
+      return { previousData };
+    },
+    onSuccess: () => {
+      toast.success(t('quests.landing.questStarted'));
+    },
+    onError: (
+      error: unknown,
+      _questId: string,
+      context: { previousData: ApiResponse<DailyQuestsData> | undefined } | undefined,
+    ) => {
+      if (context?.previousData) {
+        queryClient.setQueryData(['ai-daily-quests', language], context.previousData);
+      }
+      const err = error as { response?: { data?: { body?: { message?: string } } } };
+      toast.error(t('quests.landing.questStartFailed'), {
+        description: err?.response?.data?.body?.message || t('quests.details.errors.tryAgain'),
+      });
+    },
   });
 
   const completeMutation = useMutation({
@@ -162,6 +293,10 @@ const TodaysQuests: React.FC<Props> = ({ communityId }) => {
     },
   });
 
+  const handleStart = (questId: string) => {
+    startMutation.mutate(questId);
+  };
+
   const handleComplete = (questId: string) => {
     completeMutation.mutate(questId);
   };
@@ -196,7 +331,9 @@ const TodaysQuests: React.FC<Props> = ({ communityId }) => {
                 <QuestCard
                   key={q.id}
                   quest={q}
+                  onStart={handleStart}
                   onComplete={handleComplete}
+                  isStarting={startMutation.isPending}
                   isCompleting={completeMutation.isPending}
                 />
               ))}
