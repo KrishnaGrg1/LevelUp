@@ -1,0 +1,55 @@
+{
+  "title": "AIチャットアシスタント",
+  "subtitle": "AIによる賢い回答を取得",
+  "connectionStatus": {
+    "connected": "接続済み",
+    "disconnected": "切断済み",
+    "connecting": "接続中..."
+  },
+  "tokens": {
+    "available": "利用可能トークン",
+    "insufficient": "トークン不足",
+    "insufficientDescription": "チャットを続けるにはもっとトークンが必要です",
+    "used": "使用トークン"
+  },
+  "input": {
+    "placeholder": "ここにメッセージを入力...",
+    "placeholderDisconnected": "サーバーに接続中...",
+    "placeholderLoading": "AIが考えています...",
+    "maxLength": "最大4000文字",
+    "characterCount": "文字"
+  },
+  "buttons": {
+    "send": "送信",
+    "cancel": "キャンセル",
+    "clear": "チャットをクリア",
+    "clearConfirm": "チャット履歴をクリアしてもよろしいですか？"
+  },
+  "messages": {
+    "you": "あなた",
+    "assistant": "AIアシスタント",
+    "streaming": "AIが応答中..."
+  },
+  "errors": {
+    "connectionError": "接続エラー",
+    "connectionErrorDescription": "AIサービスへの接続に失敗しました",
+    "connectionTimeout": "接続タイムアウト",
+    "connectionTimeoutDescription": "サーバーに接続できませんでした。もう一度お試しください。",
+    "promptTooLong": "メッセージが長すぎます",
+    "promptTooLongDescription": "メッセージを4000文字以内にしてください",
+    "authError": "認証エラー",
+    "authErrorDescription": "AIチャットを使用するにはログインしてください",
+    "chatError": "チャットエラー",
+    "chatErrorDescription": "エラーが発生しました。もう一度お試しください。",
+    "notConnected": "サーバーに接続されていません"
+  },
+  "success": {
+    "responseReceived": "応答を受信しました",
+    "chatCancelled": "チャットがキャンセルされました",
+    "chatCleared": "チャット履歴がクリアされました"
+  },
+  "empty": {
+    "title": "会話を始める",
+    "description": "何でも聞いてください！お手伝いします。"
+  }
+}

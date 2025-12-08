@@ -1,0 +1,55 @@
+{
+  "title": "Assistant de Chat IA",
+  "subtitle": "Obtenez des réponses intelligentes alimentées par l'IA",
+  "connectionStatus": {
+    "connected": "Connecté",
+    "disconnected": "Déconnecté",
+    "connecting": "Connexion..."
+  },
+  "tokens": {
+    "available": "jetons disponibles",
+    "insufficient": "Jetons insuffisants",
+    "insufficientDescription": "Vous avez besoin de plus de jetons pour continuer à discuter",
+    "used": "jetons utilisés"
+  },
+  "input": {
+    "placeholder": "Tapez votre message ici...",
+    "placeholderDisconnected": "Connexion au serveur...",
+    "placeholderLoading": "L'IA réfléchit...",
+    "maxLength": "Max 4000 caractères",
+    "characterCount": "caractères"
+  },
+  "buttons": {
+    "send": "Envoyer",
+    "cancel": "Annuler",
+    "clear": "Effacer le Chat",
+    "clearConfirm": "Êtes-vous sûr de vouloir effacer l'historique du chat ?"
+  },
+  "messages": {
+    "you": "Vous",
+    "assistant": "Assistant IA",
+    "streaming": "L'IA répond..."
+  },
+  "errors": {
+    "connectionError": "Erreur de Connexion",
+    "connectionErrorDescription": "Échec de la connexion au service IA",
+    "connectionTimeout": "Délai de Connexion Expiré",
+    "connectionTimeoutDescription": "Impossible de se connecter au serveur. Veuillez réessayer.",
+    "promptTooLong": "Message Trop Long",
+    "promptTooLongDescription": "Veuillez garder votre message sous 4000 caractères",
+    "authError": "Erreur d'Authentification",
+    "authErrorDescription": "Veuillez vous connecter pour utiliser le Chat IA",
+    "chatError": "Erreur de Chat",
+    "chatErrorDescription": "Une erreur s'est produite. Veuillez réessayer.",
+    "notConnected": "Non connecté au serveur"
+  },
+  "success": {
+    "responseReceived": "Réponse reçue",
+    "chatCancelled": "Chat annulé",
+    "chatCleared": "Historique du chat effacé"
+  },
+  "empty": {
+    "title": "Démarrer une Conversation",
+    "description": "Demandez-moi n'importe quoi ! Je suis là pour vous aider."
+  }
+}

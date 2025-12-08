@@ -1,0 +1,55 @@
+{
+  "title": "AI Chat Assistant",
+  "subtitle": "Get intelligent responses powered by AI",
+  "connectionStatus": {
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "connecting": "Connecting..."
+  },
+  "tokens": {
+    "available": "tokens available",
+    "insufficient": "Insufficient tokens",
+    "insufficientDescription": "You need more tokens to continue chatting",
+    "used": "tokens used"
+  },
+  "input": {
+    "placeholder": "Type your message here...",
+    "placeholderDisconnected": "Connecting to server...",
+    "placeholderLoading": "AI is thinking...",
+    "maxLength": "Max 4000 characters",
+    "characterCount": "characters"
+  },
+  "buttons": {
+    "send": "Send",
+    "cancel": "Cancel",
+    "clear": "Clear Chat",
+    "clearConfirm": "Are you sure you want to clear the chat history?"
+  },
+  "messages": {
+    "you": "You",
+    "assistant": "AI Assistant",
+    "streaming": "AI is responding..."
+  },
+  "errors": {
+    "connectionError": "Connection Error",
+    "connectionErrorDescription": "Failed to connect to AI service",
+    "connectionTimeout": "Connection Timeout",
+    "connectionTimeoutDescription": "Could not connect to server. Please try again.",
+    "promptTooLong": "Message Too Long",
+    "promptTooLongDescription": "Please keep your message under 4000 characters",
+    "authError": "Authentication Error",
+    "authErrorDescription": "Please log in to use AI Chat",
+    "chatError": "Chat Error",
+    "chatErrorDescription": "An error occurred. Please try again.",
+    "notConnected": "Not connected to server"
+  },
+  "success": {
+    "responseReceived": "Response received",
+    "chatCancelled": "Chat cancelled",
+    "chatCleared": "Chat history cleared"
+  },
+  "empty": {
+    "title": "Start a Conversation",
+    "description": "Ask me anything! I'm here to help you."
+  }
+}

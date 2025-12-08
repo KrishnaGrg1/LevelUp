@@ -1,0 +1,55 @@
+{
+  "title": "एआई च्याट सहायक",
+  "subtitle": "एआई द्वारा संचालित बुद्धिमान प्रतिक्रियाहरू प्राप्त गर्नुहोस्",
+  "connectionStatus": {
+    "connected": "जडान भयो",
+    "disconnected": "विच्छेद भयो",
+    "connecting": "जडान हुँदैछ..."
+  },
+  "tokens": {
+    "available": "टोकनहरू उपलब्ध",
+    "insufficient": "अपर्याप्त टोकनहरू",
+    "insufficientDescription": "च्याट जारी राख्न तपाईंलाई थप टोकनहरू चाहिन्छ",
+    "used": "टोकनहरू प्रयोग गरियो"
+  },
+  "input": {
+    "placeholder": "यहाँ आफ्नो सन्देश टाइप गर्नुहोस्...",
+    "placeholderDisconnected": "सर्भरमा जडान हुँदैछ...",
+    "placeholderLoading": "एआईले सोचिरहेको छ...",
+    "maxLength": "अधिकतम ४००० वर्णहरू",
+    "characterCount": "वर्णहरू"
+  },
+  "buttons": {
+    "send": "पठाउनुहोस्",
+    "cancel": "रद्द गर्नुहोस्",
+    "clear": "च्याट खाली गर्नुहोस्",
+    "clearConfirm": "के तपाईं च्याट इतिहास खाली गर्न निश्चित हुनुहुन्छ?"
+  },
+  "messages": {
+    "you": "तपाईं",
+    "assistant": "एआई सहायक",
+    "streaming": "एआईले प्रतिक्रिया दिँदैछ..."
+  },
+  "errors": {
+    "connectionError": "जडान त्रुटि",
+    "connectionErrorDescription": "एआई सेवामा जडान गर्न असफल",
+    "connectionTimeout": "जडान समय समाप्त",
+    "connectionTimeoutDescription": "सर्भरमा जडान हुन सकेन। कृपया फेरि प्रयास गर्नुहोस्।",
+    "promptTooLong": "सन्देश धेरै लामो",
+    "promptTooLongDescription": "कृपया आफ्नो सन्देश ४००० वर्ण भन्दा कममा राख्नुहोस्",
+    "authError": "प्रमाणीकरण त्रुटि",
+    "authErrorDescription": "एआई च्याट प्रयोग गर्न कृपया लग इन गर्नुहोस्",
+    "chatError": "च्याट त्रुटि",
+    "chatErrorDescription": "त्रुटि भयो। कृपया फेरि प्रयास गर्नुहोस्।",
+    "notConnected": "सर्भरमा जडान छैन"
+  },
+  "success": {
+    "responseReceived": "प्रतिक्रिया प्राप्त भयो",
+    "chatCancelled": "च्याट रद्द गरियो",
+    "chatCleared": "च्याट इतिहास खाली गरियो"
+  },
+  "empty": {
+    "title": "कुराकानी सुरु गर्नुहोस्",
+    "description": "मलाई जे पनि सोध्नुहोस्! म तपाईंलाई मद्दत गर्न यहाँ छु।"
+  }
+}

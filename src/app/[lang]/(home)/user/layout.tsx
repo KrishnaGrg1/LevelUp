@@ -1,40 +1,45 @@
 'use client';
 
 import React from 'react';
-// import Link from 'next/link';
-// import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { RoleGuard } from '@/components/providers/RoleGuard';
-// import LanguageStore from '@/stores/useLanguage';
-// import { LayoutDashboard, User, KeyRound } from 'lucide-react';
-// import { cn } from '@/lib/utils';
+import LanguageStore from '@/stores/useLanguage';
+import { LayoutDashboard, User, KeyRound, MessageSquare } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
-// const navItems = [
-//   {
-//     href: '/user/dashboard',
-//     label: 'Dashboard',
-//     icon: LayoutDashboard,
-//   },
-//   {
-//     href: '/user/profile',
-//     label: 'Profile',
-//     icon: User,
-//   },
-//   {
-//     href: '/user/change-password',
-//     label: 'Change Password',
-//     icon: KeyRound,
-//   },
-// ];
+const navItems = [
+  {
+    href: '/user/dashboard',
+    label: 'Dashboard',
+    icon: LayoutDashboard,
+  },
+  {
+    href: '/user/profile',
+    label: 'Profile',
+    icon: User,
+  },
+  {
+    href: '/user/change-password',
+    label: 'Change Password',
+    icon: KeyRound,
+  },
+  {
+    href: '/user/ai-chat',
+    label: 'AI Chat',
+    icon: MessageSquare,
+  },
+];
 
 export default function UserLayout({ children }: { children: React.ReactNode }) {
-  // const { language } = LanguageStore();
-  // const pathname = usePathname();
+  const { language } = LanguageStore();
+  const pathname = usePathname();
 
   return (
     <RoleGuard allowedRole="user">
       <div className="min-h-screen">
-        {/* Secondary Navigation
-        <div className=" ">
+        {/* Secondary Navigation */}
+        <div className="border-b border-zinc-200 dark:border-zinc-800">
           <div className="container mx-auto px-4">
             <nav className="flex items-center justify-center gap-1 overflow-x-auto py-3">
               {navItems.map(item => {
@@ -59,7 +64,7 @@ export default function UserLayout({ children }: { children: React.ReactNode }) 
               })}
             </nav>
           </div>
-        </div> */}
+        </div>
 
         {/* Content Area */}
         <div>{children}</div>

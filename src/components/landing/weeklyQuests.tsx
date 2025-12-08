@@ -5,14 +5,14 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { t } from '@/translations';
 import LanguageStore from '@/stores/useLanguage';
 import {
-  fetchDailyQuests,
+  fetchWeeklyQuests,
   startQuest,
   completeQuest,
   getQuestStatus,
   getTimeRemaining,
   type Quest,
   type ApiResponse,
-  type DailyQuestsData,
+  type WeeklyQuestsData,
 } from '@/lib/services/ai';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -41,7 +41,7 @@ const QuestTimer: React.FC<{ quest: Quest }> = ({ quest }) => {
     <div className="flex items-center gap-2 text-xs">
       <div className="flex-1 h-1.5 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
         <div
-          className="h-full bg-gradient-to-r from-purple-500 to-purple-600 transition-all duration-300"
+          className="h-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-300"
           style={{ width: `${timeRemaining.progressPercent}%` }}
         />
       </div>
@@ -111,8 +111,9 @@ const QuestCard: React.FC<{
     success:
       'bg-green-50 text-green-700 hover:bg-green-50 dark:bg-green-900/20 dark:text-green-400 dark:hover:bg-green-900/20 cursor-default border-green-200 dark:border-green-800',
   };
+
   return (
-    <Card className="border shadow-sm transition-all hover:shadow-md hover:border-purple-200 dark:hover:border-purple-800">
+    <Card className="border shadow-sm transition-all hover:shadow-md hover:border-blue-200 dark:hover:border-blue-800">
       <div className="p-4 space-y-3">
         {/* Header */}
         <div className="flex items-start justify-between gap-3">
@@ -121,11 +122,11 @@ const QuestCard: React.FC<{
               {quest.description}
             </p>
           </div>
-          <div className="flex items-center gap-1.5 shrink-0 px-2.5 py-1 rounded-lg bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-800">
-            <span className="text-sm font-bold font-numeric text-yellow-600 dark:text-yellow-400">
+          <div className="flex items-center gap-1.5 shrink-0 px-2.5 py-1 rounded-lg bg-blue-50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-800">
+            <span className="text-sm font-bold font-numeric text-blue-600 dark:text-blue-400">
               {quest.xpValue}
             </span>
-            <span className="text-xs font-medium text-yellow-600 dark:text-yellow-400">XP</span>
+            <span className="text-xs font-medium text-blue-600 dark:text-blue-400">XP</span>
           </div>
         </div>
 
@@ -171,14 +172,14 @@ const QuestCard: React.FC<{
   );
 };
 
-const TodaysQuests: React.FC<Props> = ({ communityId }) => {
+const WeeklyQuests: React.FC<Props> = ({ communityId }) => {
   const { language } = LanguageStore();
   const queryClient = useQueryClient();
   const { setTokens } = authStore();
 
   const { data, isPending } = useQuery({
-    queryKey: ['ai-daily-quests', language],
-    queryFn: () => fetchDailyQuests(language),
+    queryKey: ['ai-weekly-quests', language],
+    queryFn: () => fetchWeeklyQuests(language),
     staleTime: 60000,
     refetchOnWindowFocus: false,
   });
@@ -186,16 +187,16 @@ const TodaysQuests: React.FC<Props> = ({ communityId }) => {
   const startMutation = useMutation({
     mutationFn: (questId: string) => startQuest(questId, language),
     onMutate: async (questId: string) => {
-      await queryClient.cancelQueries({ queryKey: ['ai-daily-quests', language] });
+      await queryClient.cancelQueries({ queryKey: ['ai-weekly-quests', language] });
 
-      const previousData = queryClient.getQueryData<ApiResponse<DailyQuestsData>>([
-        'ai-daily-quests',
+      const previousData = queryClient.getQueryData<ApiResponse<WeeklyQuestsData>>([
+        'ai-weekly-quests',
         language,
       ]);
 
       queryClient.setQueryData(
-        ['ai-daily-quests', language],
-        (old: ApiResponse<DailyQuestsData> | undefined) => {
+        ['ai-weekly-quests', language],
+        (old: ApiResponse<WeeklyQuestsData> | undefined) => {
           if (!old) return old;
           return {
             ...old,
@@ -203,7 +204,7 @@ const TodaysQuests: React.FC<Props> = ({ communityId }) => {
               ...old.body,
               data: {
                 ...old.body.data,
-                today: old.body.data.today.map((q: Quest) =>
+                thisWeek: old.body.data.thisWeek.map((q: Quest) =>
                   q.id === questId ? { ...q, startedAt: new Date().toISOString() } : q,
                 ),
               },
@@ -220,10 +221,10 @@ const TodaysQuests: React.FC<Props> = ({ communityId }) => {
     onError: (
       error: unknown,
       _questId: string,
-      context: { previousData: ApiResponse<DailyQuestsData> | undefined } | undefined,
+      context: { previousData: ApiResponse<WeeklyQuestsData> | undefined } | undefined,
     ) => {
       if (context?.previousData) {
-        queryClient.setQueryData(['ai-daily-quests', language], context.previousData);
+        queryClient.setQueryData(['ai-weekly-quests', language], context.previousData);
       }
       const err = error as { response?: { data?: { body?: { message?: string } } } };
       toast.error(t('quests.landing.questStartFailed'), {
@@ -236,18 +237,18 @@ const TodaysQuests: React.FC<Props> = ({ communityId }) => {
     mutationFn: (questId: string) => completeQuest(questId, language),
     onMutate: async (questId: string) => {
       // Cancel outgoing refetches
-      await queryClient.cancelQueries({ queryKey: ['ai-daily-quests', language] });
+      await queryClient.cancelQueries({ queryKey: ['ai-weekly-quests', language] });
 
       // Snapshot previous value
-      const previousData = queryClient.getQueryData<ApiResponse<DailyQuestsData>>([
-        'ai-daily-quests',
+      const previousData = queryClient.getQueryData<ApiResponse<WeeklyQuestsData>>([
+        'ai-weekly-quests',
         language,
       ]);
 
       // Optimistically update to mark quest as completed
       queryClient.setQueryData(
-        ['ai-daily-quests', language],
-        (old: ApiResponse<DailyQuestsData> | undefined) => {
+        ['ai-weekly-quests', language],
+        (old: ApiResponse<WeeklyQuestsData> | undefined) => {
           if (!old) return old;
           return {
             ...old,
@@ -255,7 +256,7 @@ const TodaysQuests: React.FC<Props> = ({ communityId }) => {
               ...old.body,
               data: {
                 ...old.body.data,
-                today: old.body.data.today.map((q: Quest) =>
+                thisWeek: old.body.data.thisWeek.map((q: Quest) =>
                   q.id === questId ? { ...q, isCompleted: true } : q,
                 ),
               },
@@ -280,11 +281,11 @@ const TodaysQuests: React.FC<Props> = ({ communityId }) => {
     onError: (
       error: unknown,
       _questId: string,
-      context: { previousData: ApiResponse<DailyQuestsData> | undefined } | undefined,
+      context: { previousData: ApiResponse<WeeklyQuestsData> | undefined } | undefined,
     ) => {
       // Rollback on error
       if (context?.previousData) {
-        queryClient.setQueryData(['ai-daily-quests', language], context.previousData);
+        queryClient.setQueryData(['ai-weekly-quests', language], context.previousData);
       }
       const err = error as { response?: { data?: { body?: { message?: string } } } };
       toast.error(t('quests.landing.questCompleteFailed'), {
@@ -302,23 +303,25 @@ const TodaysQuests: React.FC<Props> = ({ communityId }) => {
   };
 
   // Filter quests for the specific community (or show all if no communityId)
-  const allToday = data?.body?.data?.today ?? [];
-  const today = communityId ? allToday.filter(q => q.communityId === communityId) : allToday;
+  const allThisWeek = data?.body?.data?.thisWeek ?? [];
+  const thisWeek = communityId
+    ? allThisWeek.filter(q => q.communityId === communityId)
+    : allThisWeek;
 
   return (
     <Card className="border shadow-sm">
       <div className="p-4">
         <div className="flex items-center gap-2 mb-4">
-          <div className="h-2 w-2 rounded-full bg-purple-500" />
+          <div className="h-2 w-2 rounded-full bg-blue-500" />
           <h2 className="font-heading text-lg font-bold text-zinc-900 dark:text-zinc-50">
-            {t('quests.landing.daily.title')}
+            {t('quests.landing.weekly.title')}
           </h2>
         </div>
 
         {isPending ? (
           <div className="flex items-center justify-center py-8">
             <div className="flex flex-col items-center gap-2">
-              <div className="w-6 h-6 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" />
+              <div className="w-6 h-6 border-2 border-blue-500/30 border-t-blue-500 rounded-full animate-spin" />
               <p className="text-xs text-zinc-600 dark:text-zinc-400">
                 {t('quests.landing.loading')}
               </p>
@@ -327,7 +330,7 @@ const TodaysQuests: React.FC<Props> = ({ communityId }) => {
         ) : (
           <div>
             <div className="space-y-3">
-              {today.map(q => (
+              {thisWeek.map(q => (
                 <QuestCard
                   key={q.id}
                   quest={q}
@@ -337,7 +340,7 @@ const TodaysQuests: React.FC<Props> = ({ communityId }) => {
                   isCompleting={completeMutation.isPending}
                 />
               ))}
-              {today.length === 0 && (
+              {thisWeek.length === 0 && (
                 <div className="flex flex-col items-center justify-center py-6 px-4 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800">
                   <p className="text-xs text-zinc-600 dark:text-zinc-400">
                     {t('quests.landing.noQuests')}
@@ -352,4 +355,4 @@ const TodaysQuests: React.FC<Props> = ({ communityId }) => {
   );
 };
 
-export default TodaysQuests;
+export default WeeklyQuests;

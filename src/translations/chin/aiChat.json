@@ -1,0 +1,55 @@
+{
+  "title": "AI聊天助手",
+  "subtitle": "获取由AI驱动的智能回复",
+  "connectionStatus": {
+    "connected": "已连接",
+    "disconnected": "已断开",
+    "connecting": "连接中..."
+  },
+  "tokens": {
+    "available": "可用代币",
+    "insufficient": "代币不足",
+    "insufficientDescription": "您需要更多代币才能继续聊天",
+    "used": "已使用代币"
+  },
+  "input": {
+    "placeholder": "在此输入您的消息...",
+    "placeholderDisconnected": "连接到服务器...",
+    "placeholderLoading": "AI正在思考...",
+    "maxLength": "最多4000个字符",
+    "characterCount": "字符"
+  },
+  "buttons": {
+    "send": "发送",
+    "cancel": "取消",
+    "clear": "清空聊天",
+    "clearConfirm": "您确定要清空聊天历史记录吗？"
+  },
+  "messages": {
+    "you": "您",
+    "assistant": "AI助手",
+    "streaming": "AI正在回复..."
+  },
+  "errors": {
+    "connectionError": "连接错误",
+    "connectionErrorDescription": "无法连接到AI服务",
+    "connectionTimeout": "连接超时",
+    "connectionTimeoutDescription": "无法连接到服务器。请重试。",
+    "promptTooLong": "消息太长",
+    "promptTooLongDescription": "请将您的消息控制在4000个字符以内",
+    "authError": "认证错误",
+    "authErrorDescription": "请登录以使用AI聊天",
+    "chatError": "聊天错误",
+    "chatErrorDescription": "发生错误。请重试。",
+    "notConnected": "未连接到服务器"
+  },
+  "success": {
+    "responseReceived": "已收到回复",
+    "chatCancelled": "聊天已取消",
+    "chatCleared": "聊天历史已清空"
+  },
+  "empty": {
+    "title": "开始对话",
+    "description": "问我任何问题！我在这里帮助您。"
+  }
+}

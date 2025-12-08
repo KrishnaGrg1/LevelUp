@@ -1,0 +1,116 @@
+{
+  "panel": {
+    "title": "إدارة المهام",
+    "subtitle": "عرض وتتبع تقدم مهامك",
+    "viewDetails": "عرض التفاصيل",
+    "settings": "الإعدادات",
+    "overview": {
+      "title": "نظرة عامة على المهام",
+      "description": "تتبع تقدم مهامك اليومية والأسبوعية"
+    },
+    "settingsModal": {
+      "title": "إعدادات المهام",
+      "description": "تكوين تفضيلات المهام الخاصة بك",
+      "comingSoon": "ستكون إعدادات المهام متاحة قريبًا"
+    }
+  },
+  "details": {
+    "tabs": {
+      "daily": "يومي",
+      "weekly": "أسبوعي"
+    },
+    "periods": {
+      "today": "اليوم",
+      "thisWeek": "هذا الأسبوع",
+      "lastWeek": "الأسبوع الماضي",
+      "twoWeeksAgo": "قبل أسبوعين"
+    },
+    "xp": "XP",
+    "buttons": {
+      "complete": "إكمال",
+      "completed": "✓ تم"
+    },
+    "empty": {
+      "noQuests": "لا توجد مهام متاحة"
+    },
+    "success": {
+      "questCompleted": "تم إكمال المهمة!",
+      "xpAwarded": "+{xp} XP • المستوى {level}"
+    },
+    "errors": {
+      "completeFailed": "فشل في إكمال المهمة",
+      "tryAgain": "يرجى المحاولة مرة أخرى"
+    }
+  },
+  "landing": {
+    "daily": {
+      "title": "مهام اليوم",
+      "button": "المهام اليومية"
+    },
+    "weekly": {
+      "title": "المهام الأسبوعية",
+      "button": "المهام الأسبوعية"
+    },
+    "loading": "جارٍ التحميل...",
+    "noQuests": "لا توجد مهام متاحة",
+    "completed": "مكتمل",
+    "markComplete": "وضع علامة كمكتمل",
+    "questCompleted": "اكتملت المهمة!",
+    "questCompleteFailed": "فشل إكمال المهمة",
+    "xpLevel": "+{xp} XP • المستوى {level}",
+    "questNumber": "المهمة #{number}",
+    "startQuest": "ابدأ المهمة",
+    "starting": "جاري البدء...",
+    "inProgress": "قيد التقدم",
+    "completeQuest": "أكمل المهمة",
+    "completing": "جاري الإكمال...",
+    "completeLocked": "إكمال المهمة (مقفل)",
+    "questStarted": "بدأت المهمة!",
+    "questStartedDesc": "أكملها خلال {minutes} دقيقة للحصول على المكافآت.",
+    "questStartFailed": "فشل بدء المهمة",
+    "minRemaining": "{minutes} دقيقة متبقية",
+    "readyToComplete": "جاهز للإكمال!",
+    "minRequired": "{minutes} دقيقة مطلوبة"
+  },
+  "dashboard": {
+    "quest": "مهمة",
+    "quests": "مهام"
+  },
+  "admin": {
+    "title": "إنشاء المهام",
+    "forceDaily": {
+      "title": "إجبار إنشاء المهام اليومية",
+      "description": "تفعيل إنشاء المهام اليومية يدويًا لحسابك",
+      "button": "إنشاء",
+      "generating": "جاري الإنشاء...",
+      "success": "تم إنشاء المهام اليومية",
+      "successDesc": "تم إنشاء {count} مهمة يومية",
+      "error": "فشل إنشاء المهام اليومية"
+    },
+    "forceWeekly": {
+      "title": "إجبار إنشاء المهام الأسبوعية",
+      "description": "تفعيل إنشاء المهام الأسبوعية يدويًا لحسابك",
+      "button": "إنشاء",
+      "generating": "جاري الإنشاء...",
+      "success": "تم إنشاء المهام الأسبوعية",
+      "successDesc": "تم إنشاء {count} مهمة أسبوعية",
+      "error": "فشل إنشاء المهام الأسبوعية"
+    }
+  },
+  "generate": {
+    "buttons": {
+      "generateDaily": "إنشاء مهام اليوم",
+      "generateWeekly": "إنشاء مهام هذا الأسبوع",
+      "generatingDaily": "إنشاء المهام اليومية…",
+      "generatingWeekly": "إنشاء المهام الأسبوعية…"
+    },
+    "success": {
+      "dailyGenerated": "تم إنشاء مهام اليوم",
+      "weeklyGenerated": "تم إنشاء مهام هذا الأسبوع"
+    },
+    "errors": {
+      "dailyFailed": "فشل في إنشاء المهام اليومية",
+      "weeklyFailed": "فشل في إنشاء المهام الأسبوعية"
+    }
+  }
+}

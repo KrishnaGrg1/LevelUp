@@ -1,0 +1,116 @@
+{
+  "panel": {
+    "title": "クエスト管理",
+    "subtitle": "クエストの進捗を表示・追跡",
+    "viewDetails": "詳細を表示",
+    "settings": "設定",
+    "overview": {
+      "title": "クエスト概要",
+      "description": "デイリーおよびウィークリークエストの進捗を追跡"
+    },
+    "settingsModal": {
+      "title": "クエスト設定",
+      "description": "クエストの設定を構成",
+      "comingSoon": "クエスト設定は近日公開予定です"
+    }
+  },
+  "details": {
+    "tabs": {
+      "daily": "デイリー",
+      "weekly": "ウィークリー"
+    },
+    "periods": {
+      "today": "今日",
+      "thisWeek": "今週",
+      "lastWeek": "先週",
+      "twoWeeksAgo": "2週間前"
+    },
+    "xp": "XP",
+    "buttons": {
+      "complete": "完了",
+      "completed": "✓ 完了済み"
+    },
+    "empty": {
+      "noQuests": "利用可能なクエストはありません"
+    },
+    "success": {
+      "questCompleted": "クエスト完了！",
+      "xpAwarded": "+{xp} XP • レベル {level}"
+    },
+    "errors": {
+      "completeFailed": "クエストの完了に失敗しました",
+      "tryAgain": "もう一度お試しください"
+    }
+  },
+  "landing": {
+    "daily": {
+      "title": "今日のクエスト",
+      "button": "デイリークエスト"
+    },
+    "weekly": {
+      "title": "週間クエスト",
+      "button": "週間クエスト"
+    },
+    "loading": "読み込み中...",
+    "noQuests": "利用可能なクエストはありません",
+    "completed": "完了",
+    "markComplete": "完了としてマーク",
+    "questCompleted": "クエスト完了！",
+    "questCompleteFailed": "クエストの完了に失敗しました",
+    "xpLevel": "+{xp} XP • レベル {level}",
+    "questNumber": "クエスト #{number}",
+    "startQuest": "クエスト開始",
+    "starting": "開始中...",
+    "inProgress": "進行中",
+    "completeQuest": "クエスト完了",
+    "completing": "完了中...",
+    "completeLocked": "クエストを完了（ロック中）",
+    "questStarted": "クエスト開始！",
+    "questStartedDesc": "報酬を獲得するには{minutes}分以内に完了してください。",
+    "questStartFailed": "クエストの開始に失敗しました",
+    "minRemaining": "残り{minutes}分",
+    "readyToComplete": "完了準備完了！",
+    "minRequired": "{minutes}分必要"
+  },
+  "dashboard": {
+    "quest": "クエスト",
+    "quests": "クエスト"
+  },
+  "admin": {
+    "title": "クエスト生成",
+    "forceDaily": {
+      "title": "デイリークエストの強制生成",
+      "description": "アカウントのデイリークエスト生成を手動でトリガーする",
+      "button": "生成",
+      "generating": "生成中...",
+      "success": "デイリークエストが生成されました",
+      "successDesc": "{count}個のデイリークエストが生成されました",
+      "error": "デイリークエストの生成に失敗しました"
+    },
+    "forceWeekly": {
+      "title": "ウィークリークエストの強制生成",
+      "description": "アカウントのウィークリークエスト生成を手動でトリガーする",
+      "button": "生成",
+      "generating": "生成中...",
+      "success": "ウィークリークエストが生成されました",
+      "successDesc": "{count}個のウィークリークエストが生成されました",
+      "error": "ウィークリークエストの生成に失敗しました"
+    }
+  },
+  "generate": {
+    "buttons": {
+      "generateDaily": "今日のクエストを生成",
+      "generateWeekly": "今週のクエストを生成",
+      "generatingDaily": "デイリー生成中…",
+      "generatingWeekly": "ウィークリー生成中…"
+    },
+    "success": {
+      "dailyGenerated": "今日のクエストを生成しました",
+      "weeklyGenerated": "今週のクエストを生成しました"
+    },
+    "errors": {
+      "dailyFailed": "デイリークエストの生成に失敗しました",
+      "weeklyFailed": "ウィークリークエストの生成に失敗しました"
+    }
+  }
+}

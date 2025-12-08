@@ -1,0 +1,116 @@
+{
+  "panel": {
+    "title": "क्वेस्ट व्यवस्थापन",
+    "subtitle": "आफ्नो क्वेस्ट प्रगति हेर्नुहोस् र ट्र्याक गर्नुहोस्",
+    "viewDetails": "विवरण हेर्नुहोस्",
+    "settings": "सेटिङहरू",
+    "overview": {
+      "title": "क्वेस्ट अवलोकन",
+      "description": "आफ्नो दैनिक र साप्ताहिक क्वेस्ट प्रगति ट्र्याक गर्नुहोस्"
+    },
+    "settingsModal": {
+      "title": "क्वेस्ट सेटिङहरू",
+      "description": "आफ्नो क्वेस्ट प्राथमिकताहरू कन्फिगर गर्नुहोस्",
+      "comingSoon": "क्वेस्ट सेटिङहरू चाँडै उपलब्ध हुनेछन्"
+    }
+  },
+  "details": {
+    "tabs": {
+      "daily": "दैनिक",
+      "weekly": "साप्ताहिक"
+    },
+    "periods": {
+      "today": "आज",
+      "thisWeek": "यो हप्ता",
+      "lastWeek": "गत हप्ता",
+      "twoWeeksAgo": "दुई हप्ता अघि"
+    },
+    "xp": "XP",
+    "buttons": {
+      "complete": "पूरा गर्नुहोस्",
+      "completed": "✓ पूरा भयो"
+    },
+    "empty": {
+      "noQuests": "कुनै क्वेस्ट उपलब्ध छैन"
+    },
+    "success": {
+      "questCompleted": "क्वेस्ट पूरा भयो!",
+      "xpAwarded": "+{xp} XP • स्तर {level}"
+    },
+    "errors": {
+      "completeFailed": "क्वेस्ट पूरा गर्न असफल",
+      "tryAgain": "कृपया फेरि प्रयास गर्नुहोस्"
+    }
+  },
+  "landing": {
+    "daily": {
+      "title": "आजका खोजहरू",
+      "button": "दैनिक खोजहरू"
+    },
+    "weekly": {
+      "title": "साप्ताहिक खोजहरू",
+      "button": "साप्ताहिक खोजहरू"
+    },
+    "loading": "लोड हुँदैछ...",
+    "noQuests": "कुनै खोजहरू उपलब्ध छैनन्",
+    "completed": "पूरा भयो",
+    "markComplete": "पूरा चिन्ह लगाउनुहोस्",
+    "questCompleted": "खोज पूरा भयो!",
+    "questCompleteFailed": "खोज पूरा गर्न असफल",
+    "xpLevel": "+{xp} XP • स्तर {level}",
+    "questNumber": "खोज #{number}",
+    "startQuest": "खोज सुरु गर्नुहोस्",
+    "starting": "सुरु गर्दै...",
+    "inProgress": "प्रगतिमा",
+    "completeQuest": "खोज पूरा गर्नुहोस्",
+    "completing": "पूरा गर्दै...",
+    "completeLocked": "खोज पूरा गर्नुहोस् (लक गरिएको)",
+    "questStarted": "खोज सुरु भयो!",
+    "questStartedDesc": "पुरस्कार प्राप्त गर्न {minutes} मिनेट भित्र पूरा गर्नुहोस्।",
+    "questStartFailed": "खोज सुरु गर्न असफल",
+    "minRemaining": "{minutes} मिनेट बाँकी",
+    "readyToComplete": "पूरा गर्न तयार!",
+    "minRequired": "{minutes} मिनेट आवश्यक"
+  },
+  "dashboard": {
+    "quest": "खोज",
+    "quests": "खोजहरू"
+  },
+  "admin": {
+    "title": "खोज उत्पादन",
+    "forceDaily": {
+      "title": "दैनिक खोजहरू जबरजस्ती उत्पन्न गर्नुहोस्",
+      "description": "आफ्नो खाताको लागि म्यानुअल रूपमा दैनिक खोज उत्पादन ट्रिगर गर्नुहोस्",
+      "button": "उत्पन्न गर्नुहोस्",
+      "generating": "उत्पन्न गर्दै...",
+      "success": "दैनिक खोजहरू उत्पन्न गरियो",
+      "successDesc": "{count} दैनिक खोजहरू उत्पन्न गरियो",
+      "error": "दैनिक खोजहरू उत्पन्न गर्न असफल"
+    },
+    "forceWeekly": {
+      "title": "साप्ताहिक खोजहरू जबरजस्ती उत्पन्न गर्नुहोस्",
+      "description": "आफ्नो खाताको लागि म्यानुअल रूपमा साप्ताहिक खोज उत्पादन ट्रिगर गर्नुहोस्",
+      "button": "उत्पन्न गर्नुहोस्",
+      "generating": "उत्पन्न गर्दै...",
+      "success": "साप्ताहिक खोजहरू उत्पन्न गरियो",
+      "successDesc": "{count} साप्ताहिक खोजहरू उत्पन्न गरियो",
+      "error": "साप्ताहिक खोजहरू उत्पन्न गर्न असफल"
+    }
+  },
+  "generate": {
+    "buttons": {
+      "generateDaily": "आजका क्वेस्टहरू उत्पन्न गर्नुहोस्",
+      "generateWeekly": "यो हप्ताका क्वेस्टहरू उत्पन्न गर्नुहोस्",
+      "generatingDaily": "दैनिक उत्पन्न गर्दै…",
+      "generatingWeekly": "साप्ताहिक उत्पन्न गर्दै…"
+    },
+    "success": {
+      "dailyGenerated": "आजका क्वेस्टहरू उत्पन्न गरियो",
+      "weeklyGenerated": "यो हप्ताका क्वेस्टहरू उत्पन्न गरियो"
+    },
+    "errors": {
+      "dailyFailed": "दैनिक क्वेस्टहरू उत्पन्न गर्न असफल",
+      "weeklyFailed": "साप्ताहिक क्वेस्टहरू उत्पन्न गर्न असफल"
+    }
+  }
+}

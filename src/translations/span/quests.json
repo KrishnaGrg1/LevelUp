@@ -1,0 +1,116 @@
+{
+  "panel": {
+    "title": "Gestión de Misiones",
+    "subtitle": "Ver y seguir el progreso de tus misiones",
+    "viewDetails": "Ver Detalles",
+    "settings": "Ajustes",
+    "overview": {
+      "title": "Resumen de Misiones",
+      "description": "Seguir el progreso de tus misiones diarias y semanales"
+    },
+    "settingsModal": {
+      "title": "Ajustes de Misiones",
+      "description": "Configurar tus preferencias de misiones",
+      "comingSoon": "Los ajustes de misiones estarán disponibles pronto"
+    }
+  },
+  "details": {
+    "tabs": {
+      "daily": "Diario",
+      "weekly": "Semanal"
+    },
+    "periods": {
+      "today": "Hoy",
+      "thisWeek": "Esta Semana",
+      "lastWeek": "Semana Pasada",
+      "twoWeeksAgo": "Hace Dos Semanas"
+    },
+    "xp": "XP",
+    "buttons": {
+      "complete": "Completar",
+      "completed": "✓ Hecho"
+    },
+    "empty": {
+      "noQuests": "No hay misiones disponibles"
+    },
+    "success": {
+      "questCompleted": "¡Misión completada!",
+      "xpAwarded": "+{xp} XP • Nivel {level}"
+    },
+    "errors": {
+      "completeFailed": "Error al completar la misión",
+      "tryAgain": "Por favor, inténtalo de nuevo"
+    }
+  },
+  "landing": {
+    "daily": {
+      "title": "Misiones de Hoy",
+      "button": "Misiones Diarias"
+    },
+    "weekly": {
+      "title": "Misiones Semanales",
+      "button": "Misiones Semanales"
+    },
+    "loading": "Cargando...",
+    "noQuests": "No hay misiones disponibles",
+    "completed": "Completado",
+    "markComplete": "Marcar como completado",
+    "questCompleted": "¡Misión completada!",
+    "questCompleteFailed": "Error al completar la misión",
+    "xpLevel": "+{xp} XP • Nivel {level}",
+    "questNumber": "Misión #{number}",
+    "startQuest": "Iniciar misión",
+    "starting": "Iniciando...",
+    "inProgress": "En progreso",
+    "completeQuest": "Completar misión",
+    "completing": "Completando...",
+    "completeLocked": "Completar Misión (bloqueado)",
+    "questStarted": "¡Misión iniciada!",
+    "questStartedDesc": "Complétala en {minutes} minutos para ganar recompensas.",
+    "questStartFailed": "Error al iniciar la misión",
+    "minRemaining": "{minutes} min restantes",
+    "readyToComplete": "¡Lista para completar!",
+    "minRequired": "{minutes} min requeridos"
+  },
+  "dashboard": {
+    "quest": "misión",
+    "quests": "misiones"
+  },
+  "admin": {
+    "title": "Generación de Misiones",
+    "forceDaily": {
+      "title": "Forzar Generación de Misiones Diarias",
+      "description": "Activar manualmente la generación de misiones diarias para tu cuenta",
+      "button": "Generar",
+      "generating": "Generando...",
+      "success": "Misiones Diarias Generadas",
+      "successDesc": "Se generaron {count} misiones diarias",
+      "error": "Error al generar misiones diarias"
+    },
+    "forceWeekly": {
+      "title": "Forzar Generación de Misiones Semanales",
+      "description": "Activar manualmente la generación de misiones semanales para tu cuenta",
+      "button": "Generar",
+      "generating": "Generando...",
+      "success": "Misiones Semanales Generadas",
+      "successDesc": "Se generaron {count} misiones semanales",
+      "error": "Error al generar misiones semanales"
+    }
+  },
+  "generate": {
+    "buttons": {
+      "generateDaily": "Generar Misiones de Hoy",
+      "generateWeekly": "Generar Misiones de Esta Semana",
+      "generatingDaily": "Generando Diario…",
+      "generatingWeekly": "Generando Semanal…"
+    },
+    "success": {
+      "dailyGenerated": "Misiones de hoy generadas",
+      "weeklyGenerated": "Misiones de esta semana generadas"
+    },
+    "errors": {
+      "dailyFailed": "Error al generar misiones diarias",
+      "weeklyFailed": "Error al generar misiones semanales"
+    }
+  }
+}

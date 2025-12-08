@@ -17,6 +17,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import TokenDisplay from '@/components/TokenDisplay';
 
 export function ProfileDropdownMenu({ isadmin }: { isadmin?: boolean }) {
   const { language } = LanguageStore();
@@ -57,8 +58,9 @@ export function ProfileDropdownMenu({ isadmin }: { isadmin?: boolean }) {
         className="w-56 bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800"
         align="start"
       >
-        <DropdownMenuLabel className="text-zinc-900 dark:text-zinc-50">
-          My Account
+        <DropdownMenuLabel className="text-zinc-900 dark:text-zinc-50 flex items-center justify-between">
+          <span>My Account</span>
+          {typeof user?.tokens === 'number' && <TokenDisplay tokens={user?.tokens} />}
         </DropdownMenuLabel>
         <DropdownMenuGroup>
           <DropdownMenuItem

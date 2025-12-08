@@ -1,0 +1,116 @@
+{
+  "panel": {
+    "title": "Quest Management",
+    "subtitle": "View and track your quest progress",
+    "viewDetails": "View Details",
+    "settings": "Settings",
+    "overview": {
+      "title": "Quest Overview",
+      "description": "Track your daily and weekly quest progress"
+    },
+    "settingsModal": {
+      "title": "Quest Settings",
+      "description": "Configure your quest preferences",
+      "comingSoon": "Quest settings will be available soon"
+    }
+  },
+  "details": {
+    "tabs": {
+      "daily": "Daily",
+      "weekly": "Weekly"
+    },
+    "periods": {
+      "today": "Today",
+      "thisWeek": "This Week",
+      "lastWeek": "Last Week",
+      "twoWeeksAgo": "Two Weeks Ago"
+    },
+    "xp": "XP",
+    "buttons": {
+      "complete": "Complete",
+      "completed": "✓ Done"
+    },
+    "empty": {
+      "noQuests": "No quests available"
+    },
+    "success": {
+      "questCompleted": "Quest completed!",
+      "xpAwarded": "+{xp} XP • Level {level}"
+    },
+    "errors": {
+      "completeFailed": "Failed to complete quest",
+      "tryAgain": "Please try again"
+    }
+  },
+  "landing": {
+    "daily": {
+      "title": "Today's Quests",
+      "button": "Daily Quests"
+    },
+    "weekly": {
+      "title": "Weekly Quests",
+      "button": "Weekly Quests"
+    },
+    "loading": "Loading...",
+    "noQuests": "No quests available",
+    "completed": "Completed",
+    "markComplete": "Mark Complete",
+    "questCompleted": "Quest completed!",
+    "questCompleteFailed": "Failed to complete quest",
+    "xpLevel": "+{xp} XP • Level {level}",
+    "questNumber": "Quest #{number}",
+    "startQuest": "Start Quest",
+    "starting": "Starting...",
+    "inProgress": "In Progress",
+    "completeQuest": "Complete Quest",
+    "completing": "Completing...",
+    "completeLocked": "Complete Quest (locked)",
+    "questStarted": "Quest started!",
+    "questStartedDesc": "Complete it within {minutes} minutes to earn rewards.",
+    "questStartFailed": "Failed to start quest",
+    "minRemaining": "{minutes} min remaining",
+    "readyToComplete": "Ready to complete!",
+    "minRequired": "{minutes} min required"
+  },
+  "dashboard": {
+    "quest": "quest",
+    "quests": "quests"
+  },
+  "admin": {
+    "title": "Quest Generation",
+    "forceDaily": {
+      "title": "Force Generate Daily Quests",
+      "description": "Manually trigger daily quest generation for your account",
+      "button": "Generate",
+      "generating": "Generating...",
+      "success": "Daily Quests Generated",
+      "successDesc": "Generated {count} daily quests",
+      "error": "Failed to generate daily quests"
+    },
+    "forceWeekly": {
+      "title": "Force Generate Weekly Quests",
+      "description": "Manually trigger weekly quest generation for your account",
+      "button": "Generate",
+      "generating": "Generating...",
+      "success": "Weekly Quests Generated",
+      "successDesc": "Generated {count} weekly quests",
+      "error": "Failed to generate weekly quests"
+    }
+  },
+  "generate": {
+    "buttons": {
+      "generateDaily": "Generate Today's Quests",
+      "generateWeekly": "Generate This Week's Quests",
+      "generatingDaily": "Generating Daily…",
+      "generatingWeekly": "Generating Weekly…"
+    },
+    "success": {
+      "dailyGenerated": "Generated today's quests",
+      "weeklyGenerated": "Generated this week's quests"
+    },
+    "errors": {
+      "dailyFailed": "Failed to generate daily quests",
+      "weeklyFailed": "Failed to generate weekly quests"
+    }
+  }
+}

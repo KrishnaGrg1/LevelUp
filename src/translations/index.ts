@@ -59,9 +59,11 @@ function getCurrentLanguage(): Language {
 }
 
 // Translation function
-export function t(key: string, fallback?: string): string {
+export function t(key: string, params?: Record<string, string | number> | string): string {
   const currentLang = getCurrentLanguage();
   const keys = key.split('.');
+  const fallback = typeof params === 'string' ? params : undefined;
+  const replacements = typeof params === 'object' ? params : undefined;
 
   let value: unknown = translations[currentLang];
 
@@ -87,7 +89,16 @@ export function t(key: string, fallback?: string): string {
     }
   }
 
-  return typeof value === 'string' ? value : fallback || key;
+  let result = typeof value === 'string' ? value : fallback || key;
+
+  // Replace parameters in the string (e.g., {minutes} -> 30)
+  if (replacements) {
+    Object.entries(replacements).forEach(([param, paramValue]) => {
+      result = result.replace(new RegExp(`\\{${param}\\}`, 'g'), String(paramValue));
+    });
+  }
+
+  return result;
 }
 
 // Additional exports for compatibility

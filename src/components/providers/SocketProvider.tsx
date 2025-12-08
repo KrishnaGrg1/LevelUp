@@ -37,9 +37,11 @@ export function SocketProvider({ children }: SocketProviderProps) {
       disconnectSocket();
     }
 
-    // Cleanup on unmount
+    // Only disconnect on unmount when user is not authenticated
     return () => {
-      disconnectSocket();
+      if (!isAuthenticated) {
+        disconnectSocket();
+      }
     };
   }, [isAuthenticated, user]);
 

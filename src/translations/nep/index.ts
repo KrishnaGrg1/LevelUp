@@ -8,6 +8,9 @@ import pricing from './pricing.json';
 import dashboard from './dashboard.json';
 import profile from './profile.json';
 import clans from './clans.json';
+import aiChat from './aiChat.json';
+import quests from './quests.json';
+import community from './community.json';
 
 const nep = {
   auth,
@@ -20,6 +23,9 @@ const nep = {
   nav,
   landing,
   clans,
+  aiChat,
+  quests,
+  community,
 };
 
 export default nep;
