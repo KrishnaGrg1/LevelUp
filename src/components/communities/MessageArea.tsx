@@ -79,9 +79,9 @@ export default function MessageArea({
   }
 
   return (
-    <>
+    <div className="flex flex-col h-full">
       {/* Header */}
-      <div className="h-16 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-6">
+      <div className="h-16 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-6 flex-shrink-0">
         <div className="flex items-center gap-3">
           <div
             className={`w-12 h-12 rounded-lg flex items-center justify-center ${
@@ -121,7 +121,7 @@ export default function MessageArea({
       />
 
       {/* Input */}
-      <div className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 px-6 py-4">
+      <div className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 px-6 py-4 flex-shrink-0">
         <form onSubmit={handleSendMessage} className="flex items-center gap-3">
           <Button type="button" variant="ghost" size="sm">
             <Paperclip className="h-5 w-5 text-gray-500" />
@@ -153,6 +153,6 @@ export default function MessageArea({
           </Button>
         </form>
       </div>
-    </>
+    </div>
   );
 }
