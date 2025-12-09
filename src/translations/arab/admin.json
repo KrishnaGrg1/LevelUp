@@ -1,0 +1,177 @@
+{
+  "aiQuestManagement": {
+    "title": "إدارة المهام بالذكاء الاصطناعي",
+    "subtitle": "مراقبة وإدارة نظام المهام المولدة بالذكاء الاصطناعي",
+    "refresh": "تحديث",
+    "tabs": {
+      "overview": "نظرة عامة",
+      "userActions": "إجراءات المستخدم",
+      "adminGenerate": "توليد المسؤول",
+      "statistics": "الإحصائيات",
+      "bulkDelete": "حذف جماعي",
+      "config": "الإعدادات"
+    },
+    "overview": {
+      "systemHealth": {
+        "title": "صحة النظام",
+        "aiService": "خدمة الذكاء الاصطناعي",
+        "database": "قاعدة البيانات",
+        "uptime": "وقت التشغيل",
+        "memory": "الذاكرة",
+        "model": "النموذج",
+        "notConfigured": "غير مُهيأ",
+        "response": "الاستجابة",
+        "failed": "فشل تحميل بيانات الصحة"
+      },
+      "questStats": {
+        "title": "إحصائيات المهام",
+        "totalQuests": "إجمالي المهام",
+        "completed": "مكتمل",
+        "todayActive": "نشط اليوم",
+        "thisWeekActive": "نشط هذا الأسبوع",
+        "completionRate": "معدل الإنجاز"
+      }
+    },
+    "config": {
+      "title": "إعدادات الذكاء الاصطناعي",
+      "loading": "جاري تحميل الإعدادات...",
+      "aiSettings": {
+        "title": "إعدادات الذكاء الاصطناعي",
+        "model": "النموذج",
+        "maxPromptLength": "الحد الأقصى لطول الموجه",
+        "characters": "حروف",
+        "tokenCostPerChat": "تكلفة الرمز لكل محادثة",
+        "tokens": "رموز",
+        "status": "الحالة",
+        "configured": "مُهيأ",
+        "notConfigured": "غير مُهيأ"
+      },
+      "questSettings": {
+        "title": "إعدادات المهام",
+        "dailyCount": "عدد المهام اليومية",
+        "perDay": "في اليوم",
+        "weeklyCount": "عدد المهام الأسبوعية",
+        "perWeek": "في الأسبوع",
+        "questsPerCommunity": "المهام لكل مجتمع",
+        "dailySchedule": "الجدول اليومي"
+      },
+      "features": {
+        "title": "الميزات"
+      }
+    },
+    "adminGenerate": {
+      "title": "توليد مهام المسؤول",
+      "allUsers": {
+        "title": "توليد لجميع المستخدمين",
+        "daily": {
+          "title": "المهام اليومية - جميع المستخدمين",
+          "description": "توليد المهام اليومية لجميع المستخدمين غير المحظورين. قد يستغرق 45-60 ثانية.",
+          "button": "توليد اليومية للجميع",
+          "generating": "جاري التوليد..."
+        },
+        "weekly": {
+          "title": "المهام الأسبوعية - جميع المستخدمين",
+          "description": "توليد المهام الأسبوعية لجميع المستخدمين غير المحظورين. قد يستغرق 45-60 ثانية.",
+          "button": "توليد الأسبوعية للجميع",
+          "generating": "جاري التوليد..."
+        }
+      },
+      "specificUser": {
+        "title": "توليد لمستخدم محدد",
+        "daily": {
+          "title": "المهام اليومية - مستخدم واحد",
+          "description": "أدخل معرف المستخدم لتوليد المهام اليومية (3-8 ثوان).",
+          "placeholder": "معرف المستخدم (UUID)",
+          "button": "توليد المهام اليومية",
+          "generating": "جاري التوليد..."
+        },
+        "weekly": {
+          "title": "المهام الأسبوعية - مستخدم واحد",
+          "description": "أدخل معرف المستخدم لتوليد المهام الأسبوعية (3-8 ثوان).",
+          "placeholder": "معرف المستخدم (UUID)",
+          "button": "توليد المهام الأسبوعية",
+          "generating": "جاري التوليد..."
+        }
+      }
+    },
+    "statistics": {
+      "title": "إحصائيات وتحليلات المهام",
+      "overview": {
+        "title": "نظرة عامة",
+        "totalQuests": "إجمالي المهام",
+        "completed": "مكتمل",
+        "pending": "معلق",
+        "completionRate": "معدل الإنجاز",
+        "todayActive": "نشط اليوم",
+        "thisWeekActive": "نشط هذا الأسبوع",
+        "activeUsers": "المستخدمون النشطون"
+      },
+      "byType": {
+        "title": "حسب النوع",
+        "quests": "مهام"
+      },
+      "recentCompletions": {
+        "title": "الإنجازات الأخيرة",
+        "by": "بواسطة:",
+        "community": "المجتمع:",
+        "xp": "نقاط الخبرة:"
+      },
+      "loading": "جاري تحميل الإحصائيات...",
+      "failed": "فشل تحميل الإحصائيات"
+    },
+    "bulkDelete": {
+      "title": "حذف المهام الجماعي",
+      "description": "حذف مهام متعددة بناءً على الفلاتر. يجب توفير فلتر واحد على الأقل.",
+      "filters": {
+        "userId": {
+          "label": "معرف المستخدم (اختياري)",
+          "placeholder": "UUID المستخدم"
+        },
+        "communityId": {
+          "label": "معرف المجتمع (اختياري)",
+          "placeholder": "UUID المجتمع"
+        },
+        "type": {
+          "label": "نوع المهمة (اختياري)",
+          "allTypes": "جميع الأنواع",
+          "daily": "يومي",
+          "weekly": "أسبوعي"
+        },
+        "periodStatus": {
+          "label": "حالة الفترة (اختياري)",
+          "allPeriods": "جميع الفترات",
+          "today": "اليوم",
+          "yesterday": "أمس",
+          "thisWeek": "هذا الأسبوع",
+          "lastWeek": "الأسبوع الماضي"
+        },
+        "startDate": {
+          "label": "تاريخ البدء (اختياري)"
+        },
+        "endDate": {
+          "label": "تاريخ الانتهاء (اختياري)"
+        }
+      },
+      "button": "حذف المهام",
+      "deleting": "جاري الحذف..."
+    },
+    "toast": {
+      "dailyAllSuccess": "تم توليد المهام اليومية لجميع المستخدمين",
+      "dailyAllDescription": "تم توليد {{count}} مهمة في {{time}}",
+      "dailyUserSuccess": "تم توليد المهام اليومية",
+      "dailyUserDescription": "تم توليد {{count}} مهمة لـ {{username}}",
+      "weeklyAllSuccess": "تم توليد المهام الأسبوعية لجميع المستخدمين",
+      "weeklyAllDescription": "تم توليد {{count}} مهمة في {{time}}",
+      "weeklyUserSuccess": "تم توليد المهام الأسبوعية",
+      "weeklyUserDescription": "تم توليد {{count}} مهمة لـ {{username}}",
+      "deleteSuccess": "تم حذف المهام",
+      "deleteDescription": "تم حذف {{count}} مهمة",
+      "dailyAllError": "فشل توليد المهام اليومية لجميع المستخدمين",
+      "dailyUserError": "فشل توليد المهام اليومية",
+      "weeklyAllError": "فشل توليد المهام الأسبوعية لجميع المستخدمين",
+      "weeklyUserError": "فشل توليد المهام الأسبوعية",
+      "deleteError": "فشل حذف المهام",
+      "tryAgain": "يرجى المحاولة مرة أخرى"
+    }
+  }
+}
