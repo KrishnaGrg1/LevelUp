@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Users, Lock, Globe, Crown, Plus, Pin } from 'lucide-react';
@@ -12,14 +12,17 @@ import CustomizePinModal from './CustomizePin';
 import SearchCommunityModal from './SearchCommunities';
 import { toast } from 'sonner';
 import type { CommunityDTO } from '@/lib/generated';
+import { OnboardingFlow } from '../onboarding/OnboardingFlow';
+import authStore from '@/stores/useAuth';
 
 export default function CommunitiesSection() {
   const { language } = LanguageStore();
+  const { user } = authStore();
   const router = useRouter();
   const [openCreateModal, setOpenCreateModal] = useState(false);
   const [openJoinModal, setOpenJoinModal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [onboardingOpen, setOnboardingOpen] = useState(false);
   // Fetch user communities data
   const { data, isPending, isError, error } = useQuery({
     queryKey: ['my-communities', language],
@@ -31,7 +34,11 @@ export default function CommunitiesSection() {
     refetchOnReconnect: false,
     retryDelay: (attemptIndex: number) => Math.min(1000 * 2 ** attemptIndex, 30000),
   });
-
+  useEffect(() => {
+    if (!user?.hasOnboarded) {
+      setOnboardingOpen(true);
+    }
+  }, [user]);
   // Fetch all communities data
   const {
     data: allCommunitiesData,
@@ -75,6 +82,8 @@ export default function CommunitiesSection() {
   return (
     <div className="p-4 md:p-6 lg:p-8">
       {/* Header */}
+      <OnboardingFlow open={onboardingOpen} onOpenChange={setOnboardingOpen} lang={language} />
+
       <div className="mb-6 lg:mb-8">
         <div className="flex items-center justify-between">
           <div>

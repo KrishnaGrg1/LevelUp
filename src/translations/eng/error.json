@@ -15,5 +15,10 @@
     "passwordMismatch": "Passwords do not match",
     "otpRequired": "Verification code is required",
     "otpLength": "Verification code must be 6 digits"
+  },
+  "onboarding": {
+    "categoriesRequired": "Please select at least one category",
+    "experienceRequired": "Please select your experience level",
+    "heardAboutUsRequired": "Please tell us how you heard about us"
   }
 }

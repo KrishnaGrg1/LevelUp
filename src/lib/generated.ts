@@ -39,9 +39,14 @@ export interface User {
   CommunityMember?: CommunityMember[];
   otps?: Otp[];
   Quest?: Quest[];
-  category?: Category;
+  category?: Category[];
   sessions?: Session[];
   keys?: Key[];
+  timezone: string;
+  isBanned: boolean;
+  bandUntil: Date;
+  hasOnboarded: boolean;
+  message: Message[];
 }
 
 export interface Session {
@@ -155,6 +160,7 @@ export interface UserLoginResponse {
   body: {
     data: {
       isadmin: boolean;
+      hasOnboarded: boolean;
       expiredAt: string;
     };
     message: string;
@@ -432,6 +438,26 @@ export interface GetCommunityMessagesResponse {
     data: {
       messages: Message[];
       pagination: Pagination;
+    };
+  };
+}
+
+export interface OnboardingResponse {
+  body: {
+    message: string;
+    data?: {
+      success: boolean;
+    };
+  };
+}
+
+export interface getCategoriesResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: {
+      count: number;
+      categories: string[];
     };
   };
 }
