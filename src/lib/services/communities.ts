@@ -3,6 +3,7 @@ import { Language } from '@/stores/useLanguage';
 import {
   communityDetailByIdResponse,
   CreateCommunityResponse,
+  getCategoriesResponse,
   GetMyCommunities,
   searchCommunitiesResponse,
   TogglePinResponse,
@@ -172,6 +173,29 @@ export const communityDetailById = async (lang: Language, communityId: string) =
       err.response?.data?.body?.message ||
       err.response?.data?.message ||
       'Failed to search community';
+    throw new Error(errorMessage);
+  }
+};
+
+// Get Categories for communities
+
+export const getCategories = async (lang: Language) => {
+  try {
+    const response = await axiosInstance.get<getCategoriesResponse>(`/auth/categories`, {
+      withCredentials: true,
+      headers: {
+        'X-Language': lang,
+      },
+    });
+    return response.data;
+  } catch (error: unknown) {
+    const err = error as {
+      response?: { data?: { body?: { message?: string }; message?: string } };
+    };
+    const errorMessage =
+      err.response?.data?.body?.message ||
+      err.response?.data?.message ||
+      'Failed to get categories';
     throw new Error(errorMessage);
   }
 };

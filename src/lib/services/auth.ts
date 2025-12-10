@@ -1,3 +1,4 @@
+import { OnboardingFormData } from '@/app/[lang]/(home)/user/onboarding/schema';
 import axiosInstance from '../fetch';
 import type {
   UserRegisterResponse,
@@ -9,6 +10,7 @@ import type {
   OAuthRequest,
   // LogoutRequest,
   LogoutResponse,
+  OnboardingResponse,
 } from '../generated';
 import { Language } from '@/stores/useLanguage';
 
@@ -182,5 +184,23 @@ export const logout = async (lang: Language) => {
     const errorDetail = err.response?.data?.body?.error || err.response?.data?.error;
 
     throw { message: errorMessage, error: errorDetail };
+  }
+};
+
+export const completeOnboarding = async (data: OnboardingFormData, lang: Language) => {
+  try {
+    const response = await axiosInstance.post<OnboardingResponse>(`/auth/onboarding`, data, {
+      headers: {
+        'X-Language': lang,
+      },
+    });
+    return response.data;
+  } catch (error: unknown) {
+    const err = error as {
+      response?: { data?: { body?: { message?: string }; message?: string } };
+    };
+    const errorMessage =
+      err.response?.data?.body?.message || err.response?.data?.message || 'Onboarding failed';
+    throw new Error(errorMessage);
   }
 };

@@ -55,6 +55,12 @@ export function LoginForm({ lang }: LoginFormProps) {
       setAdminStatus(isAdmin);
 
       toast.success(t('success:login', data?.body.message));
+      const hasOnboarded = data?.body?.data?.hasOnboarded || false;
+      // if user has not completed onboarding → redirect there first
+      if (!hasOnboarded) {
+        router.push(`/${lang}/user/onboarding`);
+        return;
+      }
 
       // Redirect based on admin status
       if (isAdmin) {

@@ -3,5 +3,6 @@
   "register": "Account created successfully",
   "verify": "Account verified successfully",
   "forgot": "Reset code sent to your email",
-  "reset": "Password reset successfully"
+  "reset": "Password reset successfully",
+  "onboarding": "Welcome aboard! Your profile is all set."
 }

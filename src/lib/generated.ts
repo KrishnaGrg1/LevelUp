@@ -155,6 +155,7 @@ export interface UserLoginResponse {
   body: {
     data: {
       isadmin: boolean;
+      hasOnboarded: boolean;
       expiredAt: string;
     };
     message: string;
@@ -432,6 +433,26 @@ export interface GetCommunityMessagesResponse {
     data: {
       messages: Message[];
       pagination: Pagination;
+    };
+  };
+}
+
+export interface OnboardingResponse {
+  body: {
+    message: string;
+    data?: {
+      success: boolean;
+    };
+  };
+}
+
+export interface getCategoriesResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: {
+      count: number;
+      categories: string[];
     };
   };
 }
