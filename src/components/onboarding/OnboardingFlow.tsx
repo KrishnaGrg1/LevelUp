@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -14,7 +13,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { t } from '@/translations/index';
 import { Language } from '@/stores/useLanguage';
 import { onboardingSchema, OnboardingFormData } from '@/app/[lang]/(home)/user/dashboard/schema';
-import authStore from '@/stores/useAuth';
 import { completeOnboarding } from '@/lib/services/auth';
 import { getCategories } from '@/lib/services/communities';
 import { Dialog, DialogContent, DialogHeader, DialogDescription, DialogTitle } from '../ui/dialog';
@@ -41,8 +39,6 @@ const HEARD_ABOUT_OPTIONS = [
 export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const router = useRouter();
-  const { isAdmin } = authStore();
 
   const form = useForm<OnboardingFormData>({
     resolver: zodResolver(onboardingSchema),
@@ -122,7 +118,7 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
     // Prevent closing the dialog during onboarding
     if (!open) {
       form.reset();
-      onOpenChange(false);
+      // onOpenChange(false);
 
       return;
     }
