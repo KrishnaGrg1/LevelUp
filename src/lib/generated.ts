@@ -39,9 +39,14 @@ export interface User {
   CommunityMember?: CommunityMember[];
   otps?: Otp[];
   Quest?: Quest[];
-  category?: Category;
+  category?: Category[];
   sessions?: Session[];
   keys?: Key[];
+  timezone: string;
+  isBanned: boolean;
+  bandUntil: Date;
+  hasOnboarded: boolean;
+  message: Message[];
 }
 
 export interface Session {

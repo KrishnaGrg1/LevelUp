@@ -1,4 +1,4 @@
-import { OnboardingFormData } from '@/app/[lang]/(home)/user/onboarding/schema';
+import { OnboardingFormData } from '@/app/[lang]/(home)/user/dashboard/schema';
 import axiosInstance from '../fetch';
 import type {
   UserRegisterResponse,

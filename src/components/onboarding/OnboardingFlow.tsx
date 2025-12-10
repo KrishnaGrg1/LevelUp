@@ -13,7 +13,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/
 import { Textarea } from '@/components/ui/textarea';
 import { t } from '@/translations/index';
 import { Language } from '@/stores/useLanguage';
-import { onboardingSchema, OnboardingFormData } from '@/app/[lang]/(home)/user/onboarding/schema';
+import { onboardingSchema, OnboardingFormData } from '@/app/[lang]/(home)/user/dashboard/schema';
 import authStore from '@/stores/useAuth';
 import { completeOnboarding } from '@/lib/services/auth';
 import { getCategories } from '@/lib/services/communities';
@@ -67,12 +67,13 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
     onSuccess: () => {
       toast.success(t('success:onboarding', 'Welcome aboard! Your profile is all set.'));
 
-      // Redirect based on admin status
-      if (isAdmin) {
-        router.push(`/${lang}/admin/dashboard`);
-      } else {
-        router.push(`/${lang}/user/dashboard`);
-      }
+      // // Redirect based on admin status
+      // if (isAdmin) {
+      //   router.push(`/${lang}/admin/dashboard`);
+      // } else {
+      //   router.push(`/${lang}/user/dashboard`);
+      // }
+      onOpenChange(false);
     },
     onError: (error: unknown) => {
       const err = error as { message?: string };
@@ -129,19 +130,21 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
   };
 
   return (
-    <Dialog
-      open={open}
-      onOpenChange={dialogChange}
-      // className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-950 dark:to-gray-900"
-    >
+    <Dialog open={open} onOpenChange={dialogChange}>
       <DialogContent
         showCloseButton={false}
-        className="w-full max-w-3xl relative z-10 border-0 shadow-2xl"
+        onInteractOutside={e => {
+          e.preventDefault();
+        }}
+        onEscapeKeyDown={e => {
+          e.preventDefault();
+        }}
+        className="w-full max-w-3xl min-h-[600px] bg-white dark:bg-gray-950 border-0 shadow-xl"
       >
         {/* Progress Bar */}
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gray-200 dark:bg-gray-800 rounded-t-lg overflow-hidden">
           <motion.div
-            className="h-full bg-gradient-to-r from-blue-600 to-purple-600"
+            className="h-full bg-gray-900 dark:bg-white"
             initial={{ width: 0 }}
             animate={{ width: `${progressPercentage}%` }}
             transition={{ duration: 0.3 }}
@@ -151,18 +154,18 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
         <DialogHeader className="space-y-3 pb-6 pt-10">
           {/* Logo */}
           <div className="flex justify-center">
-            <div className="w-14 h-14 border-2 border-gray-900 dark:border-white rounded-xl flex items-center justify-center">
-              <Sparkles className="w-7 h-7 text-gray-900 dark:text-white" />
+            <div className="w-12 h-12 border-2 border-gray-900 dark:border-white rounded-lg flex items-center justify-center">
+              <Sparkles className="w-6 h-6 text-gray-900 dark:text-white" />
             </div>
           </div>
 
           {/* Title */}
-          <DialogTitle className="text-3xl font-bold text-gray-900 dark:text-white text-center">
+          <DialogTitle className="text-2xl font-semibold text-gray-900 dark:text-white text-center">
             {t('onboarding.title', 'Welcome to LevelUp!')}
           </DialogTitle>
 
           {/* Subtitle */}
-          <DialogDescription className="text-center text-gray-600 dark:text-gray-400">
+          <DialogDescription className="text-center text-gray-500 dark:text-gray-400">
             {t('onboarding.subtitle', "Let's personalize your experience")}
           </DialogDescription>
 
@@ -198,10 +201,10 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                     className="space-y-6"
                   >
                     <div className="text-center space-y-2">
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                         {t('onboarding.step1.title', 'Choose Your Interests')}
                       </h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
                         {t(
                           'onboarding.step1.description',
                           "Select the categories you're interested in",
@@ -228,8 +231,8 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                                     onClick={() => toggleCategory(category)}
                                     className={`relative px-6 py-4 rounded-lg border transition-all duration-200 ${
                                       selectedCategories.includes(category)
-                                        ? 'border-gray-900 dark:border-white bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 shadow-sm'
-                                        : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900/50 hover:border-gray-400 dark:hover:border-gray-600 hover:shadow-sm'
+                                        ? 'border-gray-900 dark:border-white bg-gray-50 dark:bg-gray-900 shadow-sm'
+                                        : 'border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900/50 hover:border-gray-400 dark:hover:border-gray-600 hover:shadow-sm'
                                     }`}
                                   >
                                     {selectedCategories.includes(category) && (
@@ -270,10 +273,10 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                     className="space-y-6"
                   >
                     <div className="text-center space-y-2">
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                         {t('onboarding.step2.title', "What's Your Goal?")}
                       </h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
                         {t(
                           'onboarding.step2.description',
                           'Tell us what you want to achieve (optional)',
@@ -317,10 +320,10 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                     className="space-y-8"
                   >
                     <div className="text-center space-y-2">
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                         {t('onboarding.step3.title', 'Your Experience & How You Found Us')}
                       </h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
                         {t('onboarding.step3.description', 'Help us tailor your experience')}
                       </p>
                     </div>
@@ -331,7 +334,7 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                       name="experience"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-base font-semibold text-gray-900 dark:text-white">
+                          <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
                             {t('onboarding.step3.experienceLabel', 'Experience Level')}
                           </FormLabel>
                           <FormControl>
@@ -341,17 +344,17 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                                   key={level.id}
                                   type="button"
                                   onClick={() => field.onChange(level.id)}
-                                  className={`p-4 rounded-xl border-2 transition-all duration-200 ${
+                                  className={`p-4 rounded-lg border transition-all duration-200 ${
                                     field.value === level.id
                                       ? 'border-gray-900 dark:border-white bg-gray-50 dark:bg-gray-900'
-                                      : 'border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700'
+                                      : 'border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600'
                                   }`}
                                 >
-                                  <div className="text-3xl mb-2">{level.icon}</div>
+                                  <div className="text-2xl mb-2">{level.icon}</div>
                                   <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">
                                     {t(`onboarding.step3.experience.${level.id}`, level.id)}
                                   </p>
-                                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                                  <p className="text-xs text-gray-500 dark:text-gray-400">
                                     {level.description}
                                   </p>
                                 </button>
@@ -376,7 +379,7 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                       name="heardAboutUs"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-base font-semibold text-gray-900 dark:text-white">
+                          <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
                             {t('onboarding.step3.heardAboutUsLabel', 'How did you hear about us?')}
                           </FormLabel>
                           <FormControl>
@@ -386,13 +389,13 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                                   key={option.id}
                                   type="button"
                                   onClick={() => field.onChange(option.id)}
-                                  className={`p-4 rounded-xl border-2 transition-all duration-200 ${
+                                  className={`p-4 rounded-lg border transition-all duration-200 ${
                                     field.value === option.id
                                       ? 'border-gray-900 dark:border-white bg-gray-50 dark:bg-gray-900'
-                                      : 'border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700'
+                                      : 'border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600'
                                   }`}
                                 >
-                                  <div className="text-2xl mb-2">{option.icon}</div>
+                                  <div className="text-xl mb-2">{option.icon}</div>
                                   <p className="text-sm font-medium text-gray-900 dark:text-white">
                                     {t(`onboarding.step3.heardAboutUs.${option.id}`, option.label)}
                                   </p>
@@ -424,7 +427,7 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                   variant="outline"
                   className={`${
                     currentStep === 1 ? 'invisible' : ''
-                  } border-gray-300 dark:border-gray-700`}
+                  } border-gray-300 dark:border-gray-700 cursor-pointer`}
                 >
                   <ChevronLeft className="w-4 h-4 mr-2" />
                   {t('onboarding.buttons.back', 'Back')}
@@ -435,7 +438,7 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                     type="button"
                     onClick={handleNext}
                     disabled={isPending}
-                    className="bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-100 text-white dark:text-gray-900"
+                    className="bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-100 text-white dark:text-gray-900 cursor-pointer"
                   >
                     {t('onboarding.buttons.next', 'Next')}
                     <ChevronRight className="w-4 h-4 ml-2" />
@@ -444,7 +447,7 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                   <Button
                     type="submit"
                     disabled={isPending}
-                    className="bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-100 text-white dark:text-gray-900"
+                    className="bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-100 text-white dark:text-gray-900 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {isPending ? (
                       <div className="flex items-center gap-2">
