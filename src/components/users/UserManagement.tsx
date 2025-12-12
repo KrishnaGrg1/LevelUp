@@ -120,7 +120,7 @@ export default function UserManagement() {
       <div className="container mx-auto max-w-7xl space-y-6">
         {/* Header */}
         <div className="space-y-2">
-          <h1 className="font-heading text-4xl font-bold text-zinc-900 dark:text-zinc-50">
+          <h1 className="font-heading text-4xl font-bold text-black dark:text-white">
             User Management
           </h1>
           <p className="text-zinc-600 dark:text-zinc-400">

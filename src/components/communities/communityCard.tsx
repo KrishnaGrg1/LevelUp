@@ -200,7 +200,7 @@ export default function CommunitiesSection() {
 
           {/* Existing Communities */}
           {communities.map((community: CommunityDTO, index: number) => {
-            const isPrivate = community.visibility === 'private';
+            const isPrivate = community.isPrivate === true;
             const isAdmin = community.userRole === 'ADMIN';
             const isPinned = community.isPinned;
 
@@ -373,7 +373,7 @@ export default function CommunitiesSection() {
         {!isLoadingAll && !isErrorAll && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {allCommunities.map((community: CommunityDTO, index: number) => {
-              const isPrivate = community.visibility === 'private';
+              const isPrivate = community.isPrivate === true;
               const isAdmin = community.userRole === 'ADMIN';
               const isPinned = community.isPinned;
 
