@@ -37,6 +37,7 @@ import { getAllCommunitiesAdmin, getCommunityStats } from '@/lib/services/admin-
 import { CategoryManagementModal } from './CategoryManagementModal';
 import { CommunityActionsModal } from './CommunityActionsModal';
 import { BetterPagination } from '@/components/BetterPagination';
+import { Community } from '@/lib/generated';
 
 export default function CommunityManagement() {
   const { language } = LanguageStore();
@@ -48,7 +49,7 @@ export default function CommunityManagement() {
   const [sortBy, setSortBy] = useState<string>('name');
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
   const [actionsModalOpen, setActionsModalOpen] = useState(false);
-  const [selectedCommunity, setSelectedCommunity] = useState<any>(null);
+  const [selectedCommunity, setSelectedCommunity] = useState<Community | null>(null);
 
   // Debounce search input
   useEffect(() => {
@@ -117,7 +118,7 @@ export default function CommunityManagement() {
     setPage(1);
   };
 
-  const openActionsModal = (community: any) => {
+  const openActionsModal = (community: Community) => {
     setSelectedCommunity(community);
     setActionsModalOpen(true);
   };
@@ -345,7 +346,7 @@ export default function CommunityManagement() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {communities.map((community: any) => (
+                    {communities.map((community: Community) => (
                       <TableRow
                         key={community.id}
                         className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
@@ -359,7 +360,7 @@ export default function CommunityManagement() {
                             className="capitalize font-medium bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800"
                           >
                             <Tag className="h-3 w-3 mr-1" />
-                            {community.category || 'No Category'}
+                            {community.category?.name || 'No Category'}
                           </Badge>
                         </TableCell>
                         <TableCell>
@@ -389,7 +390,7 @@ export default function CommunityManagement() {
                               <Users className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                             </div>
                             <span className="font-medium text-gray-700 dark:text-gray-300">
-                              {community.membersCount || 0}
+                              {community._count?.members || 0}
                             </span>
                           </div>
                         </TableCell>
@@ -439,7 +440,16 @@ export default function CommunityManagement() {
       <CommunityActionsModal
         open={actionsModalOpen}
         onOpenChange={setActionsModalOpen}
-        community={selectedCommunity}
+        community={
+          selectedCommunity
+            ? {
+                id: selectedCommunity.id,
+                name: selectedCommunity.name,
+                isPrivate: selectedCommunity.isPrivate,
+                category: selectedCommunity.category?.name || '',
+              }
+            : null
+        }
       />
     </div>
   );

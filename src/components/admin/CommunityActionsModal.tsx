@@ -40,6 +40,7 @@ import {
   updateCommunityPrivacy,
   updateCommunityCategory,
 } from '@/lib/services/admin-communities';
+import { MemberData } from '@/lib/generated';
 
 interface CommunityActionsModalProps {
   open: boolean;
@@ -78,6 +79,7 @@ export function CommunityActionsModal({
   });
 
   const members = membersData?.body?.data?.members || [];
+
   const categories = categoriesData?.body?.data?.categories || [];
 
   // Remove member mutation
@@ -287,14 +289,14 @@ export function CommunityActionsModal({
                   <p className="text-center text-gray-500 py-8">No members found</p>
                 ) : (
                   <div className="space-y-2 max-h-64 overflow-y-auto">
-                    {members.map((member: any) => (
+                    {members.map((member: MemberData) => (
                       <div
                         key={member.id}
                         className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-900"
                       >
                         <div className="flex items-center gap-3">
                           <div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-medium">
-                            {member.username?.[0]?.toUpperCase() || 'U'}
+                            {member.UserName?.[0]?.toUpperCase() || 'U'}
                           </div>
                           <div>
                             <p className="font-medium">{member.UserName}</p>
@@ -305,7 +307,7 @@ export function CommunityActionsModal({
                         <Button
                           size="sm"
                           variant="ghost"
-                          onClick={() => handleRemoveMember(member.id)}
+                          onClick={() => member.id && handleRemoveMember(member.id)}
                           className="cursor-pointer text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950"
                         >
                           <Trash2 className="h-4 w-4" />
@@ -326,8 +328,8 @@ export function CommunityActionsModal({
           <AlertDialogHeader>
             <AlertDialogTitle>Delete Community</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete "{community.name}"? This will remove all members and
-              all data associated with this community. This action cannot be undone.
+              Are you sure you want to delete <strong>{community.name}</strong>? This will remove
+              all members and all data associated with this community. This action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

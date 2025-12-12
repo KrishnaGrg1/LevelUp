@@ -282,8 +282,8 @@ export function CategoryManagementModal({ open, onOpenChange }: CategoryManageme
           <AlertDialogHeader>
             <AlertDialogTitle>Delete Category</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete the category "{categoryToDelete}"? This action cannot
-              be undone.
+              Are you sure you want to delete the category <strong>{categoryToDelete}</strong>? This
+              action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
