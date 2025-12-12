@@ -1,0 +1,177 @@
+{
+  "aiQuestManagement": {
+    "title": "AI Quest Management",
+    "subtitle": "Monitor and manage AI-generated quests system",
+    "refresh": "Refresh",
+    "tabs": {
+      "overview": "Overview",
+      "userActions": "User Actions",
+      "adminGenerate": "Admin Generate",
+      "statistics": "Statistics",
+      "bulkDelete": "Bulk Delete",
+      "config": "Config"
+    },
+    "overview": {
+      "systemHealth": {
+        "title": "System Health",
+        "aiService": "AI Service",
+        "database": "Database",
+        "uptime": "Uptime",
+        "memory": "Memory",
+        "model": "Model",
+        "notConfigured": "Not configured",
+        "response": "Response",
+        "failed": "Failed to load health data"
+      },
+      "questStats": {
+        "title": "Quest Statistics",
+        "totalQuests": "Total Quests",
+        "completed": "Completed",
+        "todayActive": "Today Active",
+        "thisWeekActive": "This Week Active",
+        "completionRate": "Completion Rate"
+      }
+    },
+    "config": {
+      "title": "AI Configuration",
+      "loading": "Loading configuration...",
+      "aiSettings": {
+        "title": "AI Settings",
+        "model": "Model",
+        "maxPromptLength": "Max Prompt Length",
+        "characters": "characters",
+        "tokenCostPerChat": "Token Cost per Chat",
+        "tokens": "token(s)",
+        "status": "Status",
+        "configured": "Configured",
+        "notConfigured": "Not Configured"
+      },
+      "questSettings": {
+        "title": "Quest Settings",
+        "dailyCount": "Daily Quest Count",
+        "perDay": "per day",
+        "weeklyCount": "Weekly Quest Count",
+        "perWeek": "per week",
+        "questsPerCommunity": "Quests per Community",
+        "dailySchedule": "Daily Schedule"
+      },
+      "features": {
+        "title": "Features"
+      }
+    },
+    "adminGenerate": {
+      "title": "Admin Quest Generation",
+      "allUsers": {
+        "title": "Generate for All Users",
+        "daily": {
+          "title": "Daily Quests - All Users",
+          "description": "Generate daily quests for all non-banned users. May take 45-60 seconds.",
+          "button": "Generate Daily for All",
+          "generating": "Generating..."
+        },
+        "weekly": {
+          "title": "Weekly Quests - All Users",
+          "description": "Generate weekly quests for all non-banned users. May take 45-60 seconds.",
+          "button": "Generate Weekly for All",
+          "generating": "Generating..."
+        }
+      },
+      "specificUser": {
+        "title": "Generate for Specific User",
+        "daily": {
+          "title": "Daily Quests - Single User",
+          "description": "Enter user ID to generate daily quests (3-8 seconds).",
+          "placeholder": "User ID (UUID)",
+          "button": "Generate Daily Quests",
+          "generating": "Generating..."
+        },
+        "weekly": {
+          "title": "Weekly Quests - Single User",
+          "description": "Enter user ID to generate weekly quests (3-8 seconds).",
+          "placeholder": "User ID (UUID)",
+          "button": "Generate Weekly Quests",
+          "generating": "Generating..."
+        }
+      }
+    },
+    "statistics": {
+      "title": "Quest Statistics & Analytics",
+      "overview": {
+        "title": "Overview",
+        "totalQuests": "Total Quests",
+        "completed": "Completed",
+        "pending": "Pending",
+        "completionRate": "Completion Rate",
+        "todayActive": "Today Active",
+        "thisWeekActive": "This Week Active",
+        "activeUsers": "Active Users"
+      },
+      "byType": {
+        "title": "By Type",
+        "quests": "quests"
+      },
+      "recentCompletions": {
+        "title": "Recent Completions",
+        "by": "By:",
+        "community": "Community:",
+        "xp": "XP:"
+      },
+      "loading": "Loading statistics...",
+      "failed": "Failed to load statistics"
+    },
+    "bulkDelete": {
+      "title": "Bulk Delete Quests",
+      "description": "Delete multiple quests based on filters. At least one filter must be provided.",
+      "filters": {
+        "userId": {
+          "label": "User ID (Optional)",
+          "placeholder": "User UUID"
+        },
+        "communityId": {
+          "label": "Community ID (Optional)",
+          "placeholder": "Community UUID"
+        },
+        "type": {
+          "label": "Quest Type (Optional)",
+          "allTypes": "All Types",
+          "daily": "Daily",
+          "weekly": "Weekly"
+        },
+        "periodStatus": {
+          "label": "Period Status (Optional)",
+          "allPeriods": "All Periods",
+          "today": "Today",
+          "yesterday": "Yesterday",
+          "thisWeek": "This Week",
+          "lastWeek": "Last Week"
+        },
+        "startDate": {
+          "label": "Start Date (Optional)"
+        },
+        "endDate": {
+          "label": "End Date (Optional)"
+        }
+      },
+      "button": "Delete Quests",
+      "deleting": "Deleting..."
+    },
+    "toast": {
+      "dailyAllSuccess": "Daily Quests Generated for All Users",
+      "dailyAllDescription": "Generated {{count}} quests in {{time}}",
+      "dailyUserSuccess": "Daily Quests Generated",
+      "dailyUserDescription": "Generated {{count}} quests for {{username}}",
+      "weeklyAllSuccess": "Weekly Quests Generated for All Users",
+      "weeklyAllDescription": "Generated {{count}} quests in {{time}}",
+      "weeklyUserSuccess": "Weekly Quests Generated",
+      "weeklyUserDescription": "Generated {{count}} quests for {{username}}",
+      "deleteSuccess": "Quests Deleted",
+      "deleteDescription": "Deleted {{count}} quests",
+      "dailyAllError": "Failed to generate daily quests for all users",
+      "dailyUserError": "Failed to generate daily quests",
+      "weeklyAllError": "Failed to generate weekly quests for all users",
+      "weeklyUserError": "Failed to generate weekly quests",
+      "deleteError": "Failed to delete quests",
+      "tryAgain": "Please try again"
+    }
+  }
+}

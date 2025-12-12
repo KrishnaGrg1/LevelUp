@@ -25,12 +25,21 @@ import {
   forceGenerateDailyQuests,
   forceGenerateWeeklyQuests,
   deleteQuest,
+  adminGenerateDailyAll,
+  adminGenerateDailyUser,
+  adminGenerateWeeklyAll,
+  adminGenerateWeeklyUser,
+  adminGetQuestStats,
+  adminBulkDeleteQuests,
+  type BulkDeleteFilter,
 } from '@/lib/services/ai';
 
 export default function AIQuestManagement() {
   const { language } = LanguageStore();
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedQuestId, setSelectedQuestId] = useState<string | null>(null);
+  const [targetUserId, setTargetUserId] = useState('');
+  const [bulkDeleteFilters, setBulkDeleteFilters] = useState<BulkDeleteFilter>({});
 
   // Fetch AI Health
   const {
@@ -102,6 +111,101 @@ export default function AIQuestManagement() {
     },
   });
 
+  // Admin: Generate daily quests for all users
+  const adminDailyAllMutation = useMutation({
+    mutationFn: () => adminGenerateDailyAll(language),
+    onSuccess: response => {
+      toast.success('Daily Quests Generated for All Users', {
+        description: `Generated ${response.body.data.totalTodayQuests} quests in ${response.body.data.timeElapsed}`,
+      });
+      refetchHealth();
+    },
+    onError: (error: unknown) => {
+      const err = error as { response?: { data?: { body?: { message?: string } } } };
+      toast.error('Failed to generate daily quests for all users', {
+        description: err?.response?.data?.body?.message || 'Please try again',
+      });
+    },
+  });
+
+  // Admin: Generate daily quests for specific user
+  const adminDailyUserMutation = useMutation({
+    mutationFn: (userId: string) => adminGenerateDailyUser(userId, language),
+    onSuccess: response => {
+      toast.success('Daily Quests Generated', {
+        description: `Generated ${response.body.data.questCount} quests for ${response.body.data.username}`,
+      });
+      setTargetUserId('');
+      refetchHealth();
+    },
+    onError: (error: unknown) => {
+      const err = error as { response?: { data?: { body?: { message?: string } } } };
+      toast.error('Failed to generate daily quests', {
+        description: err?.response?.data?.body?.message || 'Please try again',
+      });
+    },
+  });
+
+  // Admin: Generate weekly quests for all users
+  const adminWeeklyAllMutation = useMutation({
+    mutationFn: () => adminGenerateWeeklyAll(language),
+    onSuccess: response => {
+      toast.success('Weekly Quests Generated for All Users', {
+        description: `Generated ${response.body.data.totalThisWeekQuests} quests in ${response.body.data.timeElapsed}`,
+      });
+      refetchHealth();
+    },
+    onError: (error: unknown) => {
+      const err = error as { response?: { data?: { body?: { message?: string } } } };
+      toast.error('Failed to generate weekly quests for all users', {
+        description: err?.response?.data?.body?.message || 'Please try again',
+      });
+    },
+  });
+
+  // Admin: Generate weekly quests for specific user
+  const adminWeeklyUserMutation = useMutation({
+    mutationFn: (userId: string) => adminGenerateWeeklyUser(userId, language),
+    onSuccess: response => {
+      toast.success('Weekly Quests Generated', {
+        description: `Generated ${response.body.data.questCount} quests for ${response.body.data.username}`,
+      });
+      setTargetUserId('');
+      refetchHealth();
+    },
+    onError: (error: unknown) => {
+      const err = error as { response?: { data?: { body?: { message?: string } } } };
+      toast.error('Failed to generate weekly quests', {
+        description: err?.response?.data?.body?.message || 'Please try again',
+      });
+    },
+  });
+
+  // Admin: Bulk delete quests
+  const bulkDeleteMutation = useMutation({
+    mutationFn: (filters: BulkDeleteFilter) => adminBulkDeleteQuests(filters, language),
+    onSuccess: response => {
+      toast.success('Quests Deleted', {
+        description: `Deleted ${response.body.data.deletedCount} quests`,
+      });
+      setBulkDeleteFilters({});
+      refetchHealth();
+    },
+    onError: (error: unknown) => {
+      const err = error as { response?: { data?: { body?: { message?: string } } } };
+      toast.error('Failed to delete quests', {
+        description: err?.response?.data?.body?.message || 'Please try again',
+      });
+    },
+  });
+
+  // Fetch Quest Statistics
+  const { data: statsData, isLoading: statsLoading } = useQuery({
+    queryKey: ['quest-stats', language],
+    queryFn: () => adminGetQuestStats(language),
+    refetchInterval: 60000, // Refresh every minute
+  });
+
   const health = healthData?.body?.data;
   const config = configData?.body?.data;
 
@@ -122,10 +226,10 @@ export default function AIQuestManagement() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold font-heading text-zinc-900 dark:text-zinc-50">
-            AI Quest Management
+            {t('admin.aiQuestManagement.title', language)}
           </h1>
           <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
-            Monitor and manage AI-generated quests system
+            {t('admin.aiQuestManagement.subtitle', language)}
           </p>
         </div>
         <Button onClick={() => refetchHealth()} variant="outline" size="sm">
@@ -137,25 +241,40 @@ export default function AIQuestManagement() {
               d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
             />
           </svg>
-          Refresh
+          {t('admin.aiQuestManagement.refresh', language)}
         </Button>
       </div>
 
       <Tabs defaultValue="overview" className="w-full">
-        <TabsList>
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="actions">Actions</TabsTrigger>
-          <TabsTrigger value="config">Configuration</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-1">
+          <TabsTrigger value="overview" className="text-xs sm:text-sm">
+            {t('admin.aiQuestManagement.tabs.overview', language)}
+          </TabsTrigger>
+          <TabsTrigger value="actions" className="text-xs sm:text-sm">
+            {t('admin.aiQuestManagement.tabs.userActions', language)}
+          </TabsTrigger>
+          <TabsTrigger value="admin" className="text-xs sm:text-sm">
+            {t('admin.aiQuestManagement.tabs.adminGenerate', language)}
+          </TabsTrigger>
+          <TabsTrigger value="statistics" className="text-xs sm:text-sm">
+            {t('admin.aiQuestManagement.tabs.statistics', language)}
+          </TabsTrigger>
+          <TabsTrigger value="bulk-delete" className="text-xs sm:text-sm">
+            {t('admin.aiQuestManagement.tabs.bulkDelete', language)}
+          </TabsTrigger>
+          <TabsTrigger value="config" className="text-xs sm:text-sm">
+            {t('admin.aiQuestManagement.tabs.config', language)}
+          </TabsTrigger>
         </TabsList>
 
         {/* Overview Tab */}
         <TabsContent value="overview" className="space-y-6">
           {/* System Health */}
           <Card className="border-0 shadow-none">
-            <div className="p-6">
+            <div className="p-4 sm:p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold font-heading text-zinc-900 dark:text-zinc-50">
-                  System Health
+                <h2 className="text-lg sm:text-xl font-bold font-heading text-zinc-900 dark:text-zinc-50">
+                  {t('admin.aiQuestManagement.overview.systemHealth.title', language)}
                 </h2>
                 {health && (
                   <Badge
@@ -172,52 +291,63 @@ export default function AIQuestManagement() {
                   <div className="w-8 h-8 border-3 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" />
                 </div>
               ) : health ? (
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                   {/* AI Service */}
-                  <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                  <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
                     <div className="flex items-center gap-2 mb-2">
                       <div
                         className={`w-2 h-2 rounded-full ${health.services.ai.configured ? 'bg-green-500' : 'bg-red-500'}`}
                       />
-                      <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">AI Service</h3>
+                      <h3 className="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-50">
+                        {t('admin.aiQuestManagement.overview.systemHealth.aiService', language)}
+                      </h3>
                     </div>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                      Model: {health.services.ai.model || 'Not configured'}
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+                      {t('admin.aiQuestManagement.overview.systemHealth.model', language)}:{' '}
+                      {health.services.ai.model ||
+                        t('admin.aiQuestManagement.overview.systemHealth.notConfigured', language)}
                     </p>
                   </div>
 
                   {/* Database */}
-                  <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                  <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
                     <div className="flex items-center gap-2 mb-2">
                       <div
                         className={`w-2 h-2 rounded-full ${health.services.database.healthy ? 'bg-green-500' : 'bg-red-500'}`}
                       />
-                      <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">Database</h3>
+                      <h3 className="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-50">
+                        {t('admin.aiQuestManagement.overview.systemHealth.database', language)}
+                      </h3>
                     </div>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                      Response: {health.services.database.responseTime}ms
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+                      {t('admin.aiQuestManagement.overview.systemHealth.response', language)}:{' '}
+                      {health.services.database.responseTime}ms
                     </p>
                   </div>
 
                   {/* Uptime */}
-                  <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
-                    <h3 className="font-semibold text-zinc-900 dark:text-zinc-50 mb-2">Uptime</h3>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                  <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                    <h3 className="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-50 mb-2">
+                      {t('admin.aiQuestManagement.overview.systemHealth.uptime', language)}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
                       {Math.floor(health.uptime / 3600)}h {Math.floor((health.uptime % 3600) / 60)}m
                     </p>
                   </div>
 
                   {/* Memory */}
-                  <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
-                    <h3 className="font-semibold text-zinc-900 dark:text-zinc-50 mb-2">Memory</h3>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                  <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                    <h3 className="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-50 mb-2">
+                      {t('admin.aiQuestManagement.overview.systemHealth.memory', language)}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
                       {health.memory.used}MB / {health.memory.total}MB
                     </p>
                   </div>
                 </div>
               ) : (
                 <p className="text-center text-zinc-500 dark:text-zinc-400">
-                  Failed to load health data
+                  {t('admin.aiQuestManagement.overview.systemHealth.failed', language)}
                 </p>
               )}
             </div>
@@ -226,40 +356,48 @@ export default function AIQuestManagement() {
           {/* Quest Statistics */}
           {health?.quests && (
             <Card className="border-0 shadow-none">
-              <div className="p-6">
-                <h2 className="text-xl font-bold font-heading text-zinc-900 dark:text-zinc-50 mb-6">
-                  Quest Statistics
+              <div className="p-4 sm:p-6">
+                <h2 className="text-lg sm:text-xl font-bold font-heading text-zinc-900 dark:text-zinc-50 mb-6">
+                  {t('admin.aiQuestManagement.overview.questStats.title', language)}
                 </h2>
-                <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
-                  <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-1">Total Quests</p>
-                    <p className="text-2xl font-bold font-numeric text-zinc-900 dark:text-zinc-50">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+                  <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-1">
+                      {t('admin.aiQuestManagement.overview.questStats.totalQuests', language)}
+                    </p>
+                    <p className="text-lg sm:text-2xl font-bold font-numeric text-zinc-900 dark:text-zinc-50">
                       {health.quests.total}
                     </p>
                   </div>
-                  <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-1">Completed</p>
-                    <p className="text-2xl font-bold font-numeric text-green-600 dark:text-green-400">
+                  <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-1">
+                      {t('admin.aiQuestManagement.overview.questStats.completed', language)}
+                    </p>
+                    <p className="text-lg sm:text-2xl font-bold font-numeric text-green-600 dark:text-green-400">
                       {health.quests.completed}
                     </p>
                   </div>
-                  <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-1">Today Active</p>
-                    <p className="text-2xl font-bold font-numeric text-purple-600 dark:text-purple-400">
+                  <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-1">
+                      {t('admin.aiQuestManagement.overview.questStats.todayActive', language)}
+                    </p>
+                    <p className="text-lg sm:text-2xl font-bold font-numeric text-purple-600 dark:text-purple-400">
                       {health.quests.todayActive}
                     </p>
                   </div>
-                  <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-1">
-                      This Week Active
+                  <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-1">
+                      {t('admin.aiQuestManagement.overview.questStats.thisWeekActive', language)}
                     </p>
-                    <p className="text-2xl font-bold font-numeric text-blue-600 dark:text-blue-400">
+                    <p className="text-lg sm:text-2xl font-bold font-numeric text-blue-600 dark:text-blue-400">
                       {health.quests.thisWeekActive}
                     </p>
                   </div>
-                  <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-1">Completion Rate</p>
-                    <p className="text-2xl font-bold font-numeric text-zinc-900 dark:text-zinc-50">
+                  <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-1">
+                      {t('admin.aiQuestManagement.overview.questStats.completionRate', language)}
+                    </p>
+                    <p className="text-lg sm:text-2xl font-bold font-numeric text-zinc-900 dark:text-zinc-50">
                       {health.quests.completionRate}%
                     </p>
                   </div>
@@ -331,12 +469,539 @@ export default function AIQuestManagement() {
           </Card>
         </TabsContent>
 
+        {/* Admin Generate Tab */}
+        <TabsContent value="admin" className="space-y-6">
+          <Card className="border-0 shadow-none">
+            <div className="p-4 sm:p-6">
+              <h2 className="text-lg sm:text-xl font-bold font-heading text-zinc-900 dark:text-zinc-50 mb-6">
+                {t('admin.aiQuestManagement.adminGenerate.title', language)}
+              </h2>
+
+              {/* Generate for All Users */}
+              <div className="space-y-4 mb-8">
+                <h3 className="text-base sm:text-lg font-semibold text-zinc-900 dark:text-zinc-50">
+                  {t('admin.aiQuestManagement.adminGenerate.allUsers.title', language)}
+                </h3>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                    <h4 className="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-50 mb-2">
+                      {t('admin.aiQuestManagement.adminGenerate.allUsers.daily.title', language)}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-4">
+                      {t(
+                        'admin.aiQuestManagement.adminGenerate.allUsers.daily.description',
+                        language,
+                      )}
+                    </p>
+                    <Button
+                      onClick={() => adminDailyAllMutation.mutate()}
+                      disabled={adminDailyAllMutation.isPending}
+                      className="w-full bg-purple-600 hover:bg-purple-700 text-xs sm:text-sm"
+                    >
+                      {adminDailyAllMutation.isPending ? (
+                        <span className="flex items-center gap-2">
+                          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          {t(
+                            'admin.aiQuestManagement.adminGenerate.allUsers.daily.generating',
+                            language,
+                          )}
+                        </span>
+                      ) : (
+                        t('admin.aiQuestManagement.adminGenerate.allUsers.daily.button', language)
+                      )}
+                    </Button>
+                  </div>
+
+                  <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                    <h4 className="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-50 mb-2">
+                      {t('admin.aiQuestManagement.adminGenerate.allUsers.weekly.title', language)}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-4">
+                      {t(
+                        'admin.aiQuestManagement.adminGenerate.allUsers.weekly.description',
+                        language,
+                      )}
+                    </p>
+                    <Button
+                      onClick={() => adminWeeklyAllMutation.mutate()}
+                      disabled={adminWeeklyAllMutation.isPending}
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-xs sm:text-sm"
+                    >
+                      {adminWeeklyAllMutation.isPending ? (
+                        <span className="flex items-center gap-2">
+                          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          {t(
+                            'admin.aiQuestManagement.adminGenerate.allUsers.weekly.generating',
+                            language,
+                          )}
+                        </span>
+                      ) : (
+                        t('admin.aiQuestManagement.adminGenerate.allUsers.weekly.button', language)
+                      )}
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Generate for Specific User */}
+              <div className="space-y-4">
+                <h3 className="text-base sm:text-lg font-semibold text-zinc-900 dark:text-zinc-50">
+                  {t('admin.aiQuestManagement.adminGenerate.specificUser.title', language)}
+                </h3>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                    <h4 className="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-50 mb-2">
+                      {t(
+                        'admin.aiQuestManagement.adminGenerate.specificUser.daily.title',
+                        language,
+                      )}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-4">
+                      {t(
+                        'admin.aiQuestManagement.adminGenerate.specificUser.daily.description',
+                        language,
+                      )}
+                    </p>
+                    <input
+                      type="text"
+                      placeholder={t(
+                        'admin.aiQuestManagement.adminGenerate.specificUser.daily.placeholder',
+                        language,
+                      )}
+                      value={targetUserId}
+                      onChange={e => setTargetUserId(e.target.value)}
+                      className="w-full px-3 py-2 mb-3 text-xs sm:text-sm rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50"
+                    />
+                    <Button
+                      onClick={() => targetUserId && adminDailyUserMutation.mutate(targetUserId)}
+                      disabled={!targetUserId || adminDailyUserMutation.isPending}
+                      className="w-full bg-purple-600 hover:bg-purple-700 text-xs sm:text-sm"
+                    >
+                      {adminDailyUserMutation.isPending ? (
+                        <span className="flex items-center gap-2">
+                          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          {t(
+                            'admin.aiQuestManagement.adminGenerate.specificUser.daily.generating',
+                            language,
+                          )}
+                        </span>
+                      ) : (
+                        t(
+                          'admin.aiQuestManagement.adminGenerate.specificUser.daily.button',
+                          language,
+                        )
+                      )}
+                    </Button>
+                  </div>
+
+                  <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                    <h4 className="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-50 mb-2">
+                      {t(
+                        'admin.aiQuestManagement.adminGenerate.specificUser.weekly.title',
+                        language,
+                      )}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-4">
+                      {t(
+                        'admin.aiQuestManagement.adminGenerate.specificUser.weekly.description',
+                        language,
+                      )}
+                    </p>
+                    <input
+                      type="text"
+                      placeholder={t(
+                        'admin.aiQuestManagement.adminGenerate.specificUser.weekly.placeholder',
+                        language,
+                      )}
+                      value={targetUserId}
+                      onChange={e => setTargetUserId(e.target.value)}
+                      className="w-full px-3 py-2 mb-3 text-xs sm:text-sm rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50"
+                    />
+                    <Button
+                      onClick={() => targetUserId && adminWeeklyUserMutation.mutate(targetUserId)}
+                      disabled={!targetUserId || adminWeeklyUserMutation.isPending}
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-xs sm:text-sm"
+                    >
+                      {adminWeeklyUserMutation.isPending ? (
+                        <span className="flex items-center gap-2">
+                          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          {t(
+                            'admin.aiQuestManagement.adminGenerate.specificUser.weekly.generating',
+                            language,
+                          )}
+                        </span>
+                      ) : (
+                        t(
+                          'admin.aiQuestManagement.adminGenerate.specificUser.weekly.button',
+                          language,
+                        )
+                      )}
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </TabsContent>
+
+        {/* Statistics Tab */}
+        <TabsContent value="statistics" className="space-y-6">
+          <Card className="border-0 shadow-none">
+            <div className="p-4 sm:p-6">
+              <h2 className="text-lg sm:text-xl font-bold font-heading text-zinc-900 dark:text-zinc-50 mb-6">
+                {t('admin.aiQuestManagement.statistics.title', language)}
+              </h2>
+
+              {statsLoading ? (
+                <div className="flex items-center justify-center py-12">
+                  <div className="w-8 h-8 border-3 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" />
+                </div>
+              ) : statsData?.body?.data ? (
+                <div className="space-y-6">
+                  {/* Overview Stats */}
+                  <div>
+                    <h3 className="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-50 mb-3">
+                      {t('admin.aiQuestManagement.statistics.overview.title', language)}
+                    </h3>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+                      <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-1">
+                          {t('admin.aiQuestManagement.statistics.overview.totalQuests', language)}
+                        </p>
+                        <p className="text-lg sm:text-2xl font-bold text-zinc-900 dark:text-zinc-50">
+                          {statsData.body.data.overview.totalQuests.toLocaleString()}
+                        </p>
+                      </div>
+                      <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-1">
+                          {t('admin.aiQuestManagement.statistics.overview.completed', language)}
+                        </p>
+                        <p className="text-lg sm:text-2xl font-bold text-green-600 dark:text-green-400">
+                          {statsData.body.data.overview.completedQuests.toLocaleString()}
+                        </p>
+                      </div>
+                      <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-1">
+                          {t('admin.aiQuestManagement.statistics.overview.pending', language)}
+                        </p>
+                        <p className="text-lg sm:text-2xl font-bold text-orange-600 dark:text-orange-400">
+                          {statsData.body.data.overview.pendingQuests.toLocaleString()}
+                        </p>
+                      </div>
+                      <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-1">
+                          {t(
+                            'admin.aiQuestManagement.statistics.overview.completionRate',
+                            language,
+                          )}
+                        </p>
+                        <p className="text-lg sm:text-2xl font-bold text-zinc-900 dark:text-zinc-50">
+                          {statsData.body.data.overview.completionRate}
+                        </p>
+                      </div>
+                      <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-1">
+                          {t('admin.aiQuestManagement.statistics.overview.todayActive', language)}
+                        </p>
+                        <p className="text-lg sm:text-2xl font-bold text-purple-600 dark:text-purple-400">
+                          {statsData.body.data.overview.todayActive.toLocaleString()}
+                        </p>
+                      </div>
+                      <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-1">
+                          {t(
+                            'admin.aiQuestManagement.statistics.overview.thisWeekActive',
+                            language,
+                          )}
+                        </p>
+                        <p className="text-lg sm:text-2xl font-bold text-blue-600 dark:text-blue-400">
+                          {statsData.body.data.overview.thisWeekActive.toLocaleString()}
+                        </p>
+                      </div>
+                      <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-1">
+                          {t('admin.aiQuestManagement.statistics.overview.activeUsers', language)}
+                        </p>
+                        <p className="text-lg sm:text-2xl font-bold text-zinc-900 dark:text-zinc-50">
+                          {statsData.body.data.overview.activeUsers.toLocaleString()}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* By Type */}
+                  <div>
+                    <h3 className="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-50 mb-3">
+                      {t('admin.aiQuestManagement.statistics.byType.title', language)}
+                    </h3>
+                    <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
+                      {statsData.body.data.byType.map(item => (
+                        <div
+                          key={item.type}
+                          className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50"
+                        >
+                          <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-1">
+                            {item.type}
+                          </p>
+                          <p className="text-base sm:text-xl font-bold text-zinc-900 dark:text-zinc-50">
+                            {item._count.id.toLocaleString()}{' '}
+                            {t('admin.aiQuestManagement.statistics.byType.quests', language)}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Recent Completions */}
+                  <div>
+                    <h3 className="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-50 mb-3">
+                      {t('admin.aiQuestManagement.statistics.recentCompletions.title', language)}
+                    </h3>
+                    <div className="space-y-2">
+                      {statsData.body.data.recentCompletions.map(completion => (
+                        <div
+                          key={completion.id}
+                          className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50"
+                        >
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <p className="text-xs sm:text-sm font-medium text-zinc-900 dark:text-zinc-50 mb-1">
+                                {completion.description.substring(0, 100)}...
+                              </p>
+                              <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs text-zinc-600 dark:text-zinc-400">
+                                <span>
+                                  {t(
+                                    'admin.aiQuestManagement.statistics.recentCompletions.by',
+                                    language,
+                                  )}{' '}
+                                  {completion.user.UserName}
+                                </span>
+                                <span>
+                                  {t(
+                                    'admin.aiQuestManagement.statistics.recentCompletions.community',
+                                    language,
+                                  )}{' '}
+                                  {completion.community.name}
+                                </span>
+                                <span>
+                                  {t(
+                                    'admin.aiQuestManagement.statistics.recentCompletions.xp',
+                                    language,
+                                  )}{' '}
+                                  {completion.xpValue}
+                                </span>
+                                <span>{new Date(completion.completedAt).toLocaleDateString()}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <p className="text-center text-zinc-500 dark:text-zinc-400">
+                  {t('admin.aiQuestManagement.statistics.failed', language)}
+                </p>
+              )}
+            </div>
+          </Card>
+        </TabsContent>
+
+        {/* Bulk Delete Tab */}
+        <TabsContent value="bulk-delete" className="space-y-6">
+          <Card className="border-0 shadow-none">
+            <div className="p-4 sm:p-6">
+              <h2 className="text-lg sm:text-xl font-bold font-heading text-zinc-900 dark:text-zinc-50 mb-6">
+                {t('admin.aiQuestManagement.bulkDelete.title', language)}
+              </h2>
+              <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-6">
+                {t('admin.aiQuestManagement.bulkDelete.description', language)}
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-3 sm:gap-4 mb-6">
+                {/* User ID */}
+                <div>
+                  <label className="block text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+                    {t('admin.aiQuestManagement.bulkDelete.filters.userId.label', language)}
+                  </label>
+                  <input
+                    type="text"
+                    placeholder={t(
+                      'admin.aiQuestManagement.bulkDelete.filters.userId.placeholder',
+                      language,
+                    )}
+                    value={bulkDeleteFilters.userId || ''}
+                    onChange={e =>
+                      setBulkDeleteFilters({
+                        ...bulkDeleteFilters,
+                        userId: e.target.value || undefined,
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs sm:text-sm rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50"
+                  />
+                </div>
+
+                {/* Community ID */}
+                <div>
+                  <label className="block text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+                    {t('admin.aiQuestManagement.bulkDelete.filters.communityId.label', language)}
+                  </label>
+                  <input
+                    type="text"
+                    placeholder={t(
+                      'admin.aiQuestManagement.bulkDelete.filters.communityId.placeholder',
+                      language,
+                    )}
+                    value={bulkDeleteFilters.communityId || ''}
+                    onChange={e =>
+                      setBulkDeleteFilters({
+                        ...bulkDeleteFilters,
+                        communityId: e.target.value || undefined,
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs sm:text-sm rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50"
+                  />
+                </div>
+
+                {/* Type */}
+                <div>
+                  <label className="block text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+                    {t('admin.aiQuestManagement.bulkDelete.filters.type.label', language)}
+                  </label>
+                  <select
+                    value={bulkDeleteFilters.type || ''}
+                    onChange={e =>
+                      setBulkDeleteFilters({
+                        ...bulkDeleteFilters,
+                        type: (e.target.value || undefined) as 'Daily' | 'Weekly' | undefined,
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs sm:text-sm rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50"
+                  >
+                    <option value="">
+                      {t('admin.aiQuestManagement.bulkDelete.filters.type.allTypes', language)}
+                    </option>
+                    <option value="Daily">
+                      {t('admin.aiQuestManagement.bulkDelete.filters.type.daily', language)}
+                    </option>
+                    <option value="Weekly">
+                      {t('admin.aiQuestManagement.bulkDelete.filters.type.weekly', language)}
+                    </option>
+                  </select>
+                </div>
+
+                {/* Period Status */}
+                <div>
+                  <label className="block text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+                    {t('admin.aiQuestManagement.bulkDelete.filters.periodStatus.label', language)}
+                  </label>
+                  <select
+                    value={bulkDeleteFilters.periodStatus || ''}
+                    onChange={e =>
+                      setBulkDeleteFilters({
+                        ...bulkDeleteFilters,
+                        periodStatus: e.target.value || undefined,
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs sm:text-sm rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50"
+                  >
+                    <option value="">
+                      {t(
+                        'admin.aiQuestManagement.bulkDelete.filters.periodStatus.allPeriods',
+                        language,
+                      )}
+                    </option>
+                    <option value="TODAY">
+                      {t('admin.aiQuestManagement.bulkDelete.filters.periodStatus.today', language)}
+                    </option>
+                    <option value="YESTERDAY">
+                      {t(
+                        'admin.aiQuestManagement.bulkDelete.filters.periodStatus.yesterday',
+                        language,
+                      )}
+                    </option>
+                    <option value="THIS_WEEK">
+                      {t(
+                        'admin.aiQuestManagement.bulkDelete.filters.periodStatus.thisWeek',
+                        language,
+                      )}
+                    </option>
+                    <option value="LAST_WEEK">
+                      {t(
+                        'admin.aiQuestManagement.bulkDelete.filters.periodStatus.lastWeek',
+                        language,
+                      )}
+                    </option>
+                  </select>
+                </div>
+
+                {/* Start Date */}
+                <div>
+                  <label className="block text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+                    {t('admin.aiQuestManagement.bulkDelete.filters.startDate.label', language)}
+                  </label>
+                  <input
+                    type="date"
+                    value={bulkDeleteFilters.startDate?.split('T')[0] || ''}
+                    onChange={e =>
+                      setBulkDeleteFilters({
+                        ...bulkDeleteFilters,
+                        startDate: e.target.value ? `${e.target.value}T00:00:00Z` : undefined,
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs sm:text-sm rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50"
+                  />
+                </div>
+
+                {/* End Date */}
+                <div>
+                  <label className="block text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+                    {t('admin.aiQuestManagement.bulkDelete.filters.endDate.label', language)}
+                  </label>
+                  <input
+                    type="date"
+                    value={bulkDeleteFilters.endDate?.split('T')[0] || ''}
+                    onChange={e =>
+                      setBulkDeleteFilters({
+                        ...bulkDeleteFilters,
+                        endDate: e.target.value ? `${e.target.value}T23:59:59Z` : undefined,
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs sm:text-sm rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50"
+                  />
+                </div>
+              </div>
+
+              <Button
+                onClick={() => bulkDeleteMutation.mutate(bulkDeleteFilters)}
+                disabled={
+                  bulkDeleteMutation.isPending ||
+                  Object.keys(bulkDeleteFilters).filter(
+                    k => bulkDeleteFilters[k as keyof BulkDeleteFilter],
+                  ).length === 0
+                }
+                className="w-full bg-red-600 hover:bg-red-700 text-xs sm:text-sm"
+              >
+                {bulkDeleteMutation.isPending ? (
+                  <span className="flex items-center gap-2">
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    {t('admin.aiQuestManagement.bulkDelete.deleting', language)}
+                  </span>
+                ) : (
+                  t('admin.aiQuestManagement.bulkDelete.button', language)
+                )}
+              </Button>
+            </div>
+          </Card>
+        </TabsContent>
+
         {/* Configuration Tab */}
         <TabsContent value="config" className="space-y-6">
           <Card className="border-0 shadow-none">
-            <div className="p-6">
-              <h2 className="text-xl font-bold font-heading text-zinc-900 dark:text-zinc-50 mb-6">
-                AI Configuration
+            <div className="p-4 sm:p-6">
+              <h2 className="text-lg sm:text-xl font-bold font-heading text-zinc-900 dark:text-zinc-50 mb-6">
+                {t('admin.aiQuestManagement.config.title', language)}
               </h2>
               {configLoading ? (
                 <div className="flex items-center justify-center py-12">
@@ -346,36 +1011,51 @@ export default function AIQuestManagement() {
                 <div className="space-y-6">
                   {/* AI Settings */}
                   <div>
-                    <h3 className="font-semibold text-zinc-900 dark:text-zinc-50 mb-3">
-                      AI Settings
+                    <h3 className="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-50 mb-3">
+                      {t('admin.aiQuestManagement.config.aiSettings.title', language)}
                     </h3>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
-                        <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-1">Model</p>
-                        <p className="font-medium text-zinc-900 dark:text-zinc-50">
-                          {config.ai.model || 'Not configured'}
+                    <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
+                      <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-1">
+                          {t('admin.aiQuestManagement.config.aiSettings.model', language)}
+                        </p>
+                        <p className="text-sm sm:text-base font-medium text-zinc-900 dark:text-zinc-50">
+                          {config.ai.model ||
+                            t('admin.aiQuestManagement.config.aiSettings.notConfigured', language)}
                         </p>
                       </div>
-                      <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
-                        <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-1">
-                          Max Prompt Length
+                      <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-1">
+                          {t('admin.aiQuestManagement.config.aiSettings.maxPromptLength', language)}
                         </p>
-                        <p className="font-medium text-zinc-900 dark:text-zinc-50">
-                          {config.ai.maxPromptChars} characters
-                        </p>
-                      </div>
-                      <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
-                        <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-1">
-                          Token Cost per Chat
-                        </p>
-                        <p className="font-medium text-zinc-900 dark:text-zinc-50">
-                          {config.ai.tokenCostPerChat} token(s)
+                        <p className="text-sm sm:text-base font-medium text-zinc-900 dark:text-zinc-50">
+                          {config.ai.maxPromptChars}{' '}
+                          {t('admin.aiQuestManagement.config.aiSettings.characters', language)}
                         </p>
                       </div>
-                      <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
-                        <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-1">Status</p>
+                      <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-1">
+                          {t(
+                            'admin.aiQuestManagement.config.aiSettings.tokenCostPerChat',
+                            language,
+                          )}
+                        </p>
+                        <p className="text-sm sm:text-base font-medium text-zinc-900 dark:text-zinc-50">
+                          {config.ai.tokenCostPerChat}{' '}
+                          {t('admin.aiQuestManagement.config.aiSettings.tokens', language)}
+                        </p>
+                      </div>
+                      <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-1">
+                          {t('admin.aiQuestManagement.config.aiSettings.status', language)}
+                        </p>
                         <Badge className={config.ai.configured ? 'bg-green-500' : 'bg-red-500'}>
-                          {config.ai.configured ? 'Configured' : 'Not Configured'}
+                          {config.ai.configured
+                            ? t('admin.aiQuestManagement.config.aiSettings.configured', language)
+                            : t(
+                                'admin.aiQuestManagement.config.aiSettings.notConfigured',
+                                language,
+                              )}
                         </Badge>
                       </div>
                     </div>
@@ -383,37 +1063,45 @@ export default function AIQuestManagement() {
 
                   {/* Quest Settings */}
                   <div>
-                    <h3 className="font-semibold text-zinc-900 dark:text-zinc-50 mb-3">
-                      Quest Settings
+                    <h3 className="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-50 mb-3">
+                      {t('admin.aiQuestManagement.config.questSettings.title', language)}
                     </h3>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
-                        <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-1">
-                          Daily Quest Count
+                    <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
+                      <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-1">
+                          {t('admin.aiQuestManagement.config.questSettings.dailyCount', language)}
                         </p>
-                        <p className="font-medium text-zinc-900 dark:text-zinc-50">
-                          {config.quests.dailyCount} per day
-                        </p>
-                      </div>
-                      <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
-                        <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-1">
-                          Weekly Quest Count
-                        </p>
-                        <p className="font-medium text-zinc-900 dark:text-zinc-50">
-                          {config.quests.weeklyCount} per week
+                        <p className="text-sm sm:text-base font-medium text-zinc-900 dark:text-zinc-50">
+                          {config.quests.dailyCount}{' '}
+                          {t('admin.aiQuestManagement.config.questSettings.perDay', language)}
                         </p>
                       </div>
-                      <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
-                        <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-1">
-                          Quests per Community
+                      <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-1">
+                          {t('admin.aiQuestManagement.config.questSettings.weeklyCount', language)}
                         </p>
-                        <p className="font-medium text-zinc-900 dark:text-zinc-50">
+                        <p className="text-sm sm:text-base font-medium text-zinc-900 dark:text-zinc-50">
+                          {config.quests.weeklyCount}{' '}
+                          {t('admin.aiQuestManagement.config.questSettings.perWeek', language)}
+                        </p>
+                      </div>
+                      <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-1">
+                          {t(
+                            'admin.aiQuestManagement.config.questSettings.questsPerCommunity',
+                            language,
+                          )}
+                        </p>
+                        <p className="text-sm sm:text-base font-medium text-zinc-900 dark:text-zinc-50">
                           {config.quests.questsPerCommunity}
                         </p>
                       </div>
-                      <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
-                        <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-1">
-                          Daily Schedule
+                      <div className="p-3 sm:p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-1">
+                          {t(
+                            'admin.aiQuestManagement.config.questSettings.dailySchedule',
+                            language,
+                          )}
                         </p>
                         <p className="font-mono text-xs text-zinc-900 dark:text-zinc-50">
                           {config.quests.generationSchedule.daily}
@@ -424,8 +1112,10 @@ export default function AIQuestManagement() {
 
                   {/* Features */}
                   <div>
-                    <h3 className="font-semibold text-zinc-900 dark:text-zinc-50 mb-3">Features</h3>
-                    <div className="grid md:grid-cols-3 gap-4">
+                    <h3 className="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-50 mb-3">
+                      {t('admin.aiQuestManagement.config.features.title', language)}
+                    </h3>
+                    <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
                       {Object.entries(config.features).map(([key, value]) => (
                         <div
                           key={key}

@@ -1,0 +1,177 @@
+{
+  "aiQuestManagement": {
+    "title": "Gestión de Misiones IA",
+    "subtitle": "Monitorear y administrar el sistema de misiones generadas por IA",
+    "refresh": "Actualizar",
+    "tabs": {
+      "overview": "Resumen",
+      "userActions": "Acciones de Usuario",
+      "adminGenerate": "Generación Admin",
+      "statistics": "Estadísticas",
+      "bulkDelete": "Eliminación Masiva",
+      "config": "Configuración"
+    },
+    "overview": {
+      "systemHealth": {
+        "title": "Estado del sistema",
+        "aiService": "Servicio IA",
+        "database": "Base de datos",
+        "uptime": "Tiempo de actividad",
+        "memory": "Memoria",
+        "model": "Modelo",
+        "notConfigured": "No configurado",
+        "response": "Respuesta",
+        "failed": "Error al cargar datos de salud"
+      },
+      "questStats": {
+        "title": "Estadísticas de misiones",
+        "totalQuests": "Total de misiones",
+        "completed": "Completadas",
+        "todayActive": "Activo hoy",
+        "thisWeekActive": "Activo esta semana",
+        "completionRate": "Tasa de finalización"
+      }
+    },
+    "config": {
+      "title": "Configuración IA",
+      "loading": "Cargando configuración...",
+      "aiSettings": {
+        "title": "Configuración IA",
+        "model": "Modelo",
+        "maxPromptLength": "Longitud máxima del prompt",
+        "characters": "caracteres",
+        "tokenCostPerChat": "Costo de tokens por chat",
+        "tokens": "token(s)",
+        "status": "Estado",
+        "configured": "Configurado",
+        "notConfigured": "No configurado"
+      },
+      "questSettings": {
+        "title": "Configuración de misiones",
+        "dailyCount": "Cantidad de misiones diarias",
+        "perDay": "por día",
+        "weeklyCount": "Cantidad de misiones semanales",
+        "perWeek": "por semana",
+        "questsPerCommunity": "Misiones por comunidad",
+        "dailySchedule": "Horario diario"
+      },
+      "features": {
+        "title": "Características"
+      }
+    },
+    "adminGenerate": {
+      "title": "Generación de Misiones Admin",
+      "allUsers": {
+        "title": "Generar para Todos los Usuarios",
+        "daily": {
+          "title": "Misiones Diarias - Todos los Usuarios",
+          "description": "Generar misiones diarias para todos los usuarios no prohibidos. Puede tardar 45-60 segundos.",
+          "button": "Generar Diarias para Todos",
+          "generating": "Generando..."
+        },
+        "weekly": {
+          "title": "Misiones Semanales - Todos los Usuarios",
+          "description": "Generar misiones semanales para todos los usuarios no prohibidos. Puede tardar 45-60 segundos.",
+          "button": "Generar Semanales para Todos",
+          "generating": "Generando..."
+        }
+      },
+      "specificUser": {
+        "title": "Generar para Usuario Específico",
+        "daily": {
+          "title": "Misiones Diarias - Usuario Individual",
+          "description": "Ingrese el ID de usuario para generar misiones diarias (3-8 segundos).",
+          "placeholder": "ID de Usuario (UUID)",
+          "button": "Generar Misiones Diarias",
+          "generating": "Generando..."
+        },
+        "weekly": {
+          "title": "Misiones Semanales - Usuario Individual",
+          "description": "Ingrese el ID de usuario para generar misiones semanales (3-8 segundos).",
+          "placeholder": "ID de Usuario (UUID)",
+          "button": "Generar Misiones Semanales",
+          "generating": "Generando..."
+        }
+      }
+    },
+    "statistics": {
+      "title": "Estadísticas y Análisis de Misiones",
+      "overview": {
+        "title": "Resumen",
+        "totalQuests": "Misiones Totales",
+        "completed": "Completadas",
+        "pending": "Pendientes",
+        "completionRate": "Tasa de Finalización",
+        "todayActive": "Activas Hoy",
+        "thisWeekActive": "Activas Esta Semana",
+        "activeUsers": "Usuarios Activos"
+      },
+      "byType": {
+        "title": "Por Tipo",
+        "quests": "misiones"
+      },
+      "recentCompletions": {
+        "title": "Finalizaciones Recientes",
+        "by": "Por:",
+        "community": "Comunidad:",
+        "xp": "XP:"
+      },
+      "loading": "Cargando estadísticas...",
+      "failed": "Error al cargar estadísticas"
+    },
+    "bulkDelete": {
+      "title": "Eliminación Masiva de Misiones",
+      "description": "Eliminar múltiples misiones según filtros. Se debe proporcionar al menos un filtro.",
+      "filters": {
+        "userId": {
+          "label": "ID de Usuario (Opcional)",
+          "placeholder": "UUID de Usuario"
+        },
+        "communityId": {
+          "label": "ID de Comunidad (Opcional)",
+          "placeholder": "UUID de Comunidad"
+        },
+        "type": {
+          "label": "Tipo de Misión (Opcional)",
+          "allTypes": "Todos los Tipos",
+          "daily": "Diaria",
+          "weekly": "Semanal"
+        },
+        "periodStatus": {
+          "label": "Estado del Período (Opcional)",
+          "allPeriods": "Todos los Períodos",
+          "today": "Hoy",
+          "yesterday": "Ayer",
+          "thisWeek": "Esta Semana",
+          "lastWeek": "Semana Pasada"
+        },
+        "startDate": {
+          "label": "Fecha de Inicio (Opcional)"
+        },
+        "endDate": {
+          "label": "Fecha de Fin (Opcional)"
+        }
+      },
+      "button": "Eliminar Misiones",
+      "deleting": "Eliminando..."
+    },
+    "toast": {
+      "dailyAllSuccess": "Misiones Diarias Generadas para Todos los Usuarios",
+      "dailyAllDescription": "Se generaron {{count}} misiones en {{time}}",
+      "dailyUserSuccess": "Misiones Diarias Generadas",
+      "dailyUserDescription": "Se generaron {{count}} misiones para {{username}}",
+      "weeklyAllSuccess": "Misiones Semanales Generadas para Todos los Usuarios",
+      "weeklyAllDescription": "Se generaron {{count}} misiones en {{time}}",
+      "weeklyUserSuccess": "Misiones Semanales Generadas",
+      "weeklyUserDescription": "Se generaron {{count}} misiones para {{username}}",
+      "deleteSuccess": "Misiones Eliminadas",
+      "deleteDescription": "Se eliminaron {{count}} misiones",
+      "dailyAllError": "Error al generar misiones diarias para todos los usuarios",
+      "dailyUserError": "Error al generar misiones diarias",
+      "weeklyAllError": "Error al generar misiones semanales para todos los usuarios",
+      "weeklyUserError": "Error al generar misiones semanales",
+      "deleteError": "Error al eliminar misiones",
+      "tryAgain": "Por favor intente nuevamente"
+    }
+  }
+}

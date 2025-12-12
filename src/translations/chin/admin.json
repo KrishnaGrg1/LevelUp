@@ -1,0 +1,177 @@
+{
+  "aiQuestManagement": {
+    "title": "AI任务管理",
+    "subtitle": "监控和管理AI生成的任务系统",
+    "refresh": "刷新",
+    "tabs": {
+      "overview": "概览",
+      "userActions": "用户操作",
+      "adminGenerate": "管理员生成",
+      "statistics": "统计",
+      "bulkDelete": "批量删除",
+      "config": "配置"
+    },
+    "overview": {
+      "systemHealth": {
+        "title": "系统健康",
+        "aiService": "AI服务",
+        "database": "数据库",
+        "uptime": "运行时间",
+        "memory": "内存",
+        "model": "模型",
+        "notConfigured": "未配置",
+        "response": "响应",
+        "failed": "加载健康数据失败"
+      },
+      "questStats": {
+        "title": "任务统计",
+        "totalQuests": "总任务数",
+        "completed": "已完成",
+        "todayActive": "今日活跃",
+        "thisWeekActive": "本周活跃",
+        "completionRate": "完成率"
+      }
+    },
+    "config": {
+      "title": "AI配置",
+      "loading": "加载配置中...",
+      "aiSettings": {
+        "title": "AI设置",
+        "model": "模型",
+        "maxPromptLength": "最大提示长度",
+        "characters": "字符",
+        "tokenCostPerChat": "每次聊天令牌成本",
+        "tokens": "令牌",
+        "status": "状态",
+        "configured": "已配置",
+        "notConfigured": "未配置"
+      },
+      "questSettings": {
+        "title": "任务设置",
+        "dailyCount": "每日任务数",
+        "perDay": "每天",
+        "weeklyCount": "每周任务数",
+        "perWeek": "每周",
+        "questsPerCommunity": "每个社区的任务",
+        "dailySchedule": "每日计划"
+      },
+      "features": {
+        "title": "功能"
+      }
+    },
+    "adminGenerate": {
+      "title": "管理员任务生成",
+      "allUsers": {
+        "title": "为所有用户生成",
+        "daily": {
+          "title": "每日任务 - 所有用户",
+          "description": "为所有未封禁用户生成每日任务。可能需要45-60秒。",
+          "button": "为所有人生成每日任务",
+          "generating": "生成中..."
+        },
+        "weekly": {
+          "title": "每周任务 - 所有用户",
+          "description": "为所有未封禁用户生成每周任务。可能需要45-60秒。",
+          "button": "为所有人生成每周任务",
+          "generating": "生成中..."
+        }
+      },
+      "specificUser": {
+        "title": "为特定用户生成",
+        "daily": {
+          "title": "每日任务 - 单个用户",
+          "description": "输入用户ID生成每日任务（3-8秒）。",
+          "placeholder": "用户ID (UUID)",
+          "button": "生成每日任务",
+          "generating": "生成中..."
+        },
+        "weekly": {
+          "title": "每周任务 - 单个用户",
+          "description": "输入用户ID生成每周任务（3-8秒）。",
+          "placeholder": "用户ID (UUID)",
+          "button": "生成每周任务",
+          "generating": "生成中..."
+        }
+      }
+    },
+    "statistics": {
+      "title": "任务统计与分析",
+      "overview": {
+        "title": "概览",
+        "totalQuests": "总任务数",
+        "completed": "已完成",
+        "pending": "待完成",
+        "completionRate": "完成率",
+        "todayActive": "今日活跃",
+        "thisWeekActive": "本周活跃",
+        "activeUsers": "活跃用户"
+      },
+      "byType": {
+        "title": "按类型",
+        "quests": "任务"
+      },
+      "recentCompletions": {
+        "title": "最近完成",
+        "by": "由:",
+        "community": "社区:",
+        "xp": "经验值:"
+      },
+      "loading": "加载统计中...",
+      "failed": "加载统计失败"
+    },
+    "bulkDelete": {
+      "title": "批量删除任务",
+      "description": "根据过滤器删除多个任务。必须提供至少一个过滤器。",
+      "filters": {
+        "userId": {
+          "label": "用户ID（可选）",
+          "placeholder": "用户UUID"
+        },
+        "communityId": {
+          "label": "社区ID（可选）",
+          "placeholder": "社区UUID"
+        },
+        "type": {
+          "label": "任务类型（可选）",
+          "allTypes": "所有类型",
+          "daily": "每日",
+          "weekly": "每周"
+        },
+        "periodStatus": {
+          "label": "周期状态（可选）",
+          "allPeriods": "所有周期",
+          "today": "今天",
+          "yesterday": "昨天",
+          "thisWeek": "本周",
+          "lastWeek": "上周"
+        },
+        "startDate": {
+          "label": "开始日期（可选）"
+        },
+        "endDate": {
+          "label": "结束日期（可选）"
+        }
+      },
+      "button": "删除任务",
+      "deleting": "删除中..."
+    },
+    "toast": {
+      "dailyAllSuccess": "已为所有用户生成每日任务",
+      "dailyAllDescription": "在 {{time}} 内生成了 {{count}} 个任务",
+      "dailyUserSuccess": "已生成每日任务",
+      "dailyUserDescription": "为 {{username}} 生成了 {{count}} 个任务",
+      "weeklyAllSuccess": "已为所有用户生成每周任务",
+      "weeklyAllDescription": "在 {{time}} 内生成了 {{count}} 个任务",
+      "weeklyUserSuccess": "已生成每周任务",
+      "weeklyUserDescription": "为 {{username}} 生成了 {{count}} 个任务",
+      "deleteSuccess": "任务已删除",
+      "deleteDescription": "已删除 {{count}} 个任务",
+      "dailyAllError": "为所有用户生成每日任务失败",
+      "dailyUserError": "生成每日任务失败",
+      "weeklyAllError": "为所有用户生成每周任务失败",
+      "weeklyUserError": "生成每周任务失败",
+      "deleteError": "删除任务失败",
+      "tryAgain": "请重试"
+    }
+  }
+}

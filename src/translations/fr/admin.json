@@ -1,0 +1,177 @@
+{
+  "aiQuestManagement": {
+    "title": "AI Quest Gestion",
+    "subtitle": "Surveiller et gérer le système de quêtes générées par IA",
+    "refresh": "Actualiser",
+    "tabs": {
+      "overview": "Aperçu",
+      "userActions": "Actions utilisateur",
+      "adminGenerate": "Génération admin",
+      "statistics": "Statistiques",
+      "bulkDelete": "Suppression en masse",
+      "config": "Configuration"
+    },
+    "overview": {
+      "systemHealth": {
+        "title": "État du système",
+        "aiService": "Service IA",
+        "database": "Base de données",
+        "uptime": "Temps de fonctionnement",
+        "memory": "Mémoire",
+        "model": "Modèle",
+        "notConfigured": "Non configuré",
+        "response": "Réponse",
+        "failed": "Échec du chargement des données de santé"
+      },
+      "questStats": {
+        "title": "Statistiques des quêtes",
+        "totalQuests": "Total des quêtes",
+        "completed": "Terminées",
+        "todayActive": "Actif aujourd'hui",
+        "thisWeekActive": "Actif cette semaine",
+        "completionRate": "Taux de complétion"
+      }
+    },
+    "config": {
+      "title": "Configuration IA",
+      "loading": "Chargement de la configuration...",
+      "aiSettings": {
+        "title": "Paramètres IA",
+        "model": "Modèle",
+        "maxPromptLength": "Longueur maximale du prompt",
+        "characters": "caractères",
+        "tokenCostPerChat": "Coût en jetons par chat",
+        "tokens": "jeton(s)",
+        "status": "Statut",
+        "configured": "Configuré",
+        "notConfigured": "Non configuré"
+      },
+      "questSettings": {
+        "title": "Paramètres des quêtes",
+        "dailyCount": "Nombre de quêtes quotidiennes",
+        "perDay": "par jour",
+        "weeklyCount": "Nombre de quêtes hebdomadaires",
+        "perWeek": "par semaine",
+        "questsPerCommunity": "Quêtes par communauté",
+        "dailySchedule": "Planification quotidienne"
+      },
+      "features": {
+        "title": "Fonctionnalités"
+      }
+    },
+    "adminGenerate": {
+      "title": "Génération de quêtes admin",
+      "allUsers": {
+        "title": "Générer pour tous les utilisateurs",
+        "daily": {
+          "title": "Quêtes quotidiennes - Tous les utilisateurs",
+          "description": "Générer des quêtes quotidiennes pour tous les utilisateurs non bannis. Peut prendre 45-60 secondes.",
+          "button": "Générer quotidien pour tous",
+          "generating": "Génération en cours..."
+        },
+        "weekly": {
+          "title": "Quêtes hebdomadaires - Tous les utilisateurs",
+          "description": "Générer des quêtes hebdomadaires pour tous les utilisateurs non bannis. Peut prendre 45-60 secondes.",
+          "button": "Générer hebdomadaire pour tous",
+          "generating": "Génération en cours..."
+        }
+      },
+      "specificUser": {
+        "title": "Générer pour un utilisateur spécifique",
+        "daily": {
+          "title": "Quêtes quotidiennes - Utilisateur unique",
+          "description": "Entrez l'ID utilisateur pour générer des quêtes quotidiennes (3-8 secondes).",
+          "placeholder": "ID utilisateur (UUID)",
+          "button": "Générer quêtes quotidiennes",
+          "generating": "Génération en cours..."
+        },
+        "weekly": {
+          "title": "Quêtes hebdomadaires - Utilisateur unique",
+          "description": "Entrez l'ID utilisateur pour générer des quêtes hebdomadaires (3-8 secondes).",
+          "placeholder": "ID utilisateur (UUID)",
+          "button": "Générer quêtes hebdomadaires",
+          "generating": "Génération en cours..."
+        }
+      }
+    },
+    "statistics": {
+      "title": "Statistiques et analyses des quêtes",
+      "overview": {
+        "title": "Aperçu",
+        "totalQuests": "Total des quêtes",
+        "completed": "Terminées",
+        "pending": "En attente",
+        "completionRate": "Taux de complétion",
+        "todayActive": "Actif aujourd'hui",
+        "thisWeekActive": "Actif cette semaine",
+        "activeUsers": "Utilisateurs actifs"
+      },
+      "byType": {
+        "title": "Par type",
+        "quests": "quêtes"
+      },
+      "recentCompletions": {
+        "title": "Complétions récentes",
+        "by": "Par:",
+        "community": "Communauté:",
+        "xp": "XP:"
+      },
+      "loading": "Chargement des statistiques...",
+      "failed": "Échec du chargement des statistiques"
+    },
+    "bulkDelete": {
+      "title": "Suppression en masse de quêtes",
+      "description": "Supprimer plusieurs quêtes selon les filtres. Au moins un filtre doit être fourni.",
+      "filters": {
+        "userId": {
+          "label": "ID utilisateur (Optionnel)",
+          "placeholder": "UUID utilisateur"
+        },
+        "communityId": {
+          "label": "ID communauté (Optionnel)",
+          "placeholder": "UUID communauté"
+        },
+        "type": {
+          "label": "Type de quête (Optionnel)",
+          "allTypes": "Tous les types",
+          "daily": "Quotidienne",
+          "weekly": "Hebdomadaire"
+        },
+        "periodStatus": {
+          "label": "Statut de période (Optionnel)",
+          "allPeriods": "Toutes les périodes",
+          "today": "Aujourd'hui",
+          "yesterday": "Hier",
+          "thisWeek": "Cette semaine",
+          "lastWeek": "Semaine dernière"
+        },
+        "startDate": {
+          "label": "Date de début (Optionnel)"
+        },
+        "endDate": {
+          "label": "Date de fin (Optionnel)"
+        }
+      },
+      "button": "Supprimer les quêtes",
+      "deleting": "Suppression..."
+    },
+    "toast": {
+      "dailyAllSuccess": "Quêtes quotidiennes générées pour tous les utilisateurs",
+      "dailyAllDescription": "{{count}} quêtes générées en {{time}}",
+      "dailyUserSuccess": "Quêtes quotidiennes générées",
+      "dailyUserDescription": "{{count}} quêtes générées pour {{username}}",
+      "weeklyAllSuccess": "Quêtes hebdomadaires générées pour tous les utilisateurs",
+      "weeklyAllDescription": "{{count}} quêtes générées en {{time}}",
+      "weeklyUserSuccess": "Quêtes hebdomadaires générées",
+      "weeklyUserDescription": "{{count}} quêtes générées pour {{username}}",
+      "deleteSuccess": "Quêtes supprimées",
+      "deleteDescription": "{{count}} quêtes supprimées",
+      "dailyAllError": "Échec de la génération des quêtes quotidiennes pour tous",
+      "dailyUserError": "Échec de la génération des quêtes quotidiennes",
+      "weeklyAllError": "Échec de la génération des quêtes hebdomadaires pour tous",
+      "weeklyUserError": "Échec de la génération des quêtes hebdomadaires",
+      "deleteError": "Échec de la suppression des quêtes",
+      "tryAgain": "Veuillez réessayer"
+    }
+  }
+}

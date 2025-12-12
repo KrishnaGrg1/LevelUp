@@ -396,3 +396,127 @@ export const getCommunityMemberships = async (lang: Language) => {
   );
   return res.data;
 };
+
+// Admin Quest Management APIs
+
+export interface AdminGenerateAllResponse {
+  totalTodayQuests?: number;
+  totalThisWeekQuests?: number;
+  timeElapsed: string;
+}
+
+export interface AdminGenerateUserResponse {
+  userId: string;
+  username: string;
+  quests: QuestWithCommunity[];
+  questCount: number;
+  timeElapsed: string;
+}
+
+export interface QuestStatsResponse {
+  overview: {
+    totalQuests: number;
+    completedQuests: number;
+    pendingQuests: number;
+    completionRate: string;
+    todayActive: number;
+    thisWeekActive: number;
+    activeUsers: number;
+  };
+  byType: Array<{ type: string; _count: { id: number } }>;
+  byCommunity: Array<{ communityId: string; _count: { id: number } }>;
+  recentCompletions: Array<{
+    id: string;
+    description: string;
+    completedAt: string;
+    xpValue: number;
+    user: { id: string; UserName: string };
+    community: { id: string; name: string };
+  }>;
+}
+
+export interface BulkDeleteFilter {
+  userId?: string;
+  communityId?: string;
+  type?: 'Daily' | 'Weekly';
+  periodStatus?: string;
+  startDate?: string;
+  endDate?: string;
+}
+
+export interface BulkDeleteResponse {
+  message: string;
+  deletedCount: number;
+  filters: BulkDeleteFilter;
+}
+
+// Admin: Generate daily quests for all users
+export const adminGenerateDailyAll = async (lang: Language) => {
+  const res = await axiosInstance.post<ApiResponse<AdminGenerateAllResponse>>(
+    `/ai/admin/generate/daily/all`,
+    undefined,
+    {
+      headers: { 'X-Language': lang },
+      withCredentials: true,
+    },
+  );
+  return res.data;
+};
+
+// Admin: Generate daily quests for specific user
+export const adminGenerateDailyUser = async (userId: string, lang: Language) => {
+  const res = await axiosInstance.post<ApiResponse<AdminGenerateUserResponse>>(
+    `/ai/admin/generate/daily/${userId}`,
+    undefined,
+    {
+      headers: { 'X-Language': lang },
+      withCredentials: true,
+    },
+  );
+  return res.data;
+};
+
+// Admin: Generate weekly quests for all users
+export const adminGenerateWeeklyAll = async (lang: Language) => {
+  const res = await axiosInstance.post<ApiResponse<AdminGenerateAllResponse>>(
+    `/ai/admin/generate/weekly/all`,
+    undefined,
+    {
+      headers: { 'X-Language': lang },
+      withCredentials: true,
+    },
+  );
+  return res.data;
+};
+
+// Admin: Generate weekly quests for specific user
+export const adminGenerateWeeklyUser = async (userId: string, lang: Language) => {
+  const res = await axiosInstance.post<ApiResponse<AdminGenerateUserResponse>>(
+    `/ai/admin/generate/weekly/${userId}`,
+    undefined,
+    {
+      headers: { 'X-Language': lang },
+      withCredentials: true,
+    },
+  );
+  return res.data;
+};
+
+// Admin: Get quest statistics
+export const adminGetQuestStats = async (lang: Language) => {
+  const res = await axiosInstance.get<ApiResponse<QuestStatsResponse>>(`/ai/admin/quests/stats`, {
+    headers: { 'X-Language': lang },
+    withCredentials: true,
+  });
+  return res.data;
+};
+
+// Admin: Bulk delete quests
+export const adminBulkDeleteQuests = async (filters: BulkDeleteFilter, lang: Language) => {
+  const res = await axiosInstance.delete<ApiResponse<BulkDeleteResponse>>(`/ai/admin/quests`, {
+    headers: { 'X-Language': lang },
+    data: filters,
+    withCredentials: true,
+  });
+  return res.data;
+};
