@@ -88,6 +88,8 @@ export function CategoryManagementModal({ open, onOpenChange }: CategoryManageme
       setEditingCategory(null);
       setEditedName('');
       queryClient.invalidateQueries({ queryKey: ['categories'] });
+      queryClient.invalidateQueries({ queryKey: ['categoryStats'] });
+      queryClient.invalidateQueries({ queryKey: ['adminCommunities'] });
     },
     onError: (error: Error) => {
       toast.error(error.message || 'Failed to update category');
@@ -103,6 +105,7 @@ export function CategoryManagementModal({ open, onOpenChange }: CategoryManageme
       setCategoryToDelete(null);
       queryClient.invalidateQueries({ queryKey: ['categories'] });
       queryClient.invalidateQueries({ queryKey: ['categoryStats'] });
+      queryClient.invalidateQueries({ queryKey: ['adminCommunities'] });
     },
     onError: (error: Error) => {
       toast.error(error.message || 'Failed to delete category');

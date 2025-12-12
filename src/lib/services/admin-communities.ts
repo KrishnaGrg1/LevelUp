@@ -1,14 +1,29 @@
 import axiosInstance from '../fetch';
 import { Language } from '@/stores/useLanguage';
+import {
+  AddCategoryResponse,
+  DeleteCategoryResponse,
+  DeleteCommunityResponse,
+  GetAllCommunitesAdminResponse,
+  GetCategoryStatsResponse,
+  GetCommunityMembersResponse,
+  GetCommunityStatsResponse,
+  UpdateCommunityCategoryResponse,
+  UpdateCommunityPrivacyResponse,
+} from '../generated';
 
+// Get all communities for admin with pagination and filters
 export const getAllCommunitiesAdmin = async (lang: Language, params: URLSearchParams) => {
   try {
-    const response = await axiosInstance.get(`/admin/communities/all?${params.toString()}`, {
-      withCredentials: true,
-      headers: {
-        'X-Language': lang,
+    const response = await axiosInstance.get<GetAllCommunitesAdminResponse>(
+      `/admin/communities/all?${params.toString()}`,
+      {
+        withCredentials: true,
+        headers: {
+          'X-Language': lang,
+        },
       },
-    });
+    );
     return response.data;
   } catch (error: unknown) {
     const err = error as {
@@ -22,15 +37,19 @@ export const getAllCommunitiesAdmin = async (lang: Language, params: URLSearchPa
   }
 };
 
+// Get Community Members by Community ID
 export const getCommunityMembers = async (communityId: string, lang: Language) => {
   try {
     console.log('Payload for the getCommunityMembers request:', { communityId, lang });
-    const response = await axiosInstance.get(`/admin/communities/${communityId}/members`, {
-      withCredentials: true,
-      headers: {
-        'X-Language': lang,
+    const response = await axiosInstance.get<GetCommunityMembersResponse>(
+      `/admin/communities/${communityId}/members`,
+      {
+        withCredentials: true,
+        headers: {
+          'X-Language': lang,
+        },
       },
-    });
+    );
     return response.data;
   } catch (error: unknown) {
     const err = error as {
@@ -44,7 +63,7 @@ export const getCommunityMembers = async (communityId: string, lang: Language) =
   }
 };
 
-// to do --- when admin is trying to delete --first transfer ownership to other
+// to do ---first transfer ownership to other when deleting the community  admin
 export const removeCommunityMember = async (
   communityId: string,
   memberId: string,
@@ -71,14 +90,18 @@ export const removeCommunityMember = async (
   }
 };
 
+// Delete a community by its ID
 export const deleteCommunity = async (communityId: string, lang: Language) => {
   try {
-    const response = await axiosInstance.delete(`/admin/communities/${communityId}`, {
-      withCredentials: true,
-      headers: {
-        'X-Language': lang,
+    const response = await axiosInstance.delete<DeleteCommunityResponse>(
+      `/admin/communities/${communityId}`,
+      {
+        withCredentials: true,
+        headers: {
+          'X-Language': lang,
+        },
       },
-    });
+    );
     return response.data;
   } catch (error: unknown) {
     const err = error as {
@@ -92,13 +115,14 @@ export const deleteCommunity = async (communityId: string, lang: Language) => {
   }
 };
 
+// Update community privacy (public/private)
 export const updateCommunityPrivacy = async (
   communityId: string,
   isPrivate: boolean,
   lang: Language,
 ) => {
   try {
-    const response = await axiosInstance.patch(
+    const response = await axiosInstance.patch<UpdateCommunityPrivacyResponse>(
       `/admin/communities/${communityId}/privacy`,
       { isPrivate },
       {
@@ -127,7 +151,7 @@ export const updateCommunityCategory = async (
   lang: Language,
 ) => {
   try {
-    const response = await axiosInstance.patch(
+    const response = await axiosInstance.patch<UpdateCommunityCategoryResponse>(
       `/admin/communities/${communityId}/category`,
       { category },
       {
@@ -158,7 +182,7 @@ export const updateCommunityCategory = async (
 
 export const addCategory = async (categoryName: string, lang: Language) => {
   try {
-    const response = await axiosInstance.post(
+    const response = await axiosInstance.post<AddCategoryResponse>(
       `/admin/communities/addCategory`,
       { name: categoryName },
       {
@@ -179,25 +203,7 @@ export const addCategory = async (categoryName: string, lang: Language) => {
   }
 };
 
-/**
- * Update/rename an existing category
- * Used in: CategoryManagementModal - Edit button and inline edit form for categories
- * @param oldName - Current name of the category
- * @param newName - New name for the category
- * @param lang - Current language for localized responses
- * @returns Success response with updated category
- *
- * BACKEND LOGIC:
- * PUT /admin/categories/:oldName
- * Body: { name: "new_name" }
- *
- * Backend implementation:
- * - Find category by oldName
- * - Check if newName already exists
- * - Update category name
- * - Update all communities using this category (Community.category field)
- * - Return updated category
- */
+// Update Category
 export const updateCategory = async (oldName: string, newName: string, lang: Language) => {
   try {
     const response = await axiosInstance.put(
@@ -223,9 +229,10 @@ export const updateCategory = async (oldName: string, newName: string, lang: Lan
   }
 };
 
+// Delete Category
 export const deleteCategory = async (categoryName: string, lang: Language) => {
   try {
-    const response = await axiosInstance.delete(
+    const response = await axiosInstance.delete<DeleteCategoryResponse>(
       `/admin/categories/${encodeURIComponent(categoryName)}`,
       {
         withCredentials: true,
@@ -247,9 +254,10 @@ export const deleteCategory = async (categoryName: string, lang: Language) => {
   }
 };
 
+// Get Category Stats
 export const getCategoryStats = async (lang: Language) => {
   try {
-    const response = await axiosInstance.get(`/admin/categories/stats`, {
+    const response = await axiosInstance.get<GetCategoryStatsResponse>(`/admin/categories/stats`, {
       withCredentials: true,
       headers: {
         'X-Language': lang,
@@ -268,14 +276,18 @@ export const getCategoryStats = async (lang: Language) => {
   }
 };
 
+//Get Community Stats
 export const getCommunityStats = async (lang: Language) => {
   try {
-    const response = await axiosInstance.get(`/admin/communities/stats`, {
-      withCredentials: true,
-      headers: {
-        'X-Language': lang,
+    const response = await axiosInstance.get<GetCommunityStatsResponse>(
+      `/admin/communities/stats`,
+      {
+        withCredentials: true,
+        headers: {
+          'X-Language': lang,
+        },
       },
-    });
+    );
     return response.data;
   } catch (error: unknown) {
     const err = error as {

@@ -126,6 +126,7 @@ export function CommunityActionsModal({
       toast.success('Category updated successfully');
       setSelectedCategory('');
       queryClient.invalidateQueries({ queryKey: ['adminCommunities'] });
+      queryClient.invalidateQueries({ queryKey: ['categoryStats'] });
     },
     onError: (error: Error) => {
       toast.error(error.message || 'Failed to update category');

@@ -297,11 +297,12 @@ export interface CommunityDTO {
   description?: string;
   currentMembers: number; // number of members
   maxMembers: number; // member limit
-  visibility: 'private' | 'public';
+  isPrivate: boolean;
   userRole: 'ADMIN' | 'MEMBER';
   isPinned?: boolean;
   totalXP?: number;
   level?: number;
+  updatedAt?: Date;
 }
 
 export interface GetMyCommunities {
@@ -326,7 +327,7 @@ export interface CreateCommunityResponse {
   statusCode: number;
   body: {
     message: string;
-    data: CommunityDTO; // changed from 'any' to CommunityDTO
+    data: CommunityDTO;
   };
 }
 export interface TogglePinDTO {
@@ -459,5 +460,89 @@ export interface getCategoriesResponse {
       count: number;
       categories: string[];
     };
+  };
+}
+
+export interface GetAllCommunitesAdminResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: {
+      communities: Community[];
+      pagination: PaginationMetadata;
+    };
+  };
+}
+
+export type MemberData = Partial<Pick<User, 'id' | 'UserName' | 'email' | 'isAdmin'>>;
+export interface GetCommunityMembersResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: {
+      members: MemberData[];
+    };
+  };
+}
+
+export interface DeleteCommunityResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: {
+      communityId: string;
+      deleted: boolean;
+    };
+  };
+}
+export interface UpdateCommunityPrivacyResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: { updated: boolean };
+  };
+}
+export interface UpdateCommunityCategoryResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: { updated: boolean };
+  };
+}
+
+export interface AddCategoryResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: { category: Category };
+  };
+}
+
+export interface DeleteCategoryResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: { deleted: boolean };
+  };
+}
+
+export interface GetCategoryStatsResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: { categoryUsage: Record<string, number> };
+  };
+}
+
+export interface CommunityStats {
+  totalCommunities: number;
+  privateCommunities: number;
+  publicCommunities: number;
+}
+export interface GetCommunityStatsResponse {
+  statusCode: number;
+  body: {
+    message: string;
+    data: CommunityStats;
   };
 }
