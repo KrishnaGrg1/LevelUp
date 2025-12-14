@@ -1,96 +1,69 @@
 {
   "hero": {
-    "badge": "Choose Your Adventure",
-    "titleLine1": "Level Up Your Life",
-    "titleLine2": "Your Way",
-    "description": "Choose the plan that fits your ambitions. Start free and upgrade as your adventures grow."
+    "title": "Pay only for what creates value.",
+    "subtitle": "Minimal explanation. No marketing fluff."
   },
   "billing": {
     "monthly": "Monthly",
     "annual": "Annual",
-    "annualSave": "Save 17%"
+    "save": "Save 20%"
   },
   "plans": {
-    "adventurer": {
-      "name": "Adventurer",
-      "description": "Perfect for getting started on your journey",
-      "button": "Start Free",
+    "free": {
+      "name": "Free",
+      "description": "No credit card required.",
+      "button": "Get Started Free",
       "features": [
-        "Up to 5 active quests",
-        "Basic progress tracking",
-        "Community access",
-        "Mobile app",
-        "Basic achievements",
-        "Weekly reports"
+        "AI-generated daily quests",
+        "Join interest-based communities",
+        "XP & level progression",
+        "Limited AI chat tokens (50/day)",
+        "Community & clan chat"
       ]
     },
-    "hero": {
-      "name": "Hero",
-      "description": "For serious goal achievers who want more power",
-      "button": "Upgrade to Hero",
+    "pro": {
+      "name": "Pro",
+      "description": "For serious habit builders.",
+      "button": "Upgrade to Pro",
       "features": [
-        "Unlimited quests",
-        "Advanced analytics",
-        "AI-powered insights",
-        "Priority support",
-        "Custom quest templates",
-        "Advanced achievements",
-        "Team collaboration",
-        "Export data"
+        "Everything in Free",
+        "Higher daily AI token limits (Unlimited)",
+        "Weekly quests generation",
+        "Advanced AI personalization (GPT-4o)",
+        "Priority quest generation"
       ]
     },
-    "legend": {
-      "name": "Legend",
-      "description": "Ultimate power for teams and power users",
-      "button": "Go Legend",
+    "team": {
+      "name": "Community / Team",
+      "description": "For squads and organizations.",
+      "button": "Contact Us",
       "features": [
-        "Everything in Hero",
-        "Team management",
-        "Advanced integrations",
-        "White-label options",
-        "Custom branding",
-        "API access",
-        "Dedicated success manager",
-        "Advanced security"
+        "Everything in Pro",
+        "Clan-based progression stats",
+        "Shared analytics dashboard",
+        "Admin controls for clans",
+        "Direct priority support"
       ]
     }
   },
   "faqTitle": "Frequently Asked Questions",
-  "faqSubtitle": "Everything you need to know about Level Up pricing and features.",
+  "faqSubtitle": "Everything you need to know about the product and billing.",
   "faq": {
-    "0": {
-      "q": "Can I change plans anytime?",
-      "a": "Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately, and we'll prorate any billing differences."
+    "hiddenFees": {
+      "q": "Are there any hidden fees?",
+      "a": "No. The price you see is what you pay. Cancel anytime."
     },
-    "1": {
-      "q": "What happens to my data if I cancel?",
-      "a": "Your data remains accessible for 30 days after cancellation. You can export your progress and quest data anytime before permanent deletion."
+    "missDay": {
+      "q": "What happens if I miss a day?",
+      "a": "Consistency is key, but life happens. Use a 'Freeze Streak' potion to save your progress."
     },
-    "2": {
-      "q": "Is there a team discount?",
-      "a": "Yes! Teams of 10+ users get 20% off any plan. Contact our sales team for custom enterprise pricing and features."
+    "upgrade": {
+      "q": "Can I upgrade later?",
+      "a": "Yes, you can switch between plans at any time."
     },
-    "3": {
-      "q": "Do you offer a money-back guarantee?",
-      "a": "Absolutely! We offer a 30-day money-back guarantee. If you're not satisfied, we'll refund your payment, no questions asked."
+    "tokens": {
+      "q": "How do tokens work?",
+      "a": "Tokens power AI interactions. Free users get 50/day. Pro users get unlimited."
     }
-  },
-  "enterprise": {
-    "0": {
-      "title": "Team Management",
-      "description": "Advanced user management with role-based permissions"
-    },
-    "1": {
-      "title": "Enterprise Security",
-      "description": "SOC 2 compliance, SSO, and advanced data protection"
-    },
-    "2": {
-      "title": "Custom Solutions",
-      "description": "Tailored features and integrations for your needs"
-    },
-    "contactButton": "Contact Sales",
-    "badge": "Enterprise Solutions",
-    "title": "Ready for Enterprise?",
-    "description": "Get custom solutions, dedicated support, and enterprise-grade security for your organization."
   }
 }

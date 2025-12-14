@@ -7,25 +7,27 @@ const Footer: React.FC = () => {
   const { language } = LanguageStore();
 
   return (
-    <footer className="bg-black border-t border-slate-800 py-12">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="w-full bg-white dark:bg-black text-black dark:text-white border-t border-gray-100 dark:border-gray-900 py-16 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Brand + Tagline */}
-          <div>
-            <h3 className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent mb-4">
-              {t('footer.brand')}
-            </h3>
-            <p className="text-slate-400 text-sm">{t('footer.tagline')}</p>
+          <div className="col-span-1 md:col-span-1">
+            <h3 className="text-xl font-bold mb-4 text-black dark:text-white">LevelUp</h3>
+            <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+              {t('footer.tagline')}
+            </p>
           </div>
 
           {/* Product section */}
           <div>
-            <h4 className="text-white font-semibold mb-4">{t('footer.product.title')}</h4>
-            <ul className="space-y-2">
+            <h4 className="font-semibold mb-6 text-black dark:text-white">
+              {t('footer.product.title')}
+            </h4>
+            <ul className="space-y-4">
               <li>
                 <Link
                   href={`/${language}/features`}
-                  className="text-slate-400 hover:text-white transition-colors text-sm"
+                  className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors text-sm"
                 >
                   {t('footer.product.features')}
                 </Link>
@@ -33,7 +35,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   href={`/${language}/pricing`}
-                  className="text-slate-400 hover:text-white transition-colors text-sm"
+                  className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors text-sm"
                 >
                   {t('footer.product.pricing')}
                 </Link>
@@ -41,7 +43,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   href="#"
-                  className="text-slate-400 hover:text-white transition-colors text-sm"
+                  className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors text-sm"
                 >
                   {t('footer.product.mobileApp')}
                 </Link>
@@ -49,7 +51,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   href="#"
-                  className="text-slate-400 hover:text-white transition-colors text-sm"
+                  className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors text-sm"
                 >
                   {t('footer.product.integrations')}
                 </Link>
@@ -59,12 +61,14 @@ const Footer: React.FC = () => {
 
           {/* Company section */}
           <div>
-            <h4 className="text-white font-semibold mb-4">{t('footer.company.title')}</h4>
-            <ul className="space-y-2">
+            <h4 className="font-semibold mb-6 text-black dark:text-white">
+              {t('footer.company.title')}
+            </h4>
+            <ul className="space-y-4">
               <li>
                 <Link
                   href={`/${language}/about`}
-                  className="text-slate-400 hover:text-white transition-colors text-sm"
+                  className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors text-sm"
                 >
                   {t('footer.company.about')}
                 </Link>
@@ -72,7 +76,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   href={`/${language}/contact`}
-                  className="text-slate-400 hover:text-white transition-colors text-sm"
+                  className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors text-sm"
                 >
                   {t('footer.company.contact')}
                 </Link>
@@ -80,7 +84,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   href="#"
-                  className="text-slate-400 hover:text-white transition-colors text-sm"
+                  className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors text-sm"
                 >
                   {t('footer.company.careers')}
                 </Link>
@@ -88,7 +92,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   href="#"
-                  className="text-slate-400 hover:text-white transition-colors text-sm"
+                  className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors text-sm"
                 >
                   {t('footer.company.blog')}
                 </Link>
@@ -98,12 +102,14 @@ const Footer: React.FC = () => {
 
           {/* Support section */}
           <div>
-            <h4 className="text-white font-semibold mb-4">{t('footer.support.title')}</h4>
-            <ul className="space-y-2">
+            <h4 className="font-semibold mb-6 text-black dark:text-white">
+              {t('footer.support.title')}
+            </h4>
+            <ul className="space-y-4">
               <li>
                 <Link
                   href="#"
-                  className="text-slate-400 hover:text-white transition-colors text-sm"
+                  className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors text-sm"
                 >
                   {t('footer.support.helpCenter')}
                 </Link>
@@ -111,7 +117,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   href={`/${language}/contact`}
-                  className="text-slate-400 hover:text-white transition-colors text-sm"
+                  className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors text-sm"
                 >
                   {t('footer.support.contactSupport')}
                 </Link>
@@ -119,7 +125,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   href="#"
-                  className="text-slate-400 hover:text-white transition-colors text-sm"
+                  className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors text-sm"
                 >
                   {t('footer.support.community')}
                 </Link>
@@ -127,7 +133,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   href="#"
-                  className="text-slate-400 hover:text-white transition-colors text-sm"
+                  className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors text-sm"
                 >
                   {t('footer.support.status')}
                 </Link>
@@ -137,16 +143,16 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-slate-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-slate-500 text-sm">{t('footer.copyright')}</p>
+        <div className="border-t border-gray-100 dark:border-gray-900 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+          <p>{t('footer.copyright')}</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href="#" className="text-slate-500 hover:text-white transition-colors text-sm">
+            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">
               {t('footer.privacy')}
             </Link>
-            <Link href="#" className="text-slate-500 hover:text-white transition-colors text-sm">
+            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">
               {t('footer.terms')}
             </Link>
-            <Link href="#" className="text-slate-500 hover:text-white transition-colors text-sm">
+            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">
               {t('footer.cookies')}
             </Link>
           </div>

@@ -1,92 +1,113 @@
 {
   "heroSection": {
-    "watchDemo": "观看演示",
-    "batchText": "人生游戏化平台",
-    "titleMain": "升级你的人生",
-    "titleSub": "伴随史诗般的每日任务",
-    "desc1": "将枯燥的目标转变为一场",
-    "descHighlight1": "史诗冒险",
-    "desc2": "获取 AI 驱动的每日任务，追踪你的英雄进度，并",
-    "descHighlight2": "展望你的传奇未来。",
-    "ctaStart": "开启你的史诗之旅",
-    "rating": "4.9/5 评分",
-    "secure": "100% 安全",
-    "activeUsers": "20k+ 活跃用户"
+    "titleMain": "用 AI 和社区游戏化你的自我提升",
+    "desc": "每日 AI 生成的任务、实时部落聊天和基于 XP 的升级系统，帮助你建立持久的习惯。",
+    "ctaStart": "免费开始",
+    "ctaLearn": "看看它是如何工作的",
+    "dashboard": {
+      "url": "levelup.app/dashboard",
+      "sidebar": {
+        "dashboard": "仪表板",
+        "quests": "任务",
+        "community": "社区",
+        "leaderboard": "排行榜",
+        "settings": "设置"
+      },
+      "streak": "12 天连续",
+      "header": "今天的任务",
+      "greeting": "早上好，Alex",
+      "subGreeting": "准备好升级了吗？",
+      "cards": {
+        "card1": { "type": "正念", "xp": "50 XP", "title": "早晨冥想", "time": "10 分钟" },
+        "card2": { "type": "知识", "xp": "100 XP", "title": "阅读 10 页", "time": "20 分钟" },
+        "card3": { "type": "专注", "xp": "150 XP", "title": "深度工作时段", "time": "60 分钟" }
+      },
+      "dailyQuest": "每日任务",
+      "startQuest": "开始任务"
+    }
   },
-
+  "problemSolution": {
+    "problem": {
+      "title1": "动力会消退。",
+      "title2": "追踪感觉很无聊。",
+      "title3": "坚持很难。"
+    },
+    "solution": {
+      "title1": "Levelup 将习惯变成任务。",
+      "title2": "进步感觉很有回报。",
+      "title3": "坚持变得自然。"
+    }
+  },
+  "SocialProofSection": {
+    "quotes": {
+      "q1": "专为长期坚持而设计。",
+      "q2": "没有有毒的生产力。",
+      "q3": "进步胜于完美。"
+    },
+    "stats": {
+      "quests": "已完成任务",
+      "streak": "平均连胜"
+    }
+  },
+  "FinalCTASection": {
+    "title": "开始建立持久的习惯。",
+    "button": "创建你的第一个任务"
+  },
+  "HowItWorksSection": {
+    "title": "如何运作",
+    "steps": {
+      "step1": {
+        "title": "设定目标",
+        "description": "定义你想要实现的。"
+      },
+      "step2": {
+        "title": "获取每日任务",
+        "description": "每天早上接收可执行的任务。"
+      },
+      "step3": {
+        "title": "完成任务",
+        "description": "勾选你的任务并获得 XP。"
+      },
+      "step4": {
+        "title": "升级你的人生",
+        "description": "随着你的进步，观察你的数据增长。"
+      }
+    }
+  },
   "FeaturesSection": {
     "hero": {
-      "badge": "全新升级！",
-      "title1": "游戏化你的目标",
-      "title2": "提升你的生活",
-      "description": "通过我们的游戏化系统，将你的日常习惯转化为令人兴奋的成就。"
+      "badge": "功能",
+      "title1": "你需要的一切",
+      "title2": "以发挥你的潜力。",
+      "description": "适应你旅程的工具，而不是相反。"
     },
-
-    "features": {
-      "badge": "为什么选择 LevelUp？",
-      "badgeText": "强大功能",
-      "description": "探索革命性的功能，让 Level Up 成为终极生活游戏化平台。",
-      "titleMain": "精彩功能",
-      "feature1": {
-        "title": "AI 驱动的每日任务",
-        "description": "获取根据你的目标量身定制的每日挑战。我们的 AI 创建新颖、激励性的任务，随你的进展和学习风格调整。"
-      },
-      "feature2": {
-        "title": "实时进度跟踪",
-        "description": "通过美观的可视化观察你的生活提升。跟踪连续完成的任务、成就，并通过交互式图表看到你的变化。"
-      },
-      "feature3": {
-        "title": "游戏化奖励系统",
-        "description": "获取经验值 (XP)、解锁成就，并与朋友竞争。通过我们的完整奖励系统，将枯燥任务变成令人兴奋的冒险。"
-      },
-      "feature4": {
-        "title": "全球社区",
-        "description": "加入全球数千名 LevelUp 用户。分享成就，获得动力，并找到旅途中的责任伙伴。"
-      },
-      "feature5": {
-        "title": "智能时间管理",
-        "description": "使用 AI 驱动的时间分配优化你的每日计划。在工作、健康、关系和个人成长之间取得平衡，实现最大生活满意度。"
-      },
-      "feature6": {
-        "title": "整体健康",
-        "description": "关注心理、身体和情绪健康。获取个性化健康任务，滋养你的身心灵，实现全面转变。"
-      }
-    },
-
-    "readMore": "了解更多",
-
     "coreFeatures": {
       "title": "核心功能",
-      "subtitle": "通过这些基本工具释放 LevelUp 的全部潜力",
+      "subtitle": "建立持久习惯所需的一切。",
       "features": {
         "feature1": {
-          "title": "AI 驱动的洞察",
-          "description": "基于你的进展模式和行为数据的智能推荐。",
-          "highlight": "全新"
+          "title": "AI 生成的任务",
+          "description": "自动生成每日和每周挑战。根据用户等级、加入的社区和过去的进度进行个性化定制。清晰、可衡量的任务，根据难度奖励 XP。",
+          "highlight": "没有模糊的目标"
         },
         "feature2": {
-          "title": "高级分析",
-          "description": "通过详细图表和趋势分析深入了解你的表现。",
+          "title": "游戏化系统",
+          "description": "XP、等级和从初学者到高级的进度里程碑。可见的进步，没有压力，按社区追踪。",
           "highlight": ""
         },
         "feature3": {
-          "title": "隐私优先",
-          "description": "端到端加密确保你的个人数据完全私密。",
+          "title": "社区和部落",
+          "description": "加入基于兴趣的社区或组建部落进行团队合作和问责。基于角色的访问和共享 XP 增长。",
           "highlight": ""
         },
         "feature4": {
-          "title": "跨平台同步",
-          "description": "通过实时同步在所有设备上无缝访问你的任务。",
-          "highlight": ""
+          "title": "实时聊天和 AI 聊天",
+          "description": "社区和部落实时聊天。由代币驱动的 AI 聊天，保存对话历史并清晰显示余额。",
+          "highlight": "代币驱动"
         },
         "feature5": {
-          "title": "智能排程",
-          "description": "AI 优化的时间块，根据你的精力和可用性调整。",
-          "highlight": "测试版"
-        },
-        "feature6": {
-          "title": "成就系统",
-          "description": "获得徽章，解锁称号，并通过全面的成就系统展示你的旅程。",
+          "title": "进度与一致性",
+          "description": "每日连续记录、任务历史（今天/昨天/周）和时区感知的日程安排。为长期一致性而构建。",
           "highlight": ""
         }
       }
@@ -94,285 +115,174 @@
 
     "integrationFeatures": {
       "title": "无缝集成",
-      "description": "连接你喜爱的应用和服务，创建统一的生产力生态系统。",
-      "integrations": {
-        "integration1": "日历应用",
-        "integration2": "健身追踪器",
-        "integration3": "笔记应用",
-        "integration4": "音乐应用",
-        "integration5": "社交媒体",
-        "integration6": "健康应用",
-        "integration7": "任务管理器",
-        "integration8": "时间追踪器",
-        "integration9": "冥想应用",
-        "integration10": "阅读应用",
-        "integration11": "学习平台",
-        "integration12": "银行应用"
-      }
+      "description": "连接你已经使用的工具。"
     },
 
     "comparisonSection": {
-      "title": "为什么选择 Level Up？",
-      "description": "看看我们与传统目标设定方法及其他应用的对比。",
+      "title": "为什么选择 LevelUp？",
+      "description": "看看我们与其他产品的对比。",
       "tableHeaders": {
         "feature": "功能",
-        "levelUp": "Level Up",
-        "traditionalMethods": "传统方法",
+        "levelUp": "LevelUp",
+        "traditionalMethods": "传统应用",
         "otherApps": "其他应用"
       },
       "features": {
         "feature1": {
-          "name": "游戏化体验",
-          "levelUp": "✓",
-          "traditionalMethods": "✗",
-          "otherApps": "有限"
+          "name": "AI 个性化任务",
+          "otherApps": "通用模板"
         },
         "feature2": {
-          "name": "AI 驱动洞察",
-          "levelUp": "✓",
-          "traditionalMethods": "✗",
-          "otherApps": "✗"
+          "name": "实时部落聊天",
+          "otherApps": "异步论坛"
         },
         "feature3": {
-          "name": "社区支持",
-          "levelUp": "✓",
-          "traditionalMethods": "✗",
-          "otherApps": "基础"
+          "name": "XP 和升级系统",
+          "otherApps": "清单"
         },
         "feature4": {
-          "name": "跨平台同步",
-          "levelUp": "✓",
-          "traditionalMethods": "✗",
-          "otherApps": "✓"
+          "name": "代币门控 AI 聊天",
+          "otherApps": "付费附加组件"
         },
         "feature5": {
-          "name": "高级分析",
-          "levelUp": "✓",
-          "traditionalMethods": "✗",
-          "otherApps": "有限"
+          "name": "多语言支持",
+          "otherApps": "仅英语"
         },
         "feature6": {
-          "name": "隐私保护",
-          "levelUp": "✓",
-          "traditionalMethods": "✓",
-          "otherApps": "不定"
+          "name": "优先支持工单",
+          "otherApps": "电子邮件支持"
         }
       }
     }
   },
 
   "CTASection": {
-    "badgeText": "冒险在等着你",
-    "titleMain": "准备好升级了吗？",
-    "titleSub": "你的人生？",
-    "description": "加入成千上万的冒险者，他们改变了习惯，实现了目标，并通过 Level Up 解锁了自己的全部潜力。",
+    "badgeText": "你的冒险等待着",
+    "titleMain": "准备好升级",
+    "titleSub": "你的生活了吗？",
+    "description": "加入成千上万改变习惯、实现目标并通过 Level Up 释放全部潜力的冒险者。",
     "primaryCTA": "开始你的任务",
     "secondaryCTA": "继续冒险",
     "trustIndicators": {
       "freeStart": "免费开始",
       "noCreditCard": "无需信用卡",
-      "quickJoin": "30 秒加入"
+      "quickJoin": "30 秒内加入"
     }
   },
   "StatsSection": {
-    "titleMain": "加入人生升级革命",
-    "description": "数千名冒险者已经在使用 Level Up 改变他们的生活",
+    "titleMain": "加入生活升级革命",
+    "description": "成千上万的冒险者已经在用 Level Up 改变他们的生活",
     "stats": [
       {
         "label": "活跃冒险者",
-        "description": "每天提升他们的生活水平"
+        "description": "每天升级他们的生活"
       },
       {
         "label": "完成的任务",
-        "description": "实现目标并实现梦想"
+        "description": "实现目标和梦想"
       },
       {
         "label": "成功率",
-        "description": "坚持他们习惯的用户"
+        "description": "坚持习惯的用户"
       }
     ]
   },
 
+  "TestimonialsSection": {
+    "titleMain": "真实故事，真实转变",
+    "description": "发现世界各地的冒险者如何通过 Level Up 升级他们的生活",
+    "testimonials": [
+      {
+        "name": "Alex Rivera",
+        "role": "软件工程师",
+        "content": "Level Up 完全改变了我的效率。游戏化让建立习惯变得非常有趣，我在短短 3 个月内完成了 45 个目标！",
+        "badge": {
+          "text": "45 个任务"
+        }
+      },
+      {
+        "name": "Sarah Chen",
+        "role": "营销总监",
+        "content": "社区方面令人难以置信。分享成就并从其他冒险者那里获得支持让我每一天都保持动力。",
+        "badge": {
+          "text": "12 级"
+        }
+      },
+      {
+        "name": "Marcus Johnson",
+        "role": "健身教练",
+        "content": "我尝试过无数的习惯应用，但 Level Up 在健康和进度追踪方面的方法是无与伦比的。我的客户也喜欢它！",
+        "badge": {
+          "text": "冠军"
+        }
+      }
+    ],
+    "socialProof": "加入 10,000+ 快乐的冒险者"
+  },
   "about": {
     "hero": {
-      "badge": "我们的故事",
-      "titleLine1": "改变生活",
-      "titleLine2": "一次一个任务",
-      "description": "我们相信每个人都有提升自己生活的潜力。Level Up 的诞生源自这样一个想法：实现目标应该像一次史诗般的冒险，而不是一项无聊的任务。"
+      "badge": "关于 LevelUp",
+      "title": "LevelUp 的存在是为了让一致性感觉可以实现。"
     },
-    "stats": {
-      "title": "我们的历程（数字）",
-      "description": "从一个小型初创公司到一个全球个人发展冒险者社区",
-      "founded": {
-        "label": "成立时间",
-        "description": "我们的冒险开始于此"
-      },
-      "team": {
-        "label": "团队成员",
-        "description": "充满激情的冒险者"
-      },
-      "countries": {
-        "label": "参与国家",
-        "description": "全球社区"
-      },
-      "milestones": {
-        "label": "里程碑",
-        "description": "我们一起达成的目标"
+    "story": {
+      "title": "旨在解决倦怠。",
+      "p1": "我们厌倦了那些僵化的生产力工具，它们让我们因为错过一天而感到内疚。动力会消退，但系统会持久。",
+      "p2": "LevelUp 平静地解释说，进步应该是赢得的，而不是强迫的。我们优先考虑诚实的反馈循环，而不是有毒的生产力。",
+      "principlesTitle": "我们的原则",
+      "items": {
+        "0": "进步优于完美",
+        "1": "每日小行动",
+        "2": "诚实的反馈循环",
+        "3": "没有有毒的生产力"
       }
     },
-    "mission": {
-      "title": "我们的使命",
-      "description": "将个人发展游戏化，让实现人生目标像玩你最喜欢的游戏一样有趣。",
-      "items": [
-        {
-          "title": "目标达成",
-          "description": "将你的梦想转化为可实现的任务，配有清晰的里程碑和有意义的进度奖励。"
-        },
-        {
-          "title": "社区力量",
-          "description": "加入一个支持社区，庆祝你的胜利，并帮助你克服挑战。"
-        },
-        {
-          "title": "游戏化体验",
-          "description": "通过经验值、成就和奖励来提升你的生活，让个人成长变得令人上瘾。"
-        }
-      ]
+    "howItWorks": {
+      "title": "LevelUp 如何运作",
+      "subtitle": "复杂生活的简单系统。",
+      "steps": {
+        "0": { "title": "加入社区", "desc": "找到你的小队。" },
+        "1": { "title": "接收任务", "desc": "每日 AI 挑战。" },
+        "2": { "title": "完成行动", "desc": "向前迈出一小步。" },
+        "3": { "title": "获得 XP", "desc": "可视化进度。" }
+      }
     },
-    "values": {
-      "title": "我们的价值观",
-      "description": "引导我们在 Level Up 所做一切的原则。",
-      "items": [
-        {
-          "title": "进步重于完美",
-          "description": "我们相信稳定的小步伐可以带来非凡的转变。每一个完成的任务都是值得庆祝的胜利。"
-        },
-        {
-          "title": "社区优先",
-          "description": "个人成长在一起更好。我们营造一个支持性的环境，在这里每个人都能茁壮成长并帮助他人成功。"
-        },
-        {
-          "title": "隐私与安全",
-          "description": "你的个人旅程是神圣的。我们用企业级安全保护你的数据，绝不妥协隐私。"
-        },
-        {
-          "title": "创新与乐趣",
-          "description": "我们不断创新，让个人成长比以往更有趣、更有效、更引人入胜。"
-        }
-      ]
+    "closing": {
+      "title": "“这不在于做得更多。而在于坚持——始终如一。”",
+      "button": "开始你的旅程"
     },
     "team": {
-      "title": "认识团队",
-      "description": "Level Up 背后那些充满激情的冒险者，他们致力于帮助你提升生活。",
-      "members": [
-        {
-          "name": "亚历克斯·陈",
-          "role": "联合创始人兼 CEO",
-          "bio": "曾是一名游戏设计师，后成为生活升级爱好者。相信每个人都值得成为自己故事的主角。"
-        },
-        {
-          "name": "莎拉·罗德里格斯",
-          "role": "联合创始人兼 CTO",
-          "bio": "技术奇才，热衷构建真正让生活变得更好的工具。拥有 15 年以上的产品开发经验。"
-        },
-        {
-          "name": "马库斯·约翰逊",
-          "role": "产品负责人",
-          "bio": "专注用户体验的设计师，把自己的效率挣扎转化成 Level Up 中你喜欢的功能。"
-        }
-      ],
       "cta": {
-        "badge": "我们在成长",
+        "badge": "我们正在成长",
         "title": "想加入我们的冒险吗？",
-        "description": "我们一直在寻找充满热情、和我们共享让个人成长变得有趣和吸引人愿景的人。",
-        "button": "查看招聘职位"
+        "description": "我们一直在寻找分享我们愿景的充满激情的个人，让个人成长变得有趣和引人入胜。",
+        "button": "查看空缺职位"
       }
     }
   },
   "contact": {
-    "heroSection": {
-      "badge": "联系我们",
-      "title1": "让我们开始",
-      "title2": "你的旅程",
-      "description": "对 Level Up 有疑问？需要帮助入门？我们的冒险指南团队在这里帮助你提升生活。"
+    "hero": {
+      "title": "咱们聊聊。",
+      "options": "支持 • 反馈 • 社区合作伙伴关系"
     },
-    "contactOptions": {
-      "title": "选择联系方式",
-      "description": "我们愿意以最适合你的方式提供帮助。",
-      "email": {
-        "title": "电子邮件支持",
-        "desc": "获取对问题的详细解答",
-        "contact": "hello@levelup.app",
-        "response": "24 小时内回复"
+    "cards": {
+      "support": {
+        "title": "支持",
+        "desc": "基于电子邮件的支持（工单系统）。",
+        "response": "24小时内回复。"
       },
-      "chat": {
-        "title": "实时聊天",
-        "desc": "你需要时立即帮助",
-        "contact": "PST 时间 9:00 AM - 6:00 PM",
-        "response": "即时回复"
-      },
-      "phone": {
-        "title": "电话支持",
-        "desc": "直接与我们团队通话",
-        "contact": "+1 (555) 123‑4567",
-        "response": "周一至周五可用"
+      "general": {
+        "title": "一般咨询",
+        "desc": "合作伙伴关系和社区创建。",
+        "response": "我们阅读每条信息。"
       }
     },
     "form": {
-      "title": "给我们留言",
-      "description": "填写下面的表格，我们会尽快回复你。",
-      "name": "全名 *",
-      "email": "电子邮箱 *",
-      "type": "咨询类型",
-      "subject": "主题 *",
-      "message": "留言 *",
-      "send": "发送留言",
-      "placeholderName": "输入你的全名",
-      "placeholderEmail": "输入你的邮箱",
-      "placeholderSubject": "简要主题",
-      "placeholderMessage": "告诉我们如何帮助你...",
-      "select": {
-        "default": "请选择",
-        "general": "一般咨询",
-        "support": "支持请求",
-        "billing": "账单与定价",
-        "enterprise": "企业解决方案",
-        "feedback": "反馈/建议",
-        "partnership": "合作机会",
-        "other": "其他"
-      }
-    },
-    "office": {
-      "title": "访问我们的总部",
-      "description": "亲临我们总部，一起喝咖啡，聊聊你的目标。",
-      "location": "博卡拉办事处",
-      "address": "Lakeside\n波卡拉，尼泊尔 33700\n尼泊尔",
-      "hours": "办公时间",
-      "hoursDetail": "周一 – 周五：PST 时间 9:00 AM - 6:00 PM\n周六：10:00 AM - 4:00 PM PST\n周日：休息",
-      "expect": "你可以期待",
-      "expectDetail": "咖啡、零食，以及随时为你提供帮助的友好团队。快速问题无需预约！",
-      "map": "互动地图敬请期待"
-    },
-    "faq": {
-      "title": "常见问题",
-      "description": "查找关于开始使用 Level Up 的常见问题答案。",
-      "items": [
-        {
-          "q": "我能多快开始？",
-          "a": "你可以在不到两分钟内创建账号并开始你的第一个任务！我们的入门流程旨在让你立即参与。"
-        },
-        {
-          "q": "你们提供培训课程吗？",
-          "a": "是的！我们为新用户提供免费入门培训，并为团队提供全面培训。通过联系我们的表单预约吧。"
-        },
-        {
-          "q": "如果我需要定制功能怎么办？",
-          "a": "我们喜欢构建定制方案！请联系我们的企业团队，讨论你的具体需求，我们将制定专属计划。"
-        },
-        {
-          "q": "我该如何提供反馈？",
-          "a": "我们始终欢迎用户社区的反馈！可以在应用中使用反馈表单、发送电子邮件，或加入我们的 Discord 社区实时讨论。"
-        }
-      ]
+      "name": "姓名",
+      "email": "电子邮件",
+      "subject": "主题",
+      "message": "信息",
+      "submit": "发送信息",
+      "footer": "我们阅读每条信息。"
     }
   }
 }
