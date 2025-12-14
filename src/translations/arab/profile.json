@@ -10,5 +10,40 @@
   "username": "اسم المستخدم",
   "unknown": "غير معروف",
   "memberSince": "عضو منذ",
-  "na": "لا يوجد"
+  "na": "لا يوجد",
+  "dropdown": {
+    "myAccount": "حسابي",
+    "profile": "الملف الشخصي",
+    "changePassword": "تغيير كلمة المرور",
+    "settings": "الإعدادات",
+    "logout": "تسجيل الخروج",
+    "loggingOut": "جاري تسجيل الخروج..."
+  },
+  "admin": {
+    "badge": "مسؤول",
+    "editProfile": "تعديل الملف الشخصي",
+    "totalXP": "إجمالي النقاط",
+    "currentLevel": "المستوى الحالي",
+    "role": "الدور",
+    "administrator": "مدير النظام",
+    "accountInfo": "معلومات الحساب",
+    "accountInfoDesc": "تفاصيل حسابك الشخصي",
+    "preferences": "التفضيلات",
+    "preferencesDesc": "إعدادات وتفضيلات التطبيق الخاص بك",
+    "theme": "السمة",
+    "themeAuto": "تلقائي (النظام)",
+    "accessLevel": "مستوى الوصول",
+    "fullAdminAccess": "وصول كامل للمسؤول"
+  },
+  "user": {
+    "changePasswordTitle": "تغيير كلمة المرور",
+    "changePasswordDesc": "تحديث كلمة مرور حسابك",
+    "currentPassword": "كلمة المرور الحالية",
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmPassword": "تأكيد كلمة المرور الجديدة",
+    "updatePassword": "تحديث كلمة المرور",
+    "updating": "جاري التحديث...",
+    "passwordUpdated": "تم تحديث كلمة المرور بنجاح",
+    "passwordMismatch": "كلمات المرور غير متطابقة"
+  }
 }

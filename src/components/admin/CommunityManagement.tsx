@@ -33,6 +33,7 @@ import {
   BarChart3,
 } from 'lucide-react';
 import LanguageStore from '@/stores/useLanguage';
+import { t } from '@/translations';
 import { getAllCommunitiesAdmin, getCommunityStats } from '@/lib/services/admin-communities';
 import { CategoryManagementModal } from './CategoryManagementModal';
 import { CommunityActionsModal } from './CommunityActionsModal';
@@ -128,9 +129,11 @@ export default function CommunityManagement() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
-          <h1 className="text-4xl font-bold text-black dark:text-white">Community Management</h1>
+          <h1 className="text-4xl font-bold text-black dark:text-white">
+            {t('admin:communityManagement.title', language)}
+          </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            Manage communities, members, and categories across the platform
+            {t('admin:communityManagement.description', language)}
           </p>
         </div>
         <Button
@@ -138,7 +141,7 @@ export default function CommunityManagement() {
           className="cursor-pointer bg-black hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-200 dark:text-black text-white"
         >
           <Tag className="h-4 w-4 mr-2" />
-          Manage Categories
+          {t('admin:communityManagement.buttons.manageCategories', language)}
         </Button>
       </div>
 
@@ -147,7 +150,7 @@ export default function CommunityManagement() {
         <Card className="border-none shadow-lg hover:shadow-xl transition-shadow bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-900">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-blue-700 dark:text-blue-300">
-              Total Communities
+              {t('admin:communityManagement.stats.totalCommunities', language)}
             </CardTitle>
             <div className="h-10 w-10 rounded-full bg-blue-500/20 flex items-center justify-center">
               <BarChart3 className="h-5 w-5 text-blue-600 dark:text-blue-400" />
@@ -157,14 +160,16 @@ export default function CommunityManagement() {
             <div className="text-3xl font-bold text-blue-900 dark:text-blue-100">
               {stats.totalCommunities}
             </div>
-            <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">Active communities</p>
+            <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
+              {t('admin:communityManagement.stats.activeCommunities', language)}
+            </p>
           </CardContent>
         </Card>
 
         <Card className="border-none shadow-lg hover:shadow-xl transition-shadow bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950 dark:to-green-900">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-green-700 dark:text-green-300">
-              Public Communities
+              {t('admin:communityManagement.privacy.publicCommunities', language)}
             </CardTitle>
             <div className="h-10 w-10 rounded-full bg-green-500/20 flex items-center justify-center">
               <Unlock className="h-5 w-5 text-green-600 dark:text-green-400" />
@@ -178,7 +183,7 @@ export default function CommunityManagement() {
               {stats.totalCommunities > 0
                 ? Math.round((stats.publicCommunities / stats.totalCommunities) * 100)
                 : 0}
-              % of total
+              % {t('admin:communityManagement.privacy.ofTotal', language)}
             </p>
           </CardContent>
         </Card>
@@ -186,7 +191,7 @@ export default function CommunityManagement() {
         <Card className="border-none shadow-lg hover:shadow-xl transition-shadow bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-950 dark:to-orange-900">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-orange-700 dark:text-orange-300">
-              Private Communities
+              {t('admin:communityManagement.privacy.privateCommunities', language)}
             </CardTitle>
             <div className="h-10 w-10 rounded-full bg-orange-500/20 flex items-center justify-center">
               <Shield className="h-5 w-5 text-orange-600 dark:text-orange-400" />
@@ -214,7 +219,7 @@ export default function CommunityManagement() {
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
-                placeholder="Search communities by name..."
+                placeholder={t('admin:communityManagement.filters.search', language)}
                 value={searchInput}
                 onChange={e => handleSearch(e.target.value)}
                 className="pl-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
@@ -230,19 +235,19 @@ export default function CommunityManagement() {
                 <SelectItem value="all">
                   <div className="flex items-center gap-2">
                     <Users className="h-4 w-4" />
-                    All Communities
+                    {t('admin:communityManagement.filters.allCommunities', language)}
                   </div>
                 </SelectItem>
                 <SelectItem value="public">
                   <div className="flex items-center gap-2">
                     <Unlock className="h-4 w-4 text-green-500" />
-                    Public Only
+                    {t('admin:communityManagement.filters.publicOnly', language)}
                   </div>
                 </SelectItem>
                 <SelectItem value="private">
                   <div className="flex items-center gap-2">
                     <Lock className="h-4 w-4 text-orange-500" />
-                    Private Only
+                    {t('admin:communityManagement.filters.privateOnly', language)}
                   </div>
                 </SelectItem>
               </SelectContent>
@@ -254,10 +259,18 @@ export default function CommunityManagement() {
                 <SelectValue placeholder="Sort by" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="name">Name (A-Z)</SelectItem>
-                <SelectItem value="-name">Name (Z-A)</SelectItem>
-                <SelectItem value="-createdAt">Newest First</SelectItem>
-                <SelectItem value="createdAt">Oldest First</SelectItem>
+                <SelectItem value="name">
+                  {t('admin:communityManagement.sorting.nameAZ', language)}
+                </SelectItem>
+                <SelectItem value="-name">
+                  {t('admin:communityManagement.sorting.nameZA', language)}
+                </SelectItem>
+                <SelectItem value="-createdAt">
+                  {t('admin:communityManagement.sorting.newestFirst', language)}
+                </SelectItem>
+                <SelectItem value="createdAt">
+                  {t('admin:communityManagement.sorting.oldestFirst', language)}
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -269,14 +282,14 @@ export default function CommunityManagement() {
         <CardHeader className="border-b bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
           <div className="flex items-center justify-between">
             <CardTitle className="text-xl font-semibold">
-              Communities
+              {t('admin:communityManagement.messages.communities', language)}
               <span className="ml-2 text-sm font-normal text-gray-500">
-                ({totalCommunities} total)
+                ({totalCommunities} {t('admin:communityManagement.messages.total', language)})
               </span>
             </CardTitle>
             {searchQuery && (
               <Badge variant="secondary" className="text-xs">
-                Filtered results
+                {t('admin:communityManagement.messages.filteredResults', language)}
               </Badge>
             )}
           </div>
@@ -285,7 +298,9 @@ export default function CommunityManagement() {
           {isPending ? (
             <div className="flex flex-col justify-center items-center py-16">
               <Loader2 className="h-10 w-10 animate-spin text-blue-500 mb-4" />
-              <p className="text-gray-500">Loading communities...</p>
+              <p className="text-gray-500">
+                {t('admin:communityManagement.messages.loadingCommunities', language)}
+              </p>
             </div>
           ) : isError ? (
             <div className="flex flex-col items-center justify-center py-16">
@@ -305,18 +320,24 @@ export default function CommunityManagement() {
                 </svg>
               </div>
               <p className="text-red-600 dark:text-red-400 font-medium">
-                Failed to load communities
+                {t('admin:communityManagement.messages.failedToLoad', language)}
               </p>
-              <p className="text-gray-500 text-sm mt-1">Please try again later</p>
+              <p className="text-gray-500 text-sm mt-1">
+                {t('admin:communityManagement.messages.tryAgainLater', language)}
+              </p>
             </div>
           ) : communities.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-16">
               <div className="h-16 w-16 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center mb-4">
                 <Users className="h-8 w-8 text-gray-400" />
               </div>
-              <p className="text-gray-600 dark:text-gray-400 font-medium">No communities found</p>
+              <p className="text-gray-600 dark:text-gray-400 font-medium">
+                {t('admin:communityManagement.messages.noCommunitiesFound', language)}
+              </p>
               <p className="text-gray-500 text-sm mt-1">
-                {searchQuery ? 'Try adjusting your search' : 'Create your first community'}
+                {searchQuery
+                  ? t('admin:communityManagement.messages.tryAdjustingSearch', language)
+                  : t('admin:communityManagement.messages.createFirstCommunity', language)}
               </p>
             </div>
           ) : (
@@ -326,22 +347,22 @@ export default function CommunityManagement() {
                   <TableHeader>
                     <TableRow className="hover:bg-transparent border-b-2">
                       <TableHead className="font-semibold text-gray-700 dark:text-gray-300">
-                        Name
+                        {t('admin:communityManagement.tableHeaders.name', language)}
                       </TableHead>
                       <TableHead className="font-semibold text-gray-700 dark:text-gray-300">
-                        Category
+                        {t('admin:communityManagement.tableHeaders.category', language)}
                       </TableHead>
                       <TableHead className="font-semibold text-gray-700 dark:text-gray-300">
-                        Privacy
+                        {t('admin:communityManagement.tableHeaders.privacy', language)}
                       </TableHead>
                       <TableHead className="font-semibold text-gray-700 dark:text-gray-300">
-                        Members
+                        {t('admin:communityManagement.tableHeaders.members', language)}
                       </TableHead>
                       <TableHead className="font-semibold text-gray-700 dark:text-gray-300">
-                        Created
+                        {t('admin:communityManagement.tableHeaders.created', language)}
                       </TableHead>
                       <TableHead className="text-right font-semibold text-gray-700 dark:text-gray-300">
-                        Actions
+                        {t('admin:communityManagement.tableHeaders.actions', language)}
                       </TableHead>
                     </TableRow>
                   </TableHeader>
@@ -360,7 +381,8 @@ export default function CommunityManagement() {
                             className="capitalize font-medium bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800"
                           >
                             <Tag className="h-3 w-3 mr-1" />
-                            {community.category?.name || 'No Category'}
+                            {community.category?.name ||
+                              t('admin:communityManagement.tableHeaders.noCategory', language)}
                           </Badge>
                         </TableCell>
                         <TableCell>
@@ -370,7 +392,7 @@ export default function CommunityManagement() {
                                 <Lock className="h-4 w-4 text-orange-600 dark:text-orange-400" />
                               </div>
                               <span className="font-medium text-orange-700 dark:text-orange-400">
-                                Private
+                                {t('admin:communityManagement.privacy.private', language)}
                               </span>
                             </div>
                           ) : (
@@ -379,7 +401,7 @@ export default function CommunityManagement() {
                                 <Unlock className="h-4 w-4 text-green-600 dark:text-green-400" />
                               </div>
                               <span className="font-medium text-green-700 dark:text-green-400">
-                                Public
+                                {t('admin:communityManagement.privacy.public', language)}
                               </span>
                             </div>
                           )}
@@ -409,7 +431,9 @@ export default function CommunityManagement() {
                             className="cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
                           >
                             <Settings className="h-4 w-4" />
-                            <span className="ml-2 hidden sm:inline">Manage</span>
+                            <span className="ml-2 hidden sm:inline">
+                              {t('admin:communityManagement.buttons.manage', language)}
+                            </span>
                           </Button>
                         </TableCell>
                       </TableRow>

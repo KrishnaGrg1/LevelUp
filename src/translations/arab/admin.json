@@ -173,5 +173,162 @@
       "deleteError": "فشل حذف المهام",
       "tryAgain": "يرجى المحاولة مرة أخرى"
     }
+  },
+  "communityManagement": {
+    "title": "إدارة المجتمعات",
+    "description": "إدارة ومراقبة جميع المجتمعات في المنصة",
+    "stats": {
+      "totalCommunities": "إجمالي المجتمعات",
+      "activeCommunities": "المجتمعات النشطة",
+      "totalMembers": "إجمالي الأعضاء",
+      "acrossAllCommunities": "عبر جميع المجتمعات",
+      "avgMembersPerCommunity": "متوسط الأعضاء/المجتمع",
+      "communityHealth": "صحة المجتمع"
+    },
+
+    "table": {
+      "community": "المجتمع",
+      "type": "النوع",
+      "members": "الأعضاء",
+      "owner": "المالك",
+      "created": "تم الإنشاء",
+      "actions": "الإجراءات",
+      "noData": "لم يتم العثور على مجتمعات",
+      "loading": "جاري تحميل المجتمعات..."
+    },
+    "buttons": {
+      "manageCategories": "إدارة الفئات",
+      "manage": "إدارة"
+    },
+    "privacy": {
+      "publicCommunities": "المجتمعات العامة",
+      "privateCommunities": "المجتمعات الخاصة",
+      "public": "عام",
+      "private": "خاص",
+      "ofTotal": "من الإجمالي"
+    },
+    "sorting": {
+      "nameAZ": "الاسم (أ-ي)",
+      "nameZA": "الاسم (ي-أ)",
+      "newestFirst": "الأحدث أولاً",
+      "oldestFirst": "الأقدم أولاً"
+    },
+    "filters": {
+      "allCommunities": "جميع المجتمعات",
+      "publicOnly": "عام فقط",
+      "privateOnly": "خاص فقط"
+    },
+    "tableHeaders": {
+      "name": "الاسم",
+      "category": "الفئة",
+      "noCategory": "بدون فئة",
+      "privacy": "الخصوصية",
+      "members": "الأعضاء",
+      "created": "تاريخ الإنشاء",
+      "actions": "الإجراءات"
+    },
+    "messages": {
+      "communities": "المجتمعات",
+      "total": "الإجمالي",
+      "filteredResults": "النتائج المفلترة",
+      "loadingCommunities": "جاري تحميل المجتمعات...",
+      "failedToLoad": "فشل تحميل المجتمعات",
+      "tryAgainLater": "يرجى المحاولة مرة أخرى لاحقاً",
+      "noCommunitiesFound": "لم يتم العثور على مجتمعات",
+      "tryAdjustingSearch": "جرب تعديل بحثك",
+      "createFirstCommunity": "أنشئ مجتمعك الأول"
+    }
+  },
+  "dashboard": {
+    "title": "لوحة تحكم المشرف",
+    "subtitle": "نظرة عامة على النظام والضوابط الإدارية",
+    "stats": {
+      "totalUsers": "إجمالي المستخدمين",
+      "totalRegistered": "إجمالي المستخدمين المسجلين",
+      "verifiedUsers": "المستخدمون المؤكدون",
+      "verifiedAccounts": "المستخدمون ذوو الحسابات المؤكدة",
+      "adminUsers": "مستخدمو المشرف",
+      "systemAdministrators": "مسؤولو النظام",
+      "verificationRate": "معدل التحقق",
+      "usersVerified": "المستخدمون المؤكدون",
+      "of": "من"
+    },
+    "userGrowth": {
+      "title": "نمو المستخدمين",
+      "subtitle": "المستخدمون الجدد بمرور الوقت"
+    },
+    "quickActions": {
+      "userManagement": {
+        "title": "إدارة المستخدمين",
+        "description": "إدارة شاملة للمستخدمين",
+        "button": "عرض جميع المستخدمين",
+        "details": "إدارة جميع المستخدمين في مكان واحد. التحكم في الوصول، تعيين الأدوار، ومراقبة النشاط عبر منصتك."
+      },
+      "systemSettings": {
+        "title": "إعدادات النظام",
+        "description": "تكوين الإعدادات على مستوى النظام",
+        "button": "قريباً",
+        "details": "إدارة إعدادات التطبيق، وقوالب البريد الإلكتروني، وتكوين النظام."
+      }
+    },
+    "errors": {
+      "failedToLoad": "فشل تحميل بيانات لوحة التحكم"
+    }
+  },
+  "actionsModal": {
+    "title": "إجراءات المجتمع",
+    "subtitle": "إدارة إعدادات المجتمع والأعضاء",
+    "sections": {
+      "privacy": {
+        "title": "إعدادات الخصوصية",
+        "description": "التحكم في رؤية المجتمع",
+        "currentStatus": "الحالة الحالية",
+        "changePrivacy": "تغيير الخصوصية",
+        "updating": "جاري التحديث..."
+      },
+      "category": {
+        "title": "الفئة",
+        "description": "تحديث فئة المجتمع",
+        "currentCategory": "الفئة الحالية",
+        "changeCategory": "تغيير الفئة",
+        "selectCategory": "اختر فئة",
+        "updating": "جاري التحديث..."
+      },
+      "members": {
+        "title": "الأعضاء",
+        "loading": "جاري تحميل الأعضاء...",
+        "noMembers": "لم يتم العثور على أعضاء",
+        "remove": "إزالة"
+      },
+      "danger": {
+        "title": "منطقة الخطر",
+        "deleteCommunity": "حذف المجتمع",
+        "deleteDescription": "حذف هذا المجتمع نهائياً. لا يمكن التراجع عن هذا الإجراء.",
+        "deleteButton": "حذف المجتمع",
+        "deleting": "جاري الحذف..."
+      }
+    },
+    "deleteDialog": {
+      "title": "حذف المجتمع",
+      "description": "هل أنت متأكد من رغبتك في حذف هذا المجتمع؟ لا يمكن التراجع عن هذا الإجراء وسيتم إزالة جميع الأعضاء والمحتوى.",
+      "cancel": "إلغاء",
+      "confirm": "حذف المجتمع"
+    },
+    "removeDialog": {
+      "title": "إزالة العضو",
+      "description": "هل أنت متأكد من رغبتك في إزالة هذا العضو من المجتمع؟",
+      "cancel": "إلغاء",
+      "confirm": "إزالة العضو"
+    },
+    "toast": {
+      "privacyUpdated": "تم تحديث الخصوصية بنجاح",
+      "privacyFailed": "فشل تحديث الخصوصية",
+      "categoryUpdated": "تم تحديث الفئة بنجاح",
+      "categoryFailed": "فشل تحديث الفئة",
+      "memberRemoved": "تمت إزالة العضو بنجاح",
+      "memberRemoveFailed": "فشل إزالة العضو",
+      "communityDeleted": "تم حذف المجتمع بنجاح",
+      "communityDeleteFailed": "فشل حذف المجتمع"
+    }
   }
 }

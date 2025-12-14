@@ -8,6 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { togglePin } from '@/lib/services/communities';
 import LanguageStore from '@/stores/useLanguage';
+import { t } from '@/translations';
 
 interface Community {
   id: string;
@@ -65,14 +66,16 @@ export default function CustomizePinModal({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-md bg-[#0D1117] text-gray-100 rounded-xl border border-gray-700">
         <DialogHeader className="flex justify-between items-center">
-          <DialogTitle className="text-lg font-semibold">Customize pinned communities</DialogTitle>
+          <DialogTitle className="text-lg font-semibold">
+            {t('community:customizePin.title', language)}
+          </DialogTitle>
           <Button size="icon" variant="ghost" onClick={onClose}>
             <X className="h-4 w-4" />
           </Button>
         </DialogHeader>
 
         <Input
-          placeholder="Search communities..."
+          placeholder={t('community:customizePin.messagePlaceholder', language)}
           value={search}
           onChange={e => setSearch(e.target.value)}
           className="mb-3 bg-[#161B22] border-gray-700 text-gray-200"
@@ -104,14 +107,16 @@ export default function CustomizePinModal({
 
         <div className="flex justify-end gap-2 mt-4">
           <Button variant="ghost" onClick={onClose}>
-            Cancel
+            {t('community:customizePin.cancel', language)}
           </Button>
           <Button
             onClick={() => handleToggle(selectedIds)}
             disabled={isPending}
             className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold"
           >
-            {isPending ? 'Saving...' : 'Save Pins'}
+            {isPending
+              ? t('community:customizePin.saving', language)
+              : t('community:customizePin.save', language)}
           </Button>
         </div>
       </DialogContent>

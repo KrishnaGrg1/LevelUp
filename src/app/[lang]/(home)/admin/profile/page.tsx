@@ -53,22 +53,16 @@ export default function Profile() {
                     {user?.UserName || t('profile.unnamedUser')}
                   </h1>
                   <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">
-                    Admin
+                    {t('profile:admin.badge', language)}
                   </Badge>
                 </div>
-                <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-                  {t('profile.welcomeBack')}
-                </p>
+                <p className="mt-2 text-zinc-600 dark:text-zinc-400">{t('profile.welcomeBack')}</p>
               </div>
 
               {/* Edit Button */}
-              <Button
-                variant="outline"
-                size="sm"
-                className="cursor-pointer gap-2"
-              >
+              <Button variant="outline" size="sm" className="cursor-pointer gap-2">
                 <Edit className="h-4 w-4" />
-                Edit Profile
+                {t('profile:admin.editProfile', language)}
               </Button>
             </div>
           </CardContent>
@@ -78,20 +72,20 @@ export default function Profile() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <StatCard
             icon={<Trophy className="h-5 w-5 text-yellow-500" />}
-            label="Total XP"
+            label={t('profile:admin.totalXP', language)}
             value={(user?.xp || 0).toString()}
             bgColor="bg-yellow-50 dark:bg-yellow-900/10"
           />
           <StatCard
             icon={<Target className="h-5 w-5 text-blue-500" />}
-            label="Current Level"
+            label={t('profile:admin.currentLevel', language)}
             value={(user?.level || 1).toString()}
             bgColor="bg-blue-50 dark:bg-blue-900/10"
           />
           <StatCard
             icon={<Shield className="h-5 w-5 text-purple-500" />}
-            label="Role"
-            value="Administrator"
+            label={t('profile:admin.role', language)}
+            value={t('profile:admin.administrator', language)}
             bgColor="bg-purple-50 dark:bg-purple-900/10"
           />
         </div>
@@ -103,9 +97,9 @@ export default function Profile() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 font-heading text-xl">
                 <UserRoundSearch className="h-5 w-5 text-zinc-700 dark:text-zinc-300" />
-                Account Information
+                {t('profile:admin.accountInfo', language)}
               </CardTitle>
-              <CardDescription>Your personal account details</CardDescription>
+              <CardDescription>{t('profile:admin.accountInfoDesc', language)}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <ProfileField
@@ -139,9 +133,9 @@ export default function Profile() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 font-heading text-xl">
                 <GlobeIcon className="h-5 w-5 text-zinc-700 dark:text-zinc-300" />
-                Preferences
+                {t('profile:admin.preferences', language)}
               </CardTitle>
-              <CardDescription>Your app settings and preferences</CardDescription>
+              <CardDescription>{t('profile:admin.preferencesDesc', language)}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <ProfileField
@@ -151,13 +145,13 @@ export default function Profile() {
               />
               <ProfileField
                 icon={<StarIcon className="h-4 w-4" />}
-                label="Theme"
-                value="Auto (System)"
+                label={t('profile:admin.theme', language)}
+                value={t('profile:admin.themeAuto', language)}
               />
               <ProfileField
                 icon={<Shield className="h-4 w-4" />}
-                label="Access Level"
-                value="Full Admin Access"
+                label={t('profile:admin.accessLevel', language)}
+                value={t('profile:admin.fullAdminAccess', language)}
               />
             </CardContent>
           </Card>

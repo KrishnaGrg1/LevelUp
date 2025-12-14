@@ -10,5 +10,40 @@
   "username": "प्रयोगकर्ता नाम",
   "unknown": "अज्ञात",
   "memberSince": "सदस्य बनेको मिति",
-  "na": "एन/ए"
+  "na": "एन/ए",
+  "dropdown": {
+    "myAccount": "मेरो खाता",
+    "profile": "प्रोफाइल",
+    "changePassword": "पासवर्ड परिवर्तन गर्नुहोस्",
+    "settings": "सेटिङहरू",
+    "logout": "लग आउट",
+    "loggingOut": "लग आउट गर्दै..."
+  },
+  "admin": {
+    "badge": "एडमिन",
+    "editProfile": "प्रोफाइल सम्पादन गर्नुहोस्",
+    "totalXP": "कुल XP",
+    "currentLevel": "हालको स्तर",
+    "role": "भूमिका",
+    "administrator": "प्रशासक",
+    "accountInfo": "खाता जानकारी",
+    "accountInfoDesc": "तपाईंको व्यक्तिगत खाता विवरण",
+    "preferences": "प्राथमिकताहरू",
+    "preferencesDesc": "तपाईंको एप सेटिङ र प्राथमिकताहरू",
+    "theme": "थिम",
+    "themeAuto": "स्वचालित (सिस्टम)",
+    "accessLevel": "पहुँच स्तर",
+    "fullAdminAccess": "पूर्ण एडमिन पहुँच"
+  },
+  "user": {
+    "changePasswordTitle": "पासवर्ड परिवर्तन गर्नुहोस्",
+    "changePasswordDesc": "तपाईंको खाता पासवर्ड अपडेट गर्नुहोस्",
+    "currentPassword": "हालको पासवर्ड",
+    "newPassword": "नयाँ पासवर्ड",
+    "confirmPassword": "नयाँ पासवर्ड पुष्टि गर्नुहोस्",
+    "updatePassword": "पासवर्ड अपडेट गर्नुहोस्",
+    "updating": "अपडेट गर्दै...",
+    "passwordUpdated": "पासवर्ड सफलतापूर्वक अपडेट भयो",
+    "passwordMismatch": "पासवर्डहरू मेल खाँदैनन्"
+  }
 }

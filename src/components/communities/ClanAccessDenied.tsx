@@ -2,6 +2,8 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Shield, Lock, AlertCircle, UserX } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import LanguageStore from '@/stores/useLanguage';
+import { t } from '@/translations';
 
 interface ClanAccessDeniedProps {
   clanName: string;
@@ -19,6 +21,7 @@ export const ClanAccessDenied: React.FC<ClanAccessDeniedProps> = ({
   onGoBack,
 }) => {
   const router = useRouter();
+  const { language } = LanguageStore();
 
   const handleGoBack = () => {
     if (onGoBack) {
@@ -34,30 +37,30 @@ export const ClanAccessDenied: React.FC<ClanAccessDeniedProps> = ({
       case 'NOT_MEMBER':
         return {
           icon: <UserX className="h-16 w-16 text-red-500" />,
-          title: 'Access Denied',
-          message: `You are not a member of ${clanName}`,
-          description: 'Only clan members can access this chat.',
+          title: t('community:accessDenied.notMember.title', language),
+          message: t('community:accessDenied.notMember.message', { clanName }),
+          description: t('community:accessDenied.notMember.description', language),
         };
       case 'NOT_AUTHENTICATED':
         return {
           icon: <Lock className="h-16 w-16 text-amber-500" />,
-          title: 'Authentication Required',
-          message: 'Please log in to access this clan',
-          description: 'You need to be logged in to view clan chats.',
+          title: t('community:accessDenied.notAuthenticated.title', language),
+          message: t('community:accessDenied.notAuthenticated.message', language),
+          description: t('community:accessDenied.notAuthenticated.description', language),
         };
       case 'MEMBERSHIP_CHECK_FAILED':
         return {
           icon: <AlertCircle className="h-16 w-16 text-orange-500" />,
-          title: 'Unable to Verify Membership',
-          message: 'Could not verify your clan membership',
-          description: 'Please try again later or contact support.',
+          title: t('community:accessDenied.membershipCheckFailed.title', language),
+          message: t('community:accessDenied.membershipCheckFailed.message', language),
+          description: t('community:accessDenied.membershipCheckFailed.description', language),
         };
       default:
         return {
           icon: <Shield className="h-16 w-16 text-gray-500" />,
-          title: 'Access Restricted',
-          message: 'You cannot access this clan chat',
-          description: 'Please check your membership status.',
+          title: t('community:accessDenied.default.title', language),
+          message: t('community:accessDenied.default.message', language),
+          description: t('community:accessDenied.default.description', language),
         };
     }
   };
@@ -88,7 +91,7 @@ export const ClanAccessDenied: React.FC<ClanAccessDeniedProps> = ({
             variant="outline"
             className="px-6 py-2 border-gray-300 dark:border-gray-600"
           >
-            Go Back
+            {t('community:accessDenied.goBack', language)}
           </Button>
 
           {accessDeniedCode === 'NOT_MEMBER' && (
@@ -99,7 +102,7 @@ export const ClanAccessDenied: React.FC<ClanAccessDeniedProps> = ({
               }}
               className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white"
             >
-              Request to Join
+              {t('community:accessDenied.requestJoin', language)}
             </Button>
           )}
 

@@ -4,5 +4,95 @@
     "level": "Nivel",
     "xp": "XP",
     "progress": "Progreso al Siguiente Nivel"
+  },
+  "messageArea": {
+    "members": "miembros",
+    "communityInfo": "Información de la Comunidad",
+    "clanInfo": "Información del Clan",
+    "settings": "Configuración",
+    "inviteMembers": "Invitar Miembros",
+    "notifications": "Notificaciones",
+    "mute": "Silenciar",
+    "leaveCommunity": "Abandonar Comunidad",
+    "leaveClan": "Abandonar Clan",
+    "typeMessage": "Escribe un mensaje...",
+    "enterMessage": "Por favor ingresa un mensaje",
+    "mustBeLoggedIn": "Debes iniciar sesión para enviar mensajes"
+  },
+  "createModal": {
+    "title": "Crear Nueva Comunidad",
+    "description": "Completa los detalles para crear tu comunidad",
+    "communityName": "Nombre de la Comunidad",
+    "namePlaceholder": "Ingresa el nombre de la comunidad",
+    "descriptionLabel": "Descripción",
+    "descriptionPlaceholder": "Describe tu comunidad...",
+    "category": "Categoría",
+    "selectCategory": "Selecciona una categoría",
+    "memberLimit": "Límite de Miembros",
+    "memberLimitDesc": "Número máximo de miembros (10-1000)",
+    "privateCommunity": "Comunidad Privada",
+    "privateDescription": "Solo los miembros invitados pueden unirse",
+    "communityImage": "Imagen de la Comunidad",
+    "uploadImage": "Subir Imagen",
+    "dragDrop": "o arrastrar y soltar",
+    "imageRequirements": "PNG, JPG, GIF hasta 5MB",
+    "cancel": "Cancelar",
+    "create": "Crear Comunidad",
+    "creating": "Creando...",
+    "imageError": "Por favor selecciona un archivo de imagen válido",
+    "imageSizeError": "El tamaño de la imagen debe ser menor a 5MB",
+    "nameRequired": "El nombre de la comunidad es obligatorio",
+    "nameMinLength": "El nombre debe tener al menos 3 caracteres",
+    "descriptionRequired": "La descripción es obligatoria",
+    "categoryRequired": "Por favor selecciona una categoría"
+  },
+  "accessDenied": {
+    "notMember": {
+      "title": "Acceso Denegado",
+      "message": "No eres miembro de {clanName}",
+      "description": "Solo los miembros del clan pueden acceder a este chat."
+    },
+    "notAuthenticated": {
+      "title": "Autenticación Requerida",
+      "message": "Por favor inicia sesión para acceder a este clan",
+      "description": "Necesitas iniciar sesión para ver los chats del clan."
+    },
+    "membershipCheckFailed": {
+      "title": "No se Pudo Verificar la Membresía",
+      "message": "No se pudo verificar tu membresía del clan",
+      "description": "Por favor intenta de nuevo más tarde o contacta al soporte."
+    },
+    "default": {
+      "title": "Acceso Restringido",
+      "message": "No puedes acceder a este chat del clan",
+      "description": "Por favor verifica tu estado de membresía."
+    },
+    "goBack": "Volver",
+    "requestJoin": "Solicitar Unirse"
+  },
+  "customizePin": {
+    "title": "Personalizar Pin",
+    "description": "Personaliza tu mensaje fijado",
+    "messageLabel": "Mensaje Fijado",
+    "messagePlaceholder": "Ingresa tu mensaje para fijar...",
+    "colorLabel": "Color del Pin",
+    "selectColor": "Selecciona un color",
+    "cancel": "Cancelar",
+    "save": "Guardar Pin",
+    "saving": "Guardando..."
+  },
+  "card": {
+    "members": "Miembros",
+    "join": "Unirse",
+    "joined": "Unido",
+    "private": "Privado",
+    "public": "Público",
+    "owner": "Propietario"
+  },
+  "toast": {
+    "createdSuccess": "¡Comunidad creada exitosamente!",
+    "createFailed": "Error al crear la comunidad",
+    "joinedSuccess": "¡Te uniste a la comunidad exitosamente!",
+    "joinFailed": "Error al unirse a la comunidad"
   }
 }

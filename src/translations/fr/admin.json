@@ -173,5 +173,161 @@
       "deleteError": "Échec de la suppression des quêtes",
       "tryAgain": "Veuillez réessayer"
     }
+  },
+  "communityManagement": {
+    "title": "Gestion des communautés",
+    "description": "Gérer et surveiller toutes les communautés de la plateforme",
+    "stats": {
+      "totalCommunities": "Total des communautés",
+      "activeCommunities": "Communautés actives",
+      "totalMembers": "Total des membres",
+      "acrossAllCommunities": "Dans toutes les communautés",
+      "avgMembersPerCommunity": "Moyenne membres/communauté",
+      "communityHealth": "Santé de la communauté"
+    },
+    "table": {
+      "community": "Communauté",
+      "type": "Type",
+      "members": "Membres",
+      "owner": "Propriétaire",
+      "created": "Créé",
+      "actions": "Actions",
+      "noData": "Aucune communauté trouvée",
+      "loading": "Chargement des communautés..."
+    },
+    "buttons": {
+      "manageCategories": "Gérer les catégories",
+      "manage": "Gérer"
+    },
+    "privacy": {
+      "publicCommunities": "Communautés publiques",
+      "privateCommunities": "Communautés privées",
+      "public": "Public",
+      "private": "Privé",
+      "ofTotal": "du total"
+    },
+    "sorting": {
+      "nameAZ": "Nom (A-Z)",
+      "nameZA": "Nom (Z-A)",
+      "newestFirst": "Plus récent d'abord",
+      "oldestFirst": "Plus ancien d'abord"
+    },
+    "filters": {
+      "allCommunities": "Toutes les communautés",
+      "publicOnly": "Public uniquement",
+      "privateOnly": "Privé uniquement"
+    },
+    "tableHeaders": {
+      "name": "Nom",
+      "category": "Catégorie",
+      "noCategory": "Aucune catégorie",
+      "privacy": "Confidentialité",
+      "members": "Membres",
+      "created": "Créé",
+      "actions": "Actions"
+    },
+    "messages": {
+      "communities": "Communautés",
+      "total": "total",
+      "filteredResults": "Résultats filtrés",
+      "loadingCommunities": "Chargement des communautés...",
+      "failedToLoad": "Échec du chargement des communautés",
+      "tryAgainLater": "Veuillez réessayer plus tard",
+      "noCommunitiesFound": "Aucune communauté trouvée",
+      "tryAdjustingSearch": "Essayez d'ajuster votre recherche",
+      "createFirstCommunity": "Créez votre première communauté"
+    }
+  },
+  "dashboard": {
+    "title": "Tableau de bord administrateur",
+    "subtitle": "Aperçu du système et contrôles administratifs",
+    "stats": {
+      "totalUsers": "Total des utilisateurs",
+      "totalRegistered": "Total des utilisateurs inscrits",
+      "verifiedUsers": "Utilisateurs vérifiés",
+      "verifiedAccounts": "Utilisateurs avec comptes vérifiés",
+      "adminUsers": "Utilisateurs administrateurs",
+      "systemAdministrators": "Administrateurs système",
+      "verificationRate": "Taux de vérification",
+      "usersVerified": "utilisateurs vérifiés",
+      "of": "sur"
+    },
+    "userGrowth": {
+      "title": "Croissance des utilisateurs",
+      "subtitle": "Nouveaux utilisateurs au fil du temps"
+    },
+    "quickActions": {
+      "userManagement": {
+        "title": "Gestion des utilisateurs",
+        "description": "Administration complète des utilisateurs",
+        "button": "Voir tous les utilisateurs",
+        "details": "Gérez tous les utilisateurs en un seul endroit. Contrôlez l'accès, attribuez des rôles et surveillez l'activité sur votre plateforme."
+      },
+      "systemSettings": {
+        "title": "Paramètres système",
+        "description": "Configurer les paramètres à l'échelle du système",
+        "button": "Bientôt disponible",
+        "details": "Gérez les paramètres de l'application, les modèles d'e-mails et la configuration du système."
+      }
+    },
+    "errors": {
+      "failedToLoad": "Échec du chargement des données du tableau de bord"
+    }
+  },
+  "actionsModal": {
+    "title": "Actions de la communauté",
+    "subtitle": "Gérer les paramètres et les membres de la communauté",
+    "sections": {
+      "privacy": {
+        "title": "Paramètres de confidentialité",
+        "description": "Contrôler la visibilité de la communauté",
+        "currentStatus": "Statut actuel",
+        "changePrivacy": "Modifier la confidentialité",
+        "updating": "Mise à jour..."
+      },
+      "category": {
+        "title": "Catégorie",
+        "description": "Mettre à jour la catégorie de la communauté",
+        "currentCategory": "Catégorie actuelle",
+        "changeCategory": "Modifier la catégorie",
+        "selectCategory": "Sélectionner une catégorie",
+        "updating": "Mise à jour..."
+      },
+      "members": {
+        "title": "Membres",
+        "loading": "Chargement des membres...",
+        "noMembers": "Aucun membre trouvé",
+        "remove": "Supprimer"
+      },
+      "danger": {
+        "title": "Zone dangereuse",
+        "deleteCommunity": "Supprimer la communauté",
+        "deleteDescription": "Supprimer définitivement cette communauté. Cette action ne peut pas être annulée.",
+        "deleteButton": "Supprimer la communauté",
+        "deleting": "Suppression..."
+      }
+    },
+    "deleteDialog": {
+      "title": "Supprimer la communauté",
+      "description": "Êtes-vous sûr de vouloir supprimer cette communauté ? Cette action ne peut pas être annulée et supprimera tous les membres et le contenu.",
+      "cancel": "Annuler",
+      "confirm": "Supprimer la communauté"
+    },
+    "removeDialog": {
+      "title": "Supprimer le membre",
+      "description": "Êtes-vous sûr de vouloir supprimer ce membre de la communauté ?",
+      "cancel": "Annuler",
+      "confirm": "Supprimer le membre"
+    },
+    "toast": {
+      "privacyUpdated": "Confidentialité mise à jour avec succès",
+      "privacyFailed": "Échec de la mise à jour de la confidentialité",
+      "categoryUpdated": "Catégorie mise à jour avec succès",
+      "categoryFailed": "Échec de la mise à jour de la catégorie",
+      "memberRemoved": "Membre supprimé avec succès",
+      "memberRemoveFailed": "Échec de la suppression du membre",
+      "communityDeleted": "Communauté supprimée avec succès",
+      "communityDeleteFailed": "Échec de la suppression de la communauté"
+    }
   }
 }

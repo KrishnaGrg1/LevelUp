@@ -173,5 +173,161 @@
       "deleteError": "クエストの削除に失敗しました",
       "tryAgain": "もう一度お試しください"
     }
+  },
+  "communityManagement": {
+    "title": "コミュニティ管理",
+    "description": "プラットフォーム内のすべてのコミュニティを管理・監視",
+    "stats": {
+      "totalCommunities": "総コミュニティ数",
+      "activeCommunities": "アクティブなコミュニティ",
+      "totalMembers": "総メンバー数",
+      "acrossAllCommunities": "すべてのコミュニティ全体",
+      "avgMembersPerCommunity": "平均メンバー数/コミュニティ",
+      "communityHealth": "コミュニティの健全性"
+    },
+    "table": {
+      "community": "コミュニティ",
+      "type": "タイプ",
+      "members": "メンバー",
+      "owner": "オーナー",
+      "created": "作成日",
+      "actions": "アクション",
+      "noData": "コミュニティが見つかりません",
+      "loading": "コミュニティを読み込み中..."
+    },
+    "buttons": {
+      "manageCategories": "カテゴリーを管理",
+      "manage": "管理"
+    },
+    "privacy": {
+      "publicCommunities": "公開コミュニティ",
+      "privateCommunities": "非公開コミュニティ",
+      "public": "公開",
+      "private": "非公開",
+      "ofTotal": "全体の"
+    },
+    "sorting": {
+      "nameAZ": "名前 (A-Z)",
+      "nameZA": "名前 (Z-A)",
+      "newestFirst": "新しい順",
+      "oldestFirst": "古い順"
+    },
+    "filters": {
+      "allCommunities": "すべてのコミュニティ",
+      "publicOnly": "公開のみ",
+      "privateOnly": "非公開のみ"
+    },
+    "tableHeaders": {
+      "name": "名前",
+      "category": "カテゴリー",
+      "noCategory": "カテゴリーなし",
+      "privacy": "プライバシー",
+      "members": "メンバー",
+      "created": "作成日",
+      "actions": "アクション"
+    },
+    "messages": {
+      "communities": "コミュニティ",
+      "total": "合計",
+      "filteredResults": "フィルタ結果",
+      "loadingCommunities": "コミュニティを読み込み中...",
+      "failedToLoad": "コミュニティの読み込みに失敗しました",
+      "tryAgainLater": "後でもう一度お試しください",
+      "noCommunitiesFound": "コミュニティが見つかりません",
+      "tryAdjustingSearch": "検索条件を調整してみてください",
+      "createFirstCommunity": "最初のコミュニティを作成"
+    }
+  },
+  "dashboard": {
+    "title": "管理者ダッシュボード",
+    "subtitle": "システム概要と管理制御",
+    "stats": {
+      "totalUsers": "総ユーザー数",
+      "totalRegistered": "登録ユーザー総数",
+      "verifiedUsers": "確認済みユーザー",
+      "verifiedAccounts": "確認済みアカウントを持つユーザー",
+      "adminUsers": "管理者ユーザー",
+      "systemAdministrators": "システム管理者",
+      "verificationRate": "確認率",
+      "usersVerified": "ユーザー確認済み",
+      "of": "の"
+    },
+    "userGrowth": {
+      "title": "ユーザー成長",
+      "subtitle": "時間経過による新規ユーザー"
+    },
+    "quickActions": {
+      "userManagement": {
+        "title": "ユーザー管理",
+        "description": "包括的なユーザー管理",
+        "button": "すべてのユーザーを表示",
+        "details": "1か所ですべてのユーザーを管理します。アクセスを制御し、役割を割り当て、プラットフォーム全体のアクティビティを監視します。"
+      },
+      "systemSettings": {
+        "title": "システム設定",
+        "description": "システム全体の設定を構成",
+        "button": "近日公開",
+        "details": "アプリケーション設定、メールテンプレート、システム構成を管理します。"
+      }
+    },
+    "errors": {
+      "failedToLoad": "ダッシュボードデータの読み込みに失敗しました"
+    }
+  },
+  "actionsModal": {
+    "title": "コミュニティアクション",
+    "subtitle": "コミュニティ設定とメンバーを管理",
+    "sections": {
+      "privacy": {
+        "title": "プライバシー設定",
+        "description": "コミュニティの可視性を制御",
+        "currentStatus": "現在のステータス",
+        "changePrivacy": "プライバシーを変更",
+        "updating": "更新中..."
+      },
+      "category": {
+        "title": "カテゴリー",
+        "description": "コミュニティカテゴリーを更新",
+        "currentCategory": "現在のカテゴリー",
+        "changeCategory": "カテゴリーを変更",
+        "selectCategory": "カテゴリーを選択",
+        "updating": "更新中..."
+      },
+      "members": {
+        "title": "メンバー",
+        "loading": "メンバーを読み込み中...",
+        "noMembers": "メンバーが見つかりません",
+        "remove": "削除"
+      },
+      "danger": {
+        "title": "危険ゾーン",
+        "deleteCommunity": "コミュニティを削除",
+        "deleteDescription": "このコミュニティを完全に削除します。この操作は元に戻せません。",
+        "deleteButton": "コミュニティを削除",
+        "deleting": "削除中..."
+      }
+    },
+    "deleteDialog": {
+      "title": "コミュニティを削除",
+      "description": "このコミュニティを削除してもよろしいですか？この操作は元に戻せず、すべてのメンバーとコンテンツが削除されます。",
+      "cancel": "キャンセル",
+      "confirm": "コミュニティを削除"
+    },
+    "removeDialog": {
+      "title": "メンバーを削除",
+      "description": "このメンバーをコミュニティから削除してもよろしいですか？",
+      "cancel": "キャンセル",
+      "confirm": "メンバーを削除"
+    },
+    "toast": {
+      "privacyUpdated": "プライバシーが正常に更新されました",
+      "privacyFailed": "プライバシーの更新に失敗しました",
+      "categoryUpdated": "カテゴリーが正常に更新されました",
+      "categoryFailed": "カテゴリーの更新に失敗しました",
+      "memberRemoved": "メンバーが正常に削除されました",
+      "memberRemoveFailed": "メンバーの削除に失敗しました",
+      "communityDeleted": "コミュニティが正常に削除されました",
+      "communityDeleteFailed": "コミュニティの削除に失敗しました"
+    }
   }
 }

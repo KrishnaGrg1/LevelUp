@@ -4,5 +4,95 @@
     "level": "Level",
     "xp": "XP",
     "progress": "Progress to Next Level"
+  },
+  "messageArea": {
+    "members": "members",
+    "communityInfo": "Community Info",
+    "clanInfo": "Clan Info",
+    "settings": "Settings",
+    "inviteMembers": "Invite Members",
+    "notifications": "Notifications",
+    "mute": "Mute",
+    "leaveCommunity": "Leave Community",
+    "leaveClan": "Leave Clan",
+    "typeMessage": "Type a message...",
+    "enterMessage": "Please enter a message",
+    "mustBeLoggedIn": "You must be logged in to send messages"
+  },
+  "createModal": {
+    "title": "Create New Community",
+    "description": "Fill in the details to create your community",
+    "communityName": "Community Name",
+    "namePlaceholder": "Enter community name",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Describe your community...",
+    "category": "Category",
+    "selectCategory": "Select a category",
+    "memberLimit": "Member Limit",
+    "memberLimitDesc": "Maximum number of members (10-1000)",
+    "privateCommunity": "Private Community",
+    "privateDescription": "Only invited members can join",
+    "communityImage": "Community Image",
+    "uploadImage": "Upload Image",
+    "dragDrop": "or drag and drop",
+    "imageRequirements": "PNG, JPG, GIF up to 5MB",
+    "cancel": "Cancel",
+    "create": "Create Community",
+    "creating": "Creating...",
+    "imageError": "Please select a valid image file",
+    "imageSizeError": "Image size should be less than 5MB",
+    "nameRequired": "Community name is required",
+    "nameMinLength": "Name must be at least 3 characters",
+    "descriptionRequired": "Description is required",
+    "categoryRequired": "Please select a category"
+  },
+  "accessDenied": {
+    "notMember": {
+      "title": "Access Denied",
+      "message": "You are not a member of {clanName}",
+      "description": "Only clan members can access this chat."
+    },
+    "notAuthenticated": {
+      "title": "Authentication Required",
+      "message": "Please log in to access this clan",
+      "description": "You need to be logged in to view clan chats."
+    },
+    "membershipCheckFailed": {
+      "title": "Unable to Verify Membership",
+      "message": "Could not verify your clan membership",
+      "description": "Please try again later or contact support."
+    },
+    "default": {
+      "title": "Access Restricted",
+      "message": "You cannot access this clan chat",
+      "description": "Please check your membership status."
+    },
+    "goBack": "Go Back",
+    "requestJoin": "Request to Join"
+  },
+  "customizePin": {
+    "title": "Customize Pin",
+    "description": "Personalize your pinned message",
+    "messageLabel": "Pin Message",
+    "messagePlaceholder": "Enter your message to pin...",
+    "colorLabel": "Pin Color",
+    "selectColor": "Select a color",
+    "cancel": "Cancel",
+    "save": "Save Pin",
+    "saving": "Saving..."
+  },
+  "card": {
+    "members": "Members",
+    "join": "Join",
+    "joined": "Joined",
+    "private": "Private",
+    "public": "Public",
+    "owner": "Owner"
+  },
+  "toast": {
+    "createdSuccess": "Community created successfully!",
+    "createFailed": "Failed to create community",
+    "joinedSuccess": "Successfully joined community!",
+    "joinFailed": "Failed to join community"
   }
 }

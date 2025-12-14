@@ -10,5 +10,40 @@
   "username": "Nombre de usuario",
   "unknown": "Desconocido",
   "memberSince": "Miembro desde",
-  "na": "N/D"
+  "na": "N/D",
+  "dropdown": {
+    "myAccount": "Mi cuenta",
+    "profile": "Perfil",
+    "changePassword": "Cambiar contraseña",
+    "settings": "Configuración",
+    "logout": "Cerrar sesión",
+    "loggingOut": "Cerrando sesión..."
+  },
+  "admin": {
+    "badge": "Admin",
+    "editProfile": "Editar perfil",
+    "totalXP": "XP Total",
+    "currentLevel": "Nivel actual",
+    "role": "Rol",
+    "administrator": "Administrador",
+    "accountInfo": "Información de la cuenta",
+    "accountInfoDesc": "Los detalles de tu cuenta personal",
+    "preferences": "Preferencias",
+    "preferencesDesc": "Tus ajustes y preferencias de la aplicación",
+    "theme": "Tema",
+    "themeAuto": "Automático (Sistema)",
+    "accessLevel": "Nivel de acceso",
+    "fullAdminAccess": "Acceso completo de administrador"
+  },
+  "user": {
+    "changePasswordTitle": "Cambiar contraseña",
+    "changePasswordDesc": "Actualizar la contraseña de tu cuenta",
+    "currentPassword": "Contraseña actual",
+    "newPassword": "Nueva contraseña",
+    "confirmPassword": "Confirmar nueva contraseña",
+    "updatePassword": "Actualizar contraseña",
+    "updating": "Actualizando...",
+    "passwordUpdated": "Contraseña actualizada exitosamente",
+    "passwordMismatch": "Las contraseñas no coinciden"
+  }
 }

@@ -4,5 +4,95 @@
     "level": "等级",
     "xp": "XP",
     "progress": "升级进度"
+  },
+  "messageArea": {
+    "members": "成员",
+    "communityInfo": "社区信息",
+    "clanInfo": "战队信息",
+    "settings": "设置",
+    "inviteMembers": "邀请成员",
+    "notifications": "通知",
+    "mute": "静音",
+    "leaveCommunity": "离开社区",
+    "leaveClan": "离开战队",
+    "typeMessage": "输入消息...",
+    "enterMessage": "请输入消息",
+    "mustBeLoggedIn": "您必须登录才能发送消息"
+  },
+  "createModal": {
+    "title": "创建新社区",
+    "description": "填写详细信息以创建您的社区",
+    "communityName": "社区名称",
+    "namePlaceholder": "输入社区名称",
+    "descriptionLabel": "描述",
+    "descriptionPlaceholder": "描述您的社区...",
+    "category": "类别",
+    "selectCategory": "选择类别",
+    "memberLimit": "成员限制",
+    "memberLimitDesc": "最大成员数 (10-1000)",
+    "privateCommunity": "私密社区",
+    "privateDescription": "只有受邀成员才能加入",
+    "communityImage": "社区图片",
+    "uploadImage": "上传图片",
+    "dragDrop": "或拖放",
+    "imageRequirements": "PNG、JPG、GIF 最大5MB",
+    "cancel": "取消",
+    "create": "创建社区",
+    "creating": "创建中...",
+    "imageError": "请选择有效的图片文件",
+    "imageSizeError": "图片大小应小于5MB",
+    "nameRequired": "社区名称为必填项",
+    "nameMinLength": "名称至少需要3个字符",
+    "descriptionRequired": "描述为必填项",
+    "categoryRequired": "请选择类别"
+  },
+  "accessDenied": {
+    "notMember": {
+      "title": "访问被拒绝",
+      "message": "您不是 {clanName} 的成员",
+      "description": "只有战队成员才能访问此聊天。"
+    },
+    "notAuthenticated": {
+      "title": "需要身份验证",
+      "message": "请登录以访问此战队",
+      "description": "您需要登录才能查看战队聊天。"
+    },
+    "membershipCheckFailed": {
+      "title": "无法验证成员资格",
+      "message": "无法验证您的战队成员资格",
+      "description": "请稍后重试或联系支持人员。"
+    },
+    "default": {
+      "title": "访问受限",
+      "message": "您无法访问此战队聊天",
+      "description": "请检查您的成员资格状态。"
+    },
+    "goBack": "返回",
+    "requestJoin": "请求加入"
+  },
+  "customizePin": {
+    "title": "自定义置顶",
+    "description": "个性化您的置顶消息",
+    "messageLabel": "置顶消息",
+    "messagePlaceholder": "输入要置顶的消息...",
+    "colorLabel": "置顶颜色",
+    "selectColor": "选择颜色",
+    "cancel": "取消",
+    "save": "保存置顶",
+    "saving": "保存中..."
+  },
+  "card": {
+    "members": "成员",
+    "join": "加入",
+    "joined": "已加入",
+    "private": "私密",
+    "public": "公开",
+    "owner": "所有者"
+  },
+  "toast": {
+    "createdSuccess": "社区创建成功！",
+    "createFailed": "社区创建失败",
+    "joinedSuccess": "成功加入社区！",
+    "joinFailed": "加入社区失败"
   }
 }

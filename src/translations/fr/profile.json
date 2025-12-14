@@ -7,8 +7,43 @@
   "language": "Langue",
   "level": "Niveau",
   "xp": "XP",
-  "username": "Nom d’utilisateur",
+  "username": "Nom d'utilisateur",
   "unknown": "Inconnu",
   "memberSince": "Membre depuis",
-  "na": "N/A"
+  "na": "N/A",
+  "dropdown": {
+    "myAccount": "Mon compte",
+    "profile": "Profil",
+    "changePassword": "Changer le mot de passe",
+    "settings": "Paramètres",
+    "logout": "Se déconnecter",
+    "loggingOut": "Déconnexion..."
+  },
+  "admin": {
+    "badge": "Admin",
+    "editProfile": "Modifier le profil",
+    "totalXP": "XP Total",
+    "currentLevel": "Niveau actuel",
+    "role": "Rôle",
+    "administrator": "Administrateur",
+    "accountInfo": "Informations du compte",
+    "accountInfoDesc": "Vos informations de compte personnel",
+    "preferences": "Préférences",
+    "preferencesDesc": "Vos paramètres et préférences de l'application",
+    "theme": "Thème",
+    "themeAuto": "Auto (Système)",
+    "accessLevel": "Niveau d'accès",
+    "fullAdminAccess": "Accès administrateur complet"
+  },
+  "user": {
+    "changePasswordTitle": "Changer le mot de passe",
+    "changePasswordDesc": "Mettre à jour le mot de passe de votre compte",
+    "currentPassword": "Mot de passe actuel",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmer le nouveau mot de passe",
+    "updatePassword": "Mettre à jour le mot de passe",
+    "updating": "Mise à jour...",
+    "passwordUpdated": "Mot de passe mis à jour avec succès",
+    "passwordMismatch": "Les mots de passe ne correspondent pas"
+  }
 }

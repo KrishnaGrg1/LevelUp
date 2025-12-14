@@ -173,5 +173,161 @@
       "deleteError": "Failed to delete quests",
       "tryAgain": "Please try again"
     }
+  },
+  "communityManagement": {
+    "title": "Community Management",
+    "description": "Manage and monitor all communities in the platform",
+    "stats": {
+      "totalCommunities": "Total Communities",
+      "activeCommunities": "Active communities",
+      "totalMembers": "Total Members",
+      "acrossAllCommunities": "Across all communities",
+      "avgMembersPerCommunity": "Avg Members/Community",
+      "communityHealth": "Community health"
+    },
+    "table": {
+      "community": "Community",
+      "type": "Type",
+      "members": "Members",
+      "owner": "Owner",
+      "created": "Created",
+      "actions": "Actions",
+      "noData": "No communities found",
+      "loading": "Loading communities..."
+    },
+    "buttons": {
+      "manageCategories": "Manage Categories",
+      "manage": "Manage"
+    },
+    "privacy": {
+      "publicCommunities": "Public Communities",
+      "privateCommunities": "Private Communities",
+      "public": "Public",
+      "private": "Private",
+      "ofTotal": "of total"
+    },
+    "sorting": {
+      "nameAZ": "Name (A-Z)",
+      "nameZA": "Name (Z-A)",
+      "newestFirst": "Newest First",
+      "oldestFirst": "Oldest First"
+    },
+    "filters": {
+      "allCommunities": "All Communities",
+      "publicOnly": "Public Only",
+      "privateOnly": "Private Only"
+    },
+    "tableHeaders": {
+      "name": "Name",
+      "category": "Category",
+      "noCategory": "No Category",
+      "privacy": "Privacy",
+      "members": "Members",
+      "created": "Created",
+      "actions": "Actions"
+    },
+    "messages": {
+      "communities": "Communities",
+      "total": "total",
+      "filteredResults": "Filtered results",
+      "loadingCommunities": "Loading communities...",
+      "failedToLoad": "Failed to load communities",
+      "tryAgainLater": "Please try again later",
+      "noCommunitiesFound": "No communities found",
+      "tryAdjustingSearch": "Try adjusting your search",
+      "createFirstCommunity": "Create your first community"
+    }
+  },
+  "dashboard": {
+    "title": "Admin Dashboard",
+    "subtitle": "System overview and administrative controls",
+    "stats": {
+      "totalUsers": "Total Users",
+      "totalRegistered": "Total registered users",
+      "verifiedUsers": "Verified Users",
+      "verifiedAccounts": "Users with verified accounts",
+      "adminUsers": "Admin Users",
+      "systemAdministrators": "System administrators",
+      "verificationRate": "Verification Rate",
+      "usersVerified": "users verified",
+      "of": "of"
+    },
+    "userGrowth": {
+      "title": "User Growth",
+      "subtitle": "New users over time"
+    },
+    "quickActions": {
+      "userManagement": {
+        "title": "User Management",
+        "description": "Comprehensive user administration",
+        "button": "View All Users",
+        "details": "Manage all users in one place. Control access, assign roles, and monitor activity across your platform."
+      },
+      "systemSettings": {
+        "title": "System Settings",
+        "description": "Configure system-wide settings",
+        "button": "Coming Soon",
+        "details": "Manage application settings, email templates, and system configuration."
+      }
+    },
+    "errors": {
+      "failedToLoad": "Failed to load dashboard data"
+    }
+  },
+  "actionsModal": {
+    "title": "Community Actions",
+    "subtitle": "Manage community settings and members",
+    "sections": {
+      "privacy": {
+        "title": "Privacy Settings",
+        "description": "Control community visibility",
+        "currentStatus": "Current Status",
+        "changePrivacy": "Change Privacy",
+        "updating": "Updating..."
+      },
+      "category": {
+        "title": "Category",
+        "description": "Update community category",
+        "currentCategory": "Current Category",
+        "changeCategory": "Change Category",
+        "selectCategory": "Select a category",
+        "updating": "Updating..."
+      },
+      "members": {
+        "title": "Members",
+        "loading": "Loading members...",
+        "noMembers": "No members found",
+        "remove": "Remove"
+      },
+      "danger": {
+        "title": "Danger Zone",
+        "deleteCommunity": "Delete Community",
+        "deleteDescription": "Permanently delete this community. This action cannot be undone.",
+        "deleteButton": "Delete Community",
+        "deleting": "Deleting..."
+      }
+    },
+    "deleteDialog": {
+      "title": "Delete Community",
+      "description": "Are you sure you want to delete this community? This action cannot be undone and will remove all members and content.",
+      "cancel": "Cancel",
+      "confirm": "Delete Community"
+    },
+    "removeDialog": {
+      "title": "Remove Member",
+      "description": "Are you sure you want to remove this member from the community?",
+      "cancel": "Cancel",
+      "confirm": "Remove Member"
+    },
+    "toast": {
+      "privacyUpdated": "Privacy updated successfully",
+      "privacyFailed": "Failed to update privacy",
+      "categoryUpdated": "Category updated successfully",
+      "categoryFailed": "Failed to update category",
+      "memberRemoved": "Member removed successfully",
+      "memberRemoveFailed": "Failed to remove member",
+      "communityDeleted": "Community deleted successfully",
+      "communityDeleteFailed": "Failed to delete community"
+    }
   }
 }

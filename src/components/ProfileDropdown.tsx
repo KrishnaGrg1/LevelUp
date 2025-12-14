@@ -51,7 +51,7 @@ export function ProfileDropdownMenu({ isadmin }: { isadmin?: boolean }) {
         >
           {user?.UserName
             ? user.UserName.charAt(0).toUpperCase() + user.UserName.slice(1)
-            : 'Profile'}
+            : t('profile:dropdown.profile', language)}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
@@ -59,7 +59,7 @@ export function ProfileDropdownMenu({ isadmin }: { isadmin?: boolean }) {
         align="start"
       >
         <DropdownMenuLabel className="text-zinc-900 dark:text-zinc-50 flex items-center justify-between">
-          <span>My Account</span>
+          <span>{t('profile:dropdown.myAccount', language)}</span>
           {typeof user?.tokens === 'number' && <TokenDisplay tokens={user?.tokens} />}
         </DropdownMenuLabel>
         <DropdownMenuGroup>
@@ -73,7 +73,7 @@ export function ProfileDropdownMenu({ isadmin }: { isadmin?: boolean }) {
               router.push(`/${language}/user/profile`);
             }}
           >
-            Profile
+            {t('profile:dropdown.profile', language)}
           </DropdownMenuItem>
           <DropdownMenuItem
             className="cursor-pointer text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
@@ -85,10 +85,10 @@ export function ProfileDropdownMenu({ isadmin }: { isadmin?: boolean }) {
               router.push(`/${language}/user/change-password`);
             }}
           >
-            Change Password
+            {t('profile:dropdown.changePassword', language)}
           </DropdownMenuItem>
           <DropdownMenuItem className="cursor-pointer text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800">
-            Settings
+            {t('profile:dropdown.settings', language)}
           </DropdownMenuItem>
         </DropdownMenuGroup>
 
@@ -100,10 +100,10 @@ export function ProfileDropdownMenu({ isadmin }: { isadmin?: boolean }) {
           {isPending ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Logging out...
+              {t('profile:dropdown.loggingOut', language)}
             </>
           ) : (
-            'Log out'
+            t('profile:dropdown.logout', language)
           )}
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -173,5 +173,161 @@
       "deleteError": "Error al eliminar misiones",
       "tryAgain": "Por favor intente nuevamente"
     }
+  },
+  "communityManagement": {
+    "title": "Gestión de Comunidades",
+    "description": "Administrar y monitorear todas las comunidades en la plataforma",
+    "stats": {
+      "totalCommunities": "Total de Comunidades",
+      "activeCommunities": "Comunidades activas",
+      "totalMembers": "Total de Miembros",
+      "acrossAllCommunities": "En todas las comunidades",
+      "avgMembersPerCommunity": "Promedio Miembros/Comunidad",
+      "communityHealth": "Salud de la comunidad"
+    },
+    "table": {
+      "community": "Comunidad",
+      "type": "Tipo",
+      "members": "Miembros",
+      "owner": "Propietario",
+      "created": "Creado",
+      "actions": "Acciones",
+      "noData": "No se encontraron comunidades",
+      "loading": "Cargando comunidades..."
+    },
+    "buttons": {
+      "manageCategories": "Gestionar Categorías",
+      "manage": "Gestionar"
+    },
+    "privacy": {
+      "publicCommunities": "Comunidades Públicas",
+      "privateCommunities": "Comunidades Privadas",
+      "public": "Público",
+      "private": "Privado",
+      "ofTotal": "del total"
+    },
+    "sorting": {
+      "nameAZ": "Nombre (A-Z)",
+      "nameZA": "Nombre (Z-A)",
+      "newestFirst": "Más Reciente Primero",
+      "oldestFirst": "Más Antiguo Primero"
+    },
+    "filters": {
+      "allCommunities": "Todas las Comunidades",
+      "publicOnly": "Solo Público",
+      "privateOnly": "Solo Privado"
+    },
+    "tableHeaders": {
+      "name": "Nombre",
+      "category": "Categoría",
+      "noCategory": "Sin Categoría",
+      "privacy": "Privacidad",
+      "members": "Miembros",
+      "created": "Creado",
+      "actions": "Acciones"
+    },
+    "messages": {
+      "communities": "Comunidades",
+      "total": "total",
+      "filteredResults": "Resultados filtrados",
+      "loadingCommunities": "Cargando comunidades...",
+      "failedToLoad": "Error al cargar comunidades",
+      "tryAgainLater": "Por favor, inténtelo de nuevo más tarde",
+      "noCommunitiesFound": "No se encontraron comunidades",
+      "tryAdjustingSearch": "Intenta ajustar tu búsqueda",
+      "createFirstCommunity": "Crea tu primera comunidad"
+    }
+  },
+  "dashboard": {
+    "title": "Panel de Administración",
+    "subtitle": "Resumen del sistema y controles administrativos",
+    "stats": {
+      "totalUsers": "Total de Usuarios",
+      "totalRegistered": "Total de usuarios registrados",
+      "verifiedUsers": "Usuarios Verificados",
+      "verifiedAccounts": "Usuarios con cuentas verificadas",
+      "adminUsers": "Usuarios Administradores",
+      "systemAdministrators": "Administradores del sistema",
+      "verificationRate": "Tasa de Verificación",
+      "usersVerified": "usuarios verificados",
+      "of": "de"
+    },
+    "userGrowth": {
+      "title": "Crecimiento de Usuarios",
+      "subtitle": "Nuevos usuarios a lo largo del tiempo"
+    },
+    "quickActions": {
+      "userManagement": {
+        "title": "Gestión de Usuarios",
+        "description": "Administración completa de usuarios",
+        "button": "Ver Todos los Usuarios",
+        "details": "Gestiona todos los usuarios en un solo lugar. Controla el acceso, asigna roles y monitorea la actividad en tu plataforma."
+      },
+      "systemSettings": {
+        "title": "Configuración del Sistema",
+        "description": "Configurar ajustes a nivel del sistema",
+        "button": "Próximamente",
+        "details": "Gestiona la configuración de la aplicación, plantillas de correo electrónico y configuración del sistema."
+      }
+    },
+    "errors": {
+      "failedToLoad": "Error al cargar datos del panel"
+    }
+  },
+  "actionsModal": {
+    "title": "Acciones de la Comunidad",
+    "subtitle": "Gestionar configuración y miembros de la comunidad",
+    "sections": {
+      "privacy": {
+        "title": "Configuración de Privacidad",
+        "description": "Controlar la visibilidad de la comunidad",
+        "currentStatus": "Estado Actual",
+        "changePrivacy": "Cambiar Privacidad",
+        "updating": "Actualizando..."
+      },
+      "category": {
+        "title": "Categoría",
+        "description": "Actualizar categoría de la comunidad",
+        "currentCategory": "Categoría Actual",
+        "changeCategory": "Cambiar Categoría",
+        "selectCategory": "Seleccionar una categoría",
+        "updating": "Actualizando..."
+      },
+      "members": {
+        "title": "Miembros",
+        "loading": "Cargando miembros...",
+        "noMembers": "No se encontraron miembros",
+        "remove": "Eliminar"
+      },
+      "danger": {
+        "title": "Zona de Peligro",
+        "deleteCommunity": "Eliminar Comunidad",
+        "deleteDescription": "Eliminar permanentemente esta comunidad. Esta acción no se puede deshacer.",
+        "deleteButton": "Eliminar Comunidad",
+        "deleting": "Eliminando..."
+      }
+    },
+    "deleteDialog": {
+      "title": "Eliminar Comunidad",
+      "description": "¿Estás seguro de que quieres eliminar esta comunidad? Esta acción no se puede deshacer y eliminará todos los miembros y el contenido.",
+      "cancel": "Cancelar",
+      "confirm": "Eliminar Comunidad"
+    },
+    "removeDialog": {
+      "title": "Eliminar Miembro",
+      "description": "¿Estás seguro de que quieres eliminar este miembro de la comunidad?",
+      "cancel": "Cancelar",
+      "confirm": "Eliminar Miembro"
+    },
+    "toast": {
+      "privacyUpdated": "Privacidad actualizada exitosamente",
+      "privacyFailed": "Error al actualizar privacidad",
+      "categoryUpdated": "Categoría actualizada exitosamente",
+      "categoryFailed": "Error al actualizar categoría",
+      "memberRemoved": "Miembro eliminado exitosamente",
+      "memberRemoveFailed": "Error al eliminar miembro",
+      "communityDeleted": "Comunidad eliminada exitosamente",
+      "communityDeleteFailed": "Error al eliminar comunidad"
+    }
   }
 }

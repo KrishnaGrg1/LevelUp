@@ -173,5 +173,161 @@
       "deleteError": "क्वेस्टहरू डिलीट गर्न असफल",
       "tryAgain": "कृपया फेरि प्रयास गर्नुहोस्"
     }
+  },
+  "communityManagement": {
+    "title": "समुदाय व्यवस्थापन",
+    "description": "प्लेटफर्ममा सबै समुदायहरू व्यवस्थापन र अनुगमन गर्नुहोस्",
+    "stats": {
+      "totalCommunities": "कुल समुदायहरू",
+      "activeCommunities": "सक्रिय समुदायहरू",
+      "totalMembers": "कुल सदस्यहरू",
+      "acrossAllCommunities": "सबै समुदायहरूमा",
+      "avgMembersPerCommunity": "औसत सदस्य/समुदाय",
+      "communityHealth": "समुदाय स्वास्थ्य"
+    },
+    "table": {
+      "community": "समुदाय",
+      "type": "प्रकार",
+      "members": "सदस्यहरू",
+      "owner": "मालिक",
+      "created": "सिर्जना गरिएको",
+      "actions": "कार्यहरू",
+      "noData": "कुनै समुदाय फेला परेन",
+      "loading": "समुदायहरू लोड गर्दै..."
+    },
+    "buttons": {
+      "manageCategories": "वर्गहरू व्यवस्थापन गर्नुहोस्",
+      "manage": "व्यवस्थापन गर्नुहोस्"
+    },
+    "privacy": {
+      "publicCommunities": "सार्वजनिक समुदायहरू",
+      "privateCommunities": "निजी समुदायहरू",
+      "public": "सार्वजनिक",
+      "private": "निजी",
+      "ofTotal": "कुलमा"
+    },
+    "sorting": {
+      "nameAZ": "नाम (A-Z)",
+      "nameZA": "नाम (Z-A)",
+      "newestFirst": "नयाँ पहिले",
+      "oldestFirst": "पुरानो पहिले"
+    },
+    "filters": {
+      "allCommunities": "सबै समुदायहरू",
+      "publicOnly": "सार्वजनिक मात्र",
+      "privateOnly": "निजी मात्र"
+    },
+    "tableHeaders": {
+      "name": "नाम",
+      "category": "वर्ग",
+      "noCategory": "कुनै वर्ग छैन",
+      "privacy": "गोपनीयता",
+      "members": "सदस्यहरू",
+      "created": "सिर्जना गरिएको",
+      "actions": "कार्यहरू"
+    },
+    "messages": {
+      "communities": "समुदायहरू",
+      "total": "कुल",
+      "filteredResults": "फिल्टर गरिएको परिणामहरू",
+      "loadingCommunities": "समुदायहरू लोड गर्दै...",
+      "failedToLoad": "समुदायहरू लोड गर्न असफल",
+      "tryAgainLater": "कृपया पछि पुनः प्रयास गर्नुहोस्",
+      "noCommunitiesFound": "कुनै समुदाय फेला परेन",
+      "tryAdjustingSearch": "आफ्नो खोज समायोजन गर्नुहोस्",
+      "createFirstCommunity": "आफ्नो पहिलो समुदाय सिर्जना गर्नुहोस्"
+    }
+  },
+  "dashboard": {
+    "title": "एडमिन ड्यासबोर्ड",
+    "subtitle": "प्रणाली अवलोकन र प्रशासनिक नियन्त्रणहरू",
+    "stats": {
+      "totalUsers": "कुल प्रयोगकर्ताहरू",
+      "totalRegistered": "कुल दर्ता गरिएका प्रयोगकर्ताहरू",
+      "verifiedUsers": "प्रमाणित प्रयोगकर्ताहरू",
+      "verifiedAccounts": "प्रमाणित खाताहरू भएका प्रयोगकर्ताहरू",
+      "adminUsers": "एडमिन प्रयोगकर्ताहरू",
+      "systemAdministrators": "प्रणाली प्रशासकहरू",
+      "verificationRate": "प्रमाणीकरण दर",
+      "usersVerified": "प्रयोगकर्ताहरू प्रमाणित",
+      "of": "को"
+    },
+    "userGrowth": {
+      "title": "प्रयोगकर्ता वृद्धि",
+      "subtitle": "समयसँगै नयाँ प्रयोगकर्ताहरू"
+    },
+    "quickActions": {
+      "userManagement": {
+        "title": "प्रयोगकर्ता व्यवस्थापन",
+        "description": "व्यापक प्रयोगकर्ता प्रशासन",
+        "button": "सबै प्रयोगकर्ताहरू हेर्नुहोस्",
+        "details": "एकै ठाउँमा सबै प्रयोगकर्ताहरू व्यवस्थापन गर्नुहोस्। पहुँच नियन्त्रण गर्नुहोस्, भूमिकाहरू तोक्नुहोस्, र आफ्नो प्लेटफर्ममा गतिविधि अनुगमन गर्नुहोस्।"
+      },
+      "systemSettings": {
+        "title": "प्रणाली सेटिङहरू",
+        "description": "प्रणाली-व्यापी सेटिङहरू कन्फिगर गर्नुहोस्",
+        "button": "चाँडै आउँदैछ",
+        "details": "एप्लिकेसन सेटिङहरू, इमेल टेम्प्लेटहरू, र प्रणाली कन्फिगरेसन व्यवस्थापन गर्नुहोस्।"
+      }
+    },
+    "errors": {
+      "failedToLoad": "ड्यासबोर्ड डाटा लोड गर्न असफल"
+    }
+  },
+  "actionsModal": {
+    "title": "समुदाय कार्यहरू",
+    "subtitle": "समुदाय सेटिङहरू र सदस्यहरू व्यवस्थापन गर्नुहोस्",
+    "sections": {
+      "privacy": {
+        "title": "गोपनीयता सेटिङहरू",
+        "description": "समुदाय दृश्यता नियन्त्रण गर्नुहोस्",
+        "currentStatus": "हालको स्थिति",
+        "changePrivacy": "गोपनीयता परिवर्तन गर्नुहोस्",
+        "updating": "अपडेट गर्दै..."
+      },
+      "category": {
+        "title": "वर्ग",
+        "description": "समुदाय वर्ग अपडेट गर्नुहोस्",
+        "currentCategory": "हालको वर्ग",
+        "changeCategory": "वर्ग परिवर्तन गर्नुहोस्",
+        "selectCategory": "वर्ग चयन गर्नुहोस्",
+        "updating": "अपडेट गर्दै..."
+      },
+      "members": {
+        "title": "सदस्यहरू",
+        "loading": "सदस्यहरू लोड गर्दै...",
+        "noMembers": "कुनै सदस्य फेला परेन",
+        "remove": "हटाउनुहोस्"
+      },
+      "danger": {
+        "title": "खतरा क्षेत्र",
+        "deleteCommunity": "समुदाय डिलीट गर्नुहोस्",
+        "deleteDescription": "यो समुदाय स्थायी रूपमा डिलीट गर्नुहोस्। यो कार्य पूर्ववत गर्न सकिँदैन।",
+        "deleteButton": "समुदाय डिलीट गर्नुहोस्",
+        "deleting": "डिलीट गर्दै..."
+      }
+    },
+    "deleteDialog": {
+      "title": "समुदाय डिलीट गर्नुहोस्",
+      "description": "के तपाईं यो समुदाय डिलीट गर्न निश्चित हुनुहुन्छ? यो कार्य पूर्ववत गर्न सकिँदैन र सबै सदस्यहरू र सामग्री हटाइनेछ।",
+      "cancel": "रद्द गर्नुहोस्",
+      "confirm": "समुदाय डिलीट गर्नुहोस्"
+    },
+    "removeDialog": {
+      "title": "सदस्य हटाउनुहोस्",
+      "description": "के तपाईं यो सदस्यलाई समुदायबाट हटाउन निश्चित हुनुहुन्छ?",
+      "cancel": "रद्द गर्नुहोस्",
+      "confirm": "सदस्य हटाउनुहोस्"
+    },
+    "toast": {
+      "privacyUpdated": "गोपनीयता सफलतापूर्वक अपडेट गरियो",
+      "privacyFailed": "गोपनीयता अपडेट गर्न असफल",
+      "categoryUpdated": "वर्ग सफलतापूर्वक अपडेट गरियो",
+      "categoryFailed": "वर्ग अपडेट गर्न असफल",
+      "memberRemoved": "सदस्य सफलतापूर्वक हटाइयो",
+      "memberRemoveFailed": "सदस्य हटाउन असफल",
+      "communityDeleted": "समुदाय सफलतापूर्वक डिलीट गरियो",
+      "communityDeleteFailed": "समुदाय डिलीट गर्न असफल"
+    }
   }
 }

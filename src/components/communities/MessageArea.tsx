@@ -3,12 +3,34 @@
 import React, { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Send, Paperclip, MoreVertical, Users, Shield as ShieldIcon, Loader2 } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import {
+  Send,
+  Paperclip,
+  MoreVertical,
+  Users,
+  Shield as ShieldIcon,
+  Loader2,
+  Settings,
+  UserPlus,
+  Bell,
+  BellOff,
+  LogOut,
+  Info,
+} from 'lucide-react';
 
 import { MessengerChatContainer } from './MessengerChatContainer';
 import { ClanAccessDenied } from './ClanAccessDenied';
 import { toast } from 'sonner';
 import authStore from '@/stores/useAuth';
+import LanguageStore from '@/stores/useLanguage';
+import { t } from '@/translations';
 import { useMessages } from '@/hooks/useMessages';
 
 interface MessageAreaProps {
@@ -31,6 +53,7 @@ export default function MessageArea({
   isPrivate = false,
 }: MessageAreaProps) {
   const { user } = authStore();
+  const { language } = LanguageStore();
   const [messageInput, setMessageInput] = useState('');
 
   const {
@@ -53,12 +76,12 @@ export default function MessageArea({
     e?.preventDefault();
 
     if (!messageInput.trim()) {
-      toast.error('Please enter a message');
+      toast.error(t('community:messageArea.enterMessage', language));
       return;
     }
 
     if (!user) {
-      toast.error('You must be logged in to send messages');
+      toast.error(t('community:messageArea.mustBeLoggedIn', language));
       return;
     }
 
@@ -98,18 +121,56 @@ export default function MessageArea({
             <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">{viewName}</h2>
             <div className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400">
               <Users className="h-4 w-4" />
-              <span>{memberCount} members</span>
+              <span>
+                {memberCount} {t('community:messageArea.members', language)}
+              </span>
             </div>
           </div>
         </div>
 
-        <Button
-          variant="ghost"
-          size="sm"
-          className="h-9 w-9 p-0 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
-        >
-          <MoreVertical className="h-5 w-5" />
-        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-9 w-9 p-0 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
+            >
+              <MoreVertical className="h-5 w-5" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-56">
+            <DropdownMenuItem className="cursor-pointer">
+              <Info className="h-4 w-4 mr-2" />
+              {viewType === 'community'
+                ? t('community:messageArea.communityInfo', language)
+                : t('community:messageArea.clanInfo', language)}
+            </DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer">
+              <Settings className="h-4 w-4 mr-2" />
+              {t('community:messageArea.settings', language)}
+            </DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer">
+              <UserPlus className="h-4 w-4 mr-2" />
+              {t('community:messageArea.inviteMembers', language)}
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="cursor-pointer">
+              <Bell className="h-4 w-4 mr-2" />
+              {t('community:messageArea.notifications', language)}
+            </DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer">
+              <BellOff className="h-4 w-4 mr-2" />
+              {t('community:messageArea.mute', language)}
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="cursor-pointer text-red-600 dark:text-red-400">
+              <LogOut className="h-4 w-4 mr-2" />
+              {viewType === 'community'
+                ? t('community:messageArea.leaveCommunity', language)
+                : t('community:messageArea.leaveClan', language)}
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
       {/* Messages - Messenger-style chat container */}
@@ -118,6 +179,7 @@ export default function MessageArea({
         hasMore={hasMore}
         loadMore={loadMore}
         isLoading={isLoading}
+        currentUserId={user?.id}
       />
 
       {/* Input */}
@@ -130,7 +192,7 @@ export default function MessageArea({
           <div className="flex-1">
             <Input
               type="text"
-              placeholder="Type a message..."
+              placeholder={t('community:messageArea.typeMessage', language)}
               value={messageInput}
               onChange={e => setMessageInput(e.target.value)}
               onKeyDown={handleKeyPress}
@@ -142,7 +204,7 @@ export default function MessageArea({
           <Button
             type="submit"
             size="sm"
-            className="h-11 w-11 rounded-full bg-blue-600 hover:bg-blue-700"
+            className="h-11 w-11 rounded-full bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200"
             disabled={!messageInput.trim() || isSending || !isMember}
           >
             {isSending ? (

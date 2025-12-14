@@ -1,7 +1,7 @@
 {
   "userFallback": "User",
   "unnamedUser": "Unnamed User",
-  "welcomeBack": "Welcome back! Here’s your profile info.",
+  "welcomeBack": "Welcome back! Here's your profile info.",
   "email": "Email",
   "notAvailable": "Not available",
   "language": "Language",
@@ -10,5 +10,40 @@
   "username": "UserName",
   "unknown": "Unknown",
   "memberSince": "Member Since",
-  "na": "N/A"
+  "na": "N/A",
+  "dropdown": {
+    "myAccount": "My Account",
+    "profile": "Profile",
+    "changePassword": "Change Password",
+    "settings": "Settings",
+    "logout": "Log out",
+    "loggingOut": "Logging out..."
+  },
+  "admin": {
+    "badge": "Admin",
+    "editProfile": "Edit Profile",
+    "totalXP": "Total XP",
+    "currentLevel": "Current Level",
+    "role": "Role",
+    "administrator": "Administrator",
+    "accountInfo": "Account Information",
+    "accountInfoDesc": "Your personal account details",
+    "preferences": "Preferences",
+    "preferencesDesc": "Your app settings and preferences",
+    "theme": "Theme",
+    "themeAuto": "Auto (System)",
+    "accessLevel": "Access Level",
+    "fullAdminAccess": "Full Admin Access"
+  },
+  "user": {
+    "changePasswordTitle": "Change Password",
+    "changePasswordDesc": "Update your account password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm New Password",
+    "updatePassword": "Update Password",
+    "updating": "Updating...",
+    "passwordUpdated": "Password updated successfully",
+    "passwordMismatch": "Passwords do not match"
+  }
 }

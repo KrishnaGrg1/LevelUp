@@ -41,6 +41,7 @@ import {
   updateCommunityCategory,
 } from '@/lib/services/admin-communities';
 import { MemberData } from '@/lib/generated';
+import { t } from '@/translations';
 
 interface CommunityActionsModalProps {
   open: boolean;
@@ -86,13 +87,13 @@ export function CommunityActionsModal({
   const removeMemberMutation = useMutation({
     mutationFn: (userId: string) => removeCommunityMember(community!.id, userId, language),
     onSuccess: () => {
-      toast.success('Member removed successfully');
+      toast.success(t('admin:actionsModal.toast.memberRemoved', language));
       setMemberToRemove(null);
       queryClient.invalidateQueries({ queryKey: ['communityMembers'] });
       queryClient.invalidateQueries({ queryKey: ['adminCommunities'] });
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Failed to remove member');
+      toast.error(error.message || t('admin:actionsModal.toast.memberRemoveFailed', language));
     },
   });
 
@@ -100,12 +101,12 @@ export function CommunityActionsModal({
   const deleteCommunityMutation = useMutation({
     mutationFn: () => deleteCommunity(community!.id, language),
     onSuccess: () => {
-      toast.success('Community deleted successfully');
+      toast.success(t('admin:actionsModal.toast.communityDeleted', language));
       queryClient.invalidateQueries({ queryKey: ['adminCommunities'] });
       onOpenChange(false);
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Failed to delete community');
+      toast.error(error.message || t('admin:actionsModal.toast.communityDeleteFailed', language));
     },
   });
 
@@ -113,11 +114,11 @@ export function CommunityActionsModal({
   const updatePrivacyMutation = useMutation({
     mutationFn: (isPrivate: boolean) => updateCommunityPrivacy(community!.id, isPrivate, language),
     onSuccess: () => {
-      toast.success('Privacy updated successfully');
+      toast.success(t('admin:actionsModal.toast.privacyUpdated', language));
       queryClient.invalidateQueries({ queryKey: ['adminCommunities'] });
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Failed to update privacy');
+      toast.error(error.message || t('admin:actionsModal.toast.privacyFailed', language));
     },
   });
 
@@ -125,13 +126,13 @@ export function CommunityActionsModal({
   const updateCategoryMutation = useMutation({
     mutationFn: (category: string) => updateCommunityCategory(community!.id, category, language),
     onSuccess: () => {
-      toast.success('Category updated successfully');
+      toast.success(t('admin:actionsModal.toast.categoryUpdated', language));
       setSelectedCategory('');
       queryClient.invalidateQueries({ queryKey: ['adminCommunities'] });
       queryClient.invalidateQueries({ queryKey: ['categoryStats'] });
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Failed to update category');
+      toast.error(error.message || t('admin:actionsModal.toast.categoryFailed', language));
     },
   });
 
@@ -169,7 +170,7 @@ export function CommunityActionsModal({
         <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold">{community.name}</DialogTitle>
-            <DialogDescription>Manage community settings, members, and actions</DialogDescription>
+            <DialogDescription>{t('admin:actionsModal.subtitle', language)}</DialogDescription>
           </DialogHeader>
 
           <div className="space-y-6">
@@ -188,9 +189,14 @@ export function CommunityActionsModal({
                       <Unlock className="h-5 w-5 text-green-500" />
                     )}
                     <div>
-                      <p className="font-medium">Privacy</p>
+                      <p className="font-medium">
+                        {t('admin:actionsModal.sections.privacy.title', language)}
+                      </p>
                       <p className="text-sm text-gray-500">
-                        Currently {community.isPrivate ? 'Private' : 'Public'}
+                        {t('admin:actionsModal.sections.privacy.currentStatus', language)}:{' '}
+                        {community.isPrivate
+                          ? t('admin:communityManagement.privacy.private', language)
+                          : t('admin:communityManagement.privacy.public', language)}
                       </p>
                     </div>
                   </div>
@@ -201,9 +207,9 @@ export function CommunityActionsModal({
                     className="cursor-pointer"
                   >
                     {updatePrivacyMutation.isPending ? (
-                      <Loader2 className="h-4 w-4 animate-spin" />
+                      <>{t('admin:actionsModal.sections.privacy.updating', language)}</>
                     ) : (
-                      `Make ${community.isPrivate ? 'Public' : 'Private'}`
+                      t('admin:actionsModal.sections.privacy.changePrivacy', language)
                     )}
                   </Button>
                 </div>
@@ -213,16 +219,24 @@ export function CommunityActionsModal({
                   <div className="flex items-center gap-3">
                     <Tag className="h-5 w-5 text-blue-500" />
                     <div className="flex-1">
-                      <p className="font-medium">Category</p>
+                      <p className="font-medium">
+                        {t('admin:actionsModal.sections.category.title', language)}
+                      </p>
                       <p className="text-sm text-gray-500">
-                        Current: <span className="capitalize">{community.category}</span>
+                        {t('admin:actionsModal.sections.category.currentCategory', language)}:{' '}
+                        <span className="capitalize">{community.category}</span>
                       </p>
                     </div>
                   </div>
                   <div className="flex gap-2">
                     <Select value={selectedCategory} onValueChange={setSelectedCategory}>
                       <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Select category" />
+                        <SelectValue
+                          placeholder={t(
+                            'admin:actionsModal.sections.category.selectCategory',
+                            language,
+                          )}
+                        />
                       </SelectTrigger>
                       <SelectContent>
                         {categories.map((cat: string) => (
@@ -242,9 +256,9 @@ export function CommunityActionsModal({
                       className="cursor-pointer"
                     >
                       {updateCategoryMutation.isPending ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
+                        <>{t('admin:actionsModal.sections.category.updating', language)}</>
                       ) : (
-                        'Update'
+                        t('admin:actionsModal.sections.category.changeCategory', language)
                       )}
                     </Button>
                   </div>
@@ -255,9 +269,11 @@ export function CommunityActionsModal({
                   <div className="flex items-center gap-3">
                     <Trash2 className="h-5 w-5 text-red-500" />
                     <div>
-                      <p className="font-medium text-red-700 dark:text-red-400">Delete Community</p>
+                      <p className="font-medium text-red-700 dark:text-red-400">
+                        {t('admin:actionsModal.sections.danger.deleteCommunity', language)}
+                      </p>
                       <p className="text-sm text-red-600 dark:text-red-500">
-                        This action cannot be undone
+                        {t('admin:actionsModal.sections.danger.deleteDescription', language)}
                       </p>
                     </div>
                   </div>
@@ -266,7 +282,7 @@ export function CommunityActionsModal({
                     variant="destructive"
                     className="cursor-pointer"
                   >
-                    Delete
+                    {t('admin:actionsModal.sections.danger.deleteButton', language)}
                   </Button>
                 </div>
               </CardContent>
@@ -277,16 +293,21 @@ export function CommunityActionsModal({
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Users className="h-5 w-5" />
-                  Members ({members.length})
+                  {t('admin:actionsModal.sections.members.title', language)} ({members.length})
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 {loadingMembers ? (
                   <div className="flex justify-center py-8">
                     <Loader2 className="h-8 w-8 animate-spin text-gray-400" />
+                    <span className="sr-only">
+                      {t('admin:actionsModal.sections.members.loading', language)}
+                    </span>
                   </div>
                 ) : members.length === 0 ? (
-                  <p className="text-center text-gray-500 py-8">No members found</p>
+                  <p className="text-center text-gray-500 py-8">
+                    {t('admin:actionsModal.sections.members.noMembers', language)}
+                  </p>
                 ) : (
                   <div className="space-y-2 max-h-64 overflow-y-auto">
                     {members.map((member: MemberData) => (
@@ -309,6 +330,7 @@ export function CommunityActionsModal({
                           variant="ghost"
                           onClick={() => member.id && handleRemoveMember(member.id)}
                           className="cursor-pointer text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950"
+                          title={t('admin:actionsModal.sections.members.remove', language)}
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>
@@ -326,15 +348,16 @@ export function CommunityActionsModal({
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete Community</AlertDialogTitle>
+            <AlertDialogTitle>
+              {t('admin:actionsModal.deleteDialog.title', language)}
+            </AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete <strong>{community.name}</strong>? This will remove
-              all members and all data associated with this community. This action cannot be undone.
+              {t('admin:actionsModal.deleteDialog.description', language)}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel disabled={deleteCommunityMutation.isPending}>
-              Cancel
+              {t('admin:actionsModal.deleteDialog.cancel', language)}
             </AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDeleteCommunity}
@@ -344,10 +367,10 @@ export function CommunityActionsModal({
               {deleteCommunityMutation.isPending ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                  Deleting...
+                  {t('admin:actionsModal.sections.danger.deleting', language)}
                 </>
               ) : (
-                'Delete'
+                t('admin:actionsModal.deleteDialog.confirm', language)
               )}
             </AlertDialogAction>
           </AlertDialogFooter>
@@ -361,14 +384,17 @@ export function CommunityActionsModal({
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Remove Member</AlertDialogTitle>
+            <AlertDialogTitle>
+              {t('admin:actionsModal.removeDialog.title', language)}
+            </AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to remove this member from the community? They will lose access
-              immediately.
+              {t('admin:actionsModal.removeDialog.description', language)}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel disabled={removeMemberMutation.isPending}>Cancel</AlertDialogCancel>
+            <AlertDialogCancel disabled={removeMemberMutation.isPending}>
+              {t('admin:actionsModal.removeDialog.cancel', language)}
+            </AlertDialogCancel>
             <AlertDialogAction
               onClick={confirmRemoveMember}
               disabled={removeMemberMutation.isPending}
@@ -377,10 +403,10 @@ export function CommunityActionsModal({
               {removeMemberMutation.isPending ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                  Removing...
+                  {t('admin:actionsModal.sections.danger.deleting', language)}
                 </>
               ) : (
-                'Remove'
+                t('admin:actionsModal.removeDialog.confirm', language)
               )}
             </AlertDialogAction>
           </AlertDialogFooter>
