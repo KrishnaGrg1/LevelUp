@@ -11,6 +11,7 @@ import clans from './clans.json';
 import aiChat from './aiChat.json';
 import quests from './quests.json';
 import community from './community.json';
+import admin from './admin.json';
 
 const nep = {
   auth,
@@ -26,6 +27,7 @@ const nep = {
   aiChat,
   quests,
   community,
+  admin,
 };
 
 export default nep;

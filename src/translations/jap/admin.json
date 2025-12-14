@@ -1,0 +1,177 @@
+{
+  "aiQuestManagement": {
+    "title": "AIクエスト管理",
+    "subtitle": "AI生成クエストシステムの監視と管理",
+    "refresh": "更新",
+    "tabs": {
+      "overview": "概要",
+      "userActions": "ユーザーアクション",
+      "adminGenerate": "管理者生成",
+      "statistics": "統計",
+      "bulkDelete": "一括削除",
+      "config": "設定"
+    },
+    "overview": {
+      "systemHealth": {
+        "title": "システムヘルス",
+        "aiService": "AIサービス",
+        "database": "データベース",
+        "uptime": "稼働時間",
+        "memory": "メモリ",
+        "model": "モデル",
+        "notConfigured": "未設定",
+        "response": "応答",
+        "failed": "ヘルスデータの読み込みに失敗しました"
+      },
+      "questStats": {
+        "title": "クエスト統計",
+        "totalQuests": "総クエスト数",
+        "completed": "完了",
+        "todayActive": "今日のアクティブ",
+        "thisWeekActive": "今週のアクティブ",
+        "completionRate": "完了率"
+      }
+    },
+    "config": {
+      "title": "AI設定",
+      "loading": "設定を読み込み中...",
+      "aiSettings": {
+        "title": "AI設定",
+        "model": "モデル",
+        "maxPromptLength": "最大プロンプト長",
+        "characters": "文字",
+        "tokenCostPerChat": "チャットあたりのトークンコスト",
+        "tokens": "トークン",
+        "status": "ステータス",
+        "configured": "設定済み",
+        "notConfigured": "未設定"
+      },
+      "questSettings": {
+        "title": "クエスト設定",
+        "dailyCount": "1日のクエスト数",
+        "perDay": "1日あたり",
+        "weeklyCount": "週間クエスト数",
+        "perWeek": "1週間あたり",
+        "questsPerCommunity": "コミュニティあたりのクエスト",
+        "dailySchedule": "日次スケジュール"
+      },
+      "features": {
+        "title": "機能"
+      }
+    },
+    "adminGenerate": {
+      "title": "管理者クエスト生成",
+      "allUsers": {
+        "title": "全ユーザー向け生成",
+        "daily": {
+          "title": "デイリークエスト - 全ユーザー",
+          "description": "禁止されていない全ユーザー向けにデイリークエストを生成します。45〜60秒かかる場合があります。",
+          "button": "全員向けデイリー生成",
+          "generating": "生成中..."
+        },
+        "weekly": {
+          "title": "ウィークリークエスト - 全ユーザー",
+          "description": "禁止されていない全ユーザー向けにウィークリークエストを生成します。45〜60秒かかる場合があります。",
+          "button": "全員向けウィークリー生成",
+          "generating": "生成中..."
+        }
+      },
+      "specificUser": {
+        "title": "特定ユーザー向け生成",
+        "daily": {
+          "title": "デイリークエスト - 単一ユーザー",
+          "description": "ユーザーIDを入力してデイリークエストを生成します（3〜8秒）。",
+          "placeholder": "ユーザーID（UUID）",
+          "button": "デイリークエスト生成",
+          "generating": "生成中..."
+        },
+        "weekly": {
+          "title": "ウィークリークエスト - 単一ユーザー",
+          "description": "ユーザーIDを入力してウィークリークエストを生成します（3〜8秒）。",
+          "placeholder": "ユーザーID（UUID）",
+          "button": "ウィークリークエスト生成",
+          "generating": "生成中..."
+        }
+      }
+    },
+    "statistics": {
+      "title": "クエスト統計と分析",
+      "overview": {
+        "title": "概要",
+        "totalQuests": "総クエスト数",
+        "completed": "完了",
+        "pending": "保留中",
+        "completionRate": "完了率",
+        "todayActive": "今日のアクティブ",
+        "thisWeekActive": "今週のアクティブ",
+        "activeUsers": "アクティブユーザー"
+      },
+      "byType": {
+        "title": "タイプ別",
+        "quests": "クエスト"
+      },
+      "recentCompletions": {
+        "title": "最近の完了",
+        "by": "作成者:",
+        "community": "コミュニティ:",
+        "xp": "経験値:"
+      },
+      "loading": "統計を読み込み中...",
+      "failed": "統計の読み込みに失敗しました"
+    },
+    "bulkDelete": {
+      "title": "クエストの一括削除",
+      "description": "フィルターに基づいて複数のクエストを削除します。少なくとも1つのフィルターを指定する必要があります。",
+      "filters": {
+        "userId": {
+          "label": "ユーザーID（オプション）",
+          "placeholder": "ユーザーUUID"
+        },
+        "communityId": {
+          "label": "コミュニティID（オプション）",
+          "placeholder": "コミュニティUUID"
+        },
+        "type": {
+          "label": "クエストタイプ（オプション）",
+          "allTypes": "全タイプ",
+          "daily": "デイリー",
+          "weekly": "ウィークリー"
+        },
+        "periodStatus": {
+          "label": "期間ステータス（オプション）",
+          "allPeriods": "全期間",
+          "today": "今日",
+          "yesterday": "昨日",
+          "thisWeek": "今週",
+          "lastWeek": "先週"
+        },
+        "startDate": {
+          "label": "開始日（オプション）"
+        },
+        "endDate": {
+          "label": "終了日（オプション）"
+        }
+      },
+      "button": "クエストを削除",
+      "deleting": "削除中..."
+    },
+    "toast": {
+      "dailyAllSuccess": "全ユーザー向けデイリークエストを生成しました",
+      "dailyAllDescription": "{{time}}で{{count}}個のクエストを生成しました",
+      "dailyUserSuccess": "デイリークエストを生成しました",
+      "dailyUserDescription": "{{username}}向けに{{count}}個のクエストを生成しました",
+      "weeklyAllSuccess": "全ユーザー向けウィークリークエストを生成しました",
+      "weeklyAllDescription": "{{time}}で{{count}}個のクエストを生成しました",
+      "weeklyUserSuccess": "ウィークリークエストを生成しました",
+      "weeklyUserDescription": "{{username}}向けに{{count}}個のクエストを生成しました",
+      "deleteSuccess": "クエストを削除しました",
+      "deleteDescription": "{{count}}個のクエストを削除しました",
+      "dailyAllError": "全ユーザー向けデイリークエストの生成に失敗しました",
+      "dailyUserError": "デイリークエストの生成に失敗しました",
+      "weeklyAllError": "全ユーザー向けウィークリークエストの生成に失敗しました",
+      "weeklyUserError": "ウィークリークエストの生成に失敗しました",
+      "deleteError": "クエストの削除に失敗しました",
+      "tryAgain": "もう一度お試しください"
+    }
+  }
+}
