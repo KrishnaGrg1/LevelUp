@@ -135,7 +135,7 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
         onEscapeKeyDown={e => {
           e.preventDefault();
         }}
-        className="w-full max-w-3xl min-h-[600px] bg-white dark:bg-gray-950 border-0 shadow-xl"
+        className="max-w-md w-[90vw]  sm:w-full bg-white dark:bg-gray-950 border-0 shadow-xl"
       >
         {/* Progress Bar */}
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gray-200 dark:bg-gray-800 rounded-t-lg overflow-hidden">

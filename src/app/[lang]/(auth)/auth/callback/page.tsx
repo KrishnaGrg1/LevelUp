@@ -107,7 +107,7 @@ export default function CallbackPage() {
       if (redirectAfterAuth) {
         redirectTo = redirectAfterAuth;
       } else if (authIntent === 'register') {
-        redirectTo = `/${lang}/onboarding`;
+        redirectTo = `/${lang}/user/dashboard`;
       } else if (isAdmin) {
         redirectTo = `/${lang}/admin/dashboard`;
       }
