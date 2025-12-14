@@ -13,15 +13,15 @@ export const SocialProof = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20 text-lg md:text-xl font-medium text-gray-800 dark:text-gray-200">
           <div className="flex flex-col items-center space-y-4">
             <span className="text-4xl">🌱</span>
-            <p className="max-w-xs">"{t('landing.SocialProofSection.quotes.q1')}"</p>
+            <p className="max-w-xs">&quot;{t('landing.SocialProofSection.quotes.q1')}&quot;</p>
           </div>
           <div className="flex flex-col items-center space-y-4">
             <span className="text-4xl">✨</span>
-            <p className="max-w-xs">"{t('landing.SocialProofSection.quotes.q2')}"</p>
+            <p className="max-w-xs">&quot;{t('landing.SocialProofSection.quotes.q2')}&quot;</p>
           </div>
           <div className="flex flex-col items-center space-y-4">
             <span className="text-4xl">📈</span>
-            <p className="max-w-xs">"{t('landing.SocialProofSection.quotes.q3')}"</p>
+            <p className="max-w-xs">&quot;{t('landing.SocialProofSection.quotes.q3')}&quot;</p>
           </div>
         </div>
 
