@@ -11,6 +11,7 @@ interface MessengerChatContainerProps {
   isLoading: boolean;
   isLoadingMore?: boolean;
   onScrollToBottom?: () => void;
+  currentUserId?: string;
 }
 
 /**
@@ -23,6 +24,7 @@ export const MessengerChatContainer: React.FC<MessengerChatContainerProps> = ({
   loadMore,
   isLoading,
   isLoadingMore = false,
+  currentUserId,
 }) => {
   const { containerRef, messagesEndRef, handleScroll } = useChatScroll({
     messages,
@@ -36,7 +38,7 @@ export const MessengerChatContainer: React.FC<MessengerChatContainerProps> = ({
     return (
       <div className="flex-1 flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <div className="text-center">
-          <Loader2 className="h-12 w-12 animate-spin text-blue-500 mx-auto mb-4" />
+          <Loader2 className="h-12 w-12 animate-spin text-gray-500 mx-auto mb-4" />
           <p className="text-sm text-gray-500 dark:text-gray-400">Loading messages...</p>
         </div>
       </div>
@@ -48,9 +50,9 @@ export const MessengerChatContainer: React.FC<MessengerChatContainerProps> = ({
     return (
       <div className="flex-1 flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <div className="text-center max-w-sm px-4">
-          <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg
-              className="w-8 h-8 text-blue-500"
+              className="w-8 h-8 text-gray-500"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -87,7 +89,7 @@ export const MessengerChatContainer: React.FC<MessengerChatContainerProps> = ({
       {isLoadingMore && (
         <div className="flex justify-center py-4">
           <div className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 rounded-full shadow-sm">
-            <Loader2 className="h-4 w-4 animate-spin text-blue-500" />
+            <Loader2 className="h-4 w-4 animate-spin text-gray-500" />
             <span className="text-xs text-gray-600 dark:text-gray-400">
               Loading older messages...
             </span>
@@ -109,6 +111,7 @@ export const MessengerChatContainer: React.FC<MessengerChatContainerProps> = ({
               message={message}
               isFirstInGroup={isFirstInGroup}
               isLastInGroup={isLastInGroup}
+              currentUserId={currentUserId}
             />
           );
         })}
@@ -127,19 +130,61 @@ interface MessageBubbleProps {
   message: Message;
   isFirstInGroup: boolean;
   isLastInGroup: boolean;
+  currentUserId?: string;
 }
 
 const MessageBubble: React.FC<MessageBubbleProps> = ({
   message,
   isFirstInGroup,
   isLastInGroup,
+  currentUserId,
 }) => {
+  const isCurrentUser = currentUserId === message.sender?.id;
+
+  if (isCurrentUser) {
+    // Current user's message - align right
+    return (
+      <div className={`flex gap-3 justify-end ${!isFirstInGroup ? 'mt-1' : 'mt-4'}`}>
+        {/* Message content */}
+        <div className="flex-1 min-w-0 flex flex-col items-end">
+          {/* Timestamp - show for every message */}
+          <div className="flex items-center gap-2 mb-1 px-1">
+            <span className="text-xs text-gray-500 dark:text-gray-400">
+              {formatMessageTime(message.createdAt)}
+            </span>
+          </div>
+
+          {/* Message bubble */}
+          <div
+            className={`inline-block max-w-[85%] px-4 py-2 rounded-2xl ${
+              isFirstInGroup ? 'rounded-tr-sm' : ''
+            } ${
+              isLastInGroup ? 'rounded-br-sm' : ''
+            } bg-black dark:bg-white text-white dark:text-black shadow-sm`}
+          >
+            <p className="text-sm break-words whitespace-pre-wrap">{message.content}</p>
+          </div>
+        </div>
+
+        {/* Avatar - show for every message */}
+        <div className="flex-shrink-0">
+          <Avatar className="h-10 w-10 ring-2 ring-white dark:ring-gray-800">
+            <AvatarFallback className="bg-gradient-to-br from-gray-700 to-gray-900 dark:from-gray-200 dark:to-gray-400 text-white dark:text-black font-semibold text-sm">
+              {message.sender?.UserName?.[0]?.toUpperCase() ?? 'U'}
+            </AvatarFallback>
+          </Avatar>
+        </div>
+      </div>
+    );
+  }
+
+  // Other user's message - align left
   return (
     <div className={`flex gap-3 ${!isFirstInGroup ? 'mt-1' : 'mt-4'}`}>
       {/* Avatar - show for every message */}
       <div className="flex-shrink-0">
         <Avatar className="h-10 w-10 ring-2 ring-white dark:ring-gray-800">
-          <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white font-semibold text-sm">
+          <AvatarFallback className="bg-gradient-to-br from-gray-700 to-gray-900 dark:from-gray-200 dark:to-gray-400 text-white dark:text-black font-semibold text-sm">
             {message.sender?.UserName?.[0]?.toUpperCase() ?? 'U'}
           </AvatarFallback>
         </Avatar>

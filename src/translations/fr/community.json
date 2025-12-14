@@ -4,5 +4,95 @@
     "level": "Niveau",
     "xp": "XP",
     "progress": "Progrès vers le Niveau Suivant"
+  },
+  "messageArea": {
+    "members": "membres",
+    "communityInfo": "Info Communauté",
+    "clanInfo": "Info Clan",
+    "settings": "Paramètres",
+    "inviteMembers": "Inviter des Membres",
+    "notifications": "Notifications",
+    "mute": "Muet",
+    "leaveCommunity": "Quitter la Communauté",
+    "leaveClan": "Quitter le Clan",
+    "typeMessage": "Tapez un message...",
+    "enterMessage": "Veuillez entrer un message",
+    "mustBeLoggedIn": "Vous devez être connecté pour envoyer des messages"
+  },
+  "createModal": {
+    "title": "Créer une Nouvelle Communauté",
+    "description": "Remplissez les détails pour créer votre communauté",
+    "communityName": "Nom de la Communauté",
+    "namePlaceholder": "Entrez le nom de la communauté",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Décrivez votre communauté...",
+    "category": "Catégorie",
+    "selectCategory": "Sélectionnez une catégorie",
+    "memberLimit": "Limite de Membres",
+    "memberLimitDesc": "Nombre maximum de membres (10-1000)",
+    "privateCommunity": "Communauté Privée",
+    "privateDescription": "Seuls les membres invités peuvent rejoindre",
+    "communityImage": "Image de la Communauté",
+    "uploadImage": "Télécharger une Image",
+    "dragDrop": "ou glisser-déposer",
+    "imageRequirements": "PNG, JPG, GIF jusqu'à 5 Mo",
+    "cancel": "Annuler",
+    "create": "Créer la Communauté",
+    "creating": "Création...",
+    "imageError": "Veuillez sélectionner un fichier image valide",
+    "imageSizeError": "La taille de l'image doit être inférieure à 5 Mo",
+    "nameRequired": "Le nom de la communauté est requis",
+    "nameMinLength": "Le nom doit comporter au moins 3 caractères",
+    "descriptionRequired": "La description est requise",
+    "categoryRequired": "Veuillez sélectionner une catégorie"
+  },
+  "accessDenied": {
+    "notMember": {
+      "title": "Accès Refusé",
+      "message": "Vous n'êtes pas membre de {clanName}",
+      "description": "Seuls les membres du clan peuvent accéder à ce chat."
+    },
+    "notAuthenticated": {
+      "title": "Authentification Requise",
+      "message": "Veuillez vous connecter pour accéder à ce clan",
+      "description": "Vous devez être connecté pour voir les chats de clan."
+    },
+    "membershipCheckFailed": {
+      "title": "Impossible de Vérifier l'Adhésion",
+      "message": "Impossible de vérifier votre adhésion au clan",
+      "description": "Veuillez réessayer plus tard ou contacter le support."
+    },
+    "default": {
+      "title": "Accès Restreint",
+      "message": "Vous ne pouvez pas accéder à ce chat de clan",
+      "description": "Veuillez vérifier votre statut de membre."
+    },
+    "goBack": "Retour",
+    "requestJoin": "Demander à Rejoindre"
+  },
+  "customizePin": {
+    "title": "Personnaliser l'Épingle",
+    "description": "Personnalisez votre message épinglé",
+    "messageLabel": "Message d'Épingle",
+    "messagePlaceholder": "Entrez votre message à épingler...",
+    "colorLabel": "Couleur de l'Épingle",
+    "selectColor": "Sélectionnez une couleur",
+    "cancel": "Annuler",
+    "save": "Enregistrer l'Épingle",
+    "saving": "Enregistrement..."
+  },
+  "card": {
+    "members": "Membres",
+    "join": "Rejoindre",
+    "joined": "Rejoint",
+    "private": "Privé",
+    "public": "Public",
+    "owner": "Propriétaire"
+  },
+  "toast": {
+    "createdSuccess": "Communauté créée avec succès!",
+    "createFailed": "Échec de la création de la communauté",
+    "joinedSuccess": "Vous avez rejoint la communauté avec succès!",
+    "joinFailed": "Échec de rejoindre la communauté"
   }
 }

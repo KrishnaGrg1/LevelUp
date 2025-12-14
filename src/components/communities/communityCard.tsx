@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Users, Lock, Globe, Crown, Plus, Pin } from 'lucide-react';
 import LanguageStore from '@/stores/useLanguage';
+import { t } from '@/translations';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getMyCommunities, getAllCommunities, joinCommunity } from '@/lib/services/communities';
 import CreateCommunityModal from './CreateCommunityModal';
@@ -65,12 +66,12 @@ export default function CommunitiesSection() {
   const joinMutation = useMutation({
     mutationFn: (communityId: string) => joinCommunity(language, communityId),
     onSuccess: () => {
-      toast.success('Successfully joined community!');
+      toast.success(t('community:toast.joinedSuccess', language));
       queryClient.invalidateQueries({ queryKey: ['my-communities'] });
       queryClient.invalidateQueries({ queryKey: ['all-communities'] });
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Failed to join community');
+      toast.error(error.message || t('community:toast.joinFailed', language));
     },
   });
 
@@ -98,14 +99,14 @@ export default function CommunitiesSection() {
               className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border-2 border-green-600 dark:border-green-500 bg-white dark:bg-gray-800 text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 h-10 px-4 py-2"
             >
               <Users className="h-4 w-4 mr-2" />
-              Join Community
+              {t('community:card.join', language)}
             </button>
             <button
               onClick={() => setOpenCreateModal(true)}
               className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-blue-600 text-white hover:bg-blue-700 h-10 px-4 py-2"
             >
               <span className="text-xl mr-2">+</span>
-              Create Community
+              {t('community:createModal.title', language)}
             </button>
           </div>
         </div>

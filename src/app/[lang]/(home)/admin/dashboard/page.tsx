@@ -9,6 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 import { adminOverview } from '@/lib/services/user';
 import { UserGrowthChart } from '@/components/users/chart';
 import AIQuestManagement from '@/components/admin/AIQuestManagement';
+import { t } from '@/translations';
 
 export default function AdminDashboard() {
   const { language } = LanguageStore();
@@ -29,10 +30,10 @@ export default function AdminDashboard() {
     <div className="p-4 md:p-6 lg:p-8">
       <div className="mb-6 lg:mb-8">
         <h1 className="text-2xl md:text-3xl lg:text-4xl mb-2 font-bold text-gray-900 dark:text-gray-100">
-          Admin Dashboard
+          {t('admin:dashboard.title', language)}
         </h1>
         <p className="text-sm md:text-base lg:text-lg text-gray-600 dark:text-gray-400">
-          System overview and administrative controls
+          {t('admin:dashboard.subtitle', language)}
         </p>
       </div>
 
@@ -63,7 +64,9 @@ export default function AdminDashboard() {
               <div className="flex items-center gap-3 text-red-600 dark:text-red-400">
                 <Activity className="h-5 w-5" />
                 <div>
-                  <h3 className="font-semibold">Failed to load dashboard data</h3>
+                  <h3 className="font-semibold">
+                    {t('admin:dashboard.errors.failedToLoad', language)}
+                  </h3>
                   <p className="text-sm text-red-600 dark:text-red-400">
                     {error instanceof Error ? error.message : 'An unknown error occurred'}
                   </p>
@@ -86,7 +89,7 @@ export default function AdminDashboard() {
             )}
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-2xl font-bold text-gray-700 dark:text-gray-300">
-                Total Users
+                {t('admin:dashboard.stats.totalUsers', language)}
               </CardTitle>
               <Users className="h-4 w-4 text-blue-600 dark:text-blue-500" />
             </CardHeader>
@@ -95,7 +98,7 @@ export default function AdminDashboard() {
                 {stats.totalUsers?.toLocaleString() || '0'}
               </div>
               <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                Total registered users
+                {t('admin:dashboard.stats.totalRegistered', language)}
               </p>
             </CardContent>
           </Card>
@@ -109,7 +112,7 @@ export default function AdminDashboard() {
             )}
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-2xl font-bold text-gray-700 dark:text-gray-300">
-                Verified Users
+                {t('admin:dashboard.stats.verifiedUsers', language)}
               </CardTitle>
               <UserCheck className="h-4 w-4 text-green-600 dark:text-green-500" />
             </CardHeader>
@@ -118,7 +121,7 @@ export default function AdminDashboard() {
                 {stats.verifiedUsers?.toLocaleString() || '0'}
               </div>
               <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                Users with verified accounts
+                {t('admin:dashboard.stats.verifiedAccounts', language)}
               </p>
             </CardContent>
           </Card>
@@ -132,7 +135,7 @@ export default function AdminDashboard() {
             )}
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-2xl font-bold text-gray-700 dark:text-gray-300">
-                Admin Users
+                {t('admin:dashboard.stats.adminUsers', language)}
               </CardTitle>
               <Shield className="h-4 w-4 text-purple-600 dark:text-purple-500" />
             </CardHeader>
@@ -140,7 +143,9 @@ export default function AdminDashboard() {
               <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                 {stats.adminUsers?.toLocaleString() || '0'}
               </div>
-              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">System administrators</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                {t('admin:dashboard.stats.systemAdministrators', language)}
+              </p>
             </CardContent>
           </Card>
 
@@ -153,7 +158,7 @@ export default function AdminDashboard() {
             )}
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-2xl font-bold text-gray-700 dark:text-gray-300">
-                Verification Rate
+                {t('admin:dashboard.stats.verificationRate', language)}
               </CardTitle>
               <Activity className="h-4 w-4 text-orange-600 dark:text-orange-500" />
             </CardHeader>
@@ -164,7 +169,8 @@ export default function AdminDashboard() {
                   : '0%'}
               </div>
               <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                {stats.verifiedUsers} of {stats.totalUsers} users verified
+                {stats.verifiedUsers} {t('admin:dashboard.stats.of', language)} {stats.totalUsers}{' '}
+                {t('admin:dashboard.stats.usersVerified', language)}
               </p>
             </CardContent>
           </Card>
@@ -176,10 +182,10 @@ export default function AdminDashboard() {
         <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader>
             <CardTitle className="text-gray-900 dark:text-gray-100 text-2xl font-bold">
-              User Growth
+              {t('admin:dashboard.userGrowth.title', language)}
             </CardTitle>
             <CardDescription className="text-gray-600 dark:text-gray-400">
-              New users over time
+              {t('admin:dashboard.userGrowth.subtitle', language)}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -198,10 +204,10 @@ export default function AdminDashboard() {
         <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader>
             <CardTitle className="text-gray-900 dark:text-gray-100 text-xl font-bold">
-              User Management
+              {t('admin:dashboard.quickActions.userManagement.title', language)}
             </CardTitle>
             <CardDescription className="text-gray-600 dark:text-gray-400">
-              Comprehensive user administration
+              {t('admin:dashboard.quickActions.userManagement.description', language)}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -210,11 +216,10 @@ export default function AdminDashboard() {
                 href={`/${language}/admin/users`}
                 className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 h-10 px-4 py-2"
               >
-                View All Users
+                {t('admin:dashboard.quickActions.userManagement.button', language)}
               </Link>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Manage all users in one place. Control access, assign roles, and monitor activity
-                across your platform.
+                {t('admin:dashboard.quickActions.userManagement.details', language)}
               </p>
             </div>
           </CardContent>
@@ -223,10 +228,10 @@ export default function AdminDashboard() {
         <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader>
             <CardTitle className="text-gray-900 dark:text-gray-100 text-xl font-bold">
-              System Settings
+              {t('admin:dashboard.quickActions.systemSettings.title', language)}
             </CardTitle>
             <CardDescription className="text-gray-600 dark:text-gray-400">
-              Configure system-wide settings
+              {t('admin:dashboard.quickActions.systemSettings.description', language)}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -235,10 +240,10 @@ export default function AdminDashboard() {
                 className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-400 text-white cursor-not-allowed h-10 px-4 py-2"
                 disabled
               >
-                Coming Soon
+                {t('admin:dashboard.quickActions.systemSettings.button', language)}
               </button>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Manage application settings, email templates, and system configuration.
+                {t('admin:dashboard.quickActions.systemSettings.details', language)}
               </p>
             </div>
           </CardContent>

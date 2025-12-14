@@ -18,6 +18,7 @@ import { Button } from '@/components/ui/button';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createCommunity } from '@/lib/services/communities';
 import LanguageStore from '@/stores/useLanguage';
+import { t } from '@/translations';
 import { toast } from 'sonner';
 import { Loader2, Upload, X } from 'lucide-react';
 
@@ -42,7 +43,7 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
       return await createCommunity(language, formData);
     },
     onSuccess: data => {
-      toast.success(data.body.message || 'Community created successfully!', {
+      toast.success(data.body.message || t('community:toast.createdSuccess', language), {
         duration: 3000,
       });
 
@@ -54,7 +55,7 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
       }, 1000);
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Failed to create community');
+      toast.error(error.message || t('community:toast.createFailed', language));
     },
   });
 
@@ -72,13 +73,13 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
     if (file) {
       // Validate file type
       if (!file.type.startsWith('image/')) {
-        toast.error('Please select a valid image file');
+        toast.error(t('community:createModal.imageError', language));
         return;
       }
 
       // Validate file size (max 5MB)
       if (file.size > 5 * 1024 * 1024) {
-        toast.error('Image size should be less than 5MB');
+        toast.error(t('community:createModal.imageSizeError', language));
         return;
       }
 
@@ -100,11 +101,11 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
 
   const handleSubmit = () => {
     if (!name.trim()) {
-      toast.error('Community name is required');
+      toast.error(t('community:createModal.nameRequired', language));
       return;
     }
     if (!description.trim()) {
-      toast.error('Community description is required');
+      toast.error(t('community:createModal.descriptionRequired', language));
       return;
     }
 
@@ -138,10 +139,10 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
       <DialogContent className="sm:max-w-2xl bg-gradient-to-br from-gray-900 via-gray-850 to-gray-900 text-gray-100 shadow-[0_0_25px_rgba(59,130,246,0.45)] border border-blue-500/20 rounded-2xl backdrop-blur-md transition-all duration-300">
         <DialogHeader className="text-center space-y-2">
           <DialogTitle className="text-2xl font-bold tracking-tight bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-600 bg-clip-text text-transparent">
-            Create New Community
+            {t('community:createModal.title', language)}
           </DialogTitle>
           <p className="text-sm text-gray-300">
-            Set up a new professional community. Invite members and start collaborating.
+            {t('community:createModal.description', language)}
           </p>
         </DialogHeader>
 
@@ -150,7 +151,9 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
           <div className="flex gap-6">
             {/* Community Picture - Left Side */}
             <div className="flex flex-col items-center flex-shrink-0">
-              <Label className="text-sm font-medium text-gray-200 mb-3 block">Picture</Label>
+              <Label className="text-sm font-medium text-gray-200 mb-3 block">
+                {t('community:createModal.communityImage', language)}
+              </Label>
 
               {!imagePreview ? (
                 <div className="relative">
@@ -170,7 +173,9 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
                         <Upload className="h-5 w-5 text-blue-400" />
                       </div>
                       <p className="text-xs text-gray-300 text-center px-2">
-                        <span className="font-semibold">Upload</span>
+                        <span className="font-semibold">
+                          {t('community:createModal.uploadImage', language)}
+                        </span>
                       </p>
                     </div>
                   </label>
@@ -201,11 +206,12 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
               {/* Community Name */}
               <div>
                 <Label htmlFor="communityName" className="text-sm font-medium text-gray-200">
-                  Community Name <span className="text-red-400">*</span>
+                  {t('community:createModal.communityName', language)}{' '}
+                  <span className="text-red-400">*</span>
                 </Label>
                 <Input
                   id="communityName"
-                  placeholder="e.g., Tech Innovators"
+                  placeholder={t('community:createModal.namePlaceholder', language)}
                   value={name}
                   onChange={e => setName(e.target.value)}
                   required
@@ -216,11 +222,12 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
               {/* Description */}
               <div>
                 <Label htmlFor="description" className="text-sm font-medium text-gray-200">
-                  Description <span className="text-red-400">*</span>
+                  {t('community:createModal.descriptionLabel', language)}{' '}
+                  <span className="text-red-400">*</span>
                 </Label>
                 <Textarea
                   id="description"
-                  placeholder="Write a short description..."
+                  placeholder={t('community:createModal.descriptionPlaceholder', language)}
                   value={description}
                   onChange={e => setDescription(e.target.value)}
                   required
@@ -232,7 +239,8 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
               {/* Member Limit */}
               <div>
                 <Label htmlFor="memberLimit" className="text-sm font-medium text-gray-200">
-                  Member Limit <span className="text-gray-400 text-xs">(Default: 100)</span>
+                  {t('community:createModal.memberLimit', language)}{' '}
+                  <span className="text-gray-400 text-xs">(Default: 100)</span>
                 </Label>
                 <Input
                   id="memberLimit"
@@ -249,13 +257,15 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
           {/* Privacy Toggle */}
           <div>
             <Label className="text-sm font-medium text-gray-200 mb-2 block">
-              Community Privacy
+              {t('community:createModal.privateCommunity', language)}
             </Label>
             <div className="flex items-center justify-between border border-gray-700/50 rounded-lg px-4 py-3 bg-gray-800/50 hover:bg-gray-800/70 transition-colors">
               <div className="flex-1">
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-medium text-gray-200">
-                    {isPrivate ? '🔒 Private' : '🌐 Public'}
+                    {isPrivate
+                      ? `🔒 ${t('community:card.private', language)}`
+                      : `🌐 ${t('community:card.public', language)}`}
                   </span>
                   <span
                     className={`text-xs px-2 py-0.5 rounded-full ${
@@ -264,7 +274,9 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
                         : 'bg-green-500/20 text-green-300 border border-green-500/30'
                     }`}
                   >
-                    {isPrivate ? 'Invite Only' : 'Anyone Can Join'}
+                    {isPrivate
+                      ? t('community:createModal.privateDescription', language)
+                      : t('community:card.public', language)}
                   </span>
                 </div>
               </div>
@@ -293,7 +305,7 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
             disabled={createMutation.isPending}
             className="border-gray-600 text-gray-200 hover:bg-gray-800 hover:text-white transition-all duration-200 disabled:opacity-50"
           >
-            Cancel
+            {t('community:createModal.cancel', language)}
           </Button>
           <Button
             onClick={handleSubmit}
@@ -301,7 +313,9 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
             className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all duration-200 disabled:opacity-50 flex items-center gap-2"
           >
             {createMutation.isPending && <Loader2 className="h-4 w-4 animate-spin" />}
-            {createMutation.isPending ? 'Creating...' : 'Create Community'}
+            {createMutation.isPending
+              ? t('community:createModal.creating', language)
+              : t('community:createModal.create', language)}
           </Button>
         </DialogFooter>
       </DialogContent>

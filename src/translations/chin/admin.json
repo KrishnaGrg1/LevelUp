@@ -173,5 +173,161 @@
       "deleteError": "删除任务失败",
       "tryAgain": "请重试"
     }
+  },
+  "communityManagement": {
+    "title": "社区管理",
+    "description": "管理和监控平台中的所有社区",
+    "stats": {
+      "totalCommunities": "总社区数",
+      "activeCommunities": "活跃社区",
+      "totalMembers": "总成员数",
+      "acrossAllCommunities": "跨所有社区",
+      "avgMembersPerCommunity": "平均成员数/社区",
+      "communityHealth": "社区健康度"
+    },
+    "table": {
+      "community": "社区",
+      "type": "类型",
+      "members": "成员",
+      "owner": "所有者",
+      "created": "创建时间",
+      "actions": "操作",
+      "noData": "未找到社区",
+      "loading": "加载社区中..."
+    },
+    "buttons": {
+      "manageCategories": "管理类别",
+      "manage": "管理"
+    },
+    "privacy": {
+      "publicCommunities": "公开社区",
+      "privateCommunities": "私密社区",
+      "public": "公开",
+      "private": "私密",
+      "ofTotal": "占总数"
+    },
+    "sorting": {
+      "nameAZ": "名称 (A-Z)",
+      "nameZA": "名称 (Z-A)",
+      "newestFirst": "最新优先",
+      "oldestFirst": "最旧优先"
+    },
+    "filters": {
+      "allCommunities": "所有社区",
+      "publicOnly": "仅公开",
+      "privateOnly": "仅私密"
+    },
+    "tableHeaders": {
+      "name": "名称",
+      "category": "类别",
+      "noCategory": "无类别",
+      "privacy": "隐私",
+      "members": "成员",
+      "created": "创建时间",
+      "actions": "操作"
+    },
+    "messages": {
+      "communities": "社区",
+      "total": "总计",
+      "filteredResults": "筛选结果",
+      "loadingCommunities": "加载社区中...",
+      "failedToLoad": "加载社区失败",
+      "tryAgainLater": "请稍后重试",
+      "noCommunitiesFound": "未找到社区",
+      "tryAdjustingSearch": "尝试调整搜索条件",
+      "createFirstCommunity": "创建您的第一个社区"
+    }
+  },
+  "dashboard": {
+    "title": "管理员仪表板",
+    "subtitle": "系统概览和管理控制",
+    "stats": {
+      "totalUsers": "总用户数",
+      "totalRegistered": "注册用户总数",
+      "verifiedUsers": "已验证用户",
+      "verifiedAccounts": "拥有已验证账户的用户",
+      "adminUsers": "管理员用户",
+      "systemAdministrators": "系统管理员",
+      "verificationRate": "验证率",
+      "usersVerified": "用户已验证",
+      "of": "的"
+    },
+    "userGrowth": {
+      "title": "用户增长",
+      "subtitle": "随时间变化的新用户"
+    },
+    "quickActions": {
+      "userManagement": {
+        "title": "用户管理",
+        "description": "全面的用户管理",
+        "button": "查看所有用户",
+        "details": "在一个地方管理所有用户。控制访问权限，分配角色，并监控平台上的活动。"
+      },
+      "systemSettings": {
+        "title": "系统设置",
+        "description": "配置系统范围的设置",
+        "button": "即将推出",
+        "details": "管理应用程序设置、电子邮件模板和系统配置。"
+      }
+    },
+    "errors": {
+      "failedToLoad": "加载仪表板数据失败"
+    }
+  },
+  "actionsModal": {
+    "title": "社区操作",
+    "subtitle": "管理社区设置和成员",
+    "sections": {
+      "privacy": {
+        "title": "隐私设置",
+        "description": "控制社区可见性",
+        "currentStatus": "当前状态",
+        "changePrivacy": "更改隐私",
+        "updating": "更新中..."
+      },
+      "category": {
+        "title": "类别",
+        "description": "更新社区类别",
+        "currentCategory": "当前类别",
+        "changeCategory": "更改类别",
+        "selectCategory": "选择类别",
+        "updating": "更新中..."
+      },
+      "members": {
+        "title": "成员",
+        "loading": "加载成员中...",
+        "noMembers": "未找到成员",
+        "remove": "移除"
+      },
+      "danger": {
+        "title": "危险区域",
+        "deleteCommunity": "删除社区",
+        "deleteDescription": "永久删除此社区。此操作无法撤消。",
+        "deleteButton": "删除社区",
+        "deleting": "删除中..."
+      }
+    },
+    "deleteDialog": {
+      "title": "删除社区",
+      "description": "您确定要删除此社区吗？此操作无法撤消，将删除所有成员和内容。",
+      "cancel": "取消",
+      "confirm": "删除社区"
+    },
+    "removeDialog": {
+      "title": "移除成员",
+      "description": "您确定要从社区中移除此成员吗？",
+      "cancel": "取消",
+      "confirm": "移除成员"
+    },
+    "toast": {
+      "privacyUpdated": "隐私更新成功",
+      "privacyFailed": "隐私更新失败",
+      "categoryUpdated": "类别更新成功",
+      "categoryFailed": "类别更新失败",
+      "memberRemoved": "成员移除成功",
+      "memberRemoveFailed": "成员移除失败",
+      "communityDeleted": "社区删除成功",
+      "communityDeleteFailed": "社区删除失败"
+    }
   }
 }

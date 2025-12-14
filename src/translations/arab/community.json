@@ -4,5 +4,95 @@
     "level": "المستوى",
     "xp": "XP",
     "progress": "التقدم إلى المستوى التالي"
+  },
+  "messageArea": {
+    "members": "الأعضاء",
+    "communityInfo": "معلومات المجتمع",
+    "clanInfo": "معلومات العشيرة",
+    "settings": "الإعدادات",
+    "inviteMembers": "دعوة الأعضاء",
+    "notifications": "الإشعارات",
+    "mute": "كتم الصوت",
+    "leaveCommunity": "مغادرة المجتمع",
+    "leaveClan": "مغادرة العشيرة",
+    "typeMessage": "اكتب رسالة...",
+    "enterMessage": "الرجاء إدخال رسالة",
+    "mustBeLoggedIn": "يجب عليك تسجيل الدخول لإرسال الرسائل"
+  },
+  "createModal": {
+    "title": "إنشاء مجتمع جديد",
+    "description": "املأ التفاصيل لإنشاء مجتمعك",
+    "communityName": "اسم المجتمع",
+    "namePlaceholder": "أدخل اسم المجتمع",
+    "descriptionLabel": "الوصف",
+    "descriptionPlaceholder": "صف مجتمعك...",
+    "category": "الفئة",
+    "selectCategory": "اختر فئة",
+    "memberLimit": "حد الأعضاء",
+    "memberLimitDesc": "الحد الأقصى لعدد الأعضاء (10-1000)",
+    "privateCommunity": "مجتمع خاص",
+    "privateDescription": "فقط الأعضاء المدعوون يمكنهم الانضمام",
+    "communityImage": "صورة المجتمع",
+    "uploadImage": "تحميل صورة",
+    "dragDrop": "أو اسحب وأفلت",
+    "imageRequirements": "PNG, JPG, GIF حتى 5 ميجابايت",
+    "cancel": "إلغاء",
+    "create": "إنشاء المجتمع",
+    "creating": "جارٍ الإنشاء...",
+    "imageError": "الرجاء تحديد ملف صورة صالح",
+    "imageSizeError": "يجب أن يكون حجم الصورة أقل من 5 ميجابايت",
+    "nameRequired": "اسم المجتمع مطلوب",
+    "nameMinLength": "يجب أن يكون الاسم 3 أحرف على الأقل",
+    "descriptionRequired": "الوصف مطلوب",
+    "categoryRequired": "الرجاء اختيار فئة"
+  },
+  "accessDenied": {
+    "notMember": {
+      "title": "تم رفض الوصول",
+      "message": "أنت لست عضوًا في {clanName}",
+      "description": "فقط أعضاء العشيرة يمكنهم الوصول إلى هذه المحادثة."
+    },
+    "notAuthenticated": {
+      "title": "المصادقة مطلوبة",
+      "message": "الرجاء تسجيل الدخول للوصول إلى هذه العشيرة",
+      "description": "يجب أن تكون مسجل الدخول لعرض محادثات العشيرة."
+    },
+    "membershipCheckFailed": {
+      "title": "غير قادر على التحقق من العضوية",
+      "message": "تعذر التحقق من عضويتك في العشيرة",
+      "description": "الرجاء المحاولة مرة أخرى لاحقًا أو الاتصال بالدعم."
+    },
+    "default": {
+      "title": "الوصول مقيد",
+      "message": "لا يمكنك الوصول إلى محادثة العشيرة هذه",
+      "description": "الرجاء التحقق من حالة عضويتك."
+    },
+    "goBack": "العودة",
+    "requestJoin": "طلب الانضمام"
+  },
+  "customizePin": {
+    "title": "تخصيص التثبيت",
+    "description": "قم بتخصيص رسالتك المثبتة",
+    "messageLabel": "رسالة التثبيت",
+    "messagePlaceholder": "أدخل رسالتك للتثبيت...",
+    "colorLabel": "لون التثبيت",
+    "selectColor": "اختر لونًا",
+    "cancel": "إلغاء",
+    "save": "حفظ التثبيت",
+    "saving": "جارٍ الحفظ..."
+  },
+  "card": {
+    "members": "الأعضاء",
+    "join": "انضم",
+    "joined": "منضم",
+    "private": "خاص",
+    "public": "عام",
+    "owner": "المالك"
+  },
+  "toast": {
+    "createdSuccess": "تم إنشاء المجتمع بنجاح!",
+    "createFailed": "فشل إنشاء المجتمع",
+    "joinedSuccess": "تم الانضمام إلى المجتمع بنجاح!",
+    "joinFailed": "فشل الانضمام إلى المجتمع"
   }
 }

@@ -10,5 +10,40 @@
   "username": "用户名",
   "unknown": "未知",
   "memberSince": "注册日期",
-  "na": "无"
+  "na": "无",
+  "dropdown": {
+    "myAccount": "我的账户",
+    "profile": "个人资料",
+    "changePassword": "修改密码",
+    "settings": "设置",
+    "logout": "退出登录",
+    "loggingOut": "正在退出..."
+  },
+  "admin": {
+    "badge": "管理员",
+    "editProfile": "编辑资料",
+    "totalXP": "总经验值",
+    "currentLevel": "当前等级",
+    "role": "角色",
+    "administrator": "管理员",
+    "accountInfo": "账户信息",
+    "accountInfoDesc": "您的个人账户详情",
+    "preferences": "偏好设置",
+    "preferencesDesc": "您的应用设置和偏好",
+    "theme": "主题",
+    "themeAuto": "自动（系统）",
+    "accessLevel": "访问级别",
+    "fullAdminAccess": "完全管理员权限"
+  },
+  "user": {
+    "changePasswordTitle": "修改密码",
+    "changePasswordDesc": "更新您的账户密码",
+    "currentPassword": "当前密码",
+    "newPassword": "新密码",
+    "confirmPassword": "确认新密码",
+    "updatePassword": "更新密码",
+    "updating": "更新中...",
+    "passwordUpdated": "密码更新成功",
+    "passwordMismatch": "密码不匹配"
+  }
 }

@@ -10,5 +10,40 @@
   "username": "ユーザー名",
   "unknown": "不明",
   "memberSince": "登録日",
-  "na": "該当なし"
+  "na": "該当なし",
+  "dropdown": {
+    "myAccount": "マイアカウント",
+    "profile": "プロフィール",
+    "changePassword": "パスワードを変更",
+    "settings": "設定",
+    "logout": "ログアウト",
+    "loggingOut": "ログアウト中..."
+  },
+  "admin": {
+    "badge": "管理者",
+    "editProfile": "プロフィールを編集",
+    "totalXP": "合計経験値",
+    "currentLevel": "現在のレベル",
+    "role": "役割",
+    "administrator": "管理者",
+    "accountInfo": "アカウント情報",
+    "accountInfoDesc": "あなたの個人アカウント詳細",
+    "preferences": "設定",
+    "preferencesDesc": "アプリの設定と優先設定",
+    "theme": "テーマ",
+    "themeAuto": "自動（システム）",
+    "accessLevel": "アクセスレベル",
+    "fullAdminAccess": "完全管理者アクセス"
+  },
+  "user": {
+    "changePasswordTitle": "パスワードを変更",
+    "changePasswordDesc": "アカウントパスワードを更新",
+    "currentPassword": "現在のパスワード",
+    "newPassword": "新しいパスワード",
+    "confirmPassword": "新しいパスワードを確認",
+    "updatePassword": "パスワードを更新",
+    "updating": "更新中...",
+    "passwordUpdated": "パスワードが正常に更新されました",
+    "passwordMismatch": "パスワードが一致しません"
+  }
 }

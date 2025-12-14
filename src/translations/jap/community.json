@@ -4,5 +4,95 @@
     "level": "レベル",
     "xp": "XP",
     "progress": "次のレベルまでの進捗"
+  },
+  "messageArea": {
+    "members": "メンバー",
+    "communityInfo": "コミュニティ情報",
+    "clanInfo": "クラン情報",
+    "settings": "設定",
+    "inviteMembers": "メンバーを招待",
+    "notifications": "通知",
+    "mute": "ミュート",
+    "leaveCommunity": "コミュニティを退会",
+    "leaveClan": "クランを退会",
+    "typeMessage": "メッセージを入力...",
+    "enterMessage": "メッセージを入力してください",
+    "mustBeLoggedIn": "メッセージを送信するにはログインが必要です"
+  },
+  "createModal": {
+    "title": "新しいコミュニティを作成",
+    "description": "コミュニティを作成するための詳細を入力してください",
+    "communityName": "コミュニティ名",
+    "namePlaceholder": "コミュニティ名を入力",
+    "descriptionLabel": "説明",
+    "descriptionPlaceholder": "コミュニティを説明してください...",
+    "category": "カテゴリ",
+    "selectCategory": "カテゴリを選択",
+    "memberLimit": "メンバー制限",
+    "memberLimitDesc": "最大メンバー数 (10-1000)",
+    "privateCommunity": "プライベートコミュニティ",
+    "privateDescription": "招待されたメンバーのみが参加できます",
+    "communityImage": "コミュニティ画像",
+    "uploadImage": "画像をアップロード",
+    "dragDrop": "またはドラッグアンドドロップ",
+    "imageRequirements": "PNG、JPG、GIF 最大5MB",
+    "cancel": "キャンセル",
+    "create": "コミュニティを作成",
+    "creating": "作成中...",
+    "imageError": "有効な画像ファイルを選択してください",
+    "imageSizeError": "画像サイズは5MB未満である必要があります",
+    "nameRequired": "コミュニティ名は必須です",
+    "nameMinLength": "名前は3文字以上である必要があります",
+    "descriptionRequired": "説明は必須です",
+    "categoryRequired": "カテゴリを選択してください"
+  },
+  "accessDenied": {
+    "notMember": {
+      "title": "アクセス拒否",
+      "message": "あなたは {clanName} のメンバーではありません",
+      "description": "クランメンバーのみがこのチャットにアクセスできます。"
+    },
+    "notAuthenticated": {
+      "title": "認証が必要",
+      "message": "このクランにアクセスするにはログインしてください",
+      "description": "クランチャットを表示するにはログインが必要です。"
+    },
+    "membershipCheckFailed": {
+      "title": "メンバーシップの確認ができません",
+      "message": "クランメンバーシップを確認できませんでした",
+      "description": "後でもう一度お試しいただくか、サポートにお問い合わせください。"
+    },
+    "default": {
+      "title": "アクセス制限",
+      "message": "このクランチャットにアクセスできません",
+      "description": "メンバーシップステータスを確認してください。"
+    },
+    "goBack": "戻る",
+    "requestJoin": "参加をリクエスト"
+  },
+  "customizePin": {
+    "title": "ピンをカスタマイズ",
+    "description": "ピン留めされたメッセージをパーソナライズ",
+    "messageLabel": "ピンメッセージ",
+    "messagePlaceholder": "ピン留めするメッセージを入力...",
+    "colorLabel": "ピンの色",
+    "selectColor": "色を選択",
+    "cancel": "キャンセル",
+    "save": "ピンを保存",
+    "saving": "保存中..."
+  },
+  "card": {
+    "members": "メンバー",
+    "join": "参加",
+    "joined": "参加済み",
+    "private": "プライベート",
+    "public": "公開",
+    "owner": "オーナー"
+  },
+  "toast": {
+    "createdSuccess": "コミュニティが正常に作成されました！",
+    "createFailed": "コミュニティの作成に失敗しました",
+    "joinedSuccess": "コミュニティへの参加に成功しました！",
+    "joinFailed": "コミュニティへの参加に失敗しました"
   }
 }
