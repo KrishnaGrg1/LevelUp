@@ -62,7 +62,7 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = () => {
         <Button
           variant="outline"
           size="sm"
-          className="cursor-pointer"
+          className="cursor-pointer text-foreground"
           // className="cursor-pointer bg-slate-800/50 border-slate-700/50 text-white hover:bg-slate-700/50 hover:border-indigo-500/50"
         >
           <Languages className="mr-2 h-4 w-4" />

@@ -1,188 +1,201 @@
 {
   "heroSection": {
-    "watchDemo": "Ver demostración",
-    "batchText": "Plataforma de gamificación de la vida",
-    "titleMain": "Mejora tu vida",
-    "titleSub": "con misiones diarias épicas",
-    "desc1": "Transforma tus metas aburridas en una",
-    "descHighlight1": "aventura épica",
-    "desc2": "Obtén misiones diarias impulsadas por IA, sigue tu progreso heroico y",
-    "descHighlight2": "visualiza tu futuro legendario.",
-    "ctaStart": "Comienza tu viaje épico",
-    "rating": "Calificación 4.9/5",
-    "secure": "100% Seguro",
-    "activeUsers": "20k+ Usuarios Activos"
+    "titleMain": "Gamifica Tu Crecimiento Personal con IA y Comunidad",
+    "desc": "Misiones diarias generadas por IA, chat de clan en tiempo real y sistema de niveles basado en XP para construir hábitos duraderos.",
+    "ctaStart": "Empieza Gratis",
+    "ctaLearn": "Mira Cómo Funciona",
+    "dashboard": {
+      "url": "levelup.app/tablero",
+      "sidebar": {
+        "dashboard": "Tablero",
+        "quests": "Misiones",
+        "community": "Comunidad",
+        "leaderboard": "Clasificación",
+        "settings": "Ajustes"
+      },
+      "streak": "Racha de 12 Días",
+      "header": "Misiones de Hoy",
+      "greeting": "Buenos Días, Alex",
+      "subGreeting": "¿Listo para subir de nivel?",
+      "cards": {
+        "card1": {
+          "type": "Mindfulness",
+          "xp": "50 XP",
+          "title": "Meditación Matutina",
+          "time": "10 min"
+        },
+        "card2": {
+          "type": "Conocimiento",
+          "xp": "100 XP",
+          "title": "Leer 10 Páginas",
+          "time": "20 min"
+        },
+        "card3": {
+          "type": "Enfoque",
+          "xp": "150 XP",
+          "title": "Sesión de Trabajo Profundo",
+          "time": "60 min"
+        }
+      },
+      "dailyQuest": "Misión Diaria",
+      "startQuest": "Iniciar Misión"
+    }
+  },
+  "problemSolution": {
+    "problem": {
+      "title1": "La motivación se desvanece.",
+      "title2": "El seguimiento es aburrido.",
+      "title3": "La consistencia es difícil."
+    },
+    "solution": {
+      "title1": "Levelup convierte hábitos en misiones.",
+      "title2": "El progreso se siente gratificante.",
+      "title3": "La consistencia se vuelve natural."
+    }
+  },
+  "SocialProofSection": {
+    "quotes": {
+      "q1": "Construido para la consistencia a largo plazo.",
+      "q2": "Sin productividad tóxica.",
+      "q3": "Progreso sobre perfección."
+    },
+    "stats": {
+      "quests": "Misiones Completadas",
+      "streak": "Racha Promedio"
+    }
+  },
+  "FinalCTASection": {
+    "title": "Empieza a construir hábitos que perduren.",
+    "button": "Crea Tu Primera Misión"
+  },
+  "HowItWorksSection": {
+    "title": "Cómo Funciona",
+    "steps": {
+      "step1": {
+        "title": "Establece tus objetivos",
+        "description": "Define lo que quieres lograr."
+      },
+      "step2": {
+        "title": "Recibe misiones diarias",
+        "description": "Recibe tareas accionables cada mañana."
+      },
+      "step3": {
+        "title": "Completa tareas",
+        "description": "Marca tus misiones y gana XP."
+      },
+      "step4": {
+        "title": "Sube de nivel tu vida",
+        "description": "Mira crecer tus estadísticas mientras mejoras."
+      }
+    }
   },
   "FeaturesSection": {
     "hero": {
-      "badge": "¡Nuevo y Mejorado!",
-      "title1": "Gamifica Tus Metas",
-      "title2": "Eleva Tu Vida",
-      "description": "Transforma tus hábitos diarios en logros emocionantes con nuestro sistema gamificado."
+      "badge": "Características",
+      "title1": "Todo lo que necesitas",
+      "title2": "para alcanzar tu potencial.",
+      "description": "Herramientas que se adaptan a tu viaje, no al revés."
     },
-
-    "features": {
-      "badge": "¿Por Qué Elegir LevelUp?",
-      "badgeText": "Funciones Poderosas",
-      "description": "Descubre las funciones revolucionarias que hacen de Level Up la plataforma definitiva de gamificación de la vida.",
-      "titleMain": "Funciones Épicas",
-      "feature1": {
-        "title": "Misiones Diarias con IA",
-        "description": "Obtén desafíos diarios personalizados según tus objetivos. Nuestra IA crea misiones frescas y motivadoras que se adaptan a tu progreso y estilo de aprendizaje."
-      },
-      "feature2": {
-        "title": "Seguimiento de Progreso en Tiempo Real",
-        "description": "Observa cómo tu vida sube de nivel con visualizaciones atractivas. Rastrea rachas, logros y ve tu transformación mediante gráficos interactivos."
-      },
-      "feature3": {
-        "title": "Sistema de Recompensas Gamificado",
-        "description": "Gana XP, desbloquea logros y compite con amigos. Transforma tareas aburridas en aventuras emocionantes con nuestro completo sistema de recompensas."
-      },
-      "feature4": {
-        "title": "Comunidad Global",
-        "description": "Únete a miles de usuarios de LevelUp en todo el mundo. Comparte logros, obtén motivación y encuentra compañeros responsables en tu camino hacia la grandeza."
-      },
-      "feature5": {
-        "title": "Gestión Inteligente del Tiempo",
-        "description": "Optimiza tu horario diario con asignación de tiempo impulsada por IA. Equilibra trabajo, salud, relaciones y crecimiento personal para una máxima satisfacción de vida."
-      },
-      "feature6": {
-        "title": "Bienestar Integral",
-        "description": "Enfócate en el bienestar mental, físico y emocional. Obtén misiones de bienestar personalizadas que nutren tu mente, cuerpo y alma para una transformación completa."
-      }
-    },
-
-    "readMore": "Aprender más",
 
     "coreFeatures": {
-      "title": "Funciones Principales",
-      "subtitle": "Desbloquea todo el potencial de LevelUp con estas herramientas esenciales",
+      "title": "Características Principales",
+      "subtitle": "Todo lo que necesitas para construir hábitos que duren.",
       "features": {
         "feature1": {
-          "title": "Perspectivas Impulsadas por IA",
-          "description": "Recomendaciones inteligentes basadas en tus patrones de progreso y datos de comportamiento.",
-          "highlight": "NUEVO"
+          "title": "Misiones Generadas por IA",
+          "description": "Desafíos diarios y semanales generados automáticamente. Personalizados por nivel de usuario, comunidades unidas y progreso pasado. Tareas claras y medibles con recompensas de XP escaladas por dificultad.",
+          "highlight": "Sin metas vagas"
         },
         "feature2": {
-          "title": "Analítica Avanzada",
-          "description": "Profundiza en tu rendimiento con gráficos detallados y análisis de tendencias.",
+          "title": "Sistema de Gamificación",
+          "description": "XP, niveles e hitos de progreso de Principiante a Avanzado. Mejora visible sin presión, rastreada por comunidad.",
           "highlight": ""
         },
         "feature3": {
-          "title": "Privacidad Primero",
-          "description": "El cifrado de extremo a extremo asegura que tus datos personales permanezcan completamente privados.",
+          "title": "Comunidades y Clanes",
+          "description": "Únete a comunidades basadas en intereses o forma clanes para trabajo en equipo y responsabilidad. Acceso basado en roles y crecimiento de XP compartido.",
           "highlight": ""
         },
         "feature4": {
-          "title": "Sincronización Multiplataforma",
-          "description": "Accede a tus misiones en todos los dispositivos con sincronización en tiempo real.",
-          "highlight": ""
+          "title": "Chat en Tiempo Real y Chat IA",
+          "description": "Chat de comunidad y clan en tiempo real. Chat de IA impulsado por tokens con historial de conversación guardado y saldo claramente visible.",
+          "highlight": "Impulsado por Tokens"
         },
         "feature5": {
-          "title": "Programación Inteligente",
-          "description": "Bloques de tiempo optimizados por IA que se adaptan a tus niveles de energía y disponibilidad.",
-          "highlight": "BETA"
-        },
-        "feature6": {
-          "title": "Sistema de Logros",
-          "description": "Gana insignias, desbloquea títulos y muestra tu progreso con un completo sistema de logros.",
+          "title": "Progreso y Consistencia",
+          "description": "Rachas diarias, historial de misiones (hoy/ayer/semana) y programación consciente de la zona horaria. Construido para la consistencia a largo plazo.",
           "highlight": ""
         }
       }
     },
 
     "integrationFeatures": {
-      "title": "Integraciones Sin Problemas",
-      "description": "Conéctate con tus aplicaciones y servicios favoritos para crear un ecosistema de productividad unificado.",
-      "integrations": {
-        "integration1": "Aplicaciones de Calendario",
-        "integration2": "Rastreadores de Fitness",
-        "integration3": "Notas",
-        "integration4": "Aplicaciones de Música",
-        "integration5": "Redes Sociales",
-        "integration6": "Aplicaciones de Salud",
-        "integration7": "Gestores de Tareas",
-        "integration8": "Rastreadores de Tiempo",
-        "integration9": "Meditación",
-        "integration10": "Aplicaciones de Lectura",
-        "integration11": "Plataformas de Aprendizaje",
-        "integration12": "Aplicaciones Bancarias"
-      }
+      "title": "Integraciones Perfectas",
+      "description": "Conecta con las herramientas que ya usas."
     },
 
     "comparisonSection": {
-      "title": "¿Por Qué Elegir Level Up?",
-      "description": "Ve cómo nos comparamos con los métodos tradicionales de establecimiento de metas y otras aplicaciones.",
+      "title": "¿Por qué LevelUp?",
+      "description": "Mira cómo nos comparamos con el resto.",
       "tableHeaders": {
-        "feature": "Función",
-        "levelUp": "Level Up",
-        "traditionalMethods": "Métodos Tradicionales",
+        "feature": "Característica",
+        "levelUp": "LevelUp",
+        "traditionalMethods": "Apps Tradicionales",
         "otherApps": "Otras Apps"
       },
       "features": {
         "feature1": {
-          "name": "Experiencia Gamificada",
-          "levelUp": "✓",
-          "traditionalMethods": "✗",
-          "otherApps": "Limitado"
+          "name": "Misiones Personalizadas IA",
+          "otherApps": "Plantillas Genéricas"
         },
         "feature2": {
-          "name": "Perspectivas Impulsadas por IA",
-          "levelUp": "✓",
-          "traditionalMethods": "✗",
-          "otherApps": "✗"
+          "name": "Chat de Clan en Tiempo Real",
+          "otherApps": "Foros Asíncronos"
         },
         "feature3": {
-          "name": "Soporte Comunitario",
-          "levelUp": "✓",
-          "traditionalMethods": "✗",
-          "otherApps": "Básico"
+          "name": "Sistema de XP y Niveles",
+          "otherApps": "Listas de verificación"
         },
         "feature4": {
-          "name": "Sincronización Multiplataforma",
-          "levelUp": "✓",
-          "traditionalMethods": "✗",
-          "otherApps": "✓"
+          "name": "Chat de IA con Tokens",
+          "otherApps": "Complementos de Pago"
         },
         "feature5": {
-          "name": "Analítica Avanzada",
-          "levelUp": "✓",
-          "traditionalMethods": "✗",
-          "otherApps": "Limitado"
+          "name": "Soporte Multi-idioma",
+          "otherApps": "Solo Inglés"
         },
         "feature6": {
-          "name": "Protección de Privacidad",
-          "levelUp": "✓",
-          "traditionalMethods": "✓",
-          "otherApps": "Varía"
+          "name": "Tickets de Soporte Prioritario",
+          "otherApps": "Soporte por Email"
         }
       }
     }
   },
+
   "CTASection": {
-    "badgeText": "Tu aventura te espera",
-    "titleMain": "¿Listo para subir de nivel?",
-    "titleSub": "¿Tu vida?",
-    "description": "Únete a miles de aventureros que han transformado sus hábitos, alcanzado sus metas y desbloqueado todo su potencial con Level Up.",
-    "primaryCTA": "Comienza tu misión",
-    "secondaryCTA": "Continuar aventura",
+    "badgeText": "Tu Aventura Espera",
+    "titleMain": "Listo para Subir de Nivel",
+    "titleSub": "¿Tu Vida?",
+    "description": "Únete a miles de aventureros que han transformado sus hábitos, alcanzado sus metas y desbloqueado su máximo potencial con Level Up.",
+    "primaryCTA": "Inicia Tu Misión",
+    "secondaryCTA": "Continúa la Aventura",
     "trustIndicators": {
-      "freeStart": "Comenzar gratis",
-      "noCreditCard": "No se requiere tarjeta de crédito",
+      "freeStart": "Empieza gratis",
+      "noCreditCard": "No requiere tarjeta",
       "quickJoin": "Únete en 30 segundos"
     }
   },
   "StatsSection": {
-    "titleMain": "Únete a la Revolución del Nivel de Vida",
+    "titleMain": "Únete a la Revolución del Leveling",
     "description": "Miles de aventureros ya están transformando sus vidas con Level Up",
     "stats": [
       {
         "label": "Aventureros Activos",
-        "description": "Mejorando su vida día a día"
+        "description": "Subiendo de nivel sus vidas diariamente"
       },
       {
         "label": "Misiones Completadas",
-        "description": "Objetivos alcanzados y sueños realizados"
+        "description": "Metas alcanzadas y sueños realizados"
       },
       {
         "label": "Tasa de Éxito",
@@ -190,186 +203,102 @@
       }
     ]
   },
+
+  "TestimonialsSection": {
+    "titleMain": "Historias Reales, Transformaciones Reales",
+    "description": "Descubre cómo los aventureros de todo el mundo están subiendo de nivel sus vidas con Level Up",
+    "testimonials": [
+      {
+        "name": "Alex Rivera",
+        "role": "Ingeniero de Software",
+        "content": "Level Up transformó mi productividad por completo. ¡La gamificación hizo que construir hábitos fuera realmente divertido, y he completado 45 metas en solo 3 meses!",
+        "badge": {
+          "text": "45 Misiones"
+        }
+      },
+      {
+        "name": "Sarah Chen",
+        "role": "Directora de Marketing",
+        "content": "El aspecto comunitario es increíble. Compartir logros y obtener apoyo de otros aventureros me mantiene motivada todos los días.",
+        "badge": {
+          "text": "Nivel 12"
+        }
+      },
+      {
+        "name": "Marcus Johnson",
+        "role": "Entrenador de Fitness",
+        "content": "He probado innumerables aplicaciones de hábitos, pero el enfoque de Level Up sobre el bienestar y el seguimiento del progreso es inigualable. ¡A mis clientes también les encanta!",
+        "badge": {
+          "text": "Campeón"
+        }
+      }
+    ],
+    "socialProof": "Únete a más de 10,000 aventureros felices"
+  },
   "about": {
     "hero": {
-      "badge": "Nuestra historia",
-      "titleLine1": "Transformando vidas",
-      "titleLine2": "Una misión a la vez",
-      "description": "Creemos que todo el mundo tiene el potencial para mejorar su vida. Level Up nació de la idea de que alcanzar tus objetivos debería sentirse como una aventura épica, no como una tarea aburrida."
+      "badge": "Acerca de LevelUp",
+      "title": "LevelUp existe para hacer que la consistencia se sienta alcanzable."
     },
-    "stats": {
-      "title": "Nuestro camino en números",
-      "description": "De una pequeña startup a una comunidad global de aventureros del desarrollo personal",
-      "founded": {
-        "label": "Fundado",
-        "description": "Nuestra aventura comenzó aquí"
-      },
-      "team": {
-        "label": "Miembros del equipo",
-        "description": "Aventureros apasionados"
-      },
-      "countries": {
-        "label": "Países",
-        "description": "Comunidad global"
-      },
-      "milestones": {
-        "label": "Hitos",
-        "description": "Metas alcanzadas juntos"
+    "story": {
+      "title": "Construido para resolver el agotamiento.",
+      "p1": "Estábamos cansados de herramientas de productividad rígidas que nos hacían sentir culpables por perder un día. La motivación se desvanece, pero los sistemas perduran.",
+      "p2": "LevelUp explica con calma que el progreso debe sentirse ganado, no forzado. Priorizamos bucles de retroalimentación honestos sobre la productividad tóxica.",
+      "principlesTitle": "Nuestros Principios",
+      "items": {
+        "0": "Progreso sobre perfección",
+        "1": "Pequeñas acciones diarias",
+        "2": "Bucles de retroalimentación honestos",
+        "3": "Sin productividad tóxica"
       }
     },
-    "mission": {
-      "title": "Nuestra misión",
-      "description": "Gamificar el desarrollo personal y hacer que alcanzar metas vitales sea tan atractivo como jugar tu juego favorito.",
-      "items": [
-        {
-          "title": "Cumplimiento de objetivos",
-          "description": "Convierte tus sueños en misiones alcanzables con hitos claros y un seguimiento gratificante."
-        },
-        {
-          "title": "Poder comunitario",
-          "description": "Únete a una comunidad de apoyo de aventureros que celebran tus triunfos y te ayudan a superar desafíos."
-        },
-        {
-          "title": "Experiencia gamificada",
-          "description": "Mejora tu vida con puntos de experiencia, logros y recompensas que hacen del crecimiento personal algo adictivo."
-        }
-      ]
+    "howItWorks": {
+      "title": "Cómo Funciona LevelUp",
+      "subtitle": "Sistemas simples para vidas complejas.",
+      "steps": {
+        "0": { "title": "Unirse a Comunidades", "desc": "Encuentra tu escuadrón." },
+        "1": { "title": "Recibir Misiones", "desc": "Desafíos diarios de IA." },
+        "2": { "title": "Completar Acciones", "desc": "Pequeños pasos adelante." },
+        "3": { "title": "Ganar XP", "desc": "Visualizar progreso." }
+      }
     },
-    "values": {
-      "title": "Nuestros valores",
-      "description": "Los principios que guían todo lo que hacemos en Level Up.",
-      "items": [
-        {
-          "title": "Progreso sobre perfección",
-          "description": "Creemos que los pasos pequeños y constantes conducen a transformaciones extraordinarias. Cada misión completada es una victoria que merece celebración."
-        },
-        {
-          "title": "Primero comunidad",
-          "description": "El crecimiento personal mejora cuando se comparte. Fomentamos un entorno de apoyo donde todos pueden prosperar y ayudar a otros a triunfar."
-        },
-        {
-          "title": "Privacidad y seguridad",
-          "description": "Tu viaje personal es sagrado. Protegemos tus datos con seguridad de nivel empresarial y nunca comprometemos tu privacidad."
-        },
-        {
-          "title": "Innovación y diversión",
-          "description": "Innovamos constantemente para hacer que el crecimiento personal sea más atractivo, efectivo y divertido que nunca."
-        }
-      ]
+    "closing": {
+      "title": "\"No se trata de hacer más. Se trata de aparecer—consistentemente.\"",
+      "button": "Comienza Tu Viaje"
     },
     "team": {
-      "title": "Conoce al equipo",
-      "description": "Los aventureros apasionados detrás de Level Up que se dedican a ayudarte a mejorar tu vida.",
-      "members": [
-        {
-          "name": "Alex Chen",
-          "role": "Co‑fundador y CEO",
-          "bio": "Ex‑diseñador de juegos convertido en entusiasta del crecimiento personal. Cree que todos merecen ser el héroe de su propia historia."
-        },
-        {
-          "name": "Sarah Rodriguez",
-          "role": "Co‑fundadora y CTO",
-          "bio": "Hechicera tecnológica con pasión por construir herramientas que realmente mejoran la vida. Más de 15 años en desarrollo de producto."
-        },
-        {
-          "name": "Marcus Johnson",
-          "role": "Director de producto",
-          "bio": "Diseñador obsesionado por la UX que transformó sus propias luchas de productividad en las funciones que amas de Level Up."
-        }
-      ],
       "cta": {
-        "badge": "Estamos creciendo",
-        "title": "¿Quieres unirte a nuestra aventura?",
-        "description": "Siempre buscamos personas apasionadas que compartan nuestra visión de hacer el crecimiento personal divertido y atractivo.",
-        "button": "Ver posiciones abiertas"
+        "badge": "Estamos Creciendo",
+        "title": "¿Quieres Unirte a Nuestra Aventura?",
+        "description": "Siempre buscamos personas apasionadas que compartan nuestra visión de hacer que el crecimiento personal sea divertido y atractivo.",
+        "button": "Ver Posiciones Abiertas"
       }
     }
   },
   "contact": {
-    "heroSection": {
-      "badge": "Ponte en contacto",
-      "title1": "Empecemos",
-      "title2": "Tu viaje",
-      "description": "¿Tienes preguntas sobre Level Up? ¿Necesitas ayuda para comenzar? Nuestro equipo de guías de aventura está aquí para ayudarte a impulsar tu vida."
+    "hero": {
+      "title": "Hablemos.",
+      "options": "Soporte • Comentarios • Asociaciones Comunitarias"
     },
-    "contactOptions": {
-      "title": "Elige tu método de contacto",
-      "description": "Estamos aquí para ayudarte de la manera que mejor te funcione.",
-      "email": {
-        "title": "Soporte por correo electrónico",
-        "desc": "Obtén respuestas detalladas a tus preguntas",
-        "contact": "hello@levelup.app",
-        "response": "Respuesta en 24 horas"
+    "cards": {
+      "support": {
+        "title": "Soporte",
+        "desc": "Soporte por correo electrónico (sistema de tickets).",
+        "response": "Respuesta dentro de 24h."
       },
-      "chat": {
-        "title": "Chat en vivo",
-        "desc": "Ayuda instantánea cuando la necesites",
-        "contact": "Disponible de 9 AM a 6 PM PST",
-        "response": "Respuesta inmediata"
-      },
-      "phone": {
-        "title": "Soporte telefónico",
-        "desc": "Habla directamente con nuestro equipo",
-        "contact": "+1 (555) 123‑4567",
-        "response": "Disponible de lunes a viernes"
+      "general": {
+        "title": "Consultas Generales",
+        "desc": "Asociaciones y Creación de comunidad.",
+        "response": "Leemos cada mensaje."
       }
     },
     "form": {
-      "title": "Envíanos un mensaje",
-      "description": "Completa el formulario a continuación y te responderemos lo antes posible.",
-      "name": "Nombre completo *",
-      "email": "Correo electrónico *",
-      "type": "Tipo de consulta",
-      "subject": "Asunto *",
-      "message": "Mensaje *",
-      "send": "Enviar mensaje",
-      "placeholderName": "Ingresa tu nombre completo",
-      "placeholderEmail": "Ingresa tu correo electrónico",
-      "placeholderSubject": "Asunto breve",
-      "placeholderMessage": "Cuéntanos cómo podemos ayudarte…",
-      "select": {
-        "default": "Selecciona una opción",
-        "general": "Consulta general",
-        "support": "Solicitud de soporte",
-        "billing": "Facturación y precios",
-        "enterprise": "Soluciones empresariales",
-        "feedback": "Comentarios/Sugerencias",
-        "partnership": "Oportunidades de asociación",
-        "other": "Otro"
-      }
-    },
-    "office": {
-      "title": "Visita nuestra sede",
-      "description": "Pasa por nuestra sede, toma un café y charlemos sobre tus metas.",
-      "location": "Oficina en Pokhara",
-      "address": "Lakeside\nPokhara, Nepal 33700\nNepal",
-      "hours": "Horario de oficina",
-      "hoursDetail": "Lunes – Viernes: 9:00 AM – 6:00 PM PST\nSábado: 10:00 AM – 4:00 PM PST\nDomingo: Cerrado",
-      "expect": "Qué esperar",
-      "expectDetail": "Café, snacks y un equipo amistoso listo para ayudarte a impulsar tu vida. ¡No necesitas cita para preguntas rápidas!",
-      "map": "Mapa interactivo próximamente"
-    },
-    "faq": {
-      "title": "Respuestas rápidas",
-      "description": "Encuentra respuestas a las preguntas más comunes sobre cómo empezar con Level Up.",
-      "items": [
-        {
-          "q": "¿Qué tan rápido puedo comenzar?",
-          "a": "¡Puedes crear tu cuenta y comenzar tu primera misión en menos de 2 minutos! Nuestro proceso de incorporación está diseñado para que comiences de inmediato."
-        },
-        {
-          "q": "¿Ofrecen sesiones de capacitación?",
-          "a": "¡Sí! Ofrecemos sesiones de incorporación gratis para nuevos usuarios y capacitación integral para equipos. Puedes programar una a través de nuestro formulario de contacto."
-        },
-        {
-          "q": "¿Y si necesito funciones personalizadas?",
-          "a": "¡Nos encanta crear soluciones a medida! Contáctanos para hablar de tus necesidades específicas y elaboraremos un plan personalizado."
-        },
-        {
-          "q": "¿Cómo puedo enviar comentarios?",
-          "a": "¡Siempre estamos ansiosos por escuchar a nuestra comunidad! Usa el formulario de comentarios en la app, escríbenos un correo o únete a nuestra comunidad de Discord para conversaciones en tiempo real."
-        }
-      ]
+      "name": "Nombre",
+      "email": "Correo Electrónico",
+      "subject": "Asunto",
+      "message": "Mensaje",
+      "submit": "Enviar Mensaje",
+      "footer": "Leemos cada mensaje."
     }
   }
 }

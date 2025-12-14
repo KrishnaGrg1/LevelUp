@@ -1,97 +1,69 @@
 {
   "hero": {
-    "badge": "Choisissez votre aventure",
-    "titleLine1": "Améliorez votre vie",
-    "titleLine2": "À votre manière",
-    "description": "Choisissez le plan qui correspond à vos ambitions. Commencez gratuitement et améliorez au fur et à mesure que vos aventures progressent."
+    "title": "Payez uniquement pour ce qui crée de la valeur.",
+    "subtitle": "Explication minimale. Pas de bla-bla marketing."
   },
   "billing": {
     "monthly": "Mensuel",
     "annual": "Annuel",
-    "annualSave": "Économisez 17%"
+    "save": "Économisez 20%"
   },
   "plans": {
-    "adventurer": {
-      "name": "Aventurier",
-      "description": "Parfait pour commencer votre voyage",
+    "free": {
+      "name": "Gratuit",
+      "description": "Pas de carte de crédit requise.",
       "button": "Commencer Gratuitement",
       "features": [
-        "Jusqu'à 5 quêtes actives",
-        "Suivi de progression de base",
-        "Accès à la communauté",
-        "Application mobile",
-        "Réalisations de base",
-        "Rapports hebdomadaires"
+        "Quêtes quotidiennes générées par IA",
+        "Rejoindre des communautés par intérêt",
+        "Progression XP & niveaux",
+        "Jetons de chat IA limités (50/jour)",
+        "Chat de communauté & clan"
       ]
     },
-    "hero": {
-      "name": "Héros",
-      "description": "Pour ceux qui veulent plus de puissance",
-      "button": "Passer au Héros",
+    "pro": {
+      "name": "Pro",
+      "description": "Pour les bâtisseurs d'habitudes sérieux.",
+      "button": "Passer à Pro",
       "features": [
-        "Quêtes illimitées",
-        "Analyses avancées",
-        "Insights propulsés par l'IA",
-        "Support prioritaire",
-        "Modèles de quêtes personnalisés",
-        "Réalisations avancées",
-        "Collaboration en équipe",
-        "Exportation des données"
+        "Tout dans Gratuit",
+        "Limites de jetons IA plus élevées (Illimité)",
+        "Génération de quêtes hebdomadaires",
+        "Personnalisation avancée IA (GPT-4o)",
+        "Génération de quêtes prioritaire"
       ]
     },
-    "legend": {
-      "name": "Légende",
-      "description": "Puissance ultime pour les équipes et utilisateurs avancés",
-      "button": "Devenir Légende",
+    "team": {
+      "name": "Communauté / Équipe",
+      "description": "Pour les équipes et organisations.",
+      "button": "Contactez-nous",
       "features": [
-        "Tout ce qui est dans Héros",
-        "Gestion d'équipe",
-        "Intégrations avancées",
-        "Options en marque blanche",
-        "Branding personnalisé",
-        "Accès API",
-        "Gestionnaire de succès dédié",
-        "Sécurité avancée"
+        "Tout dans Pro",
+        "Stats de progression basées sur le clan",
+        "Tableau de bord analytique partagé",
+        "Contrôles admin pour clans",
+        "Support prioritaire direct"
       ]
     }
   },
-  "faqTitle": "Questions Fréquemment Posées",
-  "faqSubtitle": "Tout ce que vous devez savoir sur les tarifs et fonctionnalités de Level Up.",
-
-  "faq": [
-    {
-      "q": "Puis-je changer de plan à tout moment ?",
-      "a": "Oui ! Vous pouvez passer à un plan supérieur ou inférieur à tout moment. Les changements prennent effet immédiatement, et nous ajusterons la facturation au prorata."
+  "faqTitle": "Questions Fréquentes",
+  "faqSubtitle": "Tout ce que vous devez savoir sur le produit et la facturation.",
+  "faq": {
+    "hiddenFees": {
+      "q": "Y a-t-il des frais cachés ?",
+      "a": "Non. Le prix que vous voyez est celui que vous payez. Annulez à tout moment."
     },
-    {
-      "q": "Que se passe-t-il avec mes données si j'annule ?",
-      "a": "Vos données restent accessibles pendant 30 jours après l'annulation. Vous pouvez exporter vos progrès et données de quêtes avant suppression définitive."
+    "missDay": {
+      "q": "Que se passe-t-il si je rate un jour ?",
+      "a": "La constance est la clé, mais la vie arrive. Utilisez une potion 'Geler la Série' pour sauver votre progression."
     },
-    {
-      "q": "Y a-t-il une remise pour les équipes ?",
-      "a": "Oui ! Les équipes de 10 utilisateurs ou plus bénéficient de 20 % de réduction sur n'importe quel plan. Contactez notre équipe commerciale pour des tarifs personnalisés."
+    "upgrade": {
+      "q": "Puis-je changer de forfait plus tard ?",
+      "a": "Oui, vous pouvez changer de forfait à tout moment."
     },
-    {
-      "q": "Offrez-vous une garantie de remboursement ?",
-      "a": "Absolument ! Nous offrons une garantie de remboursement de 30 jours. Si vous n'êtes pas satisfait, nous vous rembourserons sans poser de questions."
+    "tokens": {
+      "q": "Comment fonctionnent les jetons ?",
+      "a": "Les jetons alimentent les interactions IA. Les utilisateurs gratuits ont 50/jour. Les utilisateurs Pro en ont en illimité."
     }
-  ],
-  "enterprise": {
-    "0": {
-      "title": "Gestion d'équipe",
-      "description": "Gestion avancée des utilisateurs avec permissions basées sur les rôles"
-    },
-    "1": {
-      "title": "Sécurité entreprise",
-      "description": "Conformité SOC 2, SSO et protection avancée des données"
-    },
-    "2": {
-      "title": "Solutions personnalisées",
-      "description": "Fonctionnalités et intégrations adaptées à vos besoins"
-    },
-    "contactButton": "Contacter les ventes",
-    "badge": "Solutions Entreprise",
-    "title": "Prêt pour l'entreprise ?",
-    "description": "Obtenez des solutions personnalisées, un support dédié et une sécurité de niveau entreprise pour votre organisation."
   }
 }

@@ -1,164 +1,168 @@
 {
   "heroSection": {
-    "watchDemo": "Watch Demo",
-    "batchText": "Life Gamification Platform",
-    "titleMain": "Level Up Your Life",
-    "titleSub": "with Epic Daily Quests",
-    "desc1": "Transform your mundane goals into an",
-    "descHighlight1": "epic adventure",
-    "desc2": "Get AI-powered daily quests, track your heroic progress, and",
-    "descHighlight2": "visualize your legendary future.",
-    "ctaStart": "Start Your Epic Journey",
-    "rating": "4.9/5 Rating",
-    "secure": "100% Secure",
-    "activeUsers": "20k+ Active Users"
+    "titleMain": "Gamify Your Self-Improvement with AI & Community",
+    "desc": "Daily AI-generated quests, real-time clan chat, and an XP-based leveling system to help you build lasting habits.",
+    "ctaStart": "Get Started Free",
+    "ctaLearn": "See How It Works",
+    "dashboard": {
+      "url": "levelup.app/dashboard",
+      "sidebar": {
+        "dashboard": "Dashboard",
+        "quests": "Quests",
+        "community": "Community",
+        "leaderboard": "Leaderboard",
+        "settings": "Settings"
+      },
+      "streak": "12 Day Streak",
+      "header": "Today's Quests",
+      "greeting": "Good Morning, Alex",
+      "subGreeting": "Ready to level up?",
+      "cards": {
+        "card1": {
+          "type": "Mindfulness",
+          "xp": "50 XP",
+          "title": "Morning Meditation",
+          "time": "10 min"
+        },
+        "card2": {
+          "type": "Knowledge",
+          "xp": "100 XP",
+          "title": "Read 10 Pages",
+          "time": "20 min"
+        },
+        "card3": { "type": "Focus", "xp": "150 XP", "title": "Deep Work Session", "time": "60 min" }
+      },
+      "dailyQuest": "Daily Quest",
+      "startQuest": "Start Quest"
+    }
+  },
+  "problemSolution": {
+    "problem": {
+      "title1": "Motivation fades.",
+      "title2": "Tracking feels boring.",
+      "title3": "Consistency is hard."
+    },
+    "solution": {
+      "title1": "Levelup turns habits into quests.",
+      "title2": "Progress feels rewarding.",
+      "title3": "Consistency becomes natural."
+    }
+  },
+  "SocialProofSection": {
+    "quotes": {
+      "q1": "Built for long-term consistency.",
+      "q2": "No toxic productivity.",
+      "q3": "Progress over perfection."
+    },
+    "stats": {
+      "quests": "Quests Completed",
+      "streak": "Average Streak"
+    }
+  },
+  "FinalCTASection": {
+    "title": "Start building habits that last.",
+    "button": "Create Your First Quest"
+  },
+  "HowItWorksSection": {
+    "title": "How It Works",
+    "steps": {
+      "step1": {
+        "title": "Set your goals",
+        "description": "Define what you want to achieve."
+      },
+      "step2": {
+        "title": "Get daily quests",
+        "description": "Receive actionable tasks every morning."
+      },
+      "step3": {
+        "title": "Complete tasks",
+        "description": "Check off your quests and earn XP."
+      },
+      "step4": {
+        "title": "Level up your life",
+        "description": "Watch your stats grow as you improve."
+      }
+    }
   },
   "FeaturesSection": {
     "hero": {
-      "badge": "New & Improved!",
-      "title1": "Gamify Your Goals",
-      "title2": "Level Up Your Life",
-      "description": "Transform your daily habits into exciting achievements with our gamified system."
+      "badge": "Features",
+      "title1": "Everything you need",
+      "title2": "to reach your potential.",
+      "description": "Tools that adapt to your journey, not the other way around."
     },
-
-    "features": {
-      "badge": "Why Choose LevelUp?",
-      "badgeText": "Powerful Features",
-      "description": "Discover the revolutionary features that make Level Up the ultimate life gamification platform",
-      "titleMain": "Epic Features",
-      "feature1": {
-        "title": "AI-Powered Daily Quests",
-        "description": "Get personalized daily challenges tailored to your goals. Our AI creates fresh, motivating quests that adapt to your progress and learning style."
-      },
-      "feature2": {
-        "title": "Real-Time Progress Tracking",
-        "description": "Watch your life level up with beautiful visualizations. Track streaks, achievements, and see your transformation through interactive charts."
-      },
-      "feature3": {
-        "title": "Gamified Rewards System",
-        "description": "Earn XP, unlock achievements, and compete with friends. Transform boring tasks into exciting adventures with our comprehensive reward system."
-      },
-      "feature4": {
-        "title": "Global Community",
-        "description": "Join thousands of life-levelers worldwide. Share achievements, get motivated, and find accountability partners on your journey to greatness."
-      },
-      "feature5": {
-        "title": "Smart Time Management",
-        "description": "Optimize your daily schedule with AI-driven time allocation. Balance work, health, relationships, and personal growth for maximum life satisfaction."
-      },
-      "feature6": {
-        "title": "Holistic Wellness",
-        "description": "Focus on mental, physical, and emotional well-being. Get personalized wellness quests that nurture your mind, body, and soul for complete transformation."
-      }
-    },
-    "readMore": "Learn more",
-
     "coreFeatures": {
       "title": "Core Features",
-      "subtitle": "Unlock the full potential of LevelUp with these essential tools",
+      "subtitle": "Everything you need to build habits that last.",
       "features": {
         "feature1": {
-          "title": "AI-Powered Insights",
-          "description": "Smart recommendations based on your progress patterns and behavioral data.",
-          "highlight": "NEW"
+          "title": "AI-Generated Quests",
+          "description": "Daily and weekly challenges generated automatically. Personalized by user level, joined communities, and past progress. Clear, measurable tasks with XP rewards scaled by difficulty.",
+          "highlight": "No vague goals"
         },
         "feature2": {
-          "title": "Advanced Analytics",
-          "description": "Deep dive into your performance with detailed charts and trend analysis.",
+          "title": "Gamification System",
+          "description": "XP, levels, and progress milestones from Beginner to Advanced. Visible improvement without pressure, tracked per community.",
           "highlight": ""
         },
         "feature3": {
-          "title": "Privacy First",
-          "description": "End-to-end encryption ensures your personal data stays completely private.",
+          "title": "Communities & Clans",
+          "description": "Join interest-based communities or form clans for teamwork and accountability. Role-based access and shared XP growth.",
           "highlight": ""
         },
         "feature4": {
-          "title": "Cross-Platform Sync",
-          "description": "Seamlessly access your quests across all devices with real-time synchronization.",
-          "highlight": ""
+          "title": "Real-Time Chat & AI Chat",
+          "description": "Community & clan chat in real-time. AI chat powered by tokens with conversation history saved and clearly visible balance.",
+          "highlight": "Token Powered"
         },
         "feature5": {
-          "title": "Smart Scheduling",
-          "description": "AI-optimized time blocks that adapt to your energy levels and availability.",
-          "highlight": "BETA"
-        },
-        "feature6": {
-          "title": "Achievement System",
-          "description": "Earn badges, unlock titles, and showcase your journey with a comprehensive achievement system.",
+          "title": "Progress & Consistency",
+          "description": "Daily streaks, quest history (today/yesterday/week), and time-zone aware scheduling. Built for long-term consistency.",
           "highlight": ""
         }
       }
     },
-
     "integrationFeatures": {
       "title": "Seamless Integrations",
-      "description": "Connect with your favorite apps and services to create a unified productivity ecosystem.",
-      "integrations": {
-        "integration1": "Calendar Apps",
-        "integration2": "Fitness Trackers",
-        "integration3": "Note Taking",
-        "integration4": "Music Apps",
-        "integration5": "Social Media",
-        "integration6": "Health Apps",
-        "integration7": "Task Managers",
-        "integration8": "Time Trackers",
-        "integration9": "Meditation",
-        "integration10": "Reading Apps",
-        "integration11": "Learning Platforms",
-        "integration12": "Banking Apps"
-      }
+      "description": "Connects with the tools you already use."
     },
-
     "comparisonSection": {
-      "title": "Why Choose Level Up?",
-      "description": "See how we compare to traditional goal-setting methods and other apps.",
+      "title": "Why LevelUp?",
+      "description": "See how we stack up against the rest.",
       "tableHeaders": {
         "feature": "Feature",
-        "levelUp": "Level Up",
-        "traditionalMethods": "Traditional Methods",
+        "levelUp": "LevelUp",
+        "traditionalMethods": "Traditional Apps",
         "otherApps": "Other Apps"
       },
       "features": {
         "feature1": {
-          "name": "Gamified Experience",
-          "levelUp": "✓",
-          "traditionalMethods": "✗",
-          "otherApps": "Limited"
+          "name": "AI Personalized Quests",
+          "otherApps": "Generic Templates"
         },
         "feature2": {
-          "name": "AI-Powered Insights",
-          "levelUp": "✓",
-          "traditionalMethods": "✗",
-          "otherApps": "✗"
+          "name": "Real-time Clan Chat",
+          "otherApps": "Async Forums"
         },
         "feature3": {
-          "name": "Community Support",
-          "levelUp": "✓",
-          "traditionalMethods": "✗",
-          "otherApps": "Basic"
+          "name": "XP & Leveling System",
+          "otherApps": "Checklists"
         },
         "feature4": {
-          "name": "Cross-Platform Sync",
-          "levelUp": "✓",
-          "traditionalMethods": "✗",
-          "otherApps": "✓"
+          "name": "Token-gated AI Chat",
+          "otherApps": "Paid Add-ons"
         },
         "feature5": {
-          "name": "Advanced Analytics",
-          "levelUp": "✓",
-          "traditionalMethods": "✗",
-          "otherApps": "Limited"
+          "name": "Multi-language Support",
+          "otherApps": "English Only"
         },
         "feature6": {
-          "name": "Privacy Protection",
-          "levelUp": "✓",
-          "traditionalMethods": "✓",
-          "otherApps": "Varies"
+          "name": "Priority Support Tickets",
+          "otherApps": "Email Support"
         }
       }
     }
   },
-
   "CTASection": {
     "badgeText": "Your Adventure Awaits",
     "titleMain": "Ready to Level Up",
@@ -190,7 +194,6 @@
       }
     ]
   },
-
   "TestimonialsSection": {
     "titleMain": "Real Stories, Real Transformations",
     "description": "Discover how adventurers worldwide are leveling up their lives with Level Up",
@@ -230,91 +233,36 @@
   },
   "about": {
     "hero": {
-      "badge": "Our Story",
-      "titleLine1": "Transforming Lives",
-      "titleLine2": "One Quest at a Time",
-      "description": "We believe that everyone has the potential to level up their life. Level Up was born from the idea that achieving your goals should feel like an epic adventure, not a boring chore."
+      "badge": "About LevelUp",
+      "title": "LevelUp exists to make consistency feel achievable."
     },
-    "stats": {
-      "title": "Our Journey in Numbers",
-      "description": "From a small startup to a global community of life-leveling adventurers",
-      "founded": {
-        "label": "Founded",
-        "description": "Our adventure began"
-      },
-      "team": {
-        "label": "Team Members",
-        "description": "Passionate adventurers"
-      },
-      "countries": {
-        "label": "Countries",
-        "description": "Global community"
-      },
-      "milestones": {
-        "label": "Milestones",
-        "description": "Goals achieved together"
+    "story": {
+      "title": "Built to solve burnout.",
+      "p1": "We were tired of rigid productivity tools that made us feel guilty for missing a day. Motivation fades, but systems last.",
+      "p2": "LevelUp calmly explains that progress should feel earned, not forced. We prioritize honest feedback loops over toxic productivity.",
+      "principlesTitle": "Our Principles",
+      "items": {
+        "0": "Progress over perfection",
+        "1": "Small daily actions",
+        "2": "Honest feedback loops",
+        "3": "No toxic productivity"
       }
     },
-    "mission": {
-      "title": "Our Mission",
-      "description": "To gamify personal development and make achieving life goals as engaging as playing your favorite game.",
-      "items": [
-        {
-          "title": "Goal Achievement",
-          "description": "Transform your dreams into achievable quests with clear milestones and rewarding progress tracking."
-        },
-        {
-          "title": "Community Power",
-          "description": "Join a supportive community of adventurers who celebrate your wins and help you overcome challenges."
-        },
-        {
-          "title": "Gamified Experience",
-          "description": "Level up your life with XP points, achievements, and rewards that make personal growth addictively fun."
-        }
-      ]
+    "howItWorks": {
+      "title": "How LevelUp Works",
+      "subtitle": "Simple systems for complex lives.",
+      "steps": {
+        "0": { "title": "Join Communities", "desc": "Find your squad." },
+        "1": { "title": "Receive Quests", "desc": "Daily AI challenges." },
+        "2": { "title": "Complete Actions", "desc": "Small steps forward." },
+        "3": { "title": "Earn XP", "desc": "Visualize progress." }
+      }
     },
-    "values": {
-      "title": "Our Values",
-      "description": "The principles that guide everything we do at Level Up.",
-      "items": [
-        {
-          "title": "Progress Over Perfection",
-          "description": "We believe that consistent small steps lead to extraordinary transformations. Every quest completed is a victory worth celebrating."
-        },
-        {
-          "title": "Community First",
-          "description": "Personal growth is better together. We foster a supportive environment where everyone can thrive and help others succeed."
-        },
-        {
-          "title": "Privacy & Security",
-          "description": "Your personal journey is sacred. We protect your data with enterprise-grade security and never compromise your privacy."
-        },
-        {
-          "title": "Innovation & Fun",
-          "description": "We constantly innovate to make personal development more engaging, effective, and enjoyable than ever before."
-        }
-      ]
+    "closing": {
+      "title": "\"This is not about doing more. It’s about showing up—consistently.\"",
+      "button": "Start Your Journey"
     },
     "team": {
-      "title": "Meet the Team",
-      "description": "The passionate adventurers behind Level Up who are dedicated to helping you level up your life.",
-      "members": [
-        {
-          "name": "Alex Chen",
-          "role": "Co-Founder & CEO",
-          "bio": "Former game designer turned life-leveling enthusiast. Believes everyone deserves to be the hero of their own story."
-        },
-        {
-          "name": "Sarah Rodriguez",
-          "role": "Co-Founder & CTO",
-          "bio": "Tech wizard with a passion for building tools that actually make life better. 15+ years in product development."
-        },
-        {
-          "name": "Marcus Johnson",
-          "role": "Head of Product",
-          "bio": "UX obsessed designer who turned his own productivity struggles into the features you love in Level Up."
-        }
-      ],
       "cta": {
         "badge": "We're Growing",
         "title": "Want to Join Our Adventure?",
@@ -324,172 +272,36 @@
     }
   },
   "contact": {
-    "heroSection": {
-      "badge": "Get in Touch",
-      "title1": "Let's Start",
-      "title2": "Your Journey",
-      "description": "Have questions about Level Up? Need help getting started? Our team of adventure guides is here to help you level up your life."
+    "hero": {
+      "title": "Let's talk.",
+      "options": "Support • Feedback • Community Partnerships"
     },
-    "contactOptions": {
-      "title": "Choose Your Contact Method",
-      "description": "We're here to help in whatever way works best for you.",
-      "email": {
-        "title": "Email Support",
-        "desc": "Get detailed answers to your questions",
-        "contact": "hello@levelup.app",
-        "response": "Response within 24 hours"
+    "cards": {
+      "support": {
+        "title": "Support",
+        "desc": "Email-based support (ticket system).",
+        "response": "Response within 24h."
       },
-      "chat": {
-        "title": "Live Chat",
-        "desc": "Instant help when you need it",
-        "contact": "Available 9 AM - 6 PM PST",
-        "response": "Instant response"
-      },
-      "phone": {
-        "title": "Phone Support",
-        "desc": "Talk directly with our team",
-        "contact": "+1 (555) 123-4567",
-        "response": "Available Mon-Fri"
+      "general": {
+        "title": "General Inquiries",
+        "desc": "Partnerships & Community creation.",
+        "response": "We read every message."
       }
     },
     "form": {
-      "title": "Send Us a Message",
-      "description": "Fill out the form below and we'll get back to you as soon as possible.",
-      "name": "Full Name *",
-      "email": "Email Address *",
-      "type": "Inquiry Type",
-      "subject": "Subject *",
-      "message": "Message *",
-      "send": "Send Message",
-      "placeholderName": "Enter your full name",
-      "placeholderEmail": "Enter your email",
-      "placeholderSubject": "Brief subject line",
-      "placeholderMessage": "Tell us how we can help...",
-      "select": {
-        "default": "Select an option",
+      "name": "Name",
+      "email": "Email",
+      "inquiryType": "Inquiry Type",
+      "inquiryOptions": {
         "general": "General Inquiry",
-        "support": "Support Request",
-        "billing": "Billing & Pricing",
-        "enterprise": "Enterprise Solutions",
-        "feedback": "Feedback/Suggestions",
-        "partnership": "Partnership Opportunities",
-        "other": "Other"
-      }
-    },
-    "office": {
-      "title": "Visit Our HQ",
-      "description": "Stop by our headquarters for a coffee and chat about your goals.",
-      "location": "Pokhara Office",
-      "address": "Lakeside\nPokhara, Nepal 33700\nNepal",
-      "hours": "Office Hours",
-      "hoursDetail": "Monday - Friday: 9:00 AM - 6:00 PM PST\nSaturday: 10:00 AM - 4:00 PM PST\nSunday: Closed",
-      "expect": "What to Expect",
-      "expectDetail": "Coffee, snacks, and a friendly team ready to help you level up your life. No appointment necessary for quick questions!",
-      "map": "Interactive Map Coming Soon"
-    },
-    "faq": {
-      "title": "Quick Answers",
-      "description": "Find answers to the most common questions about getting started with Level Up.",
-      "items": [
-        {
-          "q": "How quickly can I get started?",
-          "a": "You can create your account and start your first quest in under 2 minutes! Our onboarding process is designed to get you leveling up immediately."
-        },
-        {
-          "q": "Do you offer training sessions?",
-          "a": "Yes! We offer free onboarding sessions for new users and comprehensive training for teams. Schedule one through our contact form."
-        },
-        {
-          "q": "What if I need custom features?",
-          "a": "We love building custom solutions! Contact our enterprise team to discuss your specific needs and we'll create a tailored plan."
-        },
-        {
-          "q": "How can I provide feedback?",
-          "a": "We're always eager to hear from our community! Use the feedback form in the app, email us, or join our Discord community for real-time discussions."
-        }
-      ]
-    }
-  },
-  "feature": {
-    "heroSection": {
-      "badge": "Powerful Features",
-      "title1": "Everything You Need",
-      "title2": "To Level Up",
-      "description": "Discover the comprehensive suite of features designed to transform your goals into epic adventures and make personal growth irresistibly engaging."
-    },
-    "coreFeatures": [
-      {
-        "icon": "Sparkles",
-        "title": "Gamified Experience",
-        "description": "Turn your goals into quests and earn rewards as you progress."
+        "support": "Support",
+        "feedback": "Feedback",
+        "partnership": "Partnership"
       },
-      {
-        "icon": "Brain",
-        "title": "AI-Powered Insights",
-        "description": "Smart recommendations based on your progress patterns and behavioral data.",
-        "highlight": "NEW"
-      },
-      {
-        "icon": "TrendingUp",
-        "title": "Advanced Analytics",
-        "description": "Deep dive into your performance with detailed charts and trend analysis."
-      },
-      {
-        "icon": "Shield",
-        "title": "Privacy First",
-        "description": "End-to-end encryption ensures your personal data stays completely private."
-      },
-      {
-        "icon": "Globe",
-        "title": "Cross-Platform Sync",
-        "description": "Seamlessly access your quests across all devices with real-time synchronization."
-      },
-      {
-        "icon": "Clock",
-        "title": "Smart Scheduling",
-        "description": "AI-optimized time blocks that adapt to your energy levels and availability.",
-        "highlight": "BETA"
-      },
-      {
-        "icon": "Star",
-        "title": "Achievement System",
-        "description": "Earn badges, unlock titles, and showcase your journey with a comprehensive achievement system."
-      }
-    ],
-    "advancedSection": {
-      "title": "Advanced Capabilities",
-      "description": "Unlock powerful tools that adapt to your unique journey and accelerate your progress."
-    },
-    "integrationSection": {
-      "title": "Seamless Integrations",
-      "description": "Connect with your favorite apps and services to create a unified productivity ecosystem.",
-      "integrations": [
-        "Calendar Apps",
-        "Fitness Trackers",
-        "Note Taking",
-        "Music Apps",
-        "Social Media",
-        "Health Apps",
-        "Task Managers",
-        "Time Trackers",
-        "Meditation",
-        "Reading Apps",
-        "Learning Platforms",
-        "Banking Apps"
-      ]
-    },
-    "comparisonSection": {
-      "title": "Why Choose Level Up?",
-      "description": "See how we compare to traditional goal-setting methods and other apps.",
-      "table": [
-        ["Gamified Experience", "✓", "✗", "Limited"],
-        ["AI-Powered Insights", "✓", "✗", "✗"],
-        ["Community Support", "✓", "✗", "Basic"],
-        ["Cross-Platform Sync", "✓", "✗", "✓"],
-        ["Advanced Analytics", "✓", "✗", "Limited"],
-        ["Privacy Protection", "✓", "✓", "Varies"]
-      ],
-      "columns": ["Feature", "Level Up", "Traditional Methods", "Other Apps"]
+      "subject": "Subject",
+      "message": "Message",
+      "submit": "Send Message",
+      "footer": "We read every message."
     }
   }
 }

@@ -1,97 +1,69 @@
 {
   "hero": {
-    "badge": "Elige tu aventura",
-    "titleLine1": "Mejora tu vida",
-    "titleLine2": "A tu manera",
-    "description": "Elige el plan que se adapte a tus ambiciones. Comienza gratis y mejora a medida que crecen tus aventuras."
+    "title": "Paga solo por lo que crea valor.",
+    "subtitle": "Explicación mínima. Sin palabrería de marketing."
   },
   "billing": {
     "monthly": "Mensual",
     "annual": "Anual",
-    "annualSave": "Ahorra 17%"
+    "save": "Ahorra 20%"
   },
   "plans": {
-    "adventurer": {
-      "name": "Aventurero",
-      "description": "Perfecto para comenzar tu viaje",
-      "button": "Comenzar Gratis",
+    "free": {
+      "name": "Gratis",
+      "description": "No se requiere tarjeta de crédito.",
+      "button": "Empieza Gratis",
       "features": [
-        "Hasta 5 misiones activas",
-        "Seguimiento básico del progreso",
-        "Acceso a la comunidad",
-        "Aplicación móvil",
-        "Logros básicos",
-        "Informes semanales"
+        "Misiones diarias generadas por IA",
+        "Únete a comunidades de interés",
+        "Progreso de XP y nivel",
+        "Tokens de chat IA limitados (50/día)",
+        "Chat de comunidad y clan"
       ]
     },
-    "hero": {
-      "name": "Héroe",
-      "description": "Para quienes buscan lograr más",
-      "button": "Actualizar a Héroe",
+    "pro": {
+      "name": "Pro",
+      "description": "Para constructores de hábitos serios.",
+      "button": "Mejorar a Pro",
       "features": [
-        "Misiones ilimitadas",
-        "Análisis avanzados",
-        "Insights impulsados por IA",
-        "Soporte prioritario",
-        "Plantillas de misiones personalizadas",
-        "Logros avanzados",
-        "Colaboración en equipo",
-        "Exportar datos"
+        "Todo en Gratis",
+        "Límites de tokens IA más altos (Ilimitado)",
+        "Generación de misiones semanales",
+        "Personalización avanzada de IA (GPT-4o)",
+        "Generación de misiones prioritaria"
       ]
     },
-    "legend": {
-      "name": "Leyenda",
-      "description": "Poder máximo para equipos y usuarios avanzados",
-      "button": "Ir a Leyenda",
+    "team": {
+      "name": "Comunidad / Equipo",
+      "description": "Para escuadrones y organizaciones.",
+      "button": "Contáctanos",
       "features": [
-        "Todo en Héroe",
-        "Gestión de equipos",
-        "Integraciones avanzadas",
-        "Opciones de marca blanca",
-        "Branding personalizado",
-        "Acceso a API",
-        "Gerente de éxito dedicado",
-        "Seguridad avanzada"
+        "Todo en Pro",
+        "Estadísticas de progresión basadas en clanes",
+        "Tablero de análisis compartido",
+        "Controles de administrador para clanes",
+        "Soporte prioritario directo"
       ]
     }
   },
   "faqTitle": "Preguntas Frecuentes",
-  "faqSubtitle": "Todo lo que necesitas saber sobre los precios y funciones de Level Up.",
-
-  "faq": [
-    {
-      "q": "¿Puedo cambiar de plan en cualquier momento?",
-      "a": "¡Sí! Puedes mejorar o degradar tu plan en cualquier momento. Los cambios se aplican de inmediato y ajustaremos cualquier diferencia de facturación."
+  "faqSubtitle": "Todo lo que necesitas saber sobre el producto y la facturación.",
+  "faq": {
+    "hiddenFees": {
+      "q": "¿Hay tarifas ocultas?",
+      "a": "No. El precio que ves es lo que pagas. Cancela en cualquier momento."
     },
-    {
-      "q": "¿Qué pasa con mis datos si cancelo?",
-      "a": "Tus datos permanecen accesibles durante 30 días después de la cancelación. Puedes exportar tu progreso y datos de misiones antes de la eliminación permanente."
+    "missDay": {
+      "q": "¿Qué pasa si pierdo un día?",
+      "a": "La consistencia es clave, pero la vida pasa. Usa una poción de 'Congelar Racha' para guardar tu progreso."
     },
-    {
-      "q": "¿Hay descuento para equipos?",
-      "a": "¡Sí! Los equipos de 10 o más usuarios obtienen un 20% de descuento en cualquier plan. Contacta a nuestro equipo de ventas para precios y funciones personalizadas."
+    "upgrade": {
+      "q": "¿Puedo mejorar más tarde?",
+      "a": "Sí, puedes cambiar entre planes en cualquier momento."
     },
-    {
-      "q": "¿Ofrecen garantía de devolución de dinero?",
-      "a": "¡Absolutamente! Ofrecemos una garantía de devolución de dinero de 30 días. Si no estás satisfecho, te reembolsaremos sin hacer preguntas."
+    "tokens": {
+      "q": "¿Cómo funcionan los tokens?",
+      "a": "Los tokens impulsan las interacciones de IA. Los usuarios gratuitos obtienen 50/día. Los usuarios Pro obtienen ilimitados."
     }
-  ],
-  "enterprise": {
-    "0": {
-      "title": "Gestión de equipos",
-      "description": "Gestión avanzada de usuarios con permisos basados en roles"
-    },
-    "1": {
-      "title": "Seguridad empresarial",
-      "description": "Cumplimiento SOC 2, SSO y protección avanzada de datos"
-    },
-    "2": {
-      "title": "Soluciones personalizadas",
-      "description": "Funciones e integraciones adaptadas a tus necesidades"
-    },
-    "contactButton": "Contactar ventas",
-    "badge": "Soluciones empresariales",
-    "title": "¿Listo para empresas?",
-    "description": "Obtén soluciones personalizadas, soporte dedicado y seguridad de nivel empresarial para tu organización."
   }
 }
