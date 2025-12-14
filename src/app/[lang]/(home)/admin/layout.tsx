@@ -4,7 +4,7 @@ import React from 'react';
 import { usePathname } from 'next/navigation';
 import { RoleGuard } from '@/components/providers/RoleGuard';
 import LanguageStore from '@/stores/useLanguage';
-import { LayoutDashboard, Users } from 'lucide-react';
+import { LayoutDashboard, Users, FolderKanban } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 const navItems = [
@@ -17,6 +17,11 @@ const navItems = [
     href: '/admin/users',
     label: 'Users',
     icon: Users,
+  },
+  {
+    href: '/admin/communities',
+    label: 'Communities',
+    icon: FolderKanban,
   },
 ];
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
