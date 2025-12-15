@@ -5,7 +5,15 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { RoleGuard } from '@/components/providers/RoleGuard';
 import LanguageStore from '@/stores/useLanguage';
-import { LayoutDashboard, User, KeyRound, MessageSquare } from 'lucide-react';
+import {
+  LayoutDashboard,
+  User,
+  KeyRound,
+  MessageSquare,
+  Trophy,
+  Users,
+  Shield,
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navItems = [
@@ -28,6 +36,21 @@ const navItems = [
     href: '/user/ai-chat',
     label: 'AI Chat',
     icon: MessageSquare,
+  },
+  {
+    href: '/user/leaderboard',
+    label: 'Leaderboard',
+    icon: Trophy,
+  },
+  {
+    href: '/user/top-communities',
+    label: 'Top Communities',
+    icon: Users,
+  },
+  {
+    href: '/user/top-clans',
+    label: 'Top Clans',
+    icon: Shield,
   },
 ];
 
@@ -71,7 +94,7 @@ export default function UserLayout({ children }: { children: React.ReactNode }) 
 
         {/* Mobile Bottom Navigation */}
         <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 shadow-lg">
-          <nav className="grid grid-cols-4 h-16 safe-area-inset-bottom">
+          <nav className="grid grid-cols-7 h-16 safe-area-inset-bottom">
             {navItems.map(item => {
               const isActive = pathname?.includes(item.href);
               const Icon = item.icon;

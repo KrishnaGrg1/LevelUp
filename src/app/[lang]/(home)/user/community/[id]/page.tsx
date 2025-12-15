@@ -4,10 +4,11 @@ import React, { useState } from 'react';
 import { useParams } from 'next/navigation';
 import CommunityDetail from '@/components/communities/CommunityDetail';
 import CommunityProfile from '@/components/communities/CommunityProfile';
+import CommunityLeaderboard from '@/components/communities/CommunityLeaderboard';
 import TodaysQuests from '@/components/landing/todaysQuests';
 import WeeklyQuests from '@/components/landing/weeklyQuests';
 import { t } from '@/translations';
-import { MessageCircle, Target, User, Shield } from 'lucide-react';
+import { MessageCircle, Target, User, Shield, Trophy } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function CommunityDetailPage() {
@@ -22,7 +23,7 @@ export default function CommunityDetailPage() {
         defaultValue="chat"
         className="lg:hidden flex flex-col fixed inset-x-0 top-20 bottom-16"
       >
-        <TabsList className="w-full grid grid-cols-4 h-12 rounded-none border-b bg-white dark:bg-zinc-900 flex-shrink-0">
+        <TabsList className="w-full grid grid-cols-5 h-12 rounded-none border-b bg-white dark:bg-zinc-900 flex-shrink-0">
           <TabsTrigger
             value="chat"
             className="flex flex-col items-center justify-center gap-0.5 data-[state=active]:bg-blue-50 dark:data-[state=active]:bg-blue-950/30 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400"
@@ -50,6 +51,13 @@ export default function CommunityDetailPage() {
           >
             <Shield className="h-4 w-4" />
             <span className="text-[10px] font-medium">Clans</span>
+          </TabsTrigger>
+          <TabsTrigger
+            value="leaderboard"
+            className="flex flex-col items-center justify-center gap-0.5 data-[state=active]:bg-amber-50 dark:data-[state=active]:bg-amber-950/30 data-[state=active]:text-amber-600 dark:data-[state=active]:text-amber-400"
+          >
+            <Trophy className="h-4 w-4" />
+            <span className="text-[10px] font-medium">Leaderboard</span>
           </TabsTrigger>
         </TabsList>
 
@@ -105,7 +113,10 @@ export default function CommunityDetailPage() {
           value="profile"
           className="flex-1 overflow-auto mt-0 p-3 bg-zinc-50 dark:bg-zinc-950"
         >
-          <CommunityProfile communityId={communityId} />
+          <div className="space-y-3">
+            <CommunityProfile communityId={communityId} />
+            <CommunityLeaderboard communityId={communityId} />
+          </div>
         </TabsContent>
 
         <TabsContent
@@ -116,6 +127,13 @@ export default function CommunityDetailPage() {
             <CommunityDetail communityId={communityId} showMode="clans-only" />
           </div>
         </TabsContent>
+
+        <TabsContent
+          value="leaderboard"
+          className="flex-1 overflow-auto mt-0 p-3 bg-white dark:bg-zinc-900"
+        >
+          <CommunityLeaderboard communityId={communityId} />
+        </TabsContent>
       </Tabs>
 
       {/* Desktop Layout */}
@@ -125,7 +143,10 @@ export default function CommunityDetailPage() {
         </div>
 
         <aside className="w-[380px] xl:w-[420px] flex-shrink-0 space-y-2.5 overflow-hidden flex flex-col">
-          <CommunityProfile communityId={communityId} />
+          <div className="space-y-2">
+            <CommunityProfile communityId={communityId} />
+            <CommunityLeaderboard communityId={communityId} />
+          </div>
 
           <div className="bg-white dark:bg-zinc-900 rounded-lg p-1 shadow-sm border border-zinc-200 dark:border-zinc-800">
             <div className="flex gap-1">
