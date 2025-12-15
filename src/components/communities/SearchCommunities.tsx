@@ -5,12 +5,14 @@ import { Search, Users, Globe, Lock, TrendingUp } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { searchCommunities, joinCommunity } from '@/lib/services/communities';
 import LanguageStore from '@/stores/useLanguage';
 import { toast } from 'sonner';
 import { useDebounce } from 'use-debounce';
-import { Community } from '@/lib/generated';
+import { Community, MemberStatus } from '@/lib/generated';
 
 type SortOption = 'all' | 'most-joined' | 'public' | 'private';
 
@@ -25,6 +27,9 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
   const [search, setSearch] = useState('');
   const [sortFilter, setSortFilter] = useState<SortOption>('all');
   const [debouncedSearch] = useDebounce(search, 500);
+  const [showLevelDialog, setShowLevelDialog] = useState(false);
+  const [selectedCommunityId, setSelectedCommunityId] = useState<string | null>(null);
+  const [selectedLevel, setSelectedLevel] = useState<MemberStatus>(MemberStatus.Beginner);
 
   const { data, isLoading } = useQuery({
     queryKey: ['search-communities', debouncedSearch],
@@ -56,11 +61,14 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
 
   // Join mutation
   const joinMutation = useMutation({
-    mutationFn: (communityId: string) => joinCommunity(language, communityId),
+    mutationFn: ({ communityId, status }: { communityId: string; status?: MemberStatus }) =>
+      joinCommunity(language, communityId, status),
     onSuccess: () => {
       toast.success('Successfully joined community!');
       queryClient.invalidateQueries({ queryKey: ['my-communities'] });
       queryClient.invalidateQueries({ queryKey: ['search-communities'] });
+      setShowLevelDialog(false);
+      setSelectedCommunityId(null);
     },
     onError: (error: unknown) => {
       const err = error as { message?: string; error?: string };
@@ -70,7 +78,15 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
   });
 
   const handleJoin = (communityId: string) => {
-    joinMutation.mutate(communityId);
+    setSelectedCommunityId(communityId);
+    setSelectedLevel(MemberStatus.Beginner);
+    setShowLevelDialog(true);
+  };
+
+  const confirmJoin = () => {
+    if (selectedCommunityId) {
+      joinMutation.mutate({ communityId: selectedCommunityId, status: selectedLevel });
+    }
   };
 
   return (
@@ -271,6 +287,87 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
           )}
         </div>
       </DialogContent>
+
+      {/* Experience Level Selection Dialog */}
+      <Dialog open={showLevelDialog} onOpenChange={setShowLevelDialog}>
+        <DialogContent className="sm:max-w-md bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-semibold text-gray-900 dark:text-white">
+              Select Your Experience Level
+            </DialogTitle>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+              Choose the level that best describes your expertise in this community
+            </p>
+          </DialogHeader>
+
+          <div className="py-4">
+            <RadioGroup
+              value={selectedLevel}
+              onValueChange={value => setSelectedLevel(value as MemberStatus)}
+            >
+              <div className="space-y-3">
+                <div className="flex items-start space-x-3 rounded-lg border-2 border-gray-200 dark:border-gray-700 p-4 hover:border-blue-500 dark:hover:border-blue-500 transition-colors cursor-pointer">
+                  <RadioGroupItem value={MemberStatus.Beginner} id="beginner" className="mt-1" />
+                  <Label htmlFor="beginner" className="flex-1 cursor-pointer">
+                    <div className="font-semibold text-gray-900 dark:text-white">Beginner</div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+                      Just starting out and learning the basics
+                    </p>
+                  </Label>
+                </div>
+
+                <div className="flex items-start space-x-3 rounded-lg border-2 border-gray-200 dark:border-gray-700 p-4 hover:border-blue-500 dark:hover:border-blue-500 transition-colors cursor-pointer">
+                  <RadioGroupItem
+                    value={MemberStatus.Intermediate}
+                    id="intermediate"
+                    className="mt-1"
+                  />
+                  <Label htmlFor="intermediate" className="flex-1 cursor-pointer">
+                    <div className="font-semibold text-gray-900 dark:text-white">Intermediate</div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+                      Have some experience and actively developing skills
+                    </p>
+                  </Label>
+                </div>
+
+                <div className="flex items-start space-x-3 rounded-lg border-2 border-gray-200 dark:border-gray-700 p-4 hover:border-blue-500 dark:hover:border-blue-500 transition-colors cursor-pointer">
+                  <RadioGroupItem value={MemberStatus.Advanced} id="advanced" className="mt-1" />
+                  <Label htmlFor="advanced" className="flex-1 cursor-pointer">
+                    <div className="font-semibold text-gray-900 dark:text-white">Advanced</div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+                      Highly experienced and can mentor others
+                    </p>
+                  </Label>
+                </div>
+              </div>
+            </RadioGroup>
+          </div>
+
+          <div className="flex gap-3 justify-end">
+            <Button
+              variant="outline"
+              onClick={() => setShowLevelDialog(false)}
+              className="border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300"
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={confirmJoin}
+              disabled={joinMutation.isPending}
+              className="bg-blue-600 hover:bg-blue-700 text-white"
+            >
+              {joinMutation.isPending ? (
+                <>
+                  <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2" />
+                  Joining...
+                </>
+              ) : (
+                'Join Community'
+              )}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </Dialog>
   );
 }

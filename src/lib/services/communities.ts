@@ -127,11 +127,15 @@ export const searchCommunities = async (lang: Language, query: string) => {
 };
 
 // Join a community
-export const joinCommunity = async (lang: Language, communityId: string) => {
+export const joinCommunity = async (
+  lang: Language,
+  communityId: string,
+  status?: 'Beginner' | 'Intermediate' | 'Advanced',
+) => {
   try {
     const response = await axiosInstance.post<{ success: boolean; message: string }>(
       `/community/${communityId}/join`,
-      {},
+      status ? { status } : {},
       {
         withCredentials: true,
         headers: {

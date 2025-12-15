@@ -98,21 +98,36 @@ export const MessengerChatContainer: React.FC<MessengerChatContainerProps> = ({
       )}
 
       {/* Messages container with proper padding */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 space-y-4">
+      <div className="max-w-3xl mx-auto px-4 sm:px-5 py-4 space-y-3">
         {messages.map((message, index) => {
           const isFirstInGroup =
             index === 0 || messages[index - 1]?.sender?.id !== message.sender?.id;
           const isLastInGroup =
             index === messages.length - 1 || messages[index + 1]?.sender?.id !== message.sender?.id;
 
+          const currentDay = formatDayLabel(message.createdAt);
+          const previousDay = index > 0 ? formatDayLabel(messages[index - 1]?.createdAt) : '';
+          const showDayDivider = currentDay !== previousDay;
+
           return (
-            <MessageBubble
-              key={message.id}
-              message={message}
-              isFirstInGroup={isFirstInGroup}
-              isLastInGroup={isLastInGroup}
-              currentUserId={currentUserId}
-            />
+            <React.Fragment key={message.id}>
+              {showDayDivider && (
+                <div className="flex items-center gap-3 py-2 text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                  <div className="flex-1 border-t border-gray-200 dark:border-gray-800" />
+                  <span className="px-3 py-1 rounded-full bg-white dark:bg-gray-800 shadow-sm border border-gray-200 dark:border-gray-700">
+                    {currentDay}
+                  </span>
+                  <div className="flex-1 border-t border-gray-200 dark:border-gray-800" />
+                </div>
+              )}
+
+              <MessageBubble
+                message={message}
+                isFirstInGroup={isFirstInGroup}
+                isLastInGroup={isLastInGroup}
+                currentUserId={currentUserId}
+              />
+            </React.Fragment>
           );
         })}
 
@@ -254,5 +269,32 @@ const formatMessageTime = (timestamp: string | Date): string => {
     hour: 'numeric',
     minute: '2-digit',
     hour12: true,
+  });
+};
+
+const formatDayLabel = (timestamp: string | Date): string => {
+  const date = new Date(timestamp);
+  const now = new Date();
+
+  const isToday =
+    date.getFullYear() === now.getFullYear() &&
+    date.getMonth() === now.getMonth() &&
+    date.getDate() === now.getDate();
+
+  const yesterday = new Date(now);
+  yesterday.setDate(now.getDate() - 1);
+  const isYesterday =
+    date.getFullYear() === yesterday.getFullYear() &&
+    date.getMonth() === yesterday.getMonth() &&
+    date.getDate() === yesterday.getDate();
+
+  if (isToday) return 'Today';
+  if (isYesterday) return 'Yesterday';
+
+  return date.toLocaleDateString('en-US', {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    year: date.getFullYear() !== now.getFullYear() ? 'numeric' : undefined,
   });
 };

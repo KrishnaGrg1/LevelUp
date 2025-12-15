@@ -102,12 +102,12 @@ export default function MessageArea({
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full w-full flex-1">
       {/* Header */}
-      <div className="h-16 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-6 flex-shrink-0">
+      <div className="h-24 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-6 flex-shrink-0">
         <div className="flex items-center gap-3">
           <div
-            className={`w-12 h-12 rounded-lg flex items-center justify-center ${
+            className={`w-16 h-16 rounded-lg flex items-center justify-center ${
               viewType === 'community'
                 ? 'bg-gradient-to-br from-blue-500 to-purple-600'
                 : isPrivate
@@ -115,11 +115,11 @@ export default function MessageArea({
                   : 'bg-red-500'
             }`}
           >
-            <ShieldIcon className="h-6 w-6 text-white" />
+            <ShieldIcon className="h-8 w-8 text-white" />
           </div>
           <div>
-            <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">{viewName}</h2>
-            <div className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{viewName}</h2>
+            <div className="flex items-center gap-1 text-base text-gray-600 dark:text-gray-400">
               <Users className="h-4 w-4" />
               <span>
                 {memberCount} {t('community:messageArea.members', language)}
@@ -183,7 +183,7 @@ export default function MessageArea({
       />
 
       {/* Input */}
-      <div className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 px-6 py-4 flex-shrink-0">
+      <div className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 px-6 py-6 flex-shrink-0">
         <form onSubmit={handleSendMessage} className="flex items-center gap-3">
           <Button type="button" variant="ghost" size="sm">
             <Paperclip className="h-5 w-5 text-gray-500" />
@@ -197,14 +197,14 @@ export default function MessageArea({
               onChange={e => setMessageInput(e.target.value)}
               onKeyDown={handleKeyPress}
               disabled={isSending || !isMember}
-              className="h-11 text-sm"
+              className="h-14 text-base"
             />
           </div>
 
           <Button
             type="submit"
             size="sm"
-            className="h-11 w-11 rounded-full bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200"
+            className="h-14 w-14 rounded-full bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200"
             disabled={!messageInput.trim() || isSending || !isMember}
           >
             {isSending ? (
