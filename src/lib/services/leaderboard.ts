@@ -17,11 +17,22 @@ export interface PaginationResponse {
   hasMore: boolean;
 }
 
+// The backend sometimes wraps payload under `body.data` instead of `data` directly.
+// Normalize both shapes so consumers always receive the actual `data` object.
 export interface ApiResponse<T> {
-  success: boolean;
-  message: string;
-  data: T;
+  success?: boolean;
+  message?: string;
+  data?: T;
   errorCode?: string;
+  statusCode?: number;
+  body?: {
+    message?: string;
+    data?: T;
+  };
+}
+
+function unwrapData<T>(response: ApiResponse<T>): T | undefined {
+  return response.data ?? response.body?.data;
 }
 
 // ============================================================================
@@ -51,7 +62,19 @@ export async function getGlobalLeaderboard(
   const response = await axiosInstance.get<ApiResponse<GlobalLeaderboardResponse>>('/leaderboard', {
     params,
   });
-  return response.data.data;
+  const fallback: GlobalLeaderboardResponse = {
+    results: [],
+    pagination: {
+      page: params?.page ?? 1,
+      limit: params?.limit ?? 20,
+      total: 0,
+      totalPages: 0,
+      hasMore: false,
+    },
+  };
+
+  // Ensure react-query receives defined data even if API omits data
+  return unwrapData(response.data) ?? fallback;
 }
 
 // ============================================================================
@@ -90,7 +113,7 @@ export async function getCommunityLeaderboard(
     `/leaderboard/community/${communityId}`,
     { params },
   );
-  return response.data.data;
+  return unwrapData(response.data)!;
 }
 
 // ============================================================================
@@ -131,7 +154,20 @@ export async function getTopCommunities(
     '/leaderboard/top-communities',
     { params },
   );
-  return response.data.data;
+  const fallback: TopCommunitiesResponse = {
+    results: [],
+    sortBy: params?.sortBy ?? 'xp',
+    order: params?.order ?? 'desc',
+    pagination: {
+      page: params?.page ?? 1,
+      limit: params?.limit ?? 20,
+      total: 0,
+      totalPages: 0,
+      hasMore: false,
+    },
+  };
+
+  return unwrapData(response.data) ?? fallback;
 }
 
 // ============================================================================
@@ -169,7 +205,7 @@ export async function getClanLeaderboard(
     `/leaderboard/clan/${clanId}`,
     { params },
   );
-  return response.data.data;
+  return unwrapData(response.data)!;
 }
 
 // ============================================================================
@@ -210,7 +246,20 @@ export async function getTopClans(params?: TopClansParams): Promise<TopClansResp
     '/leaderboard/top-clans',
     { params },
   );
-  return response.data.data;
+  const fallback: TopClansResponse = {
+    results: [],
+    sortBy: params?.sortBy ?? 'xp',
+    order: params?.order ?? 'desc',
+    pagination: {
+      page: params?.page ?? 1,
+      limit: params?.limit ?? 20,
+      total: 0,
+      totalPages: 0,
+      hasMore: false,
+    },
+  };
+
+  return unwrapData(response.data) ?? fallback;
 }
 
 // ============================================================================
