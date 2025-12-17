@@ -12,7 +12,6 @@ interface TopBarProps {
   showBackButton?: boolean;
   backUrl?: string;
   isAuthenticated?: boolean;
-  isAdmin?: boolean;
 }
 
 const TopBar: React.FC<TopBarProps> = ({
@@ -20,7 +19,6 @@ const TopBar: React.FC<TopBarProps> = ({
   showBackButton = false,
   backUrl,
   isAuthenticated = false,
-  isAdmin = false,
 }) => {
   const defaultBackUrl = `/${language}/home`;
   const { user } = authStore();
