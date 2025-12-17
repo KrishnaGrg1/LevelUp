@@ -152,6 +152,32 @@ export const joinCommunity = async (lang: Language, communityId: string) => {
   }
 };
 
+// Join a community
+export const joinPrivateCommunity = async (lang: Language, joinCode: string) => {
+  try {
+    const response = await axiosInstance.post<{ success: boolean; message: string }>(
+      `/community/join`,
+      { joinCode },
+      {
+        withCredentials: true,
+        headers: {
+          'X-Language': lang,
+        },
+      },
+    );
+    return response.data;
+  } catch (error: unknown) {
+    const err = error as {
+      response?: { data?: { body?: { message?: string }; message?: string } };
+    };
+    const errorMessage =
+      err.response?.data?.body?.message ||
+      err.response?.data?.message ||
+      'Failed to join community';
+    throw new Error(errorMessage);
+  }
+};
+
 // Specific   Community Detail
 export const communityDetailById = async (lang: Language, communityId: string) => {
   try {

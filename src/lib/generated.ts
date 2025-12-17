@@ -327,7 +327,9 @@ export interface CreateCommunityResponse {
   statusCode: number;
   body: {
     message: string;
-    data: CommunityDTO;
+    data: {
+      id: string;
+    };
   };
 }
 export interface TogglePinDTO {
