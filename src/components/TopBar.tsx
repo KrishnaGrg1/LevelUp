@@ -41,34 +41,14 @@ const TopBar: React.FC<TopBarProps> = ({
             )}
 
             {/* Brand */}
-            {!isAuthenticated ? (
+            {!isAuthenticated && (
               <Link href={`/${language}/home`} className="flex items-center space-x-2 group">
                 <div className="w-8 h-8  rounded-lg border-2 flex items-center justify-center  ">
                   <Sparkles className="w-4 h-4" />
                 </div>
                 <span className="text-2xl font-extrabold ">Level Up</span>
               </Link>
-            ) : isAdmin ? (
-              <Link
-                href={`/${language}/admin/dashboard`}
-                className="flex items-center space-x-2 group"
-              >
-                <div className="w-8 h-8  rounded-lg border-2 flex items-center justify-center  ">
-                  <Sparkles className="w-4 h-4" />
-                </div>
-                <span className="text-2xl font-extrabold ">Level Up</span>
-              </Link>
-            ) : (
-              <Link
-                href={`/${language}/user/dashboard`}
-                className="flex items-center space-x-2 group"
-              >
-                <div className="w-8 h-8  rounded-lg border-2 flex items-center justify-center  ">
-                  <Sparkles className="w-4 h-4" />
-                </div>
-                <span className="text-2xl font-extrabold ">Level Up</span>
-              </Link>
-            )}
+            ) }
           </div>
 
           {/* Right Side - Language Switcher */}

@@ -36,8 +36,8 @@ const Navbar: React.FC<NavbarProps> = ({ language: initialLanguage = 'eng' }) =>
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-black/80 backdrop-blur-lg border-b border-gray-100 dark:border-gray-900 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
+      {/* <div className="max-w-7xl mx-auto px-6 py-4"> */}
+        <div className="flex items-center justify-between px-6 py-4">
           {/* Brand */}
           <Link href={`/${currentLanguage}/home`} className="flex items-center space-x-2 group">
             <div className="w-8 h-8 bg-black dark:bg-white rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
@@ -157,7 +157,7 @@ const Navbar: React.FC<NavbarProps> = ({ language: initialLanguage = 'eng' }) =>
             </Sheet>
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </nav>
   );
 };
