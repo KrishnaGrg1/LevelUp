@@ -1,0 +1,59 @@
+{
+  "title": "Leaderboard",
+  "failedToLoad": "Failed to load community leaderboard",
+  "noMembers": "No members found in this community",
+  "communityXP": "Community XP",
+  "xp": "XP",
+  "showing": "Showing {start} - {end} of {total} members",
+  "page": {
+    "title": "Leaderboards",
+    "subtitle": "Global users, top communities, and top clans — all in one place.",
+    "tabs": {
+      "global": "Global Users",
+      "communities": "Top Communities",
+      "clans": "Top Clans"
+    },
+    "global": {
+      "title": "Top Players",
+      "failed": "Failed to load leaderboard",
+      "noUsers": "No users found",
+      "level": "Level",
+      "tokens": "tokens"
+    },
+    "communities": {
+      "title": "Top Communities",
+      "failed": "Failed to load communities",
+      "noCommunities": "No communities found",
+      "sortedBy": "Sorted by {sortBy} ({order})",
+      "sortBy": "Sort By",
+      "order": "Order",
+      "highestFirst": "Highest First",
+      "lowestFirst": "Lowest First",
+      "xp": "XP",
+      "members": "Members",
+      "created": "Created",
+      "age": "Age",
+      "days": "days"
+    },
+    "clans": {
+      "title": "Top Clans",
+      "failed": "Failed to load clans",
+      "noClans": "No clans found",
+      "sortedBy": "Sorted by {sortBy} ({order})",
+      "communityFilter": "Community: {id}",
+      "sortBy": "Sort By",
+      "order": "Order",
+      "highestFirst": "Highest First",
+      "lowestFirst": "Lowest First",
+      "communityId": "Community ID (optional)",
+      "enterCommunityId": "Enter community id",
+      "apply": "Apply",
+      "clear": "Clear",
+      "xp": "XP",
+      "members": "Members",
+      "created": "Created",
+      "age": "Age",
+      "days": "days"
+    }
+  }
+}

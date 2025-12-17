@@ -13,6 +13,7 @@ import MessageArea from '@/components/communities/MessageArea';
 import ClansList from '@/components/clans/ClansList';
 
 import LanguageStore from '@/stores/useLanguage';
+import { t } from '@/translations';
 
 import { MessageCircle, Target, Shield, Trophy, Users, Settings, Loader2 } from 'lucide-react';
 
@@ -95,7 +96,7 @@ export default function CommunityDetailPage() {
                     group-data-[state=active]:opacity-100
                   "
                 >
-                  Chat
+                  {t('community.tabs.chat')}
                 </span>
               </TabsTrigger>
 
@@ -110,7 +111,7 @@ export default function CommunityDetailPage() {
                     group-data-[state=active]:opacity-100
                   "
                 >
-                  Quests
+                  {t('community.tabs.quests')}
                 </span>
               </TabsTrigger>
 
@@ -125,7 +126,7 @@ export default function CommunityDetailPage() {
                     group-data-[state=active]:opacity-100
                   "
                 >
-                  Clans
+                  {t('community.tabs.clans')}
                 </span>
               </TabsTrigger>
 
@@ -140,7 +141,7 @@ export default function CommunityDetailPage() {
                     group-data-[state=active]:opacity-100
                   "
                 >
-                  Leaderboard
+                  {t('community.tabs.leaderboard')}
                 </span>
               </TabsTrigger>
             </TabsList>

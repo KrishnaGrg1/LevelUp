@@ -1,0 +1,59 @@
+{
+  "title": "排行榜",
+  "failedToLoad": "加载社区排行榜失败",
+  "noMembers": "未在此社区找到成员",
+  "communityXP": "社区 XP",
+  "xp": "XP",
+  "showing": "显示 {start} - {end}，共 {total} 名成员",
+  "page": {
+    "title": "排行榜",
+    "subtitle": "全球用户、顶级社区和顶级氏族 — 全部在一个地方。",
+    "tabs": {
+      "global": "全球用户",
+      "communities": "顶级社区",
+      "clans": "顶级氏族"
+    },
+    "global": {
+      "title": "顶级玩家",
+      "failed": "加载排行榜失败",
+      "noUsers": "未找到用户",
+      "level": "等级",
+      "tokens": "代币"
+    },
+    "communities": {
+      "title": "顶级社区",
+      "failed": "加载社区失败",
+      "noCommunities": "未找到社区",
+      "sortedBy": "按 {sortBy} ({order}) 排序",
+      "sortBy": "排序方式",
+      "order": "顺序",
+      "highestFirst": "最高优先",
+      "lowestFirst": "最低优先",
+      "xp": "XP",
+      "members": "成员",
+      "created": "创建日期",
+      "age": "年龄",
+      "days": "天"
+    },
+    "clans": {
+      "title": "顶级氏族",
+      "failed": "加载氏族失败",
+      "noClans": "未找到氏族",
+      "sortedBy": "按 {sortBy} ({order}) 排序",
+      "communityFilter": "社区: {id}",
+      "sortBy": "排序方式",
+      "order": "顺序",
+      "highestFirst": "最高优先",
+      "lowestFirst": "最低优先",
+      "communityId": "社区ID（可选）",
+      "enterCommunityId": "输入社匾id",
+      "apply": "应用",
+      "clear": "清除",
+      "xp": "XP",
+      "members": "成员",
+      "created": "创建日期",
+      "age": "年龄",
+      "days": "天"
+    }
+  }
+}

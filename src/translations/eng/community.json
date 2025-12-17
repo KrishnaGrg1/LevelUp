@@ -89,6 +89,12 @@
     "public": "Public",
     "owner": "Owner"
   },
+  "tabs": {
+    "chat": "Chat",
+    "quests": "Quests",
+    "clans": "Clans",
+    "leaderboard": "Leaderboard"
+  },
   "toast": {
     "createdSuccess": "Community created successfully!",
     "createFailed": "Failed to create community",

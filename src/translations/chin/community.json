@@ -89,6 +89,12 @@
     "public": "公开",
     "owner": "所有者"
   },
+  "tabs": {
+    "chat": "聊天",
+    "quests": "任务",
+    "clans": "氏族",
+    "leaderboard": "排行榜"
+  },
   "toast": {
     "createdSuccess": "社区创建成功！",
     "createFailed": "社区创建失败",

@@ -89,6 +89,12 @@
     "public": "公開",
     "owner": "オーナー"
   },
+  "tabs": {
+    "chat": "チャット",
+    "quests": "クエスト",
+    "clans": "クラン",
+    "leaderboard": "リーダーボード"
+  },
   "toast": {
     "createdSuccess": "コミュニティが正常に作成されました！",
     "createFailed": "コミュニティの作成に失敗しました",

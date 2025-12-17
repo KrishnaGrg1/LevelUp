@@ -89,6 +89,12 @@
     "public": "Público",
     "owner": "Propietario"
   },
+  "tabs": {
+    "chat": "Chat",
+    "quests": "Misiones",
+    "clans": "Clanes",
+    "leaderboard": "Clasificación"
+  },
   "toast": {
     "createdSuccess": "¡Comunidad creada exitosamente!",
     "createFailed": "Error al crear la comunidad",

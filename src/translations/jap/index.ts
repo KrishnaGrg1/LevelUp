@@ -11,6 +11,7 @@ import clans from './clans.json';
 import aiChat from './aiChat.json';
 import quests from './quests.json';
 import community from './community.json';
+import leaderboard from './leaderboard.json';
 import admin from './admin.json';
 
 const jap = {
@@ -27,6 +28,7 @@ const jap = {
   aiChat,
   quests,
   community,
+  leaderboard,
   admin,
 };
 

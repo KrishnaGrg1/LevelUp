@@ -89,6 +89,12 @@
     "public": "عام",
     "owner": "المالك"
   },
+  "tabs": {
+    "chat": "دردشة",
+    "quests": "المهام",
+    "clans": "العشائر",
+    "leaderboard": "لوحة الصدارة"
+  },
   "toast": {
     "createdSuccess": "تم إنشاء المجتمع بنجاح!",
     "createFailed": "فشل إنشاء المجتمع",

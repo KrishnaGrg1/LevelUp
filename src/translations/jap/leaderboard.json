@@ -1,0 +1,59 @@
+{
+  "title": "リーダーボード",
+  "failedToLoad": "コミュニティのリーダーボードの読み込みに失敗しました",
+  "noMembers": "このコミュニティにメンバーが見つかりません",
+  "communityXP": "コミュニティXP",
+  "xp": "XP",
+  "showing": "{start} - {end} / {total} 人のメンバーを表示",
+  "page": {
+    "title": "リーダーボード",
+    "subtitle": "グローバルユーザー、トップコミュニティ、トップクラン — すべて一か所に。",
+    "tabs": {
+      "global": "グローバルユーザー",
+      "communities": "トップコミュニティ",
+      "clans": "トップクラン"
+    },
+    "global": {
+      "title": "トッププレイヤー",
+      "failed": "リーダーボードの読み込みに失敗しました",
+      "noUsers": "ユーザーが見つかりません",
+      "level": "レベル",
+      "tokens": "トークン"
+    },
+    "communities": {
+      "title": "トップコミュニティ",
+      "failed": "コミュニティの読み込みに失敗しました",
+      "noCommunities": "コミュニティが見つかりません",
+      "sortedBy": "{sortBy} ({order}) でソート",
+      "sortBy": "ソート",
+      "order": "順序",
+      "highestFirst": "高い順",
+      "lowestFirst": "低い順",
+      "xp": "XP",
+      "members": "メンバー",
+      "created": "作成日",
+      "age": "経過日数",
+      "days": "日"
+    },
+    "clans": {
+      "title": "トップクラン",
+      "failed": "クランの読み込みに失敗しました",
+      "noClans": "クランが見つかりません",
+      "sortedBy": "{sortBy} ({order}) でソート",
+      "communityFilter": "コミュニティ: {id}",
+      "sortBy": "ソート",
+      "order": "順序",
+      "highestFirst": "高い順",
+      "lowestFirst": "低い順",
+      "communityId": "コミュニティID（任意）",
+      "enterCommunityId": "コミュニティIDを入力",
+      "apply": "適用",
+      "clear": "クリア",
+      "xp": "XP",
+      "members": "メンバー",
+      "created": "作成日",
+      "age": "経過日数",
+      "days": "日"
+    }
+  }
+}

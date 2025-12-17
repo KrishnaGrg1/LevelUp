@@ -8,6 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Trophy, Medal, Award, Loader2, Users } from 'lucide-react';
 import { BetterPagination } from '@/components/BetterPagination';
+import { t } from '@/translations';
 
 interface CommunityLeaderboardProps {
   communityId: string;
@@ -51,7 +52,7 @@ export default function CommunityLeaderboard({ communityId }: CommunityLeaderboa
       <Card className="border-red-500/20 bg-white dark:bg-gray-800">
         <CardContent className="p-6">
           <p className="text-center text-red-500 dark:text-red-400">
-            Failed to load community leaderboard
+            {t('leaderboard.failedToLoad')}
           </p>
         </CardContent>
       </Card>
@@ -64,7 +65,7 @@ export default function CommunityLeaderboard({ communityId }: CommunityLeaderboa
         <CardContent className="p-6">
           <div className="text-center py-10">
             <Users className="h-12 w-12 mx-auto mb-3 text-gray-400" />
-            <p className="text-gray-500 dark:text-gray-400">No members found in this community</p>
+            <p className="text-gray-500 dark:text-gray-400">{t('leaderboard.noMembers')}</p>
           </div>
         </CardContent>
       </Card>
@@ -77,10 +78,10 @@ export default function CommunityLeaderboard({ communityId }: CommunityLeaderboa
         <div className="flex items-center justify-between">
           <CardTitle className="text-xl text-gray-900 dark:text-white flex items-center gap-2">
             <Trophy className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-            {data.community.name} Leaderboard
+            {data.community.name} {t('leaderboard.title')}
           </CardTitle>
           <Badge className="bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 border-0">
-            {data.community.xp.toLocaleString()} Community XP
+            {data.community.xp.toLocaleString()} {t('leaderboard.communityXP')}
           </Badge>
         </div>
       </CardHeader>
@@ -127,7 +128,9 @@ export default function CommunityLeaderboard({ communityId }: CommunityLeaderboa
 
                 {/* XP */}
                 <div className="text-right">
-                  <p className="text-xs font-medium text-gray-600 dark:text-gray-400">XP</p>
+                  <p className="text-xs font-medium text-gray-600 dark:text-gray-400">
+                    {t('leaderboard.xp')}
+                  </p>
                   <p className="text-base font-bold text-blue-600 dark:text-blue-400">
                     {member.totalXP.toLocaleString()}
                   </p>
@@ -152,11 +155,13 @@ export default function CommunityLeaderboard({ communityId }: CommunityLeaderboa
           </div>
         )}
 
-        {data.pagination && (
+        {data.pagination && data.pagination.total && (
           <div className="p-2 text-center text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">
-            Showing {((page - 1) * limit + 1).toLocaleString()} -{' '}
-            {Math.min(page * limit, data.pagination.total).toLocaleString()} of{' '}
-            {data.pagination.total.toLocaleString()} members
+            {t('leaderboard.showing', {
+              start: ((page - 1) * limit + 1).toLocaleString(),
+              end: Math.min(page * limit, data.pagination.total).toLocaleString(),
+              total: data.pagination.total.toLocaleString(),
+            })}
           </div>
         )}
       </CardContent>

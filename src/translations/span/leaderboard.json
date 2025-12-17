@@ -1,0 +1,59 @@
+{
+  "title": "Clasificación",
+  "failedToLoad": "Error al cargar la clasificación de la comunidad",
+  "noMembers": "No se encontraron miembros en esta comunidad",
+  "communityXP": "XP de la Comunidad",
+  "xp": "XP",
+  "showing": "Mostrando {start} - {end} de {total} miembros",
+  "page": {
+    "title": "Clasificaciones",
+    "subtitle": "Usuarios globales, mejores comunidades y mejores clanes — todo en un solo lugar.",
+    "tabs": {
+      "global": "Usuarios Globales",
+      "communities": "Mejores Comunidades",
+      "clans": "Mejores Clanes"
+    },
+    "global": {
+      "title": "Mejores Jugadores",
+      "failed": "Error al cargar la clasificación",
+      "noUsers": "No se encontraron usuarios",
+      "level": "Nivel",
+      "tokens": "tokens"
+    },
+    "communities": {
+      "title": "Mejores Comunidades",
+      "failed": "Error al cargar las comunidades",
+      "noCommunities": "No se encontraron comunidades",
+      "sortedBy": "Ordenado por {sortBy} ({order})",
+      "sortBy": "Ordenar Por",
+      "order": "Orden",
+      "highestFirst": "Más Alto Primero",
+      "lowestFirst": "Más Bajo Primero",
+      "xp": "XP",
+      "members": "Miembros",
+      "created": "Creado",
+      "age": "Edad",
+      "days": "días"
+    },
+    "clans": {
+      "title": "Mejores Clanes",
+      "failed": "Error al cargar los clanes",
+      "noClans": "No se encontraron clanes",
+      "sortedBy": "Ordenado por {sortBy} ({order})",
+      "communityFilter": "Comunidad: {id}",
+      "sortBy": "Ordenar Por",
+      "order": "Orden",
+      "highestFirst": "Más Alto Primero",
+      "lowestFirst": "Más Bajo Primero",
+      "communityId": "ID de Comunidad (opcional)",
+      "enterCommunityId": "Ingrese el id de la comunidad",
+      "apply": "Aplicar",
+      "clear": "Limpiar",
+      "xp": "XP",
+      "members": "Miembros",
+      "created": "Creado",
+      "age": "Edad",
+      "days": "días"
+    }
+  }
+}
