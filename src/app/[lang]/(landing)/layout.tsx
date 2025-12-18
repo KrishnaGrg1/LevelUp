@@ -5,8 +5,6 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import LanguageStore from '@/stores/useLanguage';
 import { validateLanguage } from '@/lib/language';
-import ClientOnly from '@/components/ClientOnly';
-import ParticleBackground from '@/components/ParticleBackground';
 
 interface LandingLayoutProps {
   children: React.ReactNode;
@@ -25,9 +23,6 @@ export default function LandingLayout({ children, params }: LandingLayoutProps) 
 
   return (
     <>
-      <ClientOnly>
-        <ParticleBackground count={30} animation="rise" />
-      </ClientOnly>
 
       <div className="min-h-screen bg-black text-white overflow-x-hidden">
         {/* Common Navbar for all landing pages */}

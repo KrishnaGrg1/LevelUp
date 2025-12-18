@@ -3,8 +3,7 @@ import Link from 'next/link';
 import { ArrowRight, Sparkles, Zap } from 'lucide-react';
 import { t } from '@/translations';
 import LanguageStore from '@/stores/useLanguage';
-import ClientOnly from '@/components/ClientOnly';
-import ParticleBackground from '@/components/ParticleBackground';
+
 
 interface CTASectionProps {
   className?: string;
@@ -17,24 +16,8 @@ export const CTASection: React.FC<CTASectionProps> = ({ className = '' }) => {
     <section
       className={`relative py-32 bg-gradient-to-b from-slate-900 to-black overflow-hidden ${className}`}
     >
-      {/* Background effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-radial from-indigo-500/20 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-radial from-purple-500/20 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-conic from-indigo-500/10 via-purple-500/10 to-pink-500/10 rounded-full blur-3xl"></div>
-      </div>
+ 
 
-      {/* Floating particles - only render on client side */}
-      <div className="absolute inset-0 overflow-hidden">
-        <ClientOnly>
-          <ParticleBackground
-            count={20}
-            animation="float"
-            showBackground={false}
-            particleClass="w-2 h-2 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full opacity-30 animate-float"
-          />
-        </ClientOnly>
-      </div>
 
       <div className="relative mx-auto max-w-4xl px-6 text-center z-10">
         {/* Main heading */}
