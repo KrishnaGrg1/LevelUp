@@ -143,7 +143,7 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
             </Button>
           </div>
         </DialogHeader>
-
+ 
         <div className="space-y-3 py-3 h-[60vh] pr-2">
           {activeTab === 'search' ? (
             <>
