@@ -55,7 +55,7 @@ export interface PaymentVerificationData {
   refunded: boolean;
 }
 
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T> {
   statusCode: number;
   body: {
     message: string;
