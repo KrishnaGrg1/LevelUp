@@ -10,7 +10,8 @@
     "available": "tokens disponibles",
     "insufficient": "Tokens insuficientes",
     "insufficientDescription": "Necesitas más tokens para continuar chateando",
-    "used": "tokens usados"
+    "used": "tokens usados",
+    "costPerMessage": "Costo por chat"
   },
   "input": {
     "placeholder": "Escribe tu mensaje aquí...",

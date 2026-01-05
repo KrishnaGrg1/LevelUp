@@ -101,7 +101,6 @@ export const fetchDailyQuests = async (lang: Language) => {
     headers: { 'X-Language': lang },
     withCredentials: true,
   });
-  console.log('fetchDailyQuests response:', res.data);
   return res.data;
 };
 
@@ -147,6 +146,10 @@ export interface CompleteQuestResponse {
   communityXp?: number;
   communityLevel?: number;
   communityId?: string;
+  communityTotalXp?: number;
+  clanMemberXp?: number;
+  clanId?: string;
+  clanTotalXp?: number;
 }
 
 export interface StartQuestResponse {
@@ -177,7 +180,6 @@ export const completeQuest = async (questId: string, lang: Language) => {
   return res.data;
 };
 
-// User Features
 export interface CompletedQuestsResponse {
   quests: Quest[];
   pagination: {
@@ -334,7 +336,6 @@ export const fetchAIHealth = async (lang: Language) => {
   return res.data;
 };
 
-// User can force generate their own quests
 export const forceGenerateDailyQuests = async (lang: Language) => {
   const res = await axiosInstance.post<
     ApiResponse<{ today: QuestWithCommunity[]; count: number; forced: boolean }>
@@ -355,7 +356,6 @@ export const forceGenerateWeeklyQuests = async (lang: Language) => {
   return res.data;
 };
 
-// Admin only - delete quest
 export const deleteQuest = async (questId: string, lang: Language) => {
   const res = await axiosInstance.delete<ApiResponse<{ deletedQuestId: string; userId: string }>>(
     `/ai/quests/${questId}`,
@@ -367,7 +367,6 @@ export const deleteQuest = async (questId: string, lang: Language) => {
   return res.data;
 };
 
-// Community Memberships
 export interface CommunityMembership {
   communityId: string;
   totalXP: number;
@@ -396,8 +395,6 @@ export const getCommunityMemberships = async (lang: Language) => {
   );
   return res.data;
 };
-
-// Admin Quest Management APIs
 
 export interface AdminGenerateAllResponse {
   totalTodayQuests?: number;
@@ -450,7 +447,6 @@ export interface BulkDeleteResponse {
   filters: BulkDeleteFilter;
 }
 
-// Admin: Generate daily quests for all users
 export const adminGenerateDailyAll = async (lang: Language) => {
   const res = await axiosInstance.post<ApiResponse<AdminGenerateAllResponse>>(
     `/ai/admin/generate/daily/all`,
@@ -463,7 +459,6 @@ export const adminGenerateDailyAll = async (lang: Language) => {
   return res.data;
 };
 
-// Admin: Generate daily quests for specific user
 export const adminGenerateDailyUser = async (userId: string, lang: Language) => {
   const res = await axiosInstance.post<ApiResponse<AdminGenerateUserResponse>>(
     `/ai/admin/generate/daily/${userId}`,
@@ -476,7 +471,6 @@ export const adminGenerateDailyUser = async (userId: string, lang: Language) => 
   return res.data;
 };
 
-// Admin: Generate weekly quests for all users
 export const adminGenerateWeeklyAll = async (lang: Language) => {
   const res = await axiosInstance.post<ApiResponse<AdminGenerateAllResponse>>(
     `/ai/admin/generate/weekly/all`,
@@ -489,7 +483,6 @@ export const adminGenerateWeeklyAll = async (lang: Language) => {
   return res.data;
 };
 
-// Admin: Generate weekly quests for specific user
 export const adminGenerateWeeklyUser = async (userId: string, lang: Language) => {
   const res = await axiosInstance.post<ApiResponse<AdminGenerateUserResponse>>(
     `/ai/admin/generate/weekly/${userId}`,
@@ -502,7 +495,6 @@ export const adminGenerateWeeklyUser = async (userId: string, lang: Language) =>
   return res.data;
 };
 
-// Admin: Get quest statistics
 export const adminGetQuestStats = async (lang: Language) => {
   const res = await axiosInstance.get<ApiResponse<QuestStatsResponse>>(`/ai/admin/quests/stats`, {
     headers: { 'X-Language': lang },
@@ -511,7 +503,6 @@ export const adminGetQuestStats = async (lang: Language) => {
   return res.data;
 };
 
-// Admin: Bulk delete quests
 export const adminBulkDeleteQuests = async (filters: BulkDeleteFilter, lang: Language) => {
   const res = await axiosInstance.delete<ApiResponse<BulkDeleteResponse>>(`/ai/admin/quests`, {
     headers: { 'X-Language': lang },

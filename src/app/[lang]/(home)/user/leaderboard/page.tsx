@@ -79,33 +79,13 @@ export default function LeaderboardsPage() {
     staleTime: 30000,
   });
 
-  const getRankIcon = (rank: number, color: 'yellow' | 'blue' | 'cyan') => {
-    const map = {
-      yellow: {
-        first: 'text-yellow-500',
-        second: 'text-gray-400',
-        third: 'text-amber-600',
-        bgFirst: 'from-yellow-50 dark:from-yellow-900/10',
-      },
-      blue: {
-        first: 'text-blue-600',
-        second: 'text-gray-400',
-        third: 'text-amber-600',
-        bgFirst: 'from-blue-50 dark:from-blue-900/10',
-      },
-      cyan: {
-        first: 'text-cyan-600',
-        second: 'text-gray-400',
-        third: 'text-amber-600',
-        bgFirst: 'from-cyan-50 dark:from-cyan-900/10',
-      },
-    } as const;
-
-    const palette = map[color];
-
-    if (rank === 1) return <Trophy className={`h-6 w-6 ${palette.first}`} aria-label="1st place" />;
-    if (rank === 2) return <Medal className={`h-6 w-6 ${palette.second}`} aria-label="2nd place" />;
-    if (rank === 3) return <Award className={`h-6 w-6 ${palette.third}`} aria-label="3rd place" />;
+  const getRankIcon = (rank: number) => {
+    if (rank === 1)
+      return <Trophy className="h-6 w-6 fill-yellow-500 text-yellow-500" aria-label="1st place" />;
+    if (rank === 2)
+      return <Medal className="h-6 w-6 fill-gray-400 text-gray-400" aria-label="2nd place" />;
+    if (rank === 3)
+      return <Award className="h-6 w-6 fill-amber-600 text-amber-600" aria-label="3rd place" />;
     return <span className="text-lg font-bold text-gray-600 dark:text-gray-400">#{rank}</span>;
   };
 
@@ -114,26 +94,26 @@ export default function LeaderboardsPage() {
     const limit = globalLimit;
 
     return (
-      <Card className="border-purple-500/20 bg-white dark:bg-gray-800">
-        <CardHeader className="border-b border-purple-500/10">
-          <CardTitle className="text-xl text-gray-900 dark:text-white">Top Players</CardTitle>
+      <Card className="border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-black">
+        <CardHeader className="border-b border-gray-200 dark:border-gray-800">
+          <CardTitle className="text-xl text-gray-900 dark:text-gray-100">Top Players</CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           {isPending ? (
             <div className="flex justify-center py-20">
-              <Loader2 className="h-10 w-10 animate-spin text-purple-600 dark:text-purple-400" />
+              <Loader2 className="h-10 w-10 animate-spin text-gray-700 dark:text-gray-300" />
             </div>
           ) : isError ? (
-            <div className="text-center py-20">
+            <div className="py-20 text-center">
               <p className="text-red-500 dark:text-red-400">Failed to load leaderboard</p>
             </div>
           ) : !data?.results || data.results.length === 0 ? (
-            <div className="text-center py-20">
+            <div className="py-20 text-center">
               <p className="text-gray-500 dark:text-gray-400">No users found</p>
             </div>
           ) : (
             <>
-              <div className="divide-y divide-gray-200 dark:divide-gray-700">
+              <div className="divide-y divide-gray-200 dark:divide-gray-800">
                 {data.results.map((user, index) => {
                   const rank = (globalPage - 1) * limit + index + 1;
                   const isTopThree = rank <= 3;
@@ -141,29 +121,27 @@ export default function LeaderboardsPage() {
                   return (
                     <div
                       key={user.id}
-                      className={`flex items-center gap-4 p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors ${
-                        isTopThree
-                          ? 'bg-gradient-to-r from-yellow-50 to-transparent dark:from-yellow-900/10 dark:to-transparent'
-                          : ''
+                      className={`flex items-center gap-4 p-4 transition-colors hover:bg-gray-50 dark:hover:bg-gray-900/50 ${
+                        isTopThree ? 'bg-gray-50 dark:bg-gray-900/30' : ''
                       }`}
                     >
-                      <div className="w-12 flex justify-center">{getRankIcon(rank, 'yellow')}</div>
+                      <div className="flex w-12 justify-center">{getRankIcon(rank)}</div>
 
-                      <Avatar className="h-12 w-12 border-2 border-purple-200 dark:border-purple-800">
+                      <Avatar className="h-12 w-12 border border-gray-200 dark:border-gray-800">
                         <AvatarImage src={user.profilePicture || undefined} alt={user.UserName} />
-                        <AvatarFallback className="bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 font-semibold">
+                        <AvatarFallback className="bg-gray-100 font-semibold text-gray-700 dark:bg-gray-900 dark:text-gray-300">
                           {user.UserName.charAt(0).toUpperCase()}
                         </AvatarFallback>
                       </Avatar>
 
-                      <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-gray-900 dark:text-white truncate">
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate font-semibold text-gray-900 dark:text-white">
                           {user.UserName}
                         </p>
-                        <div className="flex items-center gap-2 mt-1">
+                        <div className="mt-1 flex items-center gap-2">
                           <Badge
                             variant="secondary"
-                            className="text-xs bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300"
+                            className="border border-gray-200 bg-gray-100 text-xs text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                           >
                             Level {user.level}
                           </Badge>
@@ -175,7 +153,7 @@ export default function LeaderboardsPage() {
 
                       <div className="text-right">
                         <p className="text-sm font-medium text-gray-600 dark:text-gray-400">XP</p>
-                        <p className="text-lg font-bold text-purple-600 dark:text-purple-400">
+                        <p className="text-lg font-bold text-gray-900 dark:text-gray-100">
                           {user.xp.toLocaleString()}
                         </p>
                       </div>
@@ -185,7 +163,7 @@ export default function LeaderboardsPage() {
               </div>
 
               {data.pagination.totalPages > 1 && (
-                <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+                <div className="border-t border-gray-200 p-4 dark:border-gray-800">
                   <BetterPagination
                     paginationMetadata={{
                       total: data.pagination.total,
@@ -209,18 +187,18 @@ export default function LeaderboardsPage() {
     const limit = communityLimit;
 
     return (
-      <Card className="border-blue-500/20 bg-white dark:bg-gray-800">
-        <CardHeader className="border-b border-blue-500/10 flex flex-col gap-3">
+      <Card className="border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-black">
+        <CardHeader className="flex flex-col gap-3 border-b border-gray-200 dark:border-gray-800">
           <div className="flex items-center justify-between gap-2">
-            <CardTitle className="text-xl text-gray-900 dark:text-white flex items-center gap-2">
-              <Trophy className="h-5 w-5 text-blue-600" /> Top Communities
+            <CardTitle className="flex items-center gap-2 text-xl text-gray-900 dark:text-white">
+              <Trophy className="h-5 w-5 text-gray-900 dark:text-gray-100" /> Top Communities
             </CardTitle>
             <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
               Sorted by {communitySortBy} ({communityOrder})
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div>
               <label className="text-xs text-gray-600 dark:text-gray-400">Sort By</label>
               <Select
@@ -277,19 +255,19 @@ export default function LeaderboardsPage() {
         <CardContent className="p-0">
           {isPending ? (
             <div className="flex justify-center py-20">
-              <Loader2 className="h-10 w-10 animate-spin text-blue-600 dark:text-blue-400" />
+              <Loader2 className="h-10 w-10 animate-spin text-gray-700 dark:text-gray-300" />
             </div>
           ) : isError ? (
-            <div className="text-center py-20">
+            <div className="py-20 text-center">
               <p className="text-red-500 dark:text-red-400">Failed to load communities</p>
             </div>
           ) : !data?.results || data.results.length === 0 ? (
-            <div className="text-center py-20">
+            <div className="py-20 text-center">
               <p className="text-gray-500 dark:text-gray-400">No communities found</p>
             </div>
           ) : (
             <>
-              <div className="divide-y divide-gray-200 dark:divide-gray-700">
+              <div className="divide-y divide-gray-200 dark:divide-gray-800">
                 {data.results.map((community, index) => {
                   const rank = (communityPage - 1) * limit + index + 1;
                   const isTopThree = rank <= 3;
@@ -300,28 +278,26 @@ export default function LeaderboardsPage() {
                   return (
                     <div
                       key={community.id}
-                      className={`flex items-center gap-4 p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors ${
-                        isTopThree
-                          ? 'bg-gradient-to-r from-blue-50 to-transparent dark:from-blue-900/10 dark:to-transparent'
-                          : ''
+                      className={`flex items-center gap-4 p-4 transition-colors hover:bg-gray-50 dark:hover:bg-gray-900/50 ${
+                        isTopThree ? 'bg-gray-50 dark:bg-gray-900/30' : ''
                       }`}
                     >
-                      <div className="w-12 flex justify-center">{getRankIcon(rank, 'blue')}</div>
+                      <div className="flex w-12 justify-center">{getRankIcon(rank)}</div>
 
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-bold text-gray-900 dark:text-white truncate text-lg">
+                      <div className="min-w-0 flex-1">
+                        <h3 className="truncate text-lg font-bold text-gray-900 dark:text-white">
                           {community.name}
                         </h3>
-                        <div className="flex flex-wrap items-center gap-2 mt-2">
-                          <Badge className="bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300">
-                            <Trophy className="h-3 w-3 mr-1" />
+                        <div className="mt-2 flex flex-wrap items-center gap-2">
+                          <Badge className="border border-gray-200 bg-gray-100 text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
+                            <Trophy className="mr-1 h-3 w-3" />
                             {community.xp.toLocaleString()} XP
                           </Badge>
                           <Badge
                             variant="secondary"
-                            className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+                            className="border border-gray-200 bg-gray-100 text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                           >
-                            <Users className="h-3 w-3 mr-1" />
+                            <Users className="mr-1 h-3 w-3" />
                             {community.memberCount} / {community.memberLimit} ({occupancy}%)
                           </Badge>
                           <span className="text-xs text-gray-500 dark:text-gray-400">
@@ -330,13 +306,13 @@ export default function LeaderboardsPage() {
                         </div>
                       </div>
 
-                      <div className="text-right shrink-0">
+                      <div className="shrink-0 text-right">
                         {communitySortBy === 'xp' && (
                           <>
                             <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
                               XP
                             </p>
-                            <p className="text-xl font-bold text-blue-600 dark:text-blue-400">
+                            <p className="text-xl font-bold text-gray-900 dark:text-gray-100">
                               {community.xp.toLocaleString()}
                             </p>
                           </>
@@ -346,7 +322,7 @@ export default function LeaderboardsPage() {
                             <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
                               Members
                             </p>
-                            <p className="text-xl font-bold text-blue-600 dark:text-blue-400">
+                            <p className="text-xl font-bold text-gray-900 dark:text-gray-100">
                               {community.memberCount}
                             </p>
                           </>
@@ -356,7 +332,7 @@ export default function LeaderboardsPage() {
                             <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
                               Age
                             </p>
-                            <p className="text-base font-bold text-blue-600 dark:text-blue-400">
+                            <p className="text-base font-bold text-gray-900 dark:text-gray-100">
                               {Math.floor(
                                 (Date.now() - new Date(community.createdAt).getTime()) /
                                   (1000 * 60 * 60 * 24),
@@ -372,7 +348,7 @@ export default function LeaderboardsPage() {
               </div>
 
               {data.pagination.totalPages > 1 && (
-                <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+                <div className="border-t border-gray-200 p-4 dark:border-gray-800">
                   <BetterPagination
                     paginationMetadata={{
                       total: data.pagination.total,
@@ -396,11 +372,11 @@ export default function LeaderboardsPage() {
     const limit = clanLimit;
 
     return (
-      <Card className="border-cyan-500/20 bg-white dark:bg-gray-800">
-        <CardHeader className="border-b border-cyan-500/10 flex flex-col gap-3">
+      <Card className="border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-black">
+        <CardHeader className="flex flex-col gap-3 border-b border-gray-200 dark:border-gray-800">
           <div className="flex items-center justify-between gap-2">
-            <CardTitle className="text-xl text-gray-900 dark:text-white flex items-center gap-2">
-              <Shield className="h-5 w-5 text-cyan-600" /> Top Clans
+            <CardTitle className="flex items-center gap-2 text-xl text-gray-900 dark:text-white">
+              <Shield className="h-5 w-5 text-gray-900 dark:text-gray-100" /> Top Clans
             </CardTitle>
             <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
               Sorted by {clanSortBy} ({clanOrder})
@@ -408,7 +384,7 @@ export default function LeaderboardsPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <div>
               <label className="text-xs text-gray-600 dark:text-gray-400">Sort By</label>
               <Select
@@ -475,7 +451,7 @@ export default function LeaderboardsPage() {
                     setClanCommunityApplied(clanCommunityFilter.trim());
                     setClanPage(1);
                   }}
-                  className="px-3 py-2 text-sm rounded-md bg-cyan-600 text-white hover:bg-cyan-700 transition-colors"
+                  className="rounded-md bg-black px-3 py-2 text-sm text-white transition-colors hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
                 >
                   Apply
                 </button>
@@ -486,7 +462,7 @@ export default function LeaderboardsPage() {
                       setClanCommunityApplied('');
                       setClanPage(1);
                     }}
-                    className="px-3 py-2 text-sm rounded-md border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                    className="rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
                   >
                     Clear
                   </button>
@@ -499,19 +475,19 @@ export default function LeaderboardsPage() {
         <CardContent className="p-0">
           {isPending ? (
             <div className="flex justify-center py-20">
-              <Loader2 className="h-10 w-10 animate-spin text-cyan-600 dark:text-cyan-400" />
+              <Loader2 className="h-10 w-10 animate-spin text-gray-700 dark:text-gray-300" />
             </div>
           ) : isError ? (
-            <div className="text-center py-20">
+            <div className="py-20 text-center">
               <p className="text-red-500 dark:text-red-400">Failed to load clans</p>
             </div>
           ) : !data?.results || data.results.length === 0 ? (
-            <div className="text-center py-20">
+            <div className="py-20 text-center">
               <p className="text-gray-500 dark:text-gray-400">No clans found</p>
             </div>
           ) : (
             <>
-              <div className="divide-y divide-gray-200 dark:divide-gray-700">
+              <div className="divide-y divide-gray-200 dark:divide-gray-800">
                 {data.results.map((clan, index) => {
                   const rank = (clanPage - 1) * limit + index + 1;
                   const isTopThree = rank <= 3;
@@ -520,28 +496,26 @@ export default function LeaderboardsPage() {
                   return (
                     <div
                       key={clan.id}
-                      className={`flex items-center gap-4 p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors ${
-                        isTopThree
-                          ? 'bg-gradient-to-r from-cyan-50 to-transparent dark:from-cyan-900/10 dark:to-transparent'
-                          : ''
+                      className={`flex items-center gap-4 p-4 transition-colors hover:bg-gray-50 dark:hover:bg-gray-900/50 ${
+                        isTopThree ? 'bg-gray-50 dark:bg-gray-900/30' : ''
                       }`}
                     >
-                      <div className="w-12 flex justify-center">{getRankIcon(rank, 'cyan')}</div>
+                      <div className="flex w-12 justify-center">{getRankIcon(rank)}</div>
 
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-bold text-gray-900 dark:text-white truncate text-lg">
+                      <div className="min-w-0 flex-1">
+                        <h3 className="truncate text-lg font-bold text-gray-900 dark:text-white">
                           {clan.name}
                         </h3>
-                        <div className="flex flex-wrap items-center gap-2 mt-2">
-                          <Badge className="bg-cyan-100 dark:bg-cyan-900/50 text-cyan-700 dark:text-cyan-300">
-                            <Trophy className="h-3 w-3 mr-1" />
+                        <div className="mt-2 flex flex-wrap items-center gap-2">
+                          <Badge className="border border-gray-200 bg-gray-100 text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
+                            <Trophy className="mr-1 h-3 w-3" />
                             {clan.xp.toLocaleString()} XP
                           </Badge>
                           <Badge
                             variant="secondary"
-                            className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+                            className="border border-gray-200 bg-gray-100 text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                           >
-                            <Users className="h-3 w-3 mr-1" />
+                            <Users className="mr-1 h-3 w-3" />
                             {clan.memberCount} / {clan.limit} ({occupancy}%)
                           </Badge>
                           <span className="text-xs text-gray-500 dark:text-gray-400">
@@ -550,13 +524,13 @@ export default function LeaderboardsPage() {
                         </div>
                       </div>
 
-                      <div className="text-right shrink-0">
+                      <div className="shrink-0 text-right">
                         {clanSortBy === 'xp' && (
                           <>
                             <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
                               XP
                             </p>
-                            <p className="text-xl font-bold text-cyan-600 dark:text-cyan-400">
+                            <p className="text-xl font-bold text-gray-900 dark:text-gray-100">
                               {clan.xp.toLocaleString()}
                             </p>
                           </>
@@ -566,7 +540,7 @@ export default function LeaderboardsPage() {
                             <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
                               Members
                             </p>
-                            <p className="text-xl font-bold text-cyan-600 dark:text-cyan-400">
+                            <p className="text-xl font-bold text-gray-900 dark:text-gray-100">
                               {clan.memberCount}
                             </p>
                           </>
@@ -576,7 +550,7 @@ export default function LeaderboardsPage() {
                             <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
                               Age
                             </p>
-                            <p className="text-base font-bold text-cyan-600 dark:text-cyan-400">
+                            <p className="text-base font-bold text-gray-900 dark:text-gray-100">
                               {Math.floor(
                                 (Date.now() - new Date(clan.createdAt).getTime()) /
                                   (1000 * 60 * 60 * 24),
@@ -592,7 +566,7 @@ export default function LeaderboardsPage() {
               </div>
 
               {data.pagination.totalPages > 1 && (
-                <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+                <div className="border-t border-gray-200 p-4 dark:border-gray-800">
                   <BetterPagination
                     paginationMetadata={{
                       total: data.pagination.total,
@@ -612,10 +586,10 @@ export default function LeaderboardsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50/30 to-gray-100 dark:from-gray-900 dark:via-purple-900/20 dark:to-gray-900 py-6 px-4">
-      <div className="max-w-6xl mx-auto space-y-4">
+    <div className="min-h-screen bg-white px-4 py-6 dark:bg-black">
+      <div className="mx-auto max-w-6xl space-y-4">
         <div className="mb-2">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-3">
+          <h1 className="mb-2 flex items-center gap-3 text-3xl font-bold text-gray-900 md:text-4xl dark:text-white">
             <Trophy className="h-8 w-8 text-yellow-500" />
             Leaderboards
           </h1>
@@ -625,10 +599,25 @@ export default function LeaderboardsPage() {
         </div>
 
         <Tabs value={tab} onValueChange={v => setTab(v as TabKey)}>
-          <TabsList className="grid grid-cols-3 w-full sm:w-[520px]">
-            <TabsTrigger value="global">Global Users</TabsTrigger>
-            <TabsTrigger value="communities">Top Communities</TabsTrigger>
-            <TabsTrigger value="clans">Top Clans</TabsTrigger>
+          <TabsList className="grid h-11 w-full grid-cols-3 rounded-lg border border-gray-200 bg-white sm:w-[520px] dark:border-gray-800 dark:bg-black">
+            <TabsTrigger
+              value="global"
+              className="data-[state=active]:bg-black data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-black"
+            >
+              Global Users
+            </TabsTrigger>
+            <TabsTrigger
+              value="communities"
+              className="data-[state=active]:bg-black data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-black"
+            >
+              Top Communities
+            </TabsTrigger>
+            <TabsTrigger
+              value="clans"
+              className="data-[state=active]:bg-black data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-black"
+            >
+              Top Clans
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="global" className="mt-4">

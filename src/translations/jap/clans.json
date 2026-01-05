@@ -35,7 +35,11 @@
     "privateClanDesc": "招待されたメンバーのみが参加できます",
     "cancel": "キャンセル",
     "create": "クランを作成",
-    "creating": "作成中..."
+    "creating": "作成中...",
+    "namePlaceholder": "Enter clan name",
+    "descriptionLabel": "Description",
+    "privateDescription": "Only invited members can join",
+    "nameMinLength": "Clan name must be at least 3 characters"
   },
   "toast": {
     "joinedSuccess": "クランへの参加に成功しました！",
@@ -46,6 +50,12 @@
     "deleteFailed": "クランの削除に失敗しました",
     "createdSuccess": "クランを作成しました！",
     "createFailed": "クランの作成に失敗しました",
-    "nameMinLength": "クラン名は3文字以上である必要があります"
-  }
+    "nameMinLength": "クラン名は3文字以上である必要があります",
+    "leaveFailed": "Failed to leave clan"
+  },
+  "noClansDescription": "This community doesn't have any clans yet. Be the first to create one!",
+  "errorLoadingClans": "Failed to load clans",
+  "unknownError": "An unknown error occurred",
+  "creating": "Creating...",
+  "noMembers": "No members yet"
 }

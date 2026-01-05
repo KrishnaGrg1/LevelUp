@@ -83,14 +83,27 @@ export default function UserSidebar() {
 
   const SidebarFooter = () => (
     <div className="flex flex-col gap-1">
-      <Button variant="ghost" className="justify-start gap-3 w-full px-3 text-muted-foreground hover:text-foreground">
+      <Link
+        href={`/${language}/user/change-password`}
+        onClick={() => setOpen(false)}
+        className={cn(
+          'flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors',
+          isActive('/user/change-password')
+            ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900'
+            : 'text-muted-foreground hover:bg-muted hover:text-foreground',
+        )}
+      >
         <Settings className="h-4 w-4" />
         <span>Settings</span>
-      </Button>
-      <Button variant="ghost" className="justify-start gap-3 w-full px-3 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20">
+      </Link>
+      <Link
+        href={`/${language}/logout`}
+        onClick={() => setOpen(false)}
+        className="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-red-500 transition-colors hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-950/20"
+      >
         <LogOut className="h-4 w-4" />
         <span>Logout</span>
-      </Button>
+      </Link>
     </div>
   );
 
@@ -99,38 +112,38 @@ export default function UserSidebar() {
       {/* Mobile Trigger */}
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
-          <Button variant="ghost" size="icon" className="lg:hidden fixed top-4 left-4 z-40">
+          <Button variant="ghost" size="icon" className="fixed top-4 left-4 z-40 lg:hidden">
             <Menu className="h-6 w-6" />
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="w-[280px] p-0">
           <SheetHeader className="p-6 pb-0">
-            <SheetTitle className="text-xl font-bold font-heading">LevelUp</SheetTitle>
+            <SheetTitle className="font-heading text-xl font-bold">LevelUp</SheetTitle>
           </SheetHeader>
           <div className="px-4">
             <NavLinks />
           </div>
-          <div className="absolute bottom-4 left-4 right-4 px-4">
+          <div className="absolute right-4 bottom-4 left-4 px-4">
             <SidebarFooter />
           </div>
         </SheetContent>
       </Sheet>
 
       {/* Desktop Sidebar */}
-      <aside className="hidden lg:flex flex-col w-64 border-r bg-card min-h-screen fixed top-0 left-0 z-[60]">
-        <div className="p-6 pb-2 flex items-center gap-2">
-             <div className="w-8 h-8  rounded-lg border-2 flex items-center justify-center  ">
-                  <Sparkles className="w-4 h-4" />
-                </div>
-            <h1 className="text-xl font-bold font-heading">LevelUp</h1>
+      <aside className="bg-card fixed top-0 left-0 z-[60] hidden min-h-screen w-64 flex-col border-r lg:flex">
+        <div className="flex items-center gap-2 p-6 pb-2">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg border-2">
+            <Sparkles className="h-4 w-4" />
+          </div>
+          <h1 className="font-heading text-xl font-bold">LevelUp</h1>
         </div>
-        
-        <div className="flex-1 px-4 overflow-y-auto">
+
+        <div className="flex-1 overflow-y-auto px-4">
           <NavLinks />
         </div>
 
-        <div className="p-4 border-t">
-            <SidebarFooter />
+        <div className="border-t p-4">
+          <SidebarFooter />
         </div>
       </aside>
     </>

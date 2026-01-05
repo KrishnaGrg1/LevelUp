@@ -128,7 +128,7 @@ export const BetterPagination: React.FC<BetterPaginationProps> = ({
   }
 
   return (
-    <div className={`w-full flex flex-col items-center gap-4 ${className}`}>
+    <div className={`flex w-full flex-col items-center gap-4 ${className}`}>
       {/* Page Navigation */}
       <nav className="flex items-center justify-center gap-1" aria-label="Pagination">
         {/* First Page */}
@@ -159,7 +159,7 @@ export const BetterPagination: React.FC<BetterPaginationProps> = ({
             return (
               <span
                 key={`ellipsis-${idx}`}
-                className="inline-flex items-center justify-center w-10 h-10 text-sm text-slate-500"
+                className="inline-flex h-10 w-10 items-center justify-center text-sm text-slate-500"
                 aria-hidden="true"
               >
                 ...
@@ -207,7 +207,7 @@ export const BetterPagination: React.FC<BetterPaginationProps> = ({
       </nav>
 
       {/* Pagination Info & Page Size Selector */}
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-slate-400">
+      <div className="flex flex-col items-center justify-center gap-4 text-sm text-slate-400 sm:flex-row">
         <div className="text-center sm:text-left">
           Showing{' '}
           <span className="font-semibold text-indigo-400">
@@ -226,17 +226,17 @@ export const BetterPagination: React.FC<BetterPaginationProps> = ({
           </label>
           <Select value={pageSize.toString()} onValueChange={handlePageSizeChange}>
             <SelectTrigger
-              className="w-[70px] h-8 border-slate-700 bg-slate-800/50 text-white hover:bg-slate-700"
+              className="h-8 w-[70px] border-slate-700 bg-slate-800/50 text-white hover:bg-slate-700"
               id="page-size-select"
             >
               <SelectValue>{pageSize}</SelectValue>
             </SelectTrigger>
-            <SelectContent className="bg-slate-800 border-slate-700 text-white">
+            <SelectContent className="border-slate-700 bg-slate-800 text-white">
               {pageSizeOptions.map(option => (
                 <SelectItem
                   key={option}
                   value={option.toString()}
-                  className="hover:bg-slate-700 focus:bg-slate-700 cursor-pointer"
+                  className="cursor-pointer hover:bg-slate-700 focus:bg-slate-700"
                 >
                   {option}
                 </SelectItem>

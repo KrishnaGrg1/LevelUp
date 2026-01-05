@@ -18,13 +18,37 @@
       "greeting": "おはよう、アレックス",
       "subGreeting": "レベルアップの準備はいい？",
       "cards": {
-        "card1": { "type": "マインドフルネス", "xp": "50 XP", "title": "朝の瞑想", "time": "10分" },
-        "card2": { "type": "知識", "xp": "100 XP", "title": "10ページ読む", "time": "20分" },
-        "card3": { "type": "集中", "xp": "150 XP", "title": "集中作業セッション", "time": "60分" }
+        "card1": {
+          "type": "マインドフルネス",
+          "xp": "50 XP",
+          "title": "朝の瞑想",
+          "time": "10分"
+        },
+        "card2": {
+          "type": "知識",
+          "xp": "100 XP",
+          "title": "10ページ読む",
+          "time": "20分"
+        },
+        "card3": {
+          "type": "集中",
+          "xp": "150 XP",
+          "title": "集中作業セッション",
+          "time": "60分"
+        }
       },
       "dailyQuest": "デイリークエスト",
       "startQuest": "クエスト開始"
-    }
+    },
+    "batchText": "AI-powered self-improvement",
+    "titleSub": "Level up your life.",
+    "desc1": "Daily quests designed for",
+    "descHighlight1": "real accountability",
+    "desc2": " Plus a supportive community built around",
+    "watchDemo": "Watch Demo",
+    "rating": "4.9/5 Rating",
+    "secure": "Secure & Private",
+    "activeUsers": "10,000+ Active Users"
   },
   "problemSolution": {
     "problem": {
@@ -112,12 +136,10 @@
         }
       }
     },
-
     "integrationFeatures": {
       "title": "シームレスな統合",
       "description": "すでにお使いのツールと連携します。"
     },
-
     "comparisonSection": {
       "title": "なぜLevelUp？",
       "description": "他社との比較をご覧ください。",
@@ -153,9 +175,39 @@
           "otherApps": "メールサポート"
         }
       }
-    }
+    },
+    "features": {
+      "badgeText": "Built for consistency",
+      "badge": "Everything you need to level up",
+      "description": "Powerful tools that make progress feel rewarding—without the burnout.",
+      "feature1": {
+        "title": "AI-Generated Quests",
+        "description": "Personalized daily and weekly challenges that turn goals into clear, doable actions."
+      },
+      "feature2": {
+        "title": "Gamified Progress",
+        "description": "Earn XP, level up, and track milestones so improvement feels motivating, not monotonous."
+      },
+      "feature3": {
+        "title": "Communities & Clans",
+        "description": "Join like-minded groups for accountability, teamwork, and shared progress."
+      },
+      "feature4": {
+        "title": "Global, Multi-language",
+        "description": "Connect across languages and regions—progress should be accessible to everyone."
+      },
+      "feature5": {
+        "title": "Streaks & Scheduling",
+        "description": "Stay consistent with streaks, history, and time-zone aware planning that fits real life."
+      },
+      "feature6": {
+        "title": "Wellbeing First",
+        "description": "A supportive approach to growth—progress over perfection, every day."
+      }
+    },
+    "feature6Desc": "A supportive approach to growth—progress over perfection, every day.",
+    "readMore": "Learn more"
   },
-
   "CTASection": {
     "badgeText": "あなたの冒険が待っている",
     "titleMain": "レベルアップする準備は",
@@ -187,7 +239,6 @@
       }
     ]
   },
-
   "TestimonialsSection": {
     "titleMain": "実話、本物の変革",
     "description": "世界中の冒険者がLevel Upでどのように人生をレベルアップしているか発見してください",
@@ -240,10 +291,22 @@
       "title": "LevelUpの仕組み",
       "subtitle": "複雑な生活のためのシンプルなシステム。",
       "steps": {
-        "0": { "title": "コミュニティ参加", "desc": "仲間を見つける。" },
-        "1": { "title": "クエスト受信", "desc": "毎日のAIチャレンジ。" },
-        "2": { "title": "アクション完了", "desc": "前への小さな一歩。" },
-        "3": { "title": "XP獲得", "desc": "進歩を可視化。" }
+        "0": {
+          "title": "コミュニティ参加",
+          "desc": "仲間を見つける。"
+        },
+        "1": {
+          "title": "クエスト受信",
+          "desc": "毎日のAIチャレンジ。"
+        },
+        "2": {
+          "title": "アクション完了",
+          "desc": "前への小さな一歩。"
+        },
+        "3": {
+          "title": "XP獲得",
+          "desc": "進歩を可視化。"
+        }
       }
     },
     "closing": {
@@ -282,7 +345,14 @@
       "subject": "件名",
       "message": "メッセージ",
       "submit": "メッセージを送信",
-      "footer": "すべてのメッセージを読んでいます。"
+      "footer": "すべてのメッセージを読んでいます。",
+      "inquiryType": "Inquiry Type",
+      "inquiryOptions": {
+        "general": "General Inquiry",
+        "support": "Support",
+        "feedback": "Feedback",
+        "partnership": "Partnership"
+      }
     }
   }
 }

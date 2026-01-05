@@ -8,13 +8,14 @@ import LanguageStore from '@/stores/useLanguage';
 import authStore from '@/stores/useAuth';
 import { oauthRegisterUser } from '@/lib/services/auth';
 import { t } from '@/translations/index';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export default function CallbackPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { setAuthenticated, setAdminStatus } = authStore();
   const { language } = LanguageStore();
+  const queryClient = useQueryClient();
 
   const {
     mutate: handleOAuth,
@@ -77,6 +78,9 @@ export default function CallbackPage() {
       return { response, provider, intent, lang };
     },
     onSuccess: ({ response, provider, intent, lang }) => {
+      // Clear any stale cache from previous sessions
+      queryClient.clear();
+      
       // Set user in store and mark as authenticated
       setAuthenticated(true);
 
@@ -137,10 +141,10 @@ export default function CallbackPage() {
   // Only show loading state or error state
   if (isPending) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 backdrop-blur-sm">
-        <div className="text-center space-y-6 max-w-md mx-auto p-8">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 backdrop-blur-sm">
+        <div className="mx-auto max-w-md space-y-6 p-8 text-center">
           <div className="relative">
-            <div className="w-20 h-20 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+            <div className="mx-auto h-20 w-20 animate-spin rounded-full border-4 border-purple-500 border-t-transparent"></div>
           </div>
 
           <div className="space-y-2">
@@ -159,11 +163,11 @@ export default function CallbackPage() {
   // Error State - only show briefly before redirect
   if (isError) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 backdrop-blur-sm">
-        <div className="text-center space-y-6 max-w-md mx-auto p-8">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 backdrop-blur-sm">
+        <div className="mx-auto max-w-md space-y-6 p-8 text-center">
           <div className="relative">
-            <div className="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mx-auto border-2 border-red-500">
-              <div className="w-10 h-10 border-2 border-red-400 border-t-transparent rounded-full animate-spin"></div>
+            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border-2 border-red-500 bg-red-500/20">
+              <div className="h-10 w-10 animate-spin rounded-full border-2 border-red-400 border-t-transparent"></div>
             </div>
           </div>
 
@@ -171,7 +175,7 @@ export default function CallbackPage() {
             <h2 className="text-2xl font-semibold text-white">
               {t('auth.oauth.error_title', 'Authentication Failed')}
             </h2>
-            <p className="text-slate-400 text-sm">
+            <p className="text-sm text-slate-400">
               {t('auth.oauth.redirecting_error', 'Redirecting to login...')}
             </p>
           </div>

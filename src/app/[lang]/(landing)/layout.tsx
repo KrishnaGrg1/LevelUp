@@ -23,8 +23,7 @@ export default function LandingLayout({ children, params }: LandingLayoutProps) 
 
   return (
     <>
-
-      <div className="min-h-screen bg-black text-white overflow-x-hidden">
+      <div className="min-h-screen overflow-x-hidden bg-black text-white">
         {/* Common Navbar for all landing pages */}
         <Navbar language={language} />
 

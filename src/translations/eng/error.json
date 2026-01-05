@@ -4,6 +4,8 @@
   "validation": "Please check the form fields.",
   "invalidOtp": "Invalid code, please try again.",
   "passwordMismatch": "Passwords do not match",
+  "forgotPassword": "Failed to send reset code. Please try again.",
+  "register": "Registration failed. Please try again.",
   "auth": {
     "emailRequired": "Email is required",
     "emailInvalid": "Please enter a valid email address",
@@ -14,7 +16,27 @@
     "confirmPasswordRequired": "Please confirm your password",
     "passwordMismatch": "Passwords do not match",
     "otpRequired": "Verification code is required",
-    "otpLength": "Verification code must be 6 digits"
+    "otpLength": "Verification code must be 6 digits",
+    "oauth_missing_provider": "Missing OAuth provider.",
+    "oauth_missing_params": "Missing OAuth parameters.",
+    "oauth_no_response": "No response received from the OAuth provider.",
+    "oauth_access_denied": "Access denied by the OAuth provider.",
+    "oauth_invalid_request": "Invalid OAuth request.",
+    "oauth_invalid_grant": "OAuth authorization has expired or is invalid.",
+    "oauth_server_error": "OAuth provider returned a server error.",
+    "oauth_failed": "OAuth sign-in failed. Please try again.",
+    "not_authenticated": "You must be logged in to chat."
+  },
+  "community": {
+    "not_member": "You must join this community to chat."
+  },
+  "clan": {
+    "not_member_general": "Only clan members can chat here."
+  },
+  "message": {
+    "empty": "Message cannot be empty.",
+    "too_long": "Message is too long.",
+    "send_failed": "Message failed to send."
   },
   "onboarding": {
     "categoriesRequired": "Please select at least one category",

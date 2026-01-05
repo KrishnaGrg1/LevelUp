@@ -72,9 +72,12 @@ export default function ClanDetailPage() {
 
   if (isLoadingInfo) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/50 to-gray-100 dark:from-gray-900 dark:via-blue-900/30 dark:to-gray-900 py-8 px-4">
-        <div className="max-w-6xl mx-auto flex items-center justify-center py-20">
-          <Loader2 className="h-12 w-12 animate-spin text-cyan-600 dark:text-cyan-400" />
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-center py-20">
+          <div className="text-center">
+            <Loader2 className="h-12 w-12 animate-spin text-gray-900 dark:text-gray-100 mx-auto" />
+            <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">Loading clan details...</p>
+          </div>
         </div>
       </div>
     );
@@ -82,20 +85,22 @@ export default function ClanDetailPage() {
 
   if (!clan) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/50 to-gray-100 dark:from-gray-900 dark:via-blue-900/30 dark:to-gray-900 py-8 px-4">
-        <div className="max-w-6xl mx-auto">
-          <Card className="border-red-500/20 bg-red-50 dark:bg-red-900/10">
-            <CardContent className="pt-6 text-center">
-              <Shield className="h-12 w-12 mx-auto mb-4 text-red-500" />
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                {t('clans.clanNotFound', language)}
-              </h3>
-              <Button onClick={() => router.back()} variant="outline" className="mt-4">
-                {t('clans.goBack', language)}
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <Card className="border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-black">
+          <CardContent className="py-12 text-center">
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30">
+              <Shield className="h-8 w-8 text-red-500 dark:text-red-400" />
+            </div>
+            <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">
+              {t('clans.clanNotFound', language)}
+            </h3>
+            <p className="mb-6 text-sm text-gray-600 dark:text-gray-400">This clan doesn&apos;t exist or has been removed.</p>
+            <Button onClick={() => router.back()} variant="outline">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              {t('clans.goBack', language)}
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     );
   }
@@ -104,212 +109,207 @@ export default function ClanDetailPage() {
   const battlesWon = clan.stats?.battlesWon ?? 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/50 to-gray-100 dark:from-gray-900 dark:via-blue-900/30 dark:to-gray-900 py-8 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Back Button */}
-        <Button
-          onClick={() => router.back()}
-          variant="ghost"
-          className="mb-6 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-        >
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          {t('clans.back', language)}
-        </Button>
+    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      {/* Back Button */}
+      <Button
+        onClick={() => router.back()}
+        variant="ghost"
+        className="mb-6 text-sm text-gray-600 dark:text-gray-400"
+      >
+        <ArrowLeft className="mr-2 h-4 w-4" />
+        {t('clans.back', language)}
+      </Button>
 
-        {/* Clan Header */}
-        <Card
-          className={`mb-6 border ${
-            clan.isPrivate
-              ? 'border-purple-500/30 bg-gradient-to-br from-purple-100/50 to-pink-100/50 dark:from-purple-950/30 dark:to-pink-950/30'
-              : 'border-cyan-500/30 bg-gradient-to-br from-cyan-100/50 to-blue-100/50 dark:from-cyan-950/30 dark:to-blue-950/30'
-          }`}
-        >
-          <CardHeader>
-            <div className="flex items-start justify-between">
-              <div className="flex items-center gap-4">
-                <div
-                  className={`w-16 h-16 rounded-xl flex items-center justify-center ${
-                    clan.isPrivate
-                      ? 'bg-gradient-to-br from-purple-200 to-pink-200 dark:from-purple-600/30 dark:to-pink-600/30 text-purple-700 dark:text-purple-300'
-                      : 'bg-gradient-to-br from-cyan-200 to-blue-200 dark:from-cyan-600/30 dark:to-blue-600/30 text-cyan-700 dark:text-cyan-300'
-                  }`}
-                >
-                  {clan.isPrivate ? <Lock className="h-8 w-8" /> : <Globe className="h-8 w-8" />}
-                </div>
-                <div>
-                  <CardTitle className="text-3xl text-gray-900 dark:text-white mb-1">
-                    {clan.name}
-                  </CardTitle>
-                  {clan.slug && (
-                    <p className="text-sm text-gray-600 dark:text-gray-400">@{clan.slug}</p>
-                  )}
-                </div>
+      {/* Clan Header */}
+      <Card className="mb-4 border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-black">
+        <CardHeader>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-black">
+                {clan.isPrivate ? (
+                  <Lock className="h-5 w-5 text-gray-900 dark:text-gray-100" />
+                ) : (
+                  <Globe className="h-5 w-5 text-gray-900 dark:text-gray-100" />
+                )}
               </div>
-              <div className="flex items-center gap-2 px-3 py-2 rounded-full bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-300 dark:border-amber-500/40">
-                <Trophy className="h-5 w-5" />
-                <span className="font-semibold">{clan.xp} XP</span>
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                  {clan.name}
+                </h1>
+                {clan.slug && (
+                  <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">@{clan.slug}</p>
+                )}
               </div>
             </div>
+            <div className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2 shadow-sm dark:border-gray-800 dark:bg-black">
+              <Trophy className="h-4 w-4 text-gray-900 dark:text-gray-100" />
+              <div>
+                <p className="text-xs text-gray-600 dark:text-gray-400">Total XP</p>
+                <p className="text-base font-bold text-gray-900 dark:text-white">{clan.xp.toLocaleString()}</p>
+              </div>
+            </div>
+          </div>
 
-            {clan.description && (
-              <p className="text-gray-700 dark:text-gray-300 mt-4">{clan.description}</p>
+          {clan.description && (
+            <div className="mt-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">{clan.description}</p>
+            </div>
+          )}
+
+          {clan.welcomeMessage && (
+            <div className="mt-3 rounded-lg border border-gray-200 bg-white p-3 dark:border-gray-800 dark:bg-black">
+              <p className="text-xs italic text-gray-600 dark:text-gray-400">
+                💬 &quot;{clan.welcomeMessage}&quot;
+              </p>
+            </div>
+          )}
+        </CardHeader>
+
+        <CardContent className="space-y-3">
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+            <div className="rounded-lg border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-800 dark:bg-black">
+              <div className="mb-1 flex items-center gap-1.5 text-gray-600 dark:text-gray-400">
+                <Users className="h-3.5 w-3.5" />
+                <span className="text-xs font-medium">{t('clans.members', language)}</span>
+              </div>
+              <p className="text-lg font-bold text-gray-900 dark:text-white">
+                {memberCount}<span className="text-xs font-normal text-gray-500">/{clan.limit}</span>
+              </p>
+            </div>
+
+            <div className="rounded-lg border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-800 dark:bg-black">
+              <div className="mb-1 flex items-center gap-1.5 text-gray-600 dark:text-gray-400">
+                <Trophy className="h-3.5 w-3.5" />
+                <span className="text-xs font-medium">{t('clans.victories', language)}</span>
+              </div>
+              <p className="text-lg font-bold text-gray-900 dark:text-white">{battlesWon.toLocaleString()}</p>
+            </div>
+
+            <div className="rounded-lg border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-800 dark:bg-black">
+              <div className="mb-1 flex items-center gap-1.5 text-gray-600 dark:text-gray-400">
+                <Crown className="h-3.5 w-3.5" />
+                <span className="text-xs font-medium">{t('clans.owner', language)}</span>
+              </div>
+              <p className="text-sm font-bold text-gray-900 dark:text-white truncate">
+                {clan.owner.UserName}
+              </p>
+            </div>
+
+            <div className="rounded-lg border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-800 dark:bg-black">
+              <div className="mb-1 flex items-center gap-1.5 text-gray-600 dark:text-gray-400">
+                <Shield className="h-3.5 w-3.5" />
+                <span className="text-xs font-medium">{t('clans.privacy', language)}</span>
+              </div>
+              <p className="text-sm font-bold text-gray-900 dark:text-white">
+                {clan.isPrivate ? t('clans.private', language) : t('clans.public', language)}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2 sm:flex-row">
+            {!isOwner && (
+              <Button
+                onClick={() => leaveMutation.mutate()}
+                disabled={leaveMutation.isPending}
+                variant="outline"
+                className="flex-1 text-sm"
+              >
+                {leaveMutation.isPending ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  <LogOut className="mr-2 h-4 w-4" />
+                )}
+                {t('clans.leaveClan', language)}
+              </Button>
             )}
-
-            {clan.welcomeMessage && (
-              <div className="mt-4 p-3 rounded-lg bg-blue-100/50 dark:bg-blue-900/20 border border-blue-300 dark:border-blue-500/20">
-                <p className="text-sm text-gray-700 dark:text-gray-300 italic">
-                  &quot;{clan.welcomeMessage}&quot;
-                </p>
-              </div>
+            {isOwner && (
+              <Button
+                onClick={() => deleteMutation.mutate()}
+                disabled={deleteMutation.isPending}
+                variant="destructive"
+                className="flex-1 text-sm"
+              >
+                {deleteMutation.isPending ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  <Trash2 className="mr-2 h-4 w-4" />
+                )}
+                {t('clans.deleteClan', language)}
+              </Button>
             )}
-          </CardHeader>
+          </div>
+        </CardContent>
+      </Card>
 
-          <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-              <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
-                <div className="flex items-center gap-2 mb-1">
-                  <Users className="h-4 w-4 text-gray-600 dark:text-gray-400" />
-                  <span className="text-xs text-gray-600 dark:text-gray-400">
-                    {t('clans.members', language)}
-                  </span>
-                </div>
-                <p className="text-lg font-semibold text-gray-900 dark:text-white">
-                  {memberCount}/{clan.limit}
-                </p>
-              </div>
-
-              <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
-                <div className="flex items-center gap-2 mb-1">
-                  <Trophy className="h-4 w-4 text-gray-600 dark:text-gray-400" />
-                  <span className="text-xs text-gray-600 dark:text-gray-400">
-                    {t('clans.victories', language)}
-                  </span>
-                </div>
-                <p className="text-lg font-semibold text-gray-900 dark:text-white">{battlesWon}</p>
-              </div>
-
-              <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
-                <div className="flex items-center gap-2 mb-1">
-                  <Crown className="h-4 w-4 text-gray-600 dark:text-gray-400" />
-                  <span className="text-xs text-gray-600 dark:text-gray-400">
-                    {t('clans.owner', language)}
-                  </span>
-                </div>
-                <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">
-                  {clan.owner.UserName}
-                </p>
-              </div>
-
-              <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
-                <div className="flex items-center gap-2 mb-1">
-                  <Shield className="h-4 w-4 text-gray-600 dark:text-gray-400" />
-                  <span className="text-xs text-gray-600 dark:text-gray-400">
-                    {t('clans.privacy', language)}
-                  </span>
-                </div>
-                <p className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {clan.isPrivate ? t('clans.private', language) : t('clans.public', language)}
-                </p>
-              </div>
+      {/* Members Section */}
+      <Card className="border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-black">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-lg">
+            <Users className="h-4 w-4 text-gray-900 dark:text-gray-100" />
+            {t('clans.members', language)}
+            <span className="text-sm font-normal text-gray-600 dark:text-gray-400">({members.length})</span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-4">
+          {isLoadingMembers ? (
+            <div className="flex flex-col items-center justify-center py-12">
+              <Loader2 className="h-8 w-8 animate-spin text-gray-900 dark:text-gray-100" />
+              <p className="mt-3 text-xs text-gray-600 dark:text-gray-400">Loading members...</p>
             </div>
-
-            <div className="flex gap-3">
-              {!isOwner && (
-                <Button
-                  onClick={() => leaveMutation.mutate()}
-                  disabled={leaveMutation.isPending}
-                  variant="outline"
-                  className="flex-1 border-orange-300 dark:border-orange-700 text-orange-700 dark:text-orange-300 hover:bg-orange-50 dark:hover:bg-orange-900/20"
-                >
-                  {leaveMutation.isPending ? (
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  ) : (
-                    <LogOut className="h-4 w-4 mr-2" />
-                  )}
-                  {t('clans.leaveClan', language)}
-                </Button>
-              )}
-              {isOwner && (
-                <Button
-                  onClick={() => deleteMutation.mutate()}
-                  disabled={deleteMutation.isPending}
-                  variant="destructive"
-                  className="flex-1"
-                >
-                  {deleteMutation.isPending ? (
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  ) : (
-                    <Trash2 className="h-4 w-4 mr-2" />
-                  )}
-                  {t('clans.deleteClan', language)}
-                </Button>
-              )}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Members Section */}
-        <Card className="border-gray-200 dark:border-gray-800">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
-              <Users className="h-5 w-5" />
-              {t('clans.members', language)} ({members.length})
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            {isLoadingMembers ? (
-              <div className="flex justify-center py-8">
-                <Loader2 className="h-8 w-8 animate-spin text-cyan-600 dark:text-cyan-400" />
+          ) : members.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-12">
+              <div className="mb-3 rounded-full bg-gray-100 p-3 dark:bg-gray-800">
+                <Users className="h-8 w-8 text-gray-400" />
               </div>
-            ) : members.length === 0 ? (
-              <p className="text-center text-gray-600 dark:text-gray-400 py-8">
+              <p className="text-xs text-gray-600 dark:text-gray-400">
                 {t('clans.noMembers', language)}
               </p>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {members.map(member => (
-                  <Card
-                    key={member.id}
-                    className="border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow"
-                  >
-                    <CardContent className="p-4">
-                      <div className="flex items-center gap-3">
-                        <Avatar className="h-12 w-12">
-                          <AvatarImage src={member.user.profilePicture || undefined} />
-                          <AvatarFallback>
-                            {member.user.UserName.charAt(0).toUpperCase()}
-                          </AvatarFallback>
-                        </Avatar>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2">
-                            <p className="font-semibold text-gray-900 dark:text-white truncate">
-                              {member.user.UserName}
-                            </p>
-                            {member.user.isVerified && (
-                              <Shield
-                                className="h-4 w-4 text-blue-500 dark:text-blue-400"
-                                fill="currentColor"
-                              />
-                            )}
-                          </div>
-                          <div className="flex items-center gap-2 mt-1">
-                            <Badge variant="secondary" className="text-xs">
-                              {member.role}
-                            </Badge>
-                            <span className="text-xs text-gray-600 dark:text-gray-400">
-                              Lvl {member.user.level}
-                            </span>
-                          </div>
-                        </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+              {members.map(member => (
+                <div
+                  key={member.id}
+                  className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-800 dark:bg-black"
+                >
+                  <div className="relative">
+                    <Avatar className="h-10 w-10">
+                      <AvatarImage src={member.user.profilePicture || undefined} />
+                      <AvatarFallback className="bg-gray-100 text-gray-900 text-sm dark:bg-gray-800 dark:text-gray-100">
+                        {member.user.UserName.charAt(0).toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                    {member.userId === clan.ownerId && (
+                      <div className="absolute -right-1 -top-1 rounded-full bg-amber-400 p-0.5">
+                        <Crown className="h-2.5 w-2.5 text-white" fill="currentColor" />
                       </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      </div>
+                    )}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="mb-0.5 flex items-center gap-1">
+                      <p className="truncate text-sm font-semibold text-gray-900 dark:text-white">
+                        {member.user.UserName}
+                      </p>
+                      {member.user.isVerified && (
+                        <Shield className="h-3 w-3 flex-shrink-0 text-blue-600 dark:text-blue-400" fill="currentColor" />
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Badge variant="secondary" className="text-xs">
+                        {member.role}
+                      </Badge>
+                      <div className="flex items-center gap-0.5 text-xs text-gray-600 dark:text-gray-400">
+                        <Trophy className="h-3 w-3" />
+                        <span>Lvl {member.user.level}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 }

@@ -82,7 +82,7 @@ export default function ChangePassword() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 py-12 px-4">
+    <div className="min-h-screen bg-zinc-50 px-4 py-12 dark:bg-zinc-950">
       <div className="container mx-auto max-w-2xl">
         {/* Header Section */}
         <div className="mb-8 text-center">
@@ -154,7 +154,7 @@ export default function ChangePassword() {
                             type="button"
                             variant="ghost"
                             size="sm"
-                            className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                            className="absolute top-0 right-0 h-full px-3 hover:bg-transparent"
                             onClick={() => setShowCurrentPassword(!showCurrentPassword)}
                             aria-label={showCurrentPassword ? 'Hide password' : 'Show password'}
                           >
@@ -205,7 +205,7 @@ export default function ChangePassword() {
                             type="button"
                             variant="ghost"
                             size="sm"
-                            className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                            className="absolute top-0 right-0 h-full px-3 hover:bg-transparent"
                             onClick={() => setShowNewPassword(!showNewPassword)}
                             aria-label={showNewPassword ? 'Hide password' : 'Show password'}
                           >
@@ -244,7 +244,7 @@ export default function ChangePassword() {
                             type="button"
                             variant="ghost"
                             size="sm"
-                            className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                            className="absolute top-0 right-0 h-full px-3 hover:bg-transparent"
                             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                             aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
                           >

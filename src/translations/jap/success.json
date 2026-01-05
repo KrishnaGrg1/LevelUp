@@ -3,5 +3,18 @@
   "register": "アカウントが作成されました",
   "verify": "アカウントが確認されました",
   "forgot": "リセットコードが送信されました",
-  "reset": "パスワードがリセットされました"
+  "reset": "パスワードがリセットされました",
+  "onboarding": "Welcome aboard! Your profile is all set.",
+  "forgotPassword": "Reset code sent to your email",
+  "logout": "Logged out successfully",
+  "auth": {
+    "oauth_login": "Signed in successfully",
+    "oauth_login_existing": "Signed in to your existing account"
+  },
+  "community": {
+    "joined_chat": "コミュニティチャットに参加しました"
+  },
+  "clan": {
+    "joined_chat": "クランチャットに参加しました"
+  }
 }

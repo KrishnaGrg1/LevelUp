@@ -45,14 +45,14 @@ const QuestTimer: React.FC<{ quest: Quest }> = ({ quest }) => {
   if (status === 'not-started' || status === 'completed') return null;
 
   return (
-    <div className="flex items-center gap-2 text-xs mt-2">
-      <div className="flex-1 h-1.5 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+    <div className="mt-2 flex items-center gap-2 text-xs">
+      <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
         <div
           className="h-full bg-gradient-to-r from-yellow-500 to-yellow-600 transition-all duration-300"
           style={{ width: `${timeRemaining.progressPercent}%` }}
         />
       </div>
-      <span className="text-zinc-600 dark:text-zinc-400 font-medium min-w-fit">
+      <span className="min-w-fit font-medium text-zinc-600 dark:text-zinc-400">
         {timeRemaining.remainingText}
       </span>
     </div>
@@ -78,7 +78,7 @@ const QuestCard: React.FC<{
     if (status === 'completed') {
       return (
         <span className="flex items-center gap-2">
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+          <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
             <path
               fillRule="evenodd"
               d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -127,15 +127,15 @@ const QuestCard: React.FC<{
 
   return (
     <Card className="border shadow-sm transition-all hover:shadow-md">
-      <div className="p-3 sm:p-4 space-y-3">
-        <div className="flex flex-col sm:flex-row items-start sm:justify-between gap-2 sm:gap-3">
-          <p className="flex-1 text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-50 leading-snug">
+      <div className="space-y-3 p-3 sm:p-4">
+        <div className="flex flex-col items-start gap-2 sm:flex-row sm:justify-between sm:gap-3">
+          <p className="flex-1 text-sm leading-snug font-semibold text-zinc-900 sm:text-base dark:text-zinc-50">
             {quest.description}
           </p>
           <div
-            className={`flex items-center gap-1.5 shrink-0 px-2.5 py-1 rounded-lg border ${colorClass}`}
+            className={`flex shrink-0 items-center gap-1.5 rounded-lg border px-2.5 py-1 ${colorClass}`}
           >
-            <span className="text-sm font-bold font-numeric">{quest.xpValue}</span>
+            <span className="font-numeric text-sm font-bold">{quest.xpValue}</span>
             <span className="text-xs font-medium">XP</span>
           </div>
         </div>
@@ -143,8 +143,8 @@ const QuestCard: React.FC<{
         {/* Timer */}
         {status !== 'not-started' && status !== 'completed' && <QuestTimer quest={quest} />}
 
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
-          <span className="text-xs text-zinc-600 dark:text-zinc-400 font-numeric">
+        <div className="flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center sm:gap-0">
+          <span className="font-numeric text-xs text-zinc-600 dark:text-zinc-400">
             Quest #{quest.periodSeq}
           </span>
           <Button
@@ -159,7 +159,7 @@ const QuestCard: React.FC<{
                 onComplete(quest.id);
               }
             }}
-            className={`w-full sm:w-auto font-medium py-2 px-4 rounded-lg transition-all duration-200 text-xs ${
+            className={`w-full rounded-lg px-4 py-2 text-xs font-medium transition-all duration-200 sm:w-auto ${
               buttonVariants[getButtonVariant()]
             }`}
           >
@@ -184,21 +184,21 @@ const CommunityQuestSection: React.FC<{
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border rounded-lg bg-zinc-50/50 dark:bg-zinc-900/50">
+    <div className="rounded-lg border bg-zinc-50/50 dark:bg-zinc-900/50">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full p-3 sm:p-4 flex items-center justify-between hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50 transition-colors rounded-t-lg touch-manipulation"
+        className="flex w-full touch-manipulation items-center justify-between rounded-t-lg p-3 transition-colors hover:bg-zinc-100/50 sm:p-4 dark:hover:bg-zinc-800/50"
       >
-        <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           {isOpen ? (
-            <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-zinc-600 dark:text-zinc-400 shrink-0" />
+            <ChevronDown className="h-4 w-4 shrink-0 text-zinc-600 sm:h-5 sm:w-5 dark:text-zinc-400" />
           ) : (
-            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-zinc-600 dark:text-zinc-400 shrink-0" />
+            <ChevronRight className="h-4 w-4 shrink-0 text-zinc-600 sm:h-5 sm:w-5 dark:text-zinc-400" />
           )}
-          <h3 className="text-sm sm:text-base font-semibold text-zinc-900 dark:text-zinc-50">
+          <h3 className="text-sm font-semibold text-zinc-900 sm:text-base dark:text-zinc-50">
             {communityName}
           </h3>
-          <span className="px-2 py-0.5 rounded-md bg-zinc-200 dark:bg-zinc-800 text-xs font-medium text-zinc-700 dark:text-zinc-300">
+          <span className="rounded-md bg-zinc-200 px-2 py-0.5 text-xs font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
             {quests.length}{' '}
             {quests.length === 1 ? t('quests.dashboard.quest') : t('quests.dashboard.quests')}
           </span>
@@ -206,7 +206,7 @@ const CommunityQuestSection: React.FC<{
       </button>
 
       {isOpen && (
-        <div className="p-3 sm:p-4 pt-0 space-y-2 sm:space-y-3">
+        <div className="space-y-2 p-3 pt-0 sm:space-y-3 sm:p-4">
           {quests.map(quest => (
             <QuestCard
               key={quest.id}
@@ -378,8 +378,19 @@ export default function DashboardQuests() {
       return { previousDaily, previousWeekly };
     },
     onSuccess: response => {
-      const { xpAwarded, currentLevel, tokensAwarded, currentTokens, communityXp, communityId } =
-        response.body.data;
+      const {
+        xpAwarded,
+        currentLevel,
+        tokensAwarded = 0,
+        currentTokens,
+        communityLevel,
+        communityId,
+        communityTotalXp,
+        clanMemberXp,
+        clanId,
+        clanTotalXp,
+      } = response.body.data;
+
       const communityMap = new Map<string, string>();
       const communities = communitiesData?.body?.data;
       if (Array.isArray(communities)) {
@@ -388,14 +399,36 @@ export default function DashboardQuests() {
         });
       }
 
-      let description = `+${xpAwarded} XP (Global) • +${tokensAwarded} Tokens • Level ${currentLevel}`;
-      if (communityXp !== undefined && communityId) {
+      const details: string[] = [
+        `+${xpAwarded} XP`,
+        `Level ${currentLevel}`,
+        `+${tokensAwarded} Tokens`,
+      ];
+
+      if (communityId) {
         const communityName = communityMap.get(communityId) || communityId;
-        description = `+${xpAwarded} XP (Global) • +${xpAwarded} XP (${communityName}) • +${tokensAwarded} Tokens • Level ${currentLevel}`;
+        if (typeof communityLevel === 'number') {
+          details.push(`${communityName} Lv ${communityLevel}`);
+        }
+        if (typeof communityTotalXp === 'number') {
+          details.push(`${communityName} XP ${communityTotalXp.toLocaleString()}`);
+        }
+      }
+
+      if (clanId) {
+        const clanXpLabel =
+          typeof clanMemberXp === 'number'
+            ? `Clan XP ${clanMemberXp.toLocaleString()}`
+            : typeof clanTotalXp === 'number'
+              ? `Clan XP ${clanTotalXp.toLocaleString()}`
+              : null;
+        if (clanXpLabel) {
+          details.push(clanXpLabel);
+        }
       }
 
       toast.success(t('quests.landing.questCompleted'), {
-        description,
+        description: details.join(' • '),
       });
       if (typeof currentTokens === 'number') {
         setTokens(currentTokens);
@@ -477,9 +510,9 @@ export default function DashboardQuests() {
       {/* Daily Quests */}
       <Card className="border shadow-sm">
         <div className="p-4 sm:p-6">
-          <div className="flex items-center gap-2 mb-3 sm:mb-4">
+          <div className="mb-3 flex items-center gap-2 sm:mb-4">
             <div className="h-2 w-2 rounded-full bg-purple-500" />
-            <h2 className="font-heading text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-50">
+            <h2 className="font-heading text-lg font-bold text-zinc-900 sm:text-xl dark:text-zinc-50">
               {t('quests.landing.daily.title')}
             </h2>
           </div>
@@ -487,14 +520,14 @@ export default function DashboardQuests() {
           {isDailyPending ? (
             <div className="flex items-center justify-center py-8">
               <div className="flex flex-col items-center gap-2">
-                <div className="w-6 h-6 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" />
+                <div className="h-6 w-6 animate-spin rounded-full border-2 border-purple-500/30 border-t-purple-500" />
                 <p className="text-sm text-zinc-600 dark:text-zinc-400">
                   {t('quests.landing.loading')}
                 </p>
               </div>
             </div>
           ) : Object.keys(groupedDaily).length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-8 px-4 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800">
+            <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-zinc-200 px-4 py-8 dark:border-zinc-800">
               <p className="text-sm text-zinc-600 dark:text-zinc-400">
                 {t('quests.landing.noQuests')}
               </p>
@@ -522,9 +555,9 @@ export default function DashboardQuests() {
       {/* Weekly Quests */}
       <Card className="border shadow-sm">
         <div className="p-4 sm:p-6">
-          <div className="flex items-center gap-2 mb-3 sm:mb-4">
+          <div className="mb-3 flex items-center gap-2 sm:mb-4">
             <div className="h-2 w-2 rounded-full bg-blue-500" />
-            <h2 className="font-heading text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-50">
+            <h2 className="font-heading text-lg font-bold text-zinc-900 sm:text-xl dark:text-zinc-50">
               {t('quests.landing.weekly.title')}
             </h2>
           </div>
@@ -532,14 +565,14 @@ export default function DashboardQuests() {
           {isWeeklyPending ? (
             <div className="flex items-center justify-center py-8">
               <div className="flex flex-col items-center gap-2">
-                <div className="w-6 h-6 border-2 border-blue-500/30 border-t-blue-500 rounded-full animate-spin" />
+                <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-500/30 border-t-blue-500" />
                 <p className="text-sm text-zinc-600 dark:text-zinc-400">
                   {t('quests.landing.loading')}
                 </p>
               </div>
             </div>
           ) : Object.keys(groupedWeekly).length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-8 px-4 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800">
+            <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-zinc-200 px-4 py-8 dark:border-zinc-800">
               <p className="text-sm text-zinc-600 dark:text-zinc-400">
                 {t('quests.landing.noQuests')}
               </p>

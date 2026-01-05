@@ -7,10 +7,10 @@ export const SocialProof = () => {
   return (
     <section
       key={language}
-      className="w-full py-24 bg-white dark:bg-black text-black dark:text-white border-t border-gray-100 dark:border-gray-900"
+      className="w-full border-t border-gray-100 bg-white py-24 text-black dark:border-gray-900 dark:bg-black dark:text-white"
     >
       <div className="container mx-auto px-6 text-center">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20 text-lg md:text-xl font-medium text-gray-800 dark:text-gray-200">
+        <div className="mb-20 grid grid-cols-1 gap-12 text-lg font-medium text-gray-800 md:grid-cols-3 md:text-xl dark:text-gray-200">
           <div className="flex flex-col items-center space-y-4">
             <span className="text-4xl">🌱</span>
             <p className="max-w-xs">&quot;{t('landing.SocialProofSection.quotes.q1')}&quot;</p>
@@ -26,16 +26,16 @@ export const SocialProof = () => {
         </div>
 
         {/* Minimal Stats */}
-        <div className="flex flex-wrap justify-center gap-12 md:gap-24 opacity-60">
+        <div className="flex flex-wrap justify-center gap-12 opacity-60 md:gap-24">
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold font-numeric mb-1">10,000+</div>
-            <div className="text-sm font-medium uppercase tracking-wider">
+            <div className="font-numeric mb-1 text-3xl font-bold md:text-4xl">10,000+</div>
+            <div className="text-sm font-medium tracking-wider uppercase">
               {t('landing.SocialProofSection.stats.quests')}
             </div>
           </div>
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold font-numeric mb-1">21 Days</div>
-            <div className="text-sm font-medium uppercase tracking-wider">
+            <div className="font-numeric mb-1 text-3xl font-bold md:text-4xl">21 Days</div>
+            <div className="text-sm font-medium tracking-wider uppercase">
               {t('landing.SocialProofSection.stats.streak')}
             </div>
           </div>

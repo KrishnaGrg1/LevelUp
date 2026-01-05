@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Users, Lock, Globe, Crown, Plus, Pin } from 'lucide-react';
 import LanguageStore from '@/stores/useLanguage';
 import { t } from '@/translations';
@@ -24,6 +25,8 @@ export default function CommunitiesSection() {
   const [openJoinModal, setOpenJoinModal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [onboardingOpen, setOnboardingOpen] = useState(false);
+  const [onboardingCompleted, setOnboardingCompleted] = useState(false);
+  
   // Fetch user communities data
   const { data, isPending, isError, error } = useQuery({
     queryKey: ['my-communities', language],
@@ -36,10 +39,11 @@ export default function CommunitiesSection() {
     retryDelay: (attemptIndex: number) => Math.min(1000 * 2 ** attemptIndex, 30000),
   });
   useEffect(() => {
-    if (!user?.hasOnboarded) {
+    // Only show onboarding if user hasn't completed it and we haven't marked it as completed in this session
+    if (!user?.hasOnboarded && !onboardingCompleted) {
       setOnboardingOpen(true);
     }
-  }, [user]);
+  }, [user, onboardingCompleted]);
   // Fetch all communities data
   const {
     data: allCommunitiesData,
@@ -80,34 +84,48 @@ export default function CommunitiesSection() {
     joinMutation.mutate(communityId);
   };
 
+  const handleOnboardingComplete = () => {
+    // Mark onboarding as completed in this session to prevent reopening
+    setOnboardingCompleted(true);
+  };
+
   return (
     <div className="p-4 md:p-6 lg:p-8">
       {/* Header */}
-      <OnboardingFlow open={onboardingOpen} onOpenChange={setOnboardingOpen} lang={language} />
+      <OnboardingFlow 
+        open={onboardingOpen} 
+        onOpenChange={setOnboardingOpen} 
+        lang={language}
+        onComplete={handleOnboardingComplete}
+      />
 
       <div className="mb-6 lg:mb-8">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl md:text-3xl lg:text-4xl mb-2 font-bold">My Communities</h1>
-            <p className="text-sm md:text-base lg:text-lg text-muted-foreground">
+            <h1 className="mb-2 text-2xl font-bold md:text-3xl lg:text-4xl">My Communities</h1>
+            <p className="text-muted-foreground text-sm md:text-base lg:text-lg">
               Manage and explore your professional communities
             </p>
           </div>
-          <div className="flex gap-3">
-            <button
+          <div className="flex flex-wrap gap-3">
+            <Button
               onClick={() => setOpenJoinModal(true)}
-              className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border-2 border-green-600 dark:border-green-500 bg-white dark:bg-gray-800 text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 h-10 px-4 py-2"
+              variant="outline"
+              size="lg"
+              className="shadow-sm"
             >
-              <Users className="h-4 w-4 mr-2" />
+              <Users className="h-4 w-4" />
               {t('community:card.join', language)}
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={() => setOpenCreateModal(true)}
-              className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-blue-600 text-white hover:bg-blue-700 h-10 px-4 py-2"
+              variant="default"
+              size="lg"
+              className="bg-zinc-900 shadow-sm hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
             >
-              <span className="text-xl mr-2">+</span>
+              <Plus className="h-4 w-4" />
               {t('community:createModal.title', language)}
-            </button>
+            </Button>
           </div>
         </div>
 
@@ -117,21 +135,21 @@ export default function CommunitiesSection() {
 
       {/* Loading State */}
       {isPending && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {[...Array(3)].map((_, i) => (
             <Card
               key={i}
-              className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
+              className="border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800"
             >
               <CardHeader>
                 <div className="animate-pulse">
-                  <div className="h-6 bg-gray-300 dark:bg-gray-600 rounded w-32 mb-3"></div>
-                  <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-20 mb-2"></div>
-                  <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-28"></div>
+                  <div className="mb-3 h-6 w-32 rounded bg-gray-300 dark:bg-gray-600"></div>
+                  <div className="mb-2 h-4 w-20 rounded bg-gray-300 dark:bg-gray-600"></div>
+                  <div className="h-4 w-28 rounded bg-gray-300 dark:bg-gray-600"></div>
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="h-2 bg-gray-300 dark:bg-gray-600 rounded w-full"></div>
+                <div className="h-2 w-full rounded bg-gray-300 dark:bg-gray-600"></div>
               </CardContent>
             </Card>
           ))}
@@ -141,7 +159,7 @@ export default function CommunitiesSection() {
       {/* Error State */}
       {isError && (
         <div className="mb-8">
-          <Card className="bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-900/50">
+          <Card className="border-red-200 bg-red-50 dark:border-red-900/50 dark:bg-red-950/30">
             <CardContent className="pt-6">
               <div className="flex items-center gap-3 text-red-600 dark:text-red-400">
                 <Users className="h-5 w-5" />
@@ -158,15 +176,18 @@ export default function CommunitiesSection() {
       )}
 
       <div>
-        <button
+        <Button
           onClick={e => {
             e.stopPropagation();
             setIsModalOpen(true);
           }}
-          className="px-3 py-2 rounded-md bg-amber-500 text-white font-semibold hover:bg-amber-600 dark:bg-amber-600 dark:hover:bg-amber-700"
+          variant="outline"
+          size="default"
+          className="shadow-sm"
         >
+          <Pin className="h-4 w-4" />
           Customize Pins
-        </button>
+        </Button>
 
         <CustomizePinModal
           isOpen={isModalOpen}
@@ -180,20 +201,20 @@ export default function CommunitiesSection() {
       </div>
       {/* Communities Grid */}
       {!isPending && !isError && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {/* Create Community Card - Always First */}
           <Card
             onClick={() => setOpenCreateModal(true)}
-            className="relative border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-750 hover:border-gray-400 dark:hover:border-gray-500 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden cursor-pointer group"
+            className="group relative cursor-pointer overflow-hidden rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 shadow-sm transition-all duration-300 hover:border-gray-400 hover:bg-gray-100 hover:shadow-md dark:border-gray-800 dark:bg-black dark:hover:border-gray-700 dark:hover:bg-gray-900"
           >
-            <CardContent className="relative pt-6 pb-6 flex flex-col items-center justify-center h-full min-h-[200px]">
-              <div className="w-20 h-20 rounded-full bg-blue-600 dark:bg-blue-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-300 shadow-md">
-                <Plus className="h-10 w-10 text-white font-bold" strokeWidth={3} />
+            <CardContent className="relative flex h-full min-h-[200px] flex-col items-center justify-center pt-6 pb-6">
+              <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-black shadow-md transition-all duration-300 group-hover:scale-110 dark:bg-white">
+                <Plus className="h-10 w-10 font-bold text-white dark:text-black" strokeWidth={3} />
               </div>
-              <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">
+              <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-gray-100">
                 Create Community
               </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 text-center px-4">
+              <p className="px-4 text-center text-sm text-gray-600 dark:text-gray-400">
                 Start a new community and invite members
               </p>
             </CardContent>
@@ -209,77 +230,55 @@ export default function CommunitiesSection() {
               <Card
                 key={community.id || index}
                 onClick={() => router.push(`/${language}/user/community/${community.id}`)}
-                className={`relative rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden group cursor-pointer ${
-                  isPrivate
-                    ? 'border-2 border-purple-200 dark:border-purple-800 bg-white dark:bg-gray-800 hover:border-purple-300 dark:hover:border-purple-700'
-                    : 'border-2 border-green-200 dark:border-green-800 bg-white dark:bg-gray-800 hover:border-green-300 dark:hover:border-green-700'
-                }`}
+                className="group relative cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:border-gray-300 hover:shadow-md dark:border-gray-800 dark:bg-black dark:hover:border-gray-700"
               >
                 {/* Subtle top accent bar */}
-                <div
-                  className={`h-1 w-full ${
-                    isPrivate
-                      ? 'bg-purple-500 dark:bg-purple-600'
-                      : 'bg-green-500 dark:bg-green-600'
-                  }`}
-                ></div>
+                <div className="h-1 w-full bg-gray-900 dark:bg-gray-100" />
 
                 {/* Pinned Icon - Top Right Corner */}
                 {isPinned && (
                   <div className="absolute top-4 right-4 z-10">
-                    <div className="w-8 h-8 rounded-full bg-amber-500 dark:bg-amber-600 flex items-center justify-center shadow-md">
-                      <Pin className="h-4 w-4 text-white" fill="currentColor" />
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black/90 shadow-md dark:bg-white/90">
+                      <Pin className="h-4 w-4 text-white dark:text-black" fill="currentColor" />
                     </div>
                   </div>
                 )}
 
-                <CardHeader className="pb-2 px-4 pt-4">
-                  <div className="flex items-start justify-between mb-2">
+                <CardHeader className="px-4 pt-4 pb-2">
+                  <div className="mb-2 flex items-start justify-between">
                     <div className="flex items-center gap-3">
                       {/* Privacy Icon */}
-                      <div
-                        className={`w-10 h-10 rounded-lg flex items-center justify-center shadow-sm transition-all duration-300 ${
-                          isPrivate
-                            ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400'
-                            : 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
-                        }`}
-                      >
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-100 text-gray-700 shadow-sm dark:bg-gray-900 dark:text-gray-200">
                         {isPrivate ? <Lock className="h-5 w-5" /> : <Globe className="h-5 w-5" />}
                       </div>
                       <div>
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <CardTitle className="text-lg md:text-xl font-semibold text-gray-900 dark:text-gray-100 group-hover:text-gray-700 dark:group-hover:text-gray-50 transition-colors">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <CardTitle className="text-lg font-semibold text-gray-900 transition-colors group-hover:text-gray-700 md:text-xl dark:text-gray-100 dark:group-hover:text-gray-50">
                             {community.name}
                           </CardTitle>
                           {/* Pinned Badge next to title */}
                           {isPinned && (
-                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 border border-amber-300 dark:border-amber-700">
+                            <span className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
                               <Pin className="h-3 w-3" fill="currentColor" />
                               Pinned
                             </span>
                           )}
                         </div>
-                        <p
-                          className={`text-xs mt-0.5 font-medium ${
-                            isPrivate
-                              ? 'text-purple-600 dark:text-purple-400'
-                              : 'text-green-600 dark:text-green-400'
-                          }`}
-                        >
+                        <p className="mt-0.5 text-xs font-medium text-gray-600 dark:text-gray-400">
                           {isPrivate ? 'Private Community' : 'Public Community'}
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 mt-3 flex-wrap">
+                  <div className="mt-3 flex flex-wrap items-center gap-2">
                     {/* Admin Badge */}
                     {isAdmin ? (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 border border-amber-300 dark:border-amber-700 shadow-sm">
+                      <span className="inline-flex items-center gap-1 rounded-full border border-black/10 bg-black px-2.5 py-1 text-xs font-medium text-white shadow-sm dark:border-white/10 dark:bg-white dark:text-black">
                         <Crown className="h-3 w-3" />
                         Admin
                       </span>
                     ) : (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border border-blue-300 dark:border-blue-700 shadow-sm">
+                      <span className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-700 shadow-sm dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
                         <Users className="h-3 w-3" />
                         Member
                       </span>
@@ -289,7 +288,7 @@ export default function CommunitiesSection() {
 
                 <CardContent className="px-4 pb-4">
                   {/* Members info */}
-                  <div className="flex items-center justify-between text-sm text-gray-700 dark:text-gray-300 mb-3">
+                  <div className="mb-3 flex items-center justify-between text-sm text-gray-700 dark:text-gray-300">
                     <div className="flex items-center gap-1">
                       <Users className="h-4 w-4" />
                       {community.currentMembers} / {community.maxMembers} members
@@ -298,7 +297,7 @@ export default function CommunitiesSection() {
 
                   {/* Description */}
                   {community.description && (
-                    <p className="mt-3 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+                    <p className="mt-3 line-clamp-2 text-sm text-gray-600 dark:text-gray-400">
                       {community.description}
                     </p>
                   )}
@@ -310,11 +309,11 @@ export default function CommunitiesSection() {
           {/* Empty State - Only show when no communities at all */}
           {communities.length === 0 && (
             <div className="col-span-full md:col-span-2 lg:col-span-2">
-              <Card className="border-dashed border-2">
+              <Card className="border-2 border-dashed">
                 <CardContent className="pt-6 pb-6 text-center">
-                  <Users className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-                  <h3 className="text-lg font-semibold mb-2">No communities yet</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <Users className="text-muted-foreground mx-auto mb-4 h-12 w-12" />
+                  <h3 className="mb-2 text-lg font-semibold">No communities yet</h3>
+                  <p className="text-muted-foreground text-sm">
                     Click the card on the left to create your first community
                   </p>
                 </CardContent>
@@ -327,26 +326,29 @@ export default function CommunitiesSection() {
       {/* All Communities Section */}
       <div className="mt-12">
         <div className="mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold">All Communities</h2>
-          <p className="text-sm md:text-base text-muted-foreground">
+          <h2 className="text-2xl font-bold md:text-3xl">All Communities</h2>
+          <p className="text-muted-foreground text-sm md:text-base">
             Discover and join communities
           </p>
         </div>
 
         {/* Loading State for All Communities */}
         {isLoadingAll && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[...Array(3)].map((_, i) => (
-              <Card key={i} className="border-blue-500/20 bg-blue-500/5">
+              <Card
+                key={i}
+                className="border border-gray-200 bg-white dark:border-gray-800 dark:bg-black"
+              >
                 <CardHeader>
                   <div className="animate-pulse">
-                    <div className="h-6 bg-blue-300/30 rounded w-32 mb-3"></div>
-                    <div className="h-4 bg-blue-300/30 rounded w-20 mb-2"></div>
-                    <div className="h-4 bg-blue-300/30 rounded w-28"></div>
+                    <div className="mb-3 h-6 w-32 rounded bg-gray-200 dark:bg-gray-800"></div>
+                    <div className="mb-2 h-4 w-20 rounded bg-gray-200 dark:bg-gray-800"></div>
+                    <div className="h-4 w-28 rounded bg-gray-200 dark:bg-gray-800"></div>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="h-2 bg-blue-300/30 rounded w-full"></div>
+                  <div className="h-2 w-full rounded bg-gray-200 dark:bg-gray-800"></div>
                 </CardContent>
               </Card>
             ))}
@@ -355,7 +357,7 @@ export default function CommunitiesSection() {
 
         {/* Error State for All Communities */}
         {isErrorAll && (
-          <Card className="border-red-500/20 bg-red-500/5">
+          <Card className="border border-gray-200 bg-white dark:border-gray-800 dark:bg-black">
             <CardContent className="pt-6">
               <div className="flex items-center gap-3 text-red-400">
                 <Users className="h-5 w-5" />
@@ -372,7 +374,7 @@ export default function CommunitiesSection() {
 
         {/* All Communities Grid */}
         {!isLoadingAll && !isErrorAll && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {allCommunities.map((community: CommunityDTO, index: number) => {
               const isPrivate = community.isPrivate === true;
               const isAdmin = community.userRole === 'ADMIN';
@@ -382,75 +384,55 @@ export default function CommunitiesSection() {
                 <Card
                   key={community.id || index}
                   onClick={() => router.push(`/${language}/community/${community.id}`)}
-                  className={`relative rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer ${
-                    isPrivate
-                      ? 'border border-purple-500/30 bg-gradient-to-br from-purple-950/30 via-gray-900/50 to-gray-900/30 hover:border-purple-400/50'
-                      : 'border border-emerald-500/30 bg-gradient-to-br from-emerald-950/30 via-gray-900/50 to-gray-900/30 hover:border-emerald-400/50'
-                  }`}
+                  className="group relative cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:border-gray-300 hover:shadow-md dark:border-gray-800 dark:bg-black dark:hover:border-gray-700"
                 >
                   {/* Subtle top accent bar */}
-                  <div
-                    className={`h-1 w-full ${
-                      isPrivate
-                        ? 'bg-gradient-to-r from-purple-500/50 via-purple-400/50 to-pink-500/50'
-                        : 'bg-gradient-to-r from-emerald-500/50 via-teal-400/50 to-cyan-500/50'
-                    }`}
-                  ></div>
+                  <div className="h-1 w-full bg-gray-900 dark:bg-gray-100" />
 
                   {/* Pinned Icon - Top Right Corner */}
                   {isPinned && (
                     <div className="absolute top-4 right-4 z-10">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-500/90 to-amber-600/90 flex items-center justify-center shadow-lg shadow-yellow-500/30 animate-pulse">
-                        <Pin className="h-4 w-4 text-white" fill="currentColor" />
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black/90 shadow-md dark:bg-white/90">
+                        <Pin className="h-4 w-4 text-white dark:text-black" fill="currentColor" />
                       </div>
                     </div>
                   )}
 
-                  <CardHeader className="pb-2 px-4 pt-4">
-                    <div className="flex items-start justify-between mb-2">
+                  <CardHeader className="px-4 pt-4 pb-2">
+                    <div className="mb-2 flex items-start justify-between">
                       <div className="flex items-center gap-3">
                         {/* Privacy Icon with glow effect */}
-                        <div
-                          className={`w-10 h-10 rounded-lg flex items-center justify-center shadow-lg transition-all duration-300 ${
-                            isPrivate
-                              ? 'bg-gradient-to-br from-purple-600/20 to-pink-600/20 text-purple-300 group-hover:shadow-purple-500/30'
-                              : 'bg-gradient-to-br from-emerald-600/20 to-teal-600/20 text-emerald-300 group-hover:shadow-emerald-500/30'
-                          }`}
-                        >
+                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-100 text-gray-700 shadow-sm transition-all duration-300 dark:bg-gray-900 dark:text-gray-200">
                           {isPrivate ? <Lock className="h-5 w-5" /> : <Globe className="h-5 w-5" />}
                         </div>
                         <div>
-                          <div className="flex items-center gap-2 flex-wrap">
-                            <CardTitle className="text-lg md:text-xl font-semibold text-gray-100 group-hover:text-white transition-colors">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <CardTitle className="text-lg font-semibold text-gray-900 transition-colors group-hover:text-gray-700 md:text-xl dark:text-gray-100 dark:group-hover:text-white">
                               {community.name}
                             </CardTitle>
                             {/* Pinned Badge next to title */}
                             {isPinned && (
-                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-500/20 text-yellow-300 border border-yellow-500/40">
+                              <span className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
                                 <Pin className="h-3 w-3" fill="currentColor" />
                                 Pinned
                               </span>
                             )}
                           </div>
-                          <p
-                            className={`text-xs mt-0.5 font-medium ${
-                              isPrivate ? 'text-purple-400/80' : 'text-emerald-400/80'
-                            }`}
-                          >
+                          <p className="mt-0.5 text-xs font-medium text-gray-600 dark:text-gray-400">
                             {isPrivate ? 'Private Community' : 'Public Community'}
                           </p>
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2 mt-3 flex-wrap">
+                    <div className="mt-3 flex flex-wrap items-center gap-2">
                       {/* Admin Badge */}
                       {isAdmin ? (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-500/15 text-amber-300 border border-amber-500/30 shadow-sm">
+                        <span className="inline-flex items-center gap-1 rounded-full border border-black/10 bg-black px-2.5 py-1 text-xs font-medium text-white shadow-sm dark:border-white/10 dark:bg-white dark:text-black">
                           <Crown className="h-3 w-3" />
                           Admin
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-500/15 text-blue-300 border border-blue-500/30 shadow-sm">
+                        <span className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-700 shadow-sm dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
                           <Users className="h-3 w-3" />
                           Member
                         </span>
@@ -460,7 +442,7 @@ export default function CommunitiesSection() {
 
                   <CardContent className="px-4 pb-4">
                     {/* Members info */}
-                    <div className="flex items-center justify-between text-sm text-gray-300 mb-3">
+                    <div className="mb-3 flex items-center justify-between text-sm text-gray-700 dark:text-gray-300">
                       <div className="flex items-center gap-1">
                         <Users className="h-4 w-4" />
                         {community.currentMembers} / {community.maxMembers} members
@@ -469,7 +451,7 @@ export default function CommunitiesSection() {
 
                     {/* Description */}
                     {community.description && (
-                      <p className="mt-3 text-sm text-gray-300 line-clamp-2">
+                      <p className="mt-3 line-clamp-2 text-sm text-gray-600 dark:text-gray-400">
                         {community.description}
                       </p>
                     )}
@@ -479,7 +461,7 @@ export default function CommunitiesSection() {
                       <button
                         onClick={e => handleJoinCommunity(e, community.id)}
                         disabled={joinMutation.isPending}
-                        className="w-full mt-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                        className="mt-4 w-full rounded-lg bg-black py-2 text-sm font-semibold text-white transition-colors hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-white dark:text-black dark:hover:bg-gray-200"
                       >
                         {joinMutation.isPending ? 'Joining...' : 'Join'}
                       </button>
@@ -492,11 +474,11 @@ export default function CommunitiesSection() {
             {/* Empty State */}
             {allCommunities.length === 0 && (
               <div className="col-span-full">
-                <Card className="border-dashed border-2">
+                <Card className="border-2 border-dashed">
                   <CardContent className="pt-6 pb-6 text-center">
-                    <Users className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-                    <h3 className="text-lg font-semibold mb-2">No communities available</h3>
-                    <p className="text-sm text-muted-foreground">
+                    <Users className="text-muted-foreground mx-auto mb-4 h-12 w-12" />
+                    <h3 className="mb-2 text-lg font-semibold">No communities available</h3>
+                    <p className="text-muted-foreground text-sm">
                       Be the first to create a community
                     </p>
                   </CardContent>

@@ -33,12 +33,12 @@ const MyCommunities = () => {
   ];
 
   return (
-    <section className="relative py-16 px-6 bg-gradient-to-b rounded-3xl">
-      <h2 className="text-4xl font-black mb-8 text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-center">
+    <section className="relative rounded-3xl bg-gradient-to-b px-6 py-16">
+      <h2 className="mb-8 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-center text-4xl font-black text-transparent">
         {t('dashboard.myCommunities.title', 'My Communities')}
       </h2>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid gap-6 md:grid-cols-2">
         {communities.map(community => {
           const [current, total] = community.xp.split('/');
           const xpPercent = (parseInt(current) / parseInt(total)) * 100;
@@ -46,20 +46,20 @@ const MyCommunities = () => {
           return (
             <div
               key={community.name}
-              className="group relative p-6 rounded-2xl bg-purple-800 hover:shadow-2xl transition-all duration-500 border border-purple-700"
+              className="group relative rounded-2xl border border-purple-700 bg-purple-800 p-6 transition-all duration-500 hover:shadow-2xl"
             >
-              <div className="flex justify-between items-center mb-2">
+              <div className="mb-2 flex items-center justify-between">
                 <h3 className="text-xl font-semibold text-white">{community.name}</h3>
-                <span className="text-xs bg-red-500 text-white px-2 py-1 rounded-full animate-pulse">
+                <span className="animate-pulse rounded-full bg-red-500 px-2 py-1 text-xs text-white">
                   {community.newCount} {t('dashboard.myCommunities.new', 'new')}
                 </span>
               </div>
-              <p className="text-sm text-gray-300 mb-1">{community.members}</p>
-              <p className="text-sm text-gray-300 mb-2">
+              <p className="mb-1 text-sm text-gray-300">{community.members}</p>
+              <p className="mb-2 text-sm text-gray-300">
                 {t('dashboard.myCommunities.level', 'Level')} {community.level}
               </p>
 
-              <div className="w-full bg-purple-700 rounded-full h-2 mb-1 overflow-hidden">
+              <div className="mb-1 h-2 w-full overflow-hidden rounded-full bg-purple-700">
                 <div
                   className="h-2 rounded-full bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 transition-all duration-1000"
                   style={{ width: `${xpPercent}%` }}

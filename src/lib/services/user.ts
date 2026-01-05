@@ -144,7 +144,6 @@ export const adminUserGrowth = async (lang: Language, range: 'day' | 'week' | 'm
   }
 };
 
-// Get user by ID
 export const getUserById = async (lang: Language, userId: string) => {
   try {
     const response = await axiosInstance.get<fullUserObjectResponse>(`/admin/users/${userId}`, {
@@ -164,7 +163,6 @@ export const getUserById = async (lang: Language, userId: string) => {
   }
 };
 
-// Update user
 export const updateUser = async (lang: Language, userId: string, data: UpdateUserPayload) => {
   try {
     const response = await axiosInstance.patch<fullUserObjectResponse>(

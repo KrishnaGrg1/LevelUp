@@ -51,6 +51,7 @@
     "deleteFailed": "Échec de suppression du clan",
     "createdSuccess": "Clan créé avec succès!",
     "createFailed": "Échec de création du clan",
-    "nameMinLength": "Le nom du clan doit contenir au moins 3 caractères"
+    "nameMinLength": "Le nom du clan doit contenir au moins 3 caractères",
+    "leaveFailed": "Failed to leave clan"
   }
 }

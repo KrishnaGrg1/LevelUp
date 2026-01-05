@@ -24,7 +24,12 @@
           "title": "Méditation Matinale",
           "time": "10 min"
         },
-        "card2": { "type": "Savoir", "xp": "100 XP", "title": "Lire 10 Pages", "time": "20 min" },
+        "card2": {
+          "type": "Savoir",
+          "xp": "100 XP",
+          "title": "Lire 10 Pages",
+          "time": "20 min"
+        },
         "card3": {
           "type": "Concentration",
           "xp": "150 XP",
@@ -34,7 +39,16 @@
       },
       "dailyQuest": "Quête Quotidienne",
       "startQuest": "Lancer la Quête"
-    }
+    },
+    "batchText": "AI-powered self-improvement",
+    "titleSub": "Level up your life.",
+    "desc1": "Daily quests designed for",
+    "descHighlight1": "real accountability",
+    "desc2": " Plus a supportive community built around",
+    "watchDemo": "Watch Demo",
+    "rating": "4.9/5 Rating",
+    "secure": "Secure & Private",
+    "activeUsers": "10,000+ Active Users"
   },
   "problemSolution": {
     "problem": {
@@ -122,12 +136,10 @@
         }
       }
     },
-
     "integrationFeatures": {
       "title": "Intégrations Fluides",
       "description": "Connectez-vous avec les outils que vous utilisez déjà."
     },
-
     "comparisonSection": {
       "title": "Pourquoi LevelUp ?",
       "description": "Voyez comment nous nous comparons aux autres.",
@@ -163,9 +175,39 @@
           "otherApps": "Support Email"
         }
       }
-    }
+    },
+    "features": {
+      "badgeText": "Built for consistency",
+      "badge": "Everything you need to level up",
+      "description": "Powerful tools that make progress feel rewarding—without the burnout.",
+      "feature1": {
+        "title": "AI-Generated Quests",
+        "description": "Personalized daily and weekly challenges that turn goals into clear, doable actions."
+      },
+      "feature2": {
+        "title": "Gamified Progress",
+        "description": "Earn XP, level up, and track milestones so improvement feels motivating, not monotonous."
+      },
+      "feature3": {
+        "title": "Communities & Clans",
+        "description": "Join like-minded groups for accountability, teamwork, and shared progress."
+      },
+      "feature4": {
+        "title": "Global, Multi-language",
+        "description": "Connect across languages and regions—progress should be accessible to everyone."
+      },
+      "feature5": {
+        "title": "Streaks & Scheduling",
+        "description": "Stay consistent with streaks, history, and time-zone aware planning that fits real life."
+      },
+      "feature6": {
+        "title": "Wellbeing First",
+        "description": "A supportive approach to growth—progress over perfection, every day."
+      }
+    },
+    "feature6Desc": "A supportive approach to growth—progress over perfection, every day.",
+    "readMore": "Learn more"
   },
-
   "CTASection": {
     "badgeText": "Votre Aventure Attend",
     "titleMain": "Prêt à Monter de Niveau",
@@ -197,7 +239,6 @@
       }
     ]
   },
-
   "TestimonialsSection": {
     "titleMain": "Histoires Vraies, Transformations Réelles",
     "description": "Découvrez comment des aventuriers du monde entier améliorent leur vie avec Level Up",
@@ -250,10 +291,22 @@
       "title": "Comment Marche LevelUp",
       "subtitle": "Systèmes simples pour vies complexes.",
       "steps": {
-        "0": { "title": "Rejoindre", "desc": "Trouvez votre clan." },
-        "1": { "title": "Recevoir Quêtes", "desc": "Défis IA quotidiens." },
-        "2": { "title": "Agir", "desc": "Petits pas en avant." },
-        "3": { "title": "Gagner XP", "desc": "Visualisez les progrès." }
+        "0": {
+          "title": "Rejoindre",
+          "desc": "Trouvez votre clan."
+        },
+        "1": {
+          "title": "Recevoir Quêtes",
+          "desc": "Défis IA quotidiens."
+        },
+        "2": {
+          "title": "Agir",
+          "desc": "Petits pas en avant."
+        },
+        "3": {
+          "title": "Gagner XP",
+          "desc": "Visualisez les progrès."
+        }
       }
     },
     "closing": {
@@ -292,7 +345,14 @@
       "subject": "Sujet",
       "message": "Message",
       "submit": "Envoyer Message",
-      "footer": "Nous lisons chaque message."
+      "footer": "Nous lisons chaque message.",
+      "inquiryType": "Inquiry Type",
+      "inquiryOptions": {
+        "general": "General Inquiry",
+        "support": "Support",
+        "feedback": "Feedback",
+        "partnership": "Partnership"
+      }
     }
   }
 }

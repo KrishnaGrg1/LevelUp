@@ -30,6 +30,7 @@ import {
   Loader2,
   Edit,
 } from 'lucide-react';
+import { t } from '@/translations/index';
 
 export default function UserManagement() {
   const { language } = LanguageStore();
@@ -73,12 +74,12 @@ export default function UserManagement() {
   // Loading state
   if (isPending) {
     return (
-      <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 py-8 px-4">
+      <div className="min-h-screen bg-zinc-50 px-4 py-8 dark:bg-zinc-950">
         <div className="container mx-auto max-w-7xl">
           <div className="flex min-h-[400px] items-center justify-center">
             <div className="text-center">
               <Loader2 className="mx-auto h-12 w-12 animate-spin text-zinc-900 dark:text-zinc-50" />
-              <p className="mt-4 text-zinc-600 dark:text-zinc-400">Loading users...</p>
+              <p className="mt-4 text-zinc-600 dark:text-zinc-400">{t('common:loadingUsers')}</p>
             </div>
           </div>
         </div>
@@ -89,7 +90,7 @@ export default function UserManagement() {
   // Error state
   if (isError) {
     return (
-      <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 py-8 px-4">
+      <div className="min-h-screen bg-zinc-50 px-4 py-8 dark:bg-zinc-950">
         <div className="container mx-auto max-w-7xl">
           <div className="flex min-h-[400px] items-center justify-center">
             <Card className="border-red-200 bg-red-50 dark:border-red-900/50 dark:bg-red-900/10">
@@ -116,7 +117,7 @@ export default function UserManagement() {
   const metadata: PaginationMetadata | undefined = data?.body?.data?.pagination;
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 py-8 px-4">
+    <div className="min-h-screen bg-zinc-50 px-4 py-8 dark:bg-zinc-950">
       <div className="container mx-auto max-w-7xl space-y-6">
         {/* Header */}
         <div className="space-y-2">
@@ -313,7 +314,7 @@ export default function UserManagement() {
 
         {/* Loading overlay for refetching */}
         {isFetching && !isPending && (
-          <div className="fixed bottom-4 right-4 z-50">
+          <div className="fixed right-4 bottom-4 z-50">
             <Card className="border-0 shadow-lg">
               <CardContent className="flex items-center gap-3 p-4">
                 <Loader2 className="h-4 w-4 animate-spin text-zinc-900 dark:text-zinc-50" />
@@ -341,7 +342,7 @@ function StatCard({
   bgColor: string;
 }) {
   return (
-    <Card className=" shadow-none">
+    <Card className="shadow-none">
       <CardContent className="p-6">
         <div className="flex items-center gap-4">
           <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${bgColor}`}>
@@ -349,7 +350,7 @@ function StatCard({
           </div>
           <div>
             <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">{label}</p>
-            <p className="mt-1 font-heading text-2xl font-bold text-zinc-900 dark:text-zinc-50">
+            <p className="font-heading mt-1 text-2xl font-bold text-zinc-900 dark:text-zinc-50">
               {value}
             </p>
           </div>

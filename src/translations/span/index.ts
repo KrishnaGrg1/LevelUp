@@ -12,6 +12,8 @@ import aiChat from './aiChat.json';
 import quests from './quests.json';
 import community from './community.json';
 import admin from './admin.json';
+import common from './common.json';
+import onboarding from './onboarding.json';
 
 const span = {
   auth,
@@ -28,5 +30,7 @@ const span = {
   quests,
   community,
   admin,
+  common,
+  onboarding,
 };
 export default span;

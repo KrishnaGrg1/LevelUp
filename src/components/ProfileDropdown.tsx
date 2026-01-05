@@ -13,7 +13,7 @@ import authStore from '@/stores/useAuth';
 import LanguageStore from '@/stores/useLanguage';
 import { t } from '@/translations';
 
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
@@ -22,6 +22,7 @@ import TokenDisplay from '@/components/TokenDisplay';
 export function ProfileDropdownMenu({ isadmin }: { isadmin?: boolean }) {
   const { language } = LanguageStore();
   const { user, logout: clearAuth } = authStore();
+  const queryClient = useQueryClient();
 
   const router = useRouter();
 
@@ -32,6 +33,8 @@ export function ProfileDropdownMenu({ isadmin }: { isadmin?: boolean }) {
     },
     onSuccess: data => {
       clearAuth(); // resets user + isAuthenticated
+      // Clear all React Query cache to prevent stale data on next login
+      queryClient.clear();
       toast.success(t('success.logout', data?.body?.message));
       router.push(`/${language}/login`);
     },
@@ -55,10 +58,10 @@ export function ProfileDropdownMenu({ isadmin }: { isadmin?: boolean }) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="w-56 bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800"
+        className="w-56 border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900"
         align="start"
       >
-        <DropdownMenuLabel className="text-zinc-900 dark:text-zinc-50 flex items-center justify-between">
+        <DropdownMenuLabel className="flex items-center justify-between text-zinc-900 dark:text-zinc-50">
           <span>{t('profile:dropdown.myAccount', language)}</span>
           {typeof user?.tokens === 'number' && <TokenDisplay tokens={user?.tokens} />}
         </DropdownMenuLabel>
@@ -93,7 +96,7 @@ export function ProfileDropdownMenu({ isadmin }: { isadmin?: boolean }) {
         </DropdownMenuGroup>
 
         <DropdownMenuItem
-          className="flex flex-row gap-1 cursor-pointer text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/20"
+          className="flex cursor-pointer flex-row gap-1 text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/20"
           onClick={() => handleLogout()}
           disabled={isPending}
         >

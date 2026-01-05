@@ -28,7 +28,7 @@ export default function ResetPasswordPage({ params }: ResetPasswordPageProps) {
   }, []);
 
   return (
-    <div className="relative z-10 flex items-center justify-center min-h-screen pt-20">
+    <div className="relative z-10 flex min-h-screen items-center justify-center pt-20">
       <Suspense fallback={<FormLoading message="Reset Password" />}>
         <ResetPasswordForm lang={language} otp={otp} userId={userId} />
       </Suspense>

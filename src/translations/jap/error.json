@@ -14,6 +14,33 @@
     "confirmPasswordRequired": "パスワードを確認してください",
     "passwordMismatch": "パスワードが一致しません",
     "otpRequired": "確認コードは必須です",
-    "otpLength": "確認コードは6桁である必要があります"
-  }
+    "otpLength": "確認コードは6桁である必要があります",
+    "oauth_missing_provider": "Missing OAuth provider.",
+    "oauth_missing_params": "Missing OAuth parameters.",
+    "oauth_no_response": "No response received from the OAuth provider.",
+    "oauth_access_denied": "Access denied by the OAuth provider.",
+    "oauth_invalid_request": "Invalid OAuth request.",
+    "oauth_invalid_grant": "OAuth の認可が期限切れまたは無効です。",
+    "oauth_server_error": "OAuth プロバイダーがサーバーエラーを返しました。",
+    "oauth_failed": "OAuth サインインに失敗しました。もう一度お試しください。",
+    "not_authenticated": "チャットするにはログインが必要です。"
+  },
+  "community": {
+    "not_member": "チャットするにはこのコミュニティに参加してください。"
+  },
+  "clan": {
+    "not_member_general": "ここでチャットできるのはクランメンバーのみです。"
+  },
+  "message": {
+    "empty": "メッセージを入力してください。",
+    "too_long": "メッセージが長すぎます。",
+    "send_failed": "メッセージの送信に失敗しました。"
+  },
+  "onboarding": {
+    "categoriesRequired": "Please select at least one category",
+    "experienceRequired": "Please select your experience level",
+    "heardAboutUsRequired": "Please tell us how you heard about us"
+  },
+  "forgotPassword": "Failed to send reset code. Please try again.",
+  "register": "Registration failed. Please try again."
 }

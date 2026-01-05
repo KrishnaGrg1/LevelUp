@@ -22,7 +22,7 @@ const HomePage: React.FC<PageProps> = ({ params }) => {
   }, [params, setLanguage]);
 
   return (
-    <div className="font-sans antialiased text-gray-900 bg-white dark:bg-black dark:text-white">
+    <div className="bg-white font-sans text-gray-900 antialiased dark:bg-black dark:text-white">
       <Hero />
       <ProblemSolution />
       <CoreFeatures />

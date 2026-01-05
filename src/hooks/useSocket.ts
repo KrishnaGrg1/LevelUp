@@ -15,14 +15,12 @@ export const useSocket = () => {
   useEffect(() => {
     const socket = getSocket();
 
-    // Listen to connection state changes
     const handleConnect = () => setIsConnected(true);
     const handleDisconnect = () => setIsConnected(false);
 
     socket.on('connect', handleConnect);
     socket.on('disconnect', handleDisconnect);
 
-    // Set initial state
     setIsConnected(socket.connected);
 
     return () => {

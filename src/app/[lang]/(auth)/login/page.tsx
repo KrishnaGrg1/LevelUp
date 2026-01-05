@@ -24,7 +24,7 @@ export default function LoginPage({ params }: LoginPageProps) {
   }, [params, setLanguage]);
 
   return (
-    <div className="relative flex items-center justify-center min-h-screen  overflow-hidden ">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden">
       <Suspense fallback={<FormLoading message="Log In" />}>
         <LoginForm lang={language} />
       </Suspense>

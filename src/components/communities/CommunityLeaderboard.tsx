@@ -26,20 +26,20 @@ export default function CommunityLeaderboard({ communityId }: CommunityLeaderboa
 
   const getRankIcon = (rank: number) => {
     if (rank === 1)
-      return <Trophy className="h-5 w-5 text-yellow-500 fill-yellow-500" aria-label="1st place" />;
+      return <Trophy className="h-5 w-5 fill-yellow-500 text-yellow-500" aria-label="1st place" />;
     if (rank === 2)
-      return <Medal className="h-5 w-5 text-gray-400 fill-gray-400" aria-label="2nd place" />;
+      return <Medal className="h-5 w-5 fill-gray-400 text-gray-400" aria-label="2nd place" />;
     if (rank === 3)
-      return <Award className="h-5 w-5 text-amber-600 fill-amber-600" aria-label="3rd place" />;
+      return <Award className="h-5 w-5 fill-amber-600 text-amber-600" aria-label="3rd place" />;
     return <span className="text-sm font-bold text-gray-600 dark:text-gray-400">#{rank}</span>;
   };
 
   if (isPending) {
     return (
-      <Card className="border-blue-500/20 bg-white dark:bg-gray-800">
+      <Card className="border border-gray-200 bg-white dark:border-gray-800 dark:bg-black">
         <CardContent className="p-6">
           <div className="flex justify-center py-10">
-            <Loader2 className="h-8 w-8 animate-spin text-blue-600 dark:text-blue-400" />
+            <Loader2 className="h-8 w-8 animate-spin text-gray-900 dark:text-gray-100" />
           </div>
         </CardContent>
       </Card>
@@ -48,7 +48,7 @@ export default function CommunityLeaderboard({ communityId }: CommunityLeaderboa
 
   if (isError) {
     return (
-      <Card className="border-red-500/20 bg-white dark:bg-gray-800">
+      <Card className="border border-gray-200 bg-white dark:border-gray-800 dark:bg-black">
         <CardContent className="p-6">
           <p className="text-center text-red-500 dark:text-red-400">
             Failed to load community leaderboard
@@ -60,10 +60,10 @@ export default function CommunityLeaderboard({ communityId }: CommunityLeaderboa
 
   if (!data?.results || data.results.length === 0) {
     return (
-      <Card className="border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+      <Card className="border border-gray-200 bg-white dark:border-gray-800 dark:bg-black">
         <CardContent className="p-6">
-          <div className="text-center py-10">
-            <Users className="h-12 w-12 mx-auto mb-3 text-gray-400" />
+          <div className="py-10 text-center">
+            <Users className="mx-auto mb-3 h-12 w-12 text-gray-400" />
             <p className="text-gray-500 dark:text-gray-400">No members found in this community</p>
           </div>
         </CardContent>
@@ -72,14 +72,14 @@ export default function CommunityLeaderboard({ communityId }: CommunityLeaderboa
   }
 
   return (
-    <Card className="border-blue-500/20 bg-white dark:bg-gray-800">
-      <CardHeader className="border-b border-blue-500/10 bg-gradient-to-r from-blue-50 to-transparent dark:from-blue-900/20 dark:to-transparent">
+    <Card className="border border-gray-200 bg-white dark:border-gray-800 dark:bg-black">
+      <CardHeader className="border-b border-gray-200 dark:border-gray-800">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-xl text-gray-900 dark:text-white flex items-center gap-2">
-            <Trophy className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+          <CardTitle className="flex items-center gap-2 text-xl text-gray-900 dark:text-gray-100">
+            <Trophy className="h-5 w-5 text-gray-900 dark:text-gray-100" />
             {data.community.name} Leaderboard
           </CardTitle>
-          <Badge className="bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 border-0">
+          <Badge className="border border-gray-200 bg-gray-100 text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
             {data.community.xp.toLocaleString()} Community XP
           </Badge>
         </div>
@@ -93,33 +93,31 @@ export default function CommunityLeaderboard({ communityId }: CommunityLeaderboa
             return (
               <div
                 key={member.id}
-                className={`flex items-center gap-3 p-3 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors ${
-                  isTopThree
-                    ? 'bg-gradient-to-r from-blue-50 to-transparent dark:from-blue-900/10 dark:to-transparent'
-                    : ''
+                className={`flex items-center gap-3 p-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-900/50 ${
+                  isTopThree ? 'bg-gray-50 dark:bg-gray-900/30' : ''
                 }`}
               >
                 {/* Rank */}
-                <div className="w-10 flex justify-center">{getRankIcon(rank)}</div>
+                <div className="flex w-10 justify-center">{getRankIcon(rank)}</div>
 
                 {/* Avatar & Name */}
-                <Avatar className="h-10 w-10 border-2 border-blue-200 dark:border-blue-800">
+                <Avatar className="h-10 w-10 border border-gray-200 dark:border-gray-800">
                   <AvatarImage
                     src={member.user.profilePicture || undefined}
                     alt={member.user.UserName}
                   />
-                  <AvatarFallback className="bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 font-semibold text-sm">
+                  <AvatarFallback className="bg-gray-100 text-sm font-semibold text-gray-700 dark:bg-gray-900 dark:text-gray-300">
                     {member.user.UserName.charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
 
-                <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-gray-900 dark:text-white truncate text-sm">
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-semibold text-gray-900 dark:text-white">
                     {member.user.UserName}
                   </p>
                   <Badge
                     variant="secondary"
-                    className="text-xs bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 mt-1"
+                    className="mt-1 border border-gray-200 bg-gray-100 text-xs text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                   >
                     Level {member.level}
                   </Badge>
@@ -128,7 +126,7 @@ export default function CommunityLeaderboard({ communityId }: CommunityLeaderboa
                 {/* XP */}
                 <div className="text-right">
                   <p className="text-xs font-medium text-gray-600 dark:text-gray-400">XP</p>
-                  <p className="text-base font-bold text-blue-600 dark:text-blue-400">
+                  <p className="text-base font-bold text-gray-900 dark:text-gray-100">
                     {member.totalXP.toLocaleString()}
                   </p>
                 </div>
@@ -139,7 +137,7 @@ export default function CommunityLeaderboard({ communityId }: CommunityLeaderboa
 
         {/* Pagination */}
         {data.pagination.totalPages > 1 && (
-          <div className="p-3 border-t border-gray-200 dark:border-gray-700">
+          <div className="border-t border-gray-200 p-3 dark:border-gray-800">
             <BetterPagination
               paginationMetadata={{
                 total: data.pagination.total,
@@ -153,7 +151,7 @@ export default function CommunityLeaderboard({ communityId }: CommunityLeaderboa
         )}
 
         {data.pagination && (
-          <div className="p-2 text-center text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">
+          <div className="border-t border-gray-200 p-2 text-center text-xs text-gray-500 dark:border-gray-800 dark:text-gray-400">
             Showing {((page - 1) * limit + 1).toLocaleString()} -{' '}
             {Math.min(page * limit, data.pagination.total).toLocaleString()} of{' '}
             {data.pagination.total.toLocaleString()} members

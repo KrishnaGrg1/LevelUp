@@ -64,8 +64,8 @@ export default function CustomizePinModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md bg-[#0D1117] text-gray-100 rounded-xl border border-gray-700">
-        <DialogHeader className="flex justify-between items-center">
+      <DialogContent className="max-w-md rounded-xl border border-gray-700 bg-[#0D1117] text-gray-100">
+        <DialogHeader className="flex items-center justify-between">
           <DialogTitle className="text-lg font-semibold">
             {t('community:customizePin.title', language)}
           </DialogTitle>
@@ -78,20 +78,20 @@ export default function CustomizePinModal({
           placeholder={t('community:customizePin.messagePlaceholder', language)}
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="mb-3 bg-[#161B22] border-gray-700 text-gray-200"
+          className="mb-3 border-gray-700 bg-[#161B22] text-gray-200"
         />
 
-        <div className="max-h-64 overflow-y-auto space-y-1 pr-1">
+        <div className="max-h-64 space-y-1 overflow-y-auto pr-1">
           {filteredCommunities.map(c => {
             const selected = selectedIds.includes(c.id);
             return (
               <button
                 key={c.id}
                 onClick={() => toggleSelect(c.id)}
-                className={`flex items-center justify-between w-full px-3 py-2 rounded-md text-sm transition-all duration-150 ${
+                className={`flex w-full items-center justify-between rounded-md px-3 py-2 text-sm transition-all duration-150 ${
                   selected
-                    ? 'bg-yellow-500/20 border border-yellow-500 text-yellow-300'
-                    : 'hover:bg-gray-800 border border-transparent'
+                    ? 'border border-yellow-500 bg-yellow-500/20 text-yellow-300'
+                    : 'border border-transparent hover:bg-gray-800'
                 }`}
               >
                 <span>{c.name}</span>
@@ -101,18 +101,18 @@ export default function CustomizePinModal({
           })}
 
           {filteredCommunities.length === 0 && (
-            <p className="text-center text-sm text-gray-500 py-4">No communities found</p>
+            <p className="py-4 text-center text-sm text-gray-500">No communities found</p>
           )}
         </div>
 
-        <div className="flex justify-end gap-2 mt-4">
+        <div className="mt-4 flex justify-end gap-2">
           <Button variant="ghost" onClick={onClose}>
             {t('community:customizePin.cancel', language)}
           </Button>
           <Button
             onClick={() => handleToggle(selectedIds)}
             disabled={isPending}
-            className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold"
+            className="bg-yellow-500 font-semibold text-black hover:bg-yellow-600"
           >
             {isPending
               ? t('community:customizePin.saving', language)

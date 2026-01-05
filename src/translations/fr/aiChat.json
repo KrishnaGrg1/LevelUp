@@ -10,7 +10,8 @@
     "available": "jetons disponibles",
     "insufficient": "Jetons insuffisants",
     "insufficientDescription": "Vous avez besoin de plus de jetons pour continuer à discuter",
-    "used": "jetons utilisés"
+    "used": "jetons utilisés",
+    "costPerMessage": "Coût par chat"
   },
   "input": {
     "placeholder": "Tapez votre message ici...",

@@ -152,7 +152,7 @@ export function CategoryManagementModal({ open, onOpenChange }: CategoryManageme
   return (
     <>
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+        <DialogContent className="max-h-[80vh] max-w-3xl overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold">Category Management</DialogTitle>
             <DialogDescription>
@@ -180,7 +180,7 @@ export function CategoryManagementModal({ open, onOpenChange }: CategoryManageme
                     {addMutation.isPending ? (
                       <Loader2 className="h-4 w-4 animate-spin" />
                     ) : (
-                      <Plus className="h-4 w-4 mr-2" />
+                      <Plus className="mr-2 h-4 w-4" />
                     )}
                     Add
                   </Button>
@@ -196,7 +196,7 @@ export function CategoryManagementModal({ open, onOpenChange }: CategoryManageme
                   <Loader2 className="h-8 w-8 animate-spin text-gray-400" />
                 </div>
               ) : categories.length === 0 ? (
-                <p className="text-center text-gray-500 py-8">No categories found</p>
+                <p className="py-8 text-center text-gray-500">No categories found</p>
               ) : (
                 <div className="grid gap-3">
                   {categories.map((category: string) => (
@@ -259,7 +259,7 @@ export function CategoryManagementModal({ open, onOpenChange }: CategoryManageme
                                 size="sm"
                                 variant="ghost"
                                 onClick={() => confirmDelete(category)}
-                                className="cursor-pointer text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950"
+                                className="cursor-pointer text-red-600 hover:bg-red-50 hover:text-red-700 dark:hover:bg-red-950"
                               >
                                 <Trash2 className="h-4 w-4" />
                               </Button>
@@ -291,11 +291,11 @@ export function CategoryManagementModal({ open, onOpenChange }: CategoryManageme
             <AlertDialogAction
               onClick={handleDeleteCategory}
               disabled={deleteMutation.isPending}
-              className="bg-red-600 hover:bg-red-700 cursor-pointer"
+              className="cursor-pointer bg-red-600 hover:bg-red-700"
             >
               {deleteMutation.isPending ? (
                 <>
-                  <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Deleting...
                 </>
               ) : (

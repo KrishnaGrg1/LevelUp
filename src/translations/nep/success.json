@@ -1,3 +1,20 @@
 {
-  "login": "सफलतापूर्वक लगइन भयो"
+  "login": "सफलतापूर्वक लगइन भयो",
+  "register": "Account created successfully",
+  "verify": "Account verified successfully",
+  "forgot": "Reset code sent to your email",
+  "reset": "Password reset successfully",
+  "onboarding": "Welcome aboard! Your profile is all set.",
+  "forgotPassword": "Reset code sent to your email",
+  "logout": "Logged out successfully",
+  "auth": {
+    "oauth_login": "Signed in successfully",
+    "oauth_login_existing": "Signed in to your existing account"
+  },
+  "community": {
+    "joined_chat": "समुदाय च्याटमा सामेल हुनुभयो"
+  },
+  "clan": {
+    "joined_chat": "क्लान च्याटमा सामेल हुनुभयो"
+  }
 }

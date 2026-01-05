@@ -8,7 +8,6 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
-  DialogOverlay,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -121,37 +120,27 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
       formData.append('photo', imageFile);
     }
 
-    console.log('Submitting FormData with:', {
-      communityName: name.trim(),
-      description: description.trim(),
-      memberLimit: memberLimit || 100,
-      isPrivate,
-      hasImage: !!imageFile,
-    });
-
     createMutation.mutate(formData);
   };
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogOverlay className="fixed inset-0 bg-black/50 backdrop-blur-[8px] transition-all duration-300" />
-
-      <DialogContent className="sm:max-w-2xl bg-gradient-to-br from-gray-900 via-gray-850 to-gray-900 text-gray-100 shadow-[0_0_25px_rgba(59,130,246,0.45)] border border-blue-500/20 rounded-2xl backdrop-blur-md transition-all duration-300">
-        <DialogHeader className="text-center space-y-2">
-          <DialogTitle className="text-2xl font-bold tracking-tight bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-600 bg-clip-text text-transparent">
+      <DialogContent className="border-gray-200 bg-white sm:max-w-2xl dark:border-gray-800 dark:bg-gray-900">
+        <DialogHeader className="space-y-2">
+          <DialogTitle className="text-2xl font-bold text-gray-900 dark:text-white">
             {t('community:createModal.title', language)}
           </DialogTitle>
-          <p className="text-sm text-gray-300">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
             {t('community:createModal.description', language)}
           </p>
         </DialogHeader>
 
-        <div className="space-y-5 mt-5">
+        <div className="mt-5 space-y-5">
           {/* Community Picture and Basic Info - Side by Side */}
           <div className="flex gap-6">
             {/* Community Picture - Left Side */}
-            <div className="flex flex-col items-center flex-shrink-0">
-              <Label className="text-sm font-medium text-gray-200 mb-3 block">
+            <div className="flex flex-shrink-0 flex-col items-center">
+              <Label className="mb-3 block text-sm font-medium text-gray-900 dark:text-gray-200">
                 {t('community:createModal.communityImage', language)}
               </Label>
 
@@ -166,13 +155,13 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
                   />
                   <label
                     htmlFor="communityImage"
-                    className="flex flex-col items-center justify-center w-32 h-32 border-2 border-dashed border-gray-600 rounded-full cursor-pointer bg-gray-800/50 hover:bg-gray-800/70 transition-all duration-200 group"
+                    className="group flex h-32 w-32 cursor-pointer flex-col items-center justify-center rounded-full border-2 border-dashed border-gray-300 bg-gray-50 transition-all duration-200 hover:border-gray-400 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800/50 dark:hover:bg-gray-800/70"
                   >
                     <div className="flex flex-col items-center justify-center">
-                      <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center mb-2 group-hover:bg-blue-500/20 transition-colors">
-                        <Upload className="h-5 w-5 text-blue-400" />
+                      <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-zinc-100 transition-colors group-hover:bg-zinc-200 dark:bg-zinc-800 dark:group-hover:bg-zinc-700">
+                        <Upload className="h-5 w-5 text-zinc-600 dark:text-zinc-400" />
                       </div>
-                      <p className="text-xs text-gray-300 text-center px-2">
+                      <p className="px-2 text-center text-xs text-gray-600 dark:text-gray-300">
                         <span className="font-semibold">
                           {t('community:createModal.uploadImage', language)}
                         </span>
@@ -181,7 +170,7 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
                   </label>
                 </div>
               ) : (
-                <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-gray-600 bg-gray-800/50">
+                <div className="relative h-32 w-32 overflow-hidden rounded-full border-2 border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-gray-800/50">
                   <Image
                     src={imagePreview}
                     alt="Community preview"
@@ -192,22 +181,22 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
                   <button
                     type="button"
                     onClick={removeImage}
-                    className="absolute top-1 right-1 p-1.5 rounded-full bg-red-500/90 hover:bg-red-600 text-white transition-colors"
+                    className="absolute top-1 right-1 rounded-full bg-red-500 p-1.5 text-white shadow-sm transition-colors hover:bg-red-600"
                   >
                     <X className="h-4 w-4" />
                   </button>
                 </div>
               )}
-              <p className="text-xs text-gray-400 mt-2 text-center">Up to 5MB</p>
+              <p className="mt-2 text-center text-xs text-gray-500 dark:text-gray-400">Up to 5MB</p>
             </div>
 
             {/* Form Fields - Right Side */}
             <div className="flex-1 space-y-5">
               {/* Community Name */}
               <div>
-                <Label htmlFor="communityName" className="text-sm font-medium text-gray-200">
+                <Label htmlFor="communityName" className="text-sm font-medium text-gray-900 dark:text-gray-200">
                   {t('community:createModal.communityName', language)}{' '}
-                  <span className="text-red-400">*</span>
+                  <span className="text-red-500 dark:text-red-400">*</span>
                 </Label>
                 <Input
                   id="communityName"
@@ -215,15 +204,15 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
                   value={name}
                   onChange={e => setName(e.target.value)}
                   required
-                  className="mt-2 bg-gray-800/70 border border-gray-600 text-gray-100 placeholder:text-gray-400 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:border-blue-500"
+                  className="mt-2 border-gray-300 bg-gray-50 text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
                 />
               </div>
 
               {/* Description */}
               <div>
-                <Label htmlFor="description" className="text-sm font-medium text-gray-200">
+                <Label htmlFor="description" className="text-sm font-medium text-gray-900 dark:text-gray-200">
                   {t('community:createModal.descriptionLabel', language)}{' '}
-                  <span className="text-red-400">*</span>
+                  <span className="text-red-500 dark:text-red-400">*</span>
                 </Label>
                 <Textarea
                   id="description"
@@ -232,15 +221,15 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
                   onChange={e => setDescription(e.target.value)}
                   required
                   rows={4}
-                  className="mt-2 bg-gray-800/70 border border-gray-600 text-gray-100 placeholder:text-gray-400 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:border-blue-500"
+                  className="mt-2 border-gray-300 bg-gray-50 text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
                 />
               </div>
 
               {/* Member Limit */}
               <div>
-                <Label htmlFor="memberLimit" className="text-sm font-medium text-gray-200">
+                <Label htmlFor="memberLimit" className="text-sm font-medium text-gray-900 dark:text-gray-200">
                   {t('community:createModal.memberLimit', language)}{' '}
-                  <span className="text-gray-400 text-xs">(Default: 100)</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">(Default: 100)</span>
                 </Label>
                 <Input
                   id="memberLimit"
@@ -248,7 +237,7 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
                   min={1}
                   value={memberLimit}
                   onChange={e => setMemberLimit(Number(e.target.value))}
-                  className="mt-2 bg-gray-800/70 border border-gray-600 text-gray-100 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:border-blue-500"
+                  className="mt-2 border-gray-300 bg-gray-50 text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
                 />
               </div>
             </div>
@@ -256,22 +245,22 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
 
           {/* Privacy Toggle */}
           <div>
-            <Label className="text-sm font-medium text-gray-200 mb-2 block">
+            <Label className="mb-2 block text-sm font-medium text-gray-900 dark:text-gray-200">
               {t('community:createModal.privateCommunity', language)}
             </Label>
-            <div className="flex items-center justify-between border border-gray-700/50 rounded-lg px-4 py-3 bg-gray-800/50 hover:bg-gray-800/70 transition-colors">
+            <div className="flex items-center justify-between rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 transition-colors hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800/50 dark:hover:bg-gray-800/70">
               <div className="flex-1">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-medium text-gray-200">
+                  <span className="text-sm font-medium text-gray-900 dark:text-gray-200">
                     {isPrivate
                       ? `🔒 ${t('community:card.private', language)}`
                       : `🌐 ${t('community:card.public', language)}`}
                   </span>
                   <span
-                    className={`text-xs px-2 py-0.5 rounded-full ${
+                    className={`rounded-full px-2 py-0.5 text-xs ${
                       isPrivate
-                        ? 'bg-orange-500/20 text-orange-300 border border-orange-500/30'
-                        : 'bg-green-500/20 text-green-300 border border-green-500/30'
+                        ? 'border border-orange-500/30 bg-orange-100 text-orange-700 dark:bg-orange-500/20 dark:text-orange-300'
+                        : 'border border-green-500/30 bg-green-100 text-green-700 dark:bg-green-500/20 dark:text-green-300'
                     }`}
                   >
                     {isPrivate
@@ -284,13 +273,7 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
                 <Switch
                   checked={isPrivate}
                   onCheckedChange={(checked: boolean) => {
-                    console.log('Switch toggled:', checked);
                     setIsPrivate(checked);
-                  }}
-                  className="data-[state=checked]:bg-blue-600 data-[state=unchecked]:bg-gray-600 border-2 data-[state=checked]:border-blue-500 data-[state=unchecked]:border-gray-500"
-                  style={{
-                    backgroundColor: isPrivate ? '#2563eb' : '#4b5563',
-                    borderColor: isPrivate ? '#3b82f6' : '#6b7280',
                   }}
                 />
               </div>
@@ -303,14 +286,13 @@ export default function CreateCommunityModal({ open, onClose }: CreateCommunityM
             variant="outline"
             onClick={onClose}
             disabled={createMutation.isPending}
-            className="border-gray-600 text-gray-200 hover:bg-gray-800 hover:text-white transition-all duration-200 disabled:opacity-50"
           >
             {t('community:createModal.cancel', language)}
           </Button>
           <Button
             onClick={handleSubmit}
             disabled={createMutation.isPending}
-            className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all duration-200 disabled:opacity-50 flex items-center gap-2"
+            className="bg-zinc-900 shadow-sm hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
           >
             {createMutation.isPending && <Loader2 className="h-4 w-4 animate-spin" />}
             {createMutation.isPending

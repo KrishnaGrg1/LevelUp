@@ -37,19 +37,19 @@ export default function TopCommunitiesPage() {
 
   const getRankIcon = (rank: number) => {
     if (rank === 1)
-      return <Trophy className="h-6 w-6 text-yellow-500 fill-yellow-500" aria-label="1st place" />;
+      return <Trophy className="h-6 w-6 fill-yellow-500 text-yellow-500" aria-label="1st place" />;
     if (rank === 2)
-      return <Award className="h-6 w-6 text-gray-400 fill-gray-400" aria-label="2nd place" />;
+      return <Award className="h-6 w-6 fill-gray-400 text-gray-400" aria-label="2nd place" />;
     if (rank === 3)
-      return <Award className="h-6 w-6 text-amber-600 fill-amber-600" aria-label="3rd place" />;
+      return <Award className="h-6 w-6 fill-amber-600 text-amber-600" aria-label="3rd place" />;
     return <span className="text-lg font-bold text-gray-600 dark:text-gray-400">#{rank}</span>;
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-100 dark:from-gray-900 dark:via-blue-900/20 dark:to-gray-900 py-6 px-4">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-100 px-4 py-6 dark:from-gray-900 dark:via-blue-900/20 dark:to-gray-900">
+      <div className="mx-auto max-w-6xl">
         <div className="mb-6">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-3">
+          <h1 className="mb-2 flex items-center gap-3 text-3xl font-bold text-gray-900 md:text-4xl dark:text-white">
             <TrendingUp className="h-8 w-8 text-blue-600" />
             Top Communities
           </h1>
@@ -61,9 +61,9 @@ export default function TopCommunitiesPage() {
         {/* Filters */}
         <Card className="mb-4 border-blue-500/20">
           <CardContent className="p-4">
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row">
               <div className="flex-1">
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 block">
+                <label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">
                   Sort By
                 </label>
                 <Select value={sortBy} onValueChange={value => setSortBy(value as CommunitySortBy)}>
@@ -94,7 +94,7 @@ export default function TopCommunitiesPage() {
               </div>
 
               <div className="flex-1">
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 block">
+                <label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">
                   Order
                 </label>
                 <Select value={order} onValueChange={value => setOrder(value as SortOrder)}>
@@ -124,11 +124,11 @@ export default function TopCommunitiesPage() {
                 <Loader2 className="h-10 w-10 animate-spin text-blue-600 dark:text-blue-400" />
               </div>
             ) : isError ? (
-              <div className="text-center py-20">
+              <div className="py-20 text-center">
                 <p className="text-red-500 dark:text-red-400">Failed to load top communities</p>
               </div>
             ) : !data?.results || data.results.length === 0 ? (
-              <div className="text-center py-20">
+              <div className="py-20 text-center">
                 <p className="text-gray-500 dark:text-gray-400">No communities found</p>
               </div>
             ) : (
@@ -145,30 +145,30 @@ export default function TopCommunitiesPage() {
                       <div
                         key={community.id}
                         onClick={() => router.push(`/${language}/user/community/${community.id}`)}
-                        className={`flex items-center gap-4 p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer ${
+                        className={`flex cursor-pointer items-center gap-4 p-4 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700/50 ${
                           isTopThree
                             ? 'bg-gradient-to-r from-blue-50 to-transparent dark:from-blue-900/10 dark:to-transparent'
                             : ''
                         }`}
                       >
                         {/* Rank */}
-                        <div className="w-12 flex justify-center shrink-0">{getRankIcon(rank)}</div>
+                        <div className="flex w-12 shrink-0 justify-center">{getRankIcon(rank)}</div>
 
                         {/* Community Info */}
-                        <div className="flex-1 min-w-0">
-                          <h3 className="font-bold text-gray-900 dark:text-white truncate text-lg">
+                        <div className="min-w-0 flex-1">
+                          <h3 className="truncate text-lg font-bold text-gray-900 dark:text-white">
                             {community.name}
                           </h3>
-                          <div className="flex flex-wrap items-center gap-2 mt-2">
-                            <Badge className="bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300">
-                              <Trophy className="h-3 w-3 mr-1" />
+                          <div className="mt-2 flex flex-wrap items-center gap-2">
+                            <Badge className="bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300">
+                              <Trophy className="mr-1 h-3 w-3" />
                               {community.xp.toLocaleString()} XP
                             </Badge>
                             <Badge
                               variant="secondary"
-                              className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+                              className="bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
                             >
-                              <Users className="h-3 w-3 mr-1" />
+                              <Users className="mr-1 h-3 w-3" />
                               {community.memberCount} / {community.memberLimit} ({occupancy}%)
                             </Badge>
                             <span className="text-xs text-gray-500 dark:text-gray-400">
@@ -178,7 +178,7 @@ export default function TopCommunitiesPage() {
                         </div>
 
                         {/* Stats */}
-                        <div className="text-right shrink-0">
+                        <div className="shrink-0 text-right">
                           {sortBy === 'xp' && (
                             <>
                               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
@@ -221,7 +221,7 @@ export default function TopCommunitiesPage() {
 
                 {/* Pagination */}
                 {data.pagination.totalPages > 1 && (
-                  <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+                  <div className="border-t border-gray-200 p-4 dark:border-gray-700">
                     <BetterPagination
                       paginationMetadata={{
                         total: data.pagination.total,

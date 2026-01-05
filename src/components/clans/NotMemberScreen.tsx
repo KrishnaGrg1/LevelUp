@@ -30,7 +30,7 @@ export const NotMemberScreen = ({
   const getContent = () => {
     if (isBanned) {
       return {
-        icon: <Ban className="h-10 w-10 text-destructive" />,
+        icon: <Ban className="text-destructive h-10 w-10" />,
         title: `Banned from ${entityName}`,
         description: `You have been banned from ${name || `this ${type}`}`,
         bgColor: 'bg-destructive/10',
@@ -42,7 +42,7 @@ export const NotMemberScreen = ({
 
     if (isPrivate) {
       return {
-        icon: <ShieldAlert className="h-10 w-10 text-warning" />,
+        icon: <ShieldAlert className="text-warning h-10 w-10" />,
         title: `Private ${entityName}`,
         description: `${name || `This ${type}`} is private. Request access to join.`,
         bgColor: 'bg-warning/10',
@@ -54,7 +54,7 @@ export const NotMemberScreen = ({
 
     // Default: NOT_A_MEMBER
     return {
-      icon: <Lock className="h-10 w-10 text-primary" />,
+      icon: <Lock className="text-primary h-10 w-10" />,
       title: `${entityName} Locked`,
       description: name ? `You're not a member of ${name}` : `You need to join this ${type} first`,
       bgColor: 'bg-primary/10',
@@ -67,7 +67,7 @@ export const NotMemberScreen = ({
   const content = getContent();
 
   return (
-    <div className="flex h-full items-center justify-center bg-gradient-to-b from-background to-muted/20 p-6">
+    <div className="from-background to-muted/20 flex h-full items-center justify-center bg-gradient-to-b p-6">
       <Card className="w-full max-w-md border-2 shadow-lg">
         <CardContent className="space-y-6 p-8 text-center">
           {/* Icon */}
@@ -92,21 +92,21 @@ export const NotMemberScreen = ({
 
           {/* Benefits (only for non-banned users) */}
           {!isBanned && (
-            <div className="space-y-3 rounded-lg bg-muted/50 p-4 text-left">
+            <div className="bg-muted/50 space-y-3 rounded-lg p-4 text-left">
               <p className="text-sm font-medium">
                 {isPrivate ? 'Members get access to:' : 'Join to access:'}
               </p>
-              <ul className="space-y-2 text-sm text-muted-foreground">
+              <ul className="text-muted-foreground space-y-2 text-sm">
                 <li className="flex items-center gap-2">
-                  <MessageCircle className="h-4 w-4 text-primary" />
+                  <MessageCircle className="text-primary h-4 w-4" />
                   Real-time chat and discussions
                 </li>
                 <li className="flex items-center gap-2">
-                  <Users className="h-4 w-4 text-primary" />
+                  <Users className="text-primary h-4 w-4" />
                   Connect with members
                 </li>
                 <li className="flex items-center gap-2">
-                  <ArrowRight className="h-4 w-4 text-primary" />
+                  <ArrowRight className="text-primary h-4 w-4" />
                   Access exclusive content
                 </li>
               </ul>
@@ -130,7 +130,7 @@ export const NotMemberScreen = ({
 
           {/* Help Text */}
           {!isBanned && (
-            <p className="text-xs text-muted-foreground">Contact an admin if you have questions</p>
+            <p className="text-muted-foreground text-xs">Contact an admin if you have questions</p>
           )}
         </CardContent>
       </Card>

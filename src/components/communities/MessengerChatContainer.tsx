@@ -36,9 +36,9 @@ export const MessengerChatContainer: React.FC<MessengerChatContainerProps> = ({
   // Loading state for initial load
   if (isLoading && messages.length === 0) {
     return (
-      <div className="flex-1 flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+      <div className="flex flex-1 items-center justify-center bg-white dark:bg-black">
         <div className="text-center">
-          <Loader2 className="h-12 w-12 animate-spin text-gray-500 mx-auto mb-4" />
+          <Loader2 className="mx-auto mb-4 h-12 w-12 animate-spin text-gray-500" />
           <p className="text-sm text-gray-500 dark:text-gray-400">Loading messages...</p>
         </div>
       </div>
@@ -48,11 +48,11 @@ export const MessengerChatContainer: React.FC<MessengerChatContainerProps> = ({
   // Empty state
   if (!isLoading && messages.length === 0) {
     return (
-      <div className="flex-1 flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-        <div className="text-center max-w-sm px-4">
-          <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
+      <div className="flex flex-1 items-center justify-center bg-white dark:bg-black">
+        <div className="max-w-sm px-4 text-center">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
             <svg
-              className="w-8 h-8 text-gray-500"
+              className="h-8 w-8 text-gray-500"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -65,7 +65,7 @@ export const MessengerChatContainer: React.FC<MessengerChatContainerProps> = ({
               />
             </svg>
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+          <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
             No messages yet
           </h3>
           <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -80,7 +80,7 @@ export const MessengerChatContainer: React.FC<MessengerChatContainerProps> = ({
     <div
       ref={containerRef}
       onScroll={handleScroll}
-      className="flex-1 overflow-y-auto bg-gray-50 dark:bg-gray-900 scroll-smooth"
+      className="flex-1 overflow-y-auto scroll-smooth bg-white dark:bg-black"
       style={{
         overflowAnchor: 'none', // Prevent browser's automatic scroll anchoring
       }}
@@ -88,7 +88,7 @@ export const MessengerChatContainer: React.FC<MessengerChatContainerProps> = ({
       {/* Load more indicator at the top */}
       {isLoadingMore && (
         <div className="flex justify-center py-4">
-          <div className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 rounded-full shadow-sm">
+          <div className="flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-sm dark:bg-gray-800">
             <Loader2 className="h-4 w-4 animate-spin text-gray-500" />
             <span className="text-xs text-gray-600 dark:text-gray-400">
               Loading older messages...
@@ -98,7 +98,7 @@ export const MessengerChatContainer: React.FC<MessengerChatContainerProps> = ({
       )}
 
       {/* Messages container with proper padding */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 space-y-4">
+      <div className="mx-auto max-w-4xl space-y-4 px-4 py-4 sm:px-6">
         {messages.map((message, index) => {
           const isFirstInGroup =
             index === 0 || messages[index - 1]?.sender?.id !== message.sender?.id;
@@ -144,11 +144,11 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
   if (isCurrentUser) {
     // Current user's message - align right
     return (
-      <div className={`flex gap-3 justify-end ${!isFirstInGroup ? 'mt-1' : 'mt-4'}`}>
+      <div className={`flex justify-end gap-3 ${!isFirstInGroup ? 'mt-1' : 'mt-4'}`}>
         {/* Message content */}
-        <div className="flex-1 min-w-0 flex flex-col items-end">
+        <div className="flex min-w-0 flex-1 flex-col items-end">
           {/* Timestamp - show for every message */}
-          <div className="flex items-center gap-2 mb-1 px-1">
+          <div className="mb-1 flex items-center gap-2 px-1">
             <span className="text-xs text-gray-500 dark:text-gray-400">
               {formatMessageTime(message.createdAt)}
             </span>
@@ -156,11 +156,11 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
 
           {/* Message bubble */}
           <div
-            className={`inline-block max-w-[85%] px-4 py-2 rounded-2xl ${
+            className={`inline-block max-w-[85%] rounded-2xl px-4 py-2 ${
               isFirstInGroup ? 'rounded-tr-sm' : ''
             } ${
               isLastInGroup ? 'rounded-br-sm' : ''
-            } bg-black dark:bg-white text-white dark:text-black shadow-sm`}
+            } bg-black text-white shadow-sm dark:bg-white dark:text-black`}
           >
             <p className="text-sm break-words whitespace-pre-wrap">{message.content}</p>
           </div>
@@ -169,7 +169,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
         {/* Avatar - show for every message */}
         <div className="flex-shrink-0">
           <Avatar className="h-10 w-10 ring-2 ring-white dark:ring-gray-800">
-            <AvatarFallback className="bg-gradient-to-br from-gray-700 to-gray-900 dark:from-gray-200 dark:to-gray-400 text-white dark:text-black font-semibold text-sm">
+            <AvatarFallback className="bg-gradient-to-br from-gray-700 to-gray-900 text-sm font-semibold text-white dark:from-gray-200 dark:to-gray-400 dark:text-black">
               {message.sender?.UserName?.[0]?.toUpperCase() ?? 'U'}
             </AvatarFallback>
           </Avatar>
@@ -184,16 +184,16 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
       {/* Avatar - show for every message */}
       <div className="flex-shrink-0">
         <Avatar className="h-10 w-10 ring-2 ring-white dark:ring-gray-800">
-          <AvatarFallback className="bg-gradient-to-br from-gray-700 to-gray-900 dark:from-gray-200 dark:to-gray-400 text-white dark:text-black font-semibold text-sm">
+          <AvatarFallback className="bg-gradient-to-br from-gray-700 to-gray-900 text-sm font-semibold text-white dark:from-gray-200 dark:to-gray-400 dark:text-black">
             {message.sender?.UserName?.[0]?.toUpperCase() ?? 'U'}
           </AvatarFallback>
         </Avatar>
       </div>
 
       {/* Message content */}
-      <div className="flex-1 min-w-0">
+      <div className="min-w-0 flex-1">
         {/* Sender name and timestamp - show for every message */}
-        <div className="flex items-center gap-2 mb-1 px-1">
+        <div className="mb-1 flex items-center gap-2 px-1">
           <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
             {message.sender?.UserName ?? 'Unknown User'}
           </span>
@@ -204,13 +204,13 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
 
         {/* Message bubble */}
         <div
-          className={`inline-block max-w-[85%] px-4 py-2 rounded-2xl ${
+          className={`inline-block max-w-[85%] rounded-2xl px-4 py-2 ${
             isFirstInGroup ? 'rounded-tl-sm' : ''
           } ${
             isLastInGroup ? 'rounded-bl-sm' : ''
-          } bg-white dark:bg-gray-800 shadow-sm border border-gray-200 dark:border-gray-700`}
+          } border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800`}
         >
-          <p className="text-sm text-gray-800 dark:text-gray-200 break-words whitespace-pre-wrap">
+          <p className="text-sm break-words whitespace-pre-wrap text-gray-800 dark:text-gray-200">
             {message.content}
           </p>
         </div>

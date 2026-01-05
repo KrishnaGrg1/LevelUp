@@ -1,9 +1,5 @@
 import axiosInstance from '../fetch';
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export interface PaginationParams {
   page?: number;
   limit?: number;
@@ -34,10 +30,6 @@ export interface ApiResponse<T> {
 function unwrapData<T>(response: ApiResponse<T>): T | undefined {
   return response.data ?? response.body?.data;
 }
-
-// ============================================================================
-// Global User Leaderboard
-// ============================================================================
 
 export interface GlobalLeaderboardUser {
   id: string;
@@ -77,9 +69,6 @@ export async function getGlobalLeaderboard(
   return unwrapData(response.data) ?? fallback;
 }
 
-// ============================================================================
-// Community Leaderboard
-// ============================================================================
 
 export interface CommunityLeaderboardMember {
   id: string;
@@ -115,10 +104,6 @@ export async function getCommunityLeaderboard(
   );
   return unwrapData(response.data)!;
 }
-
-// ============================================================================
-// Top Communities
-// ============================================================================
 
 export interface TopCommunity {
   id: string;
@@ -170,9 +155,6 @@ export async function getTopCommunities(
   return unwrapData(response.data) ?? fallback;
 }
 
-// ============================================================================
-// Clan Leaderboard
-// ============================================================================
 
 export interface ClanLeaderboardMember {
   id: string;
@@ -207,10 +189,6 @@ export async function getClanLeaderboard(
   );
   return unwrapData(response.data)!;
 }
-
-// ============================================================================
-// Top Clans
-// ============================================================================
 
 export interface TopClan {
   id: string;
@@ -262,10 +240,6 @@ export async function getTopClans(params?: TopClansParams): Promise<TopClansResp
   return unwrapData(response.data) ?? fallback;
 }
 
-// ============================================================================
-// Quest Completion XP Updates
-// ============================================================================
-
 export interface QuestCompletionXPUpdate {
   xpAwarded: number;
   currentXp: number;
@@ -278,13 +252,6 @@ export interface QuestCompletionXPUpdate {
   clanTotalXp?: number;
 }
 
-// ============================================================================
-// Utility Functions
-// ============================================================================
-
-/**
- * Build query parameters for leaderboard requests
- */
 export function buildLeaderboardParams(
   page: number = 1,
   limit: number = 20,

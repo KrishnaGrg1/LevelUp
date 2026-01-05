@@ -13,15 +13,15 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   onSearch,
 }) => {
   return (
-    <div className="flex justify-center mt-8 px-4">
+    <div className="mt-8 flex justify-center px-4">
       <div className="relative w-full max-w-xl">
         <input
           type="text"
           placeholder={placeholder}
           onChange={e => onSearch && onSearch(e.target.value)}
-          className="w-full px-5 py-4 bg-slate-800/50 rounded-2xl text-white border border-slate-700 focus:border-indigo-500 outline-none"
+          className="w-full rounded-2xl border border-slate-700 bg-slate-800/50 px-5 py-4 text-white outline-none focus:border-indigo-500"
         />
-        <Search className="absolute top-1/2 right-4 transform -translate-y-1/2 text-slate-400" />
+        <Search className="absolute top-1/2 right-4 -translate-y-1/2 transform text-slate-400" />
       </div>
     </div>
   );

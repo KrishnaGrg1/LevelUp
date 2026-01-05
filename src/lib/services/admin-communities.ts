@@ -12,7 +12,6 @@ import {
   UpdateCommunityPrivacyResponse,
 } from '../generated';
 
-// Get all communities for admin with pagination and filters
 export const getAllCommunitiesAdmin = async (lang: Language, params: URLSearchParams) => {
   try {
     const response = await axiosInstance.get<GetAllCommunitesAdminResponse>(
@@ -37,10 +36,8 @@ export const getAllCommunitiesAdmin = async (lang: Language, params: URLSearchPa
   }
 };
 
-// Get Community Members by Community ID
 export const getCommunityMembers = async (communityId: string, lang: Language) => {
   try {
-    console.log('Payload for the getCommunityMembers request:', { communityId, lang });
     const response = await axiosInstance.get<GetCommunityMembersResponse>(
       `/admin/communities/${communityId}/members`,
       {
@@ -63,7 +60,6 @@ export const getCommunityMembers = async (communityId: string, lang: Language) =
   }
 };
 
-// to do ---first transfer ownership to other when deleting the community  admin
 export const removeCommunityMember = async (
   communityId: string,
   memberId: string,
@@ -90,7 +86,6 @@ export const removeCommunityMember = async (
   }
 };
 
-// Delete a community by its ID
 export const deleteCommunity = async (communityId: string, lang: Language) => {
   try {
     const response = await axiosInstance.delete<DeleteCommunityResponse>(
@@ -115,7 +110,6 @@ export const deleteCommunity = async (communityId: string, lang: Language) => {
   }
 };
 
-// Update community privacy (public/private)
 export const updateCommunityPrivacy = async (
   communityId: string,
   isPrivate: boolean,
@@ -203,7 +197,6 @@ export const addCategory = async (categoryName: string, lang: Language) => {
   }
 };
 
-// Update Category
 export const updateCategory = async (oldName: string, newName: string, lang: Language) => {
   try {
     const response = await axiosInstance.put(
@@ -229,7 +222,6 @@ export const updateCategory = async (oldName: string, newName: string, lang: Lan
   }
 };
 
-// Delete Category
 export const deleteCategory = async (categoryName: string, lang: Language) => {
   try {
     const response = await axiosInstance.delete<DeleteCategoryResponse>(
@@ -254,7 +246,6 @@ export const deleteCategory = async (categoryName: string, lang: Language) => {
   }
 };
 
-// Get Category Stats
 export const getCategoryStats = async (lang: Language) => {
   try {
     const response = await axiosInstance.get<GetCategoryStatsResponse>(`/admin/categories/stats`, {
@@ -276,7 +267,6 @@ export const getCategoryStats = async (lang: Language) => {
   }
 };
 
-//Get Community Stats
 export const getCommunityStats = async (lang: Language) => {
   try {
     const response = await axiosInstance.get<GetCommunityStatsResponse>(

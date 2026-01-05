@@ -51,18 +51,15 @@ export const useRoom = ({ roomId, type }: UseRoomProps) => {
       });
     };
 
-    // Subscribe to room events
     if (type === 'clan') {
       socket.on('clan-access-denied', handleAccessDenied);
     }
 
-    // Join the room
     const joinRoom = async () => {
       if (type === 'community') {
         joinCommunity(roomId);
         setRoomState(prev => ({ ...prev, isJoined: true }));
       } else {
-        // Check clan membership before joining
         const { user } = authStore.getState();
         if (!user?.id) {
           setRoomState({
@@ -86,7 +83,6 @@ export const useRoom = ({ roomId, type }: UseRoomProps) => {
             return;
           }
 
-          // User is a member, join the clan room
           joinClan(roomId);
           setRoomState(prev => ({ ...prev, isJoined: true, isMember: true }));
         } catch (error) {

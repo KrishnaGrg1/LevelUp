@@ -6,20 +6,20 @@ export const ProblemSolution = () => {
   return (
     <section
       key={language}
-      className="w-full py-20 bg-white dark:bg-black text-black dark:text-white border-t border-gray-100 dark:border-gray-900"
+      className="w-full border-t border-gray-100 bg-white py-20 text-black dark:border-gray-900 dark:bg-black dark:text-white"
     >
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-24">
           {/* Problem Side */}
-          <div className="flex flex-col justify-center space-y-8 md:text-right md:items-end">
+          <div className="flex flex-col justify-center space-y-8 md:items-end md:text-right">
             <div className="space-y-4">
-              <h3 className="text-2xl md:text-3xl font-semibold opacity-40">
+              <h3 className="text-2xl font-semibold opacity-40 md:text-3xl">
                 {t('landing.problemSolution.problem.title1')}
               </h3>
-              <h3 className="text-2xl md:text-3xl font-semibold opacity-40">
+              <h3 className="text-2xl font-semibold opacity-40 md:text-3xl">
                 {t('landing.problemSolution.problem.title2')}
               </h3>
-              <h3 className="text-2xl md:text-3xl font-semibold opacity-40">
+              <h3 className="text-2xl font-semibold opacity-40 md:text-3xl">
                 {t('landing.problemSolution.problem.title3')}
               </h3>
             </div>
@@ -28,13 +28,13 @@ export const ProblemSolution = () => {
           {/* Solution Side */}
           <div className="flex flex-col justify-center space-y-8 md:items-start">
             <div className="space-y-4">
-              <h3 className="text-2xl md:text-3xl font-bold">
+              <h3 className="text-2xl font-bold md:text-3xl">
                 {t('landing.problemSolution.solution.title1')}
               </h3>
-              <h3 className="text-2xl md:text-3xl font-bold">
+              <h3 className="text-2xl font-bold md:text-3xl">
                 {t('landing.problemSolution.solution.title2')}
               </h3>
-              <h3 className="text-2xl md:text-3xl font-semibold font-bold">
+              <h3 className="text-2xl font-bold font-semibold md:text-3xl">
                 {t('landing.problemSolution.solution.title3')}
               </h3>
             </div>

@@ -215,7 +215,8 @@
     "filters": {
       "allCommunities": "All Communities",
       "publicOnly": "Public Only",
-      "privateOnly": "Private Only"
+      "privateOnly": "Private Only",
+      "search": "Search communities..."
     },
     "tableHeaders": {
       "name": "Name",

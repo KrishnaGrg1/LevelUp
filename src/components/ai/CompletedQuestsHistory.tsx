@@ -29,14 +29,14 @@ export default function CompletedQuestsHistory() {
     const color = isPurple ? 'purple' : 'blue';
 
     return (
-      <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors">
+      <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-4 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900/50 dark:hover:bg-zinc-900">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1">
-            <div className="flex items-center gap-2 mb-2">
+            <div className="mb-2 flex items-center gap-2">
               <Badge className={`bg-${color}-600 text-white`}>{quest.type}</Badge>
               <Badge className="bg-green-600 text-white">✓ Completed</Badge>
             </div>
-            <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-50 mb-2">
+            <p className="mb-2 text-sm font-semibold text-zinc-900 dark:text-zinc-50">
               {quest.description}
             </p>
             <div className="flex items-center gap-3 text-xs text-zinc-600 dark:text-zinc-400">
@@ -54,10 +54,10 @@ export default function CompletedQuestsHistory() {
             </div>
           </div>
           <div
-            className={`flex items-center gap-1 shrink-0 px-2.5 py-1 rounded-lg bg-${color}-50 dark:bg-${color}-900/10 border border-${color}-200 dark:border-${color}-800`}
+            className={`flex shrink-0 items-center gap-1 rounded-lg px-2.5 py-1 bg-${color}-50 dark:bg-${color}-900/10 border border-${color}-200 dark:border-${color}-800`}
           >
             <span
-              className={`text-sm font-bold font-numeric text-${color}-600 dark:text-${color}-400`}
+              className={`font-numeric text-sm font-bold text-${color}-600 dark:text-${color}-400`}
             >
               +{quest.xpValue}
             </span>
@@ -74,10 +74,10 @@ export default function CompletedQuestsHistory() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold font-heading text-zinc-900 dark:text-zinc-50">
+        <h1 className="font-heading text-3xl font-bold text-zinc-900 dark:text-zinc-50">
           Quest History
         </h1>
-        <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
+        <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
           View all your completed quests and earned rewards
         </p>
       </div>
@@ -103,14 +103,14 @@ export default function CompletedQuestsHistory() {
           {isLoading ? (
             <div className="flex items-center justify-center py-12">
               <div className="flex flex-col items-center gap-3">
-                <div className="w-8 h-8 border-3 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" />
+                <div className="h-8 w-8 animate-spin rounded-full border-3 border-purple-500/30 border-t-purple-500" />
                 <p className="text-sm text-zinc-600 dark:text-zinc-400">Loading quest history...</p>
               </div>
             </div>
           ) : completedQuests.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-12 text-center">
               <svg
-                className="w-16 h-16 text-zinc-300 dark:text-zinc-700 mb-4"
+                className="mb-4 h-16 w-16 text-zinc-300 dark:text-zinc-700"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -122,7 +122,7 @@ export default function CompletedQuestsHistory() {
                   d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 mb-2">
+              <h3 className="mb-2 text-lg font-semibold text-zinc-900 dark:text-zinc-50">
                 No completed quests yet
               </h3>
               <p className="text-sm text-zinc-600 dark:text-zinc-400">
@@ -139,7 +139,7 @@ export default function CompletedQuestsHistory() {
 
               {/* Pagination */}
               {pagination && pagination.totalPages > 1 && (
-                <div className="mt-6 flex items-center justify-between pt-6 border-t border-zinc-200 dark:border-zinc-800">
+                <div className="mt-6 flex items-center justify-between border-t border-zinc-200 pt-6 dark:border-zinc-800">
                   <div className="text-sm text-zinc-600 dark:text-zinc-400">
                     Page {pagination.page} of {pagination.totalPages} ({pagination.total} total)
                   </div>

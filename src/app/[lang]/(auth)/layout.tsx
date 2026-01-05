@@ -9,7 +9,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <>
-      <div className="min-h-screen overflow-x-hidden relative">
+      <div className="relative min-h-screen overflow-x-hidden">
         {/* Top bar and page content */}
         <div className="relative z-10">
           <TopBar language={language} />

@@ -14,6 +14,33 @@
     "confirmPasswordRequired": "请确认您的密码",
     "passwordMismatch": "密码不匹配",
     "otpRequired": "验证码是必填项",
-    "otpLength": "验证码必须是6位数字"
-  }
+    "otpLength": "验证码必须是6位数字",
+    "oauth_missing_provider": "Missing OAuth provider.",
+    "oauth_missing_params": "Missing OAuth parameters.",
+    "oauth_no_response": "No response received from the OAuth provider.",
+    "oauth_access_denied": "Access denied by the OAuth provider.",
+    "oauth_invalid_request": "Invalid OAuth request.",
+    "oauth_invalid_grant": "OAuth 授权已过期或无效。",
+    "oauth_server_error": "OAuth 提供商返回了服务器错误。",
+    "oauth_failed": "OAuth 登录失败，请重试。",
+    "not_authenticated": "必须先登录才能聊天。"
+  },
+  "community": {
+    "not_member": "您必须加入该社区才能聊天。"
+  },
+  "clan": {
+    "not_member_general": "只有氏族成员可以在这里聊天。"
+  },
+  "message": {
+    "empty": "消息不能为空。",
+    "too_long": "消息过长。",
+    "send_failed": "消息发送失败。"
+  },
+  "onboarding": {
+    "categoriesRequired": "Please select at least one category",
+    "experienceRequired": "Please select your experience level",
+    "heardAboutUsRequired": "Please tell us how you heard about us"
+  },
+  "forgotPassword": "Failed to send reset code. Please try again.",
+  "register": "Registration failed. Please try again."
 }

@@ -29,19 +29,19 @@ export const CoreFeatures = () => {
   ];
 
   return (
-    <section className="w-full py-24 bg-white dark:bg-black text-black dark:text-white">
+    <section className="w-full bg-white py-24 text-black dark:bg-black dark:text-white">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="group p-6 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-600 transition-colors duration-300"
+              className="group rounded-2xl border border-gray-100 p-6 transition-colors duration-300 hover:border-gray-300 dark:border-gray-800 dark:hover:border-gray-600"
             >
-              <div className="w-12 h-12 mb-6 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-900 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
-                <feature.icon className="w-6 h-6" strokeWidth={1.5} />
+              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-gray-50 transition-colors duration-300 group-hover:bg-black group-hover:text-white dark:bg-gray-900 dark:group-hover:bg-white dark:group-hover:text-black">
+                <feature.icon className="h-6 w-6" strokeWidth={1.5} />
               </div>
-              <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400 font-medium">{feature.description}</p>
+              <h3 className="mb-3 text-xl font-bold">{feature.title}</h3>
+              <p className="font-medium text-gray-600 dark:text-gray-400">{feature.description}</p>
             </div>
           ))}
         </div>

@@ -30,7 +30,7 @@ import {
   editUserSchema,
 } from '@/app/[lang]/(home)/admin/users/[userId]/edit/schema';
 import { zodResolver } from '@hookform/resolvers/zod';
-
+import { t } from '@/translations/index';
 interface EditUserFormProps {
   userId: string;
 }
@@ -96,10 +96,10 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
   // Loading state
   if (isPending) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
+      <div className="flex min-h-[400px] items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 dark:border-blue-400 mx-auto"></div>
-          <p className="mt-4 text-gray-600 dark:text-gray-400">Loading user details...</p>
+          <div className="mx-auto h-12 w-12 animate-spin rounded-full border-b-2 border-blue-600 dark:border-blue-400"></div>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">{t('common:loadingDetails')}</p>
         </div>
       </div>
     );
@@ -108,17 +108,17 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
   // Error state
   if (isError) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="text-center max-w-md">
-          <div className="text-red-600 dark:text-red-400 text-5xl mb-4">⚠️</div>
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+      <div className="flex min-h-[400px] items-center justify-center">
+        <div className="max-w-md text-center">
+          <div className="mb-4 text-5xl text-red-600 dark:text-red-400">⚠️</div>
+          <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
             Error Loading User
           </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-4">
+          <p className="mb-4 text-gray-600 dark:text-gray-400">
             {error instanceof Error ? error.message : 'An unexpected error occurred'}
           </p>
           <Button onClick={() => router.back()} variant="outline">
-            <ArrowLeft className="h-4 w-4 mr-2" />
+            <ArrowLeft className="mr-2 h-4 w-4" />
             Go Back
           </Button>
         </div>
@@ -128,17 +128,17 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
 
   if (!user) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="text-center max-w-md">
-          <div className="text-gray-400 dark:text-gray-600 text-5xl mb-4">👤</div>
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+      <div className="flex min-h-[400px] items-center justify-center">
+        <div className="max-w-md text-center">
+          <div className="mb-4 text-5xl text-gray-400 dark:text-gray-600">👤</div>
+          <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
             User Not Found
           </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-4">
+          <p className="mb-4 text-gray-600 dark:text-gray-400">
             The user you&apos;re looking for doesn&apos;t exist.
           </p>
           <Button onClick={() => router.back()} variant="outline">
-            <ArrowLeft className="h-4 w-4 mr-2" />
+            <ArrowLeft className="mr-2 h-4 w-4" />
             Go Back
           </Button>
         </div>
@@ -147,7 +147,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
   }
 
   return (
-    <div className="container mx-auto p-6 max-w-5xl">
+    <div className="container mx-auto max-w-5xl p-6">
       {/* Header */}
       <div className="mb-8">
         <Button
@@ -155,25 +155,25 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
           onClick={() => router.back()}
           className="mb-4 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
         >
-          <ArrowLeft className="h-4 w-4 mr-2" />
+          <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Users
         </Button>
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">Edit User</h1>
+        <h1 className="mb-2 text-4xl font-bold text-gray-900 dark:text-gray-100">Edit User</h1>
         <p className="text-gray-600 dark:text-gray-400">Update user information and permissions</p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {/* User Profile Card */}
-        <Card className="lg:col-span-1 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+        <Card className="border-gray-200 bg-white lg:col-span-1 dark:border-gray-700 dark:bg-gray-800">
           <CardHeader>
             <CardTitle className="text-gray-900 dark:text-gray-100">User Profile</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Avatar */}
             <div className="flex flex-col items-center">
-              <Avatar className="h-24 w-24 mb-4 ring-2 ring-gray-200 dark:ring-gray-700">
+              <Avatar className="mb-4 h-24 w-24 ring-2 ring-gray-200 dark:ring-gray-700">
                 <AvatarImage src={user.profilePicture || undefined} alt={user.UserName} />
-                <AvatarFallback className="bg-blue-600 dark:bg-blue-500 text-white text-2xl">
+                <AvatarFallback className="bg-blue-600 text-2xl text-white dark:bg-blue-500">
                   {user.UserName.charAt(0).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
@@ -184,7 +184,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
             </div>
 
             {/* Quick Stats */}
-            <div className="space-y-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+            <div className="space-y-3 border-t border-gray-200 pt-4 dark:border-gray-700">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                   <Calendar className="h-4 w-4" />
@@ -220,7 +220,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
                   <UserIcon className="h-4 w-4" />
                   <span className="text-sm">User ID</span>
                 </div>
-                <span className="text-xs text-gray-600 dark:text-gray-400 font-mono">
+                <span className="font-mono text-xs text-gray-600 dark:text-gray-400">
                   {user.id.slice(0, 8)}...
                 </span>
               </div>
@@ -229,7 +229,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
         </Card>
 
         {/* Edit Form */}
-        <Card className="lg:col-span-2 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+        <Card className="border-gray-200 bg-white lg:col-span-2 dark:border-gray-700 dark:bg-gray-800">
           <CardHeader>
             <CardTitle className="text-gray-900 dark:text-gray-100">User Information</CardTitle>
           </CardHeader>
@@ -239,7 +239,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
               <div className="space-y-2">
                 <Label
                   htmlFor="username"
-                  className="text-gray-700 dark:text-gray-300 flex items-center gap-2"
+                  className="flex items-center gap-2 text-gray-700 dark:text-gray-300"
                 >
                   <UserIcon className="h-4 w-4" />
                   Username
@@ -247,7 +247,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
                 <Input
                   id="username"
                   {...form.register('UserName')}
-                  className="bg-gray-50 dark:bg-gray-900 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100"
+                  className="border-gray-300 bg-gray-50 text-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100"
                   placeholder="Enter username"
                 />
               </div>
@@ -256,7 +256,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
               <div className="space-y-2">
                 <Label
                   htmlFor="email"
-                  className="text-gray-700 dark:text-gray-300 flex items-center gap-2"
+                  className="flex items-center gap-2 text-gray-700 dark:text-gray-300"
                 >
                   <Mail className="h-4 w-4" />
                   Email
@@ -265,17 +265,17 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
                   id="email"
                   type="email"
                   {...form.register('email')}
-                  className="bg-gray-50 dark:bg-gray-900 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100"
+                  className="border-gray-300 bg-gray-50 text-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100"
                   placeholder="Enter email"
                 />
               </div>
 
               {/* XP and Level */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label
                     htmlFor="xp"
-                    className="text-gray-700 dark:text-gray-300 flex items-center gap-2"
+                    className="flex items-center gap-2 text-gray-700 dark:text-gray-300"
                   >
                     <Star className="h-4 w-4" />
                     Experience Points
@@ -284,7 +284,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
                     id="xp"
                     type="number"
                     {...form.register('xp', { valueAsNumber: true })}
-                    className="bg-gray-50 dark:bg-gray-900 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100"
+                    className="border-gray-300 bg-gray-50 text-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100"
                     min="0"
                   />
                 </div>
@@ -292,7 +292,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
                 <div className="space-y-2">
                   <Label
                     htmlFor="level"
-                    className="text-gray-700 dark:text-gray-300 flex items-center gap-2"
+                    className="flex items-center gap-2 text-gray-700 dark:text-gray-300"
                   >
                     <TrendingUp className="h-4 w-4" />
                     Level
@@ -301,20 +301,20 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
                     id="level"
                     type="number"
                     {...form.register('level', { valueAsNumber: true })}
-                    className="bg-gray-50 dark:bg-gray-900 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100"
+                    className="border-gray-300 bg-gray-50 text-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100"
                     min="1"
                   />
                 </div>
               </div>
 
               {/* Verification Status */}
-              <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-900/50 rounded-lg border border-gray-200 dark:border-gray-700">
+              <div className="flex items-center justify-between rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-900/50">
                 <div className="flex items-center gap-3">
                   <Shield className="h-5 w-5 text-blue-600 dark:text-blue-500" />
                   <div>
                     <Label
                       htmlFor="verified"
-                      className="text-gray-700 dark:text-gray-300 cursor-pointer"
+                      className="cursor-pointer text-gray-700 dark:text-gray-300"
                     >
                       Verification Status
                     </Label>
@@ -334,16 +334,16 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex items-center gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+              <div className="flex items-center gap-3 border-t border-gray-200 pt-4 dark:border-gray-700">
                 <Button type="submit" disabled={updateMutation.isPending} className="flex-1">
                   {updateMutation.isPending ? (
                     <>
-                      <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2" />
+                      <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
                       Saving...
                     </>
                   ) : (
                     <>
-                      <Save className="h-4 w-4 mr-2" />
+                      <Save className="mr-2 h-4 w-4" />
                       Save Changes
                     </>
                   )}
@@ -352,7 +352,7 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
                   type="button"
                   variant="outline"
                   onClick={() => router.back()}
-                  className="border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                  className="border-gray-300 text-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-800"
                 >
                   Cancel
                 </Button>
@@ -363,12 +363,12 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-        <Card className="bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-900/50">
+      <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
+        <Card className="border-blue-200 bg-blue-50 dark:border-blue-900/50 dark:bg-blue-950/30">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Current XP</p>
+                <p className="mb-1 text-sm text-gray-600 dark:text-gray-400">Current XP</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                   {formData.xp ?? user.xp}
                 </p>
@@ -378,11 +378,11 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
           </CardContent>
         </Card>
 
-        <Card className="bg-purple-50 dark:bg-purple-950/30 border-purple-200 dark:border-purple-900/50">
+        <Card className="border-purple-200 bg-purple-50 dark:border-purple-900/50 dark:bg-purple-950/30">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Current Level</p>
+                <p className="mb-1 text-sm text-gray-600 dark:text-gray-400">Current Level</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                   Level {user.level ?? user.level}
                 </p>
@@ -393,12 +393,12 @@ export default function EditUserForm({ userId }: EditUserFormProps) {
         </Card>
 
         <Card
-          className={`${user.isVerified ? 'bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-900/50' : 'bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-900/50'}`}
+          className={`${user.isVerified ? 'border-green-200 bg-green-50 dark:border-green-900/50 dark:bg-green-950/30' : 'border-amber-200 bg-amber-50 dark:border-amber-900/50 dark:bg-amber-950/30'}`}
         >
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Account Status</p>
+                <p className="mb-1 text-sm text-gray-600 dark:text-gray-400">Account Status</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                   {user.isVerified ? 'Verified' : 'Unverified'}
                 </p>

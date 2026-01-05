@@ -15,12 +15,12 @@ interface CategoryFilterProps {
 
 export const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, onSelectCategory }) => {
   return (
-    <div className="flex flex-wrap justify-center gap-4 mt-10">
+    <div className="mt-10 flex flex-wrap justify-center gap-4">
       {categories.map(cat => (
         <button
           key={cat.name}
           onClick={() => onSelectCategory && onSelectCategory(cat.name)}
-          className={`px-5 py-2 rounded-xl text-sm font-medium ${
+          className={`rounded-xl px-5 py-2 text-sm font-medium ${
             cat.active
               ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white'
               : 'bg-slate-800 text-slate-300 hover:bg-slate-700'

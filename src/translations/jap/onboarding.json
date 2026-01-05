@@ -1,0 +1,36 @@
+{
+  "title": "Welcome to LevelUp!",
+  "subtitle": "Let’s personalize your experience",
+  "buttons": {
+    "back": "Back",
+    "next": "Next",
+    "finish": "Complete setup"
+  },
+  "step1": {
+    "title": "Choose your interests",
+    "description": "Select the categories you’re interested in"
+  },
+  "step2": {
+    "title": "What’s your goal?",
+    "description": "Tell us what you want to achieve so we can tailor your quests",
+    "placeholder": "Example: Build a consistent workout habit",
+    "skip": "Skip this step"
+  },
+  "step3": {
+    "title": "Your experience & how you found us",
+    "description": "Help us tailor your experience",
+    "experienceLabel": "Experience level",
+    "heardAboutUsLabel": "How did you hear about us?",
+    "experience": {
+      "BEGINNER": "Beginner",
+      "INTERMEDIATE": "Intermediate",
+      "ADVANCED": "Advanced"
+    },
+    "heardAboutUs": {
+      "facebook": "Facebook",
+      "website": "Website",
+      "friend": "Friend",
+      "other": "Other"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { io, Socket } from 'socket.io-client';
 import { Message } from '../generated';
+import { devLog } from '@/lib/logger';
 
 interface AuthSocket extends Socket {
   auth: {
@@ -27,13 +28,12 @@ export const getSocket = (): AuthSocket => {
       transports: ['websocket', 'polling'],
     }) as AuthSocket;
 
-    // Socket connection event handlers
     socket.on('connect', () => {
-      console.log('✅ Socket Connected:', socket?.id);
+      devLog('✅ Socket Connected:', socket?.id);
     });
 
     socket.on('disconnect', reason => {
-      console.log('❌ Socket Disconnected:', reason);
+      devLog('❌ Socket Disconnected:', reason);
     });
 
     socket.on('connect_error', error => {
@@ -41,7 +41,7 @@ export const getSocket = (): AuthSocket => {
     });
 
     socket.on('reconnect', attemptNumber => {
-      console.log('🔄 Socket reconnected after', attemptNumber, 'attempts');
+      devLog('🔄 Socket reconnected after', attemptNumber, 'attempts');
     });
 
     socket.on('reconnect_error', error => {
@@ -81,11 +81,10 @@ export const disconnectSocket = () => {
   }
 };
 
-// Community room management
 export const joinCommunity = (communityId: string) => {
   const socket = getSocket();
   socket.emit('join-community', { communityId });
-  console.log('📥 Joined community');
+  devLog('📥 Joined community');
 };
 
 export const leaveCommunity = (communityId: string) => {
@@ -101,7 +100,7 @@ export const sendCommunityMessage = (communityId: string, content: string) => {
 export const joinClan = (clanId: string) => {
   const socket = getSocket();
   socket.emit('join-clan', { clanId });
-  console.log('📥 Joined clan');
+  devLog('📥 Joined clan');
 };
 
 export const leaveClan = (clanId: string) => {
@@ -114,7 +113,6 @@ export const sendClanMessage = (clanId: string, content: string) => {
   socket.emit('clan:send-message', { clanId, content });
 };
 
-// Message event listeners
 export const onNewMessage = (callback: (message: Message) => void) => {
   const socket = getSocket();
   socket.on('new-message', callback);
@@ -145,7 +143,6 @@ export const offClanMessage = () => {
   socket.off('clan:new-message');
 };
 
-// Typing indicator events
 export const sendTyping = (roomId: string, isTyping: boolean) => {
   const socket = getSocket();
   socket.emit('typing', { roomId, isTyping });
@@ -163,7 +160,6 @@ export const offTyping = () => {
   socket.off('user-typing');
 };
 
-// User Presence
 export const onUserJoined = (callback: (data: { userId: string; userName: string }) => void) => {
   const socket = getSocket();
   socket.on('user-joined', callback);

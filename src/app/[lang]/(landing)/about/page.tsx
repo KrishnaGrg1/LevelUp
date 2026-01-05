@@ -24,36 +24,36 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
   }, [params, setLanguage]);
 
   return (
-    <div className="bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
+    <div className="bg-white text-black transition-colors duration-300 dark:bg-black dark:text-white">
       {/* Hero Section */}
       <section className="relative py-32 text-center">
-        <div className="relative mx-auto max-w-4xl px-6 z-10">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-800 mb-8 bg-white dark:bg-black">
-            <Heart className="w-4 h-4 text-black dark:text-white" />
+        <div className="relative z-10 mx-auto max-w-4xl px-6">
+          <div className="mb-8 inline-flex items-center space-x-2 rounded-full border border-gray-200 bg-white px-3 py-1 dark:border-gray-800 dark:bg-black">
+            <Heart className="h-4 w-4 text-black dark:text-white" />
             <span className="text-sm font-medium">{t('landing.about.hero.badge')}</span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight tracking-tight">
+          <h1 className="mb-8 text-5xl leading-tight font-bold tracking-tight md:text-7xl">
             {t('landing.about.hero.title')}
           </h1>
         </div>
       </section>
 
       {/* Story Section */}
-      <section className="relative py-24 border-y border-gray-100 dark:border-gray-900 bg-gray-50 dark:bg-black">
+      <section className="relative border-y border-gray-100 bg-gray-50 py-24 dark:border-gray-900 dark:bg-black">
         <div className="mx-auto max-w-4xl px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
             <div>
-              <h2 className="text-3xl font-bold mb-6">{t('landing.about.story.title')}</h2>
-              <p className="text-lg text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">
+              <h2 className="mb-6 text-3xl font-bold">{t('landing.about.story.title')}</h2>
+              <p className="mb-6 text-lg leading-relaxed text-gray-500 dark:text-gray-400">
                 {t('landing.about.story.p1')}
               </p>
-              <p className="text-lg text-gray-500 dark:text-gray-400 leading-relaxed">
+              <p className="text-lg leading-relaxed text-gray-500 dark:text-gray-400">
                 {t('landing.about.story.p2')}
               </p>
             </div>
-            <div className="p-8 bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800">
-              <h3 className="text-xl font-bold mb-4">{t('landing.about.story.principlesTitle')}</h3>
+            <div className="rounded-2xl border border-gray-200 bg-white p-8 dark:border-gray-800 dark:bg-gray-900">
+              <h3 className="mb-4 text-xl font-bold">{t('landing.about.story.principlesTitle')}</h3>
               <ul className="space-y-4">
                 {[
                   t('landing.about.story.items.0'),
@@ -62,7 +62,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
                   t('landing.about.story.items.3'),
                 ].map((item, i) => (
                   <li key={i} className="flex items-center space-x-3">
-                    <CheckCircle className="w-5 h-5 text-black dark:text-white" />
+                    <CheckCircle className="h-5 w-5 text-black dark:text-white" />
                     <span className="text-gray-600 dark:text-gray-300">{item}</span>
                   </li>
                 ))}
@@ -76,16 +76,16 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
       {/* How It Works */}
       <section className="relative py-32">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+          <div className="mb-16 text-center">
+            <h2 className="mb-6 text-3xl font-bold md:text-5xl">
               {t('landing.about.howItWorks.title')}
             </h2>
-            <p className="text-gray-500 dark:text-gray-400 text-lg">
+            <p className="text-lg text-gray-500 dark:text-gray-400">
               {t('landing.about.howItWorks.subtitle')}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
             {[
               {
                 title: t('landing.about.howItWorks.steps.0.title'),
@@ -106,12 +106,12 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
             ].map((step, i) => (
               <div
                 key={i}
-                className="text-center p-6 border border-gray-200 dark:border-gray-800 rounded-xl"
+                className="rounded-xl border border-gray-200 p-6 text-center dark:border-gray-800"
               >
-                <div className="w-10 h-10 bg-black dark:bg-white text-white dark:text-black rounded-full flex items-center justify-center mx-auto mb-4 font-bold">
+                <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-black font-bold text-white dark:bg-white dark:text-black">
                   {i + 1}
                 </div>
-                <h3 className="text-xl font-bold mb-2">{step.title}</h3>
+                <h3 className="mb-2 text-xl font-bold">{step.title}</h3>
                 <p className="text-gray-500 dark:text-gray-400">{step.desc}</p>
               </div>
             ))}
@@ -120,18 +120,18 @@ const AboutPage: React.FC<AboutPageProps> = ({ params }) => {
       </section>
 
       {/* Closing */}
-      <section className="py-24 text-center border-t border-gray-100 dark:border-gray-900">
-        <div className="max-w-3xl mx-auto px-6">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+      <section className="border-t border-gray-100 py-24 text-center dark:border-gray-900">
+        <div className="mx-auto max-w-3xl px-6">
+          <h2 className="mb-6 text-3xl font-bold md:text-5xl">
             {t('landing.about.closing.title')}
           </h2>
           <Link href={`/${language}/signup`}>
             <Button
               size="lg"
-              className="rounded-full px-8 h-12 bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 mt-8"
+              className="mt-8 h-12 rounded-full bg-black px-8 text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
             >
               <span>{t('landing.about.closing.button')}</span>
-              <ArrowRight className="ml-2 w-4 h-4" />
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
         </div>

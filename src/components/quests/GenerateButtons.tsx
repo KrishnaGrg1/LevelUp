@@ -45,7 +45,7 @@ const GenerateButtons: React.FC<Props> = ({ className }) => {
       <Button
         onClick={() => dailyMutation.mutate()}
         disabled={dailyMutation.isPending}
-        className="bg-purple-600 hover:bg-purple-700 text-white"
+        className="bg-purple-600 text-white hover:bg-purple-700"
       >
         {dailyMutation.isPending
           ? t('quests.generate.buttons.generatingDaily')
@@ -55,7 +55,7 @@ const GenerateButtons: React.FC<Props> = ({ className }) => {
         onClick={() => weeklyMutation.mutate()}
         disabled={weeklyMutation.isPending}
         variant="secondary"
-        className="bg-indigo-600 hover:bg-indigo-700 text-white"
+        className="bg-indigo-600 text-white hover:bg-indigo-700"
       >
         {weeklyMutation.isPending
           ? t('quests.generate.buttons.generatingWeekly')

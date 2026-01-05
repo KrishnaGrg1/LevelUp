@@ -18,13 +18,37 @@
       "greeting": "早上好，Alex",
       "subGreeting": "准备好升级了吗？",
       "cards": {
-        "card1": { "type": "正念", "xp": "50 XP", "title": "早晨冥想", "time": "10 分钟" },
-        "card2": { "type": "知识", "xp": "100 XP", "title": "阅读 10 页", "time": "20 分钟" },
-        "card3": { "type": "专注", "xp": "150 XP", "title": "深度工作时段", "time": "60 分钟" }
+        "card1": {
+          "type": "正念",
+          "xp": "50 XP",
+          "title": "早晨冥想",
+          "time": "10 分钟"
+        },
+        "card2": {
+          "type": "知识",
+          "xp": "100 XP",
+          "title": "阅读 10 页",
+          "time": "20 分钟"
+        },
+        "card3": {
+          "type": "专注",
+          "xp": "150 XP",
+          "title": "深度工作时段",
+          "time": "60 分钟"
+        }
       },
       "dailyQuest": "每日任务",
       "startQuest": "开始任务"
-    }
+    },
+    "batchText": "AI-powered self-improvement",
+    "titleSub": "Level up your life.",
+    "desc1": "Daily quests designed for",
+    "descHighlight1": "real accountability",
+    "desc2": " Plus a supportive community built around",
+    "watchDemo": "Watch Demo",
+    "rating": "4.9/5 Rating",
+    "secure": "Secure & Private",
+    "activeUsers": "10,000+ Active Users"
   },
   "problemSolution": {
     "problem": {
@@ -112,12 +136,10 @@
         }
       }
     },
-
     "integrationFeatures": {
       "title": "无缝集成",
       "description": "连接你已经使用的工具。"
     },
-
     "comparisonSection": {
       "title": "为什么选择 LevelUp？",
       "description": "看看我们与其他产品的对比。",
@@ -153,9 +175,39 @@
           "otherApps": "电子邮件支持"
         }
       }
-    }
+    },
+    "features": {
+      "badgeText": "Built for consistency",
+      "badge": "Everything you need to level up",
+      "description": "Powerful tools that make progress feel rewarding—without the burnout.",
+      "feature1": {
+        "title": "AI-Generated Quests",
+        "description": "Personalized daily and weekly challenges that turn goals into clear, doable actions."
+      },
+      "feature2": {
+        "title": "Gamified Progress",
+        "description": "Earn XP, level up, and track milestones so improvement feels motivating, not monotonous."
+      },
+      "feature3": {
+        "title": "Communities & Clans",
+        "description": "Join like-minded groups for accountability, teamwork, and shared progress."
+      },
+      "feature4": {
+        "title": "Global, Multi-language",
+        "description": "Connect across languages and regions—progress should be accessible to everyone."
+      },
+      "feature5": {
+        "title": "Streaks & Scheduling",
+        "description": "Stay consistent with streaks, history, and time-zone aware planning that fits real life."
+      },
+      "feature6": {
+        "title": "Wellbeing First",
+        "description": "A supportive approach to growth—progress over perfection, every day."
+      }
+    },
+    "feature6Desc": "A supportive approach to growth—progress over perfection, every day.",
+    "readMore": "Learn more"
   },
-
   "CTASection": {
     "badgeText": "你的冒险等待着",
     "titleMain": "准备好升级",
@@ -187,7 +239,6 @@
       }
     ]
   },
-
   "TestimonialsSection": {
     "titleMain": "真实故事，真实转变",
     "description": "发现世界各地的冒险者如何通过 Level Up 升级他们的生活",
@@ -240,10 +291,22 @@
       "title": "LevelUp 如何运作",
       "subtitle": "复杂生活的简单系统。",
       "steps": {
-        "0": { "title": "加入社区", "desc": "找到你的小队。" },
-        "1": { "title": "接收任务", "desc": "每日 AI 挑战。" },
-        "2": { "title": "完成行动", "desc": "向前迈出一小步。" },
-        "3": { "title": "获得 XP", "desc": "可视化进度。" }
+        "0": {
+          "title": "加入社区",
+          "desc": "找到你的小队。"
+        },
+        "1": {
+          "title": "接收任务",
+          "desc": "每日 AI 挑战。"
+        },
+        "2": {
+          "title": "完成行动",
+          "desc": "向前迈出一小步。"
+        },
+        "3": {
+          "title": "获得 XP",
+          "desc": "可视化进度。"
+        }
       }
     },
     "closing": {
@@ -282,7 +345,14 @@
       "subject": "主题",
       "message": "信息",
       "submit": "发送信息",
-      "footer": "我们阅读每条信息。"
+      "footer": "我们阅读每条信息。",
+      "inquiryType": "Inquiry Type",
+      "inquiryOptions": {
+        "general": "General Inquiry",
+        "support": "Support",
+        "feedback": "Feedback",
+        "partnership": "Partnership"
+      }
     }
   }
 }

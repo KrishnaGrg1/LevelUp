@@ -4,7 +4,7 @@ import DashboardQuests from '@/components/DashboardQuests';
 
 export default function DashboardPage() {
   return (
-    <div className="space-y-4 sm:space-y-6 px-3 sm:px-0">
+    <div className="space-y-4 px-3 sm:space-y-6 sm:px-0">
       {/* <MyCommunities /> */}
       <CommunitiesSection />
 

@@ -24,12 +24,12 @@ const TokenDisplay: React.FC<TokenDisplayProps> = ({ tokens = 0, className }) =>
 
   return (
     <div
-      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border ${bg} ${border} ${color} ${className ?? ''}`}
+      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 ${bg} ${border} ${color} ${className ?? ''}`}
     >
       <span role="img" aria-label="token">
         🪙
       </span>
-      <span className="font-medium text-sm">{tokens}</span>
+      <span className="text-sm font-medium">{tokens}</span>
     </div>
   );
 };

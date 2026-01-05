@@ -16,6 +16,7 @@
 import { connectSocket, disconnectSocket } from '@/lib/services/socket';
 import authStore from '@/stores/useAuth';
 import { useEffect } from 'react';
+import { devLog } from '@/lib/logger';
 
 interface SocketProviderProps {
   children: React.ReactNode;
@@ -31,7 +32,7 @@ export function SocketProvider({ children }: SocketProviderProps) {
 
       // Connect socket with authentication
       connectSocket(token || undefined, user.id);
-      console.log('✅ Socket connected for user:', user.id);
+      devLog('✅ Socket connected for user:', user.id);
     } else {
       // Disconnect when user logs out
       disconnectSocket();

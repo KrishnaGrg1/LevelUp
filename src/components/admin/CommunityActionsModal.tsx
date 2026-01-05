@@ -167,7 +167,7 @@ export function CommunityActionsModal({
   return (
     <>
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto">
+        <DialogContent className="max-h-[85vh] max-w-4xl overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold">{community.name}</DialogTitle>
             <DialogDescription>{t('admin:actionsModal.subtitle', language)}</DialogDescription>
@@ -181,7 +181,7 @@ export function CommunityActionsModal({
               </CardHeader>
               <CardContent className="space-y-4">
                 {/* Privacy Toggle */}
-                <div className="flex items-center justify-between p-3 border rounded-lg">
+                <div className="flex items-center justify-between rounded-lg border p-3">
                   <div className="flex items-center gap-3">
                     {community.isPrivate ? (
                       <Lock className="h-5 w-5 text-orange-500" />
@@ -215,7 +215,7 @@ export function CommunityActionsModal({
                 </div>
 
                 {/* Category Change */}
-                <div className="flex items-center justify-between p-3 border rounded-lg">
+                <div className="flex items-center justify-between rounded-lg border p-3">
                   <div className="flex items-center gap-3">
                     <Tag className="h-5 w-5 text-blue-500" />
                     <div className="flex-1">
@@ -265,7 +265,7 @@ export function CommunityActionsModal({
                 </div>
 
                 {/* Delete Community */}
-                <div className="flex items-center justify-between p-3 border border-red-200 dark:border-red-900 rounded-lg bg-red-50 dark:bg-red-950/20">
+                <div className="flex items-center justify-between rounded-lg border border-red-200 bg-red-50 p-3 dark:border-red-900 dark:bg-red-950/20">
                   <div className="flex items-center gap-3">
                     <Trash2 className="h-5 w-5 text-red-500" />
                     <div>
@@ -291,7 +291,7 @@ export function CommunityActionsModal({
             {/* Members List */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg flex items-center gap-2">
+                <CardTitle className="flex items-center gap-2 text-lg">
                   <Users className="h-5 w-5" />
                   {t('admin:actionsModal.sections.members.title', language)} ({members.length})
                 </CardTitle>
@@ -305,18 +305,18 @@ export function CommunityActionsModal({
                     </span>
                   </div>
                 ) : members.length === 0 ? (
-                  <p className="text-center text-gray-500 py-8">
+                  <p className="py-8 text-center text-gray-500">
                     {t('admin:actionsModal.sections.members.noMembers', language)}
                   </p>
                 ) : (
-                  <div className="space-y-2 max-h-64 overflow-y-auto">
+                  <div className="max-h-64 space-y-2 overflow-y-auto">
                     {members.map((member: MemberData) => (
                       <div
                         key={member.id}
-                        className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-900"
+                        className="flex items-center justify-between rounded-lg border p-3 hover:bg-gray-50 dark:hover:bg-gray-900"
                       >
                         <div className="flex items-center gap-3">
-                          <div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-medium">
+                          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-500 font-medium text-white">
                             {member.UserName?.[0]?.toUpperCase() || 'U'}
                           </div>
                           <div>
@@ -329,7 +329,7 @@ export function CommunityActionsModal({
                           size="sm"
                           variant="ghost"
                           onClick={() => member.id && handleRemoveMember(member.id)}
-                          className="cursor-pointer text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950"
+                          className="cursor-pointer text-red-600 hover:bg-red-50 hover:text-red-700 dark:hover:bg-red-950"
                           title={t('admin:actionsModal.sections.members.remove', language)}
                         >
                           <Trash2 className="h-4 w-4" />
@@ -362,11 +362,11 @@ export function CommunityActionsModal({
             <AlertDialogAction
               onClick={handleDeleteCommunity}
               disabled={deleteCommunityMutation.isPending}
-              className="bg-red-600 hover:bg-red-700 cursor-pointer"
+              className="cursor-pointer bg-red-600 hover:bg-red-700"
             >
               {deleteCommunityMutation.isPending ? (
                 <>
-                  <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   {t('admin:actionsModal.sections.danger.deleting', language)}
                 </>
               ) : (
@@ -398,11 +398,11 @@ export function CommunityActionsModal({
             <AlertDialogAction
               onClick={confirmRemoveMember}
               disabled={removeMemberMutation.isPending}
-              className="bg-red-600 hover:bg-red-700 cursor-pointer"
+              className="cursor-pointer bg-red-600 hover:bg-red-700"
             >
               {removeMemberMutation.isPending ? (
                 <>
-                  <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   {t('admin:actionsModal.sections.danger.deleting', language)}
                 </>
               ) : (

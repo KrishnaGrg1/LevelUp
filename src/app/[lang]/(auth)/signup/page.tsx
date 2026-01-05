@@ -24,7 +24,7 @@ export default function RegisterPage({ params }: RegisterPageProps) {
   }, [params, setLanguage]);
 
   return (
-    <div className="relative z-10 flex items-center justify-center min-h-screen ">
+    <div className="relative z-10 flex min-h-screen items-center justify-center">
       <Suspense fallback={<FormLoading message="Register" />}>
         <RegisterForm lang={language} />
       </Suspense>

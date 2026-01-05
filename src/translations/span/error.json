@@ -14,6 +14,33 @@
     "confirmPasswordRequired": "Por favor, confirme su contraseña",
     "passwordMismatch": "Las contraseñas no coinciden",
     "otpRequired": "El código de verificación es obligatorio",
-    "otpLength": "El código de verificación debe tener 6 dígitos"
-  }
+    "otpLength": "El código de verificación debe tener 6 dígitos",
+    "oauth_missing_provider": "Missing OAuth provider.",
+    "oauth_missing_params": "Missing OAuth parameters.",
+    "oauth_no_response": "No response received from the OAuth provider.",
+    "oauth_access_denied": "Access denied by the OAuth provider.",
+    "oauth_invalid_request": "Invalid OAuth request.",
+    "oauth_invalid_grant": "OAuth authorization has expired or is invalid.",
+    "oauth_server_error": "OAuth provider returned a server error.",
+    "oauth_failed": "El inicio de sesión con OAuth falló. Inténtalo de nuevo.",
+    "not_authenticated": "Debes iniciar sesión para chatear."
+  },
+  "community": {
+    "not_member": "Debes unirte a esta comunidad para chatear."
+  },
+  "clan": {
+    "not_member_general": "Solo los miembros del clan pueden chatear aquí."
+  },
+  "message": {
+    "empty": "El mensaje no puede estar vacío.",
+    "too_long": "El mensaje es demasiado largo.",
+    "send_failed": "No se pudo enviar el mensaje."
+  },
+  "onboarding": {
+    "categoriesRequired": "Please select at least one category",
+    "experienceRequired": "Please select your experience level",
+    "heardAboutUsRequired": "Please tell us how you heard about us"
+  },
+  "forgotPassword": "Failed to send reset code. Please try again.",
+  "register": "Registration failed. Please try again."
 }

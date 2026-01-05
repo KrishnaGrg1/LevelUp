@@ -72,18 +72,18 @@ const features = [
 
 export const FeaturesSection: React.FC = () => {
   return (
-    <section className="relative py-32 bg-gradient-to-b from-slate-950 to-slate-900">
-      <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-      <div className="relative mx-auto max-w-7xl px-6 z-10">
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 rounded-full text-indigo-300 text-sm font-medium mb-6">
+    <section className="relative bg-gradient-to-b from-slate-950 to-slate-900 py-32">
+      <div className="bg-grid-pattern absolute inset-0 opacity-5"></div>
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+        <div className="mb-20 text-center">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 px-4 py-2 text-sm font-medium text-indigo-300">
             <Rocket className="h-4 w-4" />
             {t('landing.FeaturesSection.features.badgeText')}
           </div>
-          <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+          <h2 className="mb-6 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-5xl font-black text-transparent md:text-6xl">
             {t('landing.FeaturesSection.features.badge')}
           </h2>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-400">
             {t('landing.FeaturesSection.features.description')}
           </p>
         </div>
@@ -94,31 +94,31 @@ export const FeaturesSection: React.FC = () => {
             return (
               <div
                 key={index}
-                className={`group relative p-8 bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-3xl border border-slate-700/50 hover:border-${feature.hoverColor} transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-${feature.color}-500/10`}
+                className={`group relative rounded-3xl border border-slate-700/50 bg-gradient-to-br from-slate-800/50 to-slate-900/50 p-8 hover:border-${feature.hoverColor} transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-${feature.color}-500/10`}
               >
                 <div
-                  className={`absolute inset-0 bg-gradient-to-br ${feature.bgGradient} rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                  className={`absolute inset-0 bg-gradient-to-br ${feature.bgGradient} rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
                 ></div>
                 <div className="relative">
                   <div
-                    className={`w-16 h-16 bg-gradient-to-br ${feature.gradient} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 group-hover:rotate-3`}
+                    className={`h-16 w-16 bg-gradient-to-br ${feature.gradient} mb-6 flex items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}
                   >
                     <Icon className="h-8 w-8 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-white">
+                  <h3 className="mb-4 text-2xl font-bold text-white">
                     {t(`landing.${feature.title}`)}
                   </h3>
-                  <p className="text-slate-400 leading-relaxed mb-6">
+                  <p className="mb-6 leading-relaxed text-slate-400">
                     {t(`landing.${feature.description}`)}
                   </p>
                   <div
-                    className={`flex items-center text-${feature.color}-400 group-hover:text-${feature.color}-300 transition-colors cursor-pointer`}
+                    className={`flex items-center text-${feature.color}-400 group-hover:text-${feature.color}-300 cursor-pointer transition-colors`}
                   >
                     <span className="text-sm font-medium">
                       {' '}
                       {t('landing.FeaturesSection.readMore')}
                     </span>
-                    <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </div>
                 </div>
               </div>

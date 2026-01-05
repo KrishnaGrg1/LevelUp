@@ -18,7 +18,6 @@ export const getCommunityMessages = async (
         },
       },
     );
-    // Return the full data object with messages and pagination
     return res.data.body.data;
   } catch (error: unknown) {
     const err = error as {
@@ -61,7 +60,6 @@ export const sendCommunityMessageAPI = async (
   }
 };
 
-// Clan Messages
 export const getClanMessages = async (lang: Language, clanId: string, page = 1, limit = 10) => {
   try {
     const response = await axiosInstance.get<GetCommunityMessagesResponse>(
@@ -73,7 +71,6 @@ export const getClanMessages = async (lang: Language, clanId: string, page = 1, 
         },
       },
     );
-    // Return the full data object with messages and pagination
     return response.data.body.data;
   } catch (error: unknown) {
     const err = error as {

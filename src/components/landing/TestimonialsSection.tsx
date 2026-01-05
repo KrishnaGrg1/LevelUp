@@ -27,7 +27,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ classN
       content: 'TestimonialsSection.testimonials.0.content',
       avatar: 'AR',
       badge: {
-        icon: <Zap className="w-4 h-4" />,
+        icon: <Zap className="h-4 w-4" />,
         text: 'TestimonialsSection.testimonials.0.badge.text',
         color: 'from-yellow-400 to-orange-400',
       },
@@ -38,7 +38,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ classN
       content: 'TestimonialsSection.testimonials.1.content',
       avatar: 'SC',
       badge: {
-        icon: <Target className="w-4 h-4" />,
+        icon: <Target className="h-4 w-4" />,
         text: 'TestimonialsSection.testimonials.1.badge.text',
         color: 'from-blue-400 to-indigo-400',
       },
@@ -49,7 +49,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ classN
       content: 'TestimonialsSection.testimonials.2.content',
       avatar: 'MJ',
       badge: {
-        icon: <Trophy className="w-4 h-4" />,
+        icon: <Trophy className="h-4 w-4" />,
         text: 'TestimonialsSection.testimonials.2.badge.text',
         color: 'from-green-400 to-emerald-400',
       },
@@ -57,35 +57,35 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ classN
   ];
 
   return (
-    <section className={`relative py-32 bg-gradient-to-b from-slate-950 to-slate-900 ${className}`}>
-      <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 via-transparent to-transparent"></div>
-      <div className="relative mx-auto max-w-6xl px-6 z-10">
-        <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+    <section className={`relative bg-gradient-to-b from-slate-950 to-slate-900 py-32 ${className}`}>
+      <div className="bg-gradient-radial absolute inset-0 from-purple-500/5 via-transparent to-transparent"></div>
+      <div className="relative z-10 mx-auto max-w-6xl px-6">
+        <div className="mb-20 text-center">
+          <h2 className="mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-5xl font-black text-transparent md:text-6xl">
             {t('landing.TestimonialsSection.titleMain')}
           </h2>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-400">
             {t('landing.TestimonialsSection.description')}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="group relative p-8 bg-gradient-to-br from-slate-800/20 to-slate-900/40 rounded-3xl border border-slate-700/30 hover:border-purple-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/10"
+              className="group relative rounded-3xl border border-slate-700/30 bg-gradient-to-br from-slate-800/20 to-slate-900/40 p-8 transition-all duration-500 hover:scale-105 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/10"
             >
               {/* Hover glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
 
               <div className="relative">
                 {/* Quote icon */}
                 <div className="mb-6">
-                  <Quote className="w-8 h-8 text-purple-400 opacity-50" />
+                  <Quote className="h-8 w-8 text-purple-400 opacity-50" />
                 </div>
 
                 {/* Testimonial content */}
-                <p className="text-slate-300 text-lg leading-relaxed mb-8">
+                <p className="mb-8 text-lg leading-relaxed text-slate-300">
                   &ldquo; {t(`landing.${testimonial.content}`)}&rdquo;
                 </p>
 
@@ -93,25 +93,25 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ classN
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
                     {/* Avatar */}
-                    <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                      <span className="text-white font-bold text-sm">{testimonial.avatar}</span>
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-pink-500">
+                      <span className="text-sm font-bold text-white">{testimonial.avatar}</span>
                     </div>
 
                     {/* Name and role */}
                     <div>
-                      <p className="text-slate-200 font-semibold">
+                      <p className="font-semibold text-slate-200">
                         {t(`landing.${testimonial.name}`)}
                       </p>
-                      <p className="text-slate-500 text-sm">{t(`landing.${testimonial.role}`)}</p>
+                      <p className="text-sm text-slate-500">{t(`landing.${testimonial.role}`)}</p>
                     </div>
                   </div>
 
                   {/* Achievement badge */}
                   <div
-                    className={`flex items-center space-x-2 px-3 py-1.5 bg-gradient-to-r ${testimonial.badge.color} rounded-full backdrop-blur-sm`}
+                    className={`flex items-center space-x-2 bg-gradient-to-r px-3 py-1.5 ${testimonial.badge.color} rounded-full backdrop-blur-sm`}
                   >
                     {testimonial.badge.icon}
-                    <span className="text-white text-xs font-medium">
+                    <span className="text-xs font-medium text-white">
                       {t(`landing.${testimonial.badge.text}`)}
                     </span>
                   </div>
@@ -123,23 +123,23 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ classN
 
         {/* Additional social proof */}
         <div className="mt-20 text-center">
-          <div className="inline-flex items-center space-x-2 px-6 py-3 bg-slate-800/30 rounded-full border border-slate-700/30">
+          <div className="inline-flex items-center space-x-2 rounded-full border border-slate-700/30 bg-slate-800/30 px-6 py-3">
             <div className="flex -space-x-2">
               {[...Array(5)].map((_, i) => (
                 <div
                   key={i}
-                  className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full border-2 border-slate-900 flex items-center justify-center"
+                  className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-slate-900 bg-gradient-to-br from-purple-500 to-pink-500"
                 >
-                  <span className="text-white text-xs font-bold">
+                  <span className="text-xs font-bold text-white">
                     {String.fromCharCode(65 + i)}
                   </span>
                 </div>
               ))}
-              <div className="w-8 h-8 bg-slate-700 rounded-full border-2 border-slate-900 flex items-center justify-center">
-                <span className="text-slate-400 text-xs">+</span>
+              <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-slate-900 bg-slate-700">
+                <span className="text-xs text-slate-400">+</span>
               </div>
             </div>
-            <span className="text-slate-400 text-sm ml-3">
+            <span className="ml-3 text-sm text-slate-400">
               {t('landing.TestimonialsSection.socialProof')}
             </span>
           </div>

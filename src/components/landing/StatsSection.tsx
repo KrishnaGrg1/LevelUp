@@ -51,30 +51,30 @@ export const StatsSection: React.FC<StatsSectionProps> = ({
   ];
 
   return (
-    <section ref={statsRef} className="relative py-32 bg-gradient-to-b ">
-      <div className="absolute inset-0 bg-gradient-radial from-indigo-500/5 via-transparent to-transparent"></div>
-      <div className="relative mx-auto max-w-6xl px-6 text-center z-10">
+    <section ref={statsRef} className="relative bg-gradient-to-b py-32">
+      <div className="bg-gradient-radial absolute inset-0 from-indigo-500/5 via-transparent to-transparent"></div>
+      <div className="relative z-10 mx-auto max-w-6xl px-6 text-center">
         <div className="mb-16">
-          <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+          <h2 className="mb-6 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-5xl font-black text-transparent md:text-6xl">
             {t('landing.StatsSection.titleMain')}
           </h2>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-400">
             {t('landing.StatsSection.description')}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
           {stats.map((stat, index) => (
             <div
               key={index}
-              className={`group relative p-8 bg-gradient-to-br from-slate-800/30 to-slate-900/30 rounded-3xl border border-slate-700/30 hover:border-${stat.hoverColor} transition-all duration-500 hover:scale-105 hover:shadow-2xl`}
+              className={`group relative rounded-3xl border border-slate-700/30 bg-gradient-to-br from-slate-800/30 to-slate-900/30 p-8 hover:border-${stat.hoverColor} transition-all duration-500 hover:scale-105 hover:shadow-2xl`}
             >
               <div
-                className={`absolute inset-0 bg-gradient-to-br ${stat.bgGradient} rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                className={`absolute inset-0 bg-gradient-to-br ${stat.bgGradient} rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
               ></div>
               <div className="relative">
                 <div
-                  className={`text-5xl md:text-6xl font-bold bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent mb-4`}
+                  className={`bg-gradient-to-r text-5xl font-bold md:text-6xl ${stat.gradient} mb-4 bg-clip-text text-transparent`}
                 >
                   {index === 1
                     ? `${stat.count}M+`
@@ -82,10 +82,10 @@ export const StatsSection: React.FC<StatsSectionProps> = ({
                       ? `${stat.count}%`
                       : `${stat.count.toLocaleString()}+`}
                 </div>
-                <p className="text-slate-300 text-lg font-medium mb-2">
+                <p className="mb-2 text-lg font-medium text-slate-300">
                   {t(`landing.${stat.label}`)}
                 </p>
-                <p className="text-slate-500 text-sm"> {t(`landing.${stat.description}`)}</p>
+                <p className="text-sm text-slate-500"> {t(`landing.${stat.description}`)}</p>
               </div>
             </div>
           ))}

@@ -112,5 +112,42 @@
       "dailyFailed": "Failed to generate daily quests",
       "weeklyFailed": "Failed to generate weekly quests"
     }
+  },
+  "user": {
+    "title": "My Quests",
+    "subtitle": "Track and manage all your quests in one place",
+    "stats": {
+      "total": "Total Quests",
+      "completed": "Completed"
+    },
+    "cards": {
+      "active": "Active Quests",
+      "completed": "Completed",
+      "totalXp": "Total XP Earned"
+    },
+    "tabs": {
+      "all": "All Quests ({count})",
+      "active": "Active ({count})",
+      "completed": "Completed ({count})"
+    },
+    "badges": {
+      "aiGenerated": "AI Generated"
+    },
+    "minutes": "{minutes} min",
+    "completedOn": "Completed {date}",
+    "empty": {
+      "all": {
+        "title": "No quests yet",
+        "description": "Start your journey by creating your first quest!"
+      },
+      "active": {
+        "title": "No active quests",
+        "description": "All caught up! Create new quests to continue your journey."
+      },
+      "completed": {
+        "title": "No completed quests",
+        "description": "Complete your first quest to see it here!"
+      }
+    }
   }
 }

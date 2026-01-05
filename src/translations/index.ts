@@ -101,7 +101,6 @@ export function t(key: string, params?: Record<string, string | number> | string
   return result;
 }
 
-// Additional exports for compatibility
 export const locale = getCurrentLanguage();
 export const locales = Object.keys(translations) as Language[];
 export const loading = false;
@@ -112,7 +111,6 @@ export function setLocale(newLocale: Language) {
 
 export { translations };
 
-// Re-export language utilities for convenience
 export {
   VALID_LANGUAGES,
   DEFAULT_LANGUAGE,

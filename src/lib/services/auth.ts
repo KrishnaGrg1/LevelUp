@@ -1,5 +1,6 @@
 import { OnboardingFormData } from '@/app/[lang]/(home)/user/dashboard/schema';
 import axiosInstance from '../fetch';
+import { handleServiceError, handleServiceErrorWithDetail } from '../utils/error-handler';
 import type {
   UserRegisterResponse,
   UserRegisterInput,
@@ -23,12 +24,7 @@ export const login = async (data: UserLoginInput, lang: Language) => {
     });
     return response.data;
   } catch (error: unknown) {
-    const err = error as {
-      response?: { data?: { body?: { message?: string }; message?: string } };
-    };
-    const errorMessage =
-      err.response?.data?.body?.message || err.response?.data?.message || 'Login failed';
-    throw new Error(errorMessage);
+    handleServiceError(error, 'Login failed');
   }
 };
 
@@ -41,16 +37,7 @@ export const registerUser = async (data: UserRegisterInput, lang: Language) => {
     });
     return response.data;
   } catch (error: unknown) {
-    const err = error as {
-      response?: {
-        data?: { body?: { message?: string; error?: string }; message?: string; error?: string };
-      };
-    };
-    const errorMessage =
-      err.response?.data?.body?.message || err.response?.data?.message || 'Registration failed';
-    const errorDetail = err.response?.data?.body?.error || err.response?.data?.error;
-
-    throw { message: errorMessage, error: errorDetail };
+    handleServiceErrorWithDetail(error, 'Registration failed');
   }
 };
 
@@ -63,12 +50,7 @@ export const VerifyUser = async (data: UserVerifyInput, lang: Language) => {
     });
     return response.data;
   } catch (error: unknown) {
-    const err = error as {
-      response?: { data?: { body?: { message?: string }; message?: string } };
-    };
-    const errorMessage =
-      err.response?.data?.body?.message || err.response?.data?.message || 'Verification failed';
-    throw new Error(errorMessage);
+    handleServiceError(error, 'Verification failed');
   }
 };
 
@@ -85,18 +67,10 @@ export const requestPasswordReset = async (email: string, lang: Language) => {
     );
     return response.data;
   } catch (error: unknown) {
-    const err = error as {
-      response?: { data?: { body?: { message?: string }; message?: string } };
-    };
-    const errorMessage =
-      err.response?.data?.body?.message ||
-      err.response?.data?.message ||
-      'Failed to request password reset';
-    throw new Error(errorMessage);
+    handleServiceError(error, 'Failed to request password reset');
   }
 };
 
-// Verify OTP for password reset and set new password
 export const resetPasswordWithOtp = async (
   data: { userId: string; otp: string; newPassword: string },
   lang: Language,
@@ -109,14 +83,7 @@ export const resetPasswordWithOtp = async (
     });
     return response.data;
   } catch (error: unknown) {
-    const err = error as {
-      response?: { data?: { body?: { message?: string }; message?: string } };
-    };
-    const errorMessage =
-      err.response?.data?.body?.message ||
-      err.response?.data?.message ||
-      'Failed to reset password';
-    throw new Error(errorMessage);
+    handleServiceError(error, 'Failed to reset password');
   }
 };
 
@@ -147,16 +114,7 @@ export const oauthRegisterUser = async (data: OAuthRequest, lang: Language) => {
     });
     return response.data;
   } catch (error: unknown) {
-    const err = error as {
-      response?: {
-        data?: { body?: { message?: string; error?: string }; message?: string; error?: string };
-      };
-    };
-    const errorMessage =
-      err.response?.data?.body?.message || err.response?.data?.message || 'Registration failed';
-    const errorDetail = err.response?.data?.body?.error || err.response?.data?.error;
-
-    throw { message: errorMessage, error: errorDetail };
+    handleServiceErrorWithDetail(error, 'Registration failed');
   }
 };
 
@@ -174,16 +132,7 @@ export const logout = async (lang: Language) => {
     );
     return response.data;
   } catch (error: unknown) {
-    const err = error as {
-      response?: {
-        data?: { body?: { message?: string; error?: string }; message?: string; error?: string };
-      };
-    };
-    const errorMessage =
-      err.response?.data?.body?.message || err.response?.data?.message || 'Logout failed';
-    const errorDetail = err.response?.data?.body?.error || err.response?.data?.error;
-
-    throw { message: errorMessage, error: errorDetail };
+    handleServiceErrorWithDetail(error, 'Logout failed');
   }
 };
 
@@ -196,11 +145,6 @@ export const completeOnboarding = async (data: OnboardingFormData, lang: Languag
     });
     return response.data;
   } catch (error: unknown) {
-    const err = error as {
-      response?: { data?: { body?: { message?: string }; message?: string } };
-    };
-    const errorMessage =
-      err.response?.data?.body?.message || err.response?.data?.message || 'Onboarding failed';
-    throw new Error(errorMessage);
+    handleServiceError(error, 'Onboarding failed');
   }
 };

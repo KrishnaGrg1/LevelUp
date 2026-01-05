@@ -10,7 +10,11 @@
     "totalLevel": "Niveau total",
     "communities": "Communautés",
     "questsDone": "Quêtes terminées",
-    "streak": "Série"
+    "streak": "Série",
+    "title": "Your Progress",
+    "subtitle": "A quick snapshot of your journey",
+    "totalXP": "Total XP",
+    "refreshing": "Refreshing..."
   },
   "quests": {
     "hookTitle": "Partagez un React Hook",

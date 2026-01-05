@@ -30,11 +30,25 @@
           "title": "१० पाना पढ्नुहोस्",
           "time": "२० मिनेट"
         },
-        "card3": { "type": "फोकस", "xp": "150 XP", "title": "गहिरो काम सत्र", "time": "६० मिनेट" }
+        "card3": {
+          "type": "फोकस",
+          "xp": "150 XP",
+          "title": "गहिरो काम सत्र",
+          "time": "६० मिनेट"
+        }
       },
       "dailyQuest": "दैनिक क्वेस्ट",
       "startQuest": "क्वेस्ट सुरु गर्नुहोस्"
-    }
+    },
+    "batchText": "AI-powered self-improvement",
+    "titleSub": "Level up your life.",
+    "desc1": "Daily quests designed for",
+    "descHighlight1": "real accountability",
+    "desc2": " Plus a supportive community built around",
+    "watchDemo": "Watch Demo",
+    "rating": "4.9/5 Rating",
+    "secure": "Secure & Private",
+    "activeUsers": "10,000+ Active Users"
   },
   "problemSolution": {
     "problem": {
@@ -122,12 +136,10 @@
         }
       }
     },
-
     "integrationFeatures": {
       "title": "सिमलेस एकीकरण",
       "description": "तपाईंले पहिले नै प्रयोग गरिरहनुभएको उपकरणहरूसँग जोड्नुहोस्।"
     },
-
     "comparisonSection": {
       "title": "LevelUp किन रोज्ने?",
       "description": "हामी बाँकीसँग कसरी तुलना गर्छौं हेर्नुहोस्।",
@@ -163,9 +175,39 @@
           "otherApps": "इमेल समर्थन"
         }
       }
-    }
+    },
+    "features": {
+      "badgeText": "Built for consistency",
+      "badge": "Everything you need to level up",
+      "description": "Powerful tools that make progress feel rewarding—without the burnout.",
+      "feature1": {
+        "title": "AI-Generated Quests",
+        "description": "Personalized daily and weekly challenges that turn goals into clear, doable actions."
+      },
+      "feature2": {
+        "title": "Gamified Progress",
+        "description": "Earn XP, level up, and track milestones so improvement feels motivating, not monotonous."
+      },
+      "feature3": {
+        "title": "Communities & Clans",
+        "description": "Join like-minded groups for accountability, teamwork, and shared progress."
+      },
+      "feature4": {
+        "title": "Global, Multi-language",
+        "description": "Connect across languages and regions—progress should be accessible to everyone."
+      },
+      "feature5": {
+        "title": "Streaks & Scheduling",
+        "description": "Stay consistent with streaks, history, and time-zone aware planning that fits real life."
+      },
+      "feature6": {
+        "title": "Wellbeing First",
+        "description": "A supportive approach to growth—progress over perfection, every day."
+      }
+    },
+    "feature6Desc": "A supportive approach to growth—progress over perfection, every day.",
+    "readMore": "Learn more"
   },
-
   "CTASection": {
     "badgeText": "तपाईंको साहसिक कार्य पर्खिरहेको छ",
     "titleMain": "स्तर बढाउन तयार",
@@ -197,7 +239,6 @@
       }
     ]
   },
-
   "TestimonialsSection": {
     "titleMain": "वास्तविक कथाहरू, वास्तविक परिवर्तनहरू",
     "description": "पत्ता लगाउनुहोस् कि कसरी विश्वभरका साहसीहरूले Level Up को साथ आफ्नो जीवनको स्तर बढाउँदैछन्",
@@ -250,10 +291,22 @@
       "title": "LevelUp कसरी काम गर्दछ",
       "subtitle": "जटिल जीवनका लागि सरल प्रणालीहरू।",
       "steps": {
-        "0": { "title": "समुदायहरूमा सामेल हुनुहोस्", "desc": "आफ्नो टोली फेला पार्नुहोस्।" },
-        "1": { "title": "क्वेस्टहरू प्राप्त गर्नुहोस्", "desc": "दैनिक AI चुनौतीहरू।" },
-        "2": { "title": "कार्यहरू पूरा गर्नुहोस्", "desc": "अगाडि साना पाइलाहरू।" },
-        "3": { "title": "XP कमाउनुहोस्", "desc": "प्रगति कल्पना गर्नुहोस्।" }
+        "0": {
+          "title": "समुदायहरूमा सामेल हुनुहोस्",
+          "desc": "आफ्नो टोली फेला पार्नुहोस्।"
+        },
+        "1": {
+          "title": "क्वेस्टहरू प्राप्त गर्नुहोस्",
+          "desc": "दैनिक AI चुनौतीहरू।"
+        },
+        "2": {
+          "title": "कार्यहरू पूरा गर्नुहोस्",
+          "desc": "अगाडि साना पाइलाहरू।"
+        },
+        "3": {
+          "title": "XP कमाउनुहोस्",
+          "desc": "प्रगति कल्पना गर्नुहोस्।"
+        }
       }
     },
     "closing": {
@@ -292,7 +345,14 @@
       "subject": "विषय",
       "message": "सन्देश",
       "submit": "सन्देश पठाउनुहोस्",
-      "footer": "हामी हरेक सन्देश पढ्छौं।"
+      "footer": "हामी हरेक सन्देश पढ्छौं।",
+      "inquiryType": "Inquiry Type",
+      "inquiryOptions": {
+        "general": "General Inquiry",
+        "support": "Support",
+        "feedback": "Feedback",
+        "partnership": "Partnership"
+      }
     }
   }
 }

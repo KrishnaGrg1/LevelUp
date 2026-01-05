@@ -3,17 +3,17 @@ import { Sparkles } from 'lucide-react';
 
 export default function FormLoading({ message }: { message?: string }) {
   return (
-    <Card className="w-full max-w-2xl mx-auto relative z-10 border-0 shadow-none">
-      <CardHeader className="space-y-3 pb-4 pt-8">
+    <Card className="relative z-10 mx-auto w-full max-w-2xl border-0 shadow-none">
+      <CardHeader className="space-y-3 pt-8 pb-4">
         {/* Logo/Icon */}
         <div className="flex justify-center">
-          <div className="w-12 h-12 border-2 border-gray-900 dark:border-white rounded-lg flex items-center justify-center">
-            <Sparkles className="w-6 h-6 text-gray-900 dark:text-white" />
+          <div className="flex h-12 w-12 items-center justify-center rounded-lg border-2 border-gray-900 dark:border-white">
+            <Sparkles className="h-6 w-6 text-gray-900 dark:text-white" />
           </div>
         </div>
 
         {/* Title */}
-        <CardTitle className="text-2xl font-semibold text-gray-900 dark:text-white text-center">
+        <CardTitle className="text-center text-2xl font-semibold text-gray-900 dark:text-white">
           {message || 'Loading...'}
         </CardTitle>
 
@@ -27,22 +27,22 @@ export default function FormLoading({ message }: { message?: string }) {
         <div className="space-y-4">
           {/* Skeleton loaders matching form fields */}
           <div className="space-y-2">
-            <div className="h-4 w-20 bg-gray-200 dark:bg-gray-800 rounded animate-pulse"></div>
-            <div className="h-11 bg-gray-100 dark:bg-gray-900 rounded-lg animate-pulse"></div>
+            <div className="h-4 w-20 animate-pulse rounded bg-gray-200 dark:bg-gray-800"></div>
+            <div className="h-11 animate-pulse rounded-lg bg-gray-100 dark:bg-gray-900"></div>
           </div>
 
           <div className="space-y-2">
-            <div className="h-4 w-24 bg-gray-200 dark:bg-gray-800 rounded animate-pulse"></div>
-            <div className="h-11 bg-gray-100 dark:bg-gray-900 rounded-lg animate-pulse"></div>
+            <div className="h-4 w-24 animate-pulse rounded bg-gray-200 dark:bg-gray-800"></div>
+            <div className="h-11 animate-pulse rounded-lg bg-gray-100 dark:bg-gray-900"></div>
           </div>
 
           <div className="space-y-2">
-            <div className="h-4 w-20 bg-gray-200 dark:bg-gray-800 rounded animate-pulse"></div>
-            <div className="h-11 bg-gray-100 dark:bg-gray-900 rounded-lg animate-pulse"></div>
+            <div className="h-4 w-20 animate-pulse rounded bg-gray-200 dark:bg-gray-800"></div>
+            <div className="h-11 animate-pulse rounded-lg bg-gray-100 dark:bg-gray-900"></div>
           </div>
 
           {/* Button skeleton */}
-          <div className="h-11 bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"></div>
+          <div className="h-11 animate-pulse rounded-lg bg-gray-200 dark:bg-gray-800"></div>
         </div>
       </CardContent>
     </Card>

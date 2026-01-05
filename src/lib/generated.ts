@@ -154,7 +154,6 @@ export interface Quest {
   user?: User;
 }
 
-//Auth//
 export interface UserLoginResponse {
   statusCode: number;
   body: {
@@ -295,6 +294,8 @@ export interface CommunityDTO {
   id: string;
   name: string;
   description?: string;
+  photo?: string;
+  ownerId?: string;
   currentMembers: number; // number of members
   maxMembers: number; // member limit
   isPrivate: boolean;
@@ -368,6 +369,11 @@ interface communityDetailById {
   description: string;
   memberLimit: number;
   photo?: string;
+  ownerId: string;
+  isPrivate?: boolean;
+  userRole?: 'OWNER' | 'ADMIN' | 'MEMBER';
+  currentMembers?: number;
+  clansCount?: number;
   _count: {
     members: number;
     clans: number;

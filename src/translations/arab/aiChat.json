@@ -10,7 +10,8 @@
     "available": "الرموز المتاحة",
     "insufficient": "رموز غير كافية",
     "insufficientDescription": "تحتاج إلى المزيد من الرموز لمواصلة الدردشة",
-    "used": "الرموز المستخدمة"
+    "used": "الرموز المستخدمة",
+    "costPerMessage": "التكلفة لكل محادثة"
   },
   "input": {
     "placeholder": "اكتب رسالتك هنا...",

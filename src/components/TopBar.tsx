@@ -23,30 +23,30 @@ const TopBar: React.FC<TopBarProps> = ({
   const defaultBackUrl = `/${language}/home`;
   const { user } = authStore();
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-black/90 backdrop-blur-lg border-b dark:border-slate-800/50">
-      <div className="max-w-7xl mx-auto px-6 py-4">
+    <nav className="fixed top-0 right-0 left-0 z-50 border-b bg-white backdrop-blur-lg dark:border-slate-800/50 dark:bg-black/90">
+      <div className="mx-auto max-w-7xl px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Left Side - Back Button or Brand */}
           <div className="flex items-center space-x-4">
             {showBackButton && (
               <Link
                 href={backUrl || defaultBackUrl}
-                className="inline-flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-slate-800/80 to-slate-900/80 backdrop-blur-sm rounded-xl border border-slate-700/50 hover:border-indigo-500/50 transition-all duration-300 hover:scale-105 text-slate-300 hover:text-white"
+                className="inline-flex items-center space-x-2 rounded-xl border border-slate-700/50 bg-gradient-to-r from-slate-800/80 to-slate-900/80 px-3 py-2 text-slate-300 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-indigo-500/50 hover:text-white"
               >
-                <ArrowLeft className="w-4 h-4" />
-                <span className="text-sm font-medium">{t('back', 'Back')}</span>
+                <ArrowLeft className="h-4 w-4" />
+                <span className="text-sm font-medium">{t('common.back')}</span>
               </Link>
             )}
 
             {/* Brand */}
             {!isAuthenticated && (
-              <Link href={`/${language}/home`} className="flex items-center space-x-2 group">
-                <div className="w-8 h-8  rounded-lg border-2 flex items-center justify-center  ">
-                  <Sparkles className="w-4 h-4" />
+              <Link href={`/${language}/home`} className="group flex items-center space-x-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg border-2">
+                  <Sparkles className="h-4 w-4" />
                 </div>
-                <span className="text-2xl font-extrabold ">Level Up</span>
+                <span className="text-2xl font-extrabold">Level Up</span>
               </Link>
-            ) }
+            )}
           </div>
 
           {/* Right Side - Language Switcher */}

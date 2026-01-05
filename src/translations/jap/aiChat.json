@@ -10,7 +10,8 @@
     "available": "利用可能トークン",
     "insufficient": "トークン不足",
     "insufficientDescription": "チャットを続けるにはもっとトークンが必要です",
-    "used": "使用トークン"
+     "used": "使用トークン",
+     "costPerMessage": "チャットあたりのコスト"
   },
   "input": {
     "placeholder": "ここにメッセージを入力...",

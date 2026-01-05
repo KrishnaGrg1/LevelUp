@@ -9,7 +9,7 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { VerifyUser } from '@/lib/services/auth';
 import authStore from '@/stores/useAuth';
 import { toast } from 'sonner';
@@ -35,6 +35,7 @@ export function VerifyForm({ lang, otp, userId }: VerifyFormProps) {
   const { setAuthenticated, setAdminStatus } = authStore();
   const { language } = LanguageStore();
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const form = useForm<VerifyFormData>({
     resolver: zodResolver(VerifySchema),
@@ -64,6 +65,9 @@ export function VerifyForm({ lang, otp, userId }: VerifyFormProps) {
     mutationKey: ['verify'],
     mutationFn: (data: VerifyFormData) => VerifyUser(data, lang),
     onSuccess: data => {
+      // Clear any stale cache from previous sessions
+      queryClient.clear();
+      
       setAuthenticated(true);
       toast.success(data?.body.message || 'Verification Successful');
       setAdminStatus(data?.body.data?.isadmin || false);
@@ -86,17 +90,17 @@ export function VerifyForm({ lang, otp, userId }: VerifyFormProps) {
   };
 
   return (
-    <Card className="w-full max-w-2xl mx-auto relative z-10 border-0  shadow-none">
-      <CardHeader className="space-y-3 pb-4 pt-8">
+    <Card className="relative z-10 mx-auto w-full max-w-2xl border-0 shadow-none">
+      <CardHeader className="space-y-3 pt-8 pb-4">
         {/* Logo/Icon */}
         <div className="flex justify-center">
-          <div className="w-12 h-12 border-2 border-gray-900 dark:border-white rounded-lg flex items-center justify-center">
-            <Sparkles className="w-6 h-6 text-gray-900 dark:text-white" />
+          <div className="flex h-12 w-12 items-center justify-center rounded-lg border-2 border-gray-900 dark:border-white">
+            <Sparkles className="h-6 w-6 text-gray-900 dark:text-white" />
           </div>
         </div>
 
         {/* Title */}
-        <CardTitle className="text-2xl font-semibold text-gray-900 dark:text-white text-center">
+        <CardTitle className="text-center text-2xl font-semibold text-gray-900 dark:text-white">
           {t('auth.verify.title', 'Verify Your Email')}
         </CardTitle>
 
@@ -138,14 +142,14 @@ export function VerifyForm({ lang, otp, userId }: VerifyFormProps) {
                             <InputOTPSlot
                               key={idx}
                               index={idx}
-                              className="w-12 h-12 text-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white"
+                              className="h-12 w-12 border-gray-300 bg-gray-50 text-lg text-gray-900 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
                             />
                           ))}
                         </InputOTPGroup>
                       </InputOTP>
                     </div>
                   </FormControl>
-                  <FormMessage className="text-xs text-red-600 dark:text-red-400 mt-2 text-center" />
+                  <FormMessage className="mt-2 text-center text-xs text-red-600 dark:text-red-400" />
                 </FormItem>
               )}
             />
@@ -154,11 +158,11 @@ export function VerifyForm({ lang, otp, userId }: VerifyFormProps) {
             <Button
               type="submit"
               disabled={isLoading || form.formState.isSubmitting}
-              className="w-full h-11 bg-gray-900 hover:bg-gray-800 active:bg-gray-950 dark:bg-white dark:hover:bg-gray-100 dark:active:bg-gray-200 text-white dark:text-gray-900 disabled:bg-gray-300 disabled:text-gray-500 dark:disabled:bg-gray-800 dark:disabled:text-gray-500 font-medium rounded-lg transition-colors duration-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
+              className="h-11 w-full cursor-pointer rounded-lg bg-gray-900 font-medium text-white transition-colors duration-200 hover:bg-gray-800 active:bg-gray-950 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500 disabled:opacity-60 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100 dark:active:bg-gray-200 dark:disabled:bg-gray-800 dark:disabled:text-gray-500"
             >
               {isLoading ? (
                 <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 border-2 border-white/20 dark:border-gray-900/20 border-t-white dark:border-t-gray-900 rounded-full animate-spin" />
+                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-white/20 border-t-white dark:border-gray-900/20 dark:border-t-gray-900" />
                   {t('auth.verify.verifying', 'Verifying...')}
                 </div>
               ) : (
@@ -167,12 +171,12 @@ export function VerifyForm({ lang, otp, userId }: VerifyFormProps) {
             </Button>
 
             {/* Back to signup link */}
-            <div className="text-center pt-4">
+            <div className="pt-4 text-center">
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 {t('auth.verify.didntReceive', "Didn't receive the code?")}{' '}
                 <Link
                   href={`/${lang}/signup`}
-                  className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-200 font-medium underline underline-offset-2"
+                  className="font-medium text-gray-900 underline underline-offset-2 hover:text-gray-700 dark:text-white dark:hover:text-gray-200"
                 >
                   {t('auth.verify.resend', 'Resend')}
                 </Link>

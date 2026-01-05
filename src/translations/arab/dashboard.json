@@ -10,7 +10,11 @@
     "totalLevel": "إجمالي المستوى",
     "communities": "المجتمعات",
     "questsDone": "المهام المنجزة",
-    "streak": "سلسلة الإنجاز"
+    "streak": "سلسلة الإنجاز",
+    "title": "Your Progress",
+    "subtitle": "A quick snapshot of your journey",
+    "totalXP": "Total XP",
+    "refreshing": "Refreshing..."
   },
   "quests": {
     "hookTitle": "شارك React Hook",

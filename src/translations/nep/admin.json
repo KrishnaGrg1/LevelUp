@@ -215,7 +215,8 @@
     "filters": {
       "allCommunities": "सबै समुदायहरू",
       "publicOnly": "सार्वजनिक मात्र",
-      "privateOnly": "निजी मात्र"
+      "privateOnly": "निजी मात्र",
+      "search": "Search communities..."
     },
     "tableHeaders": {
       "name": "नाम",

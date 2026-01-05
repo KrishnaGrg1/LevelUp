@@ -1,3 +1,20 @@
 {
-  "login": "登录成功"
+  "login": "登录成功",
+  "register": "Account created successfully",
+  "verify": "Account verified successfully",
+  "forgot": "Reset code sent to your email",
+  "reset": "Password reset successfully",
+  "onboarding": "Welcome aboard! Your profile is all set.",
+  "forgotPassword": "Reset code sent to your email",
+  "logout": "Logged out successfully",
+  "auth": {
+    "oauth_login": "Signed in successfully",
+    "oauth_login_existing": "Signed in to your existing account"
+  },
+  "community": {
+    "joined_chat": "已加入社区聊天"
+  },
+  "clan": {
+    "joined_chat": "已加入氏族聊天"
+  }
 }

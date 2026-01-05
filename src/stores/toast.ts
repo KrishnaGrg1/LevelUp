@@ -1,5 +1,3 @@
-// Central store for managing toast notifications in Next.js (React version)
-
 export type ToastType = 'success' | 'error' | 'info' | 'warning';
 
 export interface ToastData {
@@ -8,7 +6,6 @@ export interface ToastData {
   id: number;
 }
 
-// Custom event name
 const TOAST_EVENT = 'app:toast';
 
 export function addToast(type: ToastType, message: string): void {

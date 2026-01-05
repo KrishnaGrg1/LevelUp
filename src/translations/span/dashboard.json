@@ -10,7 +10,11 @@
     "totalLevel": "Nivel total",
     "communities": "Comunidades",
     "questsDone": "Misiones completadas",
-    "streak": "Racha"
+    "streak": "Racha",
+    "title": "Your Progress",
+    "subtitle": "A quick snapshot of your journey",
+    "totalXP": "Total XP",
+    "refreshing": "Refreshing..."
   },
   "quests": {
     "hookTitle": "Comparte un React Hook",

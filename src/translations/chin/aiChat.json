@@ -10,7 +10,8 @@
     "available": "可用代币",
     "insufficient": "代币不足",
     "insufficientDescription": "您需要更多代币才能继续聊天",
-    "used": "已使用代币"
+    "used": "已使用代币",
+    "costPerMessage": "每次聊天消耗"
   },
   "input": {
     "placeholder": "在此输入您的消息...",

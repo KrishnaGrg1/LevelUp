@@ -50,17 +50,17 @@ export default function ForgetPassword({ lang, onSent }: ForgetPasswordProps) {
   };
 
   return (
-    <Card className="w-full max-w-2xl mx-auto relative z-10 border-0  shadow-none">
-      <CardHeader className="space-y-3 pb-4 pt-8">
+    <Card className="relative z-10 mx-auto w-full max-w-2xl border-0 shadow-none">
+      <CardHeader className="space-y-3 pt-8 pb-4">
         {/* Logo/Icon */}
         <div className="flex justify-center">
-          <div className="w-12 h-12 border-2 border-gray-900 dark:border-white rounded-lg flex items-center justify-center">
-            <Sparkles className="w-6 h-6 text-gray-900 dark:text-white" />
+          <div className="flex h-12 w-12 items-center justify-center rounded-lg border-2 border-gray-900 dark:border-white">
+            <Sparkles className="h-6 w-6 text-gray-900 dark:text-white" />
           </div>
         </div>
 
         {/* Title */}
-        <CardTitle className="text-2xl font-semibold text-gray-900 dark:text-white text-center">
+        <CardTitle className="text-center text-2xl font-semibold text-gray-900 dark:text-white">
           {t('auth.forgetPassword.title', 'Forgot Password?')}
         </CardTitle>
 
@@ -86,11 +86,11 @@ export default function ForgetPassword({ lang, onSent }: ForgetPasswordProps) {
                     <Input
                       type="email"
                       placeholder={t('auth.forgetPassword.emailPlaceholder', 'you@example.com')}
-                      className="h-11 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent transition-all duration-200"
+                      className="h-11 rounded-lg border border-gray-300 bg-gray-50 text-gray-900 transition-all duration-200 placeholder:text-gray-400 focus:border-transparent focus:ring-2 focus:ring-gray-900 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-500 dark:focus:ring-white"
                       {...field}
                     />
                   </FormControl>
-                  <TranslatedFormMessage className="text-xs text-red-600 dark:text-red-400 mt-1" />
+                  <TranslatedFormMessage className="mt-1 text-xs text-red-600 dark:text-red-400" />
                 </FormItem>
               )}
             />
@@ -99,11 +99,11 @@ export default function ForgetPassword({ lang, onSent }: ForgetPasswordProps) {
             <Button
               type="submit"
               disabled={isLoading || form.formState.isSubmitting || !form.formState.isValid}
-              className="w-full h-11 bg-gray-900 hover:bg-gray-800 active:bg-gray-950 dark:bg-white dark:hover:bg-gray-100 dark:active:bg-gray-200 text-white dark:text-gray-900 disabled:bg-gray-300 disabled:text-gray-500 dark:disabled:bg-gray-800 dark:disabled:text-gray-500 font-medium rounded-lg transition-colors duration-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
+              className="h-11 w-full cursor-pointer rounded-lg bg-gray-900 font-medium text-white transition-colors duration-200 hover:bg-gray-800 active:bg-gray-950 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500 disabled:opacity-60 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100 dark:active:bg-gray-200 dark:disabled:bg-gray-800 dark:disabled:text-gray-500"
             >
               {isLoading ? (
                 <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 border-2 border-white/20 dark:border-gray-900/20 border-t-white dark:border-t-gray-900 rounded-full animate-spin" />
+                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-white/20 border-t-white dark:border-gray-900/20 dark:border-t-gray-900" />
                   {t('auth.forgetPassword.sending', 'Sending...')}
                 </div>
               ) : (
@@ -112,12 +112,12 @@ export default function ForgetPassword({ lang, onSent }: ForgetPasswordProps) {
             </Button>
 
             {/* Back to login link */}
-            <div className="text-center pt-4">
+            <div className="pt-4 text-center">
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 {t('auth.forgetPassword.rememberPassword', 'Remember your password?')}{' '}
                 <Link
                   href={`/${lang}/login`}
-                  className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-200 font-medium underline underline-offset-2"
+                  className="font-medium text-gray-900 underline underline-offset-2 hover:text-gray-700 dark:text-white dark:hover:text-gray-200"
                 >
                   {t('auth.forgetPassword.backToLogin', 'Back to login')}
                 </Link>

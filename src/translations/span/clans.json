@@ -35,7 +35,11 @@
     "privateClanDesc": "Solo los miembros invitados pueden unirse",
     "cancel": "Cancelar",
     "create": "Crear Clan",
-    "creating": "Creando..."
+    "creating": "Creando...",
+    "namePlaceholder": "Enter clan name",
+    "descriptionLabel": "Description",
+    "privateDescription": "Only invited members can join",
+    "nameMinLength": "Clan name must be at least 3 characters"
   },
   "toast": {
     "joinedSuccess": "¡Te uniste al clan exitosamente!",
@@ -46,6 +50,12 @@
     "deleteFailed": "Error al eliminar el clan",
     "createdSuccess": "¡Clan creado exitosamente!",
     "createFailed": "Error al crear el clan",
-    "nameMinLength": "El nombre del clan debe tener al menos 3 caracteres"
-  }
+    "nameMinLength": "El nombre del clan debe tener al menos 3 caracteres",
+    "leaveFailed": "Failed to leave clan"
+  },
+  "noClansDescription": "This community doesn't have any clans yet. Be the first to create one!",
+  "errorLoadingClans": "Failed to load clans",
+  "unknownError": "An unknown error occurred",
+  "creating": "Creating...",
+  "noMembers": "No members yet"
 }

@@ -39,7 +39,16 @@
       },
       "dailyQuest": "Misión Diaria",
       "startQuest": "Iniciar Misión"
-    }
+    },
+    "batchText": "AI-powered self-improvement",
+    "titleSub": "Level up your life.",
+    "desc1": "Daily quests designed for",
+    "descHighlight1": "real accountability",
+    "desc2": " Plus a supportive community built around",
+    "watchDemo": "Watch Demo",
+    "rating": "4.9/5 Rating",
+    "secure": "Secure & Private",
+    "activeUsers": "10,000+ Active Users"
   },
   "problemSolution": {
     "problem": {
@@ -96,7 +105,6 @@
       "title2": "para alcanzar tu potencial.",
       "description": "Herramientas que se adaptan a tu viaje, no al revés."
     },
-
     "coreFeatures": {
       "title": "Características Principales",
       "subtitle": "Todo lo que necesitas para construir hábitos que duren.",
@@ -128,12 +136,10 @@
         }
       }
     },
-
     "integrationFeatures": {
       "title": "Integraciones Perfectas",
       "description": "Conecta con las herramientas que ya usas."
     },
-
     "comparisonSection": {
       "title": "¿Por qué LevelUp?",
       "description": "Mira cómo nos comparamos con el resto.",
@@ -169,9 +175,39 @@
           "otherApps": "Soporte por Email"
         }
       }
-    }
+    },
+    "features": {
+      "badgeText": "Built for consistency",
+      "badge": "Everything you need to level up",
+      "description": "Powerful tools that make progress feel rewarding—without the burnout.",
+      "feature1": {
+        "title": "AI-Generated Quests",
+        "description": "Personalized daily and weekly challenges that turn goals into clear, doable actions."
+      },
+      "feature2": {
+        "title": "Gamified Progress",
+        "description": "Earn XP, level up, and track milestones so improvement feels motivating, not monotonous."
+      },
+      "feature3": {
+        "title": "Communities & Clans",
+        "description": "Join like-minded groups for accountability, teamwork, and shared progress."
+      },
+      "feature4": {
+        "title": "Global, Multi-language",
+        "description": "Connect across languages and regions—progress should be accessible to everyone."
+      },
+      "feature5": {
+        "title": "Streaks & Scheduling",
+        "description": "Stay consistent with streaks, history, and time-zone aware planning that fits real life."
+      },
+      "feature6": {
+        "title": "Wellbeing First",
+        "description": "A supportive approach to growth—progress over perfection, every day."
+      }
+    },
+    "feature6Desc": "A supportive approach to growth—progress over perfection, every day.",
+    "readMore": "Learn more"
   },
-
   "CTASection": {
     "badgeText": "Tu Aventura Espera",
     "titleMain": "Listo para Subir de Nivel",
@@ -203,7 +239,6 @@
       }
     ]
   },
-
   "TestimonialsSection": {
     "titleMain": "Historias Reales, Transformaciones Reales",
     "description": "Descubre cómo los aventureros de todo el mundo están subiendo de nivel sus vidas con Level Up",
@@ -256,10 +291,22 @@
       "title": "Cómo Funciona LevelUp",
       "subtitle": "Sistemas simples para vidas complejas.",
       "steps": {
-        "0": { "title": "Unirse a Comunidades", "desc": "Encuentra tu escuadrón." },
-        "1": { "title": "Recibir Misiones", "desc": "Desafíos diarios de IA." },
-        "2": { "title": "Completar Acciones", "desc": "Pequeños pasos adelante." },
-        "3": { "title": "Ganar XP", "desc": "Visualizar progreso." }
+        "0": {
+          "title": "Unirse a Comunidades",
+          "desc": "Encuentra tu escuadrón."
+        },
+        "1": {
+          "title": "Recibir Misiones",
+          "desc": "Desafíos diarios de IA."
+        },
+        "2": {
+          "title": "Completar Acciones",
+          "desc": "Pequeños pasos adelante."
+        },
+        "3": {
+          "title": "Ganar XP",
+          "desc": "Visualizar progreso."
+        }
       }
     },
     "closing": {
@@ -298,7 +345,14 @@
       "subject": "Asunto",
       "message": "Mensaje",
       "submit": "Enviar Mensaje",
-      "footer": "Leemos cada mensaje."
+      "footer": "Leemos cada mensaje.",
+      "inquiryType": "Inquiry Type",
+      "inquiryOptions": {
+        "general": "General Inquiry",
+        "support": "Support",
+        "feedback": "Feedback",
+        "partnership": "Partnership"
+      }
     }
   }
 }

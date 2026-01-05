@@ -1,3 +1,20 @@
 {
-  "login": "Inicio de sesión exitoso"
+  "login": "Inicio de sesión exitoso",
+  "register": "Account created successfully",
+  "verify": "Account verified successfully",
+  "forgot": "Reset code sent to your email",
+  "reset": "Password reset successfully",
+  "onboarding": "Welcome aboard! Your profile is all set.",
+  "forgotPassword": "Reset code sent to your email",
+  "logout": "Logged out successfully",
+  "auth": {
+    "oauth_login": "Signed in successfully",
+    "oauth_login_existing": "Signed in to your existing account"
+  },
+  "community": {
+    "joined_chat": "Te uniste al chat de la comunidad"
+  },
+  "clan": {
+    "joined_chat": "Te uniste al chat del clan"
+  }
 }

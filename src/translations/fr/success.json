@@ -3,5 +3,18 @@
   "register": "Compte créé avec succès",
   "verify": "Compte vérifié avec succès",
   "forgot": "Code de réinitialisation envoyé",
-  "reset": "Mot de passe réinitialisé"
+  "reset": "Mot de passe réinitialisé",
+  "onboarding": "Welcome aboard! Your profile is all set.",
+  "forgotPassword": "Reset code sent to your email",
+  "logout": "Logged out successfully",
+  "auth": {
+    "oauth_login": "Signed in successfully",
+    "oauth_login_existing": "Signed in to your existing account"
+  },
+  "community": {
+    "joined_chat": "Vous avez rejoint le chat de la communauté"
+  },
+  "clan": {
+    "joined_chat": "Vous avez rejoint le chat du clan"
+  }
 }

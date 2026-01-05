@@ -35,7 +35,11 @@
     "privateClanDesc": "只有受邀成员才能加入",
     "cancel": "取消",
     "create": "创建氏族",
-    "creating": "创建中..."
+    "creating": "创建中...",
+    "namePlaceholder": "Enter clan name",
+    "descriptionLabel": "Description",
+    "privateDescription": "Only invited members can join",
+    "nameMinLength": "Clan name must be at least 3 characters"
   },
   "toast": {
     "joinedSuccess": "成功加入氏族！",
@@ -46,6 +50,12 @@
     "deleteFailed": "删除氏族失败",
     "createdSuccess": "氏族创建成功！",
     "createFailed": "创建氏族失败",
-    "nameMinLength": "氏族名称必须至少3个字符"
-  }
+    "nameMinLength": "氏族名称必须至少3个字符",
+    "leaveFailed": "Failed to leave clan"
+  },
+  "noClansDescription": "This community doesn't have any clans yet. Be the first to create one!",
+  "errorLoadingClans": "Failed to load clans",
+  "unknownError": "An unknown error occurred",
+  "creating": "Creating...",
+  "noMembers": "No members yet"
 }

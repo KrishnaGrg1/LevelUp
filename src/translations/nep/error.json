@@ -14,6 +14,33 @@
     "confirmPasswordRequired": "कृपया आफ्नो पासवर्ड पुष्टि गर्नुहोस्",
     "passwordMismatch": "पासवर्ड मिलेन",
     "otpRequired": "प्रमाणीकरण कोड आवश्यक छ",
-    "otpLength": "प्रमाणीकरण कोड ६ अंकको हुनुपर्छ"
-  }
+    "otpLength": "प्रमाणीकरण कोड ६ अंकको हुनुपर्छ",
+    "oauth_missing_provider": "Missing OAuth provider.",
+    "oauth_missing_params": "Missing OAuth parameters.",
+    "oauth_no_response": "No response received from the OAuth provider.",
+    "oauth_access_denied": "Access denied by the OAuth provider.",
+    "oauth_invalid_request": "Invalid OAuth request.",
+    "oauth_invalid_grant": "OAuth प्राधिकरणको म्याद सकिएको वा अवैध छ।",
+    "oauth_server_error": "OAuth प्रदायकले सर्भर त्रुटि फर्कायो।",
+    "oauth_failed": "OAuth साइन-इन असफल भयो। फेरि प्रयास गर्नुहोस्।",
+    "not_authenticated": "च्याट गर्न लगइन हुनुपर्छ।"
+  },
+  "community": {
+    "not_member": "च्याट गर्न यो समुदायमा सामेल हुनुपर्छ।"
+  },
+  "clan": {
+    "not_member_general": "यो च्याट केवल क्लान सदस्यका लागि हो।"
+  },
+  "message": {
+    "empty": "सन्देश खाली हुन सक्दैन।",
+    "too_long": "सन्देश धेरै लामो छ।",
+    "send_failed": "सन्देश पठाउन असफल भयो।"
+  },
+  "onboarding": {
+    "categoriesRequired": "Please select at least one category",
+    "experienceRequired": "Please select your experience level",
+    "heardAboutUsRequired": "Please tell us how you heard about us"
+  },
+  "forgotPassword": "Failed to send reset code. Please try again.",
+  "register": "Registration failed. Please try again."
 }

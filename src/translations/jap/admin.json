@@ -215,7 +215,8 @@
     "filters": {
       "allCommunities": "すべてのコミュニティ",
       "publicOnly": "公開のみ",
-      "privateOnly": "非公開のみ"
+      "privateOnly": "非公開のみ",
+      "search": "Search communities..."
     },
     "tableHeaders": {
       "name": "名前",

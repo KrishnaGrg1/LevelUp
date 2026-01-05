@@ -26,7 +26,7 @@ const ContactPage = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    // TODO: wire this form to a backend endpoint.
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -46,16 +46,16 @@ const ContactPage = () => {
   return (
     <div
       key={language}
-      className="bg-white dark:bg-black text-black dark:text-white transition-colors duration-300"
+      className="bg-white text-black transition-colors duration-300 dark:bg-black dark:text-white"
     >
       {/* Hero Section */}
       <section className="relative py-24 text-center">
-        <div className="relative mx-auto max-w-4xl px-6 z-10">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight tracking-tight">
+        <div className="relative z-10 mx-auto max-w-4xl px-6">
+          <h1 className="mb-6 text-5xl leading-tight font-bold tracking-tight md:text-7xl">
             {t('landing.contact.hero.title')}
           </h1>
 
-          <p className="text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="mx-auto max-w-2xl text-xl leading-relaxed text-gray-500 dark:text-gray-400">
             {t('landing.contact.hero.options')}
           </p>
         </div>
@@ -63,16 +63,16 @@ const ContactPage = () => {
 
       {/* Contact Options */}
       <section className="relative py-12">
-        <div className="relative mx-auto max-w-6xl px-6 z-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 max-w-3xl mx-auto">
-            <div className="p-8 bg-white dark:bg-black rounded-xl border border-gray-200 dark:border-gray-800 text-center">
-              <h3 className="text-xl font-bold mb-2">{t('landing.contact.cards.support.title')}</h3>
-              <p className="text-gray-500 mb-4">{t('landing.contact.cards.support.desc')}</p>
+        <div className="relative z-10 mx-auto max-w-6xl px-6">
+          <div className="mx-auto mb-16 grid max-w-3xl grid-cols-1 gap-8 md:grid-cols-2">
+            <div className="rounded-xl border border-gray-200 bg-white p-8 text-center dark:border-gray-800 dark:bg-black">
+              <h3 className="mb-2 text-xl font-bold">{t('landing.contact.cards.support.title')}</h3>
+              <p className="mb-4 text-gray-500">{t('landing.contact.cards.support.desc')}</p>
               <p className="text-sm font-medium">{t('landing.contact.cards.support.response')}</p>
             </div>
-            <div className="p-8 bg-white dark:bg-black rounded-xl border border-gray-200 dark:border-gray-800 text-center">
-              <h3 className="text-xl font-bold mb-2">{t('landing.contact.cards.general.title')}</h3>
-              <p className="text-gray-500 mb-4">{t('landing.contact.cards.general.desc')}</p>
+            <div className="rounded-xl border border-gray-200 bg-white p-8 text-center dark:border-gray-800 dark:bg-black">
+              <h3 className="mb-2 text-xl font-bold">{t('landing.contact.cards.general.title')}</h3>
+              <p className="mb-4 text-gray-500">{t('landing.contact.cards.general.desc')}</p>
               <p className="text-sm font-medium">{t('landing.contact.cards.general.response')}</p>
             </div>
           </div>
@@ -81,11 +81,11 @@ const ContactPage = () => {
 
       {/* Contact Form */}
       <section className="relative pb-32">
-        <div className="relative mx-auto max-w-3xl px-6 z-10">
+        <div className="relative z-10 mx-auto max-w-3xl px-6">
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <div>
-                <label htmlFor="name" className="text-sm font-medium mb-2">
+                <label htmlFor="name" className="mb-2 text-sm font-medium">
                   {t('landing.contact.form.name')} *
                 </label>
                 <Input
@@ -96,12 +96,12 @@ const ContactPage = () => {
                   value={formData.name}
                   onChange={handleInputChange}
                   required
-                  className="h-12 bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800 focus:ring-black dark:focus:ring-white rounded-lg"
+                  className="h-12 rounded-lg border-gray-200 bg-gray-50 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:focus:ring-white"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="text-sm font-medium mb-2">
+                <label htmlFor="email" className="mb-2 text-sm font-medium">
                   {t('landing.contact.form.email')} *
                 </label>
                 <Input
@@ -112,16 +112,16 @@ const ContactPage = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="h-12 bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800 focus:ring-black dark:focus:ring-white rounded-lg"
+                  className="h-12 rounded-lg border-gray-200 bg-gray-50 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:focus:ring-white"
                 />
               </div>
 
               <div>
-                <label htmlFor="inquiryType" className="text-sm font-medium mb-2">
+                <label htmlFor="inquiryType" className="mb-2 text-sm font-medium">
                   {t('landing.contact.form.inquiryType')}
                 </label>
                 <Select onValueChange={handleSelectChange} defaultValue={formData.inquiryType}>
-                  <SelectTrigger className="w-full h-12 bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800 focus:ring-black dark:focus:ring-white rounded-lg">
+                  <SelectTrigger className="h-12 w-full rounded-lg border-gray-200 bg-gray-50 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:focus:ring-white">
                     <SelectValue placeholder={t('landing.contact.form.inquiryOptions.general')} />
                   </SelectTrigger>
                   <SelectContent>
@@ -142,7 +142,7 @@ const ContactPage = () => {
               </div>
 
               <div>
-                <label htmlFor="subject" className="text-sm font-medium mb-2">
+                <label htmlFor="subject" className="mb-2 text-sm font-medium">
                   {t('landing.contact.form.subject')} *
                 </label>
                 <Input
@@ -153,12 +153,12 @@ const ContactPage = () => {
                   value={formData.subject}
                   onChange={handleInputChange}
                   required
-                  className="h-12 bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800 focus:ring-black dark:focus:ring-white rounded-lg"
+                  className="h-12 rounded-lg border-gray-200 bg-gray-50 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:focus:ring-white"
                 />
               </div>
 
-              <div className=" md:col-span-2">
-                <label htmlFor="message" className="text-sm font-medium mb-2">
+              <div className="md:col-span-2">
+                <label htmlFor="message" className="mb-2 text-sm font-medium">
                   {t('landing.contact.form.message')} *
                 </label>
                 <Textarea
@@ -169,17 +169,17 @@ const ContactPage = () => {
                   onChange={handleInputChange}
                   required
                   rows={6}
-                  className="bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800 focus:ring-black dark:focus:ring-white resize-y rounded-lg"
+                  className="resize-y rounded-lg border-gray-200 bg-gray-50 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:focus:ring-white"
                 />
               </div>
             </div>
 
-            <div className="pt-4 flex justify-center">
-              <Button type="submit" size="lg" className="rounded-full px-12 h-12 ">
+            <div className="flex justify-center pt-4">
+              <Button type="submit" size="lg" className="h-12 rounded-full px-12">
                 {t('landing.contact.form.submit')}
               </Button>
             </div>
-            <p className="text-center text-xs text-gray-400 mt-4">
+            <p className="mt-4 text-center text-xs text-gray-400">
               {t('landing.contact.form.footer')}
             </p>
           </form>

@@ -13,6 +13,8 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { useRoom } from './useRoom';
+import { devLog } from '@/lib/logger';
+import { t } from '@/translations/index';
 
 interface UseMessagesProps {
   communityId?: string;
@@ -75,7 +77,7 @@ export const useMessages = ({ communityId, clanId, type }: UseMessagesProps) => 
   // ✅ Reset state when switching rooms (using unique room key)
   useEffect(() => {
     if (previousRoomKeyRef.current !== roomKey) {
-      console.log(`🔄 Room changed: ${previousRoomKeyRef.current} → ${roomKey}`);
+      devLog(`🔄 Room changed: ${previousRoomKeyRef.current} → ${roomKey}`);
       hasInitializedRef.current = false;
 
       // Reset local state
@@ -122,7 +124,7 @@ export const useMessages = ({ communityId, clanId, type }: UseMessagesProps) => 
       setCurrentPage(nextPage);
     } catch (error) {
       console.error(`Failed to load more messages for ${roomKey}:`, error);
-      toast.error('Failed to load more messages');
+      toast.error(t('common:failedToLoadMore'));
     }
   }, [targetId, initialMessages?.pagination?.hasMore, currentPage, type, language, roomKey]);
 
@@ -140,7 +142,7 @@ export const useMessages = ({ communityId, clanId, type }: UseMessagesProps) => 
 
       setMessages(prev => {
         if (prev.some(m => m.id === message.id)) return prev;
-        console.log(`🔌 New message received via socket`);
+        devLog(`🔌 New message received via socket`);
         return [...prev, message];
       });
     };
@@ -161,7 +163,7 @@ export const useMessages = ({ communityId, clanId, type }: UseMessagesProps) => 
     mutationFn: async (content: string) => {
       if (!targetId) throw new Error('No target ID');
 
-      console.log(`📤 Sending message`);
+      devLog(`📤 Sending message`);
 
       if (type === 'community') {
         sendCommunityMessage(targetId, content);
@@ -184,9 +186,9 @@ export const useMessages = ({ communityId, clanId, type }: UseMessagesProps) => 
 
   const sendMessage = useCallback(
     (content: string) => {
-      if (!content.trim()) return toast.error('Message cannot be empty');
-      if (!isJoined) return toast.error('Not connected to room');
-      if (!isMember) return toast.error('You are not a member');
+      if (!content.trim()) return toast.error(t('common:messageCannotBeEmpty'));
+      if (!isJoined) return toast.error(t('common:notConnectedToRoom'));
+      if (!isMember) return toast.error(t('common:notAMember'));
 
       sendMessageMutation.mutate(content);
     },

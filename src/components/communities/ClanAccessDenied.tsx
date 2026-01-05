@@ -68,28 +68,28 @@ export const ClanAccessDenied: React.FC<ClanAccessDeniedProps> = ({
   const details = getAccessDeniedDetails();
 
   return (
-    <div className="flex-1 flex items-center justify-center bg-gray-50 dark:bg-gray-900 p-6">
-      <div className="max-w-md w-full text-center">
+    <div className="flex flex-1 items-center justify-center bg-white p-6 dark:bg-black">
+      <div className="w-full max-w-md text-center">
         {/* Icon */}
-        <div className="flex justify-center mb-6">{details.icon}</div>
+        <div className="mb-6 flex justify-center">{details.icon}</div>
 
         {/* Title */}
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">
+        <h2 className="mb-3 text-2xl font-bold text-gray-900 dark:text-gray-100">
           {details.title}
         </h2>
 
         {/* Message */}
-        <p className="text-lg text-gray-700 dark:text-gray-300 mb-2">{details.message}</p>
+        <p className="mb-2 text-lg text-gray-700 dark:text-gray-300">{details.message}</p>
 
         {/* Description */}
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">{details.description}</p>
+        <p className="mb-8 text-sm text-gray-500 dark:text-gray-400">{details.description}</p>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+        <div className="flex flex-col justify-center gap-3 sm:flex-row">
           <Button
             onClick={handleGoBack}
             variant="outline"
-            className="px-6 py-2 border-gray-300 dark:border-gray-600"
+            className="border-gray-300 bg-white px-6 py-2 dark:border-gray-800 dark:bg-black"
           >
             {t('community:accessDenied.goBack', language)}
           </Button>
@@ -100,7 +100,7 @@ export const ClanAccessDenied: React.FC<ClanAccessDeniedProps> = ({
                 // TODO: Implement request to join functionality
                 alert('Request to join functionality - to be implemented');
               }}
-              className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white"
+              className="bg-black px-6 py-2 text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
             >
               {t('community:accessDenied.requestJoin', language)}
             </Button>
@@ -109,7 +109,7 @@ export const ClanAccessDenied: React.FC<ClanAccessDeniedProps> = ({
           {accessDeniedCode === 'NOT_AUTHENTICATED' && (
             <Button
               onClick={() => router.push('/login')}
-              className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white"
+              className="bg-black px-6 py-2 text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
             >
               Log In
             </Button>
@@ -117,7 +117,7 @@ export const ClanAccessDenied: React.FC<ClanAccessDeniedProps> = ({
         </div>
 
         {/* Additional Info */}
-        <div className="mt-8 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+        <div className="mt-8 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-800 dark:bg-gray-900">
           <p className="text-xs text-gray-600 dark:text-gray-400">
             <strong>Need help?</strong> Contact the clan admin or visit the clan page to learn more
             about joining.

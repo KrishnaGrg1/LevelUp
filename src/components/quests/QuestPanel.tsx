@@ -24,9 +24,9 @@ const QuestPanel: React.FC<QuestPanelProps> = ({ communityId }) => {
   return (
     <Card className="border-0 shadow-none">
       <div className="p-6">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
+        <div className="mb-4 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
           <div>
-            <h3 className="font-heading text-xl font-bold text-zinc-900 dark:text-zinc-50 mb-1">
+            <h3 className="font-heading mb-1 text-xl font-bold text-zinc-900 dark:text-zinc-50">
               {t('quests.panel.title')}
             </h3>
             <p className="text-sm text-zinc-600 dark:text-zinc-400">{t('quests.panel.subtitle')}</p>
@@ -35,10 +35,10 @@ const QuestPanel: React.FC<QuestPanelProps> = ({ communityId }) => {
 
         <div className="flex flex-wrap items-center gap-3">
           <Button
-            className="bg-green-600 hover:bg-purple-700 dark:bg-purple-600 dark:hover:bg-purple-700 text-white font-semibold"
+            className="bg-green-600 font-semibold text-white hover:bg-purple-700 dark:bg-purple-600 dark:hover:bg-purple-700"
             onClick={() => setOpenDetails(true)}
           >
-            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -49,7 +49,7 @@ const QuestPanel: React.FC<QuestPanelProps> = ({ communityId }) => {
             {t('quests.panel.viewDetails')}
           </Button>
           <Button variant="outline" onClick={() => setOpenSettings(true)}>
-            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -70,7 +70,7 @@ const QuestPanel: React.FC<QuestPanelProps> = ({ communityId }) => {
 
       {/* Details Modal */}
       <Dialog open={openDetails} onOpenChange={setOpenDetails}>
-        <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto">
+        <DialogContent className="max-h-[85vh] max-w-4xl overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold">
               {t('quests.panel.overview.title')}
@@ -90,9 +90,9 @@ const QuestPanel: React.FC<QuestPanelProps> = ({ communityId }) => {
             </DialogTitle>
             <DialogDescription>{t('quests.panel.settingsModal.description')}</DialogDescription>
           </DialogHeader>
-          <div className="flex flex-col items-center justify-center py-8 px-4 rounded-lg border border-dashed border-white/10 bg-white/5">
+          <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-white/10 bg-white/5 px-4 py-8">
             <svg
-              className="w-12 h-12 text-muted-foreground/50 mb-3"
+              className="text-muted-foreground/50 mb-3 h-12 w-12"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -104,7 +104,7 @@ const QuestPanel: React.FC<QuestPanelProps> = ({ communityId }) => {
                 d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
               />
             </svg>
-            <p className="text-sm text-muted-foreground text-center">
+            <p className="text-muted-foreground text-center text-sm">
               {t('quests.panel.settingsModal.comingSoon')}
             </p>
           </div>

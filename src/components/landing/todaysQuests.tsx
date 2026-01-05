@@ -39,13 +39,13 @@ const QuestTimer: React.FC<{ quest: Quest }> = ({ quest }) => {
 
   return (
     <div className="flex items-center gap-2 text-xs">
-      <div className="flex-1 h-1.5 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+      <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
         <div
           className="h-full bg-gradient-to-r from-purple-500 to-purple-600 transition-all duration-300"
           style={{ width: `${timeRemaining.progressPercent}%` }}
         />
       </div>
-      <span className="text-zinc-600 dark:text-zinc-400 font-medium min-w-fit">
+      <span className="min-w-fit font-medium text-zinc-600 dark:text-zinc-400">
         {timeRemaining.remainingText}
       </span>
     </div>
@@ -65,7 +65,7 @@ const QuestCard: React.FC<{
     if (status === 'completed') {
       return (
         <span className="flex items-center gap-2">
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+          <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
             <path
               fillRule="evenodd"
               d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -112,17 +112,17 @@ const QuestCard: React.FC<{
       'bg-green-50 text-green-700 hover:bg-green-50 dark:bg-green-900/20 dark:text-green-400 dark:hover:bg-green-900/20 cursor-default border-green-200 dark:border-green-800',
   };
   return (
-    <Card className="border shadow-sm transition-all hover:shadow-md hover:border-purple-200 dark:hover:border-purple-800">
-      <div className="p-4 space-y-3">
+    <Card className="border shadow-sm transition-all hover:border-purple-200 hover:shadow-md dark:hover:border-purple-800">
+      <div className="space-y-3 p-4">
         {/* Header */}
         <div className="flex items-start justify-between gap-3">
-          <div className="flex-1 min-w-0">
-            <p className="text-base font-semibold text-zinc-900 dark:text-zinc-50 leading-snug">
+          <div className="min-w-0 flex-1">
+            <p className="text-base leading-snug font-semibold text-zinc-900 dark:text-zinc-50">
               {quest.description}
             </p>
           </div>
-          <div className="flex items-center gap-1.5 shrink-0 px-2.5 py-1 rounded-lg bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-800">
-            <span className="text-sm font-bold font-numeric text-yellow-600 dark:text-yellow-400">
+          <div className="flex shrink-0 items-center gap-1.5 rounded-lg border border-yellow-200 bg-yellow-50 px-2.5 py-1 dark:border-yellow-800 dark:bg-yellow-900/10">
+            <span className="font-numeric text-sm font-bold text-yellow-600 dark:text-yellow-400">
               {quest.xpValue}
             </span>
             <span className="text-xs font-medium text-yellow-600 dark:text-yellow-400">XP</span>
@@ -131,13 +131,13 @@ const QuestCard: React.FC<{
 
         {/* Community badge */}
         <div className="flex items-center gap-2">
-          <div className="px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">
-            <p className="text-xs text-zinc-700 dark:text-zinc-300 font-medium">
+          <div className="rounded-md border border-zinc-200 bg-zinc-100 px-2 py-0.5 dark:border-zinc-700 dark:bg-zinc-800">
+            <p className="text-xs font-medium text-zinc-700 dark:text-zinc-300">
               {quest.communityId}
             </p>
           </div>
           <span className="text-xs text-zinc-500 dark:text-zinc-500">•</span>
-          <span className="text-xs text-zinc-600 dark:text-zinc-400 font-numeric">
+          <span className="font-numeric text-xs text-zinc-600 dark:text-zinc-400">
             Quest #{quest.periodSeq}
           </span>
         </div>
@@ -159,7 +159,7 @@ const QuestCard: React.FC<{
                 onComplete(quest.id);
               }
             }}
-            className={`w-full font-medium py-2 rounded-lg transition-all duration-200 text-sm ${
+            className={`w-full rounded-lg py-2 text-sm font-medium transition-all duration-200 ${
               buttonVariants[getButtonVariant()]
             }`}
           >
@@ -267,9 +267,33 @@ const TodaysQuests: React.FC<Props> = ({ communityId }) => {
       return { previousData };
     },
     onSuccess: response => {
-      const { xpAwarded, currentLevel, tokensAwarded, currentTokens } = response.body.data;
+      const {
+        xpAwarded,
+        currentLevel,
+        tokensAwarded = 0,
+        currentTokens,
+        communityLevel,
+        communityId,
+        clanMemberXp,
+        clanId,
+      } = response.body.data;
+
+      const detailParts: string[] = [
+        `+${xpAwarded} XP`,
+        `Level ${currentLevel}`,
+        `+${tokensAwarded} Tokens`,
+      ];
+
+      if (communityId && typeof communityLevel === 'number') {
+        detailParts.push(`Community Lv ${communityLevel}`);
+      }
+
+      if (clanId && typeof clanMemberXp === 'number') {
+        detailParts.push(`Clan XP ${clanMemberXp}`);
+      }
+
       toast.success(t('quests.landing.questCompleted'), {
-        description: `+${xpAwarded} XP • +${tokensAwarded} Tokens • Level ${currentLevel}`,
+        description: detailParts.join(' • '),
       });
       if (typeof currentTokens === 'number') {
         setTokens(currentTokens);
@@ -308,7 +332,7 @@ const TodaysQuests: React.FC<Props> = ({ communityId }) => {
   return (
     <Card className="border shadow-sm">
       <div className="p-4">
-        <div className="flex items-center gap-2 mb-4">
+        <div className="mb-4 flex items-center gap-2">
           <div className="h-2 w-2 rounded-full bg-purple-500" />
           <h2 className="font-heading text-lg font-bold text-zinc-900 dark:text-zinc-50">
             {t('quests.landing.daily.title')}
@@ -318,7 +342,7 @@ const TodaysQuests: React.FC<Props> = ({ communityId }) => {
         {isPending ? (
           <div className="flex items-center justify-center py-8">
             <div className="flex flex-col items-center gap-2">
-              <div className="w-6 h-6 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" />
+              <div className="h-6 w-6 animate-spin rounded-full border-2 border-purple-500/30 border-t-purple-500" />
               <p className="text-xs text-zinc-600 dark:text-zinc-400">
                 {t('quests.landing.loading')}
               </p>
@@ -338,7 +362,7 @@ const TodaysQuests: React.FC<Props> = ({ communityId }) => {
                 />
               ))}
               {today.length === 0 && (
-                <div className="flex flex-col items-center justify-center py-6 px-4 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800">
+                <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-zinc-200 px-4 py-6 dark:border-zinc-800">
                   <p className="text-xs text-zinc-600 dark:text-zinc-400">
                     {t('quests.landing.noQuests')}
                   </p>

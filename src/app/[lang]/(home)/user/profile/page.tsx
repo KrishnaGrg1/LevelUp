@@ -20,18 +20,21 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { t } from '@/translations';
+import { computeLevelFromXp } from '@/lib/leveling';
 
 export default function Profile() {
   const { language } = LanguageStore();
   const { user } = authStore();
 
-  // Calculate XP progress to next level (example: 100 XP per level)
-  const currentXP = user?.xp || 0;
-  const currentLevel = user?.level || 1;
-  const xpProgress = ((currentXP % 100) / 100) * 100;
+  const totalXp = user?.xp ?? 0;
+  const computed = computeLevelFromXp(totalXp);
+  const currentLevel = user?.level ?? computed.level;
+  const xpProgress = computed.maxLevelReached
+    ? 100
+    : Math.min(100, (computed.xpIntoLevel / computed.xpForNext) * 100 || 0);
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 py-8 px-4">
+    <div className="min-h-screen bg-zinc-50 px-4 py-8 dark:bg-zinc-950">
       <div className="container mx-auto max-w-5xl space-y-6">
         {/* Header Card - Profile Overview */}
         <Card className="border-0 shadow-none">
@@ -48,7 +51,7 @@ export default function Profile() {
                     {user?.UserName?.[0]?.toUpperCase() || 'U'}
                   </AvatarFallback>
                 </Avatar>
-                <div className="absolute -bottom-2 -right-2 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-gradient-to-br from-yellow-400 to-orange-500 dark:border-zinc-900">
+                <div className="absolute -right-2 -bottom-2 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-gradient-to-br from-yellow-400 to-orange-500 dark:border-zinc-900">
                   <Sparkles className="h-5 w-5 text-white" />
                 </div>
               </div>
@@ -73,10 +76,14 @@ export default function Profile() {
                   <div className="flex items-center justify-between text-sm">
                     <span className="flex items-center gap-1 font-medium text-zinc-700 dark:text-zinc-300">
                       <TrendingUpIcon className="h-4 w-4" />
-                      {currentXP % 100} / 100 XP
+                      {computed.maxLevelReached
+                        ? `${computed.totalXp.toLocaleString()} XP`
+                        : `${computed.xpIntoLevel.toLocaleString()} / ${computed.xpForNext.toLocaleString()} XP`}
                     </span>
                     <span className="text-zinc-600 dark:text-zinc-400">
-                      {100 - (currentXP % 100)} XP to Level {currentLevel + 1}
+                      {computed.maxLevelReached
+                        ? t('profile.maxLevelReached', 'Max level reached')
+                        : `${computed.xpNeeded.toLocaleString()} XP to Level ${currentLevel + 1}`}
                     </span>
                   </div>
                   <Progress value={xpProgress} className="h-2" />
@@ -97,7 +104,7 @@ export default function Profile() {
           <StatCard
             icon={<Trophy className="h-5 w-5 text-yellow-500" />}
             label="Total XP"
-            value={currentXP.toString()}
+            value={totalXp.toLocaleString()}
             bgColor="bg-yellow-50 dark:bg-yellow-900/10"
           />
           <StatCard
@@ -119,7 +126,7 @@ export default function Profile() {
           {/* Account Information */}
           <Card className="border-0 shadow-none">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 font-heading text-xl">
+              <CardTitle className="font-heading flex items-center gap-2 text-xl">
                 <UserRoundSearch className="h-5 w-5 text-zinc-700 dark:text-zinc-300" />
                 Account Information
               </CardTitle>
@@ -155,7 +162,7 @@ export default function Profile() {
           {/* Preferences */}
           <Card className="border-0 shadow-none">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 font-heading text-xl">
+              <CardTitle className="font-heading flex items-center gap-2 text-xl">
                 <GlobeIcon className="h-5 w-5 text-zinc-700 dark:text-zinc-300" />
                 Preferences
               </CardTitle>
@@ -184,7 +191,7 @@ export default function Profile() {
         {/* Activity Overview */}
         <Card className="border-0 shadow-none">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 font-heading text-xl">
+            <CardTitle className="font-heading flex items-center gap-2 text-xl">
               <TrendingUpIcon className="h-5 w-5 text-zinc-700 dark:text-zinc-300" />
               Recent Activity
             </CardTitle>
@@ -266,7 +273,7 @@ function StatCard({
           </div>
           <div>
             <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">{label}</p>
-            <p className="mt-1 font-heading text-2xl font-bold text-zinc-900 dark:text-zinc-50">
+            <p className="font-heading mt-1 text-2xl font-bold text-zinc-900 dark:text-zinc-50">
               {value}
             </p>
           </div>

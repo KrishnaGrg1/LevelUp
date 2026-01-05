@@ -28,7 +28,7 @@ export default function VerifyPage({ params }: LoginPageProps) {
     setUserId(userId);
   }, []);
   return (
-    <div className="relative z-10 flex items-center justify-center min-h-screen pt-20">
+    <div className="relative z-10 flex min-h-screen items-center justify-center pt-20">
       <Suspense fallback={<FormLoading message="Verify Email" />}>
         <VerifyForm lang={language} otp={otp} userId={userId} />
       </Suspense>

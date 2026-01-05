@@ -1,5 +1,3 @@
-// import { Toaster } from 'sonner';
-// import Providers from '@/components/providers/Providers';
 import { redirect } from 'next/navigation';
 import { isValidLanguage } from '@/lib/language';
 

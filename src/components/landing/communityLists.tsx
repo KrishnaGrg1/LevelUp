@@ -20,7 +20,7 @@ interface CommunityListProps {
 
 export const CommunityList: React.FC<CommunityListProps> = ({ communities }) => {
   return (
-    <div className="grid gap-8 mt-12 px-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="mt-12 grid gap-8 px-6 sm:grid-cols-2 lg:grid-cols-3">
       {communities.map((community, index) => (
         <CommunityCard key={index} {...community} />
       ))}

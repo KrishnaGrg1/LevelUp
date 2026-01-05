@@ -16,7 +16,6 @@ export const usePaginationStore = create<PaginationState>()(
       pageSize: 10,
       setPage: page => set({ page }),
       setPageSize: pageSize => {
-        console.log('Setting page size to:', pageSize); // Debug log
         set({ pageSize, page: 1 }); // Reset to page 1 when changing size
       },
       reset: () => set({ page: 1, pageSize: 10 }),

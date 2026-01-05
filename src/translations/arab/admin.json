@@ -185,7 +185,6 @@
       "avgMembersPerCommunity": "متوسط الأعضاء/المجتمع",
       "communityHealth": "صحة المجتمع"
     },
-
     "table": {
       "community": "المجتمع",
       "type": "النوع",
@@ -216,7 +215,8 @@
     "filters": {
       "allCommunities": "جميع المجتمعات",
       "publicOnly": "عام فقط",
-      "privateOnly": "خاص فقط"
+      "privateOnly": "خاص فقط",
+      "search": "Search communities..."
     },
     "tableHeaders": {
       "name": "الاسم",

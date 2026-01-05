@@ -10,7 +10,11 @@
     "totalLevel": "合計レベル",
     "communities": "コミュニティ",
     "questsDone": "完了したクエスト",
-    "streak": "連続日数"
+    "streak": "連続日数",
+    "title": "Your Progress",
+    "subtitle": "A quick snapshot of your journey",
+    "totalXP": "Total XP",
+    "refreshing": "Refreshing..."
   },
   "quests": {
     "hookTitle": "React Hook を共有する",

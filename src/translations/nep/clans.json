@@ -35,7 +35,11 @@
     "privateClanDesc": "निमन्त्रित सदस्यहरू मात्र सामेल हुन सक्छन्",
     "cancel": "रद्द गर्नुहोस्",
     "create": "कुल सिर्जना गर्नुहोस्",
-    "creating": "सिर्जना गर्दै..."
+    "creating": "सिर्जना गर्दै...",
+    "namePlaceholder": "Enter clan name",
+    "descriptionLabel": "Description",
+    "privateDescription": "Only invited members can join",
+    "nameMinLength": "Clan name must be at least 3 characters"
   },
   "toast": {
     "joinedSuccess": "सफलतापूर्वक कुलमा सामेल हुनुभयो!",
@@ -46,6 +50,12 @@
     "deleteFailed": "कुल मेटाउन असफल",
     "createdSuccess": "कुल सफलतापूर्वक सिर्जना गरियो!",
     "createFailed": "कुल सिर्जना गर्न असफल",
-    "nameMinLength": "कुलको नाम कम्तिमा ३ अक्षरको हुनुपर्छ"
-  }
+    "nameMinLength": "कुलको नाम कम्तिमा ३ अक्षरको हुनुपर्छ",
+    "leaveFailed": "Failed to leave clan"
+  },
+  "noClansDescription": "This community doesn't have any clans yet. Be the first to create one!",
+  "errorLoadingClans": "Failed to load clans",
+  "unknownError": "An unknown error occurred",
+  "creating": "Creating...",
+  "noMembers": "No members yet"
 }

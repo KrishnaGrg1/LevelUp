@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
@@ -16,11 +16,13 @@ import { onboardingSchema, OnboardingFormData } from '@/app/[lang]/(home)/user/d
 import { completeOnboarding } from '@/lib/services/auth';
 import { getCategories } from '@/lib/services/communities';
 import { Dialog, DialogContent, DialogHeader, DialogDescription, DialogTitle } from '../ui/dialog';
+import authStore from '@/stores/useAuth';
 
 interface OnboardingFlowProps {
   lang: Language;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  onComplete?: () => void;
 }
 
 const EXPERIENCE_LEVELS = [
@@ -36,9 +38,11 @@ const HEARD_ABOUT_OPTIONS = [
   { id: 'other', icon: '💭', label: 'Other' },
 ];
 
-export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps) {
+export function OnboardingFlow({ lang, open, onOpenChange, onComplete }: OnboardingFlowProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const queryClient = useQueryClient();
+  const { user, setUser } = authStore();
 
   const form = useForm<OnboardingFormData>({
     resolver: zodResolver(onboardingSchema),
@@ -49,7 +53,6 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
     mode: 'onChange',
   });
 
-  // Fetch categories from backend
   const { data: categoriesData, isLoading: isLoadingCategories } = useQuery({
     queryKey: ['categories', lang],
     queryFn: () => getCategories(lang),
@@ -60,15 +63,16 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
     : [];
   const { mutateAsync, isPending } = useMutation({
     mutationFn: (data: OnboardingFormData) => completeOnboarding(data, lang),
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.success(t('success:onboarding', 'Welcome aboard! Your profile is all set.'));
 
-      // // Redirect based on admin status
-      // if (isAdmin) {
-      //   router.push(`/${lang}/admin/dashboard`);
-      // } else {
-      //   router.push(`/${lang}/user/dashboard`);
-      // }
+      // Immediately update the user in Zustand store to mark onboarding as complete
+      if (user) {
+        setUser({ ...user, hasOnboarded: true });
+      }
+
+      onComplete?.();
+      queryClient.invalidateQueries({ queryKey: ['me', lang] });
       onOpenChange(false);
     },
     onError: (error: unknown) => {
@@ -115,10 +119,8 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
   const progressPercentage = (currentStep / totalSteps) * 100;
 
   const dialogChange = (open: boolean) => {
-    // Prevent closing the dialog during onboarding
     if (!open) {
       form.reset();
-      // onOpenChange(false);
 
       return;
     }
@@ -135,10 +137,10 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
         onEscapeKeyDown={e => {
           e.preventDefault();
         }}
-        className="max-w-md w-[90vw]  sm:w-full bg-white dark:bg-gray-950 border-0 shadow-xl"
+        className="w-[90vw] max-w-md border-0 bg-white shadow-xl sm:w-full dark:bg-gray-950"
       >
         {/* Progress Bar */}
-        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gray-200 dark:bg-gray-800 rounded-t-lg overflow-hidden">
+        <div className="absolute top-0 right-0 left-0 h-1.5 overflow-hidden rounded-t-lg bg-gray-200 dark:bg-gray-800">
           <motion.div
             className="h-full bg-gray-900 dark:bg-white"
             initial={{ width: 0 }}
@@ -147,16 +149,16 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
           />
         </div>
 
-        <DialogHeader className="space-y-3 pb-6 pt-10">
+        <DialogHeader className="space-y-3 pt-10 pb-6">
           {/* Logo */}
           <div className="flex justify-center">
-            <div className="w-12 h-12 border-2 border-gray-900 dark:border-white rounded-lg flex items-center justify-center">
-              <Sparkles className="w-6 h-6 text-gray-900 dark:text-white" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-lg border-2 border-gray-900 dark:border-white">
+              <Sparkles className="h-6 w-6 text-gray-900 dark:text-white" />
             </div>
           </div>
 
           {/* Title */}
-          <DialogTitle className="text-2xl font-semibold text-gray-900 dark:text-white text-center">
+          <DialogTitle className="text-center text-2xl font-semibold text-gray-900 dark:text-white">
             {t('onboarding.title', 'Welcome to LevelUp!')}
           </DialogTitle>
 
@@ -170,9 +172,9 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
             {[1, 2, 3].map(step => (
               <div
                 key={step}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
                   step === currentStep
-                    ? 'bg-gray-900 dark:bg-white w-8'
+                    ? 'w-8 bg-gray-900 dark:bg-white'
                     : step < currentStep
                       ? 'bg-gray-400 dark:bg-gray-600'
                       : 'bg-gray-200 dark:bg-gray-800'
@@ -196,7 +198,7 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                     transition={{ duration: 0.3 }}
                     className="space-y-6"
                   >
-                    <div className="text-center space-y-2">
+                    <div className="space-y-2 text-center">
                       <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                         {t('onboarding.step1.title', 'Choose Your Interests')}
                       </h3>
@@ -216,27 +218,27 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                           <FormControl>
                             {isLoadingCategories ? (
                               <div className="flex items-center justify-center py-12">
-                                <div className="w-8 h-8 border-4 border-gray-300 dark:border-gray-700 border-t-gray-900 dark:border-t-white rounded-full animate-spin" />
+                                <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-gray-900 dark:border-gray-700 dark:border-t-white" />
                               </div>
                             ) : (
-                              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                              <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
                                 {categories.map((category: string) => (
                                   <button
                                     key={category}
                                     type="button"
                                     onClick={() => toggleCategory(category)}
-                                    className={`relative px-6 py-4 rounded-lg border transition-all duration-200 ${
+                                    className={`relative rounded-lg border px-6 py-4 transition-all duration-200 ${
                                       selectedCategories.includes(category)
-                                        ? 'border-gray-900 dark:border-white bg-gray-50 dark:bg-gray-900 shadow-sm'
-                                        : 'border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900/50 hover:border-gray-400 dark:hover:border-gray-600 hover:shadow-sm'
+                                        ? 'border-gray-900 bg-gray-50 shadow-sm dark:border-white dark:bg-gray-900'
+                                        : 'border-gray-300 bg-white hover:border-gray-400 hover:shadow-sm dark:border-gray-700 dark:bg-gray-900/50 dark:hover:border-gray-600'
                                     }`}
                                   >
                                     {selectedCategories.includes(category) && (
-                                      <div className="absolute top-2 right-2 w-4 h-4 bg-gray-900 dark:bg-white rounded-full flex items-center justify-center">
-                                        <Check className="w-2.5 h-2.5 text-white dark:text-gray-900" />
+                                      <div className="absolute top-2 right-2 flex h-4 w-4 items-center justify-center rounded-full bg-gray-900 dark:bg-white">
+                                        <Check className="h-2.5 w-2.5 text-white dark:text-gray-900" />
                                       </div>
                                     )}
-                                    <p className="text-sm font-medium text-gray-900 dark:text-white capitalize text-center">
+                                    <p className="text-center text-sm font-medium text-gray-900 capitalize dark:text-white">
                                       {category}
                                     </p>
                                   </button>
@@ -245,7 +247,7 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                             )}
                           </FormControl>
                           {form.formState.errors.categoriesNames && (
-                            <p className="text-sm text-red-600 dark:text-red-400 text-center mt-2">
+                            <p className="mt-2 text-center text-sm text-red-600 dark:text-red-400">
                               {t(
                                 'error.onboarding.categoriesRequired',
                                 'Please select at least one category',
@@ -268,7 +270,7 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                     transition={{ duration: 0.3 }}
                     className="space-y-6"
                   >
-                    <div className="text-center space-y-2">
+                    <div className="space-y-2 text-center">
                       <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                         {t('onboarding.step2.title', "What's Your Goal?")}
                       </h3>
@@ -291,7 +293,7 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                                 'onboarding.step2.placeholder',
                                 'e.g., Learn web development...',
                               )}
-                              className="min-h-[120px] bg-gray-50 dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white resize-none"
+                              className="min-h-[120px] resize-none border-gray-300 bg-gray-50 text-gray-900 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
                               {...field}
                             />
                           </FormControl>
@@ -315,7 +317,7 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                     transition={{ duration: 0.3 }}
                     className="space-y-8"
                   >
-                    <div className="text-center space-y-2">
+                    <div className="space-y-2 text-center">
                       <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                         {t('onboarding.step3.title', 'Your Experience & How You Found Us')}
                       </h3>
@@ -340,14 +342,14 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                                   key={level.id}
                                   type="button"
                                   onClick={() => field.onChange(level.id)}
-                                  className={`p-4 rounded-lg border transition-all duration-200 ${
+                                  className={`rounded-lg border p-4 transition-all duration-200 ${
                                     field.value === level.id
-                                      ? 'border-gray-900 dark:border-white bg-gray-50 dark:bg-gray-900'
-                                      : 'border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600'
+                                      ? 'border-gray-900 bg-gray-50 dark:border-white dark:bg-gray-900'
+                                      : 'border-gray-300 hover:border-gray-400 dark:border-gray-700 dark:hover:border-gray-600'
                                   }`}
                                 >
-                                  <div className="text-2xl mb-2">{level.icon}</div>
-                                  <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">
+                                  <div className="mb-2 text-2xl">{level.icon}</div>
+                                  <p className="mb-1 text-sm font-medium text-gray-900 dark:text-white">
                                     {t(`onboarding.step3.experience.${level.id}`, level.id)}
                                   </p>
                                   <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -358,7 +360,7 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                             </div>
                           </FormControl>
                           {form.formState.errors.experience && (
-                            <p className="text-sm text-red-600 dark:text-red-400 mt-2">
+                            <p className="mt-2 text-sm text-red-600 dark:text-red-400">
                               {t(
                                 'error.onboarding.experienceRequired',
                                 'Please select your experience level',
@@ -379,19 +381,19 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                             {t('onboarding.step3.heardAboutUsLabel', 'How did you hear about us?')}
                           </FormLabel>
                           <FormControl>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                            <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
                               {HEARD_ABOUT_OPTIONS.map(option => (
                                 <button
                                   key={option.id}
                                   type="button"
                                   onClick={() => field.onChange(option.id)}
-                                  className={`p-4 rounded-lg border transition-all duration-200 ${
+                                  className={`rounded-lg border p-4 transition-all duration-200 ${
                                     field.value === option.id
-                                      ? 'border-gray-900 dark:border-white bg-gray-50 dark:bg-gray-900'
-                                      : 'border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600'
+                                      ? 'border-gray-900 bg-gray-50 dark:border-white dark:bg-gray-900'
+                                      : 'border-gray-300 hover:border-gray-400 dark:border-gray-700 dark:hover:border-gray-600'
                                   }`}
                                 >
-                                  <div className="text-xl mb-2">{option.icon}</div>
+                                  <div className="mb-2 text-xl">{option.icon}</div>
                                   <p className="text-sm font-medium text-gray-900 dark:text-white">
                                     {t(`onboarding.step3.heardAboutUs.${option.id}`, option.label)}
                                   </p>
@@ -400,7 +402,7 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                             </div>
                           </FormControl>
                           {form.formState.errors.heardAboutUs && (
-                            <p className="text-sm text-red-600 dark:text-red-400 mt-2">
+                            <p className="mt-2 text-sm text-red-600 dark:text-red-400">
                               {t(
                                 'error.onboarding.heardAboutUsRequired',
                                 'Please select an option',
@@ -415,7 +417,7 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
               </AnimatePresence>
 
               {/* Navigation Buttons */}
-              <div className="flex items-center justify-between mt-8 pt-6 border-t border-gray-200 dark:border-gray-800">
+              <div className="mt-8 flex items-center justify-between border-t border-gray-200 pt-6 dark:border-gray-800">
                 <Button
                   type="button"
                   onClick={handleBack}
@@ -423,9 +425,9 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                   variant="outline"
                   className={`${
                     currentStep === 1 ? 'invisible' : ''
-                  } border-gray-300 dark:border-gray-700 cursor-pointer`}
+                  } cursor-pointer border-gray-300 dark:border-gray-700`}
                 >
-                  <ChevronLeft className="w-4 h-4 mr-2" />
+                  <ChevronLeft className="mr-2 h-4 w-4" />
                   {t('onboarding.buttons.back', 'Back')}
                 </Button>
 
@@ -434,20 +436,20 @@ export function OnboardingFlow({ lang, open, onOpenChange }: OnboardingFlowProps
                     type="button"
                     onClick={handleNext}
                     disabled={isPending}
-                    className="bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-100 text-white dark:text-gray-900 cursor-pointer"
+                    className="cursor-pointer bg-gray-900 text-white hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100"
                   >
                     {t('onboarding.buttons.next', 'Next')}
-                    <ChevronRight className="w-4 h-4 ml-2" />
+                    <ChevronRight className="ml-2 h-4 w-4" />
                   </Button>
                 ) : (
                   <Button
                     type="submit"
                     disabled={isPending}
-                    className="bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-100 text-white dark:text-gray-900 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
+                    className="cursor-pointer bg-gray-900 text-white hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100"
                   >
                     {isPending ? (
                       <div className="flex items-center gap-2">
-                        <div className="w-4 h-4 border-2 border-white/20 dark:border-gray-900/20 border-t-white dark:border-t-gray-900 rounded-full animate-spin" />
+                        <div className="h-4 w-4 animate-spin rounded-full border-2 border-white/20 border-t-white dark:border-gray-900/20 dark:border-t-gray-900" />
                         {t('common.loading', 'Loading...')}
                       </div>
                     ) : (

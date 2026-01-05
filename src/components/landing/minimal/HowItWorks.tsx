@@ -31,27 +31,27 @@ export const HowItWorks = () => {
     <section
       id="how-it-works"
       key={language}
-      className="w-full py-24 bg-white dark:bg-black text-black dark:text-white border-t border-gray-100 dark:border-gray-900"
+      className="w-full border-t border-gray-100 bg-white py-24 text-black dark:border-gray-900 dark:bg-black dark:text-white"
     >
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-5xl font-bold mb-16 text-center tracking-tight">
+        <h2 className="mb-16 text-center text-3xl font-bold tracking-tight md:text-5xl">
           {t('landing.HowItWorksSection.title')}
         </h2>
 
         <div className="relative">
           {/* Horizontal Line for Desktop */}
-          <div className="hidden md:block absolute top-12 left-0 w-full h-px bg-gray-100 dark:bg-gray-800 -z-10" />
+          <div className="absolute top-12 left-0 -z-10 hidden h-px w-full bg-gray-100 md:block dark:bg-gray-800" />
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+          <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
             {steps.map((step, index) => (
               <div
                 key={index}
-                className="flex flex-col items-start md:items-center text-left md:text-center bg-white dark:bg-black"
+                className="flex flex-col items-start bg-white text-left md:items-center md:text-center dark:bg-black"
               >
-                <div className="text-6xl font-bold text-gray-400 dark:text-gray-800 mb-6 font-numeric">
+                <div className="font-numeric mb-6 text-6xl font-bold text-gray-400 dark:text-gray-800">
                   {step.number}
                 </div>
-                <h3 className="text-xl font-bold mb-2">{step.title}</h3>
+                <h3 className="mb-2 text-xl font-bold">{step.title}</h3>
                 <p className="text-gray-500 dark:text-gray-400">{step.description}</p>
               </div>
             ))}

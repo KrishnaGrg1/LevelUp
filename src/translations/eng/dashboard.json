@@ -7,10 +7,14 @@
     "level": "Level"
   },
   "stats": {
+    "title": "Your Progress",
+    "subtitle": "A quick snapshot of your journey",
     "totalLevel": "Total Level",
+    "totalXP": "Total XP",
     "communities": "Communities",
     "questsDone": "Quests Done",
-    "streak": "Streak"
+    "streak": "Streak",
+    "refreshing": "Refreshing..."
   },
   "quests": {
     "hookTitle": "Share a React Hook",

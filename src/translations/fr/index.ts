@@ -12,6 +12,8 @@ import aiChat from './aiChat.json';
 import quests from './quests.json';
 import community from './community.json';
 import admin from './admin.json';
+import common from './common.json';
+import onboarding from './onboarding.json';
 
 const fr = {
   auth,
@@ -28,6 +30,8 @@ const fr = {
   quests,
   community,
   admin,
+  common,
+  onboarding,
 };
 
 export default fr;

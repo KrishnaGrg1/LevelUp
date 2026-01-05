@@ -10,18 +10,18 @@ export const FinalCTA = () => {
   return (
     <section
       key={language}
-      className="w-full py-32 bg-white dark:bg-black text-black dark:text-white border-t border-gray-100 dark:border-gray-900"
+      className="w-full border-t border-gray-100 bg-white py-32 text-black dark:border-gray-900 dark:bg-black dark:text-white"
     >
       <div className="container mx-auto px-6 text-center">
-        <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
+        <h2 className="mb-6 text-4xl font-bold tracking-tight md:text-6xl">
           {t('landing.FinalCTASection.title')}
         </h2>
 
-        <div className="flex justify-center mt-10">
+        <div className="mt-10 flex justify-center">
           <Link href={`/${language}/signup`}>
             <Button
               size="lg"
-              className="px-10 h-14 text-lg font-medium bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 rounded-full transition-all"
+              className="h-14 rounded-full bg-black px-10 text-lg font-medium text-white transition-all hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
             >
               {t('landing.FinalCTASection.button')}
             </Button>

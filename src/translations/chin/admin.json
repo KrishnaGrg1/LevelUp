@@ -215,7 +215,8 @@
     "filters": {
       "allCommunities": "所有社区",
       "publicOnly": "仅公开",
-      "privateOnly": "仅私密"
+      "privateOnly": "仅私密",
+      "search": "Search communities..."
     },
     "tableHeaders": {
       "name": "名称",

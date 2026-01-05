@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import LanguageStore from '@/stores/useLanguage';
 import { adminUserGrowth } from '@/lib/services/user';
 import { GrowthData, UserGrowthResponse } from '@/lib/generated';
+import { t } from '@/translations/index';
 
 export function UserGrowthChart() {
   const { language } = LanguageStore();
@@ -21,23 +22,23 @@ export function UserGrowthChart() {
     setRange(e.target.value as 'day' | 'week' | 'month');
   };
 
-  if (isLoading) return <p>Loading chart...</p>;
+  if (isLoading) return <p>{t('common:loadingChart')}</p>;
   if (isError || !data) return <p>Failed to load user growth</p>;
 
   const growthData: GrowthData[] = data.body.data.growth;
 
   return (
-    <div className="bg-gray-800 p-4 rounded-lg">
+    <div className="rounded-lg bg-gray-800 p-4">
       {/* Dropdown on the right */}
-      <div className="flex justify-end mb-4">
-        <label htmlFor="range" className="text-sm font-medium text-gray-300 mr-2">
+      <div className="mb-4 flex justify-end">
+        <label htmlFor="range" className="mr-2 text-sm font-medium text-gray-300">
           Select Range:
         </label>
         <select
           id="range"
           value={range}
           onChange={handleRangeChange}
-          className="border border-gray-600 rounded px-2 py-1 bg-gray-700 text-white"
+          className="rounded border border-gray-600 bg-gray-700 px-2 py-1 text-white"
         >
           <option value="day">Day</option>
           <option value="week">Week</option>

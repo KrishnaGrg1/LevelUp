@@ -215,7 +215,8 @@
     "filters": {
       "allCommunities": "Todas las Comunidades",
       "publicOnly": "Solo Público",
-      "privateOnly": "Solo Privado"
+      "privateOnly": "Solo Privado",
+      "search": "Search communities..."
     },
     "tableHeaders": {
       "name": "Nombre",

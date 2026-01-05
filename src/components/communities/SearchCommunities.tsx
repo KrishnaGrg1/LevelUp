@@ -102,65 +102,67 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[95vh] bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800">
-        <DialogHeader className="border-b border-gray-200 dark:border-gray-800 pb-4">
+      <DialogContent className="max-h-[95vh] max-w-2xl border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+        <DialogHeader className="border-b border-gray-200 pb-4 dark:border-gray-800">
           <div className="flex items-center justify-between">
             <div>
               <DialogTitle className="text-2xl font-semibold text-gray-900 dark:text-white">
                 Discover Communities
               </DialogTitle>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+              <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
                 Search and join communities that match your interests
               </p>
             </div>
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-2 mt-4">
+          <div className="mt-4 flex gap-2">
             <Button
               onClick={() => setActiveTab('search')}
               variant={activeTab === 'search' ? 'default' : 'outline'}
+              size="sm"
               className={
                 activeTab === 'search'
-                  ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                  : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                  ? 'bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200'
+                  : ''
               }
             >
-              <Search className="h-4 w-4 mr-2" />
+              <Search className="h-4 w-4" />
               Search Communities
             </Button>
             <Button
               onClick={() => setActiveTab('joinCode')}
               variant={activeTab === 'joinCode' ? 'default' : 'outline'}
+              size="sm"
               className={
                 activeTab === 'joinCode'
-                  ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                  : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                  ? 'bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200'
+                  : ''
               }
             >
-              <Key className="h-4 w-4 mr-2" />
+              <Key className="h-4 w-4" />
               Join Private Community
             </Button>
           </div>
         </DialogHeader>
 
-        <div className="space-y-3 py-3 h-[60vh] pr-2">
+        <div className="h-[60vh] space-y-3 py-3 pr-2">
           {activeTab === 'search' ? (
             <>
               {/* Search Bar */}
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Search className="absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 transform text-gray-400" />
                 <Input
                   placeholder="Search communities..."
                   value={search}
                   onChange={e => setSearch(e.target.value)}
-                  className="pl-10 h-11 bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500"
+                  className="h-11 border-gray-300 bg-gray-50 pl-10 text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-400"
                 />
               </div>
 
               {/* Filter Buttons */}
               {search.length > 0 && communities.length > 0 && (
-                <div className="flex items-center gap-2 flex-wrap">
+                <div className="flex flex-wrap items-center gap-2">
                   <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                     Filter:
                   </span>
@@ -170,8 +172,8 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
                     onClick={() => setSortFilter('all')}
                     className={
                       sortFilter === 'all'
-                        ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                        : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                        ? 'bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200'
+                        : ''
                     }
                   >
                     All
@@ -182,11 +184,11 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
                     onClick={() => setSortFilter('most-joined')}
                     className={
                       sortFilter === 'most-joined'
-                        ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                        : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                        ? 'bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200'
+                        : ''
                     }
                   >
-                    <TrendingUp className="h-3.5 w-3.5 mr-1" />
+                    <TrendingUp className="h-3.5 w-3.5" />
                     Most Joined
                   </Button>
                   <Button
@@ -195,11 +197,11 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
                     onClick={() => setSortFilter('public')}
                     className={
                       sortFilter === 'public'
-                        ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                        : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                        ? 'bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200'
+                        : ''
                     }
                   >
-                    <Globe className="h-3.5 w-3.5 mr-1" />
+                    <Globe className="h-3.5 w-3.5" />
                     Public
                   </Button>
                   <Button
@@ -208,28 +210,28 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
                     onClick={() => setSortFilter('private')}
                     className={
                       sortFilter === 'private'
-                        ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                        : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                        ? 'bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200'
+                        : ''
                     }
                   >
-                    <Lock className="h-3.5 w-3.5 mr-1" />
+                    <Lock className="h-3.5 w-3.5" />
                     Private
                   </Button>
                 </div>
               )}
 
               {/* Communities List */}
-              <div className="space-y-3 overflow-y-auto max-h-[calc(85vh-280px)] pr-2 custom-scrollbar">
+              <div className="custom-scrollbar max-h-[calc(85vh-280px)] space-y-3 overflow-y-auto pr-2">
                 {isLoading && (
-                  <div className="text-center py-8">
+                  <div className="py-8 text-center">
                     <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-blue-600 border-r-transparent"></div>
-                    <p className="text-gray-500 dark:text-gray-400 mt-2">Searching...</p>
+                    <p className="mt-2 text-gray-500 dark:text-gray-400">Searching...</p>
                   </div>
                 )}
 
                 {!isLoading && search.length === 0 && (
-                  <div className="text-center py-12">
-                    <Search className="h-12 w-12 mx-auto text-gray-300 dark:text-gray-600 mb-3" />
+                  <div className="py-12 text-center">
+                    <Search className="mx-auto mb-3 h-12 w-12 text-gray-300 dark:text-gray-600" />
                     <p className="text-gray-500 dark:text-gray-400">
                       Start typing to search for communities
                     </p>
@@ -237,10 +239,10 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
                 )}
 
                 {!isLoading && search.length > 0 && filteredAndSortedCommunities.length === 0 && (
-                  <div className="text-center py-12">
-                    <Users className="h-12 w-12 mx-auto text-gray-300 dark:text-gray-600 mb-3" />
+                  <div className="py-12 text-center">
+                    <Users className="mx-auto mb-3 h-12 w-12 text-gray-300 dark:text-gray-600" />
                     <p className="text-gray-500 dark:text-gray-400">No communities found</p>
-                    <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">
+                    <p className="mt-1 text-sm text-gray-400 dark:text-gray-500">
                       Try adjusting your search terms or filters
                     </p>
                   </div>
@@ -256,14 +258,14 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
                     return (
                       <div
                         key={community.id}
-                        className="flex items-start justify-between p-4 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-750 transition-colors border border-gray-200 dark:border-gray-700"
+                        className="dark:hover:bg-gray-750 flex items-start justify-between rounded-lg border border-gray-200 bg-gray-50 p-4 transition-colors hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800"
                       >
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 mb-1">
-                            <h3 className="text-base font-semibold text-gray-900 dark:text-white truncate">
+                        <div className="min-w-0 flex-1">
+                          <div className="mb-1 flex items-center gap-2">
+                            <h3 className="truncate text-base font-semibold text-gray-900 dark:text-white">
                               {community.name}
                             </h3>
-                            <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400 shrink-0">
+                            <div className="flex shrink-0 items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
                               {isPublic ? (
                                 <>
                                   <Globe className="h-3.5 w-3.5" />
@@ -279,7 +281,7 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
                           </div>
 
                           {community.description && (
-                            <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mb-2">
+                            <p className="mb-2 line-clamp-2 text-sm text-gray-600 dark:text-gray-400">
                               {community.description}
                             </p>
                           )}
@@ -298,14 +300,15 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
                           size="sm"
                           className={`ml-4 shrink-0 ${
                             community.isPrivate
-                              ? 'bg-yellow-500 hover:bg-yellow-600 text-white' // Private request button color
+                              ? 'bg-yellow-500 text-white hover:bg-yellow-600 dark:bg-yellow-600 dark:hover:bg-yellow-700'
                               : isFull
-                                ? 'bg-gray-300 text-gray-500 dark:bg-gray-700 dark:text-gray-500' // Full
-                                : 'bg-blue-600 hover:bg-blue-700 text-white' // Public join
+                                ? ''
+                                : 'bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200'
                           }`}
+                          variant={isFull ? 'outline' : 'default'}
                         >
                           {joinMutation.isPending && !community.isPrivate ? (
-                            <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                            <div className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
                           ) : community.isPrivate ? (
                             'Request to Join'
                           ) : isFull ? (
@@ -321,7 +324,7 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
 
               {/* Results Count */}
               {!isLoading && search.length > 0 && filteredAndSortedCommunities.length > 0 && (
-                <div className="pt-2 border-t border-gray-200 dark:border-gray-800">
+                <div className="border-t border-gray-200 pt-2 dark:border-gray-800">
                   <p className="text-sm text-gray-500 dark:text-gray-400">
                     Showing {filteredAndSortedCommunities.length} of {communities.length}{' '}
                     {communities.length === 1 ? 'community' : 'communities'}
@@ -331,22 +334,22 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
             </>
           ) : (
             /* Join with Code Section */
-            <div className="flex flex-col items-center justify-center py-12 space-y-6">
+            <div className="flex flex-col items-center justify-center space-y-6 py-12">
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900/30 mb-4">
+                <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30">
                   <Key className="h-8 w-8 text-blue-600 dark:text-blue-400" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
                   Join Private Community
                 </h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400 max-w-md">
+                <p className="max-w-md text-sm text-gray-500 dark:text-gray-400">
                   Enter the invite code you received to join a private community
                 </p>
               </div>
 
               <div className="w-full max-w-md space-y-4">
                 <div className="relative">
-                  <Key className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                  <Key className="absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 transform text-gray-400" />
                   <Input
                     placeholder="Enter join code (e.g., 50RV-FB1B)"
                     value={joinCode}
@@ -356,7 +359,7 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
                         handleJoinWithCode();
                       }
                     }}
-                    className="pl-10 h-12 bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500 text-center text-lg font-mono tracking-wider"
+                    className="h-12 border-gray-300 bg-gray-50 pl-10 text-center font-mono text-lg tracking-wider text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-400"
                     maxLength={10}
                   />
                 </div>
@@ -364,11 +367,11 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
                 <Button
                   onClick={handleJoinWithCode}
                   disabled={!joinCode.trim() || joinPrivateMutation.isPending}
-                  className="w-full h-11 bg-blue-600 hover:bg-blue-700 text-white font-medium"
+                  className="h-11 w-full bg-zinc-900 font-medium shadow-sm hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
                 >
                   {joinPrivateMutation.isPending ? (
                     <div className="flex items-center gap-2">
-                      <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <div className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white dark:border-zinc-900/30 dark:border-t-zinc-900" />
                       <span>Joining...</span>
                     </div>
                   ) : (
@@ -379,17 +382,17 @@ export default function SearchCommunityModal({ isOpen, onClose }: SearchCommunit
                   )}
                 </Button>
 
-                <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-900/20">
                   <div className="flex gap-3">
                     <div className="shrink-0">
-                      <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center">
-                        <span className="text-blue-600 dark:text-blue-400 text-sm font-bold">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/40">
+                        <span className="text-sm font-bold text-blue-600 dark:text-blue-400">
                           i
                         </span>
                       </div>
                     </div>
                     <div className="text-sm text-blue-800 dark:text-blue-300">
-                      <p className="font-medium mb-1">How to get a join code?</p>
+                      <p className="mb-1 font-medium">How to get a join code?</p>
                       <p className="text-blue-700 dark:text-blue-400">
                         Ask the community admin or a member to share the private invite code with
                         you.

@@ -35,7 +35,11 @@
     "privateClanDesc": "يمكن للأعضاء المدعوين فقط الانضمام",
     "cancel": "إلغاء",
     "create": "إنشاء عشيرة",
-    "creating": "جارٍ الإنشاء..."
+    "creating": "جارٍ الإنشاء...",
+    "namePlaceholder": "Enter clan name",
+    "descriptionLabel": "Description",
+    "privateDescription": "Only invited members can join",
+    "nameMinLength": "Clan name must be at least 3 characters"
   },
   "toast": {
     "joinedSuccess": "تم الانضمام إلى العشيرة بنجاح!",
@@ -46,6 +50,12 @@
     "deleteFailed": "فشل حذف العشيرة",
     "createdSuccess": "تم إنشاء العشيرة بنجاح!",
     "createFailed": "فشل إنشاء العشيرة",
-    "nameMinLength": "يجب أن يحتوي اسم العشيرة على 3 أحرف على الأقل"
-  }
+    "nameMinLength": "يجب أن يحتوي اسم العشيرة على 3 أحرف على الأقل",
+    "leaveFailed": "Failed to leave clan"
+  },
+  "noClansDescription": "This community doesn't have any clans yet. Be the first to create one!",
+  "errorLoadingClans": "Failed to load clans",
+  "unknownError": "An unknown error occurred",
+  "creating": "Creating...",
+  "noMembers": "No members yet"
 }

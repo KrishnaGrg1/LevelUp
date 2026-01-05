@@ -94,5 +94,108 @@
     "createFailed": "社区创建失败",
     "joinedSuccess": "成功加入社区！",
     "joinFailed": "加入社区失败"
+  },
+  "myCommunities": {
+    "title": "My Communities",
+    "subtitle": "Manage and explore all your communities",
+    "discover": "Discover Communities",
+    "searchPlaceholder": "Search communities...",
+    "stats": {
+      "owned": "Owned",
+      "admin": "Admin",
+      "member": "Member"
+    },
+    "emptyTitle": "No communities yet",
+    "emptyDescription": "Join or create your first community to get started!",
+    "emptyFilteredTitle": "No communities found",
+    "emptyFilteredDescription": "Try a different search term"
+  },
+  "settings": {
+    "title": "Community Settings",
+    "backToCommunity": "Back to Community",
+    "tabs": {
+      "general": "General",
+      "photo": "Photo",
+      "members": "Members",
+      "ownership": "Ownership"
+    },
+    "general": {
+      "title": "General Settings",
+      "description": "Update your community's basic information",
+      "communityName": "Community Name",
+      "namePlaceholder": "Enter community name",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Describe your community...",
+      "memberLimit": "Member Limit",
+      "memberLimitDesc": "Maximum number of members (1-1000)",
+      "visibility": "Visibility",
+      "private": "Private",
+      "public": "Public",
+      "privateDesc": "Only invited members can join",
+      "publicDesc": "Anyone can join this community",
+      "saveChanges": "Save Changes",
+      "saving": "Saving...",
+      "saved": "Settings saved successfully!",
+      "error": "Failed to save settings"
+    },
+    "photo": {
+      "title": "Community Photo",
+      "description": "Upload or update your community photo",
+      "currentPhoto": "Current Photo",
+      "noPhoto": "No photo uploaded",
+      "uploadNew": "Upload New Photo",
+      "dragDrop": "Drag and drop an image here, or click to select",
+      "fileTypes": "JPEG, PNG, GIF, WebP (max 10MB)",
+      "uploading": "Uploading...",
+      "uploaded": "Photo uploaded successfully!",
+      "error": "Failed to upload photo"
+    },
+    "members": {
+      "title": "Member Management",
+      "description": "Manage your community members and their roles",
+      "totalMembers": "Total Members",
+      "search": "Search members...",
+      "role": "Role",
+      "actions": "Actions",
+      "owner": "Owner",
+      "admin": "Admin",
+      "member": "Member",
+      "makeAdmin": "Make Admin",
+      "makeMember": "Make Member",
+      "remove": "Remove",
+      "confirmRemove": "Are you sure you want to remove this member?",
+      "removeMember": "Remove Member",
+      "cancel": "Cancel",
+      "removing": "Removing...",
+      "removed": "Member removed successfully!",
+      "roleChanged": "Role changed successfully!",
+      "error": "Failed to perform action"
+    },
+    "ownership": {
+      "title": "Transfer Ownership",
+      "description": "Transfer community ownership to another admin or member",
+      "warning": "Warning: This action cannot be undone",
+      "warningDesc": "Transferring ownership will make the selected user the new owner and you will lose owner privileges.",
+      "selectMemberError": "Please select a member to transfer ownership to",
+      "noEligibleMembers": "No eligible members to transfer ownership to",
+      "needAnotherMember": "Community must have at least one other member",
+      "selectMember": "Select New Owner",
+      "selectPlaceholder": "Choose a member...",
+      "keepAsAdmin": "Keep me as Admin",
+      "keepAsAdminDesc": "Remain as an admin after transferring ownership",
+      "transfer": "Transfer Ownership",
+      "transferring": "Transferring...",
+      "transferred": "Ownership transferred successfully!",
+      "error": "Failed to transfer ownership",
+      "confirmTransfer": "Confirm Transfer",
+      "confirmMessage": "Are you sure you want to transfer ownership to",
+      "fullControl": "Will have full control over all settings",
+      "confirmButton": "Confirm Transfer"
+    },
+    "permissions": {
+      "ownerOnly": "Only the community owner or admins can access this setting",
+      "adminOnly": "Only admins and owner can access this setting",
+      "unauthorized": "You don't have permission to access this page"
+    }
   }
 }

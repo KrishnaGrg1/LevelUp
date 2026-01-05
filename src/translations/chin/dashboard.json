@@ -10,7 +10,11 @@
     "totalLevel": "总等级",
     "communities": "社区",
     "questsDone": "完成的任务",
-    "streak": "连续天数"
+    "streak": "连续天数",
+    "title": "Your Progress",
+    "subtitle": "A quick snapshot of your journey",
+    "totalXP": "Total XP",
+    "refreshing": "Refreshing..."
   },
   "quests": {
     "hookTitle": "分享一个 React Hook",

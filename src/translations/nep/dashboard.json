@@ -10,7 +10,11 @@
     "totalLevel": "कुल स्तर",
     "communities": "समुदायहरू",
     "questsDone": "पूरा भएका क्वेस्ट",
-    "streak": "लगातार दिन"
+    "streak": "लगातार दिन",
+    "title": "Your Progress",
+    "subtitle": "A quick snapshot of your journey",
+    "totalXP": "Total XP",
+    "refreshing": "Refreshing..."
   },
   "quests": {
     "hookTitle": "एक React Hook साझेदारी गर्नुहोस्",

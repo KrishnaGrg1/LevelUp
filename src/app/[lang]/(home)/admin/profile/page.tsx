@@ -24,7 +24,7 @@ export default function Profile() {
   const { user } = authStore();
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 py-8 px-4">
+    <div className="min-h-screen bg-zinc-50 px-4 py-8 dark:bg-zinc-950">
       <div className="container mx-auto max-w-5xl space-y-6">
         {/* Header Card - Profile Overview */}
         <Card className="border-0 shadow-none">
@@ -41,7 +41,7 @@ export default function Profile() {
                     {user?.UserName?.[0]?.toUpperCase() || 'A'}
                   </AvatarFallback>
                 </Avatar>
-                <div className="absolute -bottom-2 -right-2 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-gradient-to-br from-yellow-400 to-orange-500 dark:border-zinc-900">
+                <div className="absolute -right-2 -bottom-2 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-gradient-to-br from-yellow-400 to-orange-500 dark:border-zinc-900">
                   <Shield className="h-5 w-5 text-white" />
                 </div>
               </div>
@@ -95,7 +95,7 @@ export default function Profile() {
           {/* Account Information */}
           <Card className="border-0 shadow-none">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 font-heading text-xl">
+              <CardTitle className="font-heading flex items-center gap-2 text-xl">
                 <UserRoundSearch className="h-5 w-5 text-zinc-700 dark:text-zinc-300" />
                 {t('profile:admin.accountInfo', language)}
               </CardTitle>
@@ -131,7 +131,7 @@ export default function Profile() {
           {/* Preferences */}
           <Card className="border-0 shadow-none">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 font-heading text-xl">
+              <CardTitle className="font-heading flex items-center gap-2 text-xl">
                 <GlobeIcon className="h-5 w-5 text-zinc-700 dark:text-zinc-300" />
                 {t('profile:admin.preferences', language)}
               </CardTitle>
@@ -203,7 +203,7 @@ function StatCard({
           </div>
           <div>
             <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">{label}</p>
-            <p className="mt-1 font-heading text-2xl font-bold text-zinc-900 dark:text-zinc-50">
+            <p className="font-heading mt-1 text-2xl font-bold text-zinc-900 dark:text-zinc-50">
               {value}
             </p>
           </div>

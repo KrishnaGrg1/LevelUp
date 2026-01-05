@@ -96,14 +96,14 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
   ];
 
   return (
-    <div className="bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
+    <div className="bg-white text-black transition-colors duration-300 dark:bg-black dark:text-white">
       {/* Hero */}
       <section className="relative py-24 text-center">
-        <div className="relative mx-auto max-w-4xl px-6 z-10">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
+        <div className="relative z-10 mx-auto max-w-4xl px-6">
+          <h1 className="mb-6 text-4xl font-bold tracking-tight md:text-6xl">
             {t('pricing.hero.title')}
           </h1>
-          <p className="text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed mb-4">
+          <p className="mx-auto mb-4 max-w-2xl text-xl leading-relaxed text-gray-500 dark:text-gray-400">
             {t('pricing.hero.subtitle')}
           </p>
 
@@ -115,10 +115,10 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
             </span>
             <button
               onClick={() => setIsAnnual(!isAnnual)}
-              className="relative w-12 h-6 rounded-full bg-gray-200 dark:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
+              className="relative h-6 w-12 rounded-full bg-gray-200 transition-colors focus:ring-2 focus:ring-black focus:outline-none dark:bg-gray-800 dark:focus:ring-white"
             >
               <div
-                className={`absolute top-1 left-1 w-4 h-4 rounded-full bg-white dark:bg-black shadow-sm transition-transform duration-300 ${
+                className={`absolute top-1 left-1 h-4 w-4 rounded-full bg-white shadow-sm transition-transform duration-300 dark:bg-black ${
                   isAnnual ? 'translate-x-6' : 'translate-x-0'
                 }`}
               />
@@ -127,7 +127,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
               className={`text-sm font-medium ${isAnnual ? 'text-black dark:text-white' : 'text-gray-400'}`}
             >
               {t('pricing.billing.annual')}
-              <span className="ml-2 px-2 py-0.5 bg-black dark:bg-white text-white dark:text-black text-xs rounded-full">
+              <span className="ml-2 rounded-full bg-black px-2 py-0.5 text-xs text-white dark:bg-white dark:text-black">
                 {t('pricing.billing.save')}
               </span>
             </span>
@@ -137,55 +137,55 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
 
       {/* Pricing Cards */}
       <section className="relative pb-32">
-        <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 md:grid-cols-3">
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`relative p-8 rounded-xl border transition-all duration-300 ${
+              className={`relative rounded-xl border p-8 transition-all duration-300 ${
                 plan.popular
                   ? 'border-black dark:border-white'
-                  : 'border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-white'
+                  : 'border-gray-200 hover:border-black dark:border-gray-800 dark:hover:border-white'
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-black dark:bg-white text-white dark:text-black rounded-full text-xs font-bold uppercase tracking-wide">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-black px-3 py-1 text-xs font-bold tracking-wide text-white uppercase dark:bg-white dark:text-black">
                   Popular
                 </div>
               )}
 
-              <div className="text-center mb-8">
-                <div className="w-12 h-12 bg-gray-100 dark:bg-gray-900 rounded-xl mx-auto mb-6 flex items-center justify-center">
-                  <plan.icon className="w-6 h-6 text-black dark:text-white" strokeWidth={1.5} />
+              <div className="mb-8 text-center">
+                <div className="mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-900">
+                  <plan.icon className="h-6 w-6 text-black dark:text-white" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
-                <p className="text-gray-500 dark:text-gray-400 text-sm mb-6 h-10">
+                <h3 className="mb-2 text-xl font-bold">{plan.name}</h3>
+                <p className="mb-6 h-10 text-sm text-gray-500 dark:text-gray-400">
                   {plan.description}
                 </p>
 
                 <div className="mb-6">
-                  <div className="text-4xl font-bold mb-1">
+                  <div className="mb-1 text-4xl font-bold">
                     ${isAnnual ? plan.annualPrice : plan.monthlyPrice}
                     {plan.monthlyPrice > 0 && (
-                      <span className="text-lg text-gray-400 font-normal ml-1">
+                      <span className="ml-1 text-lg font-normal text-gray-400">
                         /{isAnnual ? 'year' : 'month'}
                       </span>
                     )}
                   </div>
                   {isAnnual && plan.monthlyPrice > 0 && (
-                    <div className="text-gray-400 text-xs">
+                    <div className="text-xs text-gray-400">
                       ${(plan.annualPrice / 12).toFixed(2)}/mo billed annually
                     </div>
                   )}
                 </div>
               </div>
 
-              <ul className="space-y-4 mb-8">
+              <ul className="mb-8 space-y-4">
                 {plan.features.map((feature, i) => (
                   <li
                     key={i}
                     className="flex items-start space-x-3 text-sm text-gray-600 dark:text-gray-300"
                   >
-                    <Check className="w-4 h-4 text-black dark:text-white mt-0.5 flex-shrink-0" />
+                    <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-black dark:text-white" />
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -193,7 +193,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
 
               <Link href={`/${language}/signup`} className="block">
                 <Button
-                  className={`w-full h-12 rounded-xl font-medium transition-all ${
+                  className={`h-12 w-full rounded-xl font-medium transition-all ${
                     plan.popular
                       ? 'bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200'
                       : 'bg-gray-100 text-black hover:bg-gray-200 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-800'
@@ -208,22 +208,22 @@ const PricingPage: React.FC<PricingPageProps> = ({ params }) => {
       </section>
 
       {/* FAQ */}
-      <section className="relative py-32 border-t border-gray-100 dark:border-gray-900">
+      <section className="relative border-t border-gray-100 py-32 dark:border-gray-900">
         <div className="mx-auto max-w-3xl px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">{t('pricing.faqTitle')}</h2>
-            <p className="text-gray-500 dark:text-gray-400 text-lg">{t('pricing.faqSubtitle')}</p>
+          <div className="mb-16 text-center">
+            <h2 className="mb-6 text-3xl font-bold md:text-5xl">{t('pricing.faqTitle')}</h2>
+            <p className="text-lg text-gray-500 dark:text-gray-400">{t('pricing.faqSubtitle')}</p>
           </div>
 
           <div className="space-y-4">
             {faqs.map((faq, i) => (
               <div
                 key={i}
-                className="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-white transition-colors"
+                className="rounded-2xl border border-gray-200 p-6 transition-colors hover:border-black dark:border-gray-800 dark:hover:border-white"
                 // Updated hover border to be consistent with other elements
               >
-                <h3 className="text-lg font-bold mb-2">{faq.q}</h3>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{faq.a}</p>
+                <h3 className="mb-2 text-lg font-bold">{faq.q}</h3>
+                <p className="leading-relaxed text-gray-600 dark:text-gray-400">{faq.a}</p>
               </div>
             ))}
           </div>

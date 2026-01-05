@@ -44,11 +44,11 @@ export default function TopClansPage() {
 
   const getRankIcon = (rank: number) => {
     if (rank === 1)
-      return <Trophy className="h-6 w-6 text-yellow-500 fill-yellow-500" aria-label="1st place" />;
+      return <Trophy className="h-6 w-6 fill-yellow-500 text-yellow-500" aria-label="1st place" />;
     if (rank === 2)
-      return <Award className="h-6 w-6 text-gray-400 fill-gray-400" aria-label="2nd place" />;
+      return <Award className="h-6 w-6 fill-gray-400 text-gray-400" aria-label="2nd place" />;
     if (rank === 3)
-      return <Award className="h-6 w-6 text-amber-600 fill-amber-600" aria-label="3rd place" />;
+      return <Award className="h-6 w-6 fill-amber-600 text-amber-600" aria-label="3rd place" />;
     return <span className="text-lg font-bold text-gray-600 dark:text-gray-400">#{rank}</span>;
   };
 
@@ -64,10 +64,10 @@ export default function TopClansPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-cyan-50/30 to-gray-100 dark:from-gray-900 dark:via-cyan-900/20 dark:to-gray-900 py-6 px-4">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-cyan-50/30 to-gray-100 px-4 py-6 dark:from-gray-900 dark:via-cyan-900/20 dark:to-gray-900">
+      <div className="mx-auto max-w-6xl">
         <div className="mb-6">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-3">
+          <h1 className="mb-2 flex items-center gap-3 text-3xl font-bold text-gray-900 md:text-4xl dark:text-white">
             <Shield className="h-8 w-8 text-cyan-600" />
             Top Clans
           </h1>
@@ -79,9 +79,9 @@ export default function TopClansPage() {
         {/* Filters */}
         <Card className="mb-4 border-cyan-500/20">
           <CardContent className="p-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
               <div>
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 block">
+                <label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">
                   Sort By
                 </label>
                 <Select value={sortBy} onValueChange={value => setSortBy(value as ClanSortBy)}>
@@ -112,7 +112,7 @@ export default function TopClansPage() {
               </div>
 
               <div>
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 block">
+                <label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">
                   Order
                 </label>
                 <Select value={order} onValueChange={value => setOrder(value as SortOrder)}>
@@ -127,7 +127,7 @@ export default function TopClansPage() {
               </div>
 
               <div className="sm:col-span-2">
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 block">
+                <label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">
                   Filter by Community (Optional)
                 </label>
                 <div className="flex gap-2">
@@ -160,7 +160,7 @@ export default function TopClansPage() {
         {communityFilter && (
           <div className="mb-4 flex items-center gap-2">
             <span className="text-sm text-gray-600 dark:text-gray-400">Filtering by:</span>
-            <Badge className="bg-cyan-100 dark:bg-cyan-900/50 text-cyan-700 dark:text-cyan-300">
+            <Badge className="bg-cyan-100 text-cyan-700 dark:bg-cyan-900/50 dark:text-cyan-300">
               Community: {communityFilter}
             </Badge>
           </div>
@@ -179,12 +179,12 @@ export default function TopClansPage() {
                 <Loader2 className="h-10 w-10 animate-spin text-cyan-600 dark:text-cyan-400" />
               </div>
             ) : isError ? (
-              <div className="text-center py-20">
+              <div className="py-20 text-center">
                 <p className="text-red-500 dark:text-red-400">Failed to load top clans</p>
               </div>
             ) : !data?.results || data.results.length === 0 ? (
-              <div className="text-center py-20">
-                <Shield className="h-16 w-16 mx-auto mb-4 text-gray-400" />
+              <div className="py-20 text-center">
+                <Shield className="mx-auto mb-4 h-16 w-16 text-gray-400" />
                 <p className="text-gray-500 dark:text-gray-400">No clans found</p>
               </div>
             ) : (
@@ -199,30 +199,30 @@ export default function TopClansPage() {
                       <div
                         key={clan.id}
                         onClick={() => router.push(`/${language}/user/community/clan/${clan.id}`)}
-                        className={`flex items-center gap-4 p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer ${
+                        className={`flex cursor-pointer items-center gap-4 p-4 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700/50 ${
                           isTopThree
                             ? 'bg-gradient-to-r from-cyan-50 to-transparent dark:from-cyan-900/10 dark:to-transparent'
                             : ''
                         }`}
                       >
                         {/* Rank */}
-                        <div className="w-12 flex justify-center shrink-0">{getRankIcon(rank)}</div>
+                        <div className="flex w-12 shrink-0 justify-center">{getRankIcon(rank)}</div>
 
                         {/* Clan Info */}
-                        <div className="flex-1 min-w-0">
-                          <h3 className="font-bold text-gray-900 dark:text-white truncate text-lg">
+                        <div className="min-w-0 flex-1">
+                          <h3 className="truncate text-lg font-bold text-gray-900 dark:text-white">
                             {clan.name}
                           </h3>
-                          <div className="flex flex-wrap items-center gap-2 mt-2">
-                            <Badge className="bg-cyan-100 dark:bg-cyan-900/50 text-cyan-700 dark:text-cyan-300">
-                              <Trophy className="h-3 w-3 mr-1" />
+                          <div className="mt-2 flex flex-wrap items-center gap-2">
+                            <Badge className="bg-cyan-100 text-cyan-700 dark:bg-cyan-900/50 dark:text-cyan-300">
+                              <Trophy className="mr-1 h-3 w-3" />
                               {clan.xp.toLocaleString()} XP
                             </Badge>
                             <Badge
                               variant="secondary"
-                              className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+                              className="bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
                             >
-                              <Users className="h-3 w-3 mr-1" />
+                              <Users className="mr-1 h-3 w-3" />
                               {clan.memberCount} / {clan.limit} ({occupancy}%)
                             </Badge>
                             <span className="text-xs text-gray-500 dark:text-gray-400">
@@ -232,7 +232,7 @@ export default function TopClansPage() {
                         </div>
 
                         {/* Stats */}
-                        <div className="text-right shrink-0">
+                        <div className="shrink-0 text-right">
                           {sortBy === 'xp' && (
                             <>
                               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
@@ -275,7 +275,7 @@ export default function TopClansPage() {
 
                 {/* Pagination */}
                 {data.pagination.totalPages > 1 && (
-                  <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+                  <div className="border-t border-gray-200 p-4 dark:border-gray-700">
                     <BetterPagination
                       paginationMetadata={{
                         total: data.pagination.total,

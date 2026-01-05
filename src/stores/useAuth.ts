@@ -1,9 +1,7 @@
-// stores/useAuth.ts
 import { User } from '@/lib/generated';
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
-// stores/useAuth.ts
 interface AuthState {
   isAuthenticated: boolean;
   setAuthenticated: (value: boolean) => void;

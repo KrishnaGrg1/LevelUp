@@ -26,16 +26,16 @@ const QuestRow: React.FC<{
       : 'bg-blue-50 dark:bg-blue-900/10 border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400';
 
   return (
-    <div className="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900">
+    <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-4 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900/50 dark:hover:bg-zinc-900">
       <div className="space-y-3">
         <div className="flex items-start justify-between gap-3">
-          <p className="flex-1 text-sm font-semibold text-zinc-900 dark:text-zinc-50 leading-snug">
+          <p className="flex-1 text-sm leading-snug font-semibold text-zinc-900 dark:text-zinc-50">
             {quest.description}
           </p>
           <div
-            className={`flex items-center gap-1 shrink-0 px-2 py-0.5 rounded-md border ${xpBgColor}`}
+            className={`flex shrink-0 items-center gap-1 rounded-md border px-2 py-0.5 ${xpBgColor}`}
           >
-            <span className="text-xs font-bold font-numeric">{quest.xpValue}</span>
+            <span className="font-numeric text-xs font-bold">{quest.xpValue}</span>
             <span className="text-[10px] font-medium">XP</span>
           </div>
         </div>
@@ -49,10 +49,10 @@ const QuestRow: React.FC<{
             size="sm"
             disabled={quest.isCompleted || isCompleting}
             onClick={() => onComplete(quest.id)}
-            className={`font-semibold py-2 rounded-lg transition-all duration-300 text-xs ${
+            className={`rounded-lg py-2 text-xs font-semibold transition-all duration-300 ${
               quest.isCompleted
-                ? 'bg-green-50 text-green-700 hover:bg-green-50 dark:bg-green-900/20 dark:text-green-400 dark:hover:bg-green-900/20 cursor-default disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100'
-                : 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white hover:scale-105 hover:shadow-lg'
+                ? 'cursor-default bg-green-50 text-green-700 hover:bg-green-50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 dark:bg-green-900/20 dark:text-green-400 dark:hover:bg-green-900/20'
+                : 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:scale-105 hover:from-emerald-500 hover:to-teal-500 hover:shadow-lg'
             }`}
           >
             {quest.isCompleted
@@ -87,13 +87,36 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
   const completeMutation = useMutation({
     mutationFn: (questId: string) => completeQuest(questId, language),
     onSuccess: response => {
-      const xpAwarded = response.body.data.xpAwarded;
-      const currentLevel = response.body.data.currentLevel;
-      const tokensAwarded = response.body.data.tokensAwarded;
-      const currentTokens = response.body.data.currentTokens;
+      const {
+        xpAwarded,
+        currentLevel,
+        tokensAwarded = 0,
+        currentTokens,
+        communityLevel,
+        communityId,
+        clanMemberXp,
+        clanId,
+      } = response.body.data;
+
+      const details: string[] = [
+        `+${xpAwarded} XP`,
+        `Level ${currentLevel}`,
+      ];
+
+      details.push(`+${tokensAwarded} Tokens`);
+
+      if (communityId && typeof communityLevel === 'number') {
+        details.push(`Community Lv ${communityLevel}`);
+      }
+
+      if (clanId && typeof clanMemberXp === 'number') {
+        details.push(`Clan XP ${clanMemberXp}`);
+      }
+
       toast.success(t('quests.details.success.questCompleted'), {
-        description: `+${xpAwarded} XP • +${tokensAwarded} Tokens • Level ${currentLevel}`,
+        description: details.join(' • '),
       });
+
       if (typeof currentTokens === 'number') {
         setTokens(currentTokens);
       }
@@ -132,13 +155,13 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
 
       <TabsContent value="daily" className="mt-6 space-y-6">
         <div>
-          <div className="flex items-center gap-2 mb-3">
+          <div className="mb-3 flex items-center gap-2">
             <div className="h-2 w-2 rounded-full bg-purple-500" />
             <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
               {t('quests.details.periods.today')}
             </h3>
           </div>
-          <div className="grid md:grid-cols-2 gap-3">
+          <div className="grid gap-3 md:grid-cols-2">
             {today.map(q => (
               <QuestRow
                 key={q.id}
@@ -149,7 +172,7 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
               />
             ))}
             {today.length === 0 && (
-              <div className="col-span-full flex items-center justify-center py-8 px-4 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800">
+              <div className="col-span-full flex items-center justify-center rounded-lg border border-dashed border-zinc-200 px-4 py-8 dark:border-zinc-800">
                 <p className="text-sm text-zinc-600 dark:text-zinc-400">
                   {t('quests.details.empty.noQuests')}
                 </p>
@@ -161,13 +184,13 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
 
       <TabsContent value="weekly" className="mt-6 space-y-6">
         <div>
-          <div className="flex items-center gap-2 mb-3">
+          <div className="mb-3 flex items-center gap-2">
             <div className="h-2 w-2 rounded-full bg-blue-500" />
             <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
               {t('quests.details.periods.thisWeek')}
             </h3>
           </div>
-          <div className="grid md:grid-cols-2 gap-3">
+          <div className="grid gap-3 md:grid-cols-2">
             {thisWeek.map(q => (
               <QuestRow
                 key={q.id}
@@ -178,7 +201,7 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
               />
             ))}
             {thisWeek.length === 0 && (
-              <div className="col-span-full flex items-center justify-center py-8 px-4 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800">
+              <div className="col-span-full flex items-center justify-center rounded-lg border border-dashed border-zinc-200 px-4 py-8 dark:border-zinc-800">
                 <p className="text-sm text-zinc-600 dark:text-zinc-400">
                   {t('quests.details.empty.noQuests')}
                 </p>
@@ -188,13 +211,13 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
         </div>
 
         <div>
-          <div className="flex items-center gap-2 mb-3">
+          <div className="mb-3 flex items-center gap-2">
             <div className="h-2 w-2 rounded-full bg-blue-400" />
             <h3 className="text-base font-semibold text-zinc-800 dark:text-zinc-200">
               {t('quests.details.periods.lastWeek')}
             </h3>
           </div>
-          <div className="grid md:grid-cols-2 gap-3">
+          <div className="grid gap-3 md:grid-cols-2">
             {lastWeek.map(q => (
               <QuestRow
                 key={q.id}
@@ -205,7 +228,7 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
               />
             ))}
             {lastWeek.length === 0 && (
-              <div className="col-span-full flex items-center justify-center py-8 px-4 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800">
+              <div className="col-span-full flex items-center justify-center rounded-lg border border-dashed border-zinc-200 px-4 py-8 dark:border-zinc-800">
                 <p className="text-sm text-zinc-600 dark:text-zinc-400">
                   {t('quests.details.empty.noQuests')}
                 </p>
@@ -215,13 +238,13 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
         </div>
 
         <div>
-          <div className="flex items-center gap-2 mb-3">
+          <div className="mb-3 flex items-center gap-2">
             <div className="h-2 w-2 rounded-full bg-blue-300 dark:bg-blue-600" />
             <h3 className="text-base font-semibold text-zinc-700 dark:text-zinc-300">
               {t('quests.details.periods.twoWeeksAgo')}
             </h3>
           </div>
-          <div className="grid md:grid-cols-2 gap-3">
+          <div className="grid gap-3 md:grid-cols-2">
             {twoWeeksAgo.map(q => (
               <QuestRow
                 key={q.id}
@@ -232,7 +255,7 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
               />
             ))}
             {twoWeeksAgo.length === 0 && (
-              <div className="col-span-full flex items-center justify-center py-8 px-4 rounded-lg border border-dashed border-zinc-200 dark:border-zinc-800">
+              <div className="col-span-full flex items-center justify-center rounded-lg border border-dashed border-zinc-200 px-4 py-8 dark:border-zinc-800">
                 <p className="text-sm text-zinc-600 dark:text-zinc-400">
                   {t('quests.details.empty.noQuests')}
                 </p>

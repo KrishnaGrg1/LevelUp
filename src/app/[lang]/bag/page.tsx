@@ -35,7 +35,7 @@ export default function BagPage() {
   return (
     <div className="flex min-h-screen bg-zinc-50 dark:bg-zinc-950">
       {/* Sidebar - Step Progress */}
-      <aside className="hidden w-80 border-r border-zinc-200 bg-white p-8 dark:border-zinc-800 dark:bg-zinc-900 lg:block">
+      <aside className="hidden w-80 border-r border-zinc-200 bg-white p-8 lg:block dark:border-zinc-800 dark:bg-zinc-900">
         <div className="space-y-6">
           <div>
             <h2 className="font-heading text-xl font-semibold text-zinc-900 dark:text-zinc-50">
