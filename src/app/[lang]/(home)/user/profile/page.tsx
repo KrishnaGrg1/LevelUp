@@ -14,17 +14,20 @@ import {
   Trophy,
   Target,
   Edit,
+  Crown,
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { t } from '@/translations';
-import { computeLevelFromXp } from '@/lib/leveling';
+import { useState } from 'react';
+import UpgradeModal from '@/components/UpgradeModal';
 
 export default function Profile() {
   const { language } = LanguageStore();
   const { user } = authStore();
+  const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
 
   const totalXp = user?.xp ?? 0;
   const computed = computeLevelFromXp(totalXp);
@@ -90,14 +93,27 @@ export default function Profile() {
                 </div>
               </div>
 
-              {/* Edit Button */}
-              <Button variant="outline" size="sm" className="cursor-pointer gap-2">
-                <Edit className="h-4 w-4" />
-                Edit Profile
-              </Button>
+              {/* Action Buttons */}
+              <div className="flex flex-col gap-2 sm:flex-row">
+                <Button variant="outline" size="sm" className="cursor-pointer gap-2">
+                  <Edit className="h-4 w-4" />
+                  Edit Profile
+                </Button>
+                <Button
+                  size="sm"
+                  className="cursor-pointer gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                  onClick={() => setIsUpgradeModalOpen(true)}
+                >
+                  <Crown className="h-4 w-4" />
+                  Upgrade Profile
+                </Button>
+              </div>
             </div>
           </CardContent>
         </Card>
+
+        {/* Upgrade Modal */}
+        <UpgradeModal isOpen={isUpgradeModalOpen} onOpenChange={setIsUpgradeModalOpen} />
 
         {/* Stats Cards Row */}
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
