@@ -63,6 +63,27 @@ export interface ApiResponse<T> {
   };
 }
 
+export interface SubscriptionPlans {
+  id: string;
+  planName: string;
+  durationMonth: number;
+  price: number;
+  features: string[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface SubscriptionPlans {
+  id: string;
+  planName: string;
+  durationMonth: number;
+  price: number;
+  features: string[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Update this to represent the "data" level of your response
 export interface SubscriptionPlansResponse {
   subscriptionPlans: SubscriptionPlan[];
 }
