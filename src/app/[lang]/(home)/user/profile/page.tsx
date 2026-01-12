@@ -3,6 +3,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import authStore from '@/stores/useAuth';
 import LanguageStore from '@/stores/useLanguage';
+import { computeLevelFromXp } from '@/lib/leveling';
 import {
   MailIcon,
   GlobeIcon,
