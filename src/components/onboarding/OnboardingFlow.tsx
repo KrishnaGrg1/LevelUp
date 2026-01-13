@@ -67,7 +67,7 @@ export function OnboardingFlow({ lang, open, onOpenChange, onComplete }: Onboard
       toast.success(t('success:onboarding', 'Welcome aboard! Your profile is all set.'));
 
       // Immediately update the user in Zustand store to mark onboarding as complete
-      if (user) {
+      if (user && user.id) {
         setUser({ ...user, hasOnboarded: true });
       }
 
