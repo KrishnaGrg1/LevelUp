@@ -19,8 +19,7 @@ export const getSubscriptionPlans = async (lang: Language) => {
       },
     );
 
-    response.data.body.data.subscriptionPlans;
-    return;
+    return response.data.body.data.subscriptionPlans;
   } catch (error: unknown) {
     const err = error as {
       response?: { data?: { body?: { message?: string }; message?: string } };
@@ -56,8 +55,7 @@ export const initializeKhaltiPayment = async (
       },
     );
 
-    response.data.payment.payment_url;
-    return;
+    return response.data;
   } catch (error: unknown) {
     const err = error as {
       response?: { data?: { body?: { message?: string }; message?: string } };

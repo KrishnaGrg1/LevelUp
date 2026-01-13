@@ -36,10 +36,16 @@ export default function UpgradeModal({ isOpen, onOpenChange }: UpgradeModalProps
 
   // Initialize payment mutation
   const paymentMutation = useMutation({
-    mutationFn: ({ planId, price }: { planId: string; price: number }): Promise<void> =>
+    mutationFn: ({ planId, price }: { planId: string; price: number }) =>
       initializeKhaltiPayment(planId, price, language),
-    onSuccess: () => {
-      // Payment initialized successfully
+    onSuccess: data => {
+      // Redirect to payment URL
+      if (data?.payment?.payment_url) {
+        window.location.href = data.payment.payment_url;
+      } else {
+        toastActions.error('Payment URL not found');
+        setProcessingPlanId(null);
+      }
     },
     onError: (error: Error) => {
       console.error('Error initializing payment:', error);
