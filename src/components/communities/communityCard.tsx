@@ -19,7 +19,7 @@ import authStore from '@/stores/useAuth';
 
 export default function CommunitiesSection() {
   const { language } = LanguageStore();
-  const { user } = authStore();
+  const { user, _hasHydrated } = authStore();
   const router = useRouter();
   const [openCreateModal, setOpenCreateModal] = useState(false);
   const [openJoinModal, setOpenJoinModal] = useState(false);
@@ -38,12 +38,19 @@ export default function CommunitiesSection() {
     refetchOnReconnect: false,
     retryDelay: (attemptIndex: number) => Math.min(1000 * 2 ** attemptIndex, 30000),
   });
+
   useEffect(() => {
-    // Only show onboarding if user hasn't completed it and we haven't marked it as completed in this session
-    if (!user?.hasOnboarded && !onboardingCompleted) {
+    // Only check onboarding status after the store has hydrated AND user data is available
+    if (!_hasHydrated || !user) return;
+    
+    if (user.hasOnboarded) {
+      setOnboardingCompleted(true);
+      setOnboardingOpen(false);
+    } else if (!onboardingCompleted) {
+      // Only show onboarding if user hasn't completed it and we haven't marked it as completed in this session
       setOnboardingOpen(true);
     }
-  }, [user, onboardingCompleted]);
+  }, [_hasHydrated, user, onboardingCompleted]);
   // Fetch all communities data
   const {
     data: allCommunitiesData,
