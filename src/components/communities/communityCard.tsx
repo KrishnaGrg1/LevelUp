@@ -390,7 +390,7 @@ export default function CommunitiesSection() {
               return (
                 <Card
                   key={community.id || index}
-                  onClick={() => router.push(`/${language}/community/${community.id}`)}
+                  onClick={() => router.push(`/${language}/user/community/${community.id}`)}
                   className="group relative cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:border-gray-300 hover:shadow-md dark:border-gray-800 dark:bg-black dark:hover:border-gray-700"
                 >
                   {/* Subtle top accent bar */}
