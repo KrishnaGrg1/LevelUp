@@ -86,7 +86,7 @@ export default function AdminSidebar() {
       </Button>
       <Button
         variant="ghost"
-        className="w-full justify-start gap-3 px-3 text-red-500 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-950/20"
+        className="w-full justify-start gap-3 px-3 text-gray-900 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-800"
       >
         <LogOut className="h-4 w-4" />
         <span>Logout</span>

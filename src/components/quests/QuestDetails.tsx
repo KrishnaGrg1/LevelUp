@@ -16,14 +16,11 @@ interface QuestDetailsProps {
 
 const QuestRow: React.FC<{
   quest: Quest;
-  color: 'purple' | 'indigo';
+  color?: 'purple' | 'indigo';
   onComplete: (questId: string) => void;
   isCompleting: boolean;
-}> = ({ quest, color, onComplete, isCompleting }) => {
-  const xpBgColor =
-    color === 'purple'
-      ? 'bg-purple-50 dark:bg-purple-900/10 border-purple-200 dark:border-purple-800 text-purple-600 dark:text-purple-400'
-      : 'bg-blue-50 dark:bg-blue-900/10 border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400';
+}> = ({ quest, onComplete, isCompleting }) => {
+  const xpBgColor = 'bg-zinc-50 dark:bg-zinc-900/10 border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100';
 
   return (
     <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-4 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900/50 dark:hover:bg-zinc-900">
@@ -156,7 +153,7 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
       <TabsContent value="daily" className="mt-6 space-y-6">
         <div>
           <div className="mb-3 flex items-center gap-2">
-            <div className="h-2 w-2 rounded-full bg-purple-500" />
+            <div className="h-2 w-2 rounded-full bg-zinc-900 dark:bg-zinc-100" />
             <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
               {t('quests.details.periods.today')}
             </h3>
@@ -185,7 +182,7 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
       <TabsContent value="weekly" className="mt-6 space-y-6">
         <div>
           <div className="mb-3 flex items-center gap-2">
-            <div className="h-2 w-2 rounded-full bg-blue-500" />
+            <div className="h-2 w-2 rounded-full bg-zinc-900 dark:bg-zinc-100" />
             <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
               {t('quests.details.periods.thisWeek')}
             </h3>
@@ -212,7 +209,7 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
 
         <div>
           <div className="mb-3 flex items-center gap-2">
-            <div className="h-2 w-2 rounded-full bg-blue-400" />
+            <div className="h-2 w-2 rounded-full bg-zinc-700 dark:bg-zinc-300" />
             <h3 className="text-base font-semibold text-zinc-800 dark:text-zinc-200">
               {t('quests.details.periods.lastWeek')}
             </h3>
@@ -239,7 +236,7 @@ const QuestDetails: React.FC<QuestDetailsProps> = ({ communityId }) => {
 
         <div>
           <div className="mb-3 flex items-center gap-2">
-            <div className="h-2 w-2 rounded-full bg-blue-300 dark:bg-blue-600" />
+            <div className="h-2 w-2 rounded-full bg-zinc-500 dark:bg-zinc-500" />
             <h3 className="text-base font-semibold text-zinc-700 dark:text-zinc-300">
               {t('quests.details.periods.twoWeeksAgo')}
             </h3>

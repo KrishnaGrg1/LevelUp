@@ -69,9 +69,9 @@ export function RegisterForm({ lang }: RegisterFormProps) {
       // Build dynamic redirect URI based on current language
       const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
 
-      // Google supports multiple redirect URIs, GitHub doesn't
+      // Both Google and GitHub use language-specific callback routes
       const googleRedirectUri = `${baseUrl}/${lang}/auth/callback`;
-      const githubRedirectUri = `${baseUrl}/auth/callback`; // Universal for GitHub
+      const githubRedirectUri = `${baseUrl}/${lang}/auth/callback`;
 
       // Generate OAuth URLs with appropriate redirect URI
       const oauthUrls = {

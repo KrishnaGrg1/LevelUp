@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -23,6 +23,7 @@ import {
   BellOff,
   LogOut,
   Info,
+  Smile,
 } from 'lucide-react';
 
 import { MessengerChatContainer } from './MessengerChatContainer';
@@ -32,6 +33,9 @@ import authStore from '@/stores/useAuth';
 import LanguageStore from '@/stores/useLanguage';
 import { t } from '@/translations';
 import { useMessages } from '@/hooks/useMessages';
+import dynamic from 'next/dynamic';
+
+const EmojiPicker = dynamic(() => import('emoji-picker-react'), { ssr: false });
 
 interface MessageAreaProps {
   communityId?: string;
@@ -55,6 +59,9 @@ export default function MessageArea({
   const { user } = authStore();
   const { language } = LanguageStore();
   const [messageInput, setMessageInput] = useState('');
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const emojiPickerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const {
     messages,
@@ -96,13 +103,52 @@ export default function MessageArea({
     }
   };
 
+  const handleEmojiClick = (emojiObject: { emoji: string }) => {
+    const emoji = emojiObject.emoji;
+    const input = inputRef.current;
+    
+    if (input) {
+      const cursorPosition = input.selectionStart || messageInput.length;
+      const textBefore = messageInput.substring(0, cursorPosition);
+      const textAfter = messageInput.substring(cursorPosition);
+      
+      setMessageInput(textBefore + emoji + textAfter);
+      
+      // Set cursor position after emoji
+      setTimeout(() => {
+        input.focus();
+        input.setSelectionRange(cursorPosition + emoji.length, cursorPosition + emoji.length);
+      }, 0);
+    } else {
+      setMessageInput(prev => prev + emoji);
+    }
+    setShowEmojiPicker(false);
+  };
+
+  // Close emoji picker when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (emojiPickerRef.current && !emojiPickerRef.current.contains(event.target as Node)) {
+        setShowEmojiPicker(false);
+      }
+    };
+
+    if (showEmojiPicker) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showEmojiPicker]);
+
   // If clan access is denied, show access denied screen
   if (viewType === 'clan' && accessDenied) {
     return <ClanAccessDenied clanName={viewName} accessDeniedCode={accessDeniedCode} />;
   }
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full flex-col overflow-hidden">
       {/* Header */}
       <div className="flex h-16 flex-shrink-0 items-center justify-between border-b border-gray-200 bg-white px-6 dark:border-gray-800 dark:bg-black">
         <div className="flex items-center gap-3">
@@ -183,33 +229,78 @@ export default function MessageArea({
       />
 
       {/* Input */}
-      <div className="flex-shrink-0 border-t border-gray-200 bg-white px-6 py-4 dark:border-gray-800 dark:bg-black">
-        <form onSubmit={handleSendMessage} className="flex items-center gap-3">
+      <div className="flex-shrink-0 border-t border-gray-200 bg-gradient-to-b from-white to-gray-50 px-6 py-4 dark:border-gray-800 dark:from-black dark:to-gray-950">
+        <form onSubmit={handleSendMessage} className="flex items-center gap-2">
           <Button
             type="button"
             variant="ghost"
             size="sm"
-            className="hover:bg-gray-100 dark:hover:bg-gray-900"
+            className="h-11 w-11 rounded-xl text-gray-600 transition-all hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-900 dark:hover:text-gray-100"
           >
-            <Paperclip className="h-5 w-5 text-gray-500" />
+            <Paperclip className="h-5 w-5" />
           </Button>
 
-          <div className="flex-1">
-            <Input
-              type="text"
-              placeholder={t('community:messageArea.typeMessage', language)}
-              value={messageInput}
-              onChange={e => setMessageInput(e.target.value)}
-              onKeyDown={handleKeyPress}
-              disabled={isSending || !isMember}
-              className="h-11 border-gray-200 bg-white text-sm dark:border-gray-800 dark:bg-black"
-            />
+          <div className="relative flex-1">
+            {/* Emoji Picker Popup */}
+            {showEmojiPicker && (
+              <>
+                {/* Backdrop for mobile */}
+                <div 
+                  className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm lg:hidden"
+                  onClick={() => setShowEmojiPicker(false)}
+                />
+                
+                <div
+                  ref={emojiPickerRef}
+                  className="absolute bottom-full left-0 mb-3 z-50 animate-in fade-in slide-in-from-bottom-2 duration-200"
+                >
+                  <div className="rounded-2xl border border-gray-200 bg-white shadow-2xl dark:border-gray-800 dark:bg-gray-950 overflow-hidden">
+                    <EmojiPicker
+                      onEmojiClick={handleEmojiClick}
+                      searchDisabled={false}
+                      skinTonesDisabled={false}
+                      width={350}
+                      height={400}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+
+            <div className="relative">
+              <Input
+                ref={inputRef}
+                type="text"
+                placeholder={t('community:messageArea.typeMessage', language)}
+                value={messageInput}
+                onChange={e => setMessageInput(e.target.value)}
+                onKeyDown={handleKeyPress}
+                disabled={isSending || !isMember}
+                className="h-11 rounded-xl border-gray-200 bg-white pr-12 text-sm shadow-sm transition-all focus:ring-2 focus:ring-gray-900 dark:border-gray-800 dark:bg-gray-900 dark:focus:ring-gray-100"
+              />
+              
+              {/* Emoji button inside input */}
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                className={`absolute right-1 top-1/2 -translate-y-1/2 h-9 w-9 rounded-lg transition-all ${
+                  showEmojiPicker 
+                    ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100' 
+                    : 'text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100'
+                }`}
+                disabled={!isMember}
+              >
+                <Smile className="h-5 w-5" />
+              </Button>
+            </div>
           </div>
 
           <Button
             type="submit"
             size="sm"
-            className="h-11 w-11 rounded-full bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
+            className="h-11 w-11 flex-shrink-0 rounded-xl bg-gradient-to-br from-gray-900 to-gray-700 text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl active:scale-95 disabled:from-gray-300 disabled:to-gray-300 disabled:shadow-none dark:from-gray-100 dark:to-gray-300 dark:text-gray-900 dark:disabled:from-gray-800 dark:disabled:to-gray-800"
             disabled={!messageInput.trim() || isSending || !isMember}
           >
             {isSending ? (

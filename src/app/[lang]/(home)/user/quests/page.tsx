@@ -48,7 +48,7 @@ const QuestTimer: React.FC<{ quest: Quest }> = ({ quest }) => {
     <div className="mt-2 flex items-center gap-2 text-xs">
       <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
         <div
-          className="h-full bg-gradient-to-r from-yellow-500 to-yellow-600 transition-all duration-300"
+          className="h-full bg-gradient-to-r from-zinc-600 to-zinc-700 transition-all duration-300"
           style={{ width: `${timeRemaining.progressPercent}%` }}
         />
       </div>
@@ -350,14 +350,11 @@ export default function UserQuestsPage() {
     onComplete: (questId: string) => void;
     isStarting: boolean;
     isCompleting: boolean;
-    type: 'daily' | 'weekly';
-  }> = ({ quest, onStart, onComplete, isStarting, isCompleting, type }) => {
+    type?: 'daily' | 'weekly';
+  }> = ({ quest, onStart, onComplete, isStarting, isCompleting }) => {
     const status = getQuestStatus(quest);
 
-    const colorClass =
-      type === 'daily'
-        ? 'bg-purple-50 dark:bg-purple-900/10 border-purple-200 dark:border-purple-800 text-purple-600 dark:text-purple-400'
-        : 'bg-blue-50 dark:bg-blue-900/10 border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400';
+    const colorClass = 'bg-zinc-50 dark:bg-zinc-900/10 border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100';
 
     const getButtonContent = () => {
       if (status === 'completed') {
@@ -399,9 +396,9 @@ export default function UserQuestsPage() {
       default:
         'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 shadow-sm',
       secondary:
-        'bg-blue-50 text-blue-700 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:hover:bg-blue-900/30 cursor-default',
+        'bg-zinc-200 text-zinc-700 hover:bg-zinc-300 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700 cursor-default',
       success:
-        'bg-green-50 text-green-700 hover:bg-green-50 dark:bg-green-900/20 dark:text-green-400 dark:hover:bg-green-900/20 cursor-default border-green-200 dark:border-green-800',
+        'bg-zinc-100 text-zinc-700 hover:bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-900 cursor-default border-zinc-200 dark:border-zinc-800',
     };
 
     return (
@@ -523,46 +520,46 @@ export default function UserQuestsPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <Card className="border-purple-200 bg-gradient-to-br from-purple-50 to-purple-100 p-4 sm:p-6 dark:border-purple-800 dark:from-purple-900/20 dark:to-purple-900/30">
+          <Card className="border-zinc-200 bg-gradient-to-br from-zinc-50 to-zinc-100 p-4 sm:p-6 dark:border-zinc-800 dark:from-zinc-900/20 dark:to-zinc-900/30">
             <div className="flex items-center justify-between">
               <div>
-                <p className="mb-1 text-xs sm:text-sm text-purple-600 dark:text-purple-400">
+                <p className="mb-1 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
                   {t('quests.landing.daily.title')}
                 </p>
-                <p className="text-2xl sm:text-3xl font-bold text-purple-700 dark:text-purple-300">
+                <p className="text-2xl sm:text-3xl font-bold text-zinc-700 dark:text-zinc-300">
                   {totalDailyQuests}
                 </p>
               </div>
-              <Target className="h-10 w-10 sm:h-12 sm:w-12 text-purple-600 opacity-50 dark:text-purple-400" />
+              <Target className="h-10 w-10 sm:h-12 sm:w-12 text-zinc-600 opacity-50 dark:text-zinc-400" />
             </div>
           </Card>
 
-          <Card className="border-blue-200 bg-gradient-to-br from-blue-50 to-blue-100 p-4 sm:p-6 dark:border-blue-800 dark:from-blue-900/20 dark:to-blue-900/30">
+          <Card className="border-zinc-200 bg-gradient-to-br from-zinc-50 to-zinc-100 p-4 sm:p-6 dark:border-zinc-800 dark:from-zinc-900/20 dark:to-zinc-900/30">
             <div className="flex items-center justify-between">
               <div>
-                <p className="mb-1 text-xs sm:text-sm text-blue-600 dark:text-blue-400">
+                <p className="mb-1 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
                   {t('quests.landing.weekly.title')}
                 </p>
-                <p className="text-2xl sm:text-3xl font-bold text-blue-700 dark:text-blue-300">
+                <p className="text-2xl sm:text-3xl font-bold text-zinc-700 dark:text-zinc-300">
                   {totalWeeklyQuests}
                 </p>
               </div>
-              <Target className="h-10 w-10 sm:h-12 sm:w-12 text-blue-600 opacity-50 dark:text-blue-400" />
+              <Target className="h-10 w-10 sm:h-12 sm:w-12 text-zinc-600 opacity-50 dark:text-zinc-400" />
             </div>
           </Card>
 
-          <Card className="border-green-200 bg-gradient-to-br from-green-50 to-emerald-50 p-4 sm:p-6 dark:border-green-800 dark:from-green-900/20 dark:to-emerald-900/20">
+          <Card className="border-zinc-200 bg-gradient-to-br from-zinc-50 to-zinc-100 p-4 sm:p-6 dark:border-zinc-800 dark:from-zinc-900/20 dark:to-zinc-900/30">
             <div className="flex items-center justify-between">
               <div>
-                <p className="mb-1 text-xs sm:text-sm text-green-600 dark:text-green-400">
+                <p className="mb-1 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
                   {t('quests.user.cards.completed')}
                 </p>
-                <p className="text-2xl sm:text-3xl font-bold text-green-700 dark:text-green-300">
+                <p className="text-2xl sm:text-3xl font-bold text-zinc-700 dark:text-zinc-300">
                   {totalCompleted}
                 </p>
               </div>
               <svg
-                className="h-10 w-10 sm:h-12 sm:w-12 text-green-600 opacity-50 dark:text-green-400"
+                className="h-10 w-10 sm:h-12 sm:w-12 text-zinc-600 opacity-50 dark:text-zinc-400"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -575,17 +572,17 @@ export default function UserQuestsPage() {
             </div>
           </Card>
 
-          <Card className="border-amber-200 bg-gradient-to-br from-amber-50 to-orange-50 p-4 sm:p-6 dark:border-amber-800 dark:from-amber-900/20 dark:to-orange-900/20">
+          <Card className="border-zinc-200 bg-gradient-to-br from-zinc-50 to-zinc-100 p-4 sm:p-6 dark:border-zinc-800 dark:from-zinc-900/20 dark:to-zinc-900/30">
             <div className="flex items-center justify-between">
               <div>
-                <p className="mb-1 text-xs sm:text-sm text-amber-600 dark:text-amber-400">
+                <p className="mb-1 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
                   {t('quests.user.cards.totalXp')}
                 </p>
-                <p className="text-2xl sm:text-3xl font-bold text-amber-700 dark:text-amber-300">
+                <p className="text-2xl sm:text-3xl font-bold text-zinc-700 dark:text-zinc-300">
                   {totalXp}
                 </p>
               </div>
-              <Trophy className="h-10 w-10 sm:h-12 sm:w-12 text-amber-600 opacity-50 dark:text-amber-400" />
+              <Trophy className="h-10 w-10 sm:h-12 sm:w-12 text-zinc-600 opacity-50 dark:text-zinc-400" />
             </div>
           </Card>
         </div>
@@ -594,7 +591,7 @@ export default function UserQuestsPage() {
         <Card className="border shadow-sm">
           <div className="p-4 sm:p-6">
             <div className="mb-3 flex items-center gap-2 sm:mb-4">
-              <div className="h-2 w-2 rounded-full bg-purple-500" />
+              <div className="h-2 w-2 rounded-full bg-zinc-900 dark:bg-zinc-100" />
               <h2 className="font-heading text-lg font-bold text-zinc-900 sm:text-xl dark:text-zinc-50">
                 {t('quests.landing.daily.title')}
               </h2>
@@ -639,7 +636,7 @@ export default function UserQuestsPage() {
         <Card className="border shadow-sm">
           <div className="p-4 sm:p-6">
             <div className="mb-3 flex items-center gap-2 sm:mb-4">
-              <div className="h-2 w-2 rounded-full bg-blue-500" />
+              <div className="h-2 w-2 rounded-full bg-zinc-900 dark:bg-zinc-100" />
               <h2 className="font-heading text-lg font-bold text-zinc-900 sm:text-xl dark:text-zinc-50">
                 {t('quests.landing.weekly.title')}
               </h2>
@@ -648,7 +645,7 @@ export default function UserQuestsPage() {
             {isWeeklyPending ? (
               <div className="flex items-center justify-center py-8">
                 <div className="flex flex-col items-center gap-2">
-                  <Loader2 className="h-6 w-6 animate-spin text-blue-500" />
+                  <Loader2 className="h-6 w-6 animate-spin text-zinc-500" />
                   <p className="text-sm text-zinc-600 dark:text-zinc-400">
                     {t('quests.landing.loading')}
                   </p>

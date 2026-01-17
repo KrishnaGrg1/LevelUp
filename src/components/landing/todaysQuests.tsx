@@ -41,7 +41,7 @@ const QuestTimer: React.FC<{ quest: Quest }> = ({ quest }) => {
     <div className="flex items-center gap-2 text-xs">
       <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
         <div
-          className="h-full bg-gradient-to-r from-purple-500 to-purple-600 transition-all duration-300"
+          className="h-full bg-gradient-to-r from-zinc-600 to-zinc-700 transition-all duration-300"
           style={{ width: `${timeRemaining.progressPercent}%` }}
         />
       </div>
@@ -107,12 +107,12 @@ const QuestCard: React.FC<{
     default:
       'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 shadow-sm',
     secondary:
-      'bg-blue-50 text-blue-700 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:hover:bg-blue-900/30 cursor-default',
+      'bg-zinc-200 text-zinc-700 hover:bg-zinc-300 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700 cursor-default',
     success:
-      'bg-green-50 text-green-700 hover:bg-green-50 dark:bg-green-900/20 dark:text-green-400 dark:hover:bg-green-900/20 cursor-default border-green-200 dark:border-green-800',
+      'bg-zinc-100 text-zinc-700 hover:bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-900 cursor-default border-zinc-200 dark:border-zinc-800',
   };
   return (
-    <Card className="border shadow-sm transition-all hover:border-purple-200 hover:shadow-md dark:hover:border-purple-800">
+    <Card className="border shadow-sm transition-all hover:border-zinc-300 hover:shadow-md dark:hover:border-zinc-700">
       <div className="space-y-3 p-4">
         {/* Header */}
         <div className="flex items-start justify-between gap-3">
@@ -121,11 +121,11 @@ const QuestCard: React.FC<{
               {quest.description}
             </p>
           </div>
-          <div className="flex shrink-0 items-center gap-1.5 rounded-lg border border-yellow-200 bg-yellow-50 px-2.5 py-1 dark:border-yellow-800 dark:bg-yellow-900/10">
-            <span className="font-numeric text-sm font-bold text-yellow-600 dark:text-yellow-400">
+          <div className="flex shrink-0 items-center gap-1.5 rounded-lg border border-zinc-200 bg-zinc-50 px-2.5 py-1 dark:border-zinc-800 dark:bg-zinc-900/10">
+            <span className="font-numeric text-sm font-bold text-zinc-900 dark:text-zinc-100">
               {quest.xpValue}
             </span>
-            <span className="text-xs font-medium text-yellow-600 dark:text-yellow-400">XP</span>
+            <span className="text-xs font-medium text-zinc-900 dark:text-zinc-100">XP</span>
           </div>
         </div>
 

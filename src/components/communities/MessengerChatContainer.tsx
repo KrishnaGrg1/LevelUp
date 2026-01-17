@@ -162,7 +162,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
               isLastInGroup ? 'rounded-br-sm' : ''
             } bg-black text-white shadow-sm dark:bg-white dark:text-black`}
           >
-            <p className="text-sm break-words whitespace-pre-wrap">{message.content}</p>
+            <p className="text-sm break-words overflow-wrap-anywhere whitespace-pre-wrap" style={{ wordBreak: 'break-word', overflowWrap: 'anywhere' }}>{message.content}</p>
           </div>
         </div>
 
@@ -210,7 +210,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
             isLastInGroup ? 'rounded-bl-sm' : ''
           } border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800`}
         >
-          <p className="text-sm break-words whitespace-pre-wrap text-gray-800 dark:text-gray-200">
+          <p className="text-sm break-words whitespace-pre-wrap text-gray-800 dark:text-gray-200" style={{ wordBreak: 'break-word', overflowWrap: 'anywhere' }}>
             {message.content}
           </p>
         </div>
