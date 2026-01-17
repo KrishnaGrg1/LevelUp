@@ -56,7 +56,7 @@ export const metadata: Metadata = {
       {
         url: '/companylogo1.jpeg',
         type: 'image/jpeg',
-        sizes: '192x192',
+        sizes: '512x512',
       },
     ],
   },
