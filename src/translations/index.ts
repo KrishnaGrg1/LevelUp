@@ -91,6 +91,13 @@ export function t(key: string, params?: Record<string, string | number> | string
 
   let result = typeof value === 'string' ? value : fallback || key;
 
+  // Missing key handler - log warning if translation is missing
+  if (typeof value !== 'string') {
+    const namespace = key.includes(':') ? key.split(':')[0] : 'unknown';
+    const actualKey = key.includes(':') ? key.split(':')[1] : key;
+    console.warn(`Missing key: ${actualKey} in ${namespace} for ${currentLang}`);
+  }
+
   // Replace parameters in the string (e.g., {minutes} -> 30)
   if (replacements) {
     Object.entries(replacements).forEach(([param, paramValue]) => {
