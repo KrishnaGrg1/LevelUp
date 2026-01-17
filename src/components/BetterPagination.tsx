@@ -118,9 +118,7 @@ export const BetterPagination: React.FC<BetterPaginationProps> = ({
   );
 
   const buttonClass =
-    'inline-flex items-center justify-center rounded-md w-10 h-10 text-sm font-medium transition-all duration-200 border border-slate-700 bg-slate-800/50 text-slate-300 hover:bg-slate-700 hover:text-white hover:border-slate-600 disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500';
-  const activeButtonClass =
-    'bg-gradient-to-br from-indigo-600 to-purple-600 text-white border-indigo-500 hover:from-indigo-700 hover:to-purple-700 shadow-lg shadow-indigo-500/50 scale-110 font-bold';
+    'inline-flex items-center justify-center rounded-md w-10 h-10 text-sm font-medium transition-all duration-200 border border-gray-200 bg-white text-gray-900 hover:bg-gray-100 hover:border-gray-300 disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:border-gray-800 dark:bg-black dark:text-gray-100 dark:hover:bg-gray-900';
 
   // Early return if no data
   if (!paginationMetadata || totalPages === 0) {
@@ -159,7 +157,7 @@ export const BetterPagination: React.FC<BetterPaginationProps> = ({
             return (
               <span
                 key={`ellipsis-${idx}`}
-                className="inline-flex h-10 w-10 items-center justify-center text-sm text-slate-500"
+                className="inline-flex h-10 w-10 items-center justify-center text-sm text-gray-500 dark:text-gray-400"
                 aria-hidden="true"
               >
                 ...
@@ -173,7 +171,11 @@ export const BetterPagination: React.FC<BetterPaginationProps> = ({
               key={pageNumber}
               onClick={() => handlePageChange(pageNumber)}
               disabled={isActive}
-              className={`${buttonClass} ${isActive ? activeButtonClass : ''}`}
+              className={
+                isActive
+                  ? 'inline-flex items-center justify-center rounded-md w-10 h-10 text-sm font-bold transition-all duration-200 bg-black text-white border-black shadow-lg scale-110 disabled:opacity-100 disabled:pointer-events-none dark:bg-white dark:text-black dark:border-white'
+                  : buttonClass
+              }
               aria-label={`Go to page ${pageNumber}`}
               aria-current={isActive ? 'page' : undefined}
               title={isActive ? `Current page ${pageNumber}` : `Go to page ${pageNumber}`}
@@ -207,17 +209,17 @@ export const BetterPagination: React.FC<BetterPaginationProps> = ({
       </nav>
 
       {/* Pagination Info & Page Size Selector */}
-      <div className="flex flex-col items-center justify-center gap-4 text-sm text-slate-400 sm:flex-row">
+      <div className="flex flex-col items-center justify-center gap-4 text-sm text-gray-600 dark:text-gray-400 sm:flex-row">
         <div className="text-center sm:text-left">
           Showing{' '}
-          <span className="font-semibold text-indigo-400">
+          <span className="font-semibold text-gray-900 dark:text-gray-100">
             {Math.min((currentPage - 1) * pageSize + 1, total)}
           </span>{' '}
           to{' '}
-          <span className="font-semibold text-indigo-400">
+          <span className="font-semibold text-gray-900 dark:text-gray-100">
             {Math.min(currentPage * pageSize, total)}
           </span>{' '}
-          of <span className="font-semibold text-white">{total.toLocaleString()}</span> results
+          of <span className="font-semibold text-gray-900 dark:text-gray-100">{total.toLocaleString()}</span> results
         </div>
 
         <div className="flex items-center gap-2">
@@ -226,17 +228,17 @@ export const BetterPagination: React.FC<BetterPaginationProps> = ({
           </label>
           <Select value={pageSize.toString()} onValueChange={handlePageSizeChange}>
             <SelectTrigger
-              className="h-8 w-[70px] border-slate-700 bg-slate-800/50 text-white hover:bg-slate-700"
+              className="h-8 w-[70px] border-gray-200 bg-white text-gray-900 hover:bg-gray-50 dark:border-gray-800 dark:bg-black dark:text-gray-100 dark:hover:bg-gray-900"
               id="page-size-select"
             >
               <SelectValue>{pageSize}</SelectValue>
             </SelectTrigger>
-            <SelectContent className="border-slate-700 bg-slate-800 text-white">
+            <SelectContent className="border-gray-200 bg-white text-gray-900 dark:border-gray-800 dark:bg-black dark:text-gray-100">
               {pageSizeOptions.map(option => (
                 <SelectItem
                   key={option}
                   value={option.toString()}
-                  className="cursor-pointer hover:bg-slate-700 focus:bg-slate-700"
+                  className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100 dark:hover:bg-gray-900 dark:focus:bg-gray-900"
                 >
                   {option}
                 </SelectItem>

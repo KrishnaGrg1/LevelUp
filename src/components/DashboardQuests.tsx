@@ -48,7 +48,7 @@ const QuestTimer: React.FC<{ quest: Quest }> = ({ quest }) => {
     <div className="mt-2 flex items-center gap-2 text-xs">
       <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
         <div
-          className="h-full bg-gradient-to-r from-yellow-500 to-yellow-600 transition-all duration-300"
+          className="h-full bg-gradient-to-r from-zinc-600 to-zinc-700 transition-all duration-300"
           style={{ width: `${timeRemaining.progressPercent}%` }}
         />
       </div>
@@ -65,14 +65,11 @@ const QuestCard: React.FC<{
   onComplete: (questId: string) => void;
   isStarting: boolean;
   isCompleting: boolean;
-  type: 'daily' | 'weekly';
-}> = ({ quest, onStart, onComplete, isStarting, isCompleting, type }) => {
+  type?: 'daily' | 'weekly';
+}> = ({ quest, onStart, onComplete, isStarting, isCompleting }) => {
   const status = getQuestStatus(quest);
 
-  const colorClass =
-    type === 'daily'
-      ? 'bg-purple-50 dark:bg-purple-900/10 border-purple-200 dark:border-purple-800 text-purple-600 dark:text-purple-400'
-      : 'bg-blue-50 dark:bg-blue-900/10 border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400';
+  const colorClass = 'bg-zinc-50 dark:bg-zinc-900/10 border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100';
 
   const getButtonContent = () => {
     if (status === 'completed') {
@@ -120,9 +117,9 @@ const QuestCard: React.FC<{
     default:
       'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 shadow-sm',
     secondary:
-      'bg-blue-50 text-blue-700 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:hover:bg-blue-900/30 cursor-default',
+      'bg-zinc-200 text-zinc-700 hover:bg-zinc-300 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700 cursor-default',
     success:
-      'bg-green-50 text-green-700 hover:bg-green-50 dark:bg-green-900/20 dark:text-green-400 dark:hover:bg-green-900/20 cursor-default border-green-200 dark:border-green-800',
+      'bg-zinc-100 text-zinc-700 hover:bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-900 cursor-default border-zinc-200 dark:border-zinc-800',
   };
 
   return (

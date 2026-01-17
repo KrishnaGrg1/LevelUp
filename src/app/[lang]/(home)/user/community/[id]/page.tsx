@@ -193,9 +193,9 @@ export default function CommunityDetailPage() {
           </div>
 
           {/* Hub Body */}
-          <div className="grid min-h-[calc(100vh-14rem)] grid-cols-12 gap-4">
+          <div className="grid h-[calc(100vh-14rem)] grid-cols-12 gap-4">
             <div className="col-span-12 flex min-h-0 flex-col xl:col-span-8">
-              <Tabs defaultValue="chat" className="flex min-h-0 flex-col">
+              <Tabs defaultValue="chat" className="flex h-full min-h-0 flex-col">
                 <TabsList className="grid h-11 w-full flex-shrink-0 grid-cols-4 rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-black">
                   <TabsTrigger
                     value="chat"
@@ -231,7 +231,7 @@ export default function CommunityDetailPage() {
                   </TabsTrigger>
                 </TabsList>
 
-                <TabsContent value="chat" className="mt-3 min-h-0 flex-1">
+                <TabsContent value="chat" className="mt-0 h-full min-h-0 flex-1 overflow-hidden">
                   <div className="h-full min-h-0 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-black">
                     <CommunityDetail communityId={communityId} />
                   </div>

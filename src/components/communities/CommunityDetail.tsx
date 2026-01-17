@@ -40,12 +40,8 @@ export default function CommunityDetail({ communityId, showMode = 'both' }: Comm
 
   const clans = data?.body?.data || [];
   
-  const filteredClansByMembership = clans.filter((clan: Clan) => {
-    if (showMode === 'clans-only') return true;
-    return clan.isMember === true;
-  });
-  
-  const filteredClans = filteredClansByMembership.filter((clan: Clan) =>
+  // Filter by search query only
+  const filteredClans = clans.filter((clan: Clan) =>
     clan.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 

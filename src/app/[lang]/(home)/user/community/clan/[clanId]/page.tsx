@@ -24,6 +24,7 @@ import {
   ArrowLeft,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import MessageArea from '@/components/communities/MessageArea';
 
 export default function ClanDetailPage() {
   const params = useParams();
@@ -241,75 +242,90 @@ export default function ClanDetailPage() {
         </CardContent>
       </Card>
 
-      {/* Members Section */}
-      <Card className="border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-black">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-lg">
-            <Users className="h-4 w-4 text-gray-900 dark:text-gray-100" />
-            {t('clans.members', language)}
-            <span className="text-sm font-normal text-gray-600 dark:text-gray-400">({members.length})</span>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="p-4">
-          {isLoadingMembers ? (
-            <div className="flex flex-col items-center justify-center py-12">
-              <Loader2 className="h-8 w-8 animate-spin text-gray-900 dark:text-gray-100" />
-              <p className="mt-3 text-xs text-gray-600 dark:text-gray-400">Loading members...</p>
-            </div>
-          ) : members.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-12">
-              <div className="mb-3 rounded-full bg-gray-100 p-3 dark:bg-gray-800">
-                <Users className="h-8 w-8 text-gray-400" />
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        {/* Members Section */}
+        <Card className="border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-black">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-lg">
+              <Users className="h-4 w-4 text-gray-900 dark:text-gray-100" />
+              {t('clans.members', language)}
+              <span className="text-sm font-normal text-gray-600 dark:text-gray-400">({members.length})</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-4 max-h-[548px] overflow-y-auto">
+            {isLoadingMembers ? (
+              <div className="flex flex-col items-center justify-center py-12">
+                <Loader2 className="h-8 w-8 animate-spin text-gray-900 dark:text-gray-100" />
+                <p className="mt-3 text-xs text-gray-600 dark:text-gray-400">Loading members...</p>
               </div>
-              <p className="text-xs text-gray-600 dark:text-gray-400">
-                {t('clans.noMembers', language)}
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
-              {members.map(member => (
-                <div
-                  key={member.id}
-                  className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-800 dark:bg-black"
-                >
-                  <div className="relative">
-                    <Avatar className="h-10 w-10">
-                      <AvatarImage src={member.user.profilePicture || undefined} />
-                      <AvatarFallback className="bg-gray-100 text-gray-900 text-sm dark:bg-gray-800 dark:text-gray-100">
-                        {member.user.UserName.charAt(0).toUpperCase()}
-                      </AvatarFallback>
-                    </Avatar>
-                    {member.userId === clan.ownerId && (
-                      <div className="absolute -right-1 -top-1 rounded-full bg-amber-400 p-0.5">
-                        <Crown className="h-2.5 w-2.5 text-white" fill="currentColor" />
-                      </div>
-                    )}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="mb-0.5 flex items-center gap-1">
-                      <p className="truncate text-sm font-semibold text-gray-900 dark:text-white">
-                        {member.user.UserName}
-                      </p>
-                      {member.user.isVerified && (
-                        <Shield className="h-3 w-3 flex-shrink-0 text-blue-600 dark:text-blue-400" fill="currentColor" />
+            ) : members.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-12">
+                <div className="mb-3 rounded-full bg-gray-100 p-3 dark:bg-gray-800">
+                  <Users className="h-8 w-8 text-gray-400" />
+                </div>
+                <p className="text-xs text-gray-600 dark:text-gray-400">
+                  {t('clans.noMembers', language)}
+                </p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 gap-2">
+                {members.map(member => (
+                  <div
+                    key={member.id}
+                    className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-800 dark:bg-black"
+                  >
+                    <div className="relative">
+                      <Avatar className="h-10 w-10">
+                        <AvatarImage src={member.user.profilePicture || undefined} />
+                        <AvatarFallback className="bg-gray-100 text-gray-900 text-sm dark:bg-gray-800 dark:text-gray-100">
+                          {member.user.UserName.charAt(0).toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
+                      {member.userId === clan.ownerId && (
+                        <div className="absolute -right-1 -top-1 rounded-full bg-amber-400 p-0.5">
+                          <Crown className="h-2.5 w-2.5 text-white" fill="currentColor" />
+                        </div>
                       )}
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Badge variant="secondary" className="text-xs">
-                        {member.role}
-                      </Badge>
-                      <div className="flex items-center gap-0.5 text-xs text-gray-600 dark:text-gray-400">
-                        <Trophy className="h-3 w-3" />
-                        <span>Lvl {member.user.level}</span>
+                    <div className="min-w-0 flex-1">
+                      <div className="mb-0.5 flex items-center gap-1">
+                        <p className="truncate text-sm font-semibold text-gray-900 dark:text-white">
+                          {member.user.UserName}
+                        </p>
+                        {member.user.isVerified && (
+                          <Shield className="h-3 w-3 flex-shrink-0 text-blue-600 dark:text-blue-400" fill="currentColor" />
+                        )}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Badge variant="secondary" className="text-xs">
+                          {member.role}
+                        </Badge>
+                        <div className="flex items-center gap-0.5 text-xs text-gray-600 dark:text-gray-400">
+                          <Trophy className="h-3 w-3" />
+                          <span>Lvl {member.user.level}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </CardContent>
-      </Card>
+                ))}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Clan Chat Section */}
+        <Card className="border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-black">
+          <div className="h-[600px] overflow-hidden">
+            <MessageArea
+              clanId={clanId}
+              viewType="clan"
+              viewName={clan.name}
+              memberCount={memberCount}
+              isPrivate={clan.isPrivate}
+            />
+          </div>
+        </Card>
+      </div>
     </div>
   );
 }

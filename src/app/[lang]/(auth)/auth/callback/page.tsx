@@ -57,7 +57,7 @@ export default function CallbackPage() {
         throw new Error(t('error.auth.oauth_missing_provider', 'Missing provider in state'));
       }
 
-      // Build dynamic redirect URI
+      // Build dynamic redirect URI based on language
       const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
       const dynamicRedirectUri = `${baseUrl}/${lang}/auth/callback`;
 

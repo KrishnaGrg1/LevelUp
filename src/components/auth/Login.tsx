@@ -88,9 +88,9 @@ export function LoginForm({ lang }: LoginFormProps) {
       // Build dynamic redirect URI based on current language
       const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
 
-      // Google supports multiple redirect URIs, GitHub doesn't
+      // Both Google and GitHub use language-specific callback routes
       const googleRedirectUri = `${baseUrl}/${lang}/auth/callback`;
-      const githubRedirectUri = `${baseUrl}/auth/callback`; // Universal for GitHub
+      const githubRedirectUri = `${baseUrl}/${lang}/auth/callback`;
 
       // Generate OAuth URLs with appropriate redirect URI
       const oauthUrls = {
@@ -174,7 +174,7 @@ export function LoginForm({ lang }: LoginFormProps) {
               </Button>
               <Button
                 type="button"
-                // onClick={() => handleOAuthRegister('github')}
+                onClick={() => handleOAuthRegister('github')}
                 disabled={isLoading || loadingProvider !== null}
                 className="dark:hover:bg-gray-850 h-11 rounded-lg border border-gray-300 bg-white text-gray-900 transition-colors duration-200 hover:bg-gray-50 active:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:active:bg-gray-800 dark:disabled:hover:bg-gray-900"
               >

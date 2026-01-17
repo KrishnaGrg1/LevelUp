@@ -184,9 +184,9 @@ export function CommunityActionsModal({
                 <div className="flex items-center justify-between rounded-lg border p-3">
                   <div className="flex items-center gap-3">
                     {community.isPrivate ? (
-                      <Lock className="h-5 w-5 text-orange-500" />
+                      <Lock className="h-5 w-5 text-gray-900 dark:text-gray-100" />
                     ) : (
-                      <Unlock className="h-5 w-5 text-green-500" />
+                      <Unlock className="h-5 w-5 text-gray-900 dark:text-gray-100" />
                     )}
                     <div>
                       <p className="font-medium">
@@ -217,7 +217,7 @@ export function CommunityActionsModal({
                 {/* Category Change */}
                 <div className="flex items-center justify-between rounded-lg border p-3">
                   <div className="flex items-center gap-3">
-                    <Tag className="h-5 w-5 text-blue-500" />
+                    <Tag className="h-5 w-5 text-gray-900 dark:text-gray-100" />
                     <div className="flex-1">
                       <p className="font-medium">
                         {t('admin:actionsModal.sections.category.title', language)}
@@ -265,14 +265,14 @@ export function CommunityActionsModal({
                 </div>
 
                 {/* Delete Community */}
-                <div className="flex items-center justify-between rounded-lg border border-red-200 bg-red-50 p-3 dark:border-red-900 dark:bg-red-950/20">
+                <div className="flex items-center justify-between rounded-lg border border-gray-200 bg-gray-50 p-3 dark:border-gray-800 dark:bg-gray-900">
                   <div className="flex items-center gap-3">
-                    <Trash2 className="h-5 w-5 text-red-500" />
+                    <Trash2 className="h-5 w-5 text-gray-900 dark:text-gray-100" />
                     <div>
-                      <p className="font-medium text-red-700 dark:text-red-400">
+                      <p className="font-medium text-gray-900 dark:text-gray-100">
                         {t('admin:actionsModal.sections.danger.deleteCommunity', language)}
                       </p>
-                      <p className="text-sm text-red-600 dark:text-red-500">
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
                         {t('admin:actionsModal.sections.danger.deleteDescription', language)}
                       </p>
                     </div>
@@ -329,7 +329,7 @@ export function CommunityActionsModal({
                           size="sm"
                           variant="ghost"
                           onClick={() => member.id && handleRemoveMember(member.id)}
-                          className="cursor-pointer text-red-600 hover:bg-red-50 hover:text-red-700 dark:hover:bg-red-950"
+                          className="cursor-pointer text-gray-900 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-800"
                           title={t('admin:actionsModal.sections.members.remove', language)}
                         >
                           <Trash2 className="h-4 w-4" />

@@ -148,39 +148,39 @@ export default function CommunityManagement() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-        <Card className="border-none bg-gradient-to-br from-blue-50 to-blue-100 shadow-lg transition-shadow hover:shadow-xl dark:from-blue-950 dark:to-blue-900">
+        <Card className="border border-gray-200 bg-white shadow-lg transition-shadow hover:shadow-xl dark:border-gray-800 dark:bg-black">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-blue-700 dark:text-blue-300">
+            <CardTitle className="text-sm font-medium text-gray-900 dark:text-gray-100">
               {t('admin:communityManagement.stats.totalCommunities', language)}
             </CardTitle>
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500/20">
-              <BarChart3 className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
+              <BarChart3 className="h-5 w-5 text-gray-900 dark:text-gray-100" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-blue-900 dark:text-blue-100">
+            <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">
               {stats.totalCommunities}
             </div>
-            <p className="mt-1 text-xs text-blue-600 dark:text-blue-400">
+            <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
               {t('admin:communityManagement.stats.activeCommunities', language)}
             </p>
           </CardContent>
         </Card>
 
-        <Card className="border-none bg-gradient-to-br from-green-50 to-green-100 shadow-lg transition-shadow hover:shadow-xl dark:from-green-950 dark:to-green-900">
+        <Card className="border border-gray-200 bg-white shadow-lg transition-shadow hover:shadow-xl dark:border-gray-800 dark:bg-black">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-green-700 dark:text-green-300">
+            <CardTitle className="text-sm font-medium text-gray-900 dark:text-gray-100">
               {t('admin:communityManagement.privacy.publicCommunities', language)}
             </CardTitle>
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-500/20">
-              <Unlock className="h-5 w-5 text-green-600 dark:text-green-400" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
+              <Unlock className="h-5 w-5 text-gray-900 dark:text-gray-100" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-green-900 dark:text-green-100">
+            <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">
               {stats.publicCommunities}
             </div>
-            <p className="mt-1 text-xs text-green-600 dark:text-green-400">
+            <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
               {stats.totalCommunities > 0
                 ? Math.round((stats.publicCommunities / stats.totalCommunities) * 100)
                 : 0}
@@ -189,20 +189,20 @@ export default function CommunityManagement() {
           </CardContent>
         </Card>
 
-        <Card className="border-none bg-gradient-to-br from-orange-50 to-orange-100 shadow-lg transition-shadow hover:shadow-xl dark:from-orange-950 dark:to-orange-900">
+        <Card className="border border-gray-200 bg-white shadow-lg transition-shadow hover:shadow-xl dark:border-gray-800 dark:bg-black">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-orange-700 dark:text-orange-300">
+            <CardTitle className="text-sm font-medium text-gray-900 dark:text-gray-100">
               {t('admin:communityManagement.privacy.privateCommunities', language)}
             </CardTitle>
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-orange-500/20">
-              <Shield className="h-5 w-5 text-orange-600 dark:text-orange-400" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
+              <Shield className="h-5 w-5 text-gray-900 dark:text-gray-100" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-orange-900 dark:text-orange-100">
+            <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">
               {stats.privateCommunities}
             </div>
-            <p className="mt-1 text-xs text-orange-600 dark:text-orange-400">
+            <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
               {stats.totalCommunities > 0
                 ? Math.round((stats.privateCommunities / stats.totalCommunities) * 100)
                 : 0}
@@ -298,16 +298,16 @@ export default function CommunityManagement() {
         <CardContent className="p-0">
           {isPending ? (
             <div className="flex flex-col items-center justify-center py-16">
-              <Loader2 className="mb-4 h-10 w-10 animate-spin text-blue-500" />
+              <Loader2 className="mb-4 h-10 w-10 animate-spin text-gray-900 dark:text-gray-100" />
               <p className="text-gray-500">
                 {t('admin:communityManagement.messages.loadingCommunities', language)}
               </p>
             </div>
           ) : isError ? (
             <div className="flex flex-col items-center justify-center py-16">
-              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-100 dark:bg-red-900">
+              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
                 <svg
-                  className="h-8 w-8 text-red-600 dark:text-red-400"
+                  className="h-8 w-8 text-gray-900 dark:text-gray-100"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -379,7 +379,7 @@ export default function CommunityManagement() {
                         <TableCell>
                           <Badge
                             variant="outline"
-                            className="border-blue-200 bg-blue-50 font-medium text-blue-700 capitalize dark:border-blue-800 dark:bg-blue-950 dark:text-blue-300"
+                            className="border-gray-200 bg-gray-50 font-medium text-gray-900 capitalize dark:border-gray-800 dark:bg-gray-900 dark:text-gray-100"
                           >
                             <Tag className="mr-1 h-3 w-3" />
                             {community.category?.name ||
@@ -389,19 +389,19 @@ export default function CommunityManagement() {
                         <TableCell>
                           {community.isPrivate ? (
                             <div className="flex items-center gap-2">
-                              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-orange-100 dark:bg-orange-950">
-                                <Lock className="h-4 w-4 text-orange-600 dark:text-orange-400" />
+                              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
+                                <Lock className="h-4 w-4 text-gray-900 dark:text-gray-100" />
                               </div>
-                              <span className="font-medium text-orange-700 dark:text-orange-400">
+                              <span className="font-medium text-gray-900 dark:text-gray-100">
                                 {t('admin:communityManagement.privacy.private', language)}
                               </span>
                             </div>
                           ) : (
                             <div className="flex items-center gap-2">
-                              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-100 dark:bg-green-950">
-                                <Unlock className="h-4 w-4 text-green-600 dark:text-green-400" />
+                              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
+                                <Unlock className="h-4 w-4 text-gray-900 dark:text-gray-100" />
                               </div>
-                              <span className="font-medium text-green-700 dark:text-green-400">
+                              <span className="font-medium text-gray-900 dark:text-gray-100">
                                 {t('admin:communityManagement.privacy.public', language)}
                               </span>
                             </div>
@@ -409,8 +409,8 @@ export default function CommunityManagement() {
                         </TableCell>
                         <TableCell>
                           <div className="flex items-center gap-2">
-                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-950">
-                              <Users className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
+                              <Users className="h-4 w-4 text-gray-900 dark:text-gray-100" />
                             </div>
                             <span className="font-medium text-gray-700 dark:text-gray-300">
                               {community._count?.members || 0}
@@ -429,7 +429,7 @@ export default function CommunityManagement() {
                             size="sm"
                             variant="ghost"
                             onClick={() => openActionsModal(community)}
-                            className="cursor-pointer transition-colors hover:bg-blue-100 hover:text-blue-700 dark:hover:bg-blue-900 dark:hover:text-blue-300"
+                            className="cursor-pointer transition-colors hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100"
                           >
                             <Settings className="h-4 w-4" />
                             <span className="ml-2 hidden sm:inline">
