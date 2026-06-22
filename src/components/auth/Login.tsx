@@ -51,7 +51,7 @@ export function LoginForm({ lang }: LoginFormProps) {
     onSuccess: data => {
       // Clear any stale cache from previous sessions
       queryClient.clear();
-      
+
       setAuthenticated(true);
 
       // Set admin status from login response
@@ -129,7 +129,7 @@ export function LoginForm({ lang }: LoginFormProps) {
         {/* Logo/Icon */}
         <div className="flex justify-center">
           <div className="flex h-12 w-12 items-center justify-center rounded-lg border-2 border-gray-900 dark:border-white">
-            <Sparkles className="h-6 w-6 text-gray-900 dark:text-white" />
+            Lord <Sparkles className="h-6 w-6 text-gray-900 dark:text-white" />
           </div>
         </div>
 
